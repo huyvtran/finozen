@@ -20,6 +20,25 @@ angular.module('app.routes', [])
       }
     })
         
+     .state('sliders', {
+		url: '/sliders',
+		templateUrl: 'templates/slides.html',
+		controller: 'slideCtrl'
+    })
+         
+     .state('pre_verification', {
+		url: '/pre_verification',
+		templateUrl: 'templates/pre_verification.html',
+		controller: 'pre_verificationCtrl'
+    })
+        
+         
+     .state('post_verification', {
+		url: '/post_verification',
+		templateUrl: 'templates/post_verification.html',
+		controller: 'post_verificationCtrl'
+    })
+        
       
     
       
@@ -88,7 +107,42 @@ angular.module('app.routes', [])
       abstract:true,
       templateUrl: 'templates/menu.html'
     })
-      
+             .state('account', {
+      url: '/account',         
+          templateUrl: 'templates/account.html',
+          controller: 'accountCtrl'     
+    })     
+
+          .state('faq', {
+      url: '/faq',         
+          templateUrl: 'templates/faq.html',
+          controller: 'faqCtrl'     
+    })  
+
+    .state('privacy', {
+      url: '/privacy',         
+          templateUrl: 'templates/privacy.html',
+          controller: 'privacyCtrl'     
+    })  
+
+    .state('invest', {
+      url: '/invest',         
+          templateUrl: 'templates/invest.html',
+          controller: 'investCtrl'     
+    })  
+
+    .state('withdraw', {
+      url: '/withdraw',         
+          templateUrl: 'templates/withdraw.html',
+          controller: 'withdrawCtrl'     
+    })  
+
+      .state('sidemenu', {
+      url: '/sidemenu',         
+          templateUrl: 'templates/sidemenu.html',
+          controller: 'sidemenuCtrl'     
+    })  
+     
     ;
 
   // if none of the above states are matched, use this as the fallback

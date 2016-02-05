@@ -1,22 +1,29 @@
-<ion-view title="Signup">
+<ion-view title="Signup" class="sign_up">
+<div class="bar bar-header fino_head"style="background-color:#18bb9c;height:55px;">
+<a class="button button-clear ion-android-arrow-back " href="#/side-menu21/page7" style="color:white; font-size:23px;"  ></a>
+    <div class="h1 title"><p>Sign Up</p></div>
+	<button class="button button-clear button-positive  ion-android-call" style="color:white; font-size:25px;"></button>
+</div>
     <ion-content overflow-scroll="true" padding="true" scroll="false" class="has-header" ng-class="{expanded:isExpanded}">
         <form class="list">
             <ion-list>
+                <div class="row"><div class="col"><label class="item item-input">
+                    <input type="text" placeholder="First Name">
+                </label></div>
+                <div class="col"><label class="item item-input ">
+                    <input type="text" placeholder="Last Name">
+                </label></div></div>
                 <label class="item item-input">
-                    <span class="input-label">Name</span>
-                    <input type="text" placeholder="">
+                    <input type="text" placeholder="Phone Number">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">Username</span>
-                    <input type="text" placeholder="">
+                    <input type="text" placeholder="Password">
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">Password</span>
-                    <input type="text" placeholder="">
+                    <input type="text" placeholder="Confirm Password">
                 </label>
             </ion-list>
-            <a href="#/page14/page15" class="button button-stable button-block ">Sign up</a>
-			<button on-swipe-left="onSwipeLeft()" class="button">Test</button>
+            <a href="#/pre_verification" class="button button-stable button-block ">Sign up</a>
         </form>
     </ion-content>
 </ion-view>
