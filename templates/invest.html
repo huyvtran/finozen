@@ -1,5 +1,5 @@
 <ion-view title="Add Money">
-<div class="screen_invest"> 
+<div class="screen_invest "> 
 <div class="bar bar-header fino_head"style="background-color:#18bb9c;height:55px;">
 <a class="button button-clear ion-android-arrow-back " href="#/page14/page15" style="color:white; font-size:23px;"  ></a>
     <div class="h1 title"><p>Add Money</p></div>
@@ -18,7 +18,7 @@
 			</p>
 
 		  <label class="item item-input">
-			<input type="number" placeholder="Enter Amount" name="invest" ng-model="inv.value" ng-keyup="return=((inv.value*8.3)/100) "/>
+			<input type="number" placeholder="Enter Amount" name="invest" ng-model="inv.value" ng-keyup="return=inv.value+((inv.value*8.3)/100)"/>
 		  </label>
 		<p class="invest_hint">MINIMUM BALANCE: <span>&#x20B9;</span> 100</p>
 		</div>

@@ -14,7 +14,7 @@ color:white;
 border-color:#18bb9c;
 }
 }
-.tabs{height:40px}
+.tabs{height:46px}
 .tab-item .icon {
     height: 45px;
     font-size: 45px;
@@ -60,7 +60,7 @@ padding:0;margin-top: 10px;}
     display: none;
 }
 .has-tabs-top {
-    top: 95px;
+    top: 100px;
 	background:#E5ECF4 ;
 }
 .circle{
@@ -77,7 +77,7 @@ padding:0;margin-top: 10px;}
 }
 .inner_tabs .tabs .tab-item {
     font-size: 14px;
-    line-height: 40px;
+    line-height: 43px;
 	text-transform:uppercase;
 }
 .item.item-icon-right {
@@ -133,7 +133,7 @@ padding:0;margin-top: 10px;}
 	}
 	.total{text-align:center; margin-bottom:1em;}
 }
-.verification{text-align:center}
+.verification{.bar{padding:0;} }
 .screen_invest{
 .button{background:#18bb9c;border:#18bb9c;color:white; &:hover{opacity:0.9; background:#18bb9c;} }
 	.invest_subheader {
@@ -170,4 +170,14 @@ padding:0;margin-top: 10px;}
 }
 .tour_page{
 .has-header{top:-28px;}
+}
+.recent_transactions{
+.item-avatar{
+padding-left: 100px;}
+.failed, .success {
+    position: absolute;
+    top: 24px;
+    left: 10px;
+}
+
 }
