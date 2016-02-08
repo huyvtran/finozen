@@ -1,62 +1,45 @@
-<ion-view class="sliders">
-    <div class="swiper-container swiper1">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-			<div class="rows">
-			<img src="img/1.png" />
+<ion-view class="sliders" ng-controller="MyCtrl_test">
+<ion-slide-box  class="text-center slides">
+
+   <ion-slide on-swipe-right="goBack()" on-swipe-left="goForward()">
+      <div class = "rows box box1">
+<img src="img/1.png" />
 			<h3 class="slide1">Watch your money grow</h3>
 			<p class="padding">At FinoZen, you can invest and grow your money rapidly at a rate of 8.5% which is relatively very high compared to others</p>
-			</div>
-			</div>
-			<div class="swiper-slide">
-			<div class="rows">
-			<img src="img/2.png" />
+			
+      </div>
+   </ion-slide>
+
+   <ion-slide on-swipe-right="goBack()" on-swipe-left="goForward()">
+      <div class = "rows box box2">
+<img src="img/2.png" />
 			<h3 class="slide2">Invest & withdraw @One Click</h3>
 			<p class="padding">At FinoZen, you can invest and grow your money rapidly at a rate of 8.5% which is relatively very high compared to others</p>
-			</div>
-			</div>
-			<div class="swiper-slide">
-			<div class="rows">
+			
+      </div>
+   </ion-slide>
+
+   <ion-slide on-swipe-right="goBack()" on-swipe-left="goForward()">
+      <div class = "rows box box3">
 			<img src="img/3.png" />
 			<h3 class="slide3">Your money is safe</h3>
 			<p class="padding">At FinoZen, you can invest and grow your money rapidly at a rate of 8.5% which is relatively very high compared to others</p>
-			</div>
-			</div>
-			<div class="swiper-slide">
-			<div class="rows">
+	</div>
+   </ion-slide>
+
+   <ion-slide on-swipe-right="goBack()" on-swipe-left="goForward()">
+      <div class = "rows box box4">
 			<img src="img/4.png" />
-			<h3 class="slide3">We're only a call away</h3>
+			<h3 class="slide4">We're only a call away</h3>
 			<p class="padding">At FinoZen, you can invest and grow your money rapidly at a rate of 8.5% which is relatively very high compared to others</p>
-			</div>
-			</div>
-        </div>
-	
+		<a href="#/tour" ><button class="col button button-positive text-center" style="color:009688; font-size:15px;">Start Investing</button></a>
+      </div>
+   </ion-slide>
+</ion-slide-box>
+<div class="row bar bar-footer" style="background:transparent;bottom:9px; left:10px ;">
+		<a href="#/tour"><button class="col button button-clear button-positive text-left" style="color:009688; font-size:15px;">skip</button></a>
 	</div>
-	<div class="row bar bar-footer">
-		<button class="col button button-clear button-positive" style="color:009688; font-size:15px;">skip</button>
-		<div class="col swiper-pagination swiper-pagination1"></div>
-		<button class="col button button-clear button-positive  ion-android-back" style="color:#009688; font-size:25px;"></button>
-	</div>
-    <!-- Swiper JS -->
-  
-
-    <!-- Initialize Swiper -->
-
 </ion-view>
-    <script>
-    var swiper1 = new Swiper('.swiper1', {
-        pagination: '.swiper-pagination1',
-        paginationClickable: true,
-        spaceBetween: 30,
-    });
-    var swiper2 = new Swiper('.swiper2', {
-        pagination: '.swiper-pagination2',
-        paginationClickable: true,
-        spaceBetween: 30,
-    });
-    var swiper3 = new Swiper('.swiper3', {
-        pagination: '.swiper-pagination3',
-        paginationClickable: true,
-        spaceBetween: 30,
-    });
-    </script>
+
+
+

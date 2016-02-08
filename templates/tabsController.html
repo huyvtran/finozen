@@ -1,22 +1,22 @@
-<ion-view title="Tabs Controller">
+<ion-view title="Tabs Controller" ng-controller="MyCtrl_swipe">
 <div class="bar bar-header fino_head" style="background-color:#18bb9c;height:55px;">
   <button class="button button-clear button-positive   ion-navicon " style="color:white; font-size:30px;"></button>
   <div class="h1 title"><p>FinoZen</p></div>
   <button class="button button-clear button-positive  ion-android-call" style="color:white; font-size:25px;"></button>
 </div>
     <ion-tabs class="tabs-stable tabs-icon-top tabs-top inner_tabs">
-        <ion-tab title="Summary" tabs-swipable href="#/page14/page15">
+        <ion-tab title="Summary" href="#/page14/page15">
             <ion-nav-view name="tab7"></ion-nav-view>
         </ion-tab>
-        <ion-tab title="Growth Rate" tabs-swipable href="#/page14/page9" >
+        <ion-tab title="Growth Rate" href="#/page14/page9" >
             <ion-nav-view name="tab8"></ion-nav-view>
         </ion-tab>
-        <ion-tab title="Transactions" tabs-swipable href="#/page14/page10">
+        <ion-tab title="Transactions" href="#/page14/page10">
             <ion-nav-view name="tab9"></ion-nav-view>
         </ion-tab>
     </ion-tabs>
-    <div class="bar bar-footer row invest_button_footer" style="width: 100%;">
-  <div class="col invest_button"><a href="#/withdraw"><img src="img/minus.png"></a><br /><span class="invest_bottom_button red">WITHDRAW</span></div>
-  <div class="col invest_button"><a href="#/invest"><img src="img/plus.png"></a><br /><span class="invest_bottom_button green">ADD MONEY</span></div>
+    <div class="bar bar-footer row invest_button_footer" style="width: 100%; background:#E5ECF4 ;">
+  <div class="col invest_button"><a href="#/withdraw"><img src="img/minus.png" /></a><br /><span class="invest_bottom_button red">WITHDRAW</span></div>
+  <div class="col invest_button"><a href="#/invest"><img src="img/plus.png" /></a><br /><span class="invest_bottom_button green">ADD MONEY</span></div>
 </div>
 </ion-view>

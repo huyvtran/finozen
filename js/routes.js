@@ -135,6 +135,11 @@ angular.module('app.routes', [])
       url: '/withdraw',         
           templateUrl: 'templates/withdraw.html',
           controller: 'withdrawCtrl'     
+    }) 
+    .state('tour', {
+      url: '/tour',         
+          templateUrl: 'templates/tour.html',
+          controller: 'tourCtrl'     
     })  
 
       .state('sidemenu', {

@@ -3,10 +3,30 @@ img{margin:2em auto 0;display: block;}
 .icon{color:#009688 !important}
 .failed{color:#e01916 !important}
 .payment{color:#009688 !important}
+.button{
+text-transform:uppercase;
+max-height: 42px !important;
+min-height: 20px !important;
+
+&.button-positive{
+background:#18bb9c;
+color:white;
+border-color:#18bb9c;
+}
+}
 .tabs{height:40px}
 .tab-item .icon {
     height: 45px;
     font-size: 45px;
+}
+.sliders{
+	.slide1{color:#6dbec4}
+	.slide2{color:#00a5c3}
+	.slide3{color:#49c593}
+	.slide4{color:#5d9cec}
+	img{margin: 20vh auto 80px;}
+.box{}
+
 }
 .item-note{float:none;}
 .invest_button{border:none; background:#e5ecf4; height:180px;
@@ -22,7 +42,11 @@ padding:0;margin-top: 10px;}
     line-height: 40px !important;
     width: 150px;
     border-radius: 5px;
-	
+	text-transform:uppercase;
+	max-height: 42px !important;
+	min-height: 20px !important;
+	background:#18bb9c;
+	color:white;
 	.invest_bottom_button {
     display: block;
     margin-top: -44px;
@@ -72,49 +96,19 @@ padding:0;margin-top: 10px;}
     padding: 0px 18px !important;
 }
 .inner_numbers{
-	font-family: 'Fjalla One' !important;
+	font-family: 'bebas_neueregular' !important;
 	margin:0;
 	font-size: 22px;
 	font-weight: 600;
 	padding: 9px;
 	color: #929292;
-	&.total{font-size:13px; color: #929292;font-family: 'Open Sans' !important;}
+	&.total{font-size:13px; color: #929292;font-family: 'open_sansregular' !important;}
 }
 .tab-item.tab-item-active, .tab-item.active, .tab-item.activated{
 	color:#18bb9c !important;
 	border-bottom-color:#18bb9c !important;
 }
-.sliders{
-	.slide1{color:#6dbec4}
-	.slide2{color:#00a5c3}
-	.slide3{color:#49c593}
-	.slide4{color:#5d9cec}
-	img{margin: 45px auto 100px;}
-    .swiper-container {
-        width: 100%;
-        height: auto;
-    }
-    .swiper-slide {
-        text-align: center;
-        font-size: 18px;
-        background: #fff;
 
-        /* Center slide text vertically */
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        -webkit-align-items: center;
-        align-items: center;
-    }
-
-}
 .signin_background{
 	background-image: url("../sign.jpg");
 	  background-repeat: no-repeat;
@@ -131,8 +125,8 @@ padding:0;margin-top: 10px;}
 }
 .summary{
 	.total_value{
-	font-family: 'Fjalla One' !important;
-	font-size: 30px;
+	font-family: 'bebas_neueregular';
+	font-size: 36px;
 	width: 120px !important;
 	text-align: center;	
 	color:white;
@@ -157,10 +151,23 @@ padding:0;margin-top: 10px;}
 	}
 	.invest_button_footer {
     bottom: 0px;}
-	.returns_hint{text-align:right; font-size:12px; color:#929292; padding:5px; padding-right:10px; margin:0;}
+	.returns_hint{text-align:right; font-size:12px; color:#929292; padding:5px; padding-right:10px; margin:0; #income{ font-size:15px;} }
 	.invest_amount{padding:5px;margin:12px; border:1px solid #adadad;text-align:center; p{margin:0; font-weight:600;} }
 	.item.item-radio.col {
 			border: none;
 		}
 		.withdraw_all p{padding-left:6px;}
+}
+.slides{
+.slider-slide.disable-user-behavior {
+    height: 100vh;
+}
+.button {
+    width: 40%;
+    margin: auto;
+	padding:0;
+}
+}
+.tour_page{
+.has-header{top:-28px;}
 }

@@ -47,6 +47,9 @@ angular.module('app.controllers', [])
 .controller('withdrawCtrl', function($scope) {
 
 })
+.controller('tourCtrl', function($scope) {
+
+})
 
 .controller('MyCtrl', function($scope) {
   $scope.groups = [];
@@ -68,4 +71,32 @@ angular.module('app.controllers', [])
     return $scope.shownGroup === group;
   };
   
+})
+.controller('MyCtrl_swipe', function ($scope, $ionicTabsDelegate) {
+
+    $scope.goForward = function () {
+        var selected = $ionicTabsDelegate.selectedIndex();
+        if (selected != -1) {
+            $ionicTabsDelegate.select(selected + 1);
+        }
+    }
+
+    $scope.goBack = function () {
+        var selected = $ionicTabsDelegate.selectedIndex();
+        if (selected != -1 && selected != 0) {
+            $ionicTabsDelegate.select(selected - 1);
+        }
+    }
+})
+.controller('MyCtrl_test', function($scope, $ionicSlideBoxDelegate) {
+	    $scope.goForward = function () {
+       $ionicSlideBoxDelegate.next();
+    }
+
+    $scope.goBack = function () {
+       $ionicSlideBoxDelegate.previous();
+    }
+   $scope.nextSlide = function() {
+      $ionicSlideBoxDelegate.next();
+   }
 });
