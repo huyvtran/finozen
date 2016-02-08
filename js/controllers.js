@@ -51,6 +51,7 @@ angular.module('app.controllers', [])
 
 })
 
+
 .controller('MyCtrl', function($scope) {
   $scope.groups = [];
     $scope.groups["0"] = {name: "sumanth",items: ["1", "2"] };

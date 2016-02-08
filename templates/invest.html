@@ -12,10 +12,13 @@
 		<div class="row invest_info">
 		<p>How much would you like to add ?</p>
 		</div>
-		<p class="returns_hint">Expected Returns: <span style="color:#18bb9c;"><span>&#x20B9;</span><label id="income">100.00</label></span></p>
-		<div class="list invest_info">
+		<div class="list invest_info" >
+			<p class="returns_hint" >Expected Returns: 
+				<span style="color:#18bb9c;"><label id="income">&nbsp; {{return | currency:"&#8377;" }} </label></span>
+			</p>
+
 		  <label class="item item-input">
-			<input type="number" placeholder="Enter Amount" name="invest" />
+			<input type="number" placeholder="Enter Amount" name="invest" ng-model="inv.value" ng-keyup="return=((inv.value*8.3)/100) "/>
 		  </label>
 		<p class="invest_hint">MINIMUM BALANCE: <span>&#x20B9;</span> 100</p>
 		</div>
@@ -23,6 +26,9 @@
 		<a class="button button-full button-positive bar-footer invest_button_footer"  href="#/page14/page15">Add Money<a>
 		</div>
     </ion-content>
+    <script >
+
+    </script>
 
 </div>
 </ion-view>
