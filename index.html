@@ -24,8 +24,8 @@
     <script src="js/routes.js"></script>
     <script src="js/services.js"></script>
     <script src="js/directives.js"></script>
-    <script src="js/ion-tabs-swipable.js"></script>
     <script src="js/swiper.min.js"></script>
+    <script src="js/ion-tabs-swipable.js"></script>
   </head>
   <body ng-app="app" animation="slide-left-right-ios7">
     <div>
@@ -34,17 +34,24 @@
         </ion-nav-bar>
         <ion-nav-view></ion-nav-view>
     </div>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script type="text/javascript">
-       $(document).ready(function(){
-       	$("input[name='invest']").keyup(function(event){
-       		if(event.which >= 37 && event.which <= 40 ){
-		          event.preventDefault();
-		     }  
-       		var temp=$(this).val().trim();
-       		$("#income").text((temp*1+(temp*8.3)/100).toFixed(2));
-       	});
-       });
+
+	    <!-- Initialize Swiper -->
+    <script>
+    var swiper1 = new Swiper('.swiper1', {
+        pagination: '.swiper-pagination1',
+        paginationClickable: true,
+        spaceBetween: 30,
+    });
+    var swiper2 = new Swiper('.swiper2', {
+        pagination: '.swiper-pagination2',
+        paginationClickable: true,
+        spaceBetween: 30,
+    });
+    var swiper3 = new Swiper('.swiper3', {
+        pagination: '.swiper-pagination3',
+        paginationClickable: true,
+        spaceBetween: 30,
+    });
     </script>
   </body>
 </html>
