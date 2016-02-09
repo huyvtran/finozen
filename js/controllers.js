@@ -19,9 +19,6 @@ angular.module('app.controllers', [])
 .controller('recentTransactionsCtrl', function($scope) {
 
 })
-  .controller('slideCtrl', function($scope) {
-
-})
   .controller('pre_verificationCtrl', function($scope) {
 
 })
@@ -33,26 +30,6 @@ angular.module('app.controllers', [])
 
 })
 .controller('faqCtrl', function($scope) {
-
-})
-.controller('privacyCtrl', function($scope) {
-
-})
-.controller('sidemenuCtrl', function($scope) {
-
-})
-.controller('investCtrl', function($scope) {
-
-})
-.controller('withdrawCtrl', function($scope) {
-
-})
-.controller('tourCtrl', function($scope) {
-
-})
-
-
-.controller('MyCtrl', function($scope) {
   $scope.groups = [];
     $scope.groups["0"] = {name: "sumanth",items: ["1", "2"] };
   
@@ -73,6 +50,23 @@ angular.module('app.controllers', [])
   };
   
 })
+.controller('privacyCtrl', function($scope) {
+
+})
+.controller('sidemenuCtrl', function($scope) {
+
+})
+.controller('investCtrl', function($scope) {
+
+})
+.controller('withdrawCtrl', function($scope) {
+
+})
+.controller('tourCtrl', function($scope) {
+
+})
+
+
 .controller('MyCtrl_swipe', function ($scope, $ionicTabsDelegate) {
 
     $scope.goForward = function () {
@@ -89,7 +83,7 @@ angular.module('app.controllers', [])
         }
     }
 })
-.controller('MyCtrl_test', function($scope, $ionicSlideBoxDelegate) {
+.controller('slideCtrl', function($scope, $ionicSlideBoxDelegate) {
 	    $scope.goForward = function () {
        $ionicSlideBoxDelegate.next();
     }

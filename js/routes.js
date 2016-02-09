@@ -69,7 +69,8 @@ angular.module('app.routes', [])
     .state('tabsController', {
       url: '/page14',
       abstract:true,
-      templateUrl: 'templates/tabsController.html'
+      templateUrl: 'templates/tabsController.html',
+	  controller: 'MyCtrl_swipe'
     })
       
     
