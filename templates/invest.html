@@ -1,9 +1,9 @@
 <ion-view title="Add Money">
 <div class="screen_invest "> 
-<div class="bar bar-header fino_head"style="background-color:#18bb9c;height:55px;">
+<div class="bar bar-header fino_head"style="background-color:#18bb9c;height:55px;" ng-controller="popupController as popup">
 <a class="button button-clear ion-android-arrow-back " href="#/page14/page15" style="color:white; font-size:23px;"  ></a>
     <div class="h1 title"><p>Add Money</p></div>
-	<a class="button button-clear button-positive  ion-android-call" ng-href="tel: 9566245137" style="color:white; font-size:25px;"></a>
+<a class="button button-clear button-positive  ion-android-call" style="color:white; font-size:25px;" ng-click="showPopup()"></a>
 </div>
     <ion-content overflow-scroll="true" padding="true" class="has-header">
 		<div class="row bar bar-subheader invest_subheader">
@@ -18,10 +18,14 @@
 			</p>
 
 		  <label class="item item-input">
-			<input type="number" placeholder="Enter Amount" name="invest" ng-model="inv.value" ng-keyup="return=inv.value+((inv.value*8.3)/100)"/>
+			<input type="number" placeholder="Enter Amount" name="invest" ng-model="inv.value" ng-keyup="return=inv.value+((inv.value*8.3)/100)"/>			
 		  </label>
 		<p class="invest_hint">MINIMUM BALANCE: <span>&#x20B9;</span> 100</p>
+		 <label class="item item-input">
+		<input type="Date" placeholder="Select Date" name="date"/>
+		  </label>
 		</div>
+
 		<div class="row">
 		<a  class="button button-full button-positive bar-footer invest_button_footer"  href="#/page14/page15">Add Money<a>
 		</div>

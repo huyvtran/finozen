@@ -29,6 +29,40 @@ angular.module('app.controllers', [])
 .controller('accountCtrl', function($scope) {
 
 })
+.controller('popupController', function($scope, $ionicPopup) {
+     // Triggered on a button click, or some other target
+ $scope.showPopup = function() {
+
+   // An elaborate, custom popup
+   var myPopup = $ionicPopup.show({
+     title: 'Please have a look at the FAQ before placing a call',
+     buttons: [
+       { text: 'Call',
+          onTap:function(e){
+         window.location.href="tel: 9886098860";
+       }
+
+        },  
+
+       {
+         text: '<b>Faq</b>',
+         type: 'button-positive',
+         onTap: function(e) {
+             //don't allow the user to close unless he enters wifi password
+              window.location.href="#/faq";            
+        
+         }
+       },
+     ]
+   });
+
+
+  };
+
+  //
+
+})
+
 .controller('faqCtrl', function($scope) {
   $scope.groups = [];
     $scope.groups["0"] = {name: "What is FinoZen?",items: ["It's simple. You can invest through your online banking in a one-step process."] };
