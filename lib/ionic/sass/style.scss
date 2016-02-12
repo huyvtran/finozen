@@ -65,13 +65,13 @@ padding:0;margin-top: 10px;}
 }
 .circle{
 	
-	height:150px;
-	width:150px;
-	border:7px solid white;
+	height: 100px;
+	width: 80%;
+	border: 4px solid #FFF;
 	background:#18bb9c;
-	padding: 55px 15px;
+	padding: 35px 15px;
 	margin:40px auto 5px;
-	border-radius: 70%;
+	border-radius: 20px;
 	color:white;
 	font-weight:700;
 }
@@ -115,24 +115,35 @@ padding:0;margin-top: 10px;}
   background-size: 100% 100%;
   background-position: center center;
   .secure_lock{padding-right: 10px; color: white !important;}
+  .forgot_pin{padding-right:10px; a{color:#18bb9c;} }
 }  
 .signin_background, .sign_up{ 
 .item-input{border:none; border-bottom:1px solid #18bb9c; margin:1px;background:transparent; input {font-size: 16px !important;}}  
-.item-checkbox{border:none; margin:1px; background:transparent; padding:15px 10px; .check_agree{padding-left:10px;font-size: 14px;} }  
+.item-checkbox{
+	border:none; margin:1px; background:transparent; padding:15px 10px; 
+	.check_agree{padding-left:10px;font-size: 14px;}
+	a {
+		color: #424242;
+		text-decoration: underline;
+	}
+}  
   .button{background:#18bb9c;border:#18bb9c;p{color:white; &:hover{color:white;}  }}
 }
 .sign_up{ 
 .list .item:last-child{border-radius:0 !important;} 
 .row{padding:0;}
 .col{padding:0;}
+.signup_icons{margin-right:10px;}
+.button{color:white;}
 }
 .summary{
 	.total_value{
 	font-family: 'bebas_neueregular';
 	font-size: 36px;
-	width: 120px !important;
+	width: 100% !important;
 	text-align: center;	
 	color:white;
+	.summary_values{margin-top: 15px;}
 	}
 	.total{text-align:center; margin-bottom:1em;}
 }
