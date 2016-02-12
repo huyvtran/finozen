@@ -13,9 +13,7 @@
 		<p>How much would you like to add ?</p>
 		</div>
 		<div class="list invest_info" >
-			<p class="returns_hint" >Expected Returns:<p>
-  <button ng-click="openPopover($event)">Open</button>
-</p> 
+			<p class="returns_hint" >Expected Returns:
 				<span style="color:#18bb9c;"><label id="income">&nbsp; {{return | currency:"&#8377;" }} </label></span>
 			</p>
 
@@ -29,14 +27,4 @@
 		</div>
 </div>
     </ion-content>
-  <ion-popover-view>
-    <ion-header-bar>
-      <h1 class="title">My Popover Title</h1>
-    </ion-header-bar>
-    <ion-content>
-      Hello!
-    </ion-content>
-  </ion-popover-view>
-
-
 </ion-view>

@@ -79,6 +79,19 @@ angular.module('app.controllers', [])
 
 })
 
+.controller('transListController',['$http', function($http){
+//var lisst=[{amount:"Azurite1",transactionId:12545,date:"Mon, 25 Jan, 2016"},{amount:"Azurite2",transactionId:12545,date:"Mon, 26 Jan, 2017"},{amount:"Azurite3",transactionId:12545,date:"Mon, 27 Jan, 2018"}]
+  //this.products=lisst;
+var tList=this;
+tList.products=[];
+
+$http.get('data/transactiondata.json').success(function(data){
+ tList.products=data;
+});
+
+}])
+
+
 
 .controller('MyCtrl_swipe', function ($scope, $ionicTabsDelegate) {
 
