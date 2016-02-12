@@ -4,6 +4,7 @@
   <button class="button button-clear button-positive   ion-navicon " style="color:white; font-size:30px;" menu-toggle="left" ></button>
   <div class="h1 title"><p>FinoZen</p></div>
   <button class="button button-clear button-positive  ion-android-call" style="color:white; font-size:25px;"></button>
+  <button class="button button-dark" ion-android-call ng-click="showPopup()" style="color:white; font-size:25px;"></button>
 </div>
 
     <ion-tabs class="tabs-stable tabs-icon-top tabs-top inner_tabs" ng-controller="MyCtrl_swipe">
@@ -19,7 +20,7 @@
     </ion-tabs>
     <div class="bar bar-footer row invest_button_footer" style="width: 100%; background:#E5ECF4 ;">
   <div class="col invest_button"><a href="#/withdraw"><img src="img/minus.png" /></a><br /><span class="invest_bottom_button red">WITHDRAW</span></div>
-  <div class="col invest_button"><a href="#/invest"><img src="img/plus.png" /></a><br /><span class="invest_bottom_button green">ADD MONEY</span></div>
+  <div class="col invest_button"><a href="#/invest"><img src="img/plus.png" /></a><br /><span class="invest_bottom_button green">INVEST</span></div>
 </div>
 
   </ion-side-menu-content>
@@ -30,17 +31,20 @@
           <div class="col-20"><img src="img/account-image.png"></div>
           <div class="col-70">
             <p>Rachna Gothi</p> 
-            <p>rachna.gothi@gmail.com</p>
+            <p>+91-9566245137</p>
         </div>        
         </div>
 			
     <ion-content>
             <ion-list class="menulist">
-                 <ion-item nav-clear menu-close  href="#/account" menu-close=""><i class="icon ion-android-person"></i>Account </ion-item>
-                 <ion-item nav-clear menu-close  href="#/privacy" menu-close=""><i class="icon ion-android-lock"></i>Privacy Policy</ion-item>
-                 <ion-item nav-clear menu-close  href="#/faq" menu-close=""><i class="icon ion-android-microphone"></i>Faq</ion-item>
-                 <ion-item nav-clear menu-close  href="#/sidemenu" menu-close=""><i class="icon ion-android-mail" style="font-size: 13.5px;"></i>Contact Us</ion-item>
-                 <ion-item nav-clear menu-close  href="#/side-menu21/page7" menu-close=""><i class="icon ion-power" style="font-size: 14px;"></i>Sign Out</ion-item>
+                 <ion-item nav-clear menu-close  href="#/account" menu-close=""><i class="icon ion-ios-person-outline"></i>Account </ion-item>
+                 <ion-item nav-clear menu-close  href="#/" menu-close=""><i class="icon ion-ios-people-outline"></i>Invite Friends</ion-item>
+                 <ion-item nav-clear menu-close  href="#/" menu-close=""><i class="icon ion-ios-help-outline"></i>FAQ</ion-item>
+                 <ion-item nav-clear menu-close  href="#/" menu-close=""><i class="icon ion-ios-compose-outline"></i>Feedback</ion-item>
+                 <ion-item nav-clear menu-close  href="#/faq" menu-close=""><i class="icon ion-ios-locked-outline"></i>Privacy </ion-item>
+                 <ion-item nav-clear menu-close  href="#/sidemenu" menu-close=""><i class="icon ion-ios-list-outline"></i>Terms & Conditions</ion-item>
+                 <ion-item nav-clear menu-close  href="#/side-menu21/page7" menu-close=""><i class="icon ion-ios-email-outline"></i>contact us</ion-item>
+                 <ion-item nav-clear menu-close  href="#/side-menu21/page7" menu-close=""><i class="icon ion-power"></i>Sign Out</ion-item>
             </ion-list>
     </ion-content>
   </ion-side-menu>
