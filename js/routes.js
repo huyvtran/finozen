@@ -10,14 +10,10 @@ angular.module('app.routes', [])
     
       
         
-    .state('menu.login', {
+    .state('login', {
       url: '/page7',
-      views: {
-        'side-menu21': {
-          templateUrl: 'templates/login.html',
-          controller: 'loginCtrl'
-        }
-      }
+	  templateUrl: 'templates/login.html',
+	  controller: 'loginCtrl'
     })
         
      .state('sliders', {
@@ -152,6 +148,6 @@ angular.module('app.routes', [])
     ;
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/side-menu21/page7');
+  $urlRouterProvider.otherwise('/page7');
 
 });

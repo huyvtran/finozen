@@ -3,7 +3,7 @@
 <div class="bar bar-header fino_head"style="background-color:#18bb9c;height:55px;">
 <a class="button button-clear ion-android-arrow-back " href="#/page14/page15" style="color:white; font-size:23px;"  ></a>
     <div class="h1 title"><p>Add Money</p></div>
-	<button class="button button-clear button-positive  ion-android-call" style="color:white; font-size:25px;"></button>
+	<a class="button button-clear button-positive  ion-android-call" ng-href="tel: 9566245137" style="color:white; font-size:25px;"></a>
 </div>
     <ion-content overflow-scroll="true" padding="true" class="has-header">
 		<div class="row bar bar-subheader invest_subheader">
@@ -13,7 +13,9 @@
 		<p>How much would you like to add ?</p>
 		</div>
 		<div class="list invest_info" >
-			<p class="returns_hint" >Expected Returns: 
+			<p class="returns_hint" >Expected Returns:<p>
+  <button ng-click="openPopover($event)">Open</button>
+</p> 
 				<span style="color:#18bb9c;"><label id="income">&nbsp; {{return | currency:"&#8377;" }} </label></span>
 			</p>
 
@@ -23,12 +25,18 @@
 		<p class="invest_hint">MINIMUM BALANCE: <span>&#x20B9;</span> 100</p>
 		</div>
 		<div class="row">
-		<a class="button button-full button-positive bar-footer invest_button_footer"  href="#/page14/page15">Add Money<a>
+		<a  class="button button-full button-positive bar-footer invest_button_footer"  href="#/page14/page15">Add Money<a>
 		</div>
-    </ion-content>
-    <script >
-
-    </script>
-
 </div>
+    </ion-content>
+  <ion-popover-view>
+    <ion-header-bar>
+      <h1 class="title">My Popover Title</h1>
+    </ion-header-bar>
+    <ion-content>
+      Hello!
+    </ion-content>
+  </ion-popover-view>
+
+
 </ion-view>

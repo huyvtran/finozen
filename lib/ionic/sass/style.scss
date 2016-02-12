@@ -114,9 +114,12 @@ padding:0;margin-top: 10px;}
 	  background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center center;
+  .secure_lock{padding-right: 10px; color: white !important;}
 }  
-.signin_background, .sign_up{ label{border:none; border-bottom:1px solid #18bb9c; margin:1px;background:transparent; }
-  .button{background:#18bb9c;color:white;}
+.signin_background, .sign_up{ 
+.item-input{border:none; border-bottom:1px solid #18bb9c; margin:1px;background:transparent; input {font-size: 16px !important;}}  
+.item-checkbox{border:none; margin:1px; background:transparent; padding:15px 10px; .check_agree{padding-left:10px;font-size: 14px;} }  
+  .button{background:#18bb9c;border:#18bb9c;p{color:white; &:hover{color:white;}  }}
 }
 .sign_up{ 
 .list .item:last-child{border-radius:0 !important;} 

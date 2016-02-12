@@ -5,20 +5,23 @@
       </div>
 	  
 	  <div class="row col text-center">
-        <p class="padding">Watch your Money Grow.</p>
+        <p class="padding">Watch your Money Grow</p>
       </div>
 	  
         <form class="list">
             <ion-list>
                 <label class="item item-input">
-                    <input type="text" placeholder="Username or Phone number">
+                    <input type="text" placeholder="Mobile Number" maxlength ="10">
                 </label>
                 <label class="item item-input">
-                    <input type="password" placeholder="Password">
+                    <input type="password" placeholder="4 digit PIN" maxlength ="4">
+                </label>
+                <label class="item item-checkbox">
+                    <input type="checkbox" required><span class="check_agree">I Agree to T&C and Privacy Policy</span>
                 </label>
             </ion-list>
-            <div class="spacer" style="height: 40px;"></div>
-            <a href="#/page14/page15" class="button button-stable button-block ">LOGIN</a>
+            <div class="spacer" style="height: 20px;"></div>
+            <a href="#/page14/page15" class="button button-stable button-block "><p><i class="icon ion-locked secure_lock"></i>Secure Login</p></a>
             <a href="#/page8" class="button button-positive button-clear button-block " style="text-transform:none;">Or create an account</a>
         </form>
     </ion-content>

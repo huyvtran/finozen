@@ -31,7 +31,14 @@ angular.module('app.controllers', [])
 })
 .controller('faqCtrl', function($scope) {
   $scope.groups = [];
-    $scope.groups["0"] = {name: "sumanth",items: ["1", "2"] };
+    $scope.groups["0"] = {name: "What is FinoZen?",items: ["It's simple. You can invest through your online banking in a one-step process."] };
+    $scope.groups["1"] = {name: "How do I Invest in FinoZen?",items: ["It's simple. You can invest through your online banking in a one-step process."] };
+    $scope.groups["2"] = {name: "How much can i Invest?",items: ["It's simple. You can invest through your online banking in a one-step process."] };
+    $scope.groups["3"] = {name: "Why should i trust you?",items: ["It's simple. You can invest through your online banking in a one-step process."] };
+    $scope.groups["4"] = {name: "At what rate do my money grow?",items: [""] };
+    $scope.groups["5"] = {name: "Is it dependent on market fluctuations?",items: [""] };
+    $scope.groups["6"] = {name: "Will I loose my money it market goes down?",items: [""] };
+    $scope.groups["7"] = {name: "What is the withdraw limit?",items: [""] };
   
   
   /*
@@ -56,8 +63,14 @@ angular.module('app.controllers', [])
 .controller('sidemenuCtrl', function($scope) {
 
 })
-.controller('investCtrl', function($scope) {
+.controller('investCtrl', function($scope, $ionicPopover) {
 
+  // .fromTemplate() method
+  var template = '<ion-popover-view><ion-header-bar> <h1 class="title">My Popover Title</h1> </ion-header-bar> <ion-content> Hello! </ion-content></ion-popover-view>';
+
+  $scope.popover = $ionicPopover.fromTemplate(template, {
+  scope: $scope
+  });
 })
 .controller('withdrawCtrl', function($scope) {
 
@@ -73,6 +86,7 @@ angular.module('app.controllers', [])
         var selected = $ionicTabsDelegate.selectedIndex();
         if (selected != -1) {
             $ionicTabsDelegate.select(selected + 1);
+			 $ionicTabsDelegate.$getByHandle('mainScroll').scrollTop();
         }
     }
 
@@ -80,6 +94,7 @@ angular.module('app.controllers', [])
         var selected = $ionicTabsDelegate.selectedIndex();
         if (selected != -1 && selected != 0) {
             $ionicTabsDelegate.select(selected - 1);
+			 $ionicTabsDelegate.$getByHandle('mainScroll').scrollTop();
         }
     }
 })
