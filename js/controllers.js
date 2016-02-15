@@ -39,7 +39,7 @@ angular.module('app.controllers', [])
      buttons: [
        { text: 'Call',
           onTap:function(e){
-         window.location.href="tel: 9886098860";
+         window.location.href="tel:+91 9886098860";
        }
 
         },  
