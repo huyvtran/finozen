@@ -1,9 +1,9 @@
 <ion-side-menus enable-menu-with-back-views="false" >
   <ion-side-menu-content  drag-content="false">
-<div class="bar bar-header fino_head" style="background-color:#18bb9c;height:55px;">
+<div class="bar bar-header fino_head" style="background-color:#18bb9c;height:55px;" ng-controller="popupController as popup">
   <button class="button button-clear button-positive   ion-navicon " style="color:white; font-size:30px;" menu-toggle="left" ></button>
   <div class="h1 title"><p>FinoZen</p></div>
-  <button class="button button-clear button-positive  ion-android-call" style="color:white; font-size:25px;"></button>
+  <a class="button button-clear button-positive  ion-android-call" style="color:white; font-size:25px;" ng-click="showPopup()"></a>
 </div>
 
     <ion-tabs class="tabs-stable tabs-icon-top tabs-top inner_tabs" ng-controller="MyCtrl_swipe">
@@ -19,7 +19,7 @@
     </ion-tabs>
     <div class="bar bar-footer row invest_button_footer" style="width: 100%; background:#E5ECF4 ;">
   <div class="col invest_button"><a href="#/withdraw"><img src="img/minus.png" /></a><br /><span class="invest_bottom_button red">WITHDRAW</span></div>
-  <div class="col invest_button"><a href="#/invest"><img src="img/plus.png" /></a><br /><span class="invest_bottom_button green">INVEST</span></div>
+  <div class="col invest_button"><a href="#/invest"><img src="img/plus.png" /></a><br /><span class="invest_bottom_button green">ADD MONEY</span></div>
 </div>
 
   </ion-side-menu-content>
@@ -29,11 +29,11 @@
 		<div class="row title account_block bar-subheader">
           <div class="col-20"><img src="img/account-image.png"></div>
           <div class="col-70">
-            <p>Rachna Gothi</p> 
+            <p>Rachna Gothi</p>
             <p>+91-9566245137</p>
-        </div>        
         </div>
-			
+        </div>
+
     <ion-content>
             <ion-list class="menulist">
                  <ion-item nav-clear menu-close  href="#/account" menu-close=""><i class="icon ion-ios-person-outline"></i>Account </ion-item>
