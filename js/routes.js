@@ -29,10 +29,10 @@ angular.module('app.routes', [])
     })
         
          
-     .state('post_verification', {
-		url: '/post_verification',
-		templateUrl: 'templates/post_verification.html',
-		controller: 'post_verificationCtrl'
+     .state('invite', {
+		url: '/invite',
+		templateUrl: 'templates/invite.html',
+		controller: 'inviteCtrl'
     })
         
       
@@ -113,6 +113,26 @@ angular.module('app.routes', [])
           .state('faq', {
       url: '/faq',         
           templateUrl: 'templates/faq.html',
+          controller: 'faqCtrl'     
+    })
+          .state('faq1', {
+      url: '/faq_account',         
+          templateUrl: 'templates/faq1.html',
+          controller: 'faqCtrl'     
+    })
+          .state('faq2', {
+      url: '/faq_add',         
+          templateUrl: 'templates/faq2.html',
+          controller: 'faqCtrl'     
+    })
+          .state('faq3', {
+      url: '/faq_withdraw',         
+          templateUrl: 'templates/faq3.html',
+          controller: 'faqCtrl'     
+    })
+          .state('faq4', {
+      url: '/faq_others',         
+          templateUrl: 'templates/faq4.html',
           controller: 'faqCtrl'     
     })  
 
