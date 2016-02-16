@@ -1,7 +1,7 @@
 <ion-view title="post_verification" class="verification">
-<div class="bar bar-header fino_head" style="background-color:#18bb9c;height:55px;">
+<div class="bar bar-header fino_head" style="background-color:#18bb9c;height:55px;" ng-controller="popupController as popup">
   <div class="h1 title"><p style="color:#212121; text-align:center; font-size: 15px;">DETAILS VERIFIED</p></div>
-  <button class="button button-clear button-positive  ion-android-call" style="color:white; font-size:25px;"></button>
+  <a class="button button-clear button-positive  ion-android-call" style="color:white; font-size:25px;" ng-click="showPopup()"></a>
 </div>
     <ion-content overflow-scroll="true" padding="true" class="has-header">
 		<div class="rows">
