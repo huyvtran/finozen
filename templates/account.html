@@ -1,9 +1,9 @@
 <ion-view title="Account">
-<div class="screen_account"> 
-<div class="bar bar-header fino_head"style="background-color:#18bb9c;height:55px;">
+<div class="screen_account">
+<div class="bar bar-header fino_head"style="background-color:#18bb9c;height:55px;" ng-controller="popupController as popup">
 <a class="button button-clear ion-android-arrow-back " href="#/page14/page15" style="color:white; font-size:23px;"  ></a>
     <div class="h1 title"><p>Account</p></div>
-  <button class="button button-clear button-positive  ion-android-call" style="color:white; font-size:25px;"></button>
+  <a class="button button-clear button-positive  ion-android-call" style="color:white; font-size:25px;" ng-click="showPopup()"></a>
 </div>
     <ion-content overflow-scroll="false" padding="false" class="has-header">
         <div class="row account_img"><img src="img/account-image.png" alt=""></div>
@@ -13,7 +13,7 @@
         </div>
         <div class="row account_actions">
         <div class="col-90"><h3>Basic settings</h3></div>
-        
+
   	     <div class="col action">
            <ul class="list">
           <li class="item item-toggle">
@@ -39,13 +39,13 @@
                </div>
              </label>
           </li>
-        </ul>     
-         </div> 
+        </ul>
+         </div>
          <div class="col-90 address"><h3>Address</h3>
         <p> #401, The Rise Apartment, HSR Layout </p>
-        </div>    
-          
-        </div>       
+        </div>
+
+        </div>
 
     </ion-content>
 

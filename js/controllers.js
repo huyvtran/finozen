@@ -22,7 +22,7 @@ angular.module('app.controllers', [])
   .controller('pre_verificationCtrl', function($scope) {
 
 })
-  .controller('post_verificationCtrl', function($scope) {
+  .controller('inviteCtrl', function($scope) {
 
 })
     
