@@ -33,6 +33,21 @@ angular.module('app.routes', [])
 		url: '/invite',
 		templateUrl: 'templates/invite.html',
 		controller: 'inviteCtrl'
+    })     
+     .state('contact', {
+		url: '/contact',
+		templateUrl: 'templates/contact.html',
+		controller: 'inviteCtrl'
+    })    
+     .state('change_password', {
+		url: '/change_pin',
+		templateUrl: 'templates/change_password.html',
+		controller: 'inviteCtrl'
+    })
+     .state('terms', {
+		url: '/terms',
+		templateUrl: 'templates/terms.html',
+		controller: 'termsCtrl'
     })
         
       
@@ -157,6 +172,12 @@ angular.module('app.routes', [])
       url: '/tour',         
           templateUrl: 'templates/tour.html',
           controller: 'tourCtrl'     
+    })  
+
+    .state('feedback', {
+      url: '/feedback',         
+          templateUrl: 'templates/feedback.html',
+          controller: 'feedbackCtrl'     
     })  
 
       .state('sidemenu', {

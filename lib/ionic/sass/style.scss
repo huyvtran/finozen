@@ -95,6 +95,7 @@ padding:0;margin-top: 10px;}
 	.title {
 		height: 54px !important;
 		&.h1 .head_title{
+			height: 55px;
 			color: #FFF;
 			font-size: 16px;
 			font-weight: 700;
@@ -102,7 +103,7 @@ padding:0;margin-top: 10px;}
 			text-align: left;
 			margin-left: 45px;
 			margin-bottom: 0px;
-			display:table
+			display:table;
 			& #title {
 				display: table-cell;
 				vertical-align: middle;
@@ -217,6 +218,7 @@ padding:0;margin-top: 10px;}
 }
 }
 .tour_page{
+img{margin:0;}
 .has-header{top:-28px;}
 }
 .recent_transactions{
@@ -225,14 +227,46 @@ padding:0;margin-top: 10px;}
 }
 
 .item-avatar{
-padding-left: 100px;}
+padding-left: 115px;}
 .failed, .success {
     position: absolute;
     top: 24px;
-    left: 10px;
+    left: 24px;
 }
 
 }
 .invite{
 img{margin: 20vh auto 30px;}
+}
+.FAQ{
+.list{
+	margin-top: 10px;
+	a{padding-left: 25px;}
+	}
+}
+.change_password{
+	input{
+	border: 1px solid #ddd;
+	padding: 10px;
+	margin: 10px auto auto 23px;
+	width: 70%;
+	}
+	.input_list{margin-top:20px;}
+	input[type="submit"] {
+		background: #18bb9c;
+		color: white;
+	}
+	&.feedback{
+	.feedback_body{background:#fafafa;margin-top: 14px;}
+	.list{background:#fafafa; p{padding:15px 24px; color: #d8d8d8;} }
+	img{margin: 0px auto;max-height: 45px;}
+	textarea{
+		width: 88%;
+		margin: auto;
+		border: 1px solid #ddd;
+		min-height: 60px;
+		padding: 10px;
+		}	
+		input[type="submit"] {width:88%;}
+	}
 }

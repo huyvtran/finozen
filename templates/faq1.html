@@ -1,22 +1,10 @@
 <ion-view title="FAQ">
 <div class="screen_faq"> 
 <div class="bar bar-header fino_head">
-	<a class="button button-clear ion-android-arrow-back " href="#/faq"></a>
-    <div class="h1 title"><p>FAQs</p></div>
-	<a class="button button-clear button-positive  ion-android-call"></a>
+<a class="button button-clear ion-android-arrow-back " href="#/faq"></a>
+  <div class="h1 title"><p class="head_title"><span id="title">FAQ</span></p></div>
+  <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
 </div>
-    <!--<ion-content overflow-scroll="false" padding="false" class="has-header" ng-controller="MyCtrl">
-        <div class="row faq">
-          <div><p>What is FinoZen ?</p><span class="ion-chevron-down questions"></span> </div>
-          <div><p>How do I invest in FinoZen ?</p> <span class="ion-chevron-down questions"></span></div>
-          <div> <p>How much can I invest FinoZen ?</p> <span class="ion-chevron-down questions"></span></div>
-          <div><p>Why should I trust you  ?</p> <span class="ion-chevron-down questions"></span></div>
-          <div><p>What is FinoZen ?</p><span class="ion-chevron-down questions"></span> </div>
-          <div><p>How do I invest in FinoZen ?</p> <span class="ion-chevron-down questions"></span></div>
-          <div> <p>How much can I invest FinoZen ?</p> <span class="ion-chevron-down questions"></span></div>
-          <div><p>Why should I trust you  ?</p> <span class="ion-chevron-down questions"></span></div>
-        </div>
-    </ion-content>-->
 	<ion-content overflow-scroll="true" padding="true" class="has-header faq_question">
         <div ng-repeat="group in groups" class="faq_question_content">
           <div class="item-stable col question"

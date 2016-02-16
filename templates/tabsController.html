@@ -1,11 +1,10 @@
 <ion-side-menus enable-menu-with-back-views="false" >
   <ion-side-menu-content  drag-content="false">
-<div class="bar bar-header fino_head" style="background-color:#18bb9c;height:55px;" ng-controller="popupController as popup">
-  <button class="button button-clear button-positive   ion-navicon " style="color:white; font-size:30px;" menu-toggle="left" ></button>
-  <div class="h1 title"><p>FinoZen</p></div>
-  <a class="button button-clear button-positive  ion-android-call" style="color:white; font-size:25px;" ng-click="showPopup()"></a>
+<div class="bar bar-header fino_head" ng-controller="popupController as popup">
+  <a class="button button-clear button-positive ion-navicon-round" menu-toggle="left" ></a>
+	<div class="h1 title"><p class="head_title"><span id="title">FinoZen</span></p></div>
+  <a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
 </div>
-
     <ion-tabs class="tabs-stable tabs-icon-top tabs-top inner_tabs" ng-controller="MyCtrl_swipe">
         <ion-tab title="Summary" href="#/page14/page15">
             <ion-nav-view name="tab7" delegate-handle="mainScroll"></ion-nav-view>
@@ -37,13 +36,13 @@
     <ion-content>
             <ion-list class="menulist">
                  <ion-item nav-clear menu-close  href="#/account" menu-close=""><i class="icon ion-ios-person-outline"></i>Account </ion-item>
-                 <ion-item nav-clear menu-close  href="#/" menu-close=""><i class="icon ion-ios-people-outline"></i>Invite Friends</ion-item>
-                 <ion-item nav-clear menu-close  href="#/" menu-close=""><i class="icon ion-ios-help-outline"></i>FAQ</ion-item>
-                 <ion-item nav-clear menu-close  href="#/" menu-close=""><i class="icon ion-ios-compose-outline"></i>Feedback</ion-item>
-                 <ion-item nav-clear menu-close  href="#/faq" menu-close=""><i class="icon ion-ios-locked-outline"></i>Privacy </ion-item>
-                 <ion-item nav-clear menu-close  href="#/sidemenu" menu-close=""><i class="icon ion-ios-list-outline"></i>Terms & Conditions</ion-item>
-                 <ion-item nav-clear menu-close  href="#/side-menu21/page7" menu-close=""><i class="icon ion-ios-email-outline"></i>contact us</ion-item>
-                 <ion-item nav-clear menu-close  href="#/side-menu21/page7" menu-close=""><i class="icon ion-power"></i>Sign Out</ion-item>
+                 <ion-item nav-clear menu-close  href="#/invite" menu-close=""><i class="icon ion-ios-people-outline"></i>Invite Friends</ion-item>
+                 <ion-item nav-clear menu-close  href="#/faq" menu-close=""><i class="icon ion-ios-help-outline"></i>FAQ</ion-item>
+                 <ion-item nav-clear menu-close  href="#/feedback" menu-close=""><i class="icon ion-ios-compose-outline"></i>Feedback</ion-item>
+                 <ion-item nav-clear menu-close  href="#/privacy" menu-close=""><i class="icon ion-ios-locked-outline"></i>Privacy </ion-item>
+                 <ion-item nav-clear menu-close  href="#/terms" menu-close=""><i class="icon ion-ios-list-outline"></i>Terms & Conditions</ion-item>
+                 <ion-item nav-clear menu-close  href="#/contact" menu-close=""><i class="icon ion-ios-email-outline"></i>contact us</ion-item>
+                 <ion-item nav-clear menu-close  href="#page7" menu-close=""><i class="icon ion-power"></i>Sign Out</ion-item>
             </ion-list>
     </ion-content>
   </ion-side-menu>
