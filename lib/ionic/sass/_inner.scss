@@ -198,3 +198,24 @@ a{color:blue;text-decoration:none;}
 	}
 
 }
+.pane .slidingTabs {
+	margin-top:56px;
+	/* ul li.tab-active {
+		border-bottom:2px solid #fff;
+	} */
+	ul {
+		background-color:transparent;
+		 li{
+		font-size: 14px;
+		line-height: 43px;
+		text-transform: uppercase;
+		opacity: 0.7;
+		color: rgb(68, 68, 68);
+		&.tab-active {
+			color: #18bb9c;
+			border-bottom:1px solid #18bb9c;
+		}
+	}
+	}
+	
+}
