@@ -1,12 +1,5 @@
 <ion-view title="Recent Transactions">
 <div class="list recent_transactions">
-  <div class="item item-avatar item-icon-right in in done done">
-	<p class="success"><span>&#x20B9;</span> 5,000.00</p>
-	<span class="item-note right">Transaction ID: 12545</span><br/>
-	<span class="item-note left">Mon, 25 Jan, 2016</span>
-	<i class="icon ion-ios-close-outline payment"></i>
-  </div>
-
   <div ng-controller="transListController as listControl">
   <div class="item item-avatar item-icon-right in in done done" ng-repeat="lists in listControl.products">
 	<p class="success"><span>&#x20B9;</span> {{lists.amount}}</p>
@@ -15,7 +8,5 @@
 	<i class="icon ion-ios-close-outline payment"></i>
   </div>
  </div>
-  
-  
 </div>
 </ion-view>

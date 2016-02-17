@@ -14,6 +14,9 @@ angular.module('app.controllers', [])
       
 .controller('growthRateCtrl', function($scope) {
 
+})     
+.controller('termsCtrl', function($scope) {
+
 })
    
 .controller('recentTransactionsCtrl', function($scope) {
@@ -110,6 +113,9 @@ angular.module('app.controllers', [])
 
 })
 .controller('tourCtrl', function($scope) {
+
+})
+.controller('feedbackCtrl', function($scope) {
 
 })
 
