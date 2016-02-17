@@ -22,7 +22,7 @@ angular.module('app.controllers', [])
   .controller('pre_verificationCtrl', function($scope) {
 
 })
-  .controller('post_verificationCtrl', function($scope) {
+  .controller('inviteCtrl', function($scope) {
 
 })
     
@@ -127,7 +127,7 @@ $http.get('data/transactiondata.json').success(function(data){
 
 
 
-.controller('MyCtrl_swipe', function ($scope, $ionicTabsDelegate) {
+/*.controller('MyCtrl_swipe', function ($scope, $ionicTabsDelegate) {
 
     $scope.goForward = function () {
         var selected = $ionicTabsDelegate.selectedIndex();
@@ -144,7 +144,7 @@ $http.get('data/transactiondata.json').success(function(data){
 			 $ionicTabsDelegate.$getByHandle('mainScroll').scrollTop();
         }
     }
-})
+})*/
 .controller('slideCtrl', function($scope, $ionicSlideBoxDelegate) {
 	    $scope.goForward = function () {
        $ionicSlideBoxDelegate.next();

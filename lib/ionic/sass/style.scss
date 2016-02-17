@@ -89,20 +89,37 @@ padding:0;margin-top: 10px;}
 	text-transform:uppercase;
 	}
 }
-.item.item-icon-right {
-    background: #E5ECF4 ;
-}
-.h1.title p{
-	color: #FFF;
-	font-size: 16px;
-	font-weight: 700;
-	line-height: 55px;
-	text-align: left;
-	margin-left: 45px;
-}
 
-.fino_head button {
+.fino_head{
+
+	.title {
+		height: 54px !important;
+		&.h1 .head_title{
+			color: #FFF;
+			font-size: 16px;
+			font-weight: 700;
+			line-height: 55px;
+			text-align: left;
+			margin-left: 45px;
+			margin-bottom: 0px;
+			display:table
+			& #title {
+				display: table-cell;
+				vertical-align: middle;
+			}
+		}
+	}
+	background-color:#18bb9c;
+	height:55px;
+	button , .button{
     padding: 0px 18px !important;
+	color: white !important;
+	font-size: 23px !important;
+	position: absolute;
+	top: 5px;
+	bottom: 5px;
+	line-height: 42px !important;
+	}
 }
 .inner_numbers{
 	font-family: 'bebas_neueregular' !important;
@@ -203,6 +220,10 @@ padding:0;margin-top: 10px;}
 .has-header{top:-28px;}
 }
 .recent_transactions{
+.item.item-icon-right {
+    background: #E5ECF4 ;
+}
+
 .item-avatar{
 padding-left: 100px;}
 .failed, .success {
@@ -211,4 +232,7 @@ padding-left: 100px;}
     left: 10px;
 }
 
+}
+.invite{
+img{margin: 20vh auto 30px;}
 }
