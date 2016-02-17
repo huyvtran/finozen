@@ -1,11 +1,15 @@
 angular.module('app.routes', [])
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider,$ionicAppProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
+$ionicAppProvider.identify ({
+  app_id:"83d34421",
+  "api_key":"7b8cb9f2d3b2d000350e3da52e6493b995039c9c8f7fe8c9"
+});
   $stateProvider
     
       
