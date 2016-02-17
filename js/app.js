@@ -12,7 +12,33 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     $ionicAnalytics.register();
-    
+    var io=Ionic.io();
+
+    var push=new Ionic.Push({
+      "onNotification":function(notification) {
+
+      },
+      "pluginConfig":{
+        "android":{
+          "iconcolor":"#0000FF"
+        }
+      }
+    });
+
+    var user=Ionic.User.current();
+    if (!user.id) {
+      user.id=Ionic.User.anonymousId();
+    }
+    user.set('name','simon solovan push');
+    user.set('bio','this is me again');
+    user.save();
+    var callback=function(){
+      push.addTokenToUser(user);
+      user.save();
+
+    };
+    push.register(callback);
+
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
