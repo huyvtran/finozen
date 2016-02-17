@@ -43,6 +43,11 @@ angular.module('app.routes', [])
 		url: '/change_pin',
 		templateUrl: 'templates/change_password.html',
 		controller: 'inviteCtrl'
+    })   
+     .state('forgot_pin', {
+		url: '/forgot_pin',
+		templateUrl: 'templates/forgot_password.html',
+		controller: 'inviteCtrl'
     })
      .state('terms', {
 		url: '/terms',
@@ -113,12 +118,6 @@ angular.module('app.routes', [])
         
       
     
-      
-    .state('menu', {
-      url: '/side-menu21',
-      abstract:true,
-      templateUrl: 'templates/menu.html'
-    })
              .state('account', {
       url: '/account',         
           templateUrl: 'templates/account.html',
@@ -179,12 +178,7 @@ angular.module('app.routes', [])
           templateUrl: 'templates/feedback.html',
           controller: 'feedbackCtrl'     
     })  
-
-      .state('sidemenu', {
-      url: '/sidemenu',         
-          templateUrl: 'templates/sidemenu.html',
-          controller: 'sidemenuCtrl'     
-    })  
+ 
      
     ;
 

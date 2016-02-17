@@ -157,13 +157,15 @@ a{color:blue;text-decoration:none;}
 		&side-menu-left{}
 		.item-complex{border:none !important;}
 	}
-	.title{background: #263646 !important; margin:0;height:120px; p{color:white;} }
+	.account_bar{display:table; height: 85%;}
+	.account_bar_info{display:table-cell;vertical-align: middle;}
+	.title{background: #2d3e52 !important; margin:0;height:120px; p{color:white;} }
 	.row{
 		&.account_block{
 			img{
-				width: 40px;
-				height: 40px;
-				margin: 1em 8px;
+				display: table-cell;
+				vertical-align: middle;
+				padding: 0 10px;
 			}
 			p {
 				&:first-child{
