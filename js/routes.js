@@ -47,6 +47,11 @@ $ionicAppProvider.identify ({
 		url: '/change_pin',
 		templateUrl: 'templates/change_password.html',
 		controller: 'inviteCtrl'
+    })   
+     .state('forgot_pin', {
+		url: '/forgot_pin',
+		templateUrl: 'templates/forgot_password.html',
+		controller: 'inviteCtrl'
     })
      .state('terms', {
 		url: '/terms',
@@ -117,12 +122,6 @@ $ionicAppProvider.identify ({
         
       
     
-      
-    .state('menu', {
-      url: '/side-menu21',
-      abstract:true,
-      templateUrl: 'templates/menu.html'
-    })
              .state('account', {
       url: '/account',         
           templateUrl: 'templates/account.html',
@@ -183,12 +182,7 @@ $ionicAppProvider.identify ({
           templateUrl: 'templates/feedback.html',
           controller: 'feedbackCtrl'     
     })  
-
-      .state('sidemenu', {
-      url: '/sidemenu',         
-          templateUrl: 'templates/sidemenu.html',
-          controller: 'sidemenuCtrl'     
-    })  
+ 
      
     ;
 

@@ -12,6 +12,7 @@ min-height: 20px !important;
 background:#18bb9c;
 color:white;
 border-color:#18bb9c;
+&.activated{background:#18bb9c; opacity:0.8 !important;}
 }
 }
 .tabs{height:46px}
@@ -40,7 +41,7 @@ padding:0;margin-top: 10px;}
     font-size: 15px !important;
     margin: auto;
     line-height: 40px !important;
-    width: 150px;
+    width: 100%;
     border-radius: 5px;
 	text-transform:uppercase;
 	max-height: 42px !important;
@@ -153,7 +154,7 @@ padding:0;margin-top: 10px;}
   .secure_lock{padding-right: 10px; color: white !important;}
   .forgot_pin{padding-right:10px; a{color:#18bb9c;} }
 }  
-.signin_background, .sign_up{ 
+.signin_background, .sign_up{
 .item-input{border:none; border-bottom:1px solid #18bb9c; margin:1px;background:transparent; input {font-size: 16px !important;}}  
 .item-checkbox{
 	border:none; margin:1px; background:transparent; padding:15px 10px; 
@@ -163,14 +164,14 @@ padding:0;margin-top: 10px;}
 		text-decoration: underline;
 	}
 }  
-  .button{background:#18bb9c;border:#18bb9c;p{color:white; &:hover{color:white;}  }}
+  .button{background:#18bb9c;border:#18bb9c;p{color:white; &:hover{color:white;}  } &.create_acc_btn{text-transform:none !important; &.activated{background:transparent !important;} }}
 }
 .sign_up{ 
 .list .item:last-child{border-radius:0 !important;} 
 .row{padding:0;}
 .col{padding:0;}
 .signup_icons{margin-right:10px;}
-.button{color:white;}
+.button, .button:hover{color:white; &.activated{background:#18bb9c; opacity:0.8 !important;}}
 }
 .summary{
 	.total_value{
@@ -217,6 +218,7 @@ padding:0;margin-top: 10px;}
 		.withdraw_all p{padding-left:6px;}
 }
 .slides{
+ion-slide{background:white;transition-duration: 300ms;}
 .slider-slide.disable-user-behavior {
     height: 100vh;
 }
@@ -254,7 +256,8 @@ img{margin: 20vh auto 30px;}
 	border: 1px solid #ddd;
 	padding: 10px;
 	margin: 10px auto auto 23px;
-	width: 70%;
+	width: 90%;
+	height: 48px;
 	}
 	.input_list{margin-top:20px;}
 	input[type="submit"] {
@@ -269,7 +272,7 @@ img{margin: 20vh auto 30px;}
 		width: 88%;
 		margin: auto;
 		border: 1px solid #ddd;
-		min-height: 60px;
+		min-height: 80px;
 		padding: 10px;
 		}	
 		input[type="submit"] {width:88%;}
