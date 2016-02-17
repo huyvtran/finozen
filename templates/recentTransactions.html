@@ -1,4 +1,5 @@
 <ion-view title="Recent Transactions">
+<ion-content  has-bouncing="true"  scrollbar-y="false">
 <div class="list recent_transactions">
   <div ng-controller="transListController as listControl">
   <div class="item item-avatar item-icon-right in in done done" ng-repeat="lists in listControl.products">
@@ -9,4 +10,5 @@
   </div>
  </div>
 </div>
+</ion-content>
 </ion-view>
