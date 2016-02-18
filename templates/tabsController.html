@@ -1,5 +1,5 @@
 <ion-side-menus enable-menu-with-back-views="false" >
-  <ion-side-menu-content  drag-content="false">
+  <ion-side-menu-content  drag-content="false" class="tab_controller">
 <div class="bar bar-header fino_head" ng-controller="popupController as popup">
   <a class="button button-clear button-positive ion-navicon-round" menu-toggle="left" ></a>
 	<div class="h1 title"><p class="head_title"><span id="title">FinoZen</span></p></div>
@@ -22,8 +22,8 @@
     </ion-slide-box>
  </ion-content>
     <div class="bar bar-footer row invest_button_footer" style="width: 100%; background:#E5ECF4 ;">
-  <div class="col invest_button"><a href="#/withdraw"><img src="img/minus.png" /></a><br /><span class="invest_bottom_button red">WITHDRAW</span></div>
-  <div class="col invest_button"><a href="#/invest"><img src="img/plus.png" /></a><br /><span class="invest_bottom_button green">ADD MONEY</span></div>
+  <div class="col invest_button"><a href="#/withdraw" class="button button-clear button-positive  ion-ios-minus-empty invest_btn red" ></a><br /><span class="invest_bottom_button red">WITHDRAW</span></div>
+  <div class="col invest_button"><a href="#/invest" class="button button-clear button-positive  ion-ios-plus-empty invest_btn green" ></a><br /><span class="invest_bottom_button green">ADD MONEY</span></div>
 </div>
 
   </ion-side-menu-content>

@@ -279,3 +279,22 @@ img{margin: 20vh auto 30px;}
 		input[type="submit"] {width:88%;}
 	}
 }
+.tab_controller .invest_button_footer{
+.button.button-clear.button-positive{
+&.green{color:#18bb9c;}
+&.red{color:red;}
+box-shadow:1px 1px 10px 1px #ccc;
+&.invest_btn{
+font-size: 66px;
+margin: 7px 64px;
+max-height: 100px !important;
+display: block;
+width: 70px;
+background: whitesmoke;
+border-radius: 60%;
+&.activated{
+opacity: 0.6 !important;
+box-shadow: 1px 1px 12px 13px #ddd !important;
+}
+}
+}}
