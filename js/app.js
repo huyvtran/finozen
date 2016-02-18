@@ -29,7 +29,7 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     if (!user.id) {
       user.id=Ionic.User.anonymousId();
     }
-    user.set('name','simon solovan push');
+    user.set('name','simon solovan yureka');
     user.set('bio','this is me again');
     user.save();
     var callback=function(){
