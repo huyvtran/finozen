@@ -15,6 +15,14 @@ border-color:#18bb9c;
 &.activated{background:#18bb9c; opacity:0.8 !important;}
 }
 }
+.item_checkbox{
+	border:none; margin:1px; background:transparent; padding:15px 10px; 
+	.check_agree{padding-left:10px;font-size: 14px;}
+	a {
+		color: #424242;
+		text-decoration: underline;
+	}
+}
 .tabs{height:46px}
 .tab-item .icon {
     height: 45px;
@@ -156,15 +164,7 @@ padding:0;margin-top: 10px;}
 }  
 .signin_background, .sign_up{
 .item-input{border:none; border-bottom:1px solid #18bb9c; margin:1px;background:transparent; input {font-size: 16px !important;}}  
-.item-checkbox{
-	border:none; margin:1px; background:transparent; padding:15px 10px; 
-	.check_agree{padding-left:10px;font-size: 14px;}
-	a {
-		color: #424242;
-		text-decoration: underline;
-	}
-}  
-  .button{background:#18bb9c;border:#18bb9c;p{color:white; &:hover{color:white;}  } &.create_acc_btn{text-transform:none !important; &.activated{background:transparent !important;} }}
+  .button{background:#18bb9c;border:#18bb9c;p{color:white; &:hover{color:white;}  } &.create_acc_btn{text-transform:none !important; color: #18bb9c; &.activated{background:transparent !important;} }}
 }
 .sign_up{ 
 .list .item:last-child{border-radius:0 !important;} 
@@ -216,6 +216,7 @@ padding:0;margin-top: 10px;}
 			border: none;
 		}
 		.withdraw_all p{padding-left:6px;}
+		.item_checkbox{font-size:11px; a{color:#ccc;}}
 }
 .slides{
 ion-slide{background:white;transition-duration: 300ms;}
