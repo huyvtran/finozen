@@ -68,15 +68,12 @@ angular.module('app.controllers', [])
 
 .controller('faqCtrl', function($scope) {
   $scope.groups = [];
-    $scope.groups["0"] = {name: "What is FinoZen?",items: ["It's simple. You can invest through your online banking in a one-step process."] };
-    $scope.groups["1"] = {name: "How do I Invest in FinoZen?",items: ["It's simple. You can invest through your online banking in a one-step process."] };
-    $scope.groups["2"] = {name: "How much can i Invest?",items: ["It's simple. You can invest through your online banking in a one-step process."] };
-    $scope.groups["3"] = {name: "Why should i trust you?",items: ["It's simple. You can invest through your online banking in a one-step process."] };
-    $scope.groups["4"] = {name: "At what rate do my money grow?",items: [""] };
-    $scope.groups["5"] = {name: "Is it dependent on market fluctuations?",items: [""] };
-    $scope.groups["6"] = {name: "Will I loose my money it market goes down?",items: [""] };
-    $scope.groups["7"] = {name: "What is the withdraw limit?",items: [""] };
-  
+    $scope.groups["0"] = {name: "What is FinoZen?",items: ["FinoZen is a mobile app where you can watch your money grow, literally! It enables you to invest and withdraw in just a click while your money grows at an expected rate of 7.5 – 8.5% p.a."] };
+    $scope.groups["1"] = {name: "How does FinoZen work?",items: ["FinoZen is a channel to connect your bank account to a specific selected mutual fund where your money grows.  The money moves directly from your account to the Mutual Fund and you will have full visibility and control of your money at all times. You can choose to Add or withdraw money anytime, anywhere with no penalties applicable."] };
+    $scope.groups["2"] = {name: "Where does my money go?",items: ["Finozen channels your money to Reliance <>.  Reliance <> is a Mutual fund that invests your money in <Add details here> . The investment is made in your name, implying that you can always directly connect with the AMC should any such need arise. However, FinoZen provides you with an easy to use, simple platform to control and watch your money."] };
+    $scope.groups["3"] = {name: "Who is FinoZen meant for?",items: ["FinoZen is meant for anyone who has excess money parked in their bank account. If you wish to make your money work for you and earn you interest to the tune of 7.5-8.5% p.a. in just a click, then FinoZen is meant for you.  You should be an Indian National investing in individual capacity. FinoZen is not available for companies, firms, trusts etc."] };
+    $scope.groups["4"] = {name: "Why should I use FinoZen over other options like Banks, financial planners, other websites/apps ?",items: ["FinoZen is meant for anyone who has excess money parked in their bank account. We channel your money to a pre-selected mutual fund so you do not have to worry about comparison with other funds. We also ensure that you can add and withdraw at anytime as per your convenience to ensure that you do not have to commit long term. "] };
+ 
   
   /*
    * if given group is the selected group, deselect it
