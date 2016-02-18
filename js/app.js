@@ -15,9 +15,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     var io=Ionic.io();
 
     var push=new Ionic.Push({
-      "onNotification":function(notification) {
-
-      },
+      "onNotification": function(notification) {
+    var payload = notification.payload;
+    console.log(notification, payload);
+  },
+  "onRegister": function(data) {
+    console.log(data.token);
+  },
       "pluginConfig":{
         "android":{
           "iconcolor":"#0000FF"
@@ -29,7 +33,7 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     if (!user.id) {
       user.id=Ionic.User.anonymousId();
     }
-    user.set('name','simon solovan yureka');
+    user.set('name','simon solovan error');
     user.set('bio','this is me again');
     user.save();
     var callback=function(){
