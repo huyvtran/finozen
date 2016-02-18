@@ -223,14 +223,16 @@ a{color:blue;text-decoration:none;}
 	ul {
 		background-color:transparent;
 		 li{
+		 height: 46px;
 		font-size: 14px;
 		line-height: 43px;
-		text-transform: uppercase;
 		opacity: 0.7;
 		color: rgb(68, 68, 68);
+		border-bottom:2px solid transparent;
+		transition: border-bottom-color 1s;
 		&.tab-active {
 			color: #18bb9c;
-			border-bottom:4px solid #18bb9c;
+			border-bottom-color:#18bb9c;
 		}
 	}
 	}
