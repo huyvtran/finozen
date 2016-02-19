@@ -1,15 +1,19 @@
 
 <ion-view title="Summary Page" class="summary">
-       <div class="row circle">
+       <div class="row circle" ng-controller="popOverController">
 			<p class="total_value"><span style="font-size:28px"><sup>&#x20B9;</sup></span>1,100.00
-			<br/><span class="current_bal item-note">Current Balance</span></p>
+			<br/><span class="current_bal item-note">Current Balance</span> <span class="button button-icon ion-information" ng-click="popover.show($event)"> </span> </p>
 			
 		</div>
         
-        <div class="row summary_values">
+        <div  class="row summary_values">
 			<div class="col text-center" style="font-size:18px">
 				<p class="inner_numbers"><span style="font-size:28px"><sup>&#x20B9;</sup></span>1000.00</p>
-				<p class="item-note left"  style="margin:0; ">Invested Amount</p></div>
+				<p class="item-note left"  style="margin:0; ">Invested Amount </p>
+
+				</div>
+								 
+
 			<div class="col" style="text-align:center; font-size:18px;"><p class="inner_numbers" style="margin:0;  border-left: 3px solid #808080;"><span style="font-size:28px"><sup>&#x20B9;</sup></span>100.00</p><p  style="margin:0;  border-left: 3px solid #808080;" class="item-note left">Net Gains</p></div>
         </div>
 </ion-view>

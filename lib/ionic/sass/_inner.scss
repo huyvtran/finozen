@@ -88,7 +88,7 @@ a{color:blue;text-decoration:none;}
 }
 .screen_faq{ 
 .col.question{ &.active{font-weight:600;} }
-.col.answer{width: 93%;margin: auto; p{color:#424242;font-size: 15px;} }
+.col.answer{width: 93%;margin: auto; p{color:#8b8b8b;font-size: 14px;} }
 .faq_question {
     margin-top: 10px;
 	.faq_question_content {
@@ -238,4 +238,27 @@ a{color:blue;text-decoration:none;}
 	}
 	}
 	
+}
+/* .withdraw_screen{
+	.invest_info{
+		input[disabled]{
+			background-color:transparent;
+		}
+	}
+} */
+ion-popover-view.fit {
+  height: auto;
+}
+
+ion-popover-view.fit ion-content {
+  position: relative;
+}
+
+.platform-android ion-popover-view.fit {
+  margin-top: 5px;
+}
+
+.platform-ios ion-popover-view.fit {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }

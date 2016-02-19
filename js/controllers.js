@@ -128,26 +128,20 @@ $http.get('data/transactiondata.json').success(function(data){
 
 }])
 
+.controller('popOverController',function($scope,$ionicPopover ){
+
+ var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item" href="http://learn.ionicframework.com/" target="_blank">Learn Ionic</a> </div></ion-content>';
+
+  $scope.popover = $ionicPopover.fromTemplate(template, {
+    scope: $scope
+  });
 
 
-/*.controller('MyCtrl_swipe', function ($scope, $ionicTabsDelegate) {
+})
 
-    $scope.goForward = function () {
-        var selected = $ionicTabsDelegate.selectedIndex();
-        if (selected != -1) {
-            $ionicTabsDelegate.select(selected + 1);
-			 $ionicTabsDelegate.$getByHandle('mainScroll').scrollTop();
-        }
-    }
 
-    $scope.goBack = function () {
-        var selected = $ionicTabsDelegate.selectedIndex();
-        if (selected != -1 && selected != 0) {
-            $ionicTabsDelegate.select(selected - 1);
-			 $ionicTabsDelegate.$getByHandle('mainScroll').scrollTop();
-        }
-    }
-})*/
+
+
 .controller('slideCtrl', function($scope, $ionicSlideBoxDelegate) {
 	    $scope.goForward = function () {
        $ionicSlideBoxDelegate.next();

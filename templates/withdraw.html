@@ -1,4 +1,4 @@
-<ion-view title="Withdraw">
+<ion-view title="Withdraw" class="withdraw_screen">
 <div class="screen_invest">
 <div class="bar bar-header fino_head" ng-controller="popupController as popup">
 	<a class="button button-clear ion-android-arrow-back " href="#/page14/page15" ></a>
@@ -14,15 +14,15 @@
 		</div>
 		<div class="list invest_info">
 		  <label class="item item-input">
-			<input type="number" placeholder="Enter Amount">
+			<input type="number" placeholder="Enter Amount" ng-disabled="checked_withdraw">
 		  </label>
 		<p class="invest_hint">MINIMUM BALANCE: <span>&#x20B9;</span> 100</p>
 		</div>
 		<label class="row withdraw_all">
-			<input type="checkbox" placeholder="Enter Amount" style="margin: 4px;"><p>Withdraw my complete balance</p>
+			<input ng-model="checked_withdraw" checked type="checkbox" id="withdraw_money" placeholder="Enter Amount" style="margin: 4px;"><label for="withdraw_money" >Withdraw my complete balance</label>
 		</label>
 		<div class="row">
-		<a class="button button-full button-positive bar-footer invest_button_footer"  href="#/page14/page15">Withdraw</a>
+		<a class="button button-full button-positive bar-footer invest_button_footer"  href="#/success">Withdraw</a>
 		</div>
     </ion-content>
 
