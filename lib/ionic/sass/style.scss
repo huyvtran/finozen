@@ -38,7 +38,7 @@ border-color:#18bb9c;
 
 }
 .item-note{float:none;}
-.invest_button{border:none; background:#e5ecf4; height:180px;
+.invest_button{border:none; background:#e5ecf4; height:180px;text-align: -moz-center;
 img{margin: 0px auto;max-height:75px;
 display: block; height:90px;
 padding:0;margin-top: 10px;}
@@ -88,16 +88,15 @@ padding:0;margin-top: 10px;}
 	}
 }
 .circle{
-	display:table;
-	height: 22%;
+	height: 30%;
 	width: 75%;
-	border: 4px solid #FFF;
-	background:#18bb9c;
-	margin:15% auto;
+	background: #18bb9c;
+	margin: 15% auto 0%;
 	border-radius: 20px;
-	color:white;
-	font-weight:500;
-	
+	color: white;
+	font-weight: 500;
+	display: table;
+	padding: 20px;
 }
 .inner_tabs .tabs{
 	top:56px;
@@ -180,7 +179,8 @@ padding:0;margin-top: 10px;}
 	text-align: center;	
 	width: 100%;
 	color:white;
-	padding-top: 13%;
+	display: table-cell;
+	vertical-align: middle;
 	.summary_values{margin-top: 15px;}
 
 	}
@@ -191,6 +191,9 @@ padding:0;margin-top: 10px;}
 		
 	}
 	.total{text-align:center; margin-bottom:1em;}
+	&.pane{display: flex;
+flex-flow: row wrap;
+height: 65vh;}
 }
 .verification{.bar{padding:0;} }
 .screen_invest{
@@ -215,7 +218,6 @@ padding:0;margin-top: 10px;}
 	.item.item-radio.col {
 			border: none;
 		}
-		.withdraw_all p{padding-left:6px;}
 		.item_checkbox{font-size:11px; a{color:#ccc;}}
 }
 .slides{
@@ -235,7 +237,11 @@ img{margin:0;}
 }
 .recent_transactions{
 .item-avatar{
-padding-left: 115px;}
+padding-left: 115px;
+border: none;
+border-bottom: 1px solid #ddd;
+margin: 1px;
+}
 .failed, .success {
     position: absolute;
     top: 24px;
@@ -286,7 +292,7 @@ img{margin: 20vh auto 30px;}
 box-shadow:1px 1px 10px 1px #ccc;
 &.invest_btn{
 font-size: 66px;
-margin: 7px 64px;
+margin: 9px auto;
 max-height: 100px !important;
 display: block;
 width: 70px;

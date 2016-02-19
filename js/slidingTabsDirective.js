@@ -96,17 +96,6 @@ var slidingTabsDirective = angular.module("ionic").directive('ionSlideTabs', ['$
                     var currentLi = angular.element(currentElement);
                     tabsWidth += currentLi[0].offsetWidth;
                 });
-
-                if(options.slideTabsScrollable) {
-
-                    angular.element(tabsBar[0].querySelector(".scroll")).css("width", tabsWidth + 1 + "px");
-
-                }
-                else {
-
-                    slideTabs.css("width",tabsList[0].offsetWidth / slideTabs.length + "px");
-                }
-
                 slideToCurrentPosition();
 
             };
