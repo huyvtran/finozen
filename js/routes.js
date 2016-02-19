@@ -58,11 +58,12 @@ $ionicAppProvider.identify ({
 		templateUrl: 'templates/terms.html',
 		controller: 'termsCtrl'
     })
-        
-      
-    
-      
-        
+     .state('success', {
+		url: '/success',
+		templateUrl: 'templates/payment_success.html',
+		controller: 'successCtrl'
+    })
+                
     .state('signup', {
       url: '/page8',
       templateUrl: 'templates/signup.html',
@@ -131,27 +132,27 @@ $ionicAppProvider.identify ({
           .state('faq', {
       url: '/faq',         
           templateUrl: 'templates/faq.html',
-          controller: 'faqCtrl'     
+          controller: 'privacyCtrl'     
     })
           .state('faq1', {
       url: '/faq_account',         
           templateUrl: 'templates/faq1.html',
-          controller: 'faqCtrl'     
+          controller: 'AccountfaqCtrl'     
     })
           .state('faq2', {
       url: '/faq_add',         
           templateUrl: 'templates/faq2.html',
-          controller: 'faqCtrl'     
+          controller: 'AddMoneyCtrl'     
     })
           .state('faq3', {
       url: '/faq_withdraw',         
           templateUrl: 'templates/faq3.html',
-          controller: 'faqCtrl'     
+          controller: 'WithdrawCtrl'     
     })
           .state('faq4', {
       url: '/faq_others',         
           templateUrl: 'templates/faq4.html',
-          controller: 'faqCtrl'     
+          controller: 'OthersCtrl'     
     })  
 
     .state('privacy', {
