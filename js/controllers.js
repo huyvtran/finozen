@@ -91,7 +91,7 @@ $scope.transactionStatus=transactionStatus;
 
   $scope.addUserInfo = function () {
     console.log("ENtered");
-     userInfo.save({fName:"arcd",lName:"abrcd",pin:"1234",mobileNumber:"9632305544"});
+     userInfo.save({"fName":"arcd04","lName":"abrcd","pin":"1234","mobileNumber":"1250325548"});
      console.log("message delivered");
 };
 
