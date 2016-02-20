@@ -62,7 +62,7 @@ $scope.transactionStatus=transactionStatus;
      buttons: [
        { text: 'Call',
           onTap:function(e){
-         window.location.href="tel:+91 9886098860";
+         window.location.href="tel:080-41245883";
        }
 
         },  
