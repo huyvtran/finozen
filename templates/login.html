@@ -8,11 +8,12 @@
         <p class="padding">Watch Your Money Grow</p>
       </div>
 	  
-        <form class="list">
+        <form class="list" name="myForm">
             <ion-list>
                 <label class="item item-input">
-                    <input type="number" placeholder="Mobile Number" maxlength ="10">
+                    <input name="myName" ng-model="myName" required type="number" placeholder="Mobile Number" maxlength ="10" minlength ="10" min="7000000000" max="9999999999">
                 </label>
+				<div class="error" ng-show="myForm.myName.$touched && myForm.myName.$invalid">Enter Valid mobile number</div>
                 <label class="item item-input">
                     <input type="password" placeholder="4 digit PIN" maxlength ="4">
                 </label><p class="text-right forgot_pin"><a href="#/forgot_pin">Forgot PIN?</a></p>
