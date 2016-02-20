@@ -82,9 +82,23 @@ $scope.transactionStatus=transactionStatus;
 
   };
 
-  //
+  
 
 })
+
+
+.controller('addUserController', function($scope,$http,userInfo) {
+
+  $scope.addUserInfo = function () {
+    console.log("ENtered");
+     userInfo.save({fName:"arcd",lName:"abrcd",pin:"1234",mobileNumber:"9632305544"});
+     console.log("message delivered");
+};
+
+    console.log("ENtered");
+
+})
+
 
 .controller('AccountfaqCtrl', function($scope) {
   $scope.groups = [];

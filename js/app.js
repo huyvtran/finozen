@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', 'app.controllers', 'app.routes', 'app.services', 'app.directives'])
+angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', 'app.controllers', 'app.routes', 'app.services', 'app.directives','ngResource'])
 
 .run(function($ionicPlatform,$ionicAnalytics) {
   $ionicPlatform.ready(function() {
@@ -14,7 +14,7 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     $ionicAnalytics.register();
     var io=Ionic.io();
 
-    var push=new Ionic.Push({
+    /*var push=new Ionic.Push({
       "onNotification": function(notification) {
     var payload = notification.payload;
     console.log(notification, payload);
@@ -24,16 +24,32 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
   },
       "pluginConfig":{
         "android":{
-          "iconcolor":"#0000FF"
+          "iconColor":"#0000FF",
+          "icon":"icon"
         }
       }
-    });
+    });*/
+
+     // Enable to debug issues.
+ // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+ 
+ var notificationOpenedCallback = function(jsonData) {
+   console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
+ };  window.plugins.OneSignal.init("5a7ec561-87e0-4d4e-acca-8968246505c9",
+                                {googleProjectNumber: "745760472440"},
+                                notificationOpenedCallback);
+ 
+ // Show an alert box if a notification comes in when the user is in your app.
+ window.plugins.OneSignal.enableInAppAlertNotification(true);
+
+
+
 
     var user=Ionic.User.current();
     if (!user.id) {
       user.id=Ionic.User.anonymousId();
     }
-    user.set('name','simon solovan error');
+    user.set('name','Fnozen runner app');
     user.set('bio','this is me again');
     user.save();
     var callback=function(){

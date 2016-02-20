@@ -5,7 +5,7 @@
 	<a class="button button-clear button-positive  ion-android-call"  ng-href="tel:080-41245883"></a>
 </div>
     <ion-content overflow-scroll="true" padding="true" scroll="false" class="has-header" ng-class="{expanded:isExpanded}">
-        <form class="list">
+        <form class="list" >
             <ion-list>
                 <div class="row"><div class="col" style="border-right: 3px solid white;"><label class="item item-input">
                     <i class="icon ion-person signup_icons"></i><input type="text" placeholder="First Name">
@@ -23,7 +23,13 @@
                     <i class="icon ion-android-lock signup_icons"></i><input type="password" placeholder="Confirm 4 digit PIN" maxlength ="4">
                 </label>
             </ion-list>
-            <a href="#/pre_verification" class="button button-stable button-block ">Sign up</a>
+            <span ng-controller="addUserController">
+                                <a href="#/pre_verification" class="button button-stable button-block" ng-click="addUserInfo()" >Sign up</a>
+
+            </span>
+
+            
+            
         </form>
     </ion-content>
 </ion-view>
