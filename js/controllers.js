@@ -219,9 +219,10 @@ $scope.transactionStatus=transactionStatus;
   $scope.popover = $ionicPopover.fromTemplate(template, {
   scope: $scope
   });
+  $scope.balance="1000";
 })
 .controller('withdrawCtrl', function($scope) {
-
+$scope.balance="1000";
 })
 .controller('tourCtrl', function($scope) {
 

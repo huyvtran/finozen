@@ -112,6 +112,8 @@ padding:0;margin-top: 10px;}
 	.title {
 		height: 54px !important;
 		&.h1 .head_title{
+			text-transform:uppercase;
+			#title\ fino {text-transform: none;}
 			height: 55px;
 			color: #FFF;
 			font-size: 16px;
@@ -162,7 +164,7 @@ padding:0;margin-top: 10px;}
   .forgot_pin{padding-right:10px; a{color:#18bb9c;} }
 }  
 .signin_background, .sign_up{
-.item-input{border:none; border-bottom:1px solid #18bb9c; margin:1px;background:transparent; input {font-size: 16px !important;}}  
+.item-input{border:none; border-bottom:1px solid #18bb9c; margin:1px;background:transparent; input {font-size: 16px !important;max-width: 98%;}}  
   .button{background:#18bb9c;border:#18bb9c;p{color:white; &:hover{color:white;}  } &.create_acc_btn{text-transform:none !important; color: #18bb9c; &.activated{background:transparent !important;} }}
 }
 .sign_up{ 
@@ -208,6 +210,7 @@ height: 65vh;}
 		padding-top:60px; margin:auto 10px; 
 		&.list{
 			padding-top:0px; 
+			input{max-width: 98%;}
 			.invest_hint{text-align:center; font-size:12px; color:#929292; padding:5px;}
 		} 
 	}
@@ -259,6 +262,8 @@ img{margin: 20vh auto 30px;}
 	}
 }
 .change_password{
+	.input_list{
+	.padding{padding:10px 24px;;}
 	input{
 	border: 1px solid #ddd;
 	padding: 10px;
@@ -266,7 +271,7 @@ img{margin: 20vh auto 30px;}
 	width: 90%;
 	height: 48px;
 	}
-	.input_list{margin-top:20px;}
+	margin-top:20px;}
 	input[type="submit"] {
 		background: #18bb9c;
 		color: white;
@@ -334,4 +339,8 @@ box-shadow: 1px 1px 12px 13px #ddd !important;
 		}
 		.done_btn a{background:#18bb9c; padding:0; color:white;}
 	}
+}
+.error {
+    color: red;
+    text-align: center;
 }
