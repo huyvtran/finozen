@@ -66,13 +66,22 @@
 				
 			</div>
 		</div>
-		
-		<label class="item item-input" >
-			<i class="icon ion-android-lock signup_icons"></i><input type="text" placeholder="Invite code">
+		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.invite.$invalid && signupForm.$submitted, 'no-errors' : signupForm.invite.$valid  && signupForm.$submitted}">
+			<i class="icon ion-android-lock signup_icons"></i><input type="password" name="invite" ng-model="authorization.invite" maxlength="4" required placeholder="Invite code">
 		</label>
+		<div class="error-container last-error-container" ng-show="signupForm.invite.$error && signupForm.$submitted" ng-messages="signupForm.invite.$error">
+			<div  class="error" >
+				<div ng-message="required">
+					<i class="ion-information-circled"></i> You did not enter a field
+				</div>
+				
+			</div>
+		</div>
+	
+
 	</div>
 	<button class="button button-full button-positive" type="submit">
-		<i class="icon ion-locked secure_lock"></i>Secure Login
+	Sign Up
 	</button>
 </form>	
     </ion-content>
