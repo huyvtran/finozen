@@ -254,7 +254,11 @@ $http.get('data/transactiondata.json').success(function(data){
 
 })
 
-
+.controller('showhistoryController', function($scope,$ionicHistory){
+    /*console.log($ionicHistory.currentStateName()  + "vviewHistory");
+    console.log($ionicHistory.backTitle() + "back");*/
+    $ionicHistory.clearHistory();
+})
 
 
 .controller('slideCtrl', function($scope, $ionicSlideBoxDelegate) {
