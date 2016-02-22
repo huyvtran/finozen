@@ -25,6 +25,25 @@ angular.module('app.controllers', [])
   .controller('pre_verificationCtrl', function($scope) {
 
 })
+.controller('AuthCtrl', function($scope, $state) {
+  
+  $scope.signIn = function(form) {
+    if(form.$valid) {
+      $state.go('tabsController.summaryPage');
+    }
+  };  
+
+})
+.controller('AuthCtrl2', function($scope, $state) {
+  
+  $scope.signIn = function(form) {
+    if(form.$valid) {
+      $state.go('pre_verification');
+    }
+  };  
+
+})
+
   .controller('inviteCtrl', function($scope) {
 
 })

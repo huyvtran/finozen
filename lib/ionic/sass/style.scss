@@ -1,6 +1,6 @@
 img{margin:2em auto 0;display: block;}
 .success{color:#02a315 !important}
-.icon{color:#009688 !important}
+.icon{color:#009688}
 .failed{color:#e01916 !important}
 .payment{color:#009688 !important}
 .button{
@@ -16,7 +16,14 @@ border-color:#18bb9c;
 }
 }
 .item_checkbox{
-	border:none; margin:1px; background:transparent; padding:15px 10px; 
+	border: none;
+	margin: 1px;
+	background: transparent;
+	padding: 0px 10px;
+	display: inline-block;
+	float: left;
+	width: 78vw;
+	
 	.check_agree{padding-left:10px;font-size: 14px;}
 	a {
 		color: #424242;
@@ -161,10 +168,29 @@ padding:0;margin-top: 10px;}
   background-size: 100% 100%;
   background-position: center center;
   .secure_lock{padding-right: 10px; color: white !important;}
-  .forgot_pin{padding-right:10px; a{color:#18bb9c;} }
+  .forgot_pin{
+		padding-right: 10px;
+		width: 86px;
+		display: inline-block;
+		float: right;
+		a{color:#18bb9c;} }
 }  
 .signin_background, .sign_up{
-.item-input{border:none; border-bottom:1px solid #18bb9c; margin:1px;background:transparent; input {font-size: 16px !important;max-width: 98%;}}  
+.item-input{
+	border:none; border-bottom:1px solid #18bb9c; margin:1px;background:transparent;
+	&.has-errors {
+	  border-bottom: 2px solid red;
+	}
+
+	&.no-errors {
+	  border-bottom: 2px solid #18bb9c;
+	}
+	input {font-size: 16px !important;max-width: 98%;}
+	}  
+	.agree_terms {
+    display: block;
+    margin: 40px 2px 70px 0px;
+}
   .button{background:#18bb9c;border:#18bb9c;p{color:white; &:hover{color:white;}  } &.create_acc_btn{text-transform:none !important; color: #18bb9c; &.activated{background:transparent !important;} }}
 }
 .sign_up{ 
@@ -340,7 +366,24 @@ box-shadow: 1px 1px 12px 13px #ddd !important;
 		.done_btn a{background:#18bb9c; padding:0; color:white;}
 	}
 }
-.error {
-    color: red;
-    text-align: center;
+.error-container {
+  margin-bottom: 15px;
 }
+
+.error-container:last-child {
+    margin: 5px 0 0;
+}
+
+.error {
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-size: 11px;
+  color: red;
+  vertical-align: middle;
+}
+
+.error i {
+  font-size: 24px;
+  color: #B83E2C;  
+  vertical-align: middle;
+}
+
