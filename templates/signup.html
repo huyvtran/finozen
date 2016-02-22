@@ -4,32 +4,77 @@
 	<div class="h1 title"><p class="head_title"><span id="title">SIGN UP</span></p></div>
 	<a class="button button-clear button-positive  ion-android-call"  ng-href="tel:080-41245883"></a>
 </div>
-    <ion-content overflow-scroll="true" padding="true" scroll="false" class="has-header" ng-class="{expanded:isExpanded}">
-        <form class="list" >
-            <ion-list>
-                <div class="row"><div class="col" style="border-right: 3px solid white;"><label class="item item-input">
-                    <i class="icon ion-person signup_icons"></i><input type="text" placeholder="First Name">
-                </label></div>
-                <div class="col"  style="border-left: 3px solid white;"><label class="item item-input ">
-                    <input type="text" placeholder="Last Name">
-                </label></div></div>
-                <label class="item item-input">
-                    <i class="icon ion-android-call signup_icons"></i><input type="number" placeholder="Phone Number">
-                </label>
-                <label class="item item-input">
-                    <i class="icon ion-android-lock signup_icons"></i><input type="password" placeholder="4 digit PIN" maxlength ="4">
-                </label>
-                <label class="item item-input">
-                    <i class="icon ion-android-lock signup_icons"></i><input type="password" placeholder="Confirm 4 digit PIN" maxlength ="4">
-                </label>
-            </ion-list>
-            <span ng-controller="addUserController">
-                                <a href="#/pre_verification" class="button button-stable button-block" ng-click="addUserInfo()" >Sign up</a>
+    <ion-content overflow-scroll="true" padding="true" scroll="false" class="has-header"  ng-controller="AuthCtrl2">
+ 
+<form name="signupForm" novalidate="" ng-submit="signIn(signupForm)">
 
-            </span>
-
-            
-            
-        </form>
+	<div class="list">
+		<div class="row">
+			<div class="col" style="border-right: 3px solid white;">
+				<label class="item item-input" ng-class="{ 'has-errors' : signupForm.Fname.$touched && signupForm.Fname.$invalid, 'no-errors' :  signupForm.Fname.$touched && signupForm.Fname.$valid}">
+					<i class="icon ion-person signup_icons"></i><input type="text" name="Fname" ng-step="1" ng-model="authorization.Fname"  required placeholder="First Name">
+				</label>
+				<div class="error-container" ng-show="signupForm.Fname.$error && signupForm.$submitted" ng-messages="signupForm.Fname.$error">
+					<div class="error"  ng-message="required"><i class="ion-information-circled"></i> You did not enter a field</div>
+				</div>
+			</div>
+			<div class="col"  style="border-left: 3px solid white;">
+				<label class="item item-input" ng-class="{ 'has-errors' : signupForm.Lname.$touched && signupForm.Lname.$invalid, 'no-errors' :  signupForm.Lname.$touched && signupForm.Lname.$valid}">
+					<input type="text" name="Lname" ng-step="1" ng-model="authorization.Lname"  required placeholder="Last Name">
+				</label>
+				<div class="error-container" ng-show="signupForm.Lname.$error && signupForm.$submitted" ng-messages="signupForm.Lname.$error">
+					<div class="error"  ng-message="required"><i class="ion-information-circled"></i> You did not enter a field</div>
+				</div>
+			</div>
+		</div>
+		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.mobile.$touched && signupForm.mobile.$invalid, 'no-errors' :  signupForm.mobile.$touched && signupForm.mobile.$valid}">
+			<i class="icon ion-android-call signup_icons"></i><input type="number" name="mobile" ng-model="authorization.mobile" maxlength="10" ng-minlength="10" ng-maxlength="10" required placeholder="Mobile Number" min="7000000000" max="9999999999">
+		</label>
+		<div class="error-container" ng-show="signupForm.mobile.$error && signupForm.$submitted" ng-messages="signupForm.mobile.$error">
+			<div class="error"  ng-message="required"><i class="ion-information-circled"></i> You did not enter a field</div>
+			<div class="error"  ng-message="minlength, maxlength">
+				<i class="ion-information-circled"></i> Mobile number must be 10 digits.
+			</div>
+			<div class="error"  ng-message="min, max, step">
+				<i class="ion-information-circled"></i> Enter valid mobile number
+			</div>
+		</div>
+		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.password.$invalid && signupForm.$submitted, 'no-errors' : signupForm.password.$valid  && signupForm.$submitted}">
+			<i class="icon ion-android-lock signup_icons"></i><input type="password" name="password" ng-model="authorization.password" maxlength="4" ng-minlength="4" ng-maxlength="4" required placeholder="4 digit PIN" >
+		</label>
+		<div class="error-container last-error-container" ng-show="signupForm.password.$error && signupForm.$submitted" ng-messages="signupForm.password.$error">
+			<div  class="error" >
+				<div ng-message="required">
+					<i class="ion-information-circled"></i> You did not enter a field
+				</div>
+				<div ng-message="minlength, maxlength">
+					<i class="ion-information-circled"></i> Enter 4 digit PIN
+				</div>
+			</div>
+		</div>
+		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.confirm.$invalid && signupForm.$submitted, 'no-errors' : signupForm.confirm.$valid  && signupForm.$submitted}">
+			<i class="icon ion-android-lock signup_icons"></i><input type="password" name="confirm" ng-model="authorization.confirm" maxlength="4" ng-minlength="4" ng-maxlength="4" required placeholder="Confirm 4 digit PIN">
+		</label>
+		<div class="error-container last-error-container" ng-show="signupForm.confirm.$error && signupForm.$submitted" ng-messages="signupForm.confirm.$error">
+			<div  class="error" >
+				<div ng-message="required">
+					<i class="ion-information-circled"></i> You did not enter a field
+				</div>
+				<div ng-message="minlength, maxlength">
+					<i class="ion-information-circled"></i> Enter 4 digit PIN
+				</div>
+				
+			</div>
+		</div>
+		
+		<label class="item item-input" >
+			<i class="icon ion-android-lock signup_icons"></i><input type="text" placeholder="Invite code">
+		</label>
+	</div>
+	<button class="button button-full button-positive" type="submit">
+		<i class="icon ion-locked secure_lock"></i>Secure Login
+	</button>
+</form>	
     </ion-content>
 </ion-view>
+	  

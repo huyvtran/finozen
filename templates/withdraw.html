@@ -12,14 +12,17 @@
 		<div class="row invest_info">
 		<p>How much would you like to Withdraw ?</p>
 		</div>
+		<form name="myForm2">
 		<div class="list invest_info">
 		  <label class="item item-input">
-			<input type="number" placeholder="Enter Amount" ng-disabled="checked_withdraw" max="{{balance}}" step="1">
+			<input type="number" name="myName2" placeholder="Enter Amount" ng-disabled="checked_withdraw" max="{{balance}}" step="1">
 		  </label>
+		  <div class="error" ng-show="myForm2.myName2.$touched && myForm2.myName2.$invalid">Enter Valid mobile number</div>
 		</div>
 		<label class="row withdraw_all">
 			<input ng-model="checked_withdraw" checked type="checkbox" id="withdraw_money" placeholder="Enter Amount" style="margin: 4px;"><label for="withdraw_money" >Withdraw my complete balance</label>
 		</label>
+		</form>
 		<div class="row">
 		<a class="button button-full button-positive bar-footer invest_button_footer"  href="#/success">Withdraw</a>
 		</div>
