@@ -50,7 +50,7 @@
 				<div ng-message="minlength, maxlength">
 					Enter 4 digit PIN
 				</div>
-				<div ng-message="pattern"><i class="ion-information-circled"></i>Enter digits only</div>
+				<div ng-message="pattern">Enter digits only</div>
 			</div>
 		</div>
 		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.confirm.$invalid && signupForm.$submitted, 'no-errors' : signupForm.confirm.$valid  && signupForm.$submitted}">
@@ -85,6 +85,9 @@
 	<button class="button button-full button-positive" type="submit">
 	Sign Up
 	</button>
+	<div  class="agree_terms" >
+		<span class="check_agree item-checkbox item_checkbox">By clicking Signup, I agree to <a href="#" onclick="window.open('http://www.finotrust.com/documents/T&C.pdf', '_self', 'location=yes'); return false;" >T & C</a> and <a href="#/privacy" >Privacy Policy</a></span>
+	</div>
 </form>	
     </ion-content>
 </ion-view>
