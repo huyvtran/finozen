@@ -286,8 +286,17 @@ $http.get('data/transactiondata.json').success(function(data){
 
 })
 
+.controller('showhistoryController', function($scope,$ionicHistory){
+    /*console.log($ionicHistory.currentStateName()  + "vviewHistory");
+    console.log($ionicHistory.backTitle() + "back");*/
+    $ionicHistory.clearHistory();
+})
 
-
+.controller('navhistoryController', function($scope,$ionicHistory){
+    /*console.log($ionicHistory.currentStateName()  + "vviewHistory");
+    console.log($ionicHistory.backTitle() + "back");*/
+    $ionicHistory.goBack(-2);
+})
 
 .controller('slideCtrl', function($scope, $ionicSlideBoxDelegate) {
 	    $scope.goForward = function () {
