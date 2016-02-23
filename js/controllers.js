@@ -34,12 +34,25 @@ angular.module('app.controllers', [])
   };  
 
 })
-.controller('AuthCtrl2', function($scope, $state) {
+.controller('AuthCtrlWithdrawl', function($scope, $state) {
   
   $scope.signIn = function(form) {
     if(form.$valid) {
-      $state.go('pre_verification');
+      $state.go('successPage');
     }
+  };  
+
+})
+.controller('AuthCtrlSignUp', function($scope, $state) {
+  $scope.signIn = function(form,searchText,searchText2) {
+	if(angular.equals(searchText,searchText2))
+	{
+		if(form.$valid) {
+	  $state.go('pre_verification');
+	}
+	}
+	else{$scope.error="Entered password didn't matched";}
+	
   };  
 
 })
@@ -287,4 +300,32 @@ $http.get('data/transactiondata.json').success(function(data){
    $scope.nextSlide = function() {
       $ionicSlideBoxDelegate.next();
    }
+});
+
+
+app.controller('sampleCtrl', function($scope) {
+
+      $scope.initial = 1200;
+      $scope.nav = 3651.428;
+      $scope.theory = ($scope.initial)/($scope.nav);
+      $scope.rounding =1000 ;
+      $scope.rounded = Math.round($scope.theory * $scope.rounding) / $scope.rounding;
+      $scope.loss = $scope.theory-$scope.rounded;
+
+      $scope.calculateTotal = function() {
+
+        $scope.total = $scope.stacks - ($scope.soldSheets * .001);
+      }
+
+      $scope.addStack = function() {
+
+        $scope.stacks = $scope.stacks + 1;
+        $scope.calculateTotal();
+      }
+
+      $scope.sellSheet = function() {
+
+        $scope.soldSheets = $scope.soldSheets + 1;
+        $scope.calculateTotal();
+      }
 });

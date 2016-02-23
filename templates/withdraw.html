@@ -5,27 +5,35 @@
 	<div class="h1 title"><p class="head_title"><span id="title">WITHDRAW</span></p></div>
 	<a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
 </div>
-    <ion-content overflow-scroll="true" padding="true" class="has-header">
+    <ion-content overflow-scroll="true" padding="true" class="has-header" ng-controller="AuthCtrlWithdrawl">
 		<div class="row bar bar-subheader invest_subheader">
 		  <p class="title">CURRENT BALANCE : <span style="color:#18bb9c">{{ balance|currency:"&#x20B9; "}}</span></p>
 		</div>
 		<div class="row invest_info">
 		<p>How much would you like to Withdraw ?</p>
 		</div>
-		<form name="myForm2">
-		<div class="list invest_info">
-		  <label class="item item-input">
-			<input type="number" name="myName2" placeholder="Enter Amount" ng-disabled="checked_withdraw" max="{{balance}}" step="1">
-		  </label>
-		  <div class="error" ng-show="myForm2.myName2.$touched && myForm2.myName2.$invalid">Enter Valid mobile number</div>
+		<form name="withdrawForm" novalidate="" ng-submit="signIn(withdrawForm)">
+
+	<div class="list">
+		<label class="item item-input" ng-class="{ 'has-errors' : withdrawForm.amount.$touched && withdrawForm.amount.$invalid, 'no-errors' :  withdrawForm.amount.$touched && withdrawForm.amount.$valid}">
+			<input type="number" name="amount" ng-disabled="checked_withdraw" ng-model="authorization.amount" max="{{balance}}">
+		</label>
+		<div class="error-container" ng-hide="checked_withdraw" ng-show="withdrawForm.amount.$error && withdrawForm.$submitted" ng-messages="withdrawForm.amount.$error">
+			<div  class="error" >
+				<div  ng-message="max">
+					Enter valid mobile number
+				</div>
+			</div>
 		</div>
 		<label class="row withdraw_all">
 			<input ng-model="checked_withdraw" checked type="checkbox" id="withdraw_money" placeholder="Enter Amount" style="margin: 4px;"><label for="withdraw_money" >Withdraw my complete balance</label>
 		</label>
-		</form>
-		<div class="row">
-		<a class="button button-full button-positive bar-footer invest_button_footer"  href="#/success">Withdraw</a>
-		</div>
+	</div>
+	<button class="button button-full button-positive" type="submit">
+		WITHDRAW
+	</button>
+</form>		  
+
     </ion-content>
 
 </div>
