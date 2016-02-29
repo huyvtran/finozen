@@ -12,16 +12,18 @@
 		<div class="row invest_info">
 		<p>How much would you like to add ?</p>
 		</div>
-		<div class="list invest_info" >
+		<div class="list invest_info"  ng-controller="sampleCtrl">
 			<p class="returns_hint" >Expected Value in a year:
 				<span style="color:#18bb9c;"><label id="income">&nbsp; {{return | currency:"&#8377;" }} </label></span>
 			</p>
 
 		  <label class="item item-input">
-			<input type="number" placeholder="Enter Amount" name="invest" ng-model="inv.value" ng-keyup="return=inv.value+((inv.value*8.3)/100)"  step="1"/>			
+			<input type="number" placeholder="Enter Amount" name="invest" ng-model="initial" ng-keyup="return=initial+((initial*8.3)/100)"  step="1"/>			
 		  </label>
-		<p class="invest_hint">MINIMUM AMOUNT: <span>&#x20B9;</span> 300</p>
-		 
+		<p class="invest_hint">MINIMUM AMOUNT: <span>&#x20B9;</span> 100</p>
+		<div class="row" >
+		<br>To optimize returns, we will add <span class="suggested"> {{ final(initial,nav,0) | currency:"&#8377;" }} </span> to your investments <br> 
+		</div>
 		 
 		
 <!--		<label class="item item-input">
@@ -32,8 +34,9 @@
 		<div class="row">
 		<a  class="button button-full button-positive bar-footer invest_button_footer"  href="#/successPage">Add Money</a>
 		</div>
+
 		<p class="item_checkbox"> I have read the <a href="#" onclick="window.open('http://www.finotrust.com/documents/OfferDocument.pdf', '_system', 'location=yes'); return false;">Offer Document</a>,<a href="#" onclick="window.open('http://www.finotrust.com/documents/KIM.pdf', '_system', 'location=yes'); return false;">Scheme Information Document</a>, <a href="#" onclick="window.open('http://www.finotrust.com/documents/T&C.pdf', '_system', 'location=yes'); return false;">T&C </a> before making the investment</p>
 
-</div>
     </ion-content>
+</div>
 </ion-view>
