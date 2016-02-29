@@ -38,12 +38,25 @@ angular.module('app.controllers', [])
 
 
 })
-.controller('AuthCtrl2', function($scope, $state) {
+.controller('AuthCtrlWithdrawl', function($scope, $state) {
   
   $scope.signIn = function(form) {
     if(form.$valid) {
-      $state.go('pre_verification');
+      $state.go('successPage');
     }
+  };  
+
+})
+.controller('AuthCtrlSignUp', function($scope, $state) {
+  $scope.signIn = function(form,searchText,searchText2) {
+	if(angular.equals(searchText,searchText2))
+	{
+		if(form.$valid) {
+	  $state.go('pre_verification');
+	}
+	}
+	else{$scope.error="Entered password didn't matched";}
+	
   };  
 
 })
@@ -324,4 +337,30 @@ $http.get('data/transactiondata.json').success(function(data){
    $scope.nextSlide = function() {
       $ionicSlideBoxDelegate.next();
    }
+})
+
+
+.controller('sampleCtrl', function ($scope) {
+$scope.nav=3656.5447;
+$scope.final=function(initial,nav,suggest){
+var theory=initial/nav ;
+var rounded= Math.round(theory * 1000)/1000;
+//loss=theory-rounded;
+var nav1=rounded*nav;
+var diff=nav1-initial;
+if(initial>0){
+if(diff>0){
+return suggest;
+}
+else{
+return $scope.test(initial,nav,suggest);
+}
+}
+else{return 0;}}
+$scope.test=function(initial,nav,suggest){
+suggest++;
+initial=initial+suggest;
+return $scope.final(initial,nav,suggest);
+}
+
 });
