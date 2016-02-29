@@ -14,14 +14,15 @@
 		</div>
 		<div class="list invest_info" >
 			<p class="returns_hint" >Expected Value in a year:
-				<span style="color:#18bb9c;"><label id="income">&nbsp; {{return | currency:"&#8377;" }} </label></span>
+				<span style="color:#18bb9c;"><label id="income" >&nbsp; {{netVal | currency:"&#8377;" }} </label></span>
 			</p>
 
 		  <label class="item item-input">
-			<input type="number" placeholder="Enter Amount" name="invest" ng-model="inv.value" ng-keyup="return=inv.value+((inv.value*8.3)/100)"  step="1"/>			
+			<input type="number" placeholder="Enter Amount" name="invest" ng-model="inv.value" ng-keyup="netVal=inv.value+((inv.value*8.3)/100)"  step="1"/>			
+			
 		  </label>
 		<p class="invest_hint">MINIMUM AMOUNT: <span>&#x20B9;</span> 300</p>
-		 
+
 		 
 		
 <!--		<label class="item item-input">
@@ -29,6 +30,7 @@
 		</label>-->
 		</div>
 
+		
 		<div class="row">
 		<a  class="button button-full button-positive bar-footer invest_button_footer"  href="#/success">Add Money</a>
 		</div>

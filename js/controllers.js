@@ -31,7 +31,11 @@ angular.module('app.controllers', [])
     if(form.$valid) {
       $state.go('tabsController.summaryPage');
     }
-  };  
+  }
+  var mid="WealthWeb";
+
+  $scope.url='http://205.147.99.55:8080/'+mid+'/ws/pymt/pymtView?cid=XamMicro&bucks=3.00';
+
 
 })
 .controller('AuthCtrl2', function($scope, $state) {
@@ -71,7 +75,7 @@ $scope.transactionStatus=transactionStatus;
 .controller('accountCtrl', function($scope) {
 
 })
-.controller('popupController', function($scope, $ionicPopup) {
+.controller('popupController', function($scope, $ionicPopup,$window) {
      // Triggered on a button click, or some other target
  $scope.showPopup = function() {
 
@@ -101,21 +105,37 @@ $scope.transactionStatus=transactionStatus;
 
   };
 
+
+
   
 
 })
 
+.controller('openwinController', function($scope) {
 
-.controller('addUserController', function($scope,$http,userInfo) {
+
+    
+  
+})
+
+.controller('addUserController', function($scope,$http,accessUrlService) {
 
   $scope.addUserInfo = function () {
-    console.log("ENtered");
-     userInfo.save({"fName":"arcd04","lName":"abrcd","pin":"1234","mobileNumber":"1250325548"});
-     console.log("message delivered");
-};
+     accessUrlService.save({"login":"admin","password":"rupeelog","role":"Admin"},function(data){
+      var userAuth=data;
+      console.log(userAuth.jsessionId);
 
-    console.log("ENtered");
+     }, function(error) {
+      console.log(error + "Failed");
+     }
+     );
+  };
 
+/*$scope.getUser= function (){
+   $scope.User=accessUrlService.query();
+   console.log("data");
+ };*/
+ 
 })
 
 
@@ -284,6 +304,14 @@ $http.get('data/transactiondata.json').success(function(data){
     console.log($ionicHistory.backTitle() + "back");*/
     $ionicHistory.goBack(-2);
 })
+
+/*For social sharing*/
+/*.controller('socialShareController', function($scope,$cordovaSocialSharing){
+   $scope.share = function(){
+   $scope.shareViaWhatsApp('Hi my money just grew by 2.8%. Try this awesome app','null','http://finotrust.com/');
+   }
+})*/
+
 
 .controller('slideCtrl', function($scope, $ionicSlideBoxDelegate) {
 	    $scope.goForward = function () {
