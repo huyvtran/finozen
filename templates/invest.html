@@ -22,7 +22,7 @@
 		  </label>
 		<p class="invest_hint">MINIMUM AMOUNT: <span>&#x20B9;</span> 100</p>
 		<div class="row" >
-		<br>To optimize returns, we will add <span class="suggested"> {{ final(initial,nav,0) | currency:"&#8377;" }} </span> to your investments <br> 
+		<p><br>To optimize returns, we will add <span class="suggested"> {{ final(initial,nav,0) | currency:"&#8377;" }} </span> to your investments <br> </p>
 		</div>
 		 
 		
@@ -31,8 +31,8 @@
 		</label>-->
 		</div>
 
-		<div class="row">
-		<a  class="button button-full button-positive bar-footer invest_button_footer"  href="#/successPage">Add Money</a>
+		<div class="row" ng-controller="InvestCtrl">
+		<a  class="button button-full button-positive bar-footer invest_button_footer"  ng-href={{investUrl}}>Add Money</a>
 		</div>
 
 		<p class="item_checkbox"> I have read the <a href="#" onclick="window.open('http://www.finotrust.com/documents/OfferDocument.pdf', '_system', 'location=yes'); return false;">Offer Document</a>,<a href="#" onclick="window.open('http://www.finotrust.com/documents/KIM.pdf', '_system', 'location=yes'); return false;">Scheme Information Document</a>, <a href="#" onclick="window.open('http://www.finotrust.com/documents/T&C.pdf', '_system', 'location=yes'); return false;">T&C </a> before making the investment</p>

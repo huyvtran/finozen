@@ -1,8 +1,4 @@
 angular.module('app.controllers', [])
-  
-.controller('loginCtrl', function($scope) {
-
-})
    
 .controller('signupCtrl', function($scope) {
 
@@ -32,10 +28,6 @@ angular.module('app.controllers', [])
       $state.go('tabsController.summaryPage');
     }
   }
-  var mid="WealthWeb";
-
-  $scope.url='http://205.147.99.55:8080/'+mid+'/ws/pymt/pymtView?cid=XamMicro&bucks=3.00';
-
 
 })
 .controller('AuthCtrlWithdrawl', function($scope, $state) {
@@ -124,15 +116,15 @@ $scope.transactionStatus=transactionStatus;
 
 })
 
-.controller('openwinController', function($scope) {
-
-
-    
+.controller('InvestCtrl', function($scope) {
+var mid="WealthWeb";
+$scope.investUrl='http://205.147.99.55:8080/'+mid+'/ws/pymt/pymtView?cid=Microsoft&bucks=2.00';   
   
 })
 
-.controller('addUserController', function($scope,$http,accessUrlService) {
+.controller('loginCtrl', function($scope,$http,accessUrlService) {
 
+console.log(accessUrlService + "Print");
   $scope.addUserInfo = function () {
      accessUrlService.save({"login":"admin","password":"rupeelog","role":"Admin"},function(data){
       var userAuth=data;

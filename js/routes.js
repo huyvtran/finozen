@@ -17,7 +17,6 @@ $ionicAppProvider.identify ({
     .state('login', {
       url: '/page7',
 	  templateUrl: 'templates/login.html',
-	  controller: 'loginCtrl'
     })
         
      .state('sliders', {
