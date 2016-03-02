@@ -109,38 +109,32 @@ $scope.transactionStatus=transactionStatus;
 
 
   };
-
-
-
-  
-
 })
 
-.controller('InvestCtrl', function($scope) {
+.controller('InvesturlCtrl', function($scope) {
 var mid="WealthWeb";
-$scope.investUrl='http://205.147.99.55:8080/'+mid+'/ws/pymt/pymtView?cid=Microsoft&bucks=2.00';   
+$scope.investUrl='http://205.147.99.55:8080/'+mid+'/ws/pymt/pymtView?cid=Microsoft&bucks=2.00';
+})
+
+.controller('mfOrderCtrl', function($scope,mfOrderUrlService) {
+
+  $scope.sendMfOrder=function() {
+    mfOrderUrlService.save({"portfolioCode": "CRN23840E16920","amcCode": "Birla Sun Life Mutual Fund","rtaCode": "B201D","orderTxnDate": "2016-03-01","amount": 123.32},function(data){
+      console.log(data.statusCode +"Order Sent");
+    },function(error){
+      console.log("Error");
+    });
+  };
   
 })
 
-.controller('loginCtrl', function($scope,$http,accessUrlService) {
 
-console.log(accessUrlService + "Print");
-  $scope.addUserInfo = function () {
-     accessUrlService.save({"login":"admin","password":"rupeelog","role":"Admin"},function(data){
-      var userAuth=data;
-      console.log(userAuth.jsessionId);
-
-     }, function(error) {
-      console.log(error + "Failed");
-     }
-     );
-  };
-
-/*$scope.getUser= function (){
-   $scope.User=accessUrlService.query();
-   console.log("data");
- };*/
- 
+.controller('loginCtrl', function($scope,loginInfoService) {
+  loginInfoService.getJsonId().then(function(data){
+    console.log(data.jsessionId);
+  },function(error){
+    console.log(error+ " Error" )
+  });
 })
 
 
