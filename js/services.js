@@ -35,7 +35,7 @@ angular.module('app.services', [])
 	return  {
 	getJsonId: function() {  
 		var deferred = $q.defer();
-		accessUrlService.save({"login":"admin","password":"ruelog","role":"Admin"},function(data){
+		accessUrlService.save({"login":"admin","password":"rupeelog","role":"Admin"},function(data){
 		deferred.resolve(data); 
 		},function(error){
 			console.log("eror");
