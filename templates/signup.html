@@ -4,9 +4,10 @@
 	<div class="h1 title"><p class="head_title"><span id="title">SIGN UP</span></p></div>
 	<a class="button button-clear button-positive  ion-android-call"  ng-href="tel:080-41245883"></a>
 </div>
-    <ion-content overflow-scroll="true" padding="true" scroll="false" class="has-header"  ng-controller="AuthCtrlSignUp">
+    <ion-content overflow-scroll="true" padding="true" scroll="false" class="has-header"  ng-controller="AuthSignUpCtrl">
+	
  
-<form name="signupForm" novalidate="" ng-submit="signIn(signupForm,authorization.password,authorization.confirm)">
+<form name="signupForm" novalidate="" ng-submit="signIn(signupForm,authorization.password,authorization.confirm,authorization)" >
 
 	<div class="list">
 		<div class="row">
