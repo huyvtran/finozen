@@ -93,6 +93,14 @@ a{color:blue;text-decoration:none;}
     margin-top: 10px;
 	.faq_question_content {
     padding: 8px 2px;
+	&.fundsSelection p{
+	line-height: 26px;
+	padding-bottom: 36px;
+	width: 100%;
+	&.selection_head{text-align: center;
+padding: 6px 0 30px;
+font-weight: 600;}
+	}
 	}
 	p{
 	width: 90%;

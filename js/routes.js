@@ -133,6 +133,11 @@ $ionicAppProvider.identify ({
           templateUrl: 'templates/faq.html',
           controller: 'privacyCtrl'     
     })
+          .state('faq5', {
+      url: '/faq_fundsMethods',         
+          templateUrl: 'templates/faq5.html',
+          controller: 'FundsMethodCtrl'     
+    })
           .state('faq1', {
       url: '/faq_account',         
           templateUrl: 'templates/faq1.html',

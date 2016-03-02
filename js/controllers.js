@@ -21,29 +21,38 @@ angular.module('app.controllers', [])
   .controller('pre_verificationCtrl', function($scope) {
 
 })
-.controller('AuthCtrl', function($scope, $state) {
-  
-  $scope.signIn = function(form) {
+.controller('AuthSigninCtrl', function($scope, $state) {
+
+  $scope.signIn = function(form,loginForm) {
+	
     if(form.$valid) {
+	  window.localStorage.setItem("loginTemp",JSON.stringify(loginForm));
+	  $scope.signindata = JSON.parse(window.localStorage.getItem("loginTemp"));
+	  //$scope.master2 = JSON.parse($scope.signindata);
+      console.log($scope.signindata);
       $state.go('tabsController.summaryPage');
     }
   }
 
 })
-.controller('AuthCtrlWithdrawl', function($scope, $state) {
+.controller('AuthWithdrawlCtrl', function($scope, $state) {
   
-  $scope.signIn = function(form) {
+  $scope.Withdrawl = function(form) {
     if(form.$valid) {
       $state.go('successPage');
     }
   };  
 
 })
-.controller('AuthCtrlSignUp', function($scope, $state) {
-  $scope.signIn = function(form,searchText,searchText2) {
+.controller('AuthSignUpCtrl', function($scope, $state) {
+  $scope.signIn = function(form,searchText,searchText2,signupForm) {
 	if(angular.equals(searchText,searchText2))
 	{
 		if(form.$valid) {
+	  window.localStorage.setItem("signupTemp",JSON.stringify(signupForm));
+	  var signupdata = JSON.parse(window.localStorage.getItem("signupTemp"));
+	  //$scope.signup2 = JSON.parse($scope.signupdata);
+      console.log(signupdata);
 	  $state.go('pre_verification');
 	}
 	}
@@ -137,6 +146,33 @@ $scope.investUrl='http://205.147.99.55:8080/'+mid+'/ws/pymt/pymtView?cid=Microso
   });
 })
 
+
+.controller('FundsMethodCtrl', function($scope) {
+  $scope.message = "In FinoZen, we have ensured that there is minimal risk to your investments with high returns and instantaneous liquidity. Your investments directly go to a pre-selected liquid mutual fund. We rank all the liquid fund internally and select the highest ranking liquid fund for you. FinoZen ranking algorithm is based on following parameters –";
+  $scope.groups = [];
+    $scope.groups["0"] = {name: "A. Net Assets of Liquid Fund", items: ["We give high weightage to the Net Amount Invested in a fund, and only those funds with greater than Rs. 5,000 Cr. in net assets are considered. This ensures that there is no liquidity crunch."] };
+    $scope.groups["1"] = {name: "B. Size of Asset Management Company" , items: ["Size of Asset Management Company is given due importance and only top 10 fund houses are selected by us."] };
+    $scope.groups["2"] = {name: "C. Expense Ratio" , items: ["The expense ratio of a stock or asset fund is the total percentage of fund assets used for administrative, management, advertising and all other expenses. We select only the funds with very low expense ratio to ensure higher returns."] };
+    $scope.groups["3"] = {name: "D. Average Credit Quality" , items: ["To ensure safety of investments, we select only those funds which invest in short term AAA rated securities, ensuring that funds are extremely low risk."] };
+    $scope.groups["4"] = {name: "E. Technical Indicators" , items: ["Our algorithm takes into factors 5 important technical indicators – Standard Deviation, Sharpe Ratio, Alpha, Beta and R-Squared to benchmark liquid funds. This ensures highest returns with lowest risk."] };
+ 
+  
+  /*
+   * if given group is the selected group, deselect it
+   * else, select the given group
+   */
+  $scope.toggleGroup = function(group) {
+    if ($scope.isGroupShown(group)) {
+      $scope.shownGroup = null;
+    } else {
+      $scope.shownGroup = group;
+    }
+  };
+  $scope.isGroupShown = function(group) {
+    return $scope.shownGroup === group;
+  };
+  
+})
 
 .controller('AccountfaqCtrl', function($scope) {
   $scope.groups = [];
@@ -327,6 +363,7 @@ $http.get('data/transactiondata.json').success(function(data){
 
 
 .controller('sampleCtrl', function ($scope) {
+	
 $scope.nav=3656.5447;
 $scope.final=function(initial,nav,suggest){
 var theory=initial/nav ;
@@ -348,5 +385,11 @@ suggest++;
 initial=initial+suggest;
 return $scope.final(initial,nav,suggest);
 }
+
+$scope.Invest = function(form) {
+    if(form.$valid) {
+      $state.go('tabsController.summaryPage');
+    }
+  }
 
 });
