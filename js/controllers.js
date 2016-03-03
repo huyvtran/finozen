@@ -346,13 +346,19 @@ $scope.balance="1000";
 .controller('transListController',['$http', function($http){
 //var lisst=[{amount:"Azurite1",transactionId:12545,date:"Mon, 25 Jan, 2016"},{amount:"Azurite2",transactionId:12545,date:"Mon, 26 Jan, 2017"},{amount:"Azurite3",transactionId:12545,date:"Mon, 27 Jan, 2018"}]
   //this.products=lisst;
-var tList=this;
-tList.products=[];
+var tList;
 
 $http.get('data/transactiondata.json').success(function(data){
- tList.products=data;
+ tList=data;
+ //console.log(tList + "Printing");
+}).error(function(error){
+	console.log("Not reached");
 });
 
+ var amt=tList;
+ console.log("yoooooo");
+ console.log(tList);
+ 
 }])
 
 .controller('popOverController',function($scope,$ionicPopover ){
@@ -400,7 +406,7 @@ $http.get('data/transactiondata.json').success(function(data){
 })
 
 
-.controller('sampleCtrl', function ($scope) {
+.controller('sampleCtrl', function ($scope,$state) {
 	
 $scope.nav=3656.5447;
 $scope.final=function(initial,nav,suggest){
@@ -426,7 +432,7 @@ return $scope.final(initial,nav,suggest);
 
 $scope.Invest = function(form) {
     if(form.$valid) {
-      $state.go('tabsController.summaryPage');
+      $state.go('successPage');
     }
   }
 
