@@ -29,13 +29,36 @@ angular.module('app.services', [])
 	return $resource('http://205.147.99.55:8080/WealthWeb/ws/login/restLogin');
 }])
 
+/*For Sign up*/
+.factory('SignUpUrlService', ['$resource',function($resource){
+	return $resource('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/clientFcp');
+}])
+
 /*Get data*/
 .factory('loginInfoService', ['accessUrlService','$q',function(accessUrlService,$q){
+	return  {
+	getJsonId: function(loginData) {  
+		var deferred = $q.defer();
+		accessUrlService.save(loginData,function(data){
+		deferred.resolve(data); 
+		},function(error){
+			console.log("eror");
+			deferred.reject(error);
+		}); 
+		return deferred.promise;
+		}
+	}
+
+}])
+
+/*Sign up Service*/
+.factory('signUpService', ['SignUpUrlService','$q',function(SignUpUrlService,$q){
 
 	return  {
-	getJsonId: function() {  
+	sendSignUp: function(formdata) {  
+		console.log(formdata);
 		var deferred = $q.defer();
-		accessUrlService.save({"login":"admin","password":"rupeelog","role":"Admin"},function(data){
+		SignUpUrlService.save(formdata,function(data){
 		deferred.resolve(data); 
 		},function(error){
 			console.log("eror");

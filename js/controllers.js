@@ -21,20 +21,7 @@ angular.module('app.controllers', [])
   .controller('pre_verificationCtrl', function($scope) {
 
 })
-.controller('AuthSigninCtrl', function($scope, $state) {
 
-  $scope.signIn = function(form,loginForm) {
-	
-    if(form.$valid) {
-	  window.localStorage.setItem("loginTemp",JSON.stringify(loginForm));
-	  $scope.signindata = JSON.parse(window.localStorage.getItem("loginTemp"));
-	  //$scope.master2 = JSON.parse($scope.signindata);
-      console.log($scope.signindata);
-      $state.go('tabsController.summaryPage');
-    }
-  }
-
-})
 .controller('AuthWithdrawlCtrl', function($scope, $state) {
   
   $scope.Withdrawl = function(form) {
@@ -44,23 +31,72 @@ angular.module('app.controllers', [])
   };  
 
 })
-.controller('AuthSignUpCtrl', function($scope, $state) {
+
+.controller('AuthSignUpCtrl', function($scope, $state,signUpService,$sessionStorage) {
+
   $scope.signIn = function(form,searchText,searchText2,signupForm) {
-	if(angular.equals(searchText,searchText2))
-	{
-		if(form.$valid) {
-	  window.localStorage.setItem("signupTemp",JSON.stringify(signupForm));
-	  var signupdata = JSON.parse(window.localStorage.getItem("signupTemp"));
-	  //$scope.signup2 = JSON.parse($scope.signupdata);
-      console.log(signupdata);
-	  $state.go('pre_verification');
-	}
-	}
-	else{$scope.error="Entered password didn't matched";}
-	
-  };  
+      	if(true)
+      	{
+        		if(form.$valid) {
+              //$sessionStorage.Jsonstorage = data.jsessionId;
+              //console.log(signupForm);
+              $sessionStorage.signUpData = (signupForm);
+              $scope.addUserInfo();
+        	 //window.localStorage.setItem("signupTemp",JSON.stringify(signupForm));
+        	  //var signupdata = JSON.parse(window.localStorage.getItem("signupTemp"));
+        	  //$scope.signup2 = JSON.parse($scope.signupdata);
+              //console.log(signupdata);
+        	  $state.go('pre_verification');
+        	}
+      	}
+      	else{$scope.error="Entered password didn't matched"; }
+      	
+        }
+
+  $scope.addUserInfo=function(){
+    signUpService.sendSignUp($sessionStorage.signUpData).then(function(data){
+      var str=data;
+      var n = str.search("clientCode"); 
+    console.log(n);
+    
+  },function(error){
+    console.log(error+ " Error" )
+  });
+
+
+}
+})
+
+/*For Sign In*/
+
+.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,loginInfoService) {
+
+  $scope.signIn = function(form,loginForm) {
+  
+    if(form.$valid) {
+      $sessionStorage.loginData=loginForm;
+   // window.localStorage.setItem("loginTemp",JSON.stringify(loginForm));
+   // $scope.signindata = JSON.parse(window.localStorage.getItem("loginTemp"));
+    //$scope.master2 = JSON.parse($scope.signindata);
+      //console.log($scope.signindata);
+       $scope.sendSignIn();
+      $state.go('tabsController.summaryPage');
+    }
+  }
+
+  $scope.sendSignIn=function() {
+  loginInfoService.getJsonId($sessionStorage.loginData).then(function(data){
+    $sessionStorage.Jsonstorage = data.jsessionId;
+    console.log($sessionStorage.Jsonstorage + "Session");
+  },function(error){
+    console.log(error + " Error" ); 
+  });
+
+
+  }
 
 })
+
 
   .controller('inviteCtrl', function($scope) {
 
@@ -138,12 +174,17 @@ $scope.investUrl='http://205.147.99.55:8080/'+mid+'/ws/pymt/pymtView?cid=Microso
 })
 
 
-.controller('loginCtrl', function($scope,loginInfoService) {
+.controller('loginCtrl', function($scope,loginInfoService,$sessionStorage) {
+
   loginInfoService.getJsonId().then(function(data){
-    console.log(data.jsessionId);
+    $sessionStorage.Jsonstorage = data.jsessionId;
+    //console.log($sessionStorage.Jsonstorage + "Session");
   },function(error){
-    console.log(error+ " Error" )
+    console.log(error + " Error" ); 
   });
+
+
+
 })
 
 
