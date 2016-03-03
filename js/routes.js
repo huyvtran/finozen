@@ -17,7 +17,6 @@ $ionicAppProvider.identify ({
     .state('login', {
       url: '/page7',
 	  templateUrl: 'templates/login.html',
-	  controller: 'loginCtrl'
     })
         
      .state('sliders', {
@@ -58,7 +57,7 @@ $ionicAppProvider.identify ({
 		templateUrl: 'templates/terms.html',
 		controller: 'termsCtrl'
     })
-     .state('success', {
+     .state('successPage', {
 		url: '/success',
 		templateUrl: 'templates/payment_success.html',
 		controller: 'successCtrl'
@@ -133,6 +132,11 @@ $ionicAppProvider.identify ({
       url: '/faq',         
           templateUrl: 'templates/faq.html',
           controller: 'privacyCtrl'     
+    })
+          .state('faq5', {
+      url: '/faq_fundsMethods',         
+          templateUrl: 'templates/faq5.html',
+          controller: 'FundsMethodCtrl'     
     })
           .state('faq1', {
       url: '/faq_account',         

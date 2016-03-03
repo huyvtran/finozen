@@ -1,8 +1,4 @@
 angular.module('app.controllers', [])
-  
-.controller('loginCtrl', function($scope) {
-
-})
    
 .controller('signupCtrl', function($scope) {
 
@@ -25,6 +21,47 @@ angular.module('app.controllers', [])
   .controller('pre_verificationCtrl', function($scope) {
 
 })
+.controller('AuthSigninCtrl', function($scope, $state) {
+
+  $scope.signIn = function(form,loginForm) {
+	
+    if(form.$valid) {
+	  window.localStorage.setItem("loginTemp",JSON.stringify(loginForm));
+	  $scope.signindata = JSON.parse(window.localStorage.getItem("loginTemp"));
+	  //$scope.master2 = JSON.parse($scope.signindata);
+      console.log($scope.signindata);
+      $state.go('tabsController.summaryPage');
+    }
+  }
+
+})
+.controller('AuthWithdrawlCtrl', function($scope, $state) {
+  
+  $scope.Withdrawl = function(form) {
+    if(form.$valid) {
+      $state.go('successPage');
+    }
+  };  
+
+})
+.controller('AuthSignUpCtrl', function($scope, $state) {
+  $scope.signIn = function(form,searchText,searchText2,signupForm) {
+	if(angular.equals(searchText,searchText2))
+	{
+		if(form.$valid) {
+	  window.localStorage.setItem("signupTemp",JSON.stringify(signupForm));
+	  var signupdata = JSON.parse(window.localStorage.getItem("signupTemp"));
+	  //$scope.signup2 = JSON.parse($scope.signupdata);
+      console.log(signupdata);
+	  $state.go('pre_verification');
+	}
+	}
+	else{$scope.error="Entered password didn't matched";}
+	
+  };  
+
+})
+
   .controller('inviteCtrl', function($scope) {
 
 })
@@ -52,7 +89,7 @@ $scope.transactionStatus=transactionStatus;
 .controller('accountCtrl', function($scope) {
 
 })
-.controller('popupController', function($scope, $ionicPopup) {
+.controller('popupController', function($scope, $ionicPopup,$window) {
      // Triggered on a button click, or some other target
  $scope.showPopup = function() {
 
@@ -81,24 +118,61 @@ $scope.transactionStatus=transactionStatus;
 
 
   };
+})
 
+.controller('InvesturlCtrl', function($scope) {
+var mid="WealthWeb";
+$scope.investUrl='http://205.147.99.55:8080/'+mid+'/ws/pymt/pymtView?cid=Microsoft&bucks=2.00';
+})
+
+.controller('mfOrderCtrl', function($scope,mfOrderUrlService) {
+
+  $scope.sendMfOrder=function() {
+    mfOrderUrlService.save({"portfolioCode": "CRN23840E16920","amcCode": "Birla Sun Life Mutual Fund","rtaCode": "B201D","orderTxnDate": "2016-03-01","amount": 123.32},function(data){
+      console.log(data.statusCode +"Order Sent");
+    },function(error){
+      console.log("Error");
+    });
+  };
   
-
 })
 
 
-.controller('addUserController', function($scope,$http,userInfo) {
-
-  $scope.addUserInfo = function () {
-    console.log("ENtered");
-     userInfo.save({fName:"arcd",lName:"abrcd",pin:"1234",mobileNumber:"9632305544"});
-     console.log("message delivered");
-};
-
-    console.log("ENtered");
-
+.controller('loginCtrl', function($scope,loginInfoService) {
+  loginInfoService.getJsonId().then(function(data){
+    console.log(data.jsessionId);
+  },function(error){
+    console.log(error+ " Error" )
+  });
 })
 
+
+.controller('FundsMethodCtrl', function($scope) {
+  $scope.message = "In FinoZen, we have ensured that there is minimal risk to your investments with high returns and instantaneous liquidity. Your investments directly go to a pre-selected liquid mutual fund. We rank all the liquid fund internally and select the highest ranking liquid fund for you. FinoZen ranking algorithm is based on following parameters –";
+  $scope.groups = [];
+    $scope.groups["0"] = {name: "A. Net Assets of Liquid Fund", items: ["We give high weightage to the Net Amount Invested in a fund, and only those funds with greater than Rs. 5,000 Cr. in net assets are considered. This ensures that there is no liquidity crunch."] };
+    $scope.groups["1"] = {name: "B. Size of Asset Management Company" , items: ["Size of Asset Management Company is given due importance and only top 10 fund houses are selected by us."] };
+    $scope.groups["2"] = {name: "C. Expense Ratio" , items: ["The expense ratio of a stock or asset fund is the total percentage of fund assets used for administrative, management, advertising and all other expenses. We select only the funds with very low expense ratio to ensure higher returns."] };
+    $scope.groups["3"] = {name: "D. Average Credit Quality" , items: ["To ensure safety of investments, we select only those funds which invest in short term AAA rated securities, ensuring that funds are extremely low risk."] };
+    $scope.groups["4"] = {name: "E. Technical Indicators" , items: ["Our algorithm takes into factors 5 important technical indicators – Standard Deviation, Sharpe Ratio, Alpha, Beta and R-Squared to benchmark liquid funds. This ensures highest returns with lowest risk."] };
+ 
+  
+  /*
+   * if given group is the selected group, deselect it
+   * else, select the given group
+   */
+  $scope.toggleGroup = function(group) {
+    if ($scope.isGroupShown(group)) {
+      $scope.shownGroup = null;
+    } else {
+      $scope.shownGroup = group;
+    }
+  };
+  $scope.isGroupShown = function(group) {
+    return $scope.shownGroup === group;
+  };
+  
+})
 
 .controller('AccountfaqCtrl', function($scope) {
   $scope.groups = [];
@@ -234,13 +308,19 @@ $scope.balance="1000";
 .controller('transListController',['$http', function($http){
 //var lisst=[{amount:"Azurite1",transactionId:12545,date:"Mon, 25 Jan, 2016"},{amount:"Azurite2",transactionId:12545,date:"Mon, 26 Jan, 2017"},{amount:"Azurite3",transactionId:12545,date:"Mon, 27 Jan, 2018"}]
   //this.products=lisst;
-var tList=this;
-tList.products=[];
+var tList;
 
 $http.get('data/transactiondata.json').success(function(data){
- tList.products=data;
+ tList=data;
+ //console.log(tList + "Printing");
+}).error(function(error){
+	console.log("Not reached");
 });
 
+ var amt=tList;
+ console.log("yoooooo");
+ console.log(tList);
+ 
 }])
 
 .controller('popOverController',function($scope,$ionicPopover ){
@@ -254,7 +334,24 @@ $http.get('data/transactiondata.json').success(function(data){
 
 })
 
+.controller('showhistoryController', function($scope,$ionicHistory){
+    /*console.log($ionicHistory.currentStateName()  + "vviewHistory");
+    console.log($ionicHistory.backTitle() + "back");*/
+    $ionicHistory.clearHistory();
+})
 
+.controller('navhistoryController', function($scope,$ionicHistory){
+    /*console.log($ionicHistory.currentStateName()  + "vviewHistory");
+    console.log($ionicHistory.backTitle() + "back");*/
+    $ionicHistory.goBack(-2);
+})
+
+/*For social sharing*/
+/*.controller('socialShareController', function($scope,$cordovaSocialSharing){
+   $scope.share = function(){
+   $scope.shareViaWhatsApp('Hi my money just grew by 2.8%. Try this awesome app','null','http://finotrust.com/');
+   }
+})*/
 
 
 .controller('slideCtrl', function($scope, $ionicSlideBoxDelegate) {
@@ -268,4 +365,37 @@ $http.get('data/transactiondata.json').success(function(data){
    $scope.nextSlide = function() {
       $ionicSlideBoxDelegate.next();
    }
+})
+
+
+.controller('sampleCtrl', function ($scope,$state) {
+	
+$scope.nav=3656.5447;
+$scope.final=function(initial,nav,suggest){
+var theory=initial/nav ;
+var rounded= Math.round(theory * 1000)/1000;
+//loss=theory-rounded;
+var nav1=rounded*nav;
+var diff=nav1-initial;
+if(initial>0){
+if(diff>0){
+return suggest;
+}
+else{
+return $scope.test(initial,nav,suggest);
+}
+}
+else{return 0;}}
+$scope.test=function(initial,nav,suggest){
+suggest++;
+initial=initial+suggest;
+return $scope.final(initial,nav,suggest);
+}
+
+$scope.Invest = function(form) {
+    if(form.$valid) {
+      $state.go('successPage');
+    }
+  }
+
 });

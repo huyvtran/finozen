@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', 'app.controllers', 'app.routes', 'app.services', 'app.directives','ngResource'])
+angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', 'app.controllers', 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages'])
 
 .run(function($ionicPlatform,$ionicAnalytics) {
   $ionicPlatform.ready(function() {
@@ -35,7 +35,7 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
  
  var notificationOpenedCallback = function(jsonData) {
    console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
- };  window.plugins.OneSignal.init("5a7ec561-87e0-4d4e-acca-8968246505c9",
+ };  window.plugins.OneSignal.init("fe0ec4d2-d51a-4f3c-b86f-c1434e38d27f",
                                 {googleProjectNumber: "745760472440"},
                                 notificationOpenedCallback);
  

@@ -1,6 +1,6 @@
 img{margin:2em auto 0;display: block;}
 .success{color:#02a315 !important}
-.icon{color:#009688 !important}
+.icon{color:#009688}
 .failed{color:#e01916 !important}
 .payment{color:#009688 !important}
 .button{
@@ -16,7 +16,14 @@ border-color:#18bb9c;
 }
 }
 .item_checkbox{
-	border:none; margin:1px; background:transparent; padding:15px 10px; 
+	border: none;
+	margin: 1px;
+	background: transparent;
+	padding: 0px 10px;
+	display: inline-block;
+	float: left;
+	width: 78vw;
+	
 	.check_agree{padding-left:10px;font-size: 14px;}
 	a {
 		color: #424242;
@@ -161,10 +168,29 @@ padding:0;margin-top: 10px;}
   background-size: 100% 100%;
   background-position: center center;
   .secure_lock{padding-right: 10px; color: white !important;}
-  .forgot_pin{padding-right:10px; a{color:#18bb9c;} }
+  .forgot_pin{
+		padding-right: 10px;
+		width: 86px;
+		display: inline-block;
+		float: right;
+		a{color:#18bb9c;} }
 }  
 .signin_background, .sign_up{
-.item-input{border:none; border-bottom:1px solid #18bb9c; margin:1px;background:transparent; input {font-size: 16px !important;max-width: 98%;}}  
+.item-input{
+	border:none; border-bottom:1px solid #18bb9c; margin:1px;background:transparent;
+	&.has-errors {
+	  border-bottom: 2px solid red;
+	}
+
+	&.no-errors {
+	  border-bottom: 2px solid #18bb9c;
+	}
+	input {font-size: 16px !important;max-width: 98%;}
+	}  
+	.agree_terms {
+    display: block;
+    margin: 40px 2px 70px 0px;
+}
   .button{background:#18bb9c;border:#18bb9c;p{color:white; &:hover{color:white;}  } &.create_acc_btn{text-transform:none !important; color: #18bb9c; &.activated{background:transparent !important;} }}
 }
 .sign_up{ 
@@ -222,6 +248,11 @@ height: 65vh;}
 			border: none;
 		}
 		.item_checkbox{font-size:11px; a{color:#ccc;}}
+	.suggested {
+		padding: 0 10px;
+		border: 1px solid #18bb9c;
+		margin: 0 10px;
+		}
 }
 .slides{
 ion-slide{background:white;transition-duration: 300ms;}
@@ -309,38 +340,24 @@ box-shadow: 1px 1px 12px 13px #ddd !important;
 }
 }
 }}
-.payment{
-	.item_success{
-		background:#e8e8e8;
-		.icon{padding: 10px;}
-		.status{padding-left:10px; color:green;  font-size:18px; }
-	}
-	.success_block{
-		height: 70vh;
-		width: 90vw;
-		margin: 4vh auto;
-		padding: 10px;
-		background: #e8e8e8 none repeat scroll 0% 0%;
-		border-radius: 10px;
-			.inner_block{height: 100%;
-				padding:20px;
-				border-radius: 10px;
-				border: 2px dashed #424242;
-				display: flex;
-				flex-flow: row wrap;
-			}
-		.message{font-weight:600;width: 100%;padding:4%;}
-		.disclaimer{padding:8% 0;}
-		table{
-			tr, td{text-align:left; padding: 5px; color: #424242;} 
-			tr td:first-child,tr td:last-child {
-				width:80%;
-			}
-		}
-		.done_btn a{background:#18bb9c; padding:0; color:white;}
-	}
+.error-container {
+  margin-bottom: 15px;
 }
+
+.error-container:last-child {
+    margin: 5px 0 0;
+}
+
 .error {
-    color: red;
-    text-align: center;
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-size: 11px;
+  color: red;
+  vertical-align: middle;
 }
+
+.error i {
+  font-size: 24px;
+  color: #B83E2C;  
+  vertical-align: middle;
+}
+
