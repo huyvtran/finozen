@@ -55,9 +55,6 @@ angular.module('app.controllers', [])
 
   $scope.addUserInfo=function(){
     signUpService.sendSignUp($sessionStorage.signUpData).then(function(data){
-      var str=data;
-      var n = str.search("clientCode"); 
-    console.log(n);
     
   },function(error){
     console.log(error+ " Error" )

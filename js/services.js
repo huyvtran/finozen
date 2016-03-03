@@ -56,7 +56,6 @@ angular.module('app.services', [])
 
 	return  {
 	sendSignUp: function(formdata) {  
-		console.log(formdata);
 		var deferred = $q.defer();
 		SignUpUrlService.save(formdata,function(data){
 		deferred.resolve(data); 
