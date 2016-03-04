@@ -7,13 +7,13 @@
     <ion-content overflow-scroll="true" padding="true" scroll="false" class="has-header"  ng-controller="AuthSignUpCtrl">
 	
  
-<form name="signupForm" novalidate="" ng-submit="signIn(signupForm,authorization.password,authorization.confirm,authorization)" >
+<form name="signupForm" novalidate="" ng-submit="signIn(signupForm,authorization.password,confirm,authorization)" >
 
 	<div class="list">
 		<div class="row">
 			<div class="col" style="border-right: 3px solid white;">
 				<label class="item item-input" ng-class="{ 'has-errors' : signupForm.Fname.$touched && signupForm.Fname.$invalid, 'no-errors' :  signupForm.Fname.$touched && signupForm.Fname.$valid}">
-					<i class="icon ion-person signup_icons"></i><input type="text" name="Fname" ng-step="1" ng-model="authorization.Fname"  required placeholder="First Name">
+					<i class="icon ion-person signup_icons"></i><input type="text" name="Fname" ng-step="1" ng-model="authorization.fName"  required placeholder="First Name">
 				</label>
 				<div class="error-container" ng-show="signupForm.Fname.$error && signupForm.$submitted" ng-messages="signupForm.Fname.$error">
 					<div class="error"  ng-message="required">You did not enter a field</div>
@@ -21,7 +21,7 @@
 			</div>
 			<div class="col"  style="border-left: 3px solid white;">
 				<label class="item item-input" ng-class="{ 'has-errors' : signupForm.Lname.$touched && signupForm.Lname.$invalid, 'no-errors' :  signupForm.Lname.$touched && signupForm.Lname.$valid}">
-					<input type="text" name="Lname" ng-step="1" ng-model="authorization.Lname"  required placeholder="Last Name">
+					<input type="text" name="Lname" ng-step="1" ng-model="authorization.lName"  required placeholder="Last Name">
 				</label>
 				<div class="error-container" ng-show="signupForm.Lname.$error && signupForm.$submitted" ng-messages="signupForm.Lname.$error">
 					<div class="error"  ng-message="required">You did not enter a field</div>
@@ -29,7 +29,7 @@
 			</div>
 		</div>
 		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.mobile.$touched && signupForm.mobile.$invalid, 'no-errors' :  signupForm.mobile.$touched && signupForm.mobile.$valid}">
-			<i class="icon ion-android-call signup_icons"></i><input type="number" name="mobile" ng-model="authorization.mobile" maxlength="10" ng-minlength="10" ng-maxlength="10" required placeholder="Mobile Number" min="7000000000" max="9999999999">
+			<i class="icon ion-android-call signup_icons"></i><input type="number" name="mobile" ng-model="authorization.mobileNumber" maxlength="10" ng-minlength="10" ng-maxlength="10" required placeholder="Mobile Number" min="7000000000" max="9999999999">
 		</label>
 		<div class="error-container" ng-show="signupForm.mobile.$error && signupForm.$submitted" ng-messages="signupForm.mobile.$error">
 			<div class="error"  ng-message="required">You did not enter a field</div>
@@ -41,7 +41,7 @@
 			</div>
 		</div>
 		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.password.$invalid && signupForm.$submitted, 'no-errors' : signupForm.password.$valid  && signupForm.$submitted}">
-			<i class="icon ion-android-lock signup_icons"></i><input type="password" name="password" ng-model="authorization.password" maxlength="4" ng-minlength="4" ng-maxlength="4" required placeholder="4 digit PIN" ng-pattern="/^[0-9]{1,4}$/">
+			<i class="icon ion-android-lock signup_icons"></i><input type="password" name="password" ng-model="authorization.pin" maxlength="4" ng-minlength="4" ng-maxlength="4" required placeholder="4 digit PIN" ng-pattern="/^[0-9]{1,4}$/">
 		</label>
 		<div class="error-container last-error-container" ng-show="signupForm.password.$error && signupForm.$submitted" ng-messages="signupForm.password.$error">
 			<div  class="error" >
@@ -55,7 +55,7 @@
 			</div>
 		</div>
 		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.confirm.$invalid && signupForm.$submitted, 'no-errors' : signupForm.confirm.$valid  && signupForm.$submitted}">
-			<i class="icon ion-android-lock signup_icons"></i><input type="password" name="confirm" ng-model="authorization.confirm" maxlength="4" ng-minlength="4" ng-maxlength="4" required placeholder="Confirm 4 digit PIN" ng-pattern="/^[0-9]{1,4}$/">
+			<i class="icon ion-android-lock signup_icons"></i><input type="password" name="confirm" ng-model="confirm" maxlength="4" ng-minlength="4" ng-maxlength="4" required placeholder="Confirm 4 digit PIN" ng-pattern="/^[0-9]{1,4}$/">
 		</label>
 		<div class="error-container last-error-container" ng-show="signupForm.confirm.$error && signupForm.$submitted" ng-messages="signupForm.confirm.$error">
 			<div  class="error" >
@@ -69,7 +69,7 @@
 				<div  class="error"  >{{ error }}</div>
 			</div>
 		</div>
-		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.invite.$invalid && signupForm.$submitted, 'no-errors' : signupForm.invite.$valid  && signupForm.$submitted}">
+		<!-- <label class="item item-input" ng-class="{ 'has-errors' : signupForm.invite.$invalid && signupForm.$submitted, 'no-errors' : signupForm.invite.$valid  && signupForm.$submitted}">
 			<i class="icon ion-android-lock signup_icons"></i><input type="password" name="invite" ng-model="authorization.invite" maxlength="4" required placeholder="Invite code">
 		</label>
 		
@@ -79,11 +79,11 @@
 					You did not enter a field
 				</div>
 			</div>
-		</div>
+		</div> -->
 	
 
 	</div>
-	<button class="button button-full button-positive" type="submit" ng-controller="loginCtrl" ng-click="addUserInfo()">
+	<button class="button button-full button-positive" type="submit">
 	Sign Up
 	</button>
 	<div  class="agree_terms" >
