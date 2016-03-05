@@ -34,6 +34,11 @@ angular.module('app.services', [])
 	return $resource('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/clientFcp');
 }])
 
+.factory('getTransactionService', ['$resource',function($resource){
+	return $resource('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getOrders?pfolioCode=CRN23840E16920&noOfOrders=2');
+}])
+
+
 /*Get data*/
 .factory('loginInfoService', ['accessUrlService','$q',function(accessUrlService,$q){
 	return  {
