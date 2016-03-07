@@ -30,6 +30,10 @@ angular.module('app.controllers', [])
     }
   };  
 
+  $scope.amountClear= function() {
+    $scope.amount='';
+  }
+
 })
 
 .controller('AuthSignUpCtrl', function($scope, $state,signUpService,$sessionStorage) {
@@ -38,38 +42,36 @@ angular.module('app.controllers', [])
       	if(true)
       	{
         		if(form.$valid) {
-              //$sessionStorage.Jsonstorage = data.jsessionId;
-              //console.log(signupForm);
               $sessionStorage.signUpData = (signupForm);
-              $scope.addUserInfo();
-        	 //window.localStorage.setItem("signupTemp",JSON.stringify(signupForm));
-        	  //var signupdata = JSON.parse(window.localStorage.getItem("signupTemp"));
-        	  //$scope.signup2 = JSON.parse($scope.signupdata);
-              //console.log(signupdata);
-        	  $state.go('pre_verification');
+              $scope.addUserInfo();     	  
         	}
       	}
-      	else{$scope.error="Entered password didn't matched"; }
-      	
+      	else{
+          $scope.error="Entered password didn't matched"; 
+
+        }     	
         }
 
   $scope.addUserInfo=function(){
     signUpService.sendSignUp($sessionStorage.signUpData).then(function(data){
-    
-  },function(error){
-    console.log(error+ " Error" )
-  });
-
-
-}
+        if(data.responseCode!="Cali_SUC_1030"){ 
+        $scope.serverError="Sign Up failed, please try again";     
+        }
+        else {
+          $state.go('pre_verification');
+        }
+    },function(error){
+       $scope.serverError="Sign Up failed, please call us";
+      console.log(error+ " Error" )
+    });
+  } 
 })
 
 /*For Sign In*/
 
-.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,loginInfoService) {
-
-  $scope.signIn = function(form,loginForm) {
-  
+.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,loginInfoService,getTransactionService) {
+  console.log(Date.now);
+  $scope.signIn = function(form,loginForm) {  
     if(form.$valid) {
       $sessionStorage.loginData=loginForm;
    // window.localStorage.setItem("loginTemp",JSON.stringify(loginForm));
@@ -77,19 +79,25 @@ angular.module('app.controllers', [])
     //$scope.master2 = JSON.parse($scope.signindata);
       //console.log($scope.signindata);
        $scope.sendSignIn();
-      $state.go('tabsController.summaryPage');
+     
     }
   }
 
   $scope.sendSignIn=function() {
   loginInfoService.getJsonId($sessionStorage.loginData).then(function(data){
-    $sessionStorage.Jsonstorage = data.jsessionId;
-    console.log($sessionStorage.Jsonstorage + "Session");
-  },function(error){
-    console.log(error + " Error" ); 
-  });
-
-
+    
+      if(data.responseCode!="Cali_SUC_1030"){ 
+        $scope.serverError="Entered Credentials did not validate";
+        }
+        else {
+          $sessionStorage.Jsonstorage = data.jsessionId;
+          console.log('logged in');
+         $state.go('tabsController.summaryPage');
+       }
+        },function(error){
+          console.log(error + " Error" ); 
+          $scope.serverError="Entered Credentials did not validate";
+        });
   }
 
 })
@@ -145,6 +153,7 @@ var  forgotPin2 = function(change2){
   .controller('inviteCtrl', function($scope) {
 
 })
+
   .controller('successCtrl', function($scope) {
 	  var transactionStatus=[];
 	  transactionStatus[0]={
@@ -192,38 +201,30 @@ $scope.transactionStatus=transactionStatus;
 
   };
 })
-
+/**/
 .controller('InvesturlCtrl', function($scope) {
-var mid="WealthWeb";
-$scope.investUrl='http://205.147.99.55:8080/'+mid+'/ws/pymt/pymtView?cid=Microsoft&bucks=2.00';
+var mid="87";
+$scope.investUrl='http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+mid;
 })
 
-.controller('mfOrderCtrl', function($scope,mfOrderUrlService) {
+
+.controller('mfOrderCtrl', function($scope,mfrvice) {
 
   $scope.sendMfOrder=function() {
-    mfOrderUrlService.save({"portfolioCode": "CRN23840E16920","amcCode": "Birla Sun Life Mutual Fund","rtaCode": "B201D","orderTxnDate": "2016-03-01","amount": 123.32},function(data){
-      console.log(data.statusCode +"Order Sent");
+    mfOrderUrlService.save({"portfolioCode": "CRN23866E16938","amcCode": "Axis Mutual Fund","rtaCode":"128CFGP","orderTxnDate": "2016-03-05","amount": 10},function(data){
+      console.log(data.statusCode +" Order Sent");
     },function(error){
       console.log("Error");
     });
   };
+
+  $scope.orderurl=function (){
+    var mid="87";//dynamic id 
+  }
+  
+$scope.investUrl='http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+mid;
   
 })
-
-
-.controller('loginCtrl', function($scope,loginInfoService,$sessionStorage) {
-
-  loginInfoService.getJsonId().then(function(data){
-    $sessionStorage.Jsonstorage = data.jsessionId;
-    //console.log($sessionStorage.Jsonstorage + "Session");
-  },function(error){
-    console.log(error + " Error" ); 
-  });
-
-
-
-})
-
 
 .controller('FundsMethodCtrl', function($scope) {
   $scope.message = "In FinoZen, we have ensured that there is minimal risk to your investments with high returns and instantaneous liquidity. Your investments directly go to a pre-selected liquid mutual fund. We rank all the liquid fund internally and select the highest ranking liquid fund for you. FinoZen ranking algorithm is based on following parameters –";
@@ -363,9 +364,6 @@ $scope.investUrl='http://205.147.99.55:8080/'+mid+'/ws/pymt/pymtView?cid=Microso
 .controller('sidemenuCtrl', function($scope) {
 
 })
-.controller('investCtrl', function($scope, $ionicPopover) {
-  $scope.balance="1000";
-})
 .controller('withdrawCtrl', function($scope) {
 $scope.balance="1000";
 $scope.growthRate="7.8";
@@ -380,10 +378,7 @@ $scope.netGain="100";
 })
 
 .controller('transListController',['$http', function($http){
-//var lisst=[{amount:"Azurite1",transactionId:12545,date:"Mon, 25 Jan, 2016"},{amount:"Azurite2",transactionId:12545,date:"Mon, 26 Jan, 2017"},{amount:"Azurite3",transactionId:12545,date:"Mon, 27 Jan, 2018"}]
-  //this.products=lisst;
 var tList;
-
 $http.get('data/transactiondata.json').success(function(data){
  tList=data;
  //console.log(tList + "Printing");
@@ -392,7 +387,6 @@ $http.get('data/transactiondata.json').success(function(data){
 });
 
  var amt=tList;
- console.log("yoooooo");
  console.log(tList);
  
 }])
