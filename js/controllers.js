@@ -365,8 +365,8 @@ $scope.investUrl='http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId
 
 })
 .controller('withdrawCtrl', function($scope) {
-$scope.balance="1000";
-$scope.growthRate="7.8";
+$scope.balance="1100";
+$scope.growthRate="8.3";
 $scope.netGainToday="2";
 $scope.netGain="100";
 })
@@ -393,7 +393,7 @@ $http.get('data/transactiondata.json').success(function(data){
 
 .controller('popOverController',function($scope,$ionicPopover ){
 
- var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item" href="http://learn.ionicframework.com/" target="_blank">Learn Ionic</a> </div></ion-content>';
+ var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item pop_up" href="http://learn.ionicframework.com/" target="_blank">Actual annual growth rate till date of your money.</a> </div></ion-content>';
 
   $scope.popover = $ionicPopover.fromTemplate(template, {
     scope: $scope
@@ -466,4 +466,17 @@ $scope.Invest = function(form) {
     }
   }
 
+})
+
+
+.controller('sampleListController',['$http', function($http){
+//var lisst=[{amount:"Azurite1",transactionId:12545,date:"Mon, 25 Jan, 2016"},{amount:"Azurite2",transactionId:12545,date:"Mon, 26 Jan, 2017"},{amount:"Azurite3",transactionId:12545,date:"Mon, 27 Jan, 2018"}]
+  //this.products=lisst;
+var tList=this;
+tList.products=[];
+
+$http.get('data/transactiondata.json').success(function(data){
+ tList.products=data;
 });
+
+}]);
