@@ -74,7 +74,12 @@ angular.module('app.controllers', [])
   $scope.signIn = function(form,loginForm) {  
     if(form.$valid) {
       $sessionStorage.loginData=loginForm;
-       $scope.sendSignIn();     
+   // window.localStorage.setItem("loginTemp",JSON.stringify(loginForm));
+   // $scope.signindata = JSON.parse(window.localStorage.getItem("loginTemp"));
+    //$scope.master2 = JSON.parse($scope.signindata);
+      //console.log($scope.signindata);
+       $scope.sendSignIn();
+      $state.go('tabsController.summaryPage');
     }
   }
 
@@ -97,10 +102,57 @@ angular.module('app.controllers', [])
         });
   }
 
-  $scope.receiveOrders = function() {
-    console.log('fetching data')
-  $scope.tranlist=getTransactionService.get();
-  }
+})
+
+
+.controller('forgotPinCtrl', function($scope,loginInfoService,$sessionStorage) {
+$scope.forgotPin=function(change){
+	$scope.forget5 = JSON.parse(forgotPin2(change));
+	$scope.forget5.clientCode="CRN23878";
+	$scope.forgotPinUrl='http://205.147.99.55:8080/'+  $scope.forget5.push  +'/ws/pymt/pymtView?cid=Microsoft&bucks=2.00';
+
+loginInfoService.getJsonId().then(function(data){
+    $sessionStorage.Jsonstorage = data.jsessionId;
+    console.log($sessionStorage.Jsonstorage + "Session");
+
+  });
+  
+  
+		  console.log(JSON.stringify($scope.forget5)   + "forget5"); 
+    console.log($scope.forgotPinUrl + "url"); 
+}
+var  forgotPin2 = function(change2){
+	return JSON.stringify(change2)
+}
+})
+
+
+/*
+  .controller('forgotPinCtrl', function($scope,loginInfoService,$sessionStorage) {
+	
+	$scope.forgotPin=function(forgotPinForm){
+		console.log(" inside dunction" );
+		$sessionStorage.forgotPinData=forgotPinForm;
+		loginInfoService.getJsonId().then(function(data){
+			$sessionStorage.Jsonstorage = data.jsessionId;
+			//console.log($sessionStorage.Jsonstorage + "Session");
+		  }
+		console.log($sessionStorage.forgotPinData + " forgotPinForm" );
+		console.log($sessionStorage.Jsonstorage + " before function" );
+		}
+		// nnjn
+		
+		
+		
+		  loginInfoService.getJsonId().then(function(data){
+    $sessionStorage.Jsonstorage = data.jsessionId;
+    console.log($sessionStorage.Jsonstorage + "Session");
+  },function(error){
+    console.log(error + " Error" ); 
+  });
+	
+})*/
+  .controller('inviteCtrl', function($scope) {
 
 })
 
@@ -113,15 +165,8 @@ angular.module('app.controllers', [])
 		  date: "23.02.2016",
 		  id: "2252254",
 		  iconClass: "ion-ios-checkmark-outline"
-	  };
-	  transactionStatus[1]={
-		  stats: "Transaction Failed",
-		  message: "Oops.....",
-		  amount: "10000",
-		  date: "23.02.2016",
-		  id: "2252254",
-		  iconClass: "ion-ios-close-outline"
 	  }
+	  
 $scope.transactionStatus=transactionStatus;
 })
     
@@ -262,7 +307,7 @@ $scope.investUrl='http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId
   
 })
 
-.controller('WithdrawCtrl', function($scope) {
+.controller('WithdrawMoneyCtrl', function($scope) {
   $scope.groups = [];
     $scope.groups["0"] = {name: "Where does my money go?",items: ["FinoZen channels your money to the selected liquid mutual fund which gives the best return at lowest risk. The investment is made in your name, and we will always be available just a call or message away. "] };
     $scope.groups["1"] = {name: "How soon can I start investing?",items: ["It can take as little as 4 hours to a maximum of 3 days to process your documents and activate your account. Our executive who visits you will inform you about the exact time required to activate it. We will notify you once your account is activated via a Push notification. Once activated, you can start investing immediately."] };
@@ -324,6 +369,9 @@ $scope.investUrl='http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId
 
 .controller('withdrawCtrl', function($scope) {
 $scope.balance="1000";
+$scope.growthRate="7.8";
+$scope.netGainToday="2";
+$scope.netGain="100";
 })
 .controller('tourCtrl', function($scope) {
 
