@@ -50,7 +50,7 @@ $ionicAppProvider.identify ({
      .state('forgot_pin', {
 		url: '/forgot_pin',
 		templateUrl: 'templates/forgot_password.html',
-		controller: 'inviteCtrl'
+		controller: ''
     })
      .state('terms', {
 		url: '/terms',

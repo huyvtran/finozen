@@ -35,12 +35,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
  
  var notificationOpenedCallback = function(jsonData) {
    console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
- };  window.plugins.OneSignal.init("fe0ec4d2-d51a-4f3c-b86f-c1434e38d27f",
+ };  window.plugins.OneSignal.init("20dcc20d-87ea-434e-86b7-73e2c8448047",
                                 {googleProjectNumber: "745760472440"},
                                 notificationOpenedCallback);
  
  // Show an alert box if a notification comes in when the user is in your app.
  window.plugins.OneSignal.enableInAppAlertNotification(true);
+ window.plugins.OneSignal.enableVibrate(true);
 
 
 

@@ -54,12 +54,12 @@ angular.module('app.controllers', [])
 
   $scope.addUserInfo=function(){
     signUpService.sendSignUp($sessionStorage.signUpData).then(function(data){
-        if(data.responseCode!="Cali_SUC_1030"){ 
-        $scope.serverError="Sign Up failed, please try again";     
+        /*if(data.responseCode!="Cali_SUC_1030"){ 
+        $scope.serverError="Sign Up sucess";     
         }
-        else {
+        else {*/
           $state.go('pre_verification');
-        }
+        //}
     },function(error){
        $scope.serverError="Sign Up failed, please try again";
       console.log(error+ " Error" )
@@ -80,15 +80,17 @@ angular.module('app.controllers', [])
 
   $scope.sendSignIn=function() {
   loginInfoService.getJsonId($sessionStorage.loginData).then(function(data){
-    //
-      if(data.responseMsg!="Success"){ 
+    
+      if(data.responseCode!="Cali_SUC_1030"){ 
+        console.log('');
         $scope.serverError="Entered Credentials did not validate";
 
         }
         else {
           $sessionStorage.Jsonstorage = data.jsessionId;
+          console.log('logged in');
          $state.go('tabsController.summaryPage');
-        }
+       }
         },function(error){
           console.log(error + " Error" ); 
           $scope.serverError="Entered Credentials did not validate";
@@ -96,7 +98,8 @@ angular.module('app.controllers', [])
   }
 
   $scope.receiveOrders = function() {
-  $scope.tranlist=getTransactionService.query();
+    console.log('fetching data')
+  $scope.tranlist=getTransactionService.get();
   }
 
 })
@@ -155,21 +158,28 @@ $scope.transactionStatus=transactionStatus;
 
   };
 })
-
+/**/
 .controller('InvesturlCtrl', function($scope) {
-var mid="WealthWeb";
-$scope.investUrl='http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId=76';
+var mid="87";
+$scope.investUrl='http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+mid;
 })
 
-.controller('mfOrderCtrl', function($scope,mfOrderUrlService) {
+
+.controller('mfOrderCtrl', function($scope,mfrvice) {
 
   $scope.sendMfOrder=function() {
-    mfOrderUrlService.save({"portfolioCode": "CRN23840E16920","amcCode": "Birla Sun Life Mutual Fund","rtaCode": "B201D","orderTxnDate": "2016-03-05","amount": 3},function(data){
+    mfOrderUrlService.save({"portfolioCode": "CRN23866E16938","amcCode": "Axis Mutual Fund","rtaCode":"128CFGP","orderTxnDate": "2016-03-05","amount": 10},function(data){
       console.log(data.statusCode +" Order Sent");
     },function(error){
       console.log("Error");
     });
   };
+
+  $scope.orderurl=function (){
+    var mid="87";//dynamic id 
+  }
+  
+$scope.investUrl='http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+mid;
   
 })
 

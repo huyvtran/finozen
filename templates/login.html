@@ -9,9 +9,12 @@
       </div>
 <form name="authorizationForm" novalidate="" ng-submit="signIn(authorizationForm,authorization)">
 <div  class="error" >
-	<div>{{serverError}} </div>
+ </div>
 </div>
 	<div class="list">
+		<div  class="error" >
+			<div>{{serverError}} </div>
+		</div>
 		<label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.mobile.$touched && authorizationForm.mobile.$invalid, 'no-errors' :  authorizationForm.mobile.$touched && authorizationForm.mobile.$valid}">
 			<input type="number" name="mobile" ng-model="authorization.login" maxlength="10" ng-minlength="10" ng-maxlength="10" required placeholder="Mobile Number" min="7000000000" max="9999999999" >
 		</label>
