@@ -165,8 +165,7 @@ $ionicAppProvider.identify ({
 
     .state('invest', {
       url: '/invest',         
-          templateUrl: 'templates/invest.html',
-          controller: 'investCtrl'     
+          templateUrl: 'templates/invest.html',    
     })  
 
     .state('withdraw', {

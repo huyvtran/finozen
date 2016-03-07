@@ -10,6 +10,9 @@
 <form name="signupForm" novalidate="" ng-submit="signIn(signupForm,authorization.password,confirm,authorization)" >
 
 	<div class="list">
+	<div  class="error" >
+			<div>{{serverError}} </div>
+		</div>
 		<div class="row">
 			<div class="col" style="border-right: 3px solid white;">
 				<label class="item item-input" ng-class="{ 'has-errors' : signupForm.Fname.$touched && signupForm.Fname.$invalid, 'no-errors' :  signupForm.Fname.$touched && signupForm.Fname.$valid}">
