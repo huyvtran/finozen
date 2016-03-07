@@ -45,12 +45,12 @@ $ionicAppProvider.identify ({
      .state('change_password', {
 		url: '/change_pin',
 		templateUrl: 'templates/change_password.html',
-		controller: 'inviteCtrl'
+		controller: 'forgotPinCtrl'
     })   
      .state('forgot_pin', {
 		url: '/forgot_pin',
 		templateUrl: 'templates/forgot_password.html',
-		controller: 'inviteCtrl'
+		controller: 'forgotPinCtrl'
     })
      .state('terms', {
 		url: '/terms',
@@ -77,9 +77,8 @@ $ionicAppProvider.identify ({
       url: '/page15',
       views: {
         'tab7': {
-          templateUrl: 'templates/summaryPage.html',
-          controller: 'summaryPageCtrl'
-        }
+          templateUrl: 'templates/summaryPage.html'
+		  }
       }
     })
         
@@ -90,7 +89,7 @@ $ionicAppProvider.identify ({
       url: '/page14',
       abstract:true,
       templateUrl: 'templates/tabsController.html',
-	  controller: ''
+	  controller: 'withdrawCtrl'
     })
       
     
@@ -100,8 +99,7 @@ $ionicAppProvider.identify ({
       url: '/page9',
       views: {
         'tab8': {
-          templateUrl: 'templates/growthRate.html',
-          controller: 'growthRateCtrl'
+          templateUrl: 'templates/growthRate.html'
         }
       }
     })
@@ -151,7 +149,7 @@ $ionicAppProvider.identify ({
           .state('faq3', {
       url: '/faq_withdraw',         
           templateUrl: 'templates/faq3.html',
-          controller: 'WithdrawCtrl'     
+          controller: 'WithdrawMoneyCtrl'     
     })
           .state('faq4', {
       url: '/faq_others',         
