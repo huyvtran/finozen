@@ -364,13 +364,6 @@ $scope.investUrl='http://205.147.99.55:8080/'+mid+'/ws/pymt/pymtView?cid=Microso
 
 })
 .controller('investCtrl', function($scope, $ionicPopover) {
-
-  // .fromTemplate() method
-  var template = '<ion-popover-view><ion-header-bar> <h1 class="title">My Popover Title</h1> </ion-header-bar> <ion-content> Hello! </ion-content></ion-popover-view>';
-
-  $scope.popover = $ionicPopover.fromTemplate(template, {
-  scope: $scope
-  });
   $scope.balance="1000";
 })
 .controller('withdrawCtrl', function($scope) {
