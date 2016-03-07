@@ -54,14 +54,14 @@ angular.module('app.controllers', [])
 
   $scope.addUserInfo=function(){
     signUpService.sendSignUp($sessionStorage.signUpData).then(function(data){
-        /*if(data.responseCode!="Cali_SUC_1030"){ 
-        $scope.serverError="Sign Up sucess";     
+        if(data.responseCode!="Cali_SUC_1030"){ 
+        $scope.serverError="Sign Up failed, please try again";     
         }
-        else {*/
+        else {
           $state.go('pre_verification');
-        //}
+        }
     },function(error){
-       $scope.serverError="Sign Up failed, please try again";
+       $scope.serverError="Sign Up failed, please call us";
       console.log(error+ " Error" )
     });
   } 
@@ -79,7 +79,7 @@ angular.module('app.controllers', [])
     //$scope.master2 = JSON.parse($scope.signindata);
       //console.log($scope.signindata);
        $scope.sendSignIn();
-      $state.go('tabsController.summaryPage');
+     
     }
   }
 
@@ -87,9 +87,7 @@ angular.module('app.controllers', [])
   loginInfoService.getJsonId($sessionStorage.loginData).then(function(data){
     
       if(data.responseCode!="Cali_SUC_1030"){ 
-        console.log('');
         $scope.serverError="Entered Credentials did not validate";
-
         }
         else {
           $sessionStorage.Jsonstorage = data.jsessionId;
