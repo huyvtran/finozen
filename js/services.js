@@ -90,3 +90,17 @@ angular.module('app.services', [])
 		
 	};
 }])
+
+.factory('dateService', ['$filter',function($filter){
+	return  {
+		getDate: function(){
+			var date = new Date();
+			date = $filter('date')(date,'yyyy-MM-dd');
+			return date;
+		}
+		
+	}
+
+}])
+
+

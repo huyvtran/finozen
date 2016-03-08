@@ -421,7 +421,7 @@ $http.get('data/transactiondata.json').success(function(data){
 })
 
 
-.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,$filter) {
+.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService) {
 	var finalComputedVal;
     $scope.nav=3656.5447;
     $scope.final=function(initial,nav,suggest){
@@ -455,9 +455,8 @@ $http.get('data/transactiondata.json').success(function(data){
       }
 
   $scope.sendMfOrder=function() {
-    var date = new Date();
-   date = $filter('date')(date,'yyyy-MM-dd');
 
+    var date=dateService.getDate();
     mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "Axis Mutual Fund","rtaCode":"128CFGP","orderTxnDate": date,"amount": finalComputedVal},function(data){
       if(data.responseCode=="Cali_SUC_1030"){
         window.open('http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_self');
