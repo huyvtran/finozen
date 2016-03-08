@@ -74,10 +74,6 @@ angular.module('app.controllers', [])
   $scope.signIn = function(form,loginForm) {  
     if(form.$valid) {
       $sessionStorage.loginData=loginForm;
-   // window.localStorage.setItem("loginTemp",JSON.stringify(loginForm));
-   // $scope.signindata = JSON.parse(window.localStorage.getItem("loginTemp"));
-    //$scope.master2 = JSON.parse($scope.signindata);
-      //console.log($scope.signindata);
        $scope.sendSignIn();
      
     }
@@ -91,9 +87,8 @@ angular.module('app.controllers', [])
         }
         else {
           $sessionStorage.SessionIdstorage = data.msg;
-         /* var datajson=JSON.parse(data.jsonStr);
-          console.log(datajson.pfolioCode);
-          $sessionStorage.SessionPortfolio = data.msg;*/
+          var datajson=JSON.parse(data.jsonStr);
+          $sessionStorage.SessionPortfolio =datajson[0].pfolioCode;
          $state.go('tabsController.summaryPage');
        }
         },function(error){
@@ -457,7 +452,7 @@ $http.get('data/transactiondata.json').success(function(data){
     var date = new Date();
    date = $filter('date')(date,'yyyy-MM-dd');
 
-    mfOrderUrlService.save({"portfolioCode": "CRN23850E16921","amcCode": "Axis Mutual Fund","rtaCode":"128CFGP","orderTxnDate": date,"amount": finalComputedVal},function(data){
+    mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "Axis Mutual Fund","rtaCode":"128CFGP","orderTxnDate": date,"amount": finalComputedVal},function(data){
       if(data.responseCode=="Cali_SUC_1030"){
         window.open('http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_self');
       }
