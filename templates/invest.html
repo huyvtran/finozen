@@ -21,7 +21,7 @@
 <label class="item item-input" ng-class="{ 'has-errors' : investForm.amount.$touched && investForm.amount.$invalid, 'no-errors' :  investForm.amount.$touched && investForm.amount.$valid}">
 	<input type="number" placeholder="Enter Amount"  name="amount"  ng-model="initial" ng-pattern="/^[0-9]{1,9}$/" min="100"  ng-keyup="netVal=initial+((initial*8.3)/100)">
 </label>
-<div class="error-container" ng-hide="checked_withdraw" ng-show="investForm.amount.$error && investForm.$submitted" ng-messages="investForm.amount.$error">
+<div class="error-container add_money" ng-hide="checked_withdraw" ng-show="investForm.amount.$error && investForm.$submitted" ng-messages="investForm.amount.$error">
 	<div  class="error" >
 
 		<div  ng-message="min">
@@ -32,10 +32,6 @@
 		</div>
 	</div>
 </div>
-		
-
-		<p class="invest_hint">MINIMUM AMOUNT: <span>&#x20B9;</span> 100</p>
-		<div class="row" ><p><br>Scheme :<br/><span class="suggestedScheme" onclick="window.open('http://www.moneycontrol.com/mutual-funds/nav/reliance-liquid-fund-treasury-plan-ip/MRC046', '_system', 'location=yes'); return false;" style="cursor:pointer;">Reliance Liquid Fund Treasury Plan IP(G)</span>   </p></div>
 		<div class="row" >
 		<p><br>To optimize returns, we will add <span class="suggested"> {{ final(initial,nav,0) | currency:"&#8377;" }} </span> to your investments <br> </p>
 		</div>
@@ -54,7 +50,8 @@
 
 		
 
-		<p class="item_checkbox"> I have read the <a href="#" onclick="window.open('http://www.finotrust.com/documents/OfferDocument.pdf', '_self', 'location=yes'); return false;">Offer Document</a>,<a href="#" onclick="window.open('http://www.finotrust.com/documents/KIM.pdf', '_self', 'location=yes'); return false;">Scheme Information Document</a>, <a href="#" onclick="window.open('http://www.finotrust.com/documents/T&C.pdf', '_self', 'location=yes'); return false;">T&C </a> before making the investment</p>
+		<p class="item_checkbox">By clicking ADD MONEY you agree to have read <a href="#" onclick="window.open('http://www.finotrust.com/documents/OfferDocument.pdf', '_self', 'location=yes'); return false;">Offer Document</a>, <a href="#" onclick="window.open('http://www.finotrust.com/documents/KIM.pdf', '_self', 'location=yes'); return false;">Scheme Information Document</a>, <a href="#" onclick="window.open('http://www.finotrust.com/documents/T&C.pdf', '_self', 'location=yes'); return false;">T&C </a> before making the investment</p>
+		<div class="row" ><p><br>Scheme :<br/><span class="suggestedScheme" onclick="window.open('http://www.moneycontrol.com/mutual-funds/nav/reliance-liquid-fund-treasury-plan-ip/MRC046', '_system', 'location=yes'); return false;" style="cursor:pointer;">Reliance Liquid Fund Treasury Plan IP(G)</span>   </p></div>
 </form>		</div>
     </ion-content>
 </div>

@@ -247,11 +247,18 @@ height: 65vh;}
 	.item.item-radio.col {
 			border: none;
 		}
-		.item_checkbox{font-size:11px; a{color:#ccc;}}
+		.item_checkbox{
+		font-size: 10px;
+		margin-top: -14px;
+		width: 100%;
+		 a{color:#ccc;}}
 	.suggested {
 		padding: 0 10px;
 		border: 1px solid #18bb9c;
 		margin: 0 10px;
+		}
+		.error-container.add_money {
+			margin-bottom: -10px;
 		}
 }
 .slides{
