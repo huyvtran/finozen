@@ -70,7 +70,7 @@ angular.module('app.controllers', [])
 /*For Sign In*/
 
 .controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,loginInfoService,getTransactionService) {
-  console.log(Date.now);
+ //$state.go('tabsController.summaryPage');  
   $scope.signIn = function(form,loginForm) {  
     if(form.$valid) {
       $sessionStorage.loginData=loginForm;
@@ -90,8 +90,10 @@ angular.module('app.controllers', [])
         $scope.serverError="Entered Credentials did not validate";
         }
         else {
-          $sessionStorage.Jsonstorage = data.jsessionId;
-          console.log('logged in');
+          $sessionStorage.SessionIdstorage = data.msg;
+         /* var datajson=JSON.parse(data.jsonStr);
+          console.log(datajson.pfolioCode);
+          $sessionStorage.SessionPortfolio = data.msg;*/
          $state.go('tabsController.summaryPage');
        }
         },function(error){
@@ -206,24 +208,6 @@ var mid="87";
 $scope.investUrl='http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+mid;
 })
 
-
-.controller('mfOrderCtrl', function($scope,mfrvice) {
-
-  $scope.sendMfOrder=function() {
-    mfOrderUrlService.save({"portfolioCode": "CRN23866E16938","amcCode": "Axis Mutual Fund","rtaCode":"128CFGP","orderTxnDate": "2016-03-05","amount": 10},function(data){
-      console.log(data.statusCode +" Order Sent");
-    },function(error){
-      console.log("Error");
-    });
-  };
-
-  $scope.orderurl=function (){
-    var mid="87";//dynamic id 
-  }
-  
-$scope.investUrl='http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+mid;
-  
-})
 
 .controller('FundsMethodCtrl', function($scope) {
   $scope.message = "In FinoZen, we have ensured that there is minimal risk to your investments with high returns and instantaneous liquidity. Your investments directly go to a pre-selected liquid mutual fund. We rank all the liquid fund internally and select the highest ranking liquid fund for you. FinoZen ranking algorithm is based on following parameters –";
@@ -436,35 +420,55 @@ $http.get('data/transactiondata.json').success(function(data){
 })
 
 
-.controller('sampleCtrl', function ($scope,$state) {
-	
-$scope.nav=3656.5447;
-$scope.final=function(initial,nav,suggest){
-var theory=initial/nav ;
-var rounded= Math.round(theory * 1000)/1000;
-//loss=theory-rounded;
-var nav1=rounded*nav;
-var diff=nav1-initial;
-if(initial>0){
-if(diff>0){
-return suggest;
-}
-else{
-return $scope.test(initial,nav,suggest);
-}
-}
-else{return 0;}}
-$scope.test=function(initial,nav,suggest){
-suggest++;
-initial=initial+suggest;
-return $scope.final(initial,nav,suggest);
-}
-
-$scope.Invest = function(form) {
-    if(form.$valid) {
-      $state.go('successPage');
+.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,$filter) {
+	var finalComputedVal;
+    $scope.nav=3656.5447;
+    $scope.final=function(initial,nav,suggest){
+    var theory=initial/nav ;
+    var rounded= Math.round(theory * 1000)/1000;
+    //loss=theory-rounded;
+    var nav1=rounded*nav;
+    var diff=nav1-initial;
+    if(initial>0){
+    if(diff>0){
+    finalComputedVal=initial;
+    return suggest;
     }
-  }
+    else{
+    return $scope.test(initial,nav,suggest);
+    }
+    }
+    else{return 0;}}
+    $scope.test=function(initial,nav,suggest){
+    suggest++;
+    initial=initial+suggest;
+    
+    return $scope.final(initial,nav,suggest);
+    }
+
+    $scope.Invest = function(form) {
+        if(form.$valid) {
+          //$state.go('successPage');
+          $scope.sendMfOrder();
+        }
+      }
+
+  $scope.sendMfOrder=function() {
+    var date = new Date();
+   date = $filter('date')(date,'yyyy-MM-dd');
+
+    mfOrderUrlService.save({"portfolioCode": "CRN23850E16921","amcCode": "Axis Mutual Fund","rtaCode":"128CFGP","orderTxnDate": date,"amount": finalComputedVal},function(data){
+      if(data.responseCode=="Cali_SUC_1030"){
+        window.open('http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_self');
+      }
+      
+    },function(error){
+      console.log("Error");
+    });
+  };
+
+    var mid=$sessionStorage.orderId;//dynamic id
+    
 
 })
 
