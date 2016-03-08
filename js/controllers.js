@@ -104,19 +104,18 @@ angular.module('app.controllers', [])
 
 
 .controller('forgotPinCtrl', function($scope,loginInfoService,$sessionStorage) {
-$scope.forgotPin=function(change){
+  $scope.forgotPin=function(change){
 	$scope.forget5 = JSON.parse(forgotPin2(change));
 	$scope.forget5.clientCode="CRN23878";
-	$scope.forgotPinUrl='http://205.147.99.55:8080/'+  $scope.forget5.push  +'/ws/pymt/pymtView?cid=Microsoft&bucks=2.00';
+	$scope.forgotPinUrl='http://205.147.99.55:8080/'+ $scope.forget5.push +'/ws/pymt/pymtView?cid=Microsoft&bucks=2.00';
 
 loginInfoService.getJsonId().then(function(data){
     $sessionStorage.Jsonstorage = data.jsessionId;
     console.log($sessionStorage.Jsonstorage + "Session");
-
   });
   
   
-		  console.log(JSON.stringify($scope.forget5)   + "forget5"); 
+		console.log(JSON.stringify($scope.forget5)   + "forget5"); 
     console.log($scope.forgotPinUrl + "url"); 
 }
 var  forgotPin2 = function(change2){
@@ -353,7 +352,7 @@ $scope.investUrl='http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId
     }
   };
   $scope.isGroupShown = function(group) {
-    return $scope.shownGroup === group;
+    return $scope.shownGroFup === group;
   };
   
 })
@@ -366,6 +365,7 @@ $scope.investUrl='http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId
 })
 .controller('withdrawCtrl', function($scope) {
 $scope.balance="1100";
+$scope.investAmount="1000";
 $scope.growthRate="8.3";
 $scope.netGainToday="2";
 $scope.netGain="100";
