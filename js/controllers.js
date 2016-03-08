@@ -38,8 +38,10 @@ angular.module('app.controllers', [])
 
 .controller('AuthSignUpCtrl', function($scope, $state,signUpService,$sessionStorage) {
 
-  $scope.signIn = function(form,searchText,searchText2,signupForm) {
-      	if(true)
+  $scope.signIn = function(form,searchText2,signupForm) {
+	  console.log(angular.equals(signupForm.pin,searchText2)+ " searchText" );
+	  console.log(searchText2+ " searchText2" );
+      	if(angular.equals(signupForm.pin,searchText2))
       	{
         		if(form.$valid) {
               $sessionStorage.signUpData = (signupForm);
@@ -82,6 +84,14 @@ angular.module('app.controllers', [])
      
     }
   }
+    $scope.forgotPin=function(signinformData){
+	if(signinformData.$valid){
+	$state.go('forgot_pin');
+	}
+	else{
+		$scope.message="Please enter your mobile number to reset PIN";
+	console.log("error"); }
+	}
 
   $scope.sendSignIn=function() {
   loginInfoService.getJsonId($sessionStorage.loginData).then(function(data){
@@ -104,7 +114,7 @@ angular.module('app.controllers', [])
 
 
 .controller('forgotPinCtrl', function($scope,loginInfoService,$sessionStorage) {
-  $scope.forgotPin=function(change){
+  $scope.resetPin=function(change){
 	$scope.forget5 = JSON.parse(forgotPin2(change));
 	$scope.forget5.clientCode="CRN23878";
 	$scope.forgotPinUrl='http://205.147.99.55:8080/'+ $scope.forget5.push +'/ws/pymt/pymtView?cid=Microsoft&bucks=2.00';
