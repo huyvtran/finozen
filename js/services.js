@@ -84,6 +84,17 @@ angular.module('app.services', [])
 	});
 	return mfOrderRequest;
 }])
+
+/*send MF sell order*/
+.factory('mfSellUrlService', ['$resource',function($resource){
+	var mfSellRequest= $resource('http://205.147.99.55:8080/WealthWeb/ws/clientOrders/clientOrderMfSell',{},{
+		save:{
+			method:'POST',	
+		},
+	});
+	return mfSellRequest;
+}])
+
 .factory('GetTransactionService', ['$q,getTransactionService', function(getTransactionService,$q){
 	return {
 

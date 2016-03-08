@@ -22,20 +22,6 @@ angular.module('app.controllers', [])
 
 })
 
-.controller('AuthWithdrawlCtrl', function($scope, $state) {
-  
-  $scope.Withdrawl = function(form) {
-    if(form.$valid) {
-      $state.go('successPage');
-    }
-  };  
-
-  $scope.amountClear= function() {
-    $scope.amount='';
-  }
-
-})
-
 .controller('AuthSignUpCtrl', function($scope, $state,signUpService,$sessionStorage) {
 
   $scope.signIn = function(form,searchText2,signupForm) {
@@ -72,7 +58,7 @@ angular.module('app.controllers', [])
 /*For Sign In*/
 
 .controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,loginInfoService,getTransactionService) {
- $state.go('tabsController.summaryPage');  
+ //$state.go('tabsController.summaryPage');  
   $scope.signIn = function(form,loginForm) {  
     if(form.$valid) {
       $sessionStorage.loginData=loginForm;
@@ -366,15 +352,21 @@ $scope.netGain="100";
 
 })
 
-.controller('transListController',['$http', function($http){
-var tList=this;
+.controller('transListController',function($scope,$http,$sessionStorage,dateService) {
+    var date=dateService.getDate();
+ console.log($sessionStorage.SessionPortfolio);
+ $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode='+$sessionStorage.SessionPortfolio+'&endDate='+date+'08/03/2016&noOfDays=40').success(function(data){
+  //console.log(data);
+ });
+
+/*var tList=this;
 tList.products=[];
 
 $http.get('data/transactiondata.json').success(function(data){
  tList.products=data;
-});
+});*/
  
-}])
+})
 
 .controller('popOverController',function($scope,$ionicPopover ){
 
@@ -469,6 +461,48 @@ $http.get('data/transactiondata.json').success(function(data){
 
     var mid=$sessionStorage.orderId;//dynamic id
     
+
+})
+
+.controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$sessionStorage) {
+ 
+  $scope.Withdrawl = function(form) {
+     console.log("withdraw form");
+    var date=dateService.getDate();
+    if(form.$valid) {
+     //$state.go('successPage');
+      console.log($scope.checked_withdraw + "form valid");
+     if($scope.checked_withdraw == true){
+         console.log("all");        
+        mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "KMMF","rtaCode":"K745","orderTxnDate": date,"allUnits":"Y","folioNo":"2023421/94"},function(data){
+          if(data.responseCode!="Cali_SUC_1030") {
+            console.log("Error selling")
+          }
+        },function(error){
+          console.log("Try again");
+        });
+     }
+     else{
+       console.log("none");
+     mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "KMMF","rtaCode":"K745","orderTxnDate": date,"quantity":$scope.amount,"allUnits":"N","folioNo":"2023421/94"},function(data){
+          if(data.responseCode!="Cali_SUC_1030") {
+            console.log("Error selling")
+          }
+        },function(error){
+          console.log("Try again");
+        });
+
+     }
+    
+    }
+    else {
+      console.log("Crazy");
+    }
+  };  
+
+  $scope.amountClear= function() {
+    $scope.amount='';
+  }
 
 })
 
