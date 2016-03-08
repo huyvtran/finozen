@@ -72,7 +72,7 @@ angular.module('app.controllers', [])
 /*For Sign In*/
 
 .controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,loginInfoService,getTransactionService) {
- //$state.go('tabsController.summaryPage');  
+ $state.go('tabsController.summaryPage');  
   $scope.signIn = function(form,loginForm) {  
     if(form.$valid) {
       $sessionStorage.loginData=loginForm;
@@ -367,16 +367,12 @@ $scope.netGain="100";
 })
 
 .controller('transListController',['$http', function($http){
-var tList;
-$http.get('data/transactiondata.json').success(function(data){
- tList=data;
- //console.log(tList + "Printing");
-}).error(function(error){
-	console.log("Not reached");
-});
+var tList=this;
+tList.products=[];
 
- var amt=tList;
- console.log(tList);
+$http.get('data/transactiondata.json').success(function(data){
+ tList.products=data;
+});
  
 }])
 
@@ -478,14 +474,3 @@ $http.get('data/transactiondata.json').success(function(data){
 })
 
 
-.controller('sampleListController',['$http', function($http){
-//var lisst=[{amount:"Azurite1",transactionId:12545,date:"Mon, 25 Jan, 2016"},{amount:"Azurite2",transactionId:12545,date:"Mon, 26 Jan, 2017"},{amount:"Azurite3",transactionId:12545,date:"Mon, 27 Jan, 2018"}]
-  //this.products=lisst;
-var tList=this;
-tList.products=[];
-
-$http.get('data/transactiondata.json').success(function(data){
- tList.products=data;
-});
-
-}]);
