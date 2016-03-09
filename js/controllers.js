@@ -139,34 +139,21 @@ var  forgotPin2 = function(change2){
 })
 
 
-/*
-  .controller('forgotPinCtrl', function($scope,loginInfoService,$sessionStorage) {
 
-	$scope.forgotPin=function(forgotPinForm){
-		console.log(" inside dunction" );
-		$sessionStorage.forgotPinData=forgotPinForm;
-		loginInfoService.getJsonId().then(function(data){
-			$sessionStorage.Jsonstorage = data.jsessionId;
-			//console.log($sessionStorage.Jsonstorage + "Session");
-		  }
-		console.log($sessionStorage.forgotPinData + " forgotPinForm" );
-		console.log($sessionStorage.Jsonstorage + " before function" );
+  .controller('changeCtrl', function($scope,$sessionStorage) {
+
+	$scope.forgotPin=function(changePinForm){
+
+
+		console.log(changePinForm);
+    changePinForm.session=$sessionStorage.SessionIdstorage;
+    changePinForm=JSON.stringify(changePinForm);
+    console.log(changePinForm);
+    $http.post('http://205.147.99.55:8080/WealthWeb/ws/secure/clientFcps/changePassword','changepinform');
+
 		}
-		// nnjn
-
-
-
-		  loginInfoService.getJsonId().then(function(data){
-    $sessionStorage.Jsonstorage = data.jsessionId;
-    console.log($sessionStorage.Jsonstorage + "Session");
-  },function(error){
-    console.log(error + " Error" );
-  });
-
-})*/
-  .controller('inviteCtrl', function($scope) {
-
 })
+
 
   .controller('successCtrl', function($scope) {
 	  var transactionStatus=[];
