@@ -57,7 +57,7 @@ angular.module('app.controllers', [])
 
 /*For Sign In*/
 
-.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,loginInfoService,getTransactionService) {
+.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,getTransactionService) {
  //$state.go('tabsController.summaryPage');
   $scope.signIn = function(form,loginForm) {
     if(form.$valid) {
@@ -68,8 +68,12 @@ angular.module('app.controllers', [])
   }
     $scope.forgotPin=function(signinformData){
 	if(signinformData.$valid){
+    console.log('phone number'+signinformData);
+
     var ph = signinformData
-    $scope.http = 'http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?'+ph; //sending the otp to the phone number
+
+    $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
+    console.log('success');
 	$state.go('forgot_pin');
 	}
 	else{
