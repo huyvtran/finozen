@@ -137,6 +137,21 @@ var  forgotPin2 = function(change2){
 }
 })
 
+.controller('changeCtrl', function(changeService,$scope,$sessionStorage){
+
+    $scope.forgotPin=function(changePinForm){    
+  console.log(changePinForm);
+  changePinForm.clientCode=$sessionStorage.SessionClientCode;
+  changePinForm=JSON.stringify(changePinForm);
+ 
+  var pinChange=changeService.changepinUp(changePinForm);
+  pinChange.$promise.then(function(data){
+    console.log(data);
+  })
+  }
+  
+})
+
 .controller('popupController', function($scope, $ionicPopup,$window) {
      // Triggered on a button click, or some other target
  $scope.showPopup = function() {
@@ -336,7 +351,6 @@ $scope.netGain="100";
 */
 
 var reportDate = getPerformanceService.get();
-var print;
 reportDate.$promise.then(function(data){
  if (data.responseCode == "Cali_SUC_1030") {
   
