@@ -66,7 +66,9 @@ angular.module('app.controllers', [])
 
     }
   }
-    $scope.forgotPin=function(signinformData){
+    $scope.forgotPin=function(signinformData,mobile){
+console.log($scope.authorization.login);		
+console.log(signinformData);		
 	if(signinformData.$valid){
     console.log('phone number'+signinformData);
 
