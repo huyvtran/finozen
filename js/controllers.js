@@ -123,7 +123,7 @@ console.log(signinformData);
 
 
 .controller('forgotPinCtrl', function($scope,$sessionStorage,$http) {
-/*  $scope.resetPin=function(change){
+$scope.resetPin=function(change){
 	$scope.forget5 = JSON.parse(forgotPin2(change));
 	$scope.forget5.forgotpin=$sessionStorage.forgotPinPhone;
     console.log($scope.forget5);
@@ -136,47 +136,6 @@ var  forgotPin2 = function(change2){
 	return JSON.stringify(change2)
 }
 })
-
-
-/*
-  .controller('forgotPinCtrl', function($scope,loginInfoService,$sessionStorage) {
-
-	$scope.forgotPin=function(forgotPinForm){
-		console.log(" inside dunction" );
-		loginInfoService.getJsonId().then(function(data){
-			$sessionStorage.Jsonstorage = data.jsessionId;
-			//console.log($sessionStorage.Jsonstorage + "Session");
-		  }
-		console.log($sessionStorage.forgotPinData + " forgotPinForm" );
-		}
-		// nnjn
-
-
-
-		  loginInfoService.getJsonId().then(function(data){
-    $sessionStorage.Jsonstorage = data.jsessionId;
-  },function(error){
-    console.log(error + " Error" );
-  });
-
-  .controller('inviteCtrl', function($scope) {
-
-})
-
-  .controller('successCtrl', function($scope) {
-	  var transactionStatus=[];
-	  transactionStatus[0]={
-		  stats: "Transaction Successful",
-		  message: "Thank You",
-		  amount: "10000",
-		  date: "23.02.2016",
-		  id: "2252254",
-		  iconClass: "ion-ios-checkmark-outline"
-	  }
-
-$scope.transactionStatus=transactionStatus;
-})
-
 
 .controller('popupController', function($scope, $ionicPopup,$window) {
      // Triggered on a button click, or some other target
@@ -207,12 +166,10 @@ $scope.transactionStatus=transactionStatus;
 
 
   };
+
 })
-/**/
-.controller('InvesturlCtrl', function($scope) {
-var mid="87";
-$scope.investUrl='http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+mid;
-})
+
+
 
 
 .controller('FundsMethodCtrl', function($scope) {
