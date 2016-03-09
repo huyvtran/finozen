@@ -57,7 +57,7 @@ angular.module('app.controllers', [])
 
 /*For Sign In*/
 
-.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,getTransactionService) {
+.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService) {
  //$state.go('tabsController.summaryPage');
   $scope.signIn = function(form,loginForm) {
     if(form.$valid) {
@@ -71,10 +71,7 @@ console.log($scope.authorization.login);
 console.log(signinformData);		
 	if(signinformData.$valid){
     console.log('phone number'+signinformData);
-
     $sessionStorage.forgotPinPhone = signinformData;
-
-
     $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
     console.log('success');
 	$state.go('forgot_pin');
@@ -109,7 +106,7 @@ console.log(signinformData);
 
 })
 
-.controller('transactAccessCtrl', function($scope,$sessionStorage){
+.controller('transactionAccessCtrl', function($scope,$sessionStorage){
 
   if($sessionStorage.SessionStatus!="A") {
     $scope.withdrawUrl="#/status";
@@ -379,13 +376,42 @@ $scope.netGain="100";
 
 })
 
-.controller('transListController',function($scope,$http,$sessionStorage,$filter) {
-    var date = new Date();
-    date = $filter('date')(date,'dd/MM/yyyy');
+.controller('transListController',function($scope,$sessionStorage,getPerformanceService) {
+ 
+/* $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode='+$sessionStorage.SessionPortfolio+'&endDate=09/03/201&noOfDays=40').then(function(resp) {
+    console.log('Success',resp.data.responseCode);
+    // For JSON responses, resp.data contains the result
+  }, function(err) {
+    console.error('ERR', err);
+    // err.status will contain the status code
+  })
+*/
 
- $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode='+$sessionStorage.SessionPortfolio+'&endDate='+date+'&noOfDays=40').success(function(data){
-  //console.log(data);
- });
+var reportDate = getPerformanceService.get();
+var print;
+reportDate.$promise.then(function(data){
+ if (data.responseCode == "Cali_SUC_1030") {
+  var jsonStrReports = JSON.parse(data.jsonStr);
+ 
+$sessionStorage.amcCode=jsonStrReports.amcCode;
+$sessionStorage.amount=jsonStrReports.amount;
+$sessionStorage.gainMonth=jsonStrReports.gainMonth;
+$sessionStorage.gainToday=jsonStrReports.gainToday;
+$sessionStorage.gainTotal=jsonStrReports.gainTotal;
+$sessionStorage.list=jsonStrReports.list;
+$sessionStorage.mktValue=jsonStrReports.mktValue;
+$sessionStorage.msg=jsonStrReports.msg;
+$sessionStorage.netInv=jsonStrReports.netInv;
+$sessionStorage.orderId=jsonStrReports.orderId;
+$sessionStorage.paymentMode=jsonStrReports.paymentMode; 
+$sessionStorage.quantity=jsonStrReports.quantity;
+$sessionStorage.rtaCode=jsonStrReports.rtaCode; 
+$sessionStorage.txnDate=jsonStrReports.txnDate;
+$sessionStorage.txnTypeStr=jsonStrReports.txnTypeStr;
+$sessionStorage.xirr=jsonStrReports.xirr;
+ }
+})
+
 
 /*var tList=this;
 tList.products=[];

@@ -34,9 +34,10 @@ angular.module('app.services', [])
 	return $resource('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/clientFcp');
 }])
 
-.factory('getTransactionService', ['$resource',function($resource){
-	return $resource('http://205.147.99.55:8080//WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode=CRN23840E16920&endDate=07/03/2016&noOfDays=50');
-	//http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getOrders?pfolioCode=CRN23840E16920&noOfOrders=2
+.factory('getPerformanceService', ['$resource','$filter','$sessionStorage',function($resource,$filter,$sessionStorage){
+	var date = new Date();
+    date = $filter('date')(date,'dd/MM/yyyy');
+	return $resource('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode='+$sessionStorage.SessionPortfolio+'&endDate='+date+'&noOfDays=40');
 }])
 
 
