@@ -91,14 +91,13 @@ console.log(signinformData);
         $scope.serverError="Entered Credentials did not validate";
         }
         else {
+          console.log(data.jsonStr);
           $sessionStorage.SessionIdstorage = data.msg;
-          var datajson=JSON.parse(data.jsonStr);
-          $sessionStorage.SessionPortfolio =datajson[0].pfolioCode;
-          $sessionStorage.SessionStatus =datajson[0].activeStatus;
-          $sessionStorage.SessionClientName =datajson[0].clientName;
-          $sessionStorage.SessionClientCode =datajson[0].clientCode;
-          $sessionStorage.SessionMobNo =datajson[0].mobileNo;
-          //console.log( $sessionStorage.SessionStatus,$sessionStorage.SessionClientCode,$sessionStorage.SessionMobNo,$sessionStorage.SessionClientName);
+          $sessionStorage.SessionPortfolio =data.jsonStr[0].pfolioCode;
+          $sessionStorage.SessionStatus =data.jsonStr[0].activeStatus;
+          $sessionStorage.SessionClientName =data.jsonStr[0].clientName;
+          $sessionStorage.SessionClientCode =data.jsonStr[0].clientCode;
+          $sessionStorage.SessionMobNo =data.jsonStr[0].mobileNo;
          $state.go('tabsController.summaryPage');
        }
         },function(error){
@@ -124,7 +123,7 @@ console.log(signinformData);
 
 
 .controller('forgotPinCtrl', function($scope,$sessionStorage,$http) {
-  $scope.resetPin=function(change){
+/*  $scope.resetPin=function(change){
 	$scope.forget5 = JSON.parse(forgotPin2(change));
 	$scope.forget5.forgotpin=$sessionStorage.forgotPinPhone;
     console.log($scope.forget5);
@@ -135,40 +134,10 @@ console.log(signinformData);
 }
 var  forgotPin2 = function(change2){
 	return JSON.stringify(change2)
-}
+}*/
 })
 
-
-/*
-  .controller('forgotPinCtrl', function($scope,loginInfoService,$sessionStorage) {
-
-	$scope.forgotPin=function(forgotPinForm){
-		console.log(" inside dunction" );
-		$sessionStorage.forgotPinData=forgotPinForm;
-		loginInfoService.getJsonId().then(function(data){
-			$sessionStorage.Jsonstorage = data.jsessionId;
-			//console.log($sessionStorage.Jsonstorage + "Session");
-		  }
-		console.log($sessionStorage.forgotPinData + " forgotPinForm" );
-		console.log($sessionStorage.Jsonstorage + " before function" );
-		}
-		// nnjn
-
-
-
-		  loginInfoService.getJsonId().then(function(data){
-    $sessionStorage.Jsonstorage = data.jsessionId;
-    console.log($sessionStorage.Jsonstorage + "Session");
-  },function(error){
-    console.log(error + " Error" );
-  });
-
-})*/
-  .controller('inviteCtrl', function($scope) {
-
-})
-
-  .controller('successCtrl', function($scope) {
+.controller('successCtrl', function($scope) {
 	  var transactionStatus=[];
 	  transactionStatus[0]={
 		  stats: "Transaction Successful",
@@ -182,9 +151,7 @@ var  forgotPin2 = function(change2){
 $scope.transactionStatus=transactionStatus;
 })
 
-.controller('accountCtrl', function($scope) {
 
-})
 .controller('popupController', function($scope, $ionicPopup,$window) {
      // Triggered on a button click, or some other target
  $scope.showPopup = function() {
@@ -389,24 +356,24 @@ var reportDate = getPerformanceService.get();
 var print;
 reportDate.$promise.then(function(data){
  if (data.responseCode == "Cali_SUC_1030") {
-  var jsonStrReports = JSON.parse(data.jsonStr);
- 
-$sessionStorage.amcCode=jsonStrReports.amcCode;
-$sessionStorage.amount=jsonStrReports.amount;
-$sessionStorage.gainMonth=jsonStrReports.gainMonth;
-$sessionStorage.gainToday=jsonStrReports.gainToday;
-$sessionStorage.gainTotal=jsonStrReports.gainTotal;
-$sessionStorage.list=jsonStrReports.list;
-$sessionStorage.mktValue=jsonStrReports.mktValue;
-$sessionStorage.msg=jsonStrReports.msg;
-$sessionStorage.netInv=jsonStrReports.netInv;
-$sessionStorage.orderId=jsonStrReports.orderId;
-$sessionStorage.paymentMode=jsonStrReports.paymentMode; 
-$sessionStorage.quantity=jsonStrReports.quantity;
-$sessionStorage.rtaCode=jsonStrReports.rtaCode; 
-$sessionStorage.txnDate=jsonStrReports.txnDate;
-$sessionStorage.txnTypeStr=jsonStrReports.txnTypeStr;
-$sessionStorage.xirr=jsonStrReports.xirr;
+  
+$sessionStorage.amcCode=data.jsonStr.amcCode;
+$sessionStorage.amount=data.jsonStr.amount;
+$sessionStorage.gainMonth=data.jsonStr.gainMonth;
+$sessionStorage.gainToday=data.jsonStr.gainToday;
+$sessionStorage.gainTotal=data.jsonStr.gainTotal;
+$sessionStorage.list=data.jsonStr.list;
+$sessionStorage.mktValue=data.jsonStr.mktValue;
+$sessionStorage.msg=data.jsonStr.msg;
+$sessionStorage.netInv=data.jsonStr.netInv;
+$sessionStorage.orderId=data.jsonStr.orderId;
+$sessionStorage.paymentMode=data.jsonStr.paymentMode; 
+$sessionStorage.quantity=data.jsonStr.quantity;
+$sessionStorage.rtaCode=data.jsonStr.rtaCode; 
+$sessionStorage.txnDate=data.jsonStr.txnDate;
+$sessionStorage.txnTypeStr=data.jsonStr.txnTypeStr;
+$sessionStorage.xirr=data.jsonStr.xirr;
+
  }
 })
 
@@ -501,7 +468,6 @@ $http.get('data/transactiondata.json').success(function(data){
   $scope.sendMfOrder=function() {
 
     var date=dateService.getDate();
-    //var orderData=JSON.parse("portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "Axis Mutual Fund","rtaCode":"128CFGP","orderTxnDate": date,"amount": finalComputedVal);
     mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "Axis Mutual Fund","rtaCode":"128CFGP","orderTxnDate": date,"amount": finalComputedVal},function(data){
       if(data.responseCode=="Cali_SUC_1030"){
         window.open('http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_self');
