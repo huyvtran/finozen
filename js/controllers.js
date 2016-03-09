@@ -68,7 +68,8 @@ angular.module('app.controllers', [])
   }
     $scope.forgotPin=function(signinformData){
 	if(signinformData.$valid){
-    $scope.http = 'http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?'+signinformData; //sending the otp to the phone number
+    var ph = signinformData
+    $scope.http = 'http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?'+ph; //sending the otp to the phone number
 	$state.go('forgot_pin');
 	}
 	else{
