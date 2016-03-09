@@ -134,10 +134,36 @@ console.log(signinformData);
 }
 var  forgotPin2 = function(change2){
 	return JSON.stringify(change2)
-}*/
+}
 })
 
-.controller('successCtrl', function($scope) {
+
+/*
+  .controller('forgotPinCtrl', function($scope,loginInfoService,$sessionStorage) {
+
+	$scope.forgotPin=function(forgotPinForm){
+		console.log(" inside dunction" );
+		loginInfoService.getJsonId().then(function(data){
+			$sessionStorage.Jsonstorage = data.jsessionId;
+			//console.log($sessionStorage.Jsonstorage + "Session");
+		  }
+		console.log($sessionStorage.forgotPinData + " forgotPinForm" );
+		}
+		// nnjn
+
+
+
+		  loginInfoService.getJsonId().then(function(data){
+    $sessionStorage.Jsonstorage = data.jsessionId;
+  },function(error){
+    console.log(error + " Error" );
+  });
+
+  .controller('inviteCtrl', function($scope) {
+
+})
+
+  .controller('successCtrl', function($scope) {
 	  var transactionStatus=[];
 	  transactionStatus[0]={
 		  stats: "Transaction Successful",
