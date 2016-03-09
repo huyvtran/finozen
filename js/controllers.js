@@ -85,6 +85,11 @@ angular.module('app.controllers', [])
           $sessionStorage.SessionIdstorage = data.msg;
           var datajson=JSON.parse(data.jsonStr);
           $sessionStorage.SessionPortfolio =datajson[0].pfolioCode;
+          $sessionStorage.SessionStatus =datajson[0].activeStatus;
+          $sessionStorage.SessionClientName =datajson[0].clientName;
+          $sessionStorage.SessionClientCode =datajson[0].clientCode;
+          $sessionStorage.SessionMobNo =datajson[0].mobileNo;
+          console.log( $sessionStorage.SessionStatus,$sessionStorage.SessionClientCode,$sessionStorage.SessionMobNo,$sessionStorage.SessionClientName);
          $state.go('tabsController.summaryPage');
        }
         },function(error){
@@ -93,6 +98,19 @@ angular.module('app.controllers', [])
         });
   }
 
+})
+
+.controller('transactAccessCtrl', function($scope,$sessionStorage){
+
+  if($sessionStorage.SessionStatus!="A") {
+    $scope.withdrawUrl="#/status";
+    $scope.investUrl="#/status";
+  }
+  else {
+     $scope.withdrawUrl="#/withdraw";
+      $scope.investUrl="#/invest";
+  }
+  
 })
 
 
@@ -476,20 +494,20 @@ $http.get('data/transactiondata.json').success(function(data){
          console.log("all");        
         mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "KMMF","rtaCode":"K745","orderTxnDate": date,"allUnits":"Y","folioNo":"2023421/94"},function(data){
           if(data.responseCode!="Cali_SUC_1030") {
-            console.log("Error selling")
+            $scope.withdraw_error="Error committing the transaction, please try again";
           }
         },function(error){
-          console.log("Try again");
+          $scope.withdraw_error="Error committing the transaction, please try again"
         });
      }
      else{
        console.log("none");
      mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "KMMF","rtaCode":"K745","orderTxnDate": date,"quantity":$scope.amount,"allUnits":"N","folioNo":"2023421/94"},function(data){
           if(data.responseCode!="Cali_SUC_1030") {
-            console.log("Error selling")
+             $scope.withdraw_error="Error committing the transaction, please try again";
           }
         },function(error){
-          console.log("Try again");
+           $scope.withdraw_error="Error committing the transaction, please try again";
         });
 
      }

@@ -68,6 +68,11 @@ $ionicAppProvider.identify ({
       templateUrl: 'templates/signup.html',
       controller: 'signupCtrl'
     })
+
+    .state('status', {
+      url: '/status',
+      templateUrl: 'templates/status.html',
+    })
         
       
     

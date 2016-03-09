@@ -270,3 +270,18 @@ ion-popover-view.fit ion-content {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+/* Status page */
+.status {
+	p {
+		line-height: 30px;
+		padding: 0px 10px;
+		margin-top: 20px;
+
+		&.ion-android-sad {
+	    font-size: 96px;
+	    text-align: center;
+	    color: #18bb9c;
+		}
+	}
+}
