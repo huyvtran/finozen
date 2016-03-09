@@ -50,7 +50,7 @@ angular.module('app.controllers', [])
         }
     },function(error){
        $scope.serverError="Sign Up failed, please call us";
-     
+
     });
   }
 })
@@ -67,13 +67,13 @@ angular.module('app.controllers', [])
     }
   }
     $scope.forgotPin=function(signinformData){
-console.log($scope.authorization.login);		
-console.log(signinformData);		
+console.log($scope.authorization.login);
+console.log(signinformData);
 	if(signinformData.$valid){
     console.log('phone number'+signinformData);
 
-    $sessionStorage.forgotPinPhone = signinformData;
-
+    $sessionStorage.forgotPinPhone = $scope.authorization.login;
+    var ph=signinformData;
 
     $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
     console.log('success');
@@ -102,7 +102,7 @@ console.log(signinformData);
          $state.go('tabsController.summaryPage');
        }
         },function(error){
-          
+
           $scope.serverError="Entered Credentials did not validate";
         });
   }
@@ -119,24 +119,19 @@ console.log(signinformData);
      $scope.withdrawUrl="#/withdraw";
       $scope.investUrl="#/invest";
   }
-  
+
 })
 
 
-.controller('forgotPinCtrl', function($scope,loginInfoService,$sessionStorage) {
+.controller('forgotPinCtrl', function($scope,$sessionStorage,$http) {
   $scope.resetPin=function(change){
 	$scope.forget5 = JSON.parse(forgotPin2(change));
-	$scope.forget5.clientCode="CRN23878";
-	$scope.forgotPinUrl='http://205.147.99.55:8080/'+ $scope.forget5.push +'/ws/pymt/pymtView?cid=Microsoft&bucks=2.00';
+	$scope.forget5.forgotpin=$sessionStorage.forgotPinPhone;
+    console.log($scope.forget5);
+    var forgotpinPass=JSON.stringify($scope.forget5);
+    console.log(forgotpinPass+'string');
+  $http.post('http://205.147.99.55:8080/WealthWeb/ws/secure/clientFcps/setNewPassword','forgotpinPass');
 
-loginInfoService.getJsonId().then(function(data){
-    $sessionStorage.Jsonstorage = data.jsessionId;
-    console.log($sessionStorage.Jsonstorage + "Session");
-  });
-
-
-		console.log(JSON.stringify($scope.forget5)   + "forget5");
-    console.log($scope.forgotPinUrl + "url");
 }
 var  forgotPin2 = function(change2){
 	return JSON.stringify(change2)
@@ -496,13 +491,13 @@ $http.get('data/transactiondata.json').success(function(data){
 .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$sessionStorage) {
 
   $scope.Withdrawl = function(form) {
-  
+
     var date=dateService.getDate();
     if(form.$valid) {
      //$state.go('successPage');
- 
+
      if($scope.checked_withdraw == true){
-      
+
         mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "KMMF","rtaCode":"K745","orderTxnDate": date,"allUnits":"Y","folioNo":"2023421/94"},function(data){
           if(data.responseCode!="Cali_SUC_1030") {
             $scope.withdraw_error="Error committing the transaction, please try again";
@@ -512,7 +507,7 @@ $http.get('data/transactiondata.json').success(function(data){
         });
      }
      else{
-      
+
      mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "KMMF","rtaCode":"K745","orderTxnDate": date,"quantity":$scope.amount,"allUnits":"N","folioNo":"2023421/94"},function(data){
           if(data.responseCode!="Cali_SUC_1030") {
              $scope.withdraw_error="Error committing the transaction, please try again";
@@ -524,7 +519,7 @@ $http.get('data/transactiondata.json').success(function(data){
      }
 
     }
-   
+
   };
 
   $scope.amountClear= function() {
