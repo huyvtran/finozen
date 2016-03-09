@@ -50,7 +50,7 @@ angular.module('app.controllers', [])
         }
     },function(error){
        $scope.serverError="Sign Up failed, please call us";
-      console.log(error+ " Error" )
+     
     });
   }
 })
@@ -74,7 +74,7 @@ angular.module('app.controllers', [])
 	}
 	else{
 		$scope.message="Please enter your mobile number to reset PIN";
-	console.log("error"); }
+	}
 	}
 
   $scope.sendSignIn=function() {
@@ -91,11 +91,11 @@ angular.module('app.controllers', [])
           $sessionStorage.SessionClientName =datajson[0].clientName;
           $sessionStorage.SessionClientCode =datajson[0].clientCode;
           $sessionStorage.SessionMobNo =datajson[0].mobileNo;
-          console.log( $sessionStorage.SessionStatus,$sessionStorage.SessionClientCode,$sessionStorage.SessionMobNo,$sessionStorage.SessionClientName);
+          //console.log( $sessionStorage.SessionStatus,$sessionStorage.SessionClientCode,$sessionStorage.SessionMobNo,$sessionStorage.SessionClientName);
          $state.go('tabsController.summaryPage');
        }
         },function(error){
-          console.log(error + " Error" );
+          
           $scope.serverError="Entered Credentials did not validate";
         });
   }
@@ -374,7 +374,7 @@ $scope.netGain="100";
 
 .controller('transListController',function($scope,$http,$sessionStorage,dateService) {
     var date=dateService.getDate();
- console.log($sessionStorage.SessionPortfolio);
+
  $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode='+$sessionStorage.SessionPortfolio+'&endDate='+date+'08/03/2016&noOfDays=40').success(function(data){
   //console.log(data);
  });
@@ -487,13 +487,13 @@ $http.get('data/transactiondata.json').success(function(data){
 .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$sessionStorage) {
 
   $scope.Withdrawl = function(form) {
-     console.log("withdraw form");
+  
     var date=dateService.getDate();
     if(form.$valid) {
      //$state.go('successPage');
-      console.log($scope.checked_withdraw + "form valid");
+ 
      if($scope.checked_withdraw == true){
-         console.log("all");
+      
         mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "KMMF","rtaCode":"K745","orderTxnDate": date,"allUnits":"Y","folioNo":"2023421/94"},function(data){
           if(data.responseCode!="Cali_SUC_1030") {
             $scope.withdraw_error="Error committing the transaction, please try again";
@@ -503,7 +503,7 @@ $http.get('data/transactiondata.json').success(function(data){
         });
      }
      else{
-       console.log("none");
+      
      mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "KMMF","rtaCode":"K745","orderTxnDate": date,"quantity":$scope.amount,"allUnits":"N","folioNo":"2023421/94"},function(data){
           if(data.responseCode!="Cali_SUC_1030") {
              $scope.withdraw_error="Error committing the transaction, please try again";
@@ -515,9 +515,7 @@ $http.get('data/transactiondata.json').success(function(data){
      }
 
     }
-    else {
-      console.log("Crazy");
-    }
+   
   };
 
   $scope.amountClear= function() {
