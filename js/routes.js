@@ -128,7 +128,7 @@ $ionicAppProvider.identify ({
              .state('account', {
       url: '/account',         
           templateUrl: 'templates/account.html',
-          controller: 'accountCtrl'     
+          controller: ''     
     })     
 
           .state('faq', {
