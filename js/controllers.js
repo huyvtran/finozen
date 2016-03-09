@@ -50,14 +50,14 @@ angular.module('app.controllers', [])
         }
     },function(error){
        $scope.serverError="Sign Up failed, please call us";
-      console.log(error+ " Error" )
+     
     });
   }
 })
 
 /*For Sign In*/
 
-.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,loginInfoService,getTransactionService) {
+.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,getTransactionService) {
  //$state.go('tabsController.summaryPage');
   $scope.signIn = function(form,loginForm) {
     if(form.$valid) {
@@ -70,12 +70,17 @@ angular.module('app.controllers', [])
 console.log($scope.authorization.login);		
 console.log(signinformData);		
 	if(signinformData.$valid){
-    $scope.http = 'http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?'+signinformData; //sending the otp to the phone number
+    console.log('phone number'+signinformData);
+
+    var ph = signinformData
+
+    $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
+    console.log('success');
 	$state.go('forgot_pin');
 	}
 	else{
 		$scope.message="Please enter your mobile number to reset PIN";
-	console.log("error"); }
+	}
 	}
 
   $scope.sendSignIn=function() {
@@ -88,14 +93,32 @@ console.log(signinformData);
           $sessionStorage.SessionIdstorage = data.msg;
           var datajson=JSON.parse(data.jsonStr);
           $sessionStorage.SessionPortfolio =datajson[0].pfolioCode;
+          $sessionStorage.SessionStatus =datajson[0].activeStatus;
+          $sessionStorage.SessionClientName =datajson[0].clientName;
+          $sessionStorage.SessionClientCode =datajson[0].clientCode;
+          $sessionStorage.SessionMobNo =datajson[0].mobileNo;
+          //console.log( $sessionStorage.SessionStatus,$sessionStorage.SessionClientCode,$sessionStorage.SessionMobNo,$sessionStorage.SessionClientName);
          $state.go('tabsController.summaryPage');
        }
         },function(error){
-          console.log(error + " Error" );
+          
           $scope.serverError="Entered Credentials did not validate";
         });
   }
 
+})
+
+.controller('transactAccessCtrl', function($scope,$sessionStorage){
+
+  if($sessionStorage.SessionStatus!="A") {
+    $scope.withdrawUrl="#/status";
+    $scope.investUrl="#/status";
+  }
+  else {
+     $scope.withdrawUrl="#/withdraw";
+      $scope.investUrl="#/invest";
+  }
+  
 })
 
 
@@ -357,7 +380,7 @@ $scope.netGain="100";
 
 .controller('transListController',function($scope,$http,$sessionStorage,dateService) {
     var date=dateService.getDate();
- console.log($sessionStorage.SessionPortfolio);
+
  $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode='+$sessionStorage.SessionPortfolio+'&endDate='+date+'08/03/2016&noOfDays=40').success(function(data){
   //console.log(data);
  });
@@ -470,37 +493,35 @@ $http.get('data/transactiondata.json').success(function(data){
 .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$sessionStorage) {
 
   $scope.Withdrawl = function(form) {
-     console.log("withdraw form");
+  
     var date=dateService.getDate();
     if(form.$valid) {
      //$state.go('successPage');
-      console.log($scope.checked_withdraw + "form valid");
+ 
      if($scope.checked_withdraw == true){
-         console.log("all");
+      
         mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "KMMF","rtaCode":"K745","orderTxnDate": date,"allUnits":"Y","folioNo":"2023421/94"},function(data){
           if(data.responseCode!="Cali_SUC_1030") {
-            console.log("Error selling")
+            $scope.withdraw_error="Error committing the transaction, please try again";
           }
         },function(error){
-          console.log("Try again");
+          $scope.withdraw_error="Error committing the transaction, please try again"
         });
      }
      else{
-       console.log("none");
+      
      mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "KMMF","rtaCode":"K745","orderTxnDate": date,"quantity":$scope.amount,"allUnits":"N","folioNo":"2023421/94"},function(data){
           if(data.responseCode!="Cali_SUC_1030") {
-            console.log("Error selling")
+             $scope.withdraw_error="Error committing the transaction, please try again";
           }
         },function(error){
-          console.log("Try again");
+           $scope.withdraw_error="Error committing the transaction, please try again";
         });
 
      }
 
     }
-    else {
-      console.log("Crazy");
-    }
+   
   };
 
   $scope.amountClear= function() {

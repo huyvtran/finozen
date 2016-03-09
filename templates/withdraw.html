@@ -26,7 +26,10 @@
 				<div  ng-message="pattern">
 					Enter valid Integer
 				</div>
+				<div>{{withdraw_error}} </div>
 			</div>
+			
+
 		</div>
 		<label class="row withdraw_all">
 			<input ng-model="checked_withdraw" type="checkbox" id="withdraw_money" ng-change="amountClear()" placeholder="Enter Amount" style="margin: 4px;"><label for="withdraw_money" >Withdraw my complete balance</label>
