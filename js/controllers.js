@@ -66,13 +66,14 @@ angular.module('app.controllers', [])
 
     }
   }
-    $scope.forgotPin=function(signinformData,mobile){
+    $scope.forgotPin=function(signinformData){
 console.log($scope.authorization.login);		
 console.log(signinformData);		
 	if(signinformData.$valid){
     console.log('phone number'+signinformData);
 
-    var ph = signinformData
+    $sessionStorage.forgotPinPhone = signinformData;
+
 
     $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
     console.log('success');
@@ -476,6 +477,7 @@ $http.get('data/transactiondata.json').success(function(data){
   $scope.sendMfOrder=function() {
 
     var date=dateService.getDate();
+    //var orderData=JSON.parse("portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "Axis Mutual Fund","rtaCode":"128CFGP","orderTxnDate": date,"amount": finalComputedVal);
     mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "Axis Mutual Fund","rtaCode":"128CFGP","orderTxnDate": date,"amount": finalComputedVal},function(data){
       if(data.responseCode=="Cali_SUC_1030"){
         window.open('http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_self');

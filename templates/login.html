@@ -39,7 +39,7 @@
 		<label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.password.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid  && authorizationForm.$submitted}">
 			<input type="password" name="password" ng-pattern="/^[0-9]{1,4}$/" ng-model="authorization.password" maxlength="4" ng-minlength="4" ng-maxlength="4" required placeholder="4 digit PIN" >
 		</label>
-		<p class="text-right forgot_pin" ng-click="forgotPin(authorizationForm.mobile, authorization.login)">Forgot PIN?</p>
+		<p class="text-right forgot_pin" ng-click="forgotPin(authorizationForm.mobile)">Forgot PIN?</p>
 		<div class="error-container last-error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">
 			<div  class="error" >
 				<div ng-message="required">
