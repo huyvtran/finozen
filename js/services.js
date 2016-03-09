@@ -14,11 +14,11 @@ angular.module('app.services', [])
 /*.factory('accessUrlService', ['$resource',function($resource){
 	var postRequest= $resource('http://205.147.99.55:8080/WealthWeb/ws/login/restLogin',{},{
 		save:{
-			method:'POST',			
+			method:'POST',
 			headers:{
 				'X-AUTH-TOKEN':'05173DAB80610F314F510E2FB48D85AC',
 				'content-tyoe'/: UTF-8, JSON
-			} 
+			}
 		},
 	});
 	return postRequest;
@@ -40,18 +40,24 @@ angular.module('app.services', [])
 	return $resource('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode='+$sessionStorage.SessionPortfolio+'&endDate='+date+'&noOfDays=40');
 }])
 
+/*For fetching the NAV webservices*/
+  .factory('getNAVService', ['$resource','$filter','$sessionStorage',function($resource,$filter,$sessionStorage){
+    return $resource('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getInvReco?pfolioCode='+$sessionStorage.SessionPortfolio);
+  }])
+
+
 
 /*Get data*/
 .factory('loginInfoService', ['accessUrlService','$q',function(accessUrlService,$q){
 	return  {
-	getJsonId: function(loginData) {  
+	getJsonId: function(loginData) {
 		var deferred = $q.defer();
 		accessUrlService.save(loginData,function(data){
-		deferred.resolve(data); 
+		deferred.resolve(data);
 		},function(error){
 			console.log("eror");
 			deferred.reject(error);
-		}); 
+		});
 		return deferred.promise;
 		}
 	}
@@ -79,14 +85,14 @@ angular.module('app.services', [])
 .factory('signUpService', ['SignUpUrlService','$q',function(SignUpUrlService,$q){
 
 	return  {
-	sendSignUp: function(formdata) {  
+	sendSignUp: function(formdata) {
 		var deferred = $q.defer();
 		SignUpUrlService.save(formdata,function(data){
-		deferred.resolve(data); 
+		deferred.resolve(data);
 		},function(error){
 			console.log("eror");
 			deferred.reject(error);
-		}); 
+		});
 		return deferred.promise;
 		}
 	}
@@ -99,7 +105,7 @@ angular.module('app.services', [])
 .factory('mfOrderUrlService', ['$resource',function($resource){
 	var mfOrderRequest= $resource('http://205.147.99.55:8080/WealthWeb/ws/clientOrders/clientOrderMfBuy',{},{
 		save:{
-			method:'POST',	
+			method:'POST',
 		},
 	});
 	return mfOrderRequest;
@@ -109,7 +115,7 @@ angular.module('app.services', [])
 .factory('mfSellUrlService', ['$resource',function($resource){
 	var mfSellRequest= $resource('http://205.147.99.55:8080/WealthWeb/ws/clientOrders/clientOrderMfSell',{},{
 		save:{
-			method:'POST',	
+			method:'POST',
 		},
 	});
 	return mfSellRequest;
@@ -118,7 +124,7 @@ angular.module('app.services', [])
 .factory('GetTransactionService', ['$q,getTransactionService', function(getTransactionService,$q){
 	return {
 
-		
+
 	};
 }])
 
@@ -129,7 +135,7 @@ angular.module('app.services', [])
 			date = $filter('date')(date,'yyyy-MM-dd');
 			return date;
 		}
-		
+
 	}
 
 }])

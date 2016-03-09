@@ -339,8 +339,8 @@ $scope.netGain="100";
 
 })
 
-.controller('transListController',function($scope,$sessionStorage,getPerformanceService) {
- 
+.controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService) {
+
 /* $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode='+$sessionStorage.SessionPortfolio+'&endDate=09/03/201&noOfDays=40').then(function(resp) {
     console.log('Success',resp.data.responseCode);
     // For JSON responses, resp.data contains the result
@@ -353,7 +353,7 @@ $scope.netGain="100";
 var reportDate = getPerformanceService.get();
 reportDate.$promise.then(function(data){
  if (data.responseCode == "Cali_SUC_1030") {
-  
+
 $sessionStorage.amcCode=data.jsonStr.amcCode;
 $sessionStorage.amount=data.jsonStr.amount;
 $sessionStorage.gainMonth=data.jsonStr.gainMonth;
@@ -364,9 +364,9 @@ $sessionStorage.mktValue=data.jsonStr.mktValue;
 $sessionStorage.msg=data.jsonStr.msg;
 $sessionStorage.netInv=data.jsonStr.netInv;
 $sessionStorage.orderId=data.jsonStr.orderId;
-$sessionStorage.paymentMode=data.jsonStr.paymentMode; 
+$sessionStorage.paymentMode=data.jsonStr.paymentMode;
 $sessionStorage.quantity=data.jsonStr.quantity;
-$sessionStorage.rtaCode=data.jsonStr.rtaCode; 
+$sessionStorage.rtaCode=data.jsonStr.rtaCode;
 $sessionStorage.txnDate=data.jsonStr.txnDate;
 $sessionStorage.txnTypeStr=data.jsonStr.txnTypeStr;
 $sessionStorage.xirr=data.jsonStr.xirr;
@@ -374,6 +374,17 @@ $sessionStorage.xirr=data.jsonStr.xirr;
  }
 })
 
+  var navDate = getNAVService.get();
+  navDate.$promise.then(function(data){
+    if(data.responseCode=="Cali_SUC_1030"){
+
+      $sessionStorage.schemeName=data.jsonStr.schemeName;
+      $sessionStorage.recco=data.jsonStr.recco;
+      $sessionStorage.nav=data.jsonStr.nav;
+      $sessionStorage.list=data.jsonStr.list;
+      $sessionStorage.msg=data.jsonStr.msg;
+    }
+  })
 
 /*var tList=this;
 tList.products=[];
