@@ -365,7 +365,11 @@ $scope.investUrl='http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId
 .controller('sidemenuCtrl', function($scope) {
 
 })
-.controller('withdrawCtrl', function($scope) {
+
+.controller('withdrawCtrl', function($scope,$sessionStorage) {
+	$scope.clientName= $sessionStorage.SessionClientName;
+	$scope.clientMobile= $sessionStorage.SessionMobNo;
+
 $scope.balance="1100";
 $scope.investAmount="1000";
 $scope.growthRate="8.3";
