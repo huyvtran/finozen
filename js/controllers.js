@@ -376,10 +376,11 @@ $scope.netGain="100";
 
 })
 
-.controller('transListController',function($scope,$http,$sessionStorage,dateService) {
-    var date=dateService.getDate();
+.controller('transListController',function($scope,$http,$sessionStorage,$filter) {
+    var date = new Date();
+    date = $filter('date')(date,'dd/MM/yyyy');
 
- $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode='+$sessionStorage.SessionPortfolio+'&endDate='+date+'08/03/2016&noOfDays=40').success(function(data){
+ $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode='+$sessionStorage.SessionPortfolio+'&endDate='+date+'&noOfDays=40').success(function(data){
   //console.log(data);
  });
 
