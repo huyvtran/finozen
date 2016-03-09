@@ -361,7 +361,7 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 })
 
   var navDate = getNAVService.get();
-  navdate.$promise.then(function(data){
+  navDate.$promise.then(function(data){
     if(data.responseCode=="Cali_SUC_1030"){
 
       $sessionStorage.schemeName=data.jsonStr.schemeName;
