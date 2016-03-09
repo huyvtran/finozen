@@ -50,14 +50,14 @@ angular.module('app.controllers', [])
         }
     },function(error){
        $scope.serverError="Sign Up failed, please call us";
-     
+
     });
   }
 })
 
 /*For Sign In*/
 
-.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,getTransactionService) {
+.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService) {
  //$state.go('tabsController.summaryPage');
   $scope.signIn = function(form,loginForm) {
     if(form.$valid) {
@@ -67,8 +67,8 @@ angular.module('app.controllers', [])
     }
   }
     $scope.forgotPin=function(signinformData){
-console.log($scope.authorization.login);		
-console.log(signinformData);		
+console.log($scope.authorization.login);
+console.log(signinformData);
 	if(signinformData.$valid){
     console.log('phone number'+signinformData);
 
@@ -91,25 +91,24 @@ console.log(signinformData);
         $scope.serverError="Entered Credentials did not validate";
         }
         else {
+          console.log(data.jsonStr);
           $sessionStorage.SessionIdstorage = data.msg;
-          var datajson=JSON.parse(data.jsonStr);
-          $sessionStorage.SessionPortfolio =datajson[0].pfolioCode;
-          $sessionStorage.SessionStatus =datajson[0].activeStatus;
-          $sessionStorage.SessionClientName =datajson[0].clientName;
-          $sessionStorage.SessionClientCode =datajson[0].clientCode;
-          $sessionStorage.SessionMobNo =datajson[0].mobileNo;
-          //console.log( $sessionStorage.SessionStatus,$sessionStorage.SessionClientCode,$sessionStorage.SessionMobNo,$sessionStorage.SessionClientName);
+          $sessionStorage.SessionPortfolio =data.jsonStr[0].pfolioCode;
+          $sessionStorage.SessionStatus =data.jsonStr[0].activeStatus;
+          $sessionStorage.SessionClientName =data.jsonStr[0].clientName;
+          $sessionStorage.SessionClientCode =data.jsonStr[0].clientCode;
+          $sessionStorage.SessionMobNo =data.jsonStr[0].mobileNo;
          $state.go('tabsController.summaryPage');
        }
         },function(error){
-          
+
           $scope.serverError="Entered Credentials did not validate";
         });
   }
 
 })
 
-.controller('transactAccessCtrl', function($scope,$sessionStorage){
+.controller('transactionAccessCtrl', function($scope,$sessionStorage){
 
   if($sessionStorage.SessionStatus!="A") {
     $scope.withdrawUrl="#/status";
@@ -119,77 +118,25 @@ console.log(signinformData);
      $scope.withdrawUrl="#/withdraw";
       $scope.investUrl="#/invest";
   }
-  
+
 })
 
 
-.controller('forgotPinCtrl', function($scope,loginInfoService,$sessionStorage) {
-  $scope.resetPin=function(change){
+.controller('forgotPinCtrl', function($scope,$sessionStorage,$http) {
+$scope.resetPin=function(change){
 	$scope.forget5 = JSON.parse(forgotPin2(change));
-	$scope.forget5.clientCode="CRN23878";
-	$scope.forgotPinUrl='http://205.147.99.55:8080/'+ $scope.forget5.push +'/ws/pymt/pymtView?cid=Microsoft&bucks=2.00';
+	$scope.forget5.forgotpin=$sessionStorage.forgotPinPhone;
+    console.log($scope.forget5);
+    var forgotpinPass=JSON.stringify($scope.forget5);
+    console.log(forgotpinPass+'string');
+  $http.post('http://205.147.99.55:8080/WealthWeb/ws/secure/clientFcps/setNewPassword','forgotpinPass');
 
-loginInfoService.getJsonId().then(function(data){
-    $sessionStorage.Jsonstorage = data.jsessionId;
-    console.log($sessionStorage.Jsonstorage + "Session");
-  });
-
-
-		console.log(JSON.stringify($scope.forget5)   + "forget5");
-    console.log($scope.forgotPinUrl + "url");
 }
 var  forgotPin2 = function(change2){
 	return JSON.stringify(change2)
 }
 })
 
-
-/*
-  .controller('forgotPinCtrl', function($scope,loginInfoService,$sessionStorage) {
-
-	$scope.forgotPin=function(forgotPinForm){
-		console.log(" inside dunction" );
-		$sessionStorage.forgotPinData=forgotPinForm;
-		loginInfoService.getJsonId().then(function(data){
-			$sessionStorage.Jsonstorage = data.jsessionId;
-			//console.log($sessionStorage.Jsonstorage + "Session");
-		  }
-		console.log($sessionStorage.forgotPinData + " forgotPinForm" );
-		console.log($sessionStorage.Jsonstorage + " before function" );
-		}
-		// nnjn
-
-
-
-		  loginInfoService.getJsonId().then(function(data){
-    $sessionStorage.Jsonstorage = data.jsessionId;
-    console.log($sessionStorage.Jsonstorage + "Session");
-  },function(error){
-    console.log(error + " Error" );
-  });
-
-})*/
-  .controller('inviteCtrl', function($scope) {
-
-})
-
-  .controller('successCtrl', function($scope) {
-	  var transactionStatus=[];
-	  transactionStatus[0]={
-		  stats: "Transaction Successful",
-		  message: "Thank You",
-		  amount: "10000",
-		  date: "23.02.2016",
-		  id: "2252254",
-		  iconClass: "ion-ios-checkmark-outline"
-	  }
-
-$scope.transactionStatus=transactionStatus;
-})
-
-.controller('accountCtrl', function($scope) {
-
-})
 .controller('popupController', function($scope, $ionicPopup,$window) {
      // Triggered on a button click, or some other target
  $scope.showPopup = function() {
@@ -219,12 +166,10 @@ $scope.transactionStatus=transactionStatus;
 
 
   };
+
 })
-/**/
-.controller('InvesturlCtrl', function($scope) {
-var mid="87";
-$scope.investUrl='http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+mid;
-})
+
+
 
 
 .controller('FundsMethodCtrl', function($scope) {
@@ -383,13 +328,42 @@ $scope.netGain="100";
 
 })
 
-.controller('transListController',function($scope,$http,$sessionStorage,$filter) {
-    var date = new Date();
-    date = $filter('date')(date,'dd/MM/yyyy');
+.controller('transListController',function($scope,$sessionStorage,getPerformanceService) {
+ 
+/* $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode='+$sessionStorage.SessionPortfolio+'&endDate=09/03/201&noOfDays=40').then(function(resp) {
+    console.log('Success',resp.data.responseCode);
+    // For JSON responses, resp.data contains the result
+  }, function(err) {
+    console.error('ERR', err);
+    // err.status will contain the status code
+  })
+*/
 
- $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode='+$sessionStorage.SessionPortfolio+'&endDate='+date+'&noOfDays=40').success(function(data){
-  //console.log(data);
- });
+var reportDate = getPerformanceService.get();
+var print;
+reportDate.$promise.then(function(data){
+ if (data.responseCode == "Cali_SUC_1030") {
+  
+$sessionStorage.amcCode=data.jsonStr.amcCode;
+$sessionStorage.amount=data.jsonStr.amount;
+$sessionStorage.gainMonth=data.jsonStr.gainMonth;
+$sessionStorage.gainToday=data.jsonStr.gainToday;
+$sessionStorage.gainTotal=data.jsonStr.gainTotal;
+$sessionStorage.list=data.jsonStr.list;
+$sessionStorage.mktValue=data.jsonStr.mktValue;
+$sessionStorage.msg=data.jsonStr.msg;
+$sessionStorage.netInv=data.jsonStr.netInv;
+$sessionStorage.orderId=data.jsonStr.orderId;
+$sessionStorage.paymentMode=data.jsonStr.paymentMode; 
+$sessionStorage.quantity=data.jsonStr.quantity;
+$sessionStorage.rtaCode=data.jsonStr.rtaCode; 
+$sessionStorage.txnDate=data.jsonStr.txnDate;
+$sessionStorage.txnTypeStr=data.jsonStr.txnTypeStr;
+$sessionStorage.xirr=data.jsonStr.xirr;
+
+ }
+})
+
 
 /*var tList=this;
 tList.products=[];
@@ -481,7 +455,6 @@ $http.get('data/transactiondata.json').success(function(data){
   $scope.sendMfOrder=function() {
 
     var date=dateService.getDate();
-    //var orderData=JSON.parse("portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "Axis Mutual Fund","rtaCode":"128CFGP","orderTxnDate": date,"amount": finalComputedVal);
     mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "Axis Mutual Fund","rtaCode":"128CFGP","orderTxnDate": date,"amount": finalComputedVal},function(data){
       if(data.responseCode=="Cali_SUC_1030"){
         window.open('http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_self');
@@ -500,13 +473,13 @@ $http.get('data/transactiondata.json').success(function(data){
 .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$sessionStorage) {
 
   $scope.Withdrawl = function(form) {
-  
+
     var date=dateService.getDate();
     if(form.$valid) {
      //$state.go('successPage');
- 
+
      if($scope.checked_withdraw == true){
-      
+
         mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "KMMF","rtaCode":"K745","orderTxnDate": date,"allUnits":"Y","folioNo":"2023421/94"},function(data){
           if(data.responseCode!="Cali_SUC_1030") {
             $scope.withdraw_error="Error committing the transaction, please try again";
@@ -516,7 +489,7 @@ $http.get('data/transactiondata.json').success(function(data){
         });
      }
      else{
-      
+
      mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "KMMF","rtaCode":"K745","orderTxnDate": date,"quantity":$scope.amount,"allUnits":"N","folioNo":"2023421/94"},function(data){
           if(data.responseCode!="Cali_SUC_1030") {
              $scope.withdraw_error="Error committing the transaction, please try again";
@@ -528,7 +501,7 @@ $http.get('data/transactiondata.json').success(function(data){
      }
 
     }
-   
+
   };
 
   $scope.amountClear= function() {
