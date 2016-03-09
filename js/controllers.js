@@ -11,6 +11,9 @@ angular.module('app.controllers', [])
 .controller('growthRateCtrl', function($scope) {
 
 })
+.controller('inviteCtrl', function($scope) {
+
+})
 .controller('termsCtrl', function($scope) {
 
 })
@@ -311,15 +314,56 @@ var  forgotPin2 = function(change2){
 
 })
 
+
+
+
+
 .controller('withdrawCtrl', function($scope,$sessionStorage) {
 	$scope.clientName= $sessionStorage.SessionClientName;
 	$scope.clientMobile= $sessionStorage.SessionMobNo;
+	$scope.balance= function(){
+		if($sessionStorage.amount == null){return 0;}
+		else {return $sessionStorage.amount;
+		}
+	}
+		$scope.investAmount= function(){
+		if($sessionStorage.netInv == null){return 0;}
+		else {return $sessionStorage.netInv;
+		}
+	}
 
-$scope.balance="1100";
-$scope.investAmount="1000";
-$scope.growthRate="8.3";
-$scope.netGainToday="2";
-$scope.netGain="100";
+
+	$scope.growth= $sessionStorage.xirr;
+	console.log($scope.growth);
+	$scope.growthRate= function(){
+		if($scope.growth == null){return 0;}
+		else {
+			if($scope.growth < 0){return 0;}
+			else if($scope.growth >= 0){
+			if($scope.growth >= 10){return 10;}
+			else if($scope.growth <= 7.5){return 7.5;}
+			else{return $scope.growth}
+			}
+		}
+		}
+	
+	
+	$scope.netGainToday=function(){
+		if($sessionStorage.gainToday == null){return 0;}
+		else {return $sessionStorage.gainToday;
+		}
+	}
+	$scope.netGain=function(){
+		if($sessionStorage.gainTotal == null){return 0;}
+		else {return $sessionStorage.gainTotal;
+		}
+	}
+	$scope.gainMonth=function(){
+		if($sessionStorage.gainMonth == null){return 0;}
+		else {return $sessionStorage.gainMonth;
+		}
+	}
+
 })
 .controller('tourCtrl', function($scope) {
 
