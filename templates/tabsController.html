@@ -5,9 +5,10 @@
 	<div class="h1 title"><p class="head_title"><span id="title fino">FinoZen</span></p></div>
   <a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
 </div>
+    <span ng-controller="showhistoryController"></span>
     <ion-content scroll="false">
     <ion-slide-box slide-tabs-scrollable="false"  show-pager="false" ion-slide-tabs>
-        
+
       <ion-slide ion-slide-tab-label="SUMMARY">
         <summary-page></summary-page>
       </ion-slide>
@@ -18,7 +19,7 @@
                     <span><recent-transact></recent-transact></span>
 
                 </ion-slide>
-     
+
     </ion-slide-box>
  </ion-content>
     <div class="bar bar-footer row invest_button_footer" style="width: 100%; background:#E5ECF4 ;" ng-controller="transactionAccessCtrl">
