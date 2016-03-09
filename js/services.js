@@ -46,6 +46,13 @@ angular.module('app.services', [])
   }])
 
 
+  /*For fetching the transaction webservices*/
+  .factory('getReportService', ['$resource','$filter','$sessionStorage',function($resource,$filter,$sessionStorage){
+    return $resource('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getOrders?pfolioCode='+$sessionStorage.SessionPortfolio+'&noOfOrders=30');
+  }])
+
+
+
 
 /*Get data*/
 .factory('loginInfoService', ['accessUrlService','$q',function(accessUrlService,$q){
