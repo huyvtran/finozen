@@ -11,6 +11,9 @@ angular.module('app.controllers', [])
 .controller('growthRateCtrl', function($scope) {
 
 })
+.controller('inviteCtrl', function($scope) {
+
+})
 .controller('termsCtrl', function($scope) {
 
 })
@@ -325,12 +328,56 @@ var  forgotPin2 = function(change2){
 .controller('sidemenuCtrl', function($scope) {
 
 })
-.controller('withdrawCtrl', function($scope) {
-$scope.balance="1100";
-$scope.investAmount="1000";
-$scope.growthRate="8.3";
-$scope.netGainToday="2";
-$scope.netGain="100";
+
+
+
+
+
+.controller('withdrawCtrl', function($scope,$sessionStorage) {
+	$scope.clientName= $sessionStorage.SessionClientName;
+	$scope.clientMobile= $sessionStorage.SessionMobNo;
+	$scope.balance= function(){
+		if($sessionStorage.amount == null){return 0;}
+		else {return $sessionStorage.amount;
+		}
+	}
+		$scope.investAmount= function(){
+		if($sessionStorage.netInv == null){return 0;}
+		else {return $sessionStorage.netInv;
+		}
+	}
+
+
+	$scope.growth= $sessionStorage.xirr;
+	$scope.growthRate= function(){
+		if($scope.growth == null){return 0;}
+		else {
+			if($scope.growth < 0){return 0;}
+			else if($scope.growth >= 0){
+			if($scope.growth >= 10){return 10;}
+			else if($scope.growth <= 7.5){return 7.5;}
+			else{return $scope.growth}
+			}
+		}
+		}
+	
+	
+	$scope.netGainToday=function(){
+		if($sessionStorage.gainToday == null){return 0;}
+		else {return $sessionStorage.gainToday;
+		}
+	}
+	$scope.netGain=function(){
+		if($sessionStorage.gainTotal == null){return 0;}
+		else {return $sessionStorage.gainTotal;
+		}
+	}
+	$scope.gainMonth=function(){
+		if($sessionStorage.gainMonth == null){return 0;}
+		else {return $sessionStorage.gainMonth;
+		}
+	}
+
 })
 .controller('tourCtrl', function($scope) {
 
@@ -339,7 +386,7 @@ $scope.netGain="100";
 
 })
 
-.controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService) {
+.controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,getReportService) {
 
 /* $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode='+$sessionStorage.SessionPortfolio+'&endDate=09/03/201&noOfDays=40').then(function(resp) {
     console.log('Success',resp.data.responseCode);
@@ -355,7 +402,6 @@ reportDate.$promise.then(function(data){
  if (data.responseCode == "Cali_SUC_1030") {
 
 $sessionStorage.amcCode=data.jsonStr.amcCode;
-$sessionStorage.amount=data.jsonStr.amount;
 $sessionStorage.gainMonth=data.jsonStr.gainMonth;
 $sessionStorage.gainToday=data.jsonStr.gainToday;
 $sessionStorage.gainTotal=data.jsonStr.gainTotal;
@@ -363,26 +409,36 @@ $sessionStorage.list=data.jsonStr.list;
 $sessionStorage.mktValue=data.jsonStr.mktValue;
 $sessionStorage.msg=data.jsonStr.msg;
 $sessionStorage.netInv=data.jsonStr.netInv;
-$sessionStorage.orderId=data.jsonStr.orderId;
 $sessionStorage.paymentMode=data.jsonStr.paymentMode;
 $sessionStorage.quantity=data.jsonStr.quantity;
 $sessionStorage.rtaCode=data.jsonStr.rtaCode;
-$sessionStorage.txnDate=data.jsonStr.txnDate;
-$sessionStorage.txnTypeStr=data.jsonStr.txnTypeStr;
 $sessionStorage.xirr=data.jsonStr.xirr;
-
  }
 })
 
-  var navDate = getNAVService.get();
+  var navDate = getReportService.get();
   navDate.$promise.then(function(data){
     if(data.responseCode=="Cali_SUC_1030"){
 
-      $sessionStorage.schemeName=data.jsonStr.schemeName;
-      $sessionStorage.recco=data.jsonStr.recco;
-      $sessionStorage.nav=data.jsonStr.nav;
-      $sessionStorage.list=data.jsonStr.list;
-      $sessionStorage.msg=data.jsonStr.msg;
+      $sessionStorage.amount=data.jsonStr.amount;
+      $sessionStorage.orderId=data.jsonStr.orderId;
+      $sessionStorage.txnDate=data.jsonStr.txnDate;
+      $sessionStorage.txnTypeStr=data.jsonStr.txnTypeStr;
+
+    }
+  })
+
+
+  var Report = getNAVService.get();
+  Report.$promise.then(function(data){
+    if(data.responseCode=="Cali_SUC_1030"){
+
+      $sessionStorage.schemeName=data.jsonStr[0].schemeName;
+      $sessionStorage.recco=data.jsonStr[0].recco;
+      $sessionStorage.nav=data.jsonStr[0].nav;
+      $sessionStorage.list=data.jsonStr[0].list;
+      $sessionStorage.msg=data.jsonStr[0].msg;
+	  console.log($sessionStorage.list );
     }
   })
 
@@ -442,7 +498,7 @@ $http.get('data/transactiondata.json').success(function(data){
 
 .controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService) {
 	var finalComputedVal;
-    $scope.nav=3656.5447;
+    $scope.nav=$sessionStorage.nav;
     $scope.final=function(initial,nav,suggest){
     var theory=initial/nav ;
     var rounded= Math.round(theory * 1000)/1000;
