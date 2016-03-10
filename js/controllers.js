@@ -38,7 +38,7 @@ angular.module('app.controllers', [])
         	}
       	}
       	else{
-          $scope.error="Entered password didn't matched";
+          $scope.error="Entered password didn't match";
 
         }
         }
@@ -383,7 +383,6 @@ var  forgotPin2 = function(change2){
 */
 
 var reportDate = getPerformanceService.get();
-var print;
 reportDate.$promise.then(function(data){
  if (data.responseCode == "Cali_SUC_1030") {
 
@@ -402,29 +401,36 @@ $sessionStorage.xirr=data.jsonStr.xirr;
  }
 })
 
-  var navDate = getReportService.get();
-  navDate.$promise.then(function(data){
+  var Report = getReportService.get();
+  Report.$promise.then(function(data){
     if(data.responseCode=="Cali_SUC_1030"){
-
-      $sessionStorage.amount=data.jsonStr.amount;
-      $sessionStorage.orderId=data.jsonStr.orderId;
-      $sessionStorage.txnDate=data.jsonStr.txnDate;
-      $sessionStorage.txnTypeStr=data.jsonStr.txnTypeStr;
-
+      $scope.products=data.jsonStr;
+		for(var i = 0; i < (data.jsonStr).length; i++) {
+			if(data.jsonStr[i].txnTypeStr=="Buy"){
+				$scope.txnStatusClass="success";
+			}
+			else if(data.jsonStr[i].txnTypeStr=="Sell"){
+				$scope.txnStatusClass="failed";
+			}
+		}
     }
   })
 
 
-  var Report = getNAVService.get();
-  Report.$promise.then(function(data){
+  var navDate = getNAVService.get();
+  navDate.$promise.then(function(data){
     if(data.responseCode=="Cali_SUC_1030"){
-
-      $sessionStorage.schemeName=data.jsonStr[0].schemeName;
-      $sessionStorage.recco=data.jsonStr[0].recco;
-      $sessionStorage.nav=data.jsonStr[0].nav;
-      $sessionStorage.list=data.jsonStr[0].list;
-      $sessionStorage.msg=data.jsonStr[0].msg;
-	  console.log($sessionStorage.list );
+	console.log((data.jsonStr).length );
+		for(var i = 0; i < (data.jsonStr).length; i++) {
+			if(data.jsonStr[i].recco=="Accumulate"){
+				$sessionStorage.schemeName=data.jsonStr[i].schemeName;
+				$sessionStorage.nav=data.jsonStr[i].nav;
+				console.log($sessionStorage.schemeName);
+				console.log($sessionStorage.nav);
+				console.log(i);
+			}
+			
+		}
     }
   })
 
@@ -484,6 +490,7 @@ $http.get('data/transactiondata.json').success(function(data){
 
 .controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService) {
 	var finalComputedVal;
+    $scope.schemeName=$sessionStorage.schemeName;
     $scope.nav=$sessionStorage.nav;
     $scope.final=function(initial,nav,suggest){
     var theory=initial/nav ;
@@ -572,5 +579,3 @@ $http.get('data/transactiondata.json').success(function(data){
   }
 
 })
-
-
