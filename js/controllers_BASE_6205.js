@@ -73,10 +73,11 @@ angular.module('app.controllers', [])
 console.log($scope.authorization.login);
 console.log(signinformData);
 	if(signinformData.$valid){
-    console.log('phone number'+$scope.authorization.login);
+    console.log('phone number'+signinformData);
 
-    $sessionStorage.forgotPinPhone = $scope.authorization.login;
-    var ph = $scope.authorization.login;
+    $sessionStorage.forgotPinPhone = signinformData;
+
+
     $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
     console.log('success');
 	$state.go('forgot_pin');
@@ -333,6 +334,7 @@ var  forgotPin2 = function(change2){
 
 
 	$scope.growth= $sessionStorage.xirr;
+	console.log($scope.growth);
 	$scope.growthRate= function(){
 		if($scope.growth == null){return 0;}
 		else {
@@ -344,8 +346,8 @@ var  forgotPin2 = function(change2){
 			}
 		}
 		}
-
-
+	
+	
 	$scope.netGainToday=function(){
 		if($sessionStorage.gainToday == null){return 0;}
 		else {return $sessionStorage.gainToday;
@@ -402,39 +404,27 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 })
 
   var navDate = getReportService.get();
-  navDate.$promise.then(function(data1){
-    if(data1.responseCode=="Cali_SUC_1030"){
+  navDate.$promise.then(function(data){
+    if(data.responseCode=="Cali_SUC_1030"){
 
-      $sessionStorage.amount=data1.jsonStr.amount;
-      $sessionStorage.orderId=data1.jsonStr.orderId;
-      $sessionStorage.txnDate=data1.jsonStr.txnDate;
-      $sessionStorage.txnTypeStr=data1.jsonStr.txnTypeStr;
-console.log(data1+'data1')
+      $sessionStorage.amount=data.jsonStr.amount;
+      $sessionStorage.orderId=data.jsonStr.orderId;
+      $sessionStorage.txnDate=data.jsonStr.txnDate;
+      $sessionStorage.txnTypeStr=data.jsonStr.txnTypeStr;
+
     }
   })
 
 
   var Report = getNAVService.get();
-  Report.$promise.then(function(data2){
-    if(data2.responseCode=="Cali_SUC_1030"){
-
-      $sessionStorage.schemeName=data2.jsonStr.schemeName;
-      $sessionStorage.recco=data2.jsonStr.recco;
-      $sessionStorage.nav=data2.jsonStr.nav;
-      $sessionStorage.list=data2.jsonStr.list;
-      $sessionStorage.msg=data2.jsonStr.msg;
-      console.log(data2+'data2');
-
   Report.$promise.then(function(data){
     if(data.responseCode=="Cali_SUC_1030"){
 
-      $sessionStorage.schemeName=data.jsonStr[0].schemeName;
-      $sessionStorage.recco=data.jsonStr[0].recco;
-      $sessionStorage.nav=data.jsonStr[0].nav;
-      $sessionStorage.list=data.jsonStr[0].list;
-      $sessionStorage.msg=data.jsonStr[0].msg;
-	  console.log($sessionStorage.list );
-
+      $sessionStorage.schemeName=data.jsonStr.schemeName;
+      $sessionStorage.recco=data.jsonStr.recco;
+      $sessionStorage.nav=data.jsonStr.nav;
+      $sessionStorage.list=data.jsonStr.list;
+      $sessionStorage.msg=data.jsonStr.msg;
     }
   })
 
@@ -494,7 +484,7 @@ $http.get('data/transactiondata.json').success(function(data){
 
 .controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService) {
 	var finalComputedVal;
-    $scope.nav=$sessionStorage.nav;
+    $scope.nav=3656.5447;
     $scope.final=function(initial,nav,suggest){
     var theory=initial/nav ;
     var rounded= Math.round(theory * 1000)/1000;

@@ -415,6 +415,7 @@ console.log(data1+'data1')
 
 
   var Report = getNAVService.get();
+<<<<<<< HEAD
   Report.$promise.then(function(data2){
     if(data2.responseCode=="Cali_SUC_1030"){
 
@@ -424,7 +425,7 @@ console.log(data1+'data1')
       $sessionStorage.list=data2.jsonStr.list;
       $sessionStorage.msg=data2.jsonStr.msg;
       console.log(data2+'data2');
-
+=======
   Report.$promise.then(function(data){
     if(data.responseCode=="Cali_SUC_1030"){
 
@@ -434,7 +435,7 @@ console.log(data1+'data1')
       $sessionStorage.list=data.jsonStr[0].list;
       $sessionStorage.msg=data.jsonStr[0].msg;
 	  console.log($sessionStorage.list );
-
+>>>>>>> origin/master
     }
   })
 

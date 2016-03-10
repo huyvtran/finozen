@@ -333,6 +333,7 @@ var  forgotPin2 = function(change2){
 
 
 	$scope.growth= $sessionStorage.xirr;
+	console.log($scope.growth);
 	$scope.growthRate= function(){
 		if($scope.growth == null){return 0;}
 		else {
@@ -424,17 +425,6 @@ console.log(data1+'data1')
       $sessionStorage.list=data2.jsonStr.list;
       $sessionStorage.msg=data2.jsonStr.msg;
       console.log(data2+'data2');
-
-  Report.$promise.then(function(data){
-    if(data.responseCode=="Cali_SUC_1030"){
-
-      $sessionStorage.schemeName=data.jsonStr[0].schemeName;
-      $sessionStorage.recco=data.jsonStr[0].recco;
-      $sessionStorage.nav=data.jsonStr[0].nav;
-      $sessionStorage.list=data.jsonStr[0].list;
-      $sessionStorage.msg=data.jsonStr[0].msg;
-	  console.log($sessionStorage.list );
-
     }
   })
 
@@ -494,7 +484,7 @@ $http.get('data/transactiondata.json').success(function(data){
 
 .controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService) {
 	var finalComputedVal;
-    $scope.nav=$sessionStorage.nav;
+    $scope.nav=3656.5447;
     $scope.final=function(initial,nav,suggest){
     var theory=initial/nav ;
     var rounded= Math.round(theory * 1000)/1000;
