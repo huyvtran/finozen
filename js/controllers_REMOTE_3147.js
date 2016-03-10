@@ -73,10 +73,11 @@ angular.module('app.controllers', [])
 console.log($scope.authorization.login);
 console.log(signinformData);
 	if(signinformData.$valid){
-    console.log('phone number'+$scope.authorization.login);
+    console.log('phone number'+signinformData);
 
-    $sessionStorage.forgotPinPhone = $scope.authorization.login;
-    var ph = $scope.authorization.login;
+    $sessionStorage.forgotPinPhone = signinformData;
+
+
     $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
     console.log('success');
 	$state.go('forgot_pin');
@@ -344,8 +345,8 @@ var  forgotPin2 = function(change2){
 			}
 		}
 		}
-
-
+	
+	
 	$scope.netGainToday=function(){
 		if($sessionStorage.gainToday == null){return 0;}
 		else {return $sessionStorage.gainToday;
@@ -400,17 +401,6 @@ $sessionStorage.xirr=data.jsonStr.xirr;
  }
 })
 
-<<<<<<< HEAD
-  var navDate = getReportService.get();
-  navDate.$promise.then(function(data1){
-    if(data1.responseCode=="Cali_SUC_1030"){
-
-      $sessionStorage.amount=data1.jsonStr.amount;
-      $sessionStorage.orderId=data1.jsonStr.orderId;
-      $sessionStorage.txnDate=data1.jsonStr.txnDate;
-      $sessionStorage.txnTypeStr=data1.jsonStr.txnTypeStr;
-console.log(data1+'data1')
-=======
   var Report = getReportService.get();
   Report.$promise.then(function(data){
     if(data.responseCode=="Cali_SUC_1030"){
@@ -423,34 +413,10 @@ console.log(data1+'data1')
 				$scope.txnStatusClass="failed";
 			}
 		}
->>>>>>> origin/master
     }
   })
 
 
-<<<<<<< HEAD
-  var Report = getNAVService.get();
-  Report.$promise.then(function(data2){
-    if(data2.responseCode=="Cali_SUC_1030"){
-
-      $sessionStorage.schemeName=data2.jsonStr.schemeName;
-      $sessionStorage.recco=data2.jsonStr.recco;
-      $sessionStorage.nav=data2.jsonStr.nav;
-      $sessionStorage.list=data2.jsonStr.list;
-      $sessionStorage.msg=data2.jsonStr.msg;
-      console.log(data2+'data2');
-
-  Report.$promise.then(function(data){
-    if(data.responseCode=="Cali_SUC_1030"){
-
-      $sessionStorage.schemeName=data.jsonStr[0].schemeName;
-      $sessionStorage.recco=data.jsonStr[0].recco;
-      $sessionStorage.nav=data.jsonStr[0].nav;
-      $sessionStorage.list=data.jsonStr[0].list;
-      $sessionStorage.msg=data.jsonStr[0].msg;
-	  console.log($sessionStorage.list );
-
-=======
   var navDate = getNAVService.get();
   navDate.$promise.then(function(data){
     if(data.responseCode=="Cali_SUC_1030"){
@@ -465,7 +431,6 @@ console.log(data1+'data1')
 			}
 			
 		}
->>>>>>> origin/master
     }
   })
 
