@@ -62,6 +62,7 @@ angular.module('app.controllers', [])
 
 .controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService) {
  //$state.go('tabsController.summaryPage');
+
   $scope.signIn = function(form,loginForm) {
     if(form.$valid) {
       $sessionStorage.loginData=loginForm;
@@ -142,7 +143,7 @@ var  forgotPin2 = function(change2){
 }
 })
 
-.controller('changeCtrl', function(changePinService,$scope,$sessionStorage){
+.controller('changeCtrl', function(changePinService,$scope,$sessionStorage,$ionicPopup,$state){
 
     $scope.forgotPin=function(changePinForm){    
  
@@ -151,12 +152,30 @@ var  forgotPin2 = function(change2){
  console.log(changePinForm + " form data");
 //changePinService.changePin(changePinForm);
 changePinService.save(changePinForm,function(data){
-  
+  console.log(data);
     if(data.responseCode == "Cali_SUC_1030") {
 
+       
+  var popup= $ionicPopup.alert({
+     title: 'Password Change status',
+     template: 'Password Changed Successfully'
+   });
+
+   popup.then(function(res) {
+     $state.go("account");
+   });
+ 
+   //
+   
+  
+      
     }
     else {
-      
+      console.log("Error");
+        $ionicPopup.alert({
+     title: 'Password Change status',
+     template: 'Password Changed UnSuccessfully'
+   });
     }
     },function(error){
       console.log("eror");

@@ -74,10 +74,6 @@ $ionicAppProvider.identify ({
       templateUrl: 'templates/status.html',
     })
         
-      
-    
-      
-        
     .state('tabsController.summaryPage', {
       url: '/page15',
       views: {
