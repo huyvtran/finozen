@@ -110,6 +110,7 @@ angular.module('app.controllers', [])
             });
         }
 
+
     })
 
     .controller('transactionAccessCtrl', function($scope,$sessionStorage){
@@ -452,6 +453,16 @@ angular.module('app.controllers', [])
             scope: $scope
         });
 
+
+    })
+
+    /*for destroying the session storage*/
+    .controller('signoutCtrl',function($scope,$sessionStorage,$state){
+      $scope.signOut = function(){
+          console.log('session destroyed');
+          sessionStorage.clear();
+          $state.go('login');
+      }
 
     })
 
