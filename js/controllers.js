@@ -73,11 +73,10 @@ angular.module('app.controllers', [])
 console.log($scope.authorization.login);
 console.log(signinformData);
 	if(signinformData.$valid){
-    console.log('phone number'+signinformData);
+    console.log('phone number'+$scope.authorization.login);
 
-    $sessionStorage.forgotPinPhone = signinformData;
-
-
+    $sessionStorage.forgotPinPhone = $scope.authorization.login;
+    var ph = $scope.authorization.login;
     $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
     console.log('success');
 	$state.go('forgot_pin');
@@ -346,8 +345,8 @@ var  forgotPin2 = function(change2){
 			}
 		}
 		}
-	
-	
+
+
 	$scope.netGainToday=function(){
 		if($sessionStorage.gainToday == null){return 0;}
 		else {return $sessionStorage.gainToday;
@@ -404,27 +403,28 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 })
 
   var navDate = getReportService.get();
-  navDate.$promise.then(function(data){
-    if(data.responseCode=="Cali_SUC_1030"){
+  navDate.$promise.then(function(data1){
+    if(data1.responseCode=="Cali_SUC_1030"){
 
-      $sessionStorage.amount=data.jsonStr.amount;
-      $sessionStorage.orderId=data.jsonStr.orderId;
-      $sessionStorage.txnDate=data.jsonStr.txnDate;
-      $sessionStorage.txnTypeStr=data.jsonStr.txnTypeStr;
-
+      $sessionStorage.amount=data1.jsonStr.amount;
+      $sessionStorage.orderId=data1.jsonStr.orderId;
+      $sessionStorage.txnDate=data1.jsonStr.txnDate;
+      $sessionStorage.txnTypeStr=data1.jsonStr.txnTypeStr;
+console.log(data1+'data1')
     }
   })
 
 
   var Report = getNAVService.get();
-  Report.$promise.then(function(data){
-    if(data.responseCode=="Cali_SUC_1030"){
+  Report.$promise.then(function(data2){
+    if(data2.responseCode=="Cali_SUC_1030"){
 
-      $sessionStorage.schemeName=data.jsonStr.schemeName;
-      $sessionStorage.recco=data.jsonStr.recco;
-      $sessionStorage.nav=data.jsonStr.nav;
-      $sessionStorage.list=data.jsonStr.list;
-      $sessionStorage.msg=data.jsonStr.msg;
+      $sessionStorage.schemeName=data2.jsonStr.schemeName;
+      $sessionStorage.recco=data2.jsonStr.recco;
+      $sessionStorage.nav=data2.jsonStr.nav;
+      $sessionStorage.list=data2.jsonStr.list;
+      $sessionStorage.msg=data2.jsonStr.msg;
+      console.log(data2+'data2');
     }
   })
 
