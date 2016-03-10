@@ -322,8 +322,8 @@ var  forgotPin2 = function(change2){
 	$scope.clientName= $sessionStorage.SessionClientName;
 	$scope.clientMobile= $sessionStorage.SessionMobNo;
 	$scope.balance= function(){
-		if($sessionStorage.amount == null){return 0;}
-		else {return $sessionStorage.amount;
+		if($sessionStorage.mktValue == null){return 0;}
+		else {return $sessionStorage.mktValue;
 		}
 	}
 		$scope.investAmount= function(){
@@ -491,7 +491,8 @@ $http.get('data/transactiondata.json').success(function(data){
 .controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService) {
 	var finalComputedVal;
     $scope.schemeName=$sessionStorage.schemeName;
-    $scope.nav=$sessionStorage.nav;
+    $scope.navToday=$sessionStorage.nav;
+	$scope.nav=$scope.navToday+(0.0002*$scope.navToday);
     $scope.final=function(initial,nav,suggest){
     var theory=initial/nav ;
     var rounded= Math.round(theory * 1000)/1000;
