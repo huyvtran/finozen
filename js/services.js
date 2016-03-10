@@ -72,20 +72,19 @@ angular.module('app.services', [])
 }])
 
 
-.factory('changeService', ['$resource','$sessionStorage', function($resource,$sessionStorage){
-	return{
-		changepinUp: function(changePinForm){
-			 var change = $resource('http://205.147.99.55:8080/WealthWeb/ws/secure/fcpSecure/changePassword',{},{
-                save:{
-                    method:'POST',
-                    headers:{
-                    'X-AUTH-TOKEN':$sessionStorage.SessionIdstorage  
-                    }
-                }
-            })
-		}
-
-	};
+.factory('changePinService', ['$resource','$sessionStorage', function($resource,$sessionStorage){
+//console.log();
+	var jsid=$sessionStorage.SessionIdstorage;
+	 var change = $resource('http://205.147.99.55:8080/WealthWeb/ws/secure/fcpSecure/changePassword',{},{
+        save:{
+            method:'POST',
+            headers:{
+            'X-AUTH-TOKEN':jsid  
+            }
+        }
+    });
+		return change;
+	
 }])
 
 /*Sign up Service*/
@@ -103,10 +102,7 @@ angular.module('app.services', [])
 		return deferred.promise;
 		}
 	}
-
 }])
-
-
 
 /*send MF orders*/
 .factory('mfOrderUrlService', ['$resource',function($resource){

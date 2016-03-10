@@ -95,7 +95,9 @@ console.log(signinformData);
         }
         else {
           console.log(data.jsonStr);
+          console.log(data.msg + "Post Login");
           $sessionStorage.SessionIdstorage = data.msg;
+          console.log($sessionStorage.SessionIdstorage + "From session Login");
           $sessionStorage.SessionPortfolio =data.jsonStr[0].pfolioCode;
           $sessionStorage.SessionStatus =data.jsonStr[0].activeStatus;
           $sessionStorage.SessionClientName =data.jsonStr[0].clientName;
@@ -113,7 +115,7 @@ console.log(signinformData);
 
 .controller('transactionAccessCtrl', function($scope,$sessionStorage){
 
-  if($sessionStorage.SessionStatus!="A") {
+  if($sessionStorage.clientActive!="A") {
     $scope.withdrawUrl="#/status";
     $scope.investUrl="#/status";
   }
@@ -140,17 +142,27 @@ var  forgotPin2 = function(change2){
 }
 })
 
-.controller('changeCtrl', function(changeService,$scope,$sessionStorage){
+.controller('changeCtrl', function(changePinService,$scope,$sessionStorage){
 
     $scope.forgotPin=function(changePinForm){    
-  console.log(changePinForm);
+ 
   changePinForm.clientCode=$sessionStorage.SessionClientCode;
   changePinForm=JSON.stringify(changePinForm);
- 
-  var pinChange=changeService.changepinUp(changePinForm);
-  pinChange.$promise.then(function(data){
-    console.log(data);
-  })
+ console.log(changePinForm + " form data");
+//changePinService.changePin(changePinForm);
+changePinService.save(changePinForm,function(data){
+  
+    if(data.responseCode == "Cali_SUC_1030") {
+
+    }
+    else {
+      
+    }
+    },function(error){
+      console.log("eror");
+     
+    });
+
   }
   
 })
@@ -438,7 +450,7 @@ $sessionStorage.xirr=data.jsonStr.xirr;
       $sessionStorage.nav=data.jsonStr[0].nav;
       $sessionStorage.list=data.jsonStr[0].list;
       $sessionStorage.msg=data.jsonStr[0].msg;
-	  console.log($sessionStorage.list );
+	  console.log($sessionStorage.list);
     }
   })
 
