@@ -5,7 +5,12 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', 'app.controllers', 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages','ngStorage'])
+angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', 'app.controllers', 'app.subcontrollerOne','app.subcontrollerTwo' , 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages','ngStorage'])
+
+.constant('$ionicLoadingConfig', {
+  template: '<ion-spinner icon="android"></ion-spinner>',
+  showBackdrop: true,
+})
 
 .run(function($ionicPlatform,$ionicAnalytics) {
   $ionicPlatform.ready(function() {

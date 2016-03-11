@@ -99,6 +99,7 @@ angular.module('app.controllers', [])
           $sessionStorage.SessionClientName =data.jsonStr[0].clientName;
           $sessionStorage.SessionClientCode =data.jsonStr[0].clientCode;
           $sessionStorage.SessionMobNo =data.jsonStr[0].mobileNo;
+          $sessionStorage.clientActive = data.jsonStr[0].clientActive;
          $state.go('tabsController.summaryPage');
        }
         },function(error){
@@ -112,7 +113,7 @@ angular.module('app.controllers', [])
 
     .controller('transactionAccessCtrl', function($scope,$sessionStorage){
 
-  if($sessionStorage.clientActive!="A") {
+  if($sessionStorage.clientActive!="Y") {
     $scope.withdrawUrl="#/status";
     $scope.investUrl="#/status";
   }
@@ -632,3 +633,15 @@ $sessionStorage.xirr=data.jsonStr.xirr;
         }
 
     })
+
+
+  .controller('TestCtrl', function($scope, $ionicLoading) {
+
+   $scope.showLoading = function() {
+      $ionicLoading.show();
+   };
+
+   $scope.hideLoading = function(){
+      $ionicLoading.hide();
+   };
+});
