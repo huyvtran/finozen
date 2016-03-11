@@ -71,22 +71,22 @@ angular.module('app.controllers', [])
     }
   }
     $scope.forgotPin=function(signinformData){
-	if(signinformData.$valid){
-		console.log('phone number'+$scope.authorization.login);
-		$sessionStorage.forgotPinPhone = $scope.authorization.login;
-		var ph=$sessionStorage.forgotPinPhone;
-		$http.get('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
-		console.log('success');
-		$state.go('forgot_pin');
-		}
-		else{
-			console.log("error");
-			$scope.message="Please enter your mobile number to reset PIN";
-		}
-	}
+  if(signinformData.$valid){
+    console.log('phone number'+$scope.authorization.login);
+    $sessionStorage.forgotPinPhone = $scope.authorization.login;
+    var ph=$sessionStorage.forgotPinPhone;
+    $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
+    console.log('success');
+    $state.go('forgot_pin');
+    }
+    else{
+      console.log("error");
+      $scope.message="Please enter your mobile number to reset PIN";
+    }
+  }
 
-	$scope.sendSignIn=function() {
-		loginInfoService.getJsonId($sessionStorage.loginData).then(function(data){
+  $scope.sendSignIn=function() {
+    loginInfoService.getJsonId($sessionStorage.loginData).then(function(data){
 
       if(data.responseCode!="Cali_SUC_1030"){
         $scope.serverError="Entered Credentials did not validate";
@@ -103,16 +103,16 @@ angular.module('app.controllers', [])
        }
         },function(error){
 
-			$scope.serverError="Entered Credentials did not validate";
-		});
-	}
+      $scope.serverError="Entered Credentials did not validate";
+    });
+  }
 
 
     })
 
     .controller('transactionAccessCtrl', function($scope,$sessionStorage){
 
-  if($sessionStorage.SessionStatus!="A") {
+  if($sessionStorage.clientActive!="A") {
     $scope.withdrawUrl="#/status";
     $scope.investUrl="#/status";
   }
@@ -138,6 +138,49 @@ angular.module('app.controllers', [])
             return JSON.stringify(change2)
         }
     })
+
+    .controller('changeCtrl', function(changePinService,$scope,$sessionStorage,$ionicPopup,$state){
+
+    $scope.forgotPin=function(changePinForm){    
+ 
+  changePinForm.clientCode=$sessionStorage.SessionClientCode;
+  changePinForm=JSON.stringify(changePinForm);
+ console.log(changePinForm + " form data");
+//changePinService.changePin(changePinForm);
+changePinService.save(changePinForm,function(data){
+  console.log(data);
+    if(data.responseCode == "Cali_SUC_1030") {
+
+       
+  var popup= $ionicPopup.alert({
+     title: 'Password Change status',
+     template: 'Password Changed Successfully'
+   });
+
+   popup.then(function(res) {
+     $state.go("account");
+   });
+ 
+   //
+   
+  
+      
+    }
+    else {
+      console.log("Error");
+        $ionicPopup.alert({
+     title: 'Password Change status',
+     template: 'Password Changed UnSuccessfully'
+   });
+    }
+    },function(error){
+      console.log("eror");
+     
+    });
+
+  }
+  
+})
 
 .controller('popupController', function($scope, $ionicPopup,$window) {
      // Triggered on a button click, or some other target
@@ -318,18 +361,18 @@ angular.module('app.controllers', [])
 
 
 .controller('withdrawCtrl', function($scope,$sessionStorage) {
-	$scope.clientName= $sessionStorage.SessionClientName;
-	$scope.clientMobile= $sessionStorage.SessionMobNo;
-	$scope.balance= function(){
-		if($sessionStorage.amount == null){return 0;}
-		else {return $sessionStorage.amount;
-		}
-	}
-		$scope.investAmount= function(){
-		if($sessionStorage.netInv == null){return 0;}
-		else {return $sessionStorage.netInv;
-		}
-	}
+  $scope.clientName= $sessionStorage.SessionClientName;
+  $scope.clientMobile= $sessionStorage.SessionMobNo;
+  $scope.balance= function(){
+    if($sessionStorage.amount == null){return 0;}
+    else {return $sessionStorage.amount;
+    }
+  }
+    $scope.investAmount= function(){
+    if($sessionStorage.netInv == null){return 0;}
+    else {return $sessionStorage.netInv;
+    }
+  }
 
 
         $scope.growth= $sessionStorage.xirr;
@@ -344,8 +387,8 @@ angular.module('app.controllers', [])
                 }
             }
         }
-	
-	
+  
+  
         $scope.netGainToday=function(){
             if($sessionStorage.gainToday == null){return 0;}
             else {return $sessionStorage.gainToday;
@@ -403,14 +446,14 @@ $sessionStorage.xirr=data.jsonStr.xirr;
   Report.$promise.then(function(data){
     if(data.responseCode=="Cali_SUC_1030"){
       $scope.products=data.jsonStr;
-		for(var i = 0; i < (data.jsonStr).length; i++) {
-			if(data.jsonStr[i].txnTypeStr=="Buy"){
-				$scope.txnStatusClass="success";
-			}
-			else if(data.jsonStr[i].txnTypeStr=="Sell"){
-				$scope.txnStatusClass="failed";
-			}
-		}
+    for(var i = 0; i < (data.jsonStr).length; i++) {
+      if(data.jsonStr[i].txnTypeStr=="Buy"){
+        $scope.txnStatusClass="success";
+      }
+      else if(data.jsonStr[i].txnTypeStr=="Sell"){
+        $scope.txnStatusClass="failed";
+      }
+    }
     }
   })
 
@@ -418,17 +461,17 @@ $sessionStorage.xirr=data.jsonStr.xirr;
   var navDate = getNAVService.get();
   navDate.$promise.then(function(data){
     if(data.responseCode=="Cali_SUC_1030"){
-	console.log((data.jsonStr).length );
-		for(var i = 0; i < (data.jsonStr).length; i++) {
-			if(data.jsonStr[i].recco=="Accumulate"){
-				$sessionStorage.schemeName=data.jsonStr[i].schemeName;
-				$sessionStorage.nav=data.jsonStr[i].nav;
-				console.log($sessionStorage.schemeName);
-				console.log($sessionStorage.nav);
-				console.log(i);
-			}
-			
-		}
+  console.log((data.jsonStr).length );
+    for(var i = 0; i < (data.jsonStr).length; i++) {
+      if(data.jsonStr[i].recco=="Accumulate"){
+        $sessionStorage.schemeName=data.jsonStr[i].schemeName;
+        $sessionStorage.nav=data.jsonStr[i].nav;
+        console.log($sessionStorage.schemeName);
+        console.log($sessionStorage.nav);
+        console.log(i);
+      }
+      
+    }
     }
   })
 
@@ -497,7 +540,7 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 
 
 .controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService) {
-	var finalComputedVal;
+  var finalComputedVal;
     $scope.schemeName=$sessionStorage.schemeName;
     $scope.nav=$sessionStorage.nav;
     $scope.final=function(initial,nav,suggest){
