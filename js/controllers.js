@@ -173,10 +173,10 @@ angular.module('app.controllers', [])
 
     })
 
-    .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,getReportService) {
+    .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,getReportService,$ionicLoading) {
 var timeNow = new Date().getUTCHours();
 
-
+$ionicLoading.show();
 var reportDate = getPerformanceService.get();
 reportDate.$promise.then(function(data){
  if (data.responseCode == "Cali_SUC_1030") {
@@ -223,7 +223,11 @@ $sessionStorage.xirr=data.jsonStr.xirr;
       }
       
     }
+    $ionicLoading.hide();
     }
+  },function(error){
+    console.log("error");
+    $ionicLoading.hide();
   })
 
         /*var tList=this;
@@ -304,5 +308,3 @@ $sessionStorage.xirr=data.jsonStr.xirr;
         }
 
     })
-
-
