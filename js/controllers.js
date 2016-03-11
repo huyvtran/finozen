@@ -364,8 +364,8 @@ changePinService.save(changePinForm,function(data){
   $scope.clientName= $sessionStorage.SessionClientName;
   $scope.clientMobile= $sessionStorage.SessionMobNo;
   $scope.balance= function(){
-    if($sessionStorage.amount == null){return 0;}
-    else {return $sessionStorage.amount;
+    if($sessionStorage.mktValue == null){return 0;}
+    else {return $sessionStorage.mktValue;
     }
   }
     $scope.investAmount= function(){
@@ -414,7 +414,7 @@ changePinService.save(changePinForm,function(data){
     })
 
     .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,getReportService) {
-
+var timeNow = new Date().getUTCHours();
         /* $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode='+$sessionStorage.SessionPortfolio+'&endDate=09/03/201&noOfDays=40').then(function(resp) {
          console.log('Success',resp.data.responseCode);
          // For JSON responses, resp.data contains the result
@@ -423,6 +423,7 @@ changePinService.save(changePinForm,function(data){
          // err.status will contain the status code
          })
          */
+console.log(timeNow);
 var reportDate = getPerformanceService.get();
 reportDate.$promise.then(function(data){
  if (data.responseCode == "Cali_SUC_1030") {
