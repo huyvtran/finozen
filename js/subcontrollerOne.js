@@ -185,7 +185,14 @@ angular.module('app.subcontrollerOne', [])
 .controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService) {
   var finalComputedVal;
     $scope.schemeName=$sessionStorage.schemeName;
+    
+	var timeNow = new Date().getHours();
+	if(timeNow <13){
     $scope.nav=$sessionStorage.nav;
+	}
+	else {
+		$scope.nav=$sessionStorage.nav + 0.0002*($sessionStorage.nav);
+	}
     $scope.final=function(initial,nav,suggest){
     var theory=initial/nav ;
     var rounded= Math.round(theory * 1000)/1000;
