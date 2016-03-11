@@ -1,45 +1,45 @@
 [
 {
   "amount": "500",
-  "transactionId": 189,
-  "date": "25 Feb, 2016"
+  "orderId": 189,
+  "txnDate": "25 Feb, 2016"
 
 
 }, {
   "amount": "100",
-  "transactionId": 175,
-  "date": "23 Feb, 2016"
+  "orderId": 175,
+  "txnDate": "23 Feb, 2016"
 }, {
   "amount": "500",
-  "transactionId": 169,
-  "date": "20 Feb, 2016"
+  "orderId": 169,
+  "txnDate": "20 Feb, 2016"
 }, {
   "amount": "800",
-  "transactionId": 143,
-  "date": "18 Feb, 2016"
+  "orderId": 143,
+  "txnDate": "18 Feb, 2016"
 }, {
   "amount": "500",
-  "transactionId": 120,
-  "date": "12 Feb, 2016"
+  "orderId": 120,
+  "txnDate": "12 Feb, 2016"
 }, {
   "amount": "510",
-  "transactionId": 115,
-  "date": "2 Feb, 2016"
+  "orderId": 115,
+  "txnDate": "2 Feb, 2016"
 }, {
   "amount": "502",
-  "transactionId": 104,
-  "date": "27 Jan, 2016"
+  "orderId": 104,
+  "txnDate": "27 Jan, 2016"
 }, {
   "amount": "250",
-  "transactionId": 85,
-  "date": "24 Jan, 2016"
+  "orderId": 85,
+  "txnDate": "24 Jan, 2016"
 }, {
   "amount": "352",
-  "transactionId": 79,
-  "date": "22 Jan, 2016"
+  "orderId": 79,
+  "txnDate": "22 Jan, 2016"
 }, {
   "amount": "1000",
-  "transactionId": 65,
-  "date": "20 Jan, 2016"
+  "orderId": 65,
+  "txnDate": "20 Jan, 2016"
 }
 ]

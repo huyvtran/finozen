@@ -11,9 +11,9 @@
           <h2>{{clientName}} </h2>
           <p class="">{{clientMobile}} </p>
         </div>
-		<div class="list">
+		<div class="list" ng-controller="signoutCtrl">
 		  <a class="item item-icon-right" href="#/change_pin"><i class="icon ion-ios-arrow-right"></i>Change PIN</a>
-		  <a class="item item-icon-right" href="#/page7"><i class="icon ion-ios-arrow-right"></i>Sign Out</a>
+		  <a class="item item-icon-right" href="#/page7" ng-click="signOut()"><i class="icon ion-ios-arrow-right"></i>Sign Out</a>
 		</div>
 
     </ion-content>

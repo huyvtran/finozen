@@ -41,13 +41,13 @@ angular.module('app.services', [])
 }])
 
 /*For fetching the NAV webservices*/
-  .factory('getNAVService', ['$resource','$filter','$sessionStorage',function($resource,$filter,$sessionStorage){
+  .factory('getNAVService', ['$resource','$sessionStorage',function($resource,$sessionStorage){
     return $resource('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getInvReco?pfolioCode='+$sessionStorage.SessionPortfolio);
   }])
 
 
   /*For fetching the transaction webservices*/
-  .factory('getReportService', ['$resource','$filter','$sessionStorage',function($resource,$filter,$sessionStorage){
+  .factory('getReportService', ['$resource','$sessionStorage',function($resource,$sessionStorage){
     return $resource('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getOrders?pfolioCode='+$sessionStorage.SessionPortfolio+'&noOfOrders=30');
   }])
 
