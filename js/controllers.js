@@ -486,7 +486,7 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 
     .controller('popOverController',function($scope,$ionicPopover ){
 
-        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item pop_up" href="http://learn.ionicframework.com/" target="_blank">Actual annual growth rate till date of your money.</a> </div></ion-content>';
+        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item pop_up" href="#" target="_blank">Annualized rate of growth of your investments.</a> </div></ion-content>';
 
         $scope.popover = $ionicPopover.fromTemplate(template, {
             scope: $scope
