@@ -169,11 +169,13 @@ padding:0;margin-top: 10px;}
   background-position: center center;
   .secure_lock{padding-right: 10px; color: white !important;}
   .forgot_pin{
-		padding-right: 10px;
+		padding: 10px 10px 5px 0;
 		width: 86px;
 		display: inline-block;
 		float: right;
-		a{color:#18bb9c;} }
+		color:#18bb9c; 
+		&.activated{opacity:0.5 !important;}
+		}
 }  
 .signin_background, .sign_up{
 .item-input{
@@ -191,7 +193,20 @@ padding:0;margin-top: 10px;}
     display: block;
     margin: 40px 2px 70px 0px;
 }
-  .button{background:#18bb9c;border:#18bb9c;p{color:white; &:hover{color:white;}  } &.create_acc_btn{text-transform:none !important; color: #18bb9c; &.activated{background:transparent !important;} }}
+  .button{
+	background:#18bb9c;
+	border:#18bb9c;
+		p{
+			color:white; 
+			&:hover{color:white;}
+		} 
+		&.create_acc_btn{
+			text-transform:none !important;
+			color: #18bb9c; 
+			&.activated{background:transparent !important;}
+			&.activated{opacity:0.5 !important;}
+		}
+	}
 }
 .sign_up{ 
 .list .item:last-child{border-radius:0 !important;} 

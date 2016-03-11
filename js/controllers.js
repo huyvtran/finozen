@@ -71,44 +71,41 @@ angular.module('app.controllers', [])
     }
   }
     $scope.forgotPin=function(signinformData){
-console.log($scope.authorization.login);
-console.log(signinformData);
 	if(signinformData.$valid){
-    console.log('phone number'+$scope.authorization.login);
+		console.log('phone number'+$scope.authorization.login);
+		$sessionStorage.forgotPinPhone = $scope.authorization.login;
+		var ph=$sessionStorage.forgotPinPhone;
+		$http.get('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
+		console.log('success');
+		$state.go('forgot_pin');
+		}
+		else{
+			console.log("error");
+			$scope.message="Please enter your mobile number to reset PIN";
+		}
+	}
 
-    $sessionStorage.forgotPinPhone = $scope.authorization.login;
+	$scope.sendSignIn=function() {
+		loginInfoService.getJsonId($sessionStorage.loginData).then(function(data){
 
+			if(data.responseCode!="Cali_SUC_1030"){
+				$scope.serverError="Entered Credentials did not validate";
+			}
+			else {
+				console.log(data.jsonStr);
+				$sessionStorage.SessionIdstorage = data.msg;
+				$sessionStorage.SessionPortfolio =data.jsonStr[0].pfolioCode;
+				$sessionStorage.SessionStatus =data.jsonStr[0].activeStatus;
+				$sessionStorage.SessionClientName =data.jsonStr[0].clientName;
+				$sessionStorage.SessionClientCode =data.jsonStr[0].clientCode;
+				$sessionStorage.SessionMobNo =data.jsonStr[0].mobileNo;
+				$state.go('tabsController.summaryPage');
+			}
+		},function(error){
 
-                $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
-                console.log('success');
-                $state.go('forgot_pin');
-            }
-            else{
-                $scope.message="Please enter your mobile number to reset PIN";
-            }
-        }
-
-        $scope.sendSignIn=function() {
-            loginInfoService.getJsonId($sessionStorage.loginData).then(function(data){
-
-                if(data.responseCode!="Cali_SUC_1030"){
-                    $scope.serverError="Entered Credentials did not validate";
-                }
-                else {
-                    console.log(data.jsonStr);
-                    $sessionStorage.SessionIdstorage = data.msg;
-                    $sessionStorage.SessionPortfolio =data.jsonStr[0].pfolioCode;
-                    $sessionStorage.SessionStatus =data.jsonStr[0].activeStatus;
-                    $sessionStorage.SessionClientName =data.jsonStr[0].clientName;
-                    $sessionStorage.SessionClientCode =data.jsonStr[0].clientCode;
-                    $sessionStorage.SessionMobNo =data.jsonStr[0].mobileNo;
-                    $state.go('tabsController.summaryPage');
-                }
-            },function(error){
-
-                $scope.serverError="Entered Credentials did not validate";
-            });
-        }
+			$scope.serverError="Entered Credentials did not validate";
+		});
+	}
 
 
     })
