@@ -1,4 +1,3 @@
-
 angular.module('app.controllers', [])
 
     .controller('signupCtrl', function($scope) {
@@ -29,8 +28,7 @@ angular.module('app.controllers', [])
     .controller('AuthSignUpCtrl', function($scope, $state,signUpService,$sessionStorage) {
 
         $scope.signIn = function(form,searchText2,signupForm) {
-            console.log(angular.equals(signupForm.pin,searchText2)+ " searchText" );
-            console.log(searchText2+ " searchText2" );
+          
             if(angular.equals(signupForm.pin,searchText2))
             {
                 if(form.$valid) {
@@ -67,20 +65,17 @@ angular.module('app.controllers', [])
     if(form.$valid) {
       $sessionStorage.loginData=loginForm;
        $scope.sendSignIn();
+        }
+      }
 
-    }
-  }
     $scope.forgotPin=function(signinformData){
   if(signinformData.$valid){
-    console.log('phone number'+$scope.authorization.login);
     $sessionStorage.forgotPinPhone = $scope.authorization.login;
     var ph=$sessionStorage.forgotPinPhone;
     $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
-    console.log('success');
     $state.go('forgot_pin');
     }
     else{
-      console.log("error");
       $scope.message="Please enter your mobile number to reset PIN";
     }
   }
@@ -92,7 +87,6 @@ angular.module('app.controllers', [])
         $scope.serverError="Entered Credentials did not validate";
         }
         else {
-          console.log(data.jsonStr);
           $sessionStorage.SessionIdstorage = data.msg;
           $sessionStorage.SessionPortfolio =data.jsonStr[0].pfolioCode;
           $sessionStorage.SessionStatus =data.jsonStr[0].activeStatus;
@@ -102,13 +96,12 @@ angular.module('app.controllers', [])
           $sessionStorage.clientActive = data.jsonStr[0].clientActive;
          $state.go('tabsController.summaryPage');
        }
-        },function(error){
 
+        },function(error){
       $scope.serverError="Entered Credentials did not validate";
     });
+
   }
-
-
     })
 
     .controller('transactionAccessCtrl', function($scope,$sessionStorage){
@@ -182,15 +175,8 @@ angular.module('app.controllers', [])
 
     .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,getReportService) {
 var timeNow = new Date().getUTCHours();
-        /* $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode='+$sessionStorage.SessionPortfolio+'&endDate=09/03/201&noOfDays=40').then(function(resp) {
-         console.log('Success',resp.data.responseCode);
-         // For JSON responses, resp.data contains the result
-         }, function(err) {
-         console.error('ERR', err);
-         // err.status will contain the status code
-         })
-         */
-console.log(timeNow);
+
+
 var reportDate = getPerformanceService.get();
 reportDate.$promise.then(function(data){
  if (data.responseCode == "Cali_SUC_1030") {
@@ -229,14 +215,11 @@ $sessionStorage.xirr=data.jsonStr.xirr;
   var navDate = getNAVService.get();
   navDate.$promise.then(function(data){
     if(data.responseCode=="Cali_SUC_1030"){
-  console.log((data.jsonStr).length );
     for(var i = 0; i < (data.jsonStr).length; i++) {
       if(data.jsonStr[i].recco=="Accumulate"){
         $sessionStorage.schemeName=data.jsonStr[i].schemeName;
         $sessionStorage.nav=data.jsonStr[i].nav;
-        console.log($sessionStorage.schemeName);
-        console.log($sessionStorage.nav);
-        console.log(i);
+       
       }
       
     }
@@ -265,14 +248,12 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 
 
     .controller('showhistoryController', function($scope,$ionicHistory){
-        /*console.log($ionicHistory.currentStateName()  + "vviewHistory");
-         console.log($ionicHistory.backTitle() + "back");*/
+       
         $ionicHistory.clearHistory();
     })
 
     .controller('navhistoryController', function($scope,$ionicHistory){
-        /*console.log($ionicHistory.currentStateName()  + "vviewHistory");
-         console.log($ionicHistory.backTitle() + "back");*/
+      
         $ionicHistory.goBack(-2);
     })
 
@@ -325,13 +306,3 @@ $sessionStorage.xirr=data.jsonStr.xirr;
     })
 
 
-  .controller('TestCtrl', function($scope, $ionicLoading) {
-
-   $scope.showLoading = function() {
-      $ionicLoading.show();
-   };
-
-   $scope.hideLoading = function(){
-      $ionicLoading.hide();
-   };
-});

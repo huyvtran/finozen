@@ -7,12 +7,16 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', 'app.controllers', 'app.subcontrollerOne','app.subcontrollerTwo' , 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages','ngStorage'])
 
-.constant('$ionicLoadingConfig', {
+/*.constant('$ionicLoadingConfig', {
   template: '<ion-spinner icon="android"></ion-spinner>',
   showBackdrop: true,
 })
+*/
 
-.run(function($ionicPlatform,$ionicAnalytics) {
+
+
+
+.run(function($ionicPlatform,$ionicAnalytics,$rootScope, $ionicLoading) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
