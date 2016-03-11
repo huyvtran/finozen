@@ -499,7 +499,8 @@ $sessionStorage.xirr=data.jsonStr.xirr;
     .controller('signoutCtrl',function($scope,$sessionStorage,$state){
       $scope.signOut = function(){
           console.log('session destroyed');
-          sessionStorage.clear();
+          $localStorage.$reset();
+          console.log('SessionIdstorage');
           $state.go('login');
       }
 
