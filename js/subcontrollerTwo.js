@@ -44,14 +44,16 @@ angular.module('app.subcontrollerTwo', [])
     })
 
     /*for destroying the session storage*/
-    .controller('signoutCtrl',function($scope,$sessionStorage,$state){
-        $scope.signOut = function(){
-            console.log('session destroyed');
-            $localStorage.$reset();
-            console.log('SessionIdstorage');
-            $state.go('login');
-        }
+    .controller('signoutCtrl',function($scope,$state,$ionicHistory,$timeout){
 
+        $scope.signOut = function(){
+            $state.go('login')
+            $timeout(function () {
+                $ionicHistory.clearCache();
+                $ionicHistory.clearHistory();
+                console.log('clearing cache');
+            },300)
+        }
     })
 
 
