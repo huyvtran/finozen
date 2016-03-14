@@ -51,8 +51,7 @@ angular.module('app.subcontrollerTwo', [])
             $timeout(function () {
                 $ionicHistory.clearCache();
                 $ionicHistory.clearHistory();
-                console.log('clearing cache');
-            },300)
+            },100)
         }
     })
 
