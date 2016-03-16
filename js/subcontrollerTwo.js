@@ -56,38 +56,74 @@ angular.module('app.subcontrollerTwo', [])
     })
 
 
-    .controller('forgotPinCtrl', function($scope,$sessionStorage,$http) {
-        $scope.resetPin=function(change){
-            $scope.forget5 = JSON.parse(forgotPin2(change));
-            $scope.forget5.forgotpin=$sessionStorage.forgotPinPhone;
-            console.log($scope.forget5);
-            var forgotpinPass=JSON.stringify($scope.forget5);
-            console.log(forgotpinPass+'string');
-            $http.post('http://205.147.99.55:8080/WealthWeb/ws/secure/clientFcps/setNewPassword','forgotpinPass');
-console.log(data);
+    .controller('forgotPinCtrl', function($scope,$sessionStorage,$http,$state,$ionicPopup) {
+        $scope.resetPin=function(change) {
+          $scope.forget5 = JSON.parse(forgotPin2(change));
+          $scope.forget5.mobileNumber = JSON.stringify($sessionStorage.forgotPinPhone);
+          console.log($scope.forget5);
+          var forgotpinPass = JSON.stringify($scope.forget5);
+          console.log(forgotpinPass + 'string');
+          $http.post('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/setNewPassword', forgotpinPass).success(function(data){
+            console.log(data+'response');
+            if(data.responseCode=="Cali_SUC_1030"){
+
+              var popup= $ionicPopup.alert({
+                title: 'Password Change status',
+                template: 'Password Changed Successfully'
+              });
+
+              popup.then(function(res) {
+                $state.go("login");
+              });
+            }
+
+
+
+          }).error(function(data){
+            {
+              console.log("Error");
+              $ionicPopup.alert({
+                title: 'Password Change status',
+                template: 'Password Changed UnSuccessfully'
+              });
+            }
+          });
+
         }
         var  forgotPin2 = function(change2){
             return JSON.stringify(change2)
         }
-    })
 
-    .controller('EventsCtrl', function($scope, Idle) {
+
+
+})
+/*For session timeout*/
+    .controller('EventsCtrl', function($scope, Idle,$ionicPopup) {
     $scope.events = [];
 
     $scope.$on('IdleStart', function() {
         // the user appears to have gone idle
+        console.log("Start");
     });
 
     $scope.$on('IdleWarn', function(e, countdown) {
+        console.log("Warning");
         // follows after the IdleStart event, but includes a countdown until the user is considered timed out
         // the countdown arg is the number of seconds remaining until then.
         // you can change the title or display a warning dialog from here.
         // you can let them resume their session by calling Idle.watch()
+        alert('You are about to be logged out');
+        Idle.watch();
     });
 
     $scope.$on('IdleTimeout', function() {
         // the user has timed out (meaning idleDuration + timeout has passed without any activity)
         // this is where you'd log them
+        console.log("Signout");
+        $ionicPopup.alert({
+                        title: 'Timeout',
+                        template: 'You will be logged out'
+                    });
     });
 
     $scope.$on('IdleEnd', function() {
@@ -99,4 +135,5 @@ console.log(data);
     });
 
 })
+
 

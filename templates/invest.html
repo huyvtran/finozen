@@ -19,7 +19,7 @@
 <form name="investForm" novalidate="" ng-submit="Invest(investForm)">
 
 <label class="item item-input" ng-class="{ 'has-errors' : investForm.amount.$touched && investForm.amount.$invalid, 'no-errors' :  investForm.amount.$touched && investForm.amount.$valid}">
-	<input type="number" placeholder="Enter Amount"  name="amount"  ng-model="initial" ng-pattern="/^[0-9]{1,9}$/" min="100"  ng-keyup="apprxVal=initial+((initial*8.3)/100)">
+	<input type="number" placeholder="Enter Amount"  name="amount"  ng-model="initial" ng-pattern="/^[0-9]{1,9}$/" min="10"  ng-keyup="apprxVal=initial+((initial*8.3)/100)">
 </label>
 <div class="error-container add_money" ng-hide="checked_withdraw" ng-show="investForm.amount.$error && investForm.$submitted" ng-messages="investForm.amount.$error">
 	<div  class="error" >

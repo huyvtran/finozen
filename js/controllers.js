@@ -180,7 +180,7 @@ angular.module('app.controllers', [])
 
     })
 
-    .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,getReportService,$ionicLoading) {
+    .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,$ionicLoading) {
 var timeNow = new Date().getUTCHours();
 
 $ionicLoading.show();
@@ -206,9 +206,7 @@ $sessionStorage.xirr=data.jsonStr.xirr;
   var Report = getReportService.get();
   Report.$promise.then(function(data){
     if(data.responseCode=="Cali_SUC_1030"){
-		if((data.jsonStr).length > 0){
       $scope.products=data.jsonStr;
-	  console.log("not zero");
     for(var i = 0; i < (data.jsonStr).length; i++) {
       if(data.jsonStr[i].txnTypeStr=="Buy"){
         $scope.txnStatusClass="success";
@@ -217,12 +215,6 @@ $sessionStorage.xirr=data.jsonStr.xirr;
         $scope.txnStatusClass="failed";
       }
     }
-	}
-	else{console.log(window.Connection + "connection");
-	$scope.noTxnMsg1="There are no transactions to display,";
-	$scope.noTxnMsg2="START INVESTING NOW";
-	$scope.noTxnIcon="img/account-image.png";
-	}
     }
   })
 
@@ -292,13 +284,10 @@ $sessionStorage.xirr=data.jsonStr.xirr;
             var date=dateService.getDate();
             if(form.$valid) {
                 //$state.go('successPage');
-console.log($sessionStorage.folioNums);
-console.log($sessionStorage.amcCode);
-console.log($sessionStorage.rtaCode);
 
                 if($scope.checked_withdraw == true){
 
-                    mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"allUnits":"Y","folioNo":$sessionStorage.folioNums},function(data){
+                    mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "KMMF","rtaCode":"K745","orderTxnDate": date,"allUnits":"Y","folioNo":"2023421/94"},function(data){
                         if(data.responseCode!="Cali_SUC_1030") {
                             $scope.withdraw_error="Error committing the transaction, please try again";
                         }
@@ -327,3 +316,25 @@ console.log($sessionStorage.rtaCode);
         }
 
     })
+
+    /*Fetching reports data on swipe from growth rate page --> transaction page
+    .controller('updateTransactionCTRL',function($scope,$sessionStorage,$ionicLoading,getReportService){
+        console.log('entered');
+        $ionicLoading.show();
+
+        /* var Report = getReportService.get();
+         Report.$promise.then(function(data){
+         if(data.responseCode=="Cali_SUC_1030"){
+         $scope.products=data.jsonStr;
+         for(var i = 0; i < (data.jsonStr).length; i++) {
+         if(data.jsonStr[i].txnTypeStr=="Buy"){
+         $scope.txnStatusClass="success";
+         }
+         else if(data.jsonStr[i].txnTypeStr=="Sell"){
+         $scope.txnStatusClass="failed";
+         }
+         }
+         }
+         })
+        $ionicLoading.hide();
+    })*/
