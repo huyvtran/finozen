@@ -100,7 +100,8 @@ $ionicAppProvider.identify ({
       url: '/page9',
       views: {
         'tab8': {
-          templateUrl: 'templates/growthRate.html'
+          templateUrl: 'templates/growthRate.html',
+            controller:'updateTransactionCTRL'
         }
       }
     })
@@ -166,7 +167,8 @@ $ionicAppProvider.identify ({
 
     .state('invest', {
       url: '/invest',         
-          templateUrl: 'templates/invest.html',    
+          templateUrl: 'templates/invest.html',
+
     })  
 
     .state('withdraw', {

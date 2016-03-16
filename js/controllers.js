@@ -173,7 +173,7 @@ angular.module('app.controllers', [])
 
     })
 
-    .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,getReportService,$ionicLoading) {
+    .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,$ionicLoading) {
 var timeNow = new Date().getUTCHours();
 
 $ionicLoading.show();
@@ -193,23 +193,11 @@ $sessionStorage.paymentMode=data.jsonStr.paymentMode;
 $sessionStorage.quantity=data.jsonStr.quantity;
 $sessionStorage.rtaCode=data.jsonStr.rtaCode;
 $sessionStorage.xirr=data.jsonStr.xirr;
+     $sessionStorage.folioNums = data.jsonStr.folioNums;
+     console.log('folio number' + data);
+
  }
 })
-
-  var Report = getReportService.get();
-  Report.$promise.then(function(data){
-    if(data.responseCode=="Cali_SUC_1030"){
-      $scope.products=data.jsonStr;
-    for(var i = 0; i < (data.jsonStr).length; i++) {
-      if(data.jsonStr[i].txnTypeStr=="Buy"){
-        $scope.txnStatusClass="success";
-      }
-      else if(data.jsonStr[i].txnTypeStr=="Sell"){
-        $scope.txnStatusClass="failed";
-      }
-    }
-    }
-  })
 
 
   var navDate = getNAVService.get();
@@ -279,7 +267,7 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 
                 if($scope.checked_withdraw == true){
 
-                    mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "KMMF","rtaCode":"K745","orderTxnDate": date,"allUnits":"Y","folioNo":"2023421/94"},function(data){
+                    mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "RMF","rtaCode":"LFIG","orderTxnDate": date,"allUnits":"Y","folioNo":"2023421/94"},function(data){
                         if(data.responseCode!="Cali_SUC_1030") {
                             $scope.withdraw_error="Error committing the transaction, please try again";
                         }
@@ -308,3 +296,25 @@ $sessionStorage.xirr=data.jsonStr.xirr;
         }
 
     })
+
+    /*Fetching reports data on swipe from growth rate page --> transaction page
+    .controller('updateTransactionCTRL',function($scope,$sessionStorage,$ionicLoading,getReportService){
+        console.log('entered');
+        $ionicLoading.show();
+
+        /* var Report = getReportService.get();
+         Report.$promise.then(function(data){
+         if(data.responseCode=="Cali_SUC_1030"){
+         $scope.products=data.jsonStr;
+         for(var i = 0; i < (data.jsonStr).length; i++) {
+         if(data.jsonStr[i].txnTypeStr=="Buy"){
+         $scope.txnStatusClass="success";
+         }
+         else if(data.jsonStr[i].txnTypeStr=="Sell"){
+         $scope.txnStatusClass="failed";
+         }
+         }
+         }
+         })
+        $ionicLoading.hide();
+    })*/
