@@ -64,7 +64,7 @@ angular.module('app.subcontrollerTwo', [])
             var forgotpinPass=JSON.stringify($scope.forget5);
             console.log(forgotpinPass+'string');
             $http.post('http://205.147.99.55:8080/WealthWeb/ws/secure/clientFcps/setNewPassword','forgotpinPass');
-
+console.log(data);
         }
         var  forgotPin2 = function(change2){
             return JSON.stringify(change2)

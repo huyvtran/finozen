@@ -135,6 +135,15 @@ angular.module('app.subcontrollerOne', [])
 //FAQ controllers END
 //TAB's DATA controller
 	.controller('withdrawCtrl', function($scope,$sessionStorage) {
+$scope.policy = function()
+{
+	window.open('http://finozen.com/policy.html','_self', 'location=yes'); 
+}
+$scope.terms = function()
+{
+	window.open('http://finozen.com/t&c.html','_self'); 
+}	
+
   $scope.clientName= $sessionStorage.SessionClientName;
   $scope.clientMobile= $sessionStorage.SessionMobNo;
   $scope.balance= function(){
@@ -153,8 +162,8 @@ angular.module('app.subcontrollerOne', [])
         $scope.growthRate= function(){
             if($scope.growth == null){return 0;}
             else {
-                if($scope.growth < 0){return 0;}
-                else if($scope.growth >= 0){
+                if($scope.growth <= 0){return 0;}
+                else if($scope.growth > 0){
                     if($scope.growth >= 10){return 10;}
                     else if($scope.growth <= 7.5){return 7.5;}
                     else{return $scope.growth}
@@ -185,7 +194,9 @@ angular.module('app.subcontrollerOne', [])
 .controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService) {
   var finalComputedVal;
     $scope.schemeName=$sessionStorage.schemeName;
-    
+    if($scope.schemeName=="RELIANCE LIQUID FUND - TREASURY PLAN - GROWTH PLAN - GROWTH OPTION - G"){
+		$scope.schemeLink="http://www.moneycontrol.com/mutual-funds/nav/reliance-liquid-fund-treasury-plan-ip/MRC046";
+	}
 	var timeNow = new Date().getHours();
 	if(timeNow <13){
     $scope.nav=$sessionStorage.nav;
@@ -224,9 +235,11 @@ angular.module('app.subcontrollerOne', [])
         }
 
         $scope.sendMfOrder=function() {
-
+console.log($sessionStorage.folioNums);
+console.log($sessionStorage.amcCode);
+console.log($sessionStorage.rtaCode);
             var date=dateService.getDate();
-            mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "Axis Mutual Fund","rtaCode":"128CFGP","orderTxnDate": date,"amount": finalComputedVal},function(data){
+            mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums},function(data){
                 if(data.responseCode=="Cali_SUC_1030"){
                     window.open('http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_self');
                 }

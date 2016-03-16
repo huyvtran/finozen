@@ -45,8 +45,13 @@ angular.module('app.controllers', [])
         $scope.addUserInfo=function(){
             signUpService.sendSignUp($sessionStorage.signUpData).then(function(data){
                 if(data.responseCode!="Cali_SUC_1030"){
-                    $scope.serverError="Sign Up failed, please try again";
-                }
+					if(data.responseCode=="Cali_ERR_2050"){
+						$scope.serverError="Mobile number in use";
+					}
+					else{
+						$scope.serverError="Sign Up failed, please try again";
+					}
+				}
                 else {
                     $state.go('pre_verification');
                 }
@@ -94,6 +99,8 @@ angular.module('app.controllers', [])
           $sessionStorage.SessionClientCode =data.jsonStr[0].clientCode;
           $sessionStorage.SessionMobNo =data.jsonStr[0].mobileNo;
           $sessionStorage.clientActive = data.jsonStr[0].clientActive;
+          $sessionStorage.folioNums = data.jsonStr[0].folioNums[0];
+
          $state.go('tabsController.summaryPage');
        }
 
@@ -199,7 +206,9 @@ $sessionStorage.xirr=data.jsonStr.xirr;
   var Report = getReportService.get();
   Report.$promise.then(function(data){
     if(data.responseCode=="Cali_SUC_1030"){
+		if((data.jsonStr).length > 0){
       $scope.products=data.jsonStr;
+	  console.log("not zero");
     for(var i = 0; i < (data.jsonStr).length; i++) {
       if(data.jsonStr[i].txnTypeStr=="Buy"){
         $scope.txnStatusClass="success";
@@ -208,6 +217,12 @@ $sessionStorage.xirr=data.jsonStr.xirr;
         $scope.txnStatusClass="failed";
       }
     }
+	}
+	else{console.log(window.Connection + "connection");
+	$scope.noTxnMsg1="There are no transactions to display,";
+	$scope.noTxnMsg2="START INVESTING NOW";
+	$scope.noTxnIcon="img/account-image.png";
+	}
     }
   })
 
@@ -219,7 +234,8 @@ $sessionStorage.xirr=data.jsonStr.xirr;
       if(data.jsonStr[i].recco=="Accumulate"){
         $sessionStorage.schemeName=data.jsonStr[i].schemeName;
         $sessionStorage.nav=data.jsonStr[i].nav;
-       
+        $sessionStorage.rtaCode=data.jsonStr[i].rtaCode;
+        $sessionStorage.amcCode=data.jsonStr[i].amcCode;
       }
       
     }
@@ -241,7 +257,7 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 
     .controller('popOverController',function($scope,$ionicPopover ){
 
-        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item pop_up" href="#" target="_blank">Annualized rate of growth of your investments.</a> </div></ion-content>';
+        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item pop_up" href="#" target="_blank">Estimated annual returns for your investments till date, and should not be construed as projected returns or actual performance.</a> </div></ion-content>';
 
         $scope.popover = $ionicPopover.fromTemplate(template, {
             scope: $scope
@@ -276,10 +292,13 @@ $sessionStorage.xirr=data.jsonStr.xirr;
             var date=dateService.getDate();
             if(form.$valid) {
                 //$state.go('successPage');
+console.log($sessionStorage.folioNums);
+console.log($sessionStorage.amcCode);
+console.log($sessionStorage.rtaCode);
 
                 if($scope.checked_withdraw == true){
 
-                    mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "KMMF","rtaCode":"K745","orderTxnDate": date,"allUnits":"Y","folioNo":"2023421/94"},function(data){
+                    mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"allUnits":"Y","folioNo":$sessionStorage.folioNums},function(data){
                         if(data.responseCode!="Cali_SUC_1030") {
                             $scope.withdraw_error="Error committing the transaction, please try again";
                         }
@@ -289,7 +308,7 @@ $sessionStorage.xirr=data.jsonStr.xirr;
                 }
                 else{
 
-                    mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "KMMF","rtaCode":"K745","orderTxnDate": date,"quantity":$scope.amount,"allUnits":"N","folioNo":"2023421/94"},function(data){
+                    mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode":$sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"quantity":$scope.amount,"allUnits":"N","folioNo":$sessionStorage.folioNums},function(data){
                         if(data.responseCode!="Cali_SUC_1030") {
                             $scope.withdraw_error="Error committing the transaction, please try again";
                         }
