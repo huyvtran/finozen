@@ -45,6 +45,21 @@ Idle.watch();
     $ionicAnalytics.register();
     var io=Ionic.io();
 
+    /*disabling the hardware back button on invest page and withdraw page*/
+
+    $ionicPlatform.registerBackButtonAction(function (event) {
+      if ($ionicHistory.currentStateName() === 'invest'){
+        event.preventDefault();
+      } else {
+        $ionicHistory.goBack();
+      }
+    }, 100);      $ionicPlatform.registerBackButtonAction(function (event) {
+      if ($ionicHistory.currentStateName() === 'withdraw'){
+        event.preventDefault();
+      } else {
+        $ionicHistory.goBack();
+      }
+    }, 100);
     /*var push=new Ionic.Push({
       "onNotification": function(notification) {
     var payload = notification.payload;
