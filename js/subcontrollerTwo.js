@@ -137,15 +137,15 @@ angular.module('app.subcontrollerTwo', [])
 })
 
   .controller('LoadingCtrl', function($scope, $ionicLoading,$timeout) {
+	  console.log("loading start");
     $scope.show = function() {
       $timeout(function () {
         $ionicLoading.show({
           template: 'Loading...'
         });
 
-      }, 2000);
-      $scope.hide = function () {
+      }, 3000)
+
         $ionicLoading.hide();
-      };
     }
   });
