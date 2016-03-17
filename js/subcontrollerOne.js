@@ -195,14 +195,6 @@ $scope.terms = function()
          Report.$promise.then(function(data){
          if(data.responseCode=="Cali_SUC_1030"){
          $scope.products=data.jsonStr;
-         for(var i = 0; i < (data.jsonStr).length; i++) {
-         if(data.jsonStr[i].txnTypeStr=="Buy"){
-         $scope.txnStatusClass="success";
-         }
-         else if(data.jsonStr[i].txnTypeStr=="Sell"){
-         $scope.txnStatusClass="failed";
-         }
-         }
          }
          })
         $ionicLoading.hide();
@@ -259,7 +251,7 @@ console.log($sessionStorage.rtaCode);
             var date=dateService.getDate();
             mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums},function(data){
                 if(data.responseCode=="Cali_SUC_1030"){
-                    window.open('http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_self');
+                    window.open('http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_system');
                 }
 
             },function(error){

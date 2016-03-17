@@ -5,7 +5,7 @@
   <div ng-controller="transListController as listControl">
   <ion-refresher on-refresh="doRefresh()">      </ion-refresher>
   <div class="item item-avatar item-icon-right in in done done" ng-repeat="lists in products | orderBy:'-orderId'">
-	<p class="{{txnStatusClass}}"><span>&#x20B9;</span> {{lists.amount}}</p>
+	<p class="success {{lists.txnTypeStr}}"><span>&#x20B9;</span> {{lists.amount|currency :"":2}}</p>
 	<span class="item-note right">Transaction ID: {{ lists.orderId}}</span><br/>
 	<span class="item-note left">{{lists.txnDate}} </span>
 	<i class="icon ion-ios-checkmark-outline payment"></i>
