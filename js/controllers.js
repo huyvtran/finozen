@@ -218,10 +218,10 @@ $sessionStorage.xirr=data.jsonStr.xirr;
     if(data.responseCode=="Cali_SUC_1030"){
       $scope.products=data.jsonStr;
     for(var i = 0; i < (data.jsonStr).length; i++) {
-      if(data.jsonStr[i].txnTypeStr=="Buy"){
+      if(data.jsonStr[i].txnTypeStr==="Sell"){
         $scope.txnStatusClass="success";
       }
-      else if(data.jsonStr[i].txnTypeStr=="Sell"){
+      else{
         $scope.txnStatusClass="failed";
       }
     }
