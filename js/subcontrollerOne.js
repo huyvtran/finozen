@@ -134,14 +134,16 @@ angular.module('app.subcontrollerOne', [])
     })
 //FAQ controllers END
 //TAB's DATA controller
-	.controller('withdrawCtrl', function($scope,$sessionStorage,$ionicLoading,getReportService) {
+	.controller('withdrawCtrl', function($scope,$sessionStorage,$ionicLoading,getReportService,$ionicHistory) {
 $scope.policy = function()
 {
-	window.open('http://finozen.com/policy.html','_self', 'location=yes'); 
+	window.open('http://finozen.com/policy.html','_self', 'location=yes');
+  $ionicHistory.goBack(-1);
 }
 $scope.terms = function()
 {
-	window.open('http://finozen.com/t&c.html','_self'); 
+	window.open('http://finozen.com/t&c.html','_self');
+  $ionicHistory.goBack(-1);
 
 }	
 
