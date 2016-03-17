@@ -135,29 +135,17 @@ angular.module('app.subcontrollerTwo', [])
     });
 
 })
-/*
-.controller('updateTransactionCTRL',function($scope,$sessionStorage,getReportService,$timeout){    
-console.log('entered');
-$scope.doRefresh=function() {
-	console.log("dsbsk");
-   $timeout(function(){
-   var Report = getReportService.get();
-   Report.$promise.then(function (data) {
-       if (data.responseCode == "Cali_SUC_1030") {
-           $scope.products = data.jsonStr;
-           $scope.products.push(data)
-           for (var i = 0; i < (data.jsonStr).length; i++) {
-               if (data.jsonStr[i].txnTypeStr == "Buy") {
-                   $scope.txnStatusClass = "success";
-               }
-               else if (data.jsonStr[i].txnTypeStr == "Sell") {
-                   $scope.txnStatusClass = "failed";
-               }
-           }
-       }
-   })
-$scope.$broadcast("scroll.refreshComplete");
-},2000)
-}
-})
-*/
+
+  .controller('LoadingCtrl', function($scope, $ionicLoading,$timeout) {
+    $scope.show = function() {
+      $timeout(function () {
+        $ionicLoading.show({
+          template: 'Loading...'
+        });
+
+      }, 2000);
+      $scope.hide = function () {
+        $ionicLoading.hide();
+      };
+    }
+  });
