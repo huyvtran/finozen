@@ -217,13 +217,10 @@ $sessionStorage.xirr=data.jsonStr.xirr;
   Report.$promise.then(function(data){
     if(data.responseCode=="Cali_SUC_1030"){
       $scope.products=data.jsonStr;
-    for(var i = 0; i < (data.jsonStr).length; i++) {
-      if(data.jsonStr[i].txnTypeStr==="Sell"){
-        $scope.txnStatusClass="success";
-      }
-      else{
-        $scope.txnStatusClass="failed";
-      }
+	if((data.jsonStr).length <= 0){console.log(window.Connection + "connection");
+	$scope.noTxnMsg1="There are no transactions to display,";
+	$scope.noTxnMsg2="START INVESTING NOW";
+	$scope.noTxnIcon="img/account-image.png";
     }
     }
   })
