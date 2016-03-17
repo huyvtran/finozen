@@ -134,7 +134,7 @@ angular.module('app.subcontrollerOne', [])
     })
 //FAQ controllers END
 //TAB's DATA controller
-	.controller('withdrawCtrl', function($scope,$sessionStorage) {
+	.controller('withdrawCtrl', function($scope,$sessionStorage,$ionicLoading,getReportService) {
 $scope.policy = function()
 {
 	window.open('http://finozen.com/policy.html','_self', 'location=yes'); 
@@ -142,6 +142,7 @@ $scope.policy = function()
 $scope.terms = function()
 {
 	window.open('http://finozen.com/t&c.html','_self'); 
+
 }	
 
   $scope.clientName= $sessionStorage.SessionClientName;
@@ -187,7 +188,24 @@ $scope.terms = function()
             else {return $sessionStorage.gainMonth;
             }
         }
+        console.log('entered');
+        $ionicLoading.show();
 
+         var Report = getReportService.get();
+         Report.$promise.then(function(data){
+         if(data.responseCode=="Cali_SUC_1030"){
+         $scope.products=data.jsonStr;
+         for(var i = 0; i < (data.jsonStr).length; i++) {
+         if(data.jsonStr[i].txnTypeStr=="Buy"){
+         $scope.txnStatusClass="success";
+         }
+         else if(data.jsonStr[i].txnTypeStr=="Sell"){
+         $scope.txnStatusClass="failed";
+         }
+         }
+         }
+         })
+        $ionicLoading.hide();
     })
  
  // NAV Calculator controller

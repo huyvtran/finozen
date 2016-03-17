@@ -3,6 +3,7 @@
 <ion-content  has-bouncing="true"  scrollbar-y="false">
 <div class="list recent_transactions">
   <div ng-controller="transListController as listControl">
+  <ion-refresher on-refresh="doRefresh()">      </ion-refresher>
   <div class="item item-avatar item-icon-right in in done done" ng-repeat="lists in products | orderBy:'-orderId'">
 	<p class="{{txnStatusClass}}"><span>&#x20B9;</span> {{lists.amount}}</p>
 	<span class="item-note right">Transaction ID: {{ lists.orderId}}</span><br/>

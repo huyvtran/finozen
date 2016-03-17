@@ -8,8 +8,18 @@ angular.module('app.controllers', [])
 
     })
 
-    .controller('growthRateCtrl', function($scope) {
+    .controller('growthRateCtrl', function($scope,$rootScope) {
+$scope.terms = function()
+{
+	//window.open('http://finozen.com/t&c.html','_self'); 
+	var win = window.open( "http://finozen.com", "_system" );
+win.addEventListener( "loadstop", function() {
 
+        win.close();
+});
+	//window.open = cordova.InAppBrowser.open;
+	//var ref = cordova.InAppBrowser.open('http://finozen.com/t&c.html', '_self', 'location=yes');
+}
     })
     .controller('inviteCtrl', function($scope) {
 
@@ -180,7 +190,7 @@ angular.module('app.controllers', [])
 
     })
 
-    .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,$ionicLoading) {
+    .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,$ionicLoading,getReportService,$timeout) {
 var timeNow = new Date().getUTCHours();
 
 $ionicLoading.show();
@@ -237,6 +247,30 @@ $sessionStorage.xirr=data.jsonStr.xirr;
     console.log("error");
     $ionicLoading.hide();
   })
+  
+  
+  
+  
+  $scope.doRefresh=function() {
+	  console.log("dsbsk");
+   $timeout(function(){
+   var Report = getReportService.get();
+   Report.$promise.then(function (data) {
+       if (data.responseCode == "Cali_SUC_1030") {
+           $scope.products = data.jsonStr;
+           for (var i = 0; i < (data.jsonStr).length; i++) {
+               if (data.jsonStr[i].txnTypeStr == "Buy") {
+                   $scope.txnStatusClass = "success";
+               }
+               else if (data.jsonStr[i].txnTypeStr == "Sell") {
+                   $scope.txnStatusClass = "failed";
+               }
+           }
+       }
+   })
+$scope.$broadcast("scroll.refreshComplete");
+},2000)
+}
 
         /*var tList=this;
          tList.products=[];
@@ -287,7 +321,7 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 
                 if($scope.checked_withdraw == true){
 
-                    mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": "KMMF","rtaCode":"K745","orderTxnDate": date,"allUnits":"Y","folioNo":"2023421/94"},function(data){
+                    mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"allUnits":"Y","folioNo":"499155246692"},function(data){
                         if(data.responseCode!="Cali_SUC_1030") {
                             $scope.withdraw_error="Error committing the transaction, please try again";
                         }
@@ -316,25 +350,3 @@ $sessionStorage.xirr=data.jsonStr.xirr;
         }
 
     })
-
-    /*Fetching reports data on swipe from growth rate page --> transaction page
-    .controller('updateTransactionCTRL',function($scope,$sessionStorage,$ionicLoading,getReportService){
-        console.log('entered');
-        $ionicLoading.show();
-
-        /* var Report = getReportService.get();
-         Report.$promise.then(function(data){
-         if(data.responseCode=="Cali_SUC_1030"){
-         $scope.products=data.jsonStr;
-         for(var i = 0; i < (data.jsonStr).length; i++) {
-         if(data.jsonStr[i].txnTypeStr=="Buy"){
-         $scope.txnStatusClass="success";
-         }
-         else if(data.jsonStr[i].txnTypeStr=="Sell"){
-         $scope.txnStatusClass="failed";
-         }
-         }
-         }
-         })
-        $ionicLoading.hide();
-    })*/
