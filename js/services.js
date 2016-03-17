@@ -36,7 +36,7 @@ angular.module('app.services', [])
 
 .factory('getPerformanceService', ['$resource','$filter','$sessionStorage',function($resource,$filter,$sessionStorage){
 	var date = new Date();
-    date = $filter('date')(date,'dd/MM/yyyy');
+    date = $filter('date')(date,'MM/dd/yyyy');
 	return $resource('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode='+$sessionStorage.SessionPortfolio+'&endDate='+date+'&noOfDays=40');
 }])
 
@@ -142,6 +142,8 @@ angular.module('app.services', [])
 	}
 
 }])
+
+
 
 
 

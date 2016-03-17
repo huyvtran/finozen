@@ -11,7 +11,7 @@ angular.module('app.controllers', [])
     .controller('growthRateCtrl', function($scope,$rootScope) {
 $scope.terms = function()
 {
-	//window.open('http://finozen.com/t&c.html','_self'); 
+	//window.open('http://finozen.com/t&c.html','_self');
 	var win = window.open( "http://finozen.com", "_system" );
 win.addEventListener( "loadstop", function() {
 
@@ -38,7 +38,7 @@ win.addEventListener( "loadstop", function() {
     .controller('AuthSignUpCtrl', function($scope, $state,signUpService,$sessionStorage) {
 
         $scope.signIn = function(form,searchText2,signupForm) {
-          
+
             if(angular.equals(signupForm.pin,searchText2))
             {
                 if(form.$valid) {
@@ -239,7 +239,7 @@ $sessionStorage.xirr=data.jsonStr.xirr;
         $sessionStorage.rtaCode=data.jsonStr[i].rtaCode;
         $sessionStorage.amcCode=data.jsonStr[i].amcCode;
       }
-      
+
     }
     $ionicLoading.hide();
     }
@@ -247,10 +247,10 @@ $sessionStorage.xirr=data.jsonStr.xirr;
     console.log("error");
     $ionicLoading.hide();
   })
-  
-  
-  
-  
+
+
+
+
   $scope.doRefresh=function() {
 	  console.log("dsbsk");
    $timeout(function(){
@@ -294,12 +294,12 @@ $scope.$broadcast("scroll.refreshComplete");
 
 
     .controller('showhistoryController', function($scope,$ionicHistory){
-       
+
         $ionicHistory.clearHistory();
     })
 
     .controller('navhistoryController', function($scope,$ionicHistory){
-      
+
         $ionicHistory.goBack(-2);
     })
 
