@@ -311,7 +311,7 @@ $scope.$broadcast("scroll.refreshComplete");
      })*/
 
 
-    .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$sessionStorage) {
+    .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$sessionStorage,$ionicPopup) {
 
         $scope.Withdrawl = function(form) {
 
@@ -322,11 +322,20 @@ $scope.$broadcast("scroll.refreshComplete");
                 if($scope.checked_withdraw == true){
 
                     mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"allUnits":"Y","folioNo":"499155246692"},function(data){
-                        if(data.responseCode!="Cali_SUC_1030") {
-                            $scope.withdraw_error="Error committing the transaction, please try again";
+                        if(data.responseCode=="Cali_SUC_1030") {
+                            $ionicPopup.alert({
+                                title: 'Request has been successfully accepted',
+                                template: 'Success'
+                            });
+                            $scope.withdraw_error="Please try again";
                         }
                     },function(error){
                         $scope.withdraw_error="Error committing the transaction, please try again"
+                        $ionicPopup.alert({
+                            title: 'Request has failed',
+                            template: 'Please try again'
+                        });
+
                     });
                 }
                 else{
@@ -334,9 +343,17 @@ $scope.$broadcast("scroll.refreshComplete");
                     mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode":$sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"quantity":$scope.amount,"allUnits":"N","folioNo":$sessionStorage.folioNums},function(data){
                         if(data.responseCode!="Cali_SUC_1030") {
                             $scope.withdraw_error="Error committing the transaction, please try again";
+                            $ionicPopup.alert({
+                                title: 'Request has failed',
+                                template: 'Please try again'
+                            });
                         }
                     },function(error){
                         $scope.withdraw_error="Error committing the transaction, please try again";
+                        $ionicPopup.alert({
+                            title: 'Request has been successfully accepted',
+                            template: 'Success'
+                        });
                     });
 
                 }
