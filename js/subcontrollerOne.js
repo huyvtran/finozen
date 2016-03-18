@@ -163,16 +163,15 @@ $scope.terms = function()
 
         $scope.growth= $sessionStorage.xirr;
         $scope.growthRate= function(){
+			console.log("growth");
             if($scope.growth != null)
              {
                 if($scope.growth <= 0){return 0;}
-                else if($scope.growth > 0){
                     if($scope.growth >= 10){return 10;}
                     else if($scope.growth <= 7.5){return 7.5;}
-                    else{return $scope.growth}
-                }
+                    else{return $scope.growth;}
             }
-			else{return 0;}
+			else{return 7.5;}
         }
   
   
@@ -247,9 +246,9 @@ $scope.terms = function()
         }
 
         $scope.sendMfOrder=function() {
-console.log($sessionStorage.folioNums);
-console.log($sessionStorage.amcCode);
-console.log($sessionStorage.rtaCode);
+		console.log($sessionStorage.folioNums);
+		console.log($sessionStorage.amcCode);
+		console.log($sessionStorage.rtaCode);
             var date=dateService.getDate();
             mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums},function(data){
                 if(data.responseCode=="Cali_SUC_1030"){
@@ -264,3 +263,10 @@ console.log($sessionStorage.rtaCode);
 
 
     })
+.controller('goOneStep', function($scope,$ionicHistory ){
+	$scope.goOneStepback=function(){
+		$ionicHistory.goBack(-1);
+		history.go(-1);
+	}
+	
+})

@@ -38,7 +38,8 @@ win.addEventListener( "loadstop", function() {
     .controller('AuthSignUpCtrl', function($scope, $state,signUpService,$sessionStorage) {
 
         $scope.signIn = function(form,searchText2,signupForm) {
-
+$sessionStorage.SessionClientName=signupForm.fName+' '+signupForm.lName;
+$sessionStorage.SessionMobNo=signupForm.mobileNumber;
             if(angular.equals(signupForm.pin,searchText2))
             {
                 if(form.$valid) {
@@ -54,6 +55,8 @@ win.addEventListener( "loadstop", function() {
 
         $scope.addUserInfo=function(){
             signUpService.sendSignUp($sessionStorage.signUpData).then(function(data){
+				//$sessionStorage.
+				$sessionStorage.SessionPortfolio=(JSON.parse(data.jsonStr)).portfolioCode;
                 if(data.responseCode!="Cali_SUC_1030"){
 					if(data.responseCode=="Cali_ERR_2050"){
 						$scope.serverError="Mobile number in use";
@@ -170,25 +173,6 @@ win.addEventListener( "loadstop", function() {
 
     })
 
-
-
-    .controller('privacyCtrl', function($scope) {
-
-    })
-    .controller('sidemenuCtrl', function($scope) {
-
-    })
-
-
-
-
-
-   .controller('tourCtrl', function($scope) {
-
-    })
-    .controller('feedbackCtrl', function($scope) {
-
-    })
 
     .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,$ionicLoading,getReportService,$timeout) {
 var timeNow = new Date().getUTCHours();
@@ -326,6 +310,14 @@ $scope.$broadcast("scroll.refreshComplete");
                             });
                             $scope.withdraw_error="Please try again";
                         }
+						else
+						{
+							console.log("failed");
+							$ionicPopup.alert({
+                            title: 'Request has failed',
+                            template: 'Failed'
+                        });
+						}
                     },function(error){
                         $scope.withdraw_error="Error committing the transaction, please try again"
                         $ionicPopup.alert({
@@ -338,19 +330,26 @@ $scope.$broadcast("scroll.refreshComplete");
                 else{
 
                     mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode":$sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount":$scope.amount,"folioNo":$sessionStorage.folioNums},function(data){
-                        if(data.responseCode!="Cali_SUC_1030") {
+                        console.log(data.responseCode);
+						if(data.responseCode!="Cali_SUC_1030") {
+							console.log("failed");
                             $scope.withdraw_error="Error committing the transaction, please try again";
                             $ionicPopup.alert({
                                 title: 'Request has failed',
                                 template: 'Please try again'
                             });
                         }
-                    },function(error){
-                        $scope.withdraw_error="Error committing the transaction, please try again";
-                        $ionicPopup.alert({
+						else
+						{
+							console.log("success");
+							$ionicPopup.alert({
                             title: 'Request has been successfully accepted',
                             template: 'Success'
                         });
+						}
+                    },function(error){
+						console.log("errorr");
+                        $scope.withdraw_error="Error committing the transaction, please try again";
                     });
 
                 }

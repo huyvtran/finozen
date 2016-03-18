@@ -131,7 +131,7 @@ $ionicAppProvider.identify ({
           .state('faq', {
       url: '/faq',         
           templateUrl: 'templates/faq.html',
-          controller: 'privacyCtrl'     
+          controller: ''     
     })
           .state('faq5', {
       url: '/faq_fundsMethods',         
@@ -159,11 +159,6 @@ $ionicAppProvider.identify ({
           controller: 'OthersCtrl'     
     })  
 
-    .state('privacy', {
-      url: '/privacy',         
-          templateUrl: 'templates/privacy.html',
-          controller: 'privacyCtrl'     
-    })  
 
     .state('invest', {
       url: '/invest',         
@@ -178,14 +173,12 @@ $ionicAppProvider.identify ({
     }) 
     .state('tour', {
       url: '/tour',         
-          templateUrl: 'templates/tour.html',
-          controller: 'tourCtrl'     
+          templateUrl: 'templates/tour.html'    
     })  
 
     .state('feedback', {
       url: '/feedback',         
-          templateUrl: 'templates/feedback.html',
-          controller: 'feedbackCtrl'     
+          templateUrl: 'templates/feedback.html'   
     })  
  
      
