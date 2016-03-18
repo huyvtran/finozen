@@ -22,7 +22,7 @@ $ionicAppProvider.identify ({
      .state('sliders', {
 		url: '/sliders',
 		templateUrl: 'templates/slides.html',
-		controller: 'slideCtrl'
+		controller: ''
     })
          
      .state('pre_verification', {

@@ -137,13 +137,13 @@ angular.module('app.subcontrollerOne', [])
 	.controller('withdrawCtrl', function($scope,$sessionStorage,$ionicLoading,getReportService,$ionicHistory) {
 $scope.policy = function()
 {
-	window.open('http://finozen.com/policy.html','_self', 'location=yes');
-  $ionicHistory.goBack(-1);
+	window.open('http://finozen.com/policy.html','_self');
+  //$ionicHistory.goBack(-1);
 }
 $scope.terms = function()
 {
 	window.open('http://finozen.com/t&c.html','_self');
-  $ionicHistory.goBack(-1);
+  //$ionicHistory.goBack(-1);
 
 }	
 
@@ -163,8 +163,8 @@ $scope.terms = function()
 
         $scope.growth= $sessionStorage.xirr;
         $scope.growthRate= function(){
-            if($scope.growth == null){return 0;}
-            else {
+            if($scope.growth != null)
+             {
                 if($scope.growth <= 0){return 0;}
                 else if($scope.growth > 0){
                     if($scope.growth >= 10){return 10;}
@@ -172,6 +172,7 @@ $scope.terms = function()
                     else{return $scope.growth}
                 }
             }
+			else{return 0;}
         }
   
   
@@ -238,7 +239,6 @@ $scope.terms = function()
 
             return $scope.final(initial,nav,suggest);
         }
-
         $scope.Invest = function(form) {
             if(form.$valid) {
                 //$state.go('successPage');
@@ -253,14 +253,13 @@ console.log($sessionStorage.rtaCode);
             var date=dateService.getDate();
             mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums},function(data){
                 if(data.responseCode=="Cali_SUC_1030"){
-                    window.open('http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_system');
+                    window.open('http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_self');
                 }
 
             },function(error){
                 console.log("Error");
             });
         };
-
         var mid=$sessionStorage.orderId;//dynamic id
 
 

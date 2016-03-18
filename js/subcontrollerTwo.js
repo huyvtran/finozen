@@ -49,8 +49,8 @@ angular.module('app.subcontrollerTwo', [])
         $scope.signOut = function(){
             $state.go('login')
             $timeout(function () {
-                $ionicHistory.clearCache();
-                $ionicHistory.clearHistory();
+                //$ionicHistory.clearCache();
+                //$ionicHistory.clearHistory();
             },100)
         }
     })

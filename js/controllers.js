@@ -255,14 +255,6 @@ $sessionStorage.xirr=data.jsonStr.xirr;
    Report.$promise.then(function (data) {
        if (data.responseCode == "Cali_SUC_1030") {
            $scope.products = data.jsonStr;
-           for (var i = 0; i < (data.jsonStr).length; i++) {
-               if (data.jsonStr[i].txnTypeStr == "Buy") {
-                   $scope.txnStatusClass = "success";
-               }
-               else if (data.jsonStr[i].txnTypeStr == "Sell") {
-                   $scope.txnStatusClass = "failed";
-               }
-           }
        }
    })
 $scope.$broadcast("scroll.refreshComplete");
@@ -292,7 +284,7 @@ $scope.$broadcast("scroll.refreshComplete");
 
     .controller('showhistoryController', function($scope,$ionicHistory){
 
-        $ionicHistory.clearHistory();
+        //$ionicHistory.clearHistory();
     })
 
     .controller('navhistoryController', function($scope,$ionicHistory){
@@ -318,7 +310,7 @@ $scope.$broadcast("scroll.refreshComplete");
 
                 if($scope.checked_withdraw == true){
 
-                    mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"allUnits":"Y","folioNo":"499155246692"},function(data){
+                    mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"allUnits":"Y","folioNo":$sessionStorage.folioNums},function(data){
                         if(data.responseCode!="Cali_SUC_1030") {
                             $scope.withdraw_error="Error committing the transaction, please try again";
                         }
@@ -328,7 +320,7 @@ $scope.$broadcast("scroll.refreshComplete");
                 }
                 else{
 
-                    mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode":$sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"quantity":$scope.amount,"allUnits":"N","folioNo":$sessionStorage.folioNums},function(data){
+                    mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode":$sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount":$scope.amount,"folioNo":$sessionStorage.folioNums},function(data){
                         if(data.responseCode!="Cali_SUC_1030") {
                             $scope.withdraw_error="Error committing the transaction, please try again";
                         }
