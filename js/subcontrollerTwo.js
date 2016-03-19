@@ -47,11 +47,12 @@ angular.module('app.subcontrollerTwo', [])
     .controller('signoutCtrl',function($scope,$state,$ionicHistory,$timeout){
 
         $scope.signOut = function(){
-            $state.go('login')
+           
             $timeout(function () {
-                //$ionicHistory.clearCache();
-                //$ionicHistory.clearHistory();
+                $ionicHistory.clearCache();
+               $ionicHistory.clearHistory();
             },100)
+             $state.go('login');
         }
     })
 
