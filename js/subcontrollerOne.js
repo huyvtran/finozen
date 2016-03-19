@@ -149,31 +149,44 @@ $scope.terms = function()
 
   $scope.clientName= $sessionStorage.SessionClientName;
   $scope.clientMobile= $sessionStorage.SessionMobNo;
+  //$scope.xirr=$sessionStorage.xirr;
+$scope.xirrRate= function(){
+	
+	if($sessionStorage.xirr == null){return 0;}
+	else if($sessionStorage.xirr <= 0){return 0;}
+	else if($sessionStorage.xirr >= 10){return 10;}
+	else if($sessionStorage.xirr <= 7.5){return 7.5;}
+	else{return $sessionStorage.xirr;}
+	
+}
+console.log($scope.xirrRate());
+
   $scope.balance= function(){
     if($sessionStorage.mktValue == null){return 0;}
     else {return $sessionStorage.mktValue;
     }
   }
+  
     $scope.investAmount= function(){
     if($sessionStorage.netInv == null){return 0;}
+	
     else {return $sessionStorage.netInv;
     }
   }
-
-
-        $scope.growth= $sessionStorage.xirr;
-        $scope.growthRate= function(){
-			console.log("growth");
-            if($scope.growth != null)
-             {
-                if($scope.growth <= 0){return 0;}
-                    if($scope.growth >= 10){return 10;}
-                    else if($scope.growth <= 7.5){return 7.5;}
-                    else{return $scope.growth;}
-            }
-			else{return 7.5;}
-        }
-  
+/*  this is to be removed
+$scope.growthRate= $sessionStorage.xirr;
+$scope.growthRate= function(){
+	console.log("growth");
+	if($scope.growth != null)
+	 {
+		if($scope.growth <= 0){return 0;}
+			if($scope.growth >= 10){return 10;}
+			else if($scope.growth <= 7.5){return 7.5;}
+			else{return $scope.growth;}
+	}
+	else{return 7.5;}
+}
+  */
   
         $scope.netGainToday=function(){
             if($sessionStorage.gainToday == null){return 0;}
@@ -209,13 +222,16 @@ $scope.terms = function()
     if($scope.schemeName=="RELIANCE LIQUID FUND - TREASURY PLAN - GROWTH PLAN - GROWTH OPTION - G"){
 		$scope.schemeLink="http://www.moneycontrol.com/mutual-funds/nav/reliance-liquid-fund-treasury-plan-ip/MRC046";
 	}
-	var timeNow = new Date().getHours();
-	if(timeNow <13){
-    $scope.nav=$sessionStorage.nav;
-	}
-	else {
-		$scope.nav=$sessionStorage.nav + 0.0002*($sessionStorage.nav);
-	}
+	// to be changed 
+	var dayNow = new Date().getDay();
+	console.log(dayNow);
+	if(dayNow >0 && dayNow <5){$scope.nav=$sessionStorage.nav*(1+ 0.0002);}
+	else if(dayNow ==5) {$scope.nav=$sessionStorage.nav*(Math.pow((1+ 0.0002),3));}
+	else if(dayNow ==6 || dayNow ==7) {$scope.nav=$sessionStorage.nav*(Math.pow((1+ 0.0002),2));}
+	
+	console.log($scope.nav);
+	// till here
+	
     $scope.final=function(initial,nav,suggest){
     var theory=initial/nav ;
     var rounded= Math.round(theory * 1000)/1000;
@@ -234,8 +250,7 @@ $scope.terms = function()
     else{return 0;}}
     $scope.test=function(initial,nav,suggest){
     suggest++;
-    initial=initial+suggest;
-
+    initial=initial+1;
             return $scope.final(initial,nav,suggest);
         }
         $scope.Invest = function(form) {

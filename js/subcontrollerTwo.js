@@ -21,17 +21,15 @@ angular.module('app.subcontrollerTwo', [])
                     popup.then(function(res) {
                         $state.go("account");
                     });
-
-                    //
-
-
-
                 }
                 else {
                     console.log("Error");
                     $ionicPopup.alert({
                         title: 'Password Change status',
                         template: 'Password Changed UnSuccessfully'
+                    });
+					popup.then(function(res) {
+                        $state.go("account");
                     });
                 }
             },function(error){
@@ -69,23 +67,31 @@ angular.module('app.subcontrollerTwo', [])
             if(data.responseCode=="Cali_SUC_1030"){
 
               var popup= $ionicPopup.alert({
-                title: 'Password Change status',
-                template: 'Password Changed Successfully'
+                title: 'PIN Change status',
+                template: 'PIN Changed Successfully'
               });
 
               popup.then(function(res) {
                 $state.go("login");
               });
             }
-
+			else {
+				$ionicPopup.alert({
+                title: 'PIN Change status',
+                template: 'PIN Changed UnSuccessfully'
+				});
+				popup.then(function(res) {
+                $state.go("login");
+              });
+			}
 
 
           }).error(function(data){
             {
               console.log("Error");
               $ionicPopup.alert({
-                title: 'Password Change status',
-                template: 'Password Changed UnSuccessfully'
+                title: 'PIN Change status',
+                template: 'PIN Changed UnSuccessfully'
               });
             }
           });
