@@ -56,7 +56,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
         $scope.addUserInfo=function(){
             signUpService.sendSignUp($sessionStorage.signUpData).then(function(data){
 				//$sessionStorage.
-				$sessionStorage.SessionPortfolio=(JSON.parse(data.jsonStr)).portfolioCode;
+				
                 if(data.responseCode!="Cali_SUC_1030"){
 					if(data.responseCode=="Cali_ERR_2050"){
 						$scope.serverError="Mobile number in use";
@@ -66,6 +66,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 					}
 				}
                 else {
+					$sessionStorage.SessionPortfolio=(JSON.parse(data.jsonStr)).portfolioCode;
                     $state.go('pre_verification');
                 }
             },function(error){

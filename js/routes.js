@@ -60,7 +60,7 @@ $ionicAppProvider.identify ({
      .state('successPage', {
 		url: '/success',
 		templateUrl: 'templates/payment_success.html',
-		controller: 'successCtrl'
+		controller: ''
     })
                 
     .state('signup', {
