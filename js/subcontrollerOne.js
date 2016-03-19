@@ -222,13 +222,16 @@ $scope.growthRate= function(){
     if($scope.schemeName=="RELIANCE LIQUID FUND - TREASURY PLAN - GROWTH PLAN - GROWTH OPTION - G"){
 		$scope.schemeLink="http://www.moneycontrol.com/mutual-funds/nav/reliance-liquid-fund-treasury-plan-ip/MRC046";
 	}
-	var timeNow = new Date().getHours();
-	if(timeNow <13){
-    $scope.nav=$sessionStorage.nav;
-	}
-	else {
-		$scope.nav=$sessionStorage.nav + 0.0002*($sessionStorage.nav);
-	}
+	// to be changed 
+	var dayNow = new Date().getDay();
+	console.log(dayNow);
+	if(dayNow >0 && dayNow <5){$scope.nav=$sessionStorage.nav*(1+ 0.0002);}
+	else if(dayNow ==5) {$scope.nav=$sessionStorage.nav*(Math.pow((1+ 0.0002),3));}
+	else if(dayNow ==6 || dayNow ==7) {$scope.nav=$sessionStorage.nav*(Math.pow((1+ 0.0002),2));}
+	
+	console.log($scope.nav);
+	// till here
+	
     $scope.final=function(initial,nav,suggest){
     var theory=initial/nav ;
     var rounded= Math.round(theory * 1000)/1000;
@@ -247,8 +250,7 @@ $scope.growthRate= function(){
     else{return 0;}}
     $scope.test=function(initial,nav,suggest){
     suggest++;
-    initial=initial+suggest;
-
+    initial=initial+1;
             return $scope.final(initial,nav,suggest);
         }
         $scope.Invest = function(form) {
