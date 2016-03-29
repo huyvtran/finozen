@@ -1,9 +1,5 @@
 angular.module('app.controllers', [])
 
-    .controller('signupCtrl', function($scope) {
-
-    })
-
     .controller('summaryPageCtrl', function($scope) {
 
     })
@@ -177,7 +173,6 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 
     .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,$ionicLoading,getReportService,$timeout) {
 var timeNow = new Date().getUTCHours();
-
 $ionicLoading.show();
 var reportDate = getPerformanceService.get();
 reportDate.$promise.then(function(data){
