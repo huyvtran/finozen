@@ -1,4 +1,18 @@
 angular.module('app.subcontrollerOne', [])
+    .controller('signupCtrl', function($scope,$ionicHistory,$sessionStorage) {
+/*
+	$scope.terms=function(){
+	$ionicHistory.clearHistory();
+	$ionicHistory.clearCache();
+	console.log($sessionStorage.SessionPortfolio + "before clearing");
+	sessionStorage.clear();
+	delete $sessionStorage.SessionPortfolio;
+	delete $sessionStorage.gainMonth;
+	console.log($sessionStorage.SessionPortfolio + "after clearing");
+	history.go(-(history.length - 1));
+	console.log("cleared");
+}*/
+    })
 
 //FAQ controllers START
     .controller('FundsMethodCtrl', function($scope) {
@@ -187,11 +201,8 @@ $scope.growthRate= function(){
 }
   */
   
-        $scope.netGainToday=function(){
-            if($sessionStorage.gainToday == null){return 0;}
-            else {return $sessionStorage.gainToday;
-            }
-        }
+            if($sessionStorage.gainToday == null){$scope.netGainToday = 0;}
+            else {$scope.netGainToday = $sessionStorage.gainToday;}
         $scope.netGain=function(){
             if($sessionStorage.gainTotal == null){return 0;}
             else {return $scope.balance()-$scope.investAmount();
@@ -212,6 +223,7 @@ $scope.growthRate= function(){
          }
          })
         $ionicLoading.hide();
+
     })
  
  // NAV Calculator controller
@@ -224,9 +236,9 @@ $scope.growthRate= function(){
 	// to be changed 
 	var dayNow = new Date().getDay();
 	console.log(dayNow);
-	if(dayNow >0 && dayNow <5){$scope.nav=$sessionStorage.nav*(1+ 0.0002);}
+	if(dayNow >=0 && dayNow <5){$scope.nav=$sessionStorage.nav*(1+ 0.0002);}
 	else if(dayNow ==5) {$scope.nav=$sessionStorage.nav*(Math.pow((1+ 0.0002),3));}
-	else if(dayNow ==6 || dayNow ==7) {$scope.nav=$sessionStorage.nav*(Math.pow((1+ 0.0002),2));}
+	else if(dayNow ==6) {$scope.nav=$sessionStorage.nav*(Math.pow((1+ 0.0002),2));}
 	
 	console.log($scope.nav);
 	// till here
