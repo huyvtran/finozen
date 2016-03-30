@@ -15,7 +15,7 @@
 			<div>{{serverError}} </div>
 		</div>
 		<label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.mobile.$touched && authorizationForm.mobile.$invalid, 'no-errors' :  authorizationForm.mobile.$touched && authorizationForm.mobile.$valid}">
-			<input type="number" name="mobile" ng-model="authorization.login"  maxlength="10" ng-minlength="10" ng-maxlength="10" required placeholder="Mobile Number" min="7000000000" max="9999999999" >
+			<input type="number" name="mobile" ng-model="authorization.login"  maxlength="10" ng-minlength="10" ng-maxlength="10" required placeholder="Mobile Number">
 		</label>
 		<div class="error-container" ng-show="authorizationForm.mobile.$error && authorizationForm.$submitted" ng-messages="authorizationForm.mobile.$error">
 			<div  class="error" >
@@ -24,7 +24,7 @@
 				<div ng-message="minlength, maxlength">
 					Mobile number must be 10 digits.
 				</div>
-				<div  ng-message="min, max, step">
+				<div  ng-message="step">
 					Enter valid mobile number
 				</div>
 

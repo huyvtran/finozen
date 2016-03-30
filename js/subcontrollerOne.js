@@ -201,8 +201,11 @@ $scope.growthRate= function(){
 }
   */
   
-            if($sessionStorage.gainToday == null){$scope.netGainToday = 0;}
-            else {$scope.netGainToday = $sessionStorage.gainToday;}
+        $scope.gainToday=function(){
+            if($sessionStorage.gainToday == null){return 0;}
+            else {return $sessionStorage.gainToday;
+            }
+        }			
         $scope.netGain=function(){
             if($sessionStorage.gainTotal == null){return 0;}
             else {return $scope.balance()-$scope.investAmount();
@@ -227,7 +230,7 @@ $scope.growthRate= function(){
     })
  
  // NAV Calculator controller
-.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService) {
+.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup) {
   var finalComputedVal;
     $scope.schemeName=$sessionStorage.schemeName;
     if($scope.schemeName=="RELIANCE LIQUID FUND - TREASURY PLAN - GROWTH PLAN - GROWTH OPTION - G"){
@@ -236,9 +239,10 @@ $scope.growthRate= function(){
 	// to be changed 
 	var dayNow = new Date().getDay();
 	console.log(dayNow);
-	if(dayNow >=0 && dayNow <5){$scope.nav=$sessionStorage.nav*(1+ 0.0002);}
+	if(dayNow >=1 && dayNow <5){$scope.nav=$sessionStorage.nav*(1+ 0.0002);}
 	else if(dayNow ==5) {$scope.nav=$sessionStorage.nav*(Math.pow((1+ 0.0002),3));}
 	else if(dayNow ==6) {$scope.nav=$sessionStorage.nav*(Math.pow((1+ 0.0002),2));}
+	else if(dayNow ==0) {$scope.nav=$sessionStorage.nav;}
 	
 	console.log($scope.nav);
 	// till here
@@ -282,7 +286,7 @@ $scope.growthRate= function(){
                 }
 
             },function(error){
-                console.log("Error");
+				$scope.mess="Enter a value";
             });
         };
         var mid=$sessionStorage.orderId;//dynamic id
@@ -291,7 +295,6 @@ $scope.growthRate= function(){
     })
 .controller('goOneStep', function($scope,$ionicHistory ){
 	$scope.goOneStepback=function(){
-		$ionicHistory.goBack(-1);
 		history.go(-1);
 	}
 	

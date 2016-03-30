@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', 'app.controllers', 'app.subcontrollerOne','app.subcontrollerTwo' , 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages','ngStorage','ngIdle'])
+angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', 'app.controllers', 'app.subcontrollerOne','app.subcontrollerTwo' , 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages','ngStorage','ngIdle','ngCordova'])
 
 /*.constant('$ionicLoadingConfig', {
   template: '<ion-spinner icon="android"></ion-spinner>',
@@ -23,10 +23,12 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 
 
 
-.run(function($ionicPlatform,$ionicAnalytics,$rootScope, $ionicLoading,Idle) {
+
+.run(function($ionicPlatform,$ionicAnalytics,$rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
+
 Idle.watch();
     if(window.Connection) {
                 if(navigator.connection.type == Connection.NONE) {
@@ -45,19 +47,21 @@ Idle.watch();
     $ionicAnalytics.register();
     var io=Ionic.io();
 
-    /*disabling the hardware back button on invest page and withdraw page*/
+    /*disabling the hardware back button on invest page and withdraw page
 
     $ionicPlatform.registerBackButtonAction(function (event) {
-      if ($ionicHistory.currentStateName() === 'invest'){
+      if ($ionicHistory.currentStateName() == 'invest'){
         event.preventDefault();
       } else {
-        $ionicHistory.goBack();
+        history.go(-1);
       }
-    }, 100);      $ionicPlatform.registerBackButtonAction(function (event) {
-      if ($ionicHistory.currentStateName() === 'withdraw'){
+    }, 100);      */
+	$ionicPlatform.registerBackButtonAction(function (event) {
+		  console.log("hardware back" + $ionicHistory);
+      if ($ionicHistory.currentStateName() == 'invest'){
         event.preventDefault();
       } else {
-        $ionicHistory.goBack();
+        history.go(-1);
       }
     }, 100);
     /*var push=new Ionic.Push({

@@ -281,11 +281,13 @@ $scope.$broadcast("scroll.refreshComplete");
     })
 
     /*For social sharing*/
-    /*.controller('socialShareController', function($scope,$cordovaSocialSharing){
-     $scope.share = function(){
-     $scope.shareViaWhatsApp('Hi my money just grew by 2.8%. Try this awesome app','null','http://finotrust.com/');
-     }
-     })*/
+    .controller('socialShareController', function($scope,$cordovaSocialSharing){
+		
+		
+$scope.shareViaTwitter=function(){
+	window.plugins.socialsharing.share('Hey, This is a great investment app. Start with Rs.100, download now!',null,null,'https://goo.gl/uAkHRa');
+}
+     })
 
 
     .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$sessionStorage,$ionicPopup) {
@@ -304,7 +306,7 @@ $scope.$broadcast("scroll.refreshComplete");
                                 title: 'Request has been successfully accepted',
                                 template: 'Success'
                             });
-                            $scope.withdraw_error="Please try again";
+                            
                         }
 						else
 						{
@@ -313,6 +315,7 @@ $scope.$broadcast("scroll.refreshComplete");
                             title: 'Request has failed',
                             template: 'Failed'
                         });
+						$scope.withdraw_error="Please try again";
 						}
                     },function(error){
                         $scope.withdraw_error="Error committing the transaction, please try again"
@@ -320,7 +323,7 @@ $scope.$broadcast("scroll.refreshComplete");
                             title: 'Request has failed',
                             template: 'Please try again'
                         });
-
+$scope.withdraw_error="Please try again";
                     });
                 }
                 else{
