@@ -238,7 +238,25 @@ padding:0;margin-top: 10px;}
 flex-flow: row wrap;
 height: 65vh;}
 }
-.verification{.bar{padding:0;} }
+.verification{
+	.steps{
+		margin: 0;
+		width: 100vw;
+	}
+	.bar-footer{padding:0;}
+	.container{margin-top:10px;}
+	.custom_bullets{
+		display: inline-block;
+		float: left;
+		height: 20px;
+		width: 20px;
+		background: #18bb9c;
+		border-radius: 50%;
+		color: white;
+		text-align: center;
+		margin:0px 10px;
+		}
+}
 .screen_invest{
 .button{background:#18bb9c;border:#18bb9c;color:white; &:hover{opacity:0.9; background:#18bb9c;} }
 	.invest_subheader {

@@ -36,6 +36,8 @@ win.addEventListener( "loadstop", function() {
         $scope.signIn = function(form,searchText2,signupForm) {
 $sessionStorage.SessionClientName=signupForm.fName+' '+signupForm.lName;
 $sessionStorage.SessionMobNo=signupForm.mobileNumber;
+$sessionStorage.SessionRefNo=signupForm.invite;
+console.log($sessionStorage.SessionRefNo);
             if(angular.equals(signupForm.pin,searchText2))
             {
                 if(form.$valid) {
@@ -200,7 +202,7 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 	if((data.jsonStr).length <= 0){console.log(window.Connection + "connection");
 	$scope.noTxnMsg1="There are no transactions to display,";
 	$scope.noTxnMsg2="START INVESTING NOW";
-	$scope.noTxnIcon="img/account-image.png";
+	$scope.noTxnIcon="img/no_leaves.png";
     }
     }
   })

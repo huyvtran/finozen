@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', 'app.controllers', 'app.subcontrollerOne','app.subcontrollerTwo' , 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages','ngStorage','ngIdle','ngCordova'])
+angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', 'app.controllers', 'app.subcontrollerOne','app.subcontrollerTwo' , 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages','ngStorage','ngIdle','ngCordova', 'ionic-toast'])
 
 /*.constant('$ionicLoadingConfig', {
   template: '<ion-spinner icon="android"></ion-spinner>',
@@ -60,10 +60,28 @@ Idle.watch();
       if ($ionicHistory.currentStateName() == 'invest'){
         //event.preventDefault();
 		$state.go('tabsController.summaryPage');
+		
       } else {
         history.go(-1);
       }
     }, 100);
+	
+	
+	/*
+	$ionicPlatform.registerBackButtonAction(function(event) {
+		$ionicPopup.confirm({
+		title: 'System warning',
+		template: 'are you sure you want to exit?'
+		}).then(function(res) {
+		if (res) {
+		ionic.Platform.exitApp();
+		}
+		})
+	}, 100);*/
+	
+	
+	
+	
     /*var push=new Ionic.Push({
       "onNotification": function(notification) {
     var payload = notification.payload;

@@ -147,7 +147,7 @@ angular.module('app.subcontrollerOne', [])
     })
 //FAQ controllers END
 //TAB's DATA controller
-	.controller('withdrawCtrl', function($scope,$sessionStorage,$ionicLoading,getReportService,$ionicHistory) {
+	.controller('withdrawCtrl', function($scope,$sessionStorage,$ionicLoading,getReportService,$ionicHistory,ionicToast,$ionicPlatform) {
 $scope.policy = function()
 {
 	window.open('http://finozen.com/policy.html','_self');
@@ -226,7 +226,20 @@ $scope.growthRate= function(){
          }
          })
         $ionicLoading.hide();
-
+  $ionicPlatform.registerBackButtonAction(function (event) {
+      if ($ionicHistory.currentStateName() == 'tabsController'){
+        //event.preventDefault();
+		//$state.go('tabsController.summaryPage');
+		  $scope.showToast = function(){
+		//ionicToast.show(message, position, stick, time); 
+		  ionicToast.show('This is a toast at the top.', 'bottom', false, 2500);
+		};
+      } else {
+        history.go(-1);
+      }
+    }, 100);
+  
+  
     })
  
  // NAV Calculator controller
@@ -298,4 +311,22 @@ $scope.growthRate= function(){
 		history.go(-1);
 	}
 	
+})
+.controller('HomeCtrl', function($scope, ionicToast,ionicPlatform, ionicHistory) {
+  //code here
+  $ionicPlatform.registerBackButtonAction(function (event) {
+      if ($ionicHistory.currentStateName() == 'tabsController'){
+        //event.preventDefault();
+		//$state.go('tabsController.summaryPage');
+		  $scope.showToast = function(){
+		//ionicToast.show(message, position, stick, time); 
+		  ionicToast.show('This is a toast at the top.', 'bottom', false, 2500);
+		};
+      } else {
+        history.go(-1);
+      }
+    }, 100);
+  
+  
+
 })
