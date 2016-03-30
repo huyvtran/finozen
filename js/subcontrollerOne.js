@@ -46,7 +46,7 @@ angular.module('app.subcontrollerOne', [])
         $scope.groups = [];
         $scope.groups["0"] = {name: "What is FinoZen?",items: ["FinoZen is a mobile app where you can watch your money grow, literally! It enables you to invest and withdraw in just a click while your money grows at an expected rate of 7.5 – 8.5% p.a."] };
         $scope.groups["1"] = {name: "How does FinoZen work?" , items: ["FinoZen channels your money to the selected liquid mutual fund which gives the best return at lowest risk. You will have full visibility and control of your money at all times. You can choose to Add or withdraw money anytime, anywhere with no penalties applicable. "] };
-        $scope.groups["2"] = {name: "Who is FinoZen meant for?" , items: ["FinoZen is meant for anyone who has excess money parked in their bank account. If you wish to make your money work for you and earn you interest to the tune of 7.5-8.5% p.a. in just a click, then FinoZen is meant for you.  You should be an Indian National investing in individual capacity. FinoZen is not available for NRIs, companies, firms, trusts etc."] };
+        $scope.groups["2"] = {name: "Who is FinoZen meant for?" , items: ["FinoZen is meant for anyone who has excess money parked in their bank account. If you wish to make your money work for you and earn you interest to the tune of 7.5-8.5% p.a. in just a click, then FinoZen is meant for you.  You should be an Indian National investing in individual capacity.FinoZen is not available for NRIs, companies, firms, trusts etc."] };
         $scope.groups["3"] = {name: "Why should I use Finozen over other options like savings accounts, fixed deposits?" , items: ["If your money is in Savings account, you get low returns at best quarterly.  Fixed Deposits  and other saving instruments will have higher returns but have a lock in period. With FinoZen, your returns are usually 7.5-8.5%, returns get credited in your account everyday, and you can add or withdraw any time!"] };
 
 
@@ -69,7 +69,7 @@ angular.module('app.subcontrollerOne', [])
     .controller('AddMoneyCtrl', function($scope) {
         $scope.groups = [];
         $scope.groups["0"] = {name: "I have signed up, what happens next?",items: ["Congratulations and welcome to Finozen! Here are the next steps:",
-            "  1) Welcome Call: We will call you shortly and collect your personal details like address, email ID and PAN no. Our executive will answer all your queries and help you understand the exact document requirement. ",
+            "  1) Welcome Call: We will call you shortly and collect your personal details like address, email ID and PAN no.No.,Aadhar Card No. and Bank Account No.Our executive will answer all your queries and help you understand the exact document requirement. ",
             "  2)Account Activation: Post collection of necessary details, It will take us 5 mins. to activate your account. We will get in touch with you to inform you about the activation. ",
             "  3) Start Investing: Post activation of account, you can click on “Add Money” and start investing through netbanking",
             "  4) Welcome to FinoZen family, now you can watch your money grow! "
@@ -95,11 +95,11 @@ angular.module('app.subcontrollerOne', [])
 
     .controller('WithdrawMoneyCtrl', function($scope) {
         $scope.groups = [];
-        $scope.groups["0"] = {name: "Where does my money go?",items: ["FinoZen channels your money to the selected liquid mutual fund which gives the best return at lowest risk. The investment is made in your name, and we will always be available just a call or message away. "] };
+        $scope.groups["0"] = {name: "Where does my money go?",items: ["FinoZen channels your money to the selected liquid mutual fund which gives the best return at lowest risk. You will have full visibility and control of your money at all times. You can choose to Add or withdraw money anytime, anywhere with no penalties applicable. "] };
         $scope.groups["1"] = {name: "How soon can I start investing?",items: ["It will take us 5 mins to activate your account post you provide your documents to us. We will notify you once your account is activated. Once activated, you can start investing immediately."] };
         $scope.groups["2"] = {name: "How often can I invest/Add money or withdraw?",items: ["You can invest/add money or withdraw as often as you want. There are no restrictions on the frequency of your transactions. Also, there are no penalties or charges applicable when you withdraw your money."] };
         $scope.groups["3"] = {name: "How soon will my investments reflect on FinoZen?",items: ["All withdrawals made before 2 pm Monday to Friday will reflect in your bank account on the next working day morning before 11 am.","working day morning before 11 am.", "This is also subject to a working day being a Bank Holiday or non-transaction day (as per Mutual Fund Company)"] };
-        $scope.groups["4"] = {name: "Where does my money go once I withdraw?",items: ["Your money will be sent to the same bank account from which you have invested once you withdraw on FinoZen."] };
+        $scope.groups["4"] = {name: "Where does my money go once I withdraw?",items: ["Your money will be deposited to the same bank account from which you have invested once you withdraw on FinoZen."] };
         $scope.groups["5"] = {name: "How soon can I access my withdrawn money?",items: ["All withdrawals made before 1pm Monday to Saturday will reflect in your bank account on the next business day. "] };
         $scope.groups["6"] = {name: "How much can I invest at a time? Is there a minimum or a maximum?",items: ["You can invest any amount from a minimum of INR 1,00"] };
         $scope.groups["7"] = {name: "How long do I need to stay invested? Is there a lock-in period?",items: ["There is no minimum period or lock-in. You have the option to withdraw your money anytime. Your money will grow from the very next day that you have invested, irrespective. "] };
