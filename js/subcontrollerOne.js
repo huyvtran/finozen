@@ -226,19 +226,6 @@ $scope.growthRate= function(){
          }
          })
         $ionicLoading.hide();
-  $ionicPlatform.registerBackButtonAction(function (event) {
-      if ($ionicHistory.currentStateName() == 'tabsController'){
-        //event.preventDefault();
-		//$state.go('tabsController.summaryPage');
-		  $scope.showToast = function(){
-		//ionicToast.show(message, position, stick, time); 
-		  ionicToast.show('This is a toast at the top.', 'bottom', false, 2500);
-		};
-      } else {
-        history.go(-1);
-      }
-    }, 100);
-  
   
     })
  
@@ -261,11 +248,11 @@ $scope.growthRate= function(){
 	// till here
 	
     $scope.final=function(initial,nav,suggest){
+		
     var theory=initial/nav ;
     var rounded= Math.round(theory * 1000)/1000;
     //loss=theory-rounded;
-    var nav1=rounded*nav;
-    var diff=nav1-initial;
+    var diff=rounded*nav-initial;
     if(initial>0){
     if(diff>0){
     finalComputedVal=initial;
@@ -275,14 +262,17 @@ $scope.growthRate= function(){
     return $scope.test(initial,nav,suggest);
     }
     }
-    else{return 0;}}
+    else{return 0;}
+	}
     $scope.test=function(initial,nav,suggest){
     suggest++;
     initial=initial+1;
             return $scope.final(initial,nav,suggest);
         }
-        $scope.Invest = function(form) {
-            if(form.$valid) {
+        
+		
+		$scope.Invest = function(form) {
+            if(form.$valid && $scope.initial>=100) {
                 //$state.go('successPage');
                 $scope.sendMfOrder();
             }

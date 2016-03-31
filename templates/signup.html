@@ -78,7 +78,7 @@
 			</div>
 		</div>
 		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.invite.$invalid && signupForm.$submitted, 'no-errors' : signupForm.invite.$valid  && signupForm.$submitted}">
-			<i class="icon ion-android-call signup_icons"></i><input type="number" name="invite" ng-model="authorization.invite" ng-minlength="10" ng-maxlength="10"  placeholder="Referal code">
+			<i class="icon ion-android-call signup_icons"></i><input type="number" name="invite" ng-model="authorization.invite" ng-minlength="10" ng-maxlength="10"  placeholder="Referal code(optional)">
 		</label>
 		
 		<div class="error-container last-error-container" ng-show="signupForm.invite.$error && signupForm.$submitted" ng-messages="signupForm.invite.$error">

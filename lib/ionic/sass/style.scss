@@ -238,7 +238,8 @@ padding:0;margin-top: 10px;}
 flex-flow: row wrap;
 height: 65vh;}
 }
-.verification{
+.verification, .statusPage{
+img{margin:0;width:100vw;}
 	.steps{
 		margin: 0;
 		width: 100vw;

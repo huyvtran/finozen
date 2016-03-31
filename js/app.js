@@ -24,7 +24,7 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 
 
 
-.run(function($ionicPlatform,$ionicAnalytics,$rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state) {
+.run(function($ionicPlatform,$ionicAnalytics,$rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,ionicToast) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -57,11 +57,24 @@ Idle.watch();
       }
     }, 100);      */
 	$ionicPlatform.registerBackButtonAction(function (event) {
-      if ($ionicHistory.currentStateName() == 'invest'){
+     if ($ionicHistory.currentStateName() == 'invest'){
         //event.preventDefault();
+		
 		$state.go('tabsController.summaryPage');
 		
-      } else {
+      }
+
+     else if ($ionicHistory.currentStateName() == 'tabsController.summaryPage'){
+        //event.preventDefault();
+		//$state.go('tabsController.summaryPage');
+		/*var showToast = function(){
+		//ionicToast.show(message, position, stick, time); 
+		  ionicToast.show('This is a toast at the top.', 'bottom', false, 2500);
+		};*/
+		navigator.app.exitApp();
+      }
+
+	  else {
         history.go(-1);
       }
     }, 100);
