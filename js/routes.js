@@ -122,9 +122,45 @@ $ionicAppProvider.identify ({
         
       
     
+             .state('questions', {
+      url: '/questions',         
+          templateUrl: 'templates/questions.html',
+          controller: ''     
+    })
+    
+             .state('confirm', {
+      url: '/confirm',         
+          templateUrl: 'templates/confirm.html',
+          controller: ''     
+    })
+             .state('verifySuccess', {
+      url: '/verifySuccess',         
+          templateUrl: 'templates/success.html',
+          controller: ''     
+    })
              .state('account', {
       url: '/account',         
           templateUrl: 'templates/account.html',
+          controller: ''     
+    })
+        .state('bank', {
+		url: '/bank',         
+        templateUrl: 'templates/bank.html',
+        controller: ''     
+    }) 
+        .state('panVerify', {
+		url: '/panVerify',         
+        templateUrl: 'templates/panVerify.html',
+        controller: ''     
+    }) 
+        .state('panImage', {
+		url: '/panImage',         
+        templateUrl: 'templates/panImage.html',
+        controller: ''     
+    })    
+             .state('aadhar', {
+      url: '/aadhar',         
+          templateUrl: 'templates/aadhar.html',
           controller: ''     
     })     
 
@@ -162,7 +198,7 @@ $ionicAppProvider.identify ({
 
     .state('invest', {
       url: '/invest',         
-          templateUrl: 'templates/invest.html',
+          templateUrl: 'templates/invest.html'
 
     })  
 

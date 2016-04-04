@@ -1,0 +1,40 @@
+<ion-view title="AADHAR" class="aadhar">
+<div class="bar bar-header fino_head">
+<button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepback()"></button>
+  <div class="h1 title"><p class="head_title"><span id="title">AADHAR</span></p></div>
+  <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
+</div>
+    <ion-content overflow-scroll="false" padding="false" class="has-header">
+<div class="aadharVerify">
+	<div class="aadharNumber padding">
+		<span class="custom_bullets">1</span>
+		<p>Please enter your aadhar number</p><br/>
+		<form name="aadharVerify" class="aadharInput">
+			<label class="item item-input" >
+				<input type="number"  >
+			</label>
+			<button class="button button-full button-positive" type="submit">submit</button>
+		</form>
+	</div>
+	<div  class="aadharOtp" ng-hide="aadharVerify.$invalid" ng-show="aadharVerify.$valid && aadharVerify.$submitted">
+		<div class="padding">
+			<span class="custom_bullets">2</span>
+			<p>Enter OTP</p><br/>
+			<form name="aadharOTP" class="aadharInput">
+				<label class="item item-input" >
+					<input type="number" >
+				</label>
+				<button class="button button-full button-positive" type="submit">submit</button>
+				<p class="">If you didn't receive OTP <a href="#">click here</a></p>
+			</form>
+		</div>
+		<p class="note padding">Note: We will need your AADHAR number to create KYC. KYC is mandatory to start investing in mutual funds</p>
+		<div class="footer" ng-controller="panVerifyCtrl">
+			<button class="button button-half button-positive"  ng-click="otpdone()">OTP success</button>
+			<button class="button button-half button-positive" ng-click="otpnotdone()">OTP failed</button>
+		</div>
+	</div>
+</div>
+
+    </ion-content>
+</ion-view>

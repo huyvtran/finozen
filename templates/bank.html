@@ -1,0 +1,19 @@
+<ion-view title="PAN">
+<div class="bar bar-header fino_head">
+<button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepback()"></button>
+  <div class="h1 title"><p class="head_title"><span id="title">BANK DETAILS</span></p></div>
+  <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
+</div>
+	<ion-content overflow-scroll="true" padding="true" class="has-header">
+<div class="panVerify">
+		<label class="item item-input" >
+			<input type="number" placeholder="Enter Bank Account Number">
+		</label>
+		<label class="item item-input" >
+			<input type="text" placeholder="Enter IFSC Code">
+		</label>
+		<button  class="button button-full button-positive" type="submit" ng-controller="panVerifyCtrl" ng-click="bankdone()">submit</button>
+</div>
+    </ion-content>
+
+</ion-view>

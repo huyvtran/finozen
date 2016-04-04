@@ -1,0 +1,22 @@
+<ion-view title="PAN">
+<div class="bar bar-header fino_head">
+<button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepback()"></button>
+  <div class="h1 title"><p class="head_title"><span id="title">PAN VERIFICATION</span></p></div>
+  <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
+</div>
+	<ion-content overflow-scroll="true" padding="true" class="has-header">
+<div class="panVerify">
+	<form name="aadharOTP" class="aadharInput">
+		<label class="item item-input" >
+			<input type="text" ng-model="panNumber" placeholder="Enter yourPAN Number">
+		</label>
+		<button class="button button-full button-positive" type="submit" ng-controller="panAuthCtrl" ng-click="panAuth()">submit</button>
+	</form>
+	<div class="footer" ng-controller="panVerifyCtrl">
+	<button class="button button-half button-positive"  ng-click="kycdone()">KYC Done</button>
+	<button class="button button-half button-positive" ng-click="kycnotdone()">KYC Not done</button>
+</div>
+</div>
+    </ion-content>
+
+</ion-view>

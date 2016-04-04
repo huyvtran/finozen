@@ -222,7 +222,6 @@ var signatureImage = function(){
         $scope.resetPin=function(change) {
           $scope.forget5 = JSON.parse(forgotPin2(change));
           $scope.forget5.mobileNumber = JSON.stringify($sessionStorage.forgotPinPhone);
-          console.log($scope.forget5);
           var forgotpinPass = JSON.stringify($scope.forget5);
           console.log(forgotpinPass + 'string');
           $http.post('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/setNewPassword', forgotpinPass).success(function(data){
@@ -346,4 +345,4 @@ var signatureImage = function(){
 
     }
   })
-
+  });

@@ -24,49 +24,35 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 
 
 
-.run(function($ionicPlatform,$ionicAnalytics,$rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,ionicToast) {
+.run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
 
 Idle.watch();
-    if(window.Connection) {
-                if(navigator.connection.type == Connection.NONE) {
-                    $ionicPopup.confirm({
+                if(!navigator.onLine) {
+console.log(navigator.onLine + "  connection state");
+					$ionicPopup.confirm({
                         title: "Internet Disconnected",
                         content: "The internet is disconnected on your device."
                     })
                     .then(function(result) {
-                        if(!result) {
+                        if(result) {
                             ionic.Platform.exitApp();
                         }
                     });
-                }
-            }
-
+				}
+				else{console.log(navigator.onLine + "  connection state");}
     $ionicAnalytics.register();
     var io=Ionic.io();
 
-    /*disabling the hardware back button on invest page and withdraw page
-
-    $ionicPlatform.registerBackButtonAction(function (event) {
-      if ($ionicHistory.currentStateName() == 'invest'){
-        event.preventDefault();
-      } else {
-        history.go(-1);
-      }
-    }, 100);      */
 	$ionicPlatform.registerBackButtonAction(function (event) {
      if ($ionicHistory.currentStateName() == 'invest'){
-        //event.preventDefault();
-		
 		$state.go('tabsController.summaryPage');
 		
       }
 
      else if ($ionicHistory.currentStateName() == 'tabsController.summaryPage'){
-        //event.preventDefault();
-		//$state.go('tabsController.summaryPage');
 		/*var showToast = function(){
 		//ionicToast.show(message, position, stick, time); 
 		  ionicToast.show('This is a toast at the top.', 'bottom', false, 2500);
@@ -75,6 +61,7 @@ Idle.watch();
       }
 
 	  else {
+		console.log($ionicHistory.currentStateName());
         history.go(-1);
       }
     }, 100);

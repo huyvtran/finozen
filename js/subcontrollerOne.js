@@ -147,7 +147,9 @@ angular.module('app.subcontrollerOne', [])
     })
 //FAQ controllers END
 //TAB's DATA controller
-	.controller('withdrawCtrl', function($scope,$sessionStorage,$ionicLoading,getReportService,$ionicHistory,ionicToast,$ionicPlatform) {
+	.controller('withdrawCtrl', function($scope,$sessionStorage,$ionicLoading,getReportService,$ionicHistory,ionicToast,$ionicPlatform,$state) {
+		
+$scope.faq = function(){$state.go('faq')}
 $scope.policy = function()
 {
 	window.open('http://finozen.com/policy.html','_self');
@@ -248,7 +250,7 @@ $scope.growthRate= function(){
 	// till here
 	
     $scope.final=function(initial,nav,suggest){
-		
+		console.log($scope.nav + "nav");
     var theory=initial/nav ;
     var rounded= Math.round(theory * 1000)/1000;
     //loss=theory-rounded;
@@ -302,21 +304,85 @@ $scope.growthRate= function(){
 	}
 	
 })
-.controller('HomeCtrl', function($scope, ionicToast,ionicPlatform, ionicHistory) {
-  //code here
-  $ionicPlatform.registerBackButtonAction(function (event) {
-      if ($ionicHistory.currentStateName() == 'tabsController'){
-        //event.preventDefault();
-		//$state.go('tabsController.summaryPage');
-		  $scope.showToast = function(){
-		//ionicToast.show(message, position, stick, time); 
-		  ionicToast.show('This is a toast at the top.', 'bottom', false, 2500);
-		};
-      } else {
-        history.go(-1);
-      }
-    }, 100);
-  
-  
 
+
+.controller('openBrowser', function($scope,$cordovaInAppBrowser,$rootScope,$state) {
+   var options = {
+      location: 'no',
+      clearcache: 'yes',
+      toolbar: 'no'
+    };
+
+
+    $scope.openBrowser = function() {
+console.log("enter");
+   document.addEventListener('deviceready',function () {
+    $cordovaInAppBrowser.open('http://ngcordova.com', '_system', options)
+      .then(function(event) {
+        // success
+		console.log("success");
+      })
+      .catch(function(event) {
+        // error
+		console.log("error");
+      });
+
+
+    $cordovaInAppBrowser.close();
+
+  }, false);
+     $rootScope.$on('$cordovaInAppBrowser:loadstart', function(e, event){
+console.log("success");
+  });
+
+   }
+
+
+
+   $scope.closeBrowser= function() {
+    //$cordovaInAppBrowser.close();
+$state.go('panVerify');
+   }
+
+    
+
+   
+    //
 })
+.controller('PictureCtrl', function($scope, $cordovaCamera,$state) {
+$scope.bank=function(){$state.go('bank');}
+$scope.takeit=function(){
+$scope.cimage="img/no_leaves.png";
+  document.addEventListener("deviceready", function () {
+    var options = {
+      quality: 50,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.CAMERA,
+      allowEdit: false,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 300,
+      targetHeight: 400,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: true,
+	  correctOrientation:true
+    };
+
+    $cordovaCamera.getPicture(options).then(function(imageData) {
+      $scope.cimage = "data:image/jpeg;base64," + imageData;
+    }, function(err) {
+      // error
+    });
+
+  }, false);
+}
+})
+    .controller('panVerifyCtrl', function($scope,$state) {
+		$scope.question=function(){$state.go('verifySuccess');}
+		$scope.bankdone=function(){$state.go('questions');}
+		$scope.kycdone=function(){$state.go('panImage');}
+		$scope.kycnotdone=function(){$state.go('aadhar');}
+		$scope.otpdone=function(){$state.go('confirm');}
+		$scope.otpnotdone=function(){
+			$state.go('pre_verification');
+			}
+    })

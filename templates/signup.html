@@ -17,27 +17,24 @@
 		<div class="row">
 			<div class="col" style="border-right: 3px solid white;">
 				<label class="item item-input" ng-class="{ 'has-errors' : signupForm.$submitted && signupForm.Fname.$invalid, 'no-errors' :  signupForm.Fname.$touched && signupForm.Fname.$valid}">
-					<i class="icon ion-person signup_icons"></i><input type="text" name="Fname" ng-pattern ="/^[a-zA-Z\s]*$/" minlength="2" ng-model="authorization.fName"  required placeholder="First Name">
+					<i class="icon ion-person signup_icons"></i><input type="text" name="Fname" ng-pattern ="/^[a-zA-Z\s]*$/" ng-model="authorization.fName"  required placeholder="First Name">
 				</label>
 				<div class="error-container" ng-show="signupForm.Fname.$error && signupForm.$submitted" ng-messages="signupForm.Fname.$error">
 					<div class="error"  ng-message="required">You did not enter a field</div>
-					<div class="error"  ng-message="min">Should be atleast 2 characters</div>
 					<div class="error"  ng-message="pattern">Enter Alphabets only</div>
 				</div>
 			</div>
 			<div class="col"  style="border-left: 3px solid white;">
 				<label class="item item-input" ng-class="{ 'has-errors' : signupForm.$submitted && signupForm.Lname.$invalid, 'no-errors' :  signupForm.Lname.$touched && signupForm.Lname.$valid}">
-					<input type="text" name="Lname" minlength="2" ng-pattern ="/^[a-zA-Z\s]*$/"  ng-model="authorization.lName"  required placeholder="Last Name">
+					<input type="text" name="Lname" ng-pattern ="/^[a-zA-Z\s]*$/"  ng-model="authorization.lName"  placeholder="Last Name">
 				</label>
 				<div class="error-container" ng-show="signupForm.Lname.$error && signupForm.$submitted" ng-messages="signupForm.Lname.$error">
-					<div class="error"  ng-message="required">You did not enter a field</div>
 					<div class="error"  ng-message="pattern">Enter Alphabets only</div>
-					<div class="error"  ng-message="minlength">Should be atleast 2 characters</div>
 				</div>
 			</div>
 		</div>
 		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.$submitted && signupForm.mobile.$invalid, 'no-errors' :  signupForm.mobile.$touched && signupForm.mobile.$valid}">
-			<i class="icon ion-android-call signup_icons"></i><input type="number" name="mobile" ng-model="authorization.mobileNumber" maxlength="10" ng-minlength="10" ng-maxlength="10" required placeholder="Mobile Number" min="7000000000" max="9999999999">
+			<i class="icon ion-android-call signup_icons"></i><input type="number" name="mobile" ng-model="authorization.mobileNumber" maxlength="10" ng-minlength="10" ng-maxlength="10" required placeholder="Mobile Number" >
 		</label>
 		<div class="error-container" ng-show="signupForm.mobile.$error && signupForm.$submitted" ng-messages="signupForm.mobile.$error">
 			<div class="error"  ng-message="required">You did not enter a field</div>
@@ -49,7 +46,7 @@
 			</div>
 		</div>
 		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.password.$invalid && signupForm.$submitted, 'no-errors' : signupForm.password.$valid  && signupForm.$submitted}">
-			<i class="icon ion-android-lock signup_icons"></i><input type="password" name="password" ng-model="authorization.pin" maxlength="4" ng-minlength="4" ng-maxlength="4" required placeholder="4 digit PIN" ng-pattern="/^[0-9]{1,4}$/">
+			<i class="icon ion-android-lock signup_icons"></i><input type="password" name="password" ng-model="authorization.pin" maxlength="4" ng-minlength="4" ng-maxlength="4" required placeholder="Enter desired 4 digit PIN" ng-pattern="/^[0-9]{1,4}$/">
 		</label>
 		<div class="error-container last-error-container" ng-show="signupForm.password.$error && signupForm.$submitted" ng-messages="signupForm.password.$error">
 			<div  class="error" >
@@ -98,6 +95,9 @@
 		<span class="check_agree item-checkbox item_checkbox">By Signing up, I agree to <a href="#" onclick="window.open('http://finozen.com/t&c.html', '_self')"> T & C</a> and <a href="#" onclick="window.open('http://finozen.com/policy.html', '_self')">Privacy Policy</a></span>
 	</div>
 </form>	
+    <div ng-controller="openBrowser">
+ <button class = "button" ng-click = "closeBrowser()">Sign up Demo</button>
+    </div>
     </ion-content>
 </ion-view>
 	  
