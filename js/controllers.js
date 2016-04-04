@@ -17,6 +17,7 @@ win.addEventListener( "loadstop", function() {
 	//var ref = cordova.InAppBrowser.open('http://finozen.com/t&c.html', '_self', 'location=yes');
 }
     })
+
     .controller('inviteCtrl', function($scope) {
 
     })
@@ -64,8 +65,11 @@ console.log($sessionStorage.SessionRefNo);
 					}
 				}
                 else {
+					//saving the signUp data with similar name convention as per sign in controller
 					$sessionStorage.SessionPortfolio=(JSON.parse(data.jsonStr)).portfolioCode;
-                    $state.go('pre_verification');
+					$sessionStorage.SessionClientCode=(JSON.parse(data.jsonStr)).clientCode;
+
+                    $state.go('panVerify');
                 }
             },function(error){
                 $scope.serverError="Sign Up failed, please call us";
@@ -287,7 +291,7 @@ $scope.$broadcast("scroll.refreshComplete");
 		
 		
 $scope.shareViaTwitter=function(){
-	window.plugins.socialsharing.share('Hey, This is a great investment app. Start with Rs.100, download now!',null,null,'https://goo.gl/uAkHRa');
+	window.plugins.socialsharing.share('Hey, FinoZen is a great investment app to watch your money grow. Start with Rs.100, download now!',null,null,'https://goo.gl/uAkHRa');
 }
      })
 

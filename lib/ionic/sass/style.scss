@@ -246,17 +246,6 @@ img{margin:0;width:100vw;}
 	}
 	.bar-footer{padding:0;}
 	.container{margin-top:10px;}
-	.custom_bullets{
-		display: inline-block;
-		float: left;
-		height: 20px;
-		width: 20px;
-		background: #18bb9c;
-		border-radius: 50%;
-		color: white;
-		text-align: center;
-		margin:0px 10px;
-		}
 }
 .screen_invest{
 .button{background:#18bb9c;border:#18bb9c;color:white; &:hover{opacity:0.9; background:#18bb9c;} }
@@ -422,4 +411,79 @@ text-align: center;
 	margin: 0;
 	}
 	img{height:165px;margin: 10px auto 0;}
+}
+.custom_bullets{
+	display: inline-block;
+	float: left;
+	height: 20px;
+	width: 20px;
+	background: #18bb9c;
+	border-radius: 50%;
+	color: white;
+	text-align: center;
+	margin:0px 10px;
+}
+.aadharVerify{
+	.item-input{border-color: #18bb9c;}
+	.aadharInput {
+		margin: 0px 40px 10px 40px;
+		width:100vw;
+	}
+	.button-clear{border: 1px solid #18bb9c;}
+	display:flex;
+	flex-flow: row wrap;
+	height:80vh;
+	margin-top: 30px;
+	.aadharNumber{
+		width: 100vw;
+		height:35vh;
+		display: flex;
+		flex-flow: row wrap;
+	}
+	.aadharOtp{
+		display: flex;
+		flex-flow: row wrap;
+		border-top: 1px solid #18bb9c;
+		.padding{
+			flex-flow: row wrap;
+			display: flex;
+			padding-top: 30px;
+			width: 100vw;
+		}
+	}
+}
+.panVerify{
+
+	height:80vh;
+	margin-top: 30px;
+	.aadharInput {
+		margin: 0px 40px 10px 40px;
+	}
+}
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  text-align: center;
+}
+.panimageSection{
+	.panimage{
+		height:400px;
+		width:300px;
+		margin: 20px auto;
+	}
+}
+.confirmimage{
+width:100vw;
+img{height: 400px;}
+}
+.questions{
+	padding:10px;
+	select{
+		border: 1px solid #18bb9c;
+		padding: 2px;
+		border-radius: 3px;
+	}
 }

@@ -59,7 +59,6 @@ angular.module('app.subcontrollerTwo', [])
         $scope.resetPin=function(change) {
           $scope.forget5 = JSON.parse(forgotPin2(change));
           $scope.forget5.mobileNumber = JSON.stringify($sessionStorage.forgotPinPhone);
-          console.log($scope.forget5);
           var forgotpinPass = JSON.stringify($scope.forget5);
           console.log(forgotpinPass + 'string');
           $http.post('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/setNewPassword', forgotpinPass).success(function(data){
@@ -155,4 +154,106 @@ angular.module('app.subcontrollerTwo', [])
 
         $ionicLoading.hide();
     }
-  });
+  })
+  
+  // for pan verification
+  .controller('panAuthCtrl',function($scope,$http,$ionicPopup,$state,$cordovaCamera){
+	$scope.panAuth=function(){
+		 $http.post('', "panNumber").success(function(data){
+            console.log(data+'response');
+            if(data.responseCode=="Cali_SUC_1030"){
+
+              var popup= $ionicPopup.alert({
+                title: 'PAN status',
+                template: 'Your Kyc is done'
+              });
+
+              popup.then(function(res) {
+                $state.go("panImage");
+              });
+            }
+			else {
+				$ionicPopup.alert({
+                title: 'PAN status',
+                template: 'Sorry your not Kyced'
+				});
+				popup.then(function(res) {
+                $state.go("aadhar");
+              });
+			}
+
+
+          }).error(function(data){
+            {
+              console.log("Error");
+              $ionicPopup.alert({
+                title: 'PAN status',
+                template: 'Please re-enter your PAN number or call us'
+              });
+            }
+          });
+	}  
+	
+
+	$scope.takeit=function(){
+  document.addEventListener("deviceready", function () {
+    var options = {
+      quality: 50,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.CAMERA,
+      allowEdit: false,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 300,
+      targetHeight: 400,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: true,
+	  correctOrientation:true
+    };
+
+    $cordovaCamera.getPicture(options).then(function(imageData) {
+      $scope.imageData = imageData;
+      $scope.cimage = "data:image/jpeg;base64," + imageData;
+    }, function(err) {
+      // error
+    });
+
+  }, false);
+}
+	$scope.bank=function(){
+		console.log($scope.imageData);
+		$scope.panImageData={};
+		$scope.panImageData.imageData=$scope.imageData;
+		$scope.panImageData.pannumber=$scope.panNumber;
+		var panimage=JSON.stringify($scope.panImageData);
+			 $http.post('', panimage).success(function(data){
+            console.log(data+'response');
+            if(data.responseCode=="Cali_SUC_1030"){
+
+              var popup= $ionicPopup.alert({
+                title: 'Image status',
+                template: 'Your Image has been sent'
+              });
+
+              popup.then(function(res) {
+                $state.go("bank");
+              });
+            }
+			else {
+				$ionicPopup.alert({
+                title: 'Image status',
+                template: 'Your Image has been not been sent'
+				});
+              }
+			}).error(function(data){
+            {
+              console.log("Error");
+              $ionicPopup.alert({
+                title: 'PAN status',
+                template: 'Please re-enter your PAN number or call us'
+              });
+            }
+          });
+	  
+
+	}
+  })
