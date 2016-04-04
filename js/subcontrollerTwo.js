@@ -54,6 +54,169 @@ angular.module('app.subcontrollerTwo', [])
         }
     })
 
+.controller('ChequeImageCTRl',function($scope,$sessionStorage,$http,$state,$ionicPopup){
+  $scope.chequeImage=function(){
+  $scope.cheque=JSON.stringify($sessionStorage.clientCode);
+  $scope.cheque=JSON.stringify(image);//image data
+
+  $http.post('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/setNewPassword', cheque).success(function(data){
+
+$sessionStorage.KYPH=data.KYPH;
+    if(data.responseCode=="Cali_SUC_1030"){
+
+      var popup= $ionicPopup.alert({
+        title: 'cheque Change status',
+        template: 'cheque Changed Successfully'
+      });
+
+      popup.then(function(res) {
+        $state.go("bankdetails"); //path name for the  bang page
+      });
+    }
+    else {
+      $ionicPopup.alert({
+        title: 'cheque Change status',
+        template: 'cheque Changed UnSuccessfully'
+      });
+      popup.then(function(res) {
+        $state.go("panImage"); //same path name for the panImage page
+      });
+    }
+
+
+  }).error(function(data){
+    {
+      console.log("Error");
+      $ionicPopup.alert({
+        title: 'cheque Change status',
+        template: 'cheque Changed UnSuccessfully'
+      });
+    }
+  });
+
+  }
+})
+  .controller('SignatureImageCTRL',function($scope,$$sessionStorage,$http,$ionicPopup){
+
+var signatureImage = function(){
+  $scope.signature=JSON.stringify($sessionStorage.KYPH);
+  $scope.signature=JSON.stringify(image);
+  $http.post('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/setNewPassword', signature).success(function(data){
+    if(data.responseCode=="Cali_SUC_1030"){
+
+      var popup= $ionicPopup.alert({
+        title: 'signature Change status',
+        template: 'signature Changed Successfully'
+      });
+
+      popup.then(function(res) {
+
+      });
+    }
+    else {
+      $ionicPopup.alert({
+        title: 'signature Change status',
+        template: 'signature Changed UnSuccessfully'
+      });
+      popup.then(function(res) {
+
+      });
+    }
+
+
+  }).error(function(data){
+    {
+      console.log("Error");
+      $ionicPopup.alert({
+        title: 'signature Change status',
+        template: 'signature Changed UnSuccessfully'
+      });
+    }
+  });
+
+}
+})
+
+  .controller('bankDetailsCTRL',function($scope,$sessionStorage,$http,$ionicPopup){
+    var bankDetail=function(){
+      var bank = JSON.stringify($sessionStorage.clientCode);
+      //bank account number
+      //bank ifsc code
+      $http.post('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/setNewPassword', bank).success(function(data){
+        if(data.responseCode=="Cali_SUC_1030"){
+
+          var popup= $ionicPopup.alert({
+            title: 'bank Change status',
+            template: 'bank Changed Successfully'
+          });
+
+          popup.then(function(res) {
+            //$state.go("login");
+          });
+        }
+        else {
+          $ionicPopup.alert({
+            title: 'bank Change status',
+            template: 'bank Changed UnSuccessfully'
+          });
+          popup.then(function(res) {
+           // $state.go("login");
+          });
+        }
+
+
+      }).error(function(data){
+        {
+          console.log("Error");
+          $ionicPopup.alert({
+            title: 'bank Change status',
+            template: 'bank Changed UnSuccessfully'
+          });
+        }
+      });
+
+    }
+  })
+
+  .controller('adhaarCTRL',function($scope,$http,$ionicPopup,$sessionStorage){
+    var adhaarFunc=function(){
+      $sessionStorage.adhaar= //data from the page where it is coming from
+      $http.post('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/setNewPassword', adhaar).success(function(data){
+        console.log(data+'response');
+        if(data.responseCode=="Cali_SUC_1030"){
+
+          var popup= $ionicPopup.alert({
+            title: 'adhaar Change status',
+            template: 'adhaar Changed Successfully'
+          });
+
+          popup.then(function(res) {
+           // $state.go("login");
+          });
+        }
+        else {
+          $ionicPopup.alert({
+            title: 'adhaar Change status',
+            template: 'adhaar Changed UnSuccessfully'
+          });
+          popup.then(function(res) {
+           // $state.go("login");
+          });
+        }
+
+
+      }).error(function(data){
+        {
+          console.log("Error");
+          $ionicPopup.alert({
+            title: 'adhaar Change status',
+            template: 'adhaar Changed UnSuccessfully'
+          });
+        }
+      });
+
+    }
+  })
 
     .controller('forgotPinCtrl', function($scope,$sessionStorage,$http,$state,$ionicPopup) {
         $scope.resetPin=function(change) {
@@ -142,118 +305,44 @@ angular.module('app.subcontrollerTwo', [])
 
 })
 
-  .controller('LoadingCtrl', function($scope, $ionicLoading,$timeout) {
-	  console.log("loading start");
-    $scope.show = function() {
-      $timeout(function () {
-        $ionicLoading.show({
-          template: 'Loading...'
-        });
+  .controller('adhaarVerification',function($scope,$sessionStorage,$http,$ionicPopup,$state){
 
-      }, 3000)
+    var adhaarVerify=function(){
+      $scope.adhaar= JSON.stringify($sessionStorage.adhaar);
+      $scope.adhaar= JSON.stringify(otp);
+      $http.post('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/setNewPassword', adhaar).success(function(data){
+        if(data.responseCode=="Cali_SUC_1030"){
 
-        $ionicLoading.hide();
+          var popup= $ionicPopup.alert({
+            title: 'Verification status',
+            template: 'Verification done Successfully'
+          });
+
+          popup.then(function(res) {
+            //$state.go("login");welcome page
+          });
+        }
+        else {
+          $ionicPopup.alert({
+            title: 'Verification status',
+            template: 'Verification was UnSuccessful'
+          });
+          popup.then(function(res) {
+          });
+        }
+
+
+      }).error(function(data){
+        {
+          console.log("Error");
+          $ionicPopup.alert({
+            title: 'Verification status',
+            template: 'Their was a problem please try again'
+            //$state.go('signup'); give the path name for the last page before welcome page
+          });
+        }
+      });
+
     }
   })
-  
-  // for pan verification
-  .controller('panAuthCtrl',function($scope,$http,$ionicPopup,$state,$cordovaCamera){
-	$scope.panAuth=function(){
-		 $http.post('', "panNumber").success(function(data){
-            console.log(data+'response');
-            if(data.responseCode=="Cali_SUC_1030"){
-
-              var popup= $ionicPopup.alert({
-                title: 'PAN status',
-                template: 'Your Kyc is done'
-              });
-
-              popup.then(function(res) {
-                $state.go("panImage");
-              });
-            }
-			else {
-				$ionicPopup.alert({
-                title: 'PAN status',
-                template: 'Sorry your not Kyced'
-				});
-				popup.then(function(res) {
-                $state.go("aadhar");
-              });
-			}
-
-
-          }).error(function(data){
-            {
-              console.log("Error");
-              $ionicPopup.alert({
-                title: 'PAN status',
-                template: 'Please re-enter your PAN number or call us'
-              });
-            }
-          });
-	}  
-	
-
-	$scope.takeit=function(){
-  document.addEventListener("deviceready", function () {
-    var options = {
-      quality: 50,
-      destinationType: Camera.DestinationType.DATA_URL,
-      sourceType: Camera.PictureSourceType.CAMERA,
-      allowEdit: false,
-      encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 300,
-      targetHeight: 400,
-      popoverOptions: CameraPopoverOptions,
-      saveToPhotoAlbum: true,
-	  correctOrientation:true
-    };
-
-    $cordovaCamera.getPicture(options).then(function(imageData) {
-      $scope.imageData = imageData;
-      $scope.cimage = "data:image/jpeg;base64," + imageData;
-    }, function(err) {
-      // error
-    });
-
-  }, false);
-}
-	$scope.bank=function(){
-		console.log($scope.imageData);
-		$scope.panImageData={};
-		$scope.panImageData.imageData=$scope.imageData;
-		$scope.panImageData.pannumber=$scope.panNumber;
-		var panimage=JSON.stringify($scope.panImageData);
-			 $http.post('', panimage).success(function(data){
-            console.log(data+'response');
-            if(data.responseCode=="Cali_SUC_1030"){
-
-              var popup= $ionicPopup.alert({
-                title: 'Image status',
-                template: 'Your Image has been sent'
-              });
-
-              popup.then(function(res) {
-                $state.go("bank");
-              });
-            }
-			else {
-				$ionicPopup.alert({
-                title: 'Image status',
-                template: 'Your Image has been not been sent'
-				});
-              }
-			}).error(function(data){
-            {
-              console.log("Error");
-              $ionicPopup.alert({
-                title: 'PAN status',
-                template: 'Please re-enter your PAN number or call us'
-              });
-            }
-          });
-	  
-
-	}
-  })
+  });
