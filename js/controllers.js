@@ -76,9 +76,10 @@ console.log($sessionStorage.SessionRefNo);
 
     /*For Sign In*/
 
-.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService) {
+.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,$ionicLoading) {
  //$state.go('tabsController.summaryPage');
   $scope.signIn = function(form,loginForm) {
+    $ionicLoading.show();
     if(form.$valid) {
       $sessionStorage.loginData=loginForm;
        $scope.sendSignIn();
@@ -112,7 +113,7 @@ console.log($sessionStorage.SessionRefNo);
           $sessionStorage.SessionMobNo =data.jsonStr[0].mobileNo;
           $sessionStorage.clientActive = data.jsonStr[0].clientActive;
           $sessionStorage.folioNums = data.jsonStr[0].folioNums[0];
-
+        $ionicLoading.hide();
          $state.go('tabsController.summaryPage');
        }
 
@@ -121,6 +122,7 @@ console.log($sessionStorage.SessionRefNo);
     });
 
   }
+  $ionicLoading.hide();
     })
 
     .controller('transactionAccessCtrl', function($scope,$sessionStorage){
@@ -133,6 +135,7 @@ console.log($sessionStorage.SessionRefNo);
      $scope.withdrawUrl="#/withdraw";
       $scope.investUrl="#/invest";
   }
+
 
     })
 
