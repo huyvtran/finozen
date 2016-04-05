@@ -46,6 +46,13 @@ console.log(navigator.onLine + "  connection state");
     $ionicAnalytics.register();
     var io=Ionic.io();
 
+if(typeof analytics !== undefined) {
+                analytics.startTrackerWithId("UA-76016305-1");
+				analytics.trackView("tracking the google analytics ");
+				//ga('set', 'userId', {{USER_ID}}); // Set the user ID using signed-in user_id.
+            } else {
+                console.log("Google Analytics Unavailable");
+            }
 	$ionicPlatform.registerBackButtonAction(function (event) {
      if ($ionicHistory.currentStateName() == 'invest'){
 		$state.go('tabsController.summaryPage');
@@ -103,7 +110,7 @@ console.log(navigator.onLine + "  connection state");
  
  var notificationOpenedCallback = function(jsonData) {
    console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
- };  window.plugins.OneSignal.init("20dcc20d-87ea-434e-86b7-73e2c8448047",
+ };  window.plugins.OneSignal.init("7b688632-6872-22f5-a33d-6f51b80af61b",
                                 {googleProjectNumber: "745760472440"},
                                 notificationOpenedCallback);
  
@@ -137,3 +144,4 @@ console.log(navigator.onLine + "  connection state");
     }
   });
 })
+

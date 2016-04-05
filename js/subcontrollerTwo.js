@@ -14,8 +14,8 @@ angular.module('app.subcontrollerTwo', [])
 
 
                     var popup= $ionicPopup.alert({
-                        title: 'Password Change status',
-                        template: 'Password Changed Successfully'
+                        title: 'PIN Change status',
+                        template: 'PIN Changed Successfully'
                     });
 
                     popup.then(function(res) {
@@ -25,8 +25,8 @@ angular.module('app.subcontrollerTwo', [])
                 else {
                     console.log("Error");
                     $ionicPopup.alert({
-                        title: 'Password Change status',
-                        template: 'Password Changed UnSuccessfully'
+                        title: 'PIN Change status',
+                        template: 'PIN Change Unsuccessful'
                     });
 					popup.then(function(res) {
                         $state.go("account");
@@ -240,7 +240,7 @@ var signatureImage = function(){
 			else {
 				$ionicPopup.alert({
                 title: 'PIN Change status',
-                template: 'PIN Changed UnSuccessfully'
+                template: 'PIN Change UnSuccessful'
 				});
 				popup.then(function(res) {
                 $state.go("login");
@@ -345,4 +345,3 @@ var signatureImage = function(){
 
     }
   })
-  });

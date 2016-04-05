@@ -74,11 +74,11 @@
 				<div  class="error"  >{{ error }}</div>
 			</div>
 		</div>
-		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.invite.$invalid && signupForm.$submitted, 'no-errors' : signupForm.invite.$valid  && signupForm.$submitted}">
-			<i class="icon ion-android-call signup_icons"></i><input type="number" name="invite" ng-model="authorization.invite" ng-minlength="10" ng-maxlength="10"  placeholder="Referal code(optional)">
+		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.referal.$invalid && signupForm.$submitted, 'no-errors' : signupForm.referal.$valid  && signupForm.$submitted}">
+			<i class="icon ion-android-call signup_icons"></i><input type="number" name="referal" ng-model="authorization.referal" ng-minlength="10" ng-maxlength="10"  placeholder="Referral code(optional)">
 		</label>
 		
-		<div class="error-container last-error-container" ng-show="signupForm.invite.$error && signupForm.$submitted" ng-messages="signupForm.invite.$error">
+		<div class="error-container last-error-container" ng-show="signupForm.referal.$error && signupForm.$submitted" ng-messages="signupForm.referal.$error">
 			<div  class="error" >
 				<div ng-message="maxlength, minlength">
 					Enter valid referal code
@@ -95,9 +95,9 @@
 		<span class="check_agree item-checkbox item_checkbox">By Signing up, I agree to <a href="#" onclick="window.open('http://finozen.com/t&c.html', '_self')"> T & C</a> and <a href="#" onclick="window.open('http://finozen.com/policy.html', '_self')">Privacy Policy</a></span>
 	</div>
 </form>	
-    <div ng-controller="openBrowser">
+ <!--   <div ng-controller="openBrowser">
  <button class = "button" ng-click = "closeBrowser()">Sign up Demo</button>
-    </div>
+    </div>-->
     </ion-content>
 </ion-view>
 	  

@@ -232,7 +232,7 @@ $scope.growthRate= function(){
     })
  
  // NAV Calculator controller
-.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup) {
+.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup,$ionicLoading) {
   var finalComputedVal;
     $scope.schemeName=$sessionStorage.schemeName;
     if($scope.schemeName=="RELIANCE LIQUID FUND - TREASURY PLAN - GROWTH PLAN - GROWTH OPTION - G"){
@@ -275,6 +275,7 @@ $scope.growthRate= function(){
 		
 		$scope.Invest = function(form) {
             if(form.$valid && $scope.initial>=100) {
+				$ionicLoading.show();
                 //$state.go('successPage');
                 $scope.sendMfOrder();
             }
@@ -287,10 +288,23 @@ $scope.growthRate= function(){
             var date=dateService.getDate();
             mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums},function(data){
                 if(data.responseCode=="Cali_SUC_1030"){
+					$ionicLoading.hide();
                     window.open('http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_self');
                 }
+				else{
+					console.log("sds");
+					$ionicLoading.hide();
+				}
 
             },function(error){
+				$ionicLoading.hide();
+				$ionicPopup.alert({
+					title: 'Sorry for the inconvince',
+					template: 'Please Login again'
+				  });
+				  popup.then(function(res) {
+					$state.go("login");
+				  });
 				$scope.mess="Enter a value";
             });
         };

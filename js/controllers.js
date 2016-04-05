@@ -37,8 +37,6 @@ win.addEventListener( "loadstop", function() {
         $scope.signIn = function(form,searchText2,signupForm) {
 $sessionStorage.SessionClientName=signupForm.fName+' '+signupForm.lName;
 $sessionStorage.SessionMobNo=signupForm.mobileNumber;
-$sessionStorage.SessionRefNo=signupForm.invite;
-console.log($sessionStorage.SessionRefNo);
             if(angular.equals(signupForm.pin,searchText2))
             {
                 if(form.$valid) {
@@ -69,7 +67,8 @@ console.log($sessionStorage.SessionRefNo);
 					$sessionStorage.SessionPortfolio=(JSON.parse(data.jsonStr)).portfolioCode;
 					$sessionStorage.SessionClientCode=(JSON.parse(data.jsonStr)).clientCode;
 
-                    $state.go('panVerify');
+                    //$state.go('panVerify');    // new sign upflow
+					$state.go('pre_verification');
                 }
             },function(error){
                 $scope.serverError="Sign Up failed, please call us";
@@ -106,6 +105,7 @@ console.log($sessionStorage.SessionRefNo);
     loginInfoService.getJsonId($sessionStorage.loginData).then(function(data){
 
       if(data.responseCode!="Cali_SUC_1030"){
+		  $ionicLoading.hide();
         $scope.serverError="Entered Credentials did not validate";
         }
         else {
@@ -117,11 +117,12 @@ console.log($sessionStorage.SessionRefNo);
           $sessionStorage.SessionMobNo =data.jsonStr[0].mobileNo;
           $sessionStorage.clientActive = data.jsonStr[0].clientActive;
           $sessionStorage.folioNums = data.jsonStr[0].folioNums[0];
-        $ionicLoading.hide();
          $state.go('tabsController.summaryPage');
+        $ionicLoading.hide();
        }
 
         },function(error){
+			$ionicLoading.hide();
       $scope.serverError="Entered Credentials did not validate";
     });
 
@@ -290,11 +291,11 @@ $scope.$broadcast("scroll.refreshComplete");
     })
 
     /*For social sharing*/
-    .controller('socialShareController', function($scope,$cordovaSocialSharing){
+    .controller('socialShareController', function($scope,$cordovaSocialSharing,$sessionStorage){
 		
 		
 $scope.shareViaTwitter=function(){
-	window.plugins.socialsharing.share('Hey, FinoZen is a great investment app to watch your money grow. Start with Rs.100, download now!',null,null,'https://goo.gl/uAkHRa');
+	window.plugins.socialsharing.share('Hey, FinoZen is a great investment app to watch your money grow. Start with Rs.100, download now! Please use my phone number '+ $sessionStorage.SessionMobNo+' as referral code',null,null,'https://goo.gl/uAkHRa');
 }
      })
 
@@ -327,7 +328,7 @@ $scope.shareViaTwitter=function(){
 						$scope.withdraw_error="Please try again";
 						}
                     },function(error){
-                        $scope.withdraw_error="Error committing the transaction, please try again"
+                        $scope.withdraw_error="Unable to accept request, please try again"
                         $ionicPopup.alert({
                             title: 'Request has failed',
                             template: 'Please try again'
@@ -341,7 +342,7 @@ $scope.withdraw_error="Please try again";
                         console.log(data.responseCode);
 						if(data.responseCode!="Cali_SUC_1030") {
 							console.log("failed");
-                            $scope.withdraw_error="Error committing the transaction, please try again";
+                            $scope.withdraw_error="Unable to accept request, please try again";
                             $ionicPopup.alert({
                                 title: 'Request has failed',
                                 template: 'Please try again'
@@ -357,7 +358,7 @@ $scope.withdraw_error="Please try again";
 						}
                     },function(error){
 						console.log("errorr");
-                        $scope.withdraw_error="Error committing the transaction, please try again";
+                        $scope.withdraw_error="Unable to accept request, please try again";
                     });
 
                 }
