@@ -115,9 +115,12 @@ if(typeof analytics !== undefined) {
                                 notificationOpenedCallback);
  
  // Show an alert box if a notification comes in when the user is in your app.
+    window.plugins.OneSignal.sendTag("key","true");
  window.plugins.OneSignal.enableInAppAlertNotification(true);
  window.plugins.OneSignal.enableVibrate(true);
-
+window.plugins.OneSignal.getTags(function(tags){
+  console.log('Tags Received: ' + JSON.stringify(tags));
+    })
 
 
 
