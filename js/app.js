@@ -110,7 +110,7 @@ if(typeof analytics !== undefined) {
  
  var notificationOpenedCallback = function(jsonData) {
    console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
- };  window.plugins.OneSignal.init("7b688632-6872-22f5-a33d-6f51b80af61b",
+ };  window.plugins.OneSignal.init("5857b4c1-e085-47b4-b5f4-2861aec2e548",
                                 {googleProjectNumber: "745760472440"},
                                 notificationOpenedCallback);
  
