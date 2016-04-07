@@ -82,8 +82,8 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 .controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,$ionicLoading) {
  //$state.go('tabsController.summaryPage');
   $scope.signIn = function(form,loginForm) {
-    $ionicLoading.show();
     if(form.$valid) {
+    $ionicLoading.show();
       $sessionStorage.loginData=loginForm;
        $scope.sendSignIn();
         }
