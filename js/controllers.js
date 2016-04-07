@@ -97,7 +97,6 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
        $scope.sendSignIn();
         }
       }
-
     $scope.forgotPin=function(signinformData){
   if(signinformData.$valid){
     $sessionStorage.forgotPinPhone = $scope.authorization.login;

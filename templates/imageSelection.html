@@ -1,0 +1,52 @@
+<ion-view title="CONFIRM">
+    <div class="bar bar-header fino_head">
+        <button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepback()"></button>
+        <div class="h1 title"><p class="head_title"><span id="title">SELECTION</span></p></div>
+        <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
+    </div>
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <div class="">
+            <br/><br/>
+            <div class="row questions">
+                <span class="col-40">Gross Annual Income</span>
+                <select class="col-50">
+                    <option>1 lac</option>
+                    <option>1 - 5 lac</option>
+                    <option>5 - 10 lac</option>
+                    <option>10 - 25 lac</option>
+                    <option>> 25 lac</option>
+                </select>
+                <br/>
+            </div>
+            <div class="row questions">
+                <span class="col-40">Occupation</span>
+                <select class="col-50">
+                    <option>Business</option>
+                    <option>Professional</option>
+                    <option>Public Sector</option>
+                    <option>Private Sector</option>
+                    <option>Government Service</option>
+                    <option>Agriculturist</option>
+                    <option>Housewife</option>
+                    <option>Student</option>
+                    <option>Retired</option>
+                    <option>Forex Dealer</option>
+                    <option>Others</option>
+                </select>
+                <br/>
+            </div>
+            <div class="row questions">
+                <span class="col-40">PEP</span>
+                <select class="col-50">
+                    <option>Politically Exposed Person</option>
+                    <option>Related to Politically Exposed Person</option>
+                    <option>None</option>
+                </select>
+            </div>
+            <div class="footer" ng-controller="panVerifyCtrl">
+                <button class="button button-half button-positive"  ng-click="question()">Confirm</button>
+            </div>
+        </div>
+    </ion-content>
+
+</ion-view>
