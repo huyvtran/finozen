@@ -24,7 +24,7 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 
 
 
-.run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup) {
+.run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -115,7 +115,12 @@ if(typeof analytics !== undefined) {
                                 notificationOpenedCallback);
  
  // Show an alert box if a notification comes in when the user is in your app.
-    window.plugins.OneSignal.sendTag("key","true");
+   if($sessionStorage.clientActive!="y"){
+     window.plugins.OneSignal.sendTags('activeState','true');
+   }
+    else {
+     window.plugins.OneSignal.sendTags('notActiveState','true');
+   }
  window.plugins.OneSignal.enableInAppAlertNotification(true);
  window.plugins.OneSignal.enableVibrate(true);
 window.plugins.OneSignal.getTags(function(tags){

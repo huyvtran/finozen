@@ -305,7 +305,7 @@ var signatureImage = function(){
 
 })
 
-  .controller('adhaarVerification',function($scope,$sessionStorage,$http,$ionicPopup,$state){
+  .controller('adhaarVerification',function($scope,$sessionStorage,$http,$ionicPopup){
 
     var adhaarVerify=function(){
       $scope.adhaar= JSON.stringify($sessionStorage.adhaar);
@@ -330,8 +330,6 @@ var signatureImage = function(){
           popup.then(function(res) {
           });
         }
-
-
       }).error(function(data){
         {
           console.log("Error");
