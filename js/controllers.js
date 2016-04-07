@@ -32,21 +32,26 @@ win.addEventListener( "loadstop", function() {
 
     })
 
-    .controller('AuthSignUpCtrl', function($scope, $state,signUpService,$sessionStorage) {
+    .controller('AuthSignUpCtrl', function($scope, $state,signUpService,$sessionStorage,$ionicLoading) {
 
-        $scope.signIn = function(form,searchText2,signupForm) {
+        $scope.signUp = function(form,searchText2,signupForm) {
 $sessionStorage.SessionClientName=signupForm.fName+' '+signupForm.lName;
 $sessionStorage.SessionMobNo=signupForm.mobileNumber;
             if(angular.equals(signupForm.pin,searchText2))
             {
-                if(form.$valid) {
-                    $sessionStorage.signUpData = (signupForm);
-                    $scope.addUserInfo();
-                }
+                if( !angular.equals(signupForm.mobileNumber,signupForm.referal)) {
+					if(form.$valid) {
+						$ionicLoading.show();
+						$sessionStorage.signUpData = (signupForm);
+						$scope.addUserInfo();
+					}
+				}
+				else{
+					$scope.error_referal="Entered mobile number and referral number should be different";
+				}
             }
             else{
-                $scope.error="Entered password didn't match";
-
+                $scope.error_pin="Entered password didn't match";
             }
         }
 
@@ -55,7 +60,9 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 				//$sessionStorage.
 				
                 if(data.responseCode!="Cali_SUC_1030"){
+					$ionicLoading.hide();
 					if(data.responseCode=="Cali_ERR_2050"){
+						
 						$scope.serverError="Mobile number in use";
 					}
 					else{
@@ -69,8 +76,10 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 
                     //$state.go('panVerify');    // new sign upflow
 					$state.go('pre_verification');
+					$ionicLoading.hide();
                 }
             },function(error){
+				$ionicLoading.hide();
                 $scope.serverError="Sign Up failed, please call us";
 
             });
