@@ -116,10 +116,10 @@ if(typeof analytics !== undefined) {
  
  // Show an alert box if a notification comes in when the user is in your app.
    if($sessionStorage.clientActive!="y"){
-     window.plugins.OneSignal.sendTags('activeState','true');
+     window.plugins.OneSignal.sendTag('activeState','true');
    }
     else {
-     window.plugins.OneSignal.sendTags('notActiveState','true');
+     window.plugins.OneSignal.sendTag('notActiveState','true');
    }
  window.plugins.OneSignal.enableInAppAlertNotification(true);
  window.plugins.OneSignal.enableVibrate(true);
