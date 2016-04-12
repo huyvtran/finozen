@@ -42,16 +42,23 @@ angular.module('app.subcontrollerTwo', [])
     })
 
     /*for destroying the session storage*/
-    .controller('signoutCtrl',function($scope,$state,$ionicHistory,$timeout){
+    .controller('signoutCtrl',function($scope,$state,$ionicHistory,$rootScope,$ionicPlatform){
 
-        $scope.signOut = function(){
+        $ionicPlatform.ready(function(){
+          $scope.signOut = function(){
+           // navigator.app.exitApp();
+            ionic.Platform.exitApp();
+          }
+        })
+        /*$scope.signOut = function(){
            
             $timeout(function () {
-                $ionicHistory.clearCache();
+                sessionStorage.clear();
                $ionicHistory.clearHistory();
+              $ionicHistory.clearCache().then(function(){ $state.go('login') })
             },100)
-             $state.go('login');
-        }
+             //$state.go('login');
+        }*/
     })
 
 .controller('ChequeImageCTRl',function($scope,$sessionStorage,$http,$state,$ionicPopup){
