@@ -1,51 +1,56 @@
 <ion-view title="Payment successful">
-<div class="payment">
 
 <div class="bar bar-header fino_head" ng-controller="popupController as popup">
-	<a class="button button-clear ion-android-arrow-back " href="#/page14/page10"></a>
-	<div class="h1 title"><p class="head_title"><span id="title">TRANSACTION STATUS</span></p></div>
+	<a class="button button-clear ion-android-arrow-back " ng-controller="panVerifyCtrl"  ng-click="withdrawSuccess()"></a>
+	<div class="h1 title"><p class="head_title"><span id="title">STATUS</span></p></div>
 	<a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
 </div>
-    <ion-content overflow-scroll="false" padding="false" class="has-header payment_success">
-		<div class="">
+    <ion-content overflow-scroll="false" padding="true" class="has-header payment_success">
+		<div class="payment padding">
 
 			<div class="list">
-			  <div class="item item-avatar item-icon-left item_success" >
-				<i class="icon {{transactionStatus[1].iconClass}}"><p class="status">{{transactionStatus[1].stats}}</p></i>
+			  <div class="item_success text-center" >
+				<p class="status">REQUEST STATUS</p></i>
 			 </div>
 			  <div class="success_block" >
 				<div class="inner_block text-center">
-				<h4 class="message text-center">{{transactionStatus[1].message}}<br/></h4>
-				<table>
-					<tr>
-						<td>Transaction Amount</td>
-						<td>{{transactionStatus[0].amount | currency:"&#x20B9;"}}</td>
-					</tr>
-					<tr>
-						<td>Transaction ID</td>
-						<td>{{transactionStatus[0].id}}</td>
-					</tr>
-					<tr>
-						<td>Transaction Date</td>
-						<td>{{transactionStatus[0].date}}</td>
-					</tr>
-				</table>
-				<div class="row text-left disclaimer">
-					<p><span>Disclaimer<br/></span>
-					Your money will be reflected after (T+1) days, if the transaction is done before 2p.m</p>
-				</div>	
-				<div class="row text-center done_btn">
-					<a class="col button"  href="#/page14/page10">Done</a>
-				</div>	
+				<h4 class="message">Thank You<br/></h4>
+	<p class="scheduled_text">Schedule for deposit to your registered bank account</p>
+	<div class="row deposit_table" >
+	<!--	<p><br/>
+		
+		Withdraw Sun - Thur, before 2 p.m.: Money will be deposited in your Bank account next day by 10 a.m.<br/>
+		
+		Withdraw Sun - Thur after 2 p.m.: Money will be deposited in your Bank account day after next by 10 a.m.<br/>
+		
+		Withdraw Fri - Sat: Money will be deposited in your Bank account on Monday by 10 a.m.<br/>
+		<br/></p>-->
+
+		<table>
+			<thead>
+				<th>Withdrawl</th>
+				<th>Deposit</th>
+			</thead>
+			<tr>
+				<td>Sun - Thur, before 2 p.m.</td>
+				<td>Next day 10 a.m.</td>
+			</tr>
+			<tr>
+				<td>Sun - Thur, after 2 p.m.</td>
+				<td>Day after next 10 a.m.</td>
+			</tr>
+			<tr>
+				<td>Fri - Sat.</td>
+				<td>Monday 10 a.m.</td>
+			</tr>
+		</table>		
+		</div>
+		<p class="small_text">If the day of deposit is a Bank Holiday, money will be deposited the next day.</p>
+				<button class="button button-positive" ng-controller="panVerifyCtrl"  ng-click="withdrawSuccess()">Done</button>
 				</div>
 			 </div>
 			</div>
 			
 		</div>		
     </ion-content>
-
-		
-
-</div>
-<span ng-controller="showhistoryController"></span>
 </ion-view>

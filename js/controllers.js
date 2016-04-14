@@ -88,19 +88,31 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 
     /*For Sign In*/
 
-.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,$ionicLoading) {
+.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,$ionicLoading,$localStorage) {
  //$state.go('tabsController.summaryPage');
+ $scope.mobileNumber=$localStorage.loginData;
   $scope.signIn = function(form,loginForm) {
+	 
     if(form.$valid) {
+		if($scope.rememberMe){ $localStorage.loginData=$scope.mobileNumber;}
+		else{$localStorage.loginData='';}
     $ionicLoading.show();
-      $sessionStorage.loginData=loginForm;
+$scope.loginDetails=JSON.parse(JSON.stringify({}));
+$scope.loginDetails.login=$scope.mobileNumber;
+$scope.loginDetails.password=$scope.digitPin;
+console.log($scope.loginDetails);
+      $sessionStorage.loginData=$scope.loginDetails;
+     
+	  console.log($localStorage.loginData);
        $scope.sendSignIn();
         }
+		else{$ionicLoading.hide();}
       }
     $scope.forgotPin=function(signinformData){
   if(signinformData.$valid){
     $sessionStorage.forgotPinPhone = $scope.authorization.login;
     var ph=$sessionStorage.forgotPinPhone;
+
     $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
     $state.go('forgot_pin');
     }
@@ -111,7 +123,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 
   $scope.sendSignIn=function() {
     loginInfoService.getJsonId($sessionStorage.loginData).then(function(data){
-
+ 
       if(data.responseCode!="Cali_SUC_1030"){
 		  $ionicLoading.hide();
         $scope.serverError="Entered Credentials did not validate";
@@ -124,6 +136,9 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
           $sessionStorage.SessionClientCode =data.jsonStr[0].clientCode;
           $sessionStorage.SessionMobNo =data.jsonStr[0].mobileNo;
           $sessionStorage.clientActive = data.jsonStr[0].clientActive;
+		  console.log($sessionStorage.clientActive);
+		if($sessionStorage.clientActive=='y'){	
+		window.plugins.OneSignal.sendTag("active","true");}
           $sessionStorage.folioNums = data.jsonStr[0].folioNums[0];
          $state.go('tabsController.summaryPage');
         $ionicLoading.hide();
@@ -162,7 +177,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 
             // An elaborate, custom popup
             var myPopup = $ionicPopup.show({
-                title: 'Please have a look at the FAQ before placing a call',
+                content: 'Please have a look at the FAQ before placing a call',
                 buttons: [
                     { text: 'Call',
                         onTap:function(e){
@@ -247,7 +262,6 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 
 
   $scope.doRefresh=function() {
-	  console.log("dsbsk");
    $timeout(function(){
    var Report = getReportService.get();
    Report.$promise.then(function (data) {
@@ -309,13 +323,58 @@ $scope.shareViaTwitter=function(){
 
 
     .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$sessionStorage,$ionicPopup) {
-
         $scope.Withdrawl = function(form) {
-
+console.log($scope.amount);
+console.log($scope.checked_withdraw );
+console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
             var date=dateService.getDate();
             if(form.$valid) {
+            if(($scope.amount!=undefined || $scope.checked_withdraw) && ($scope.amount>0 || $scope.checked_withdraw)) {
+			if($scope.checked_withdraw == true){
+				$ionicPopup.confirm({
+					title: "Confirm",
+					content: "Withdraw complete balance?"
+				})
+				.then(function(result) {
+					if(result) {
+						mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"allUnits":"Y","folioNo":$sessionStorage.folioNums},function(data){
+                        if(data.responseCode=="Cali_SUC_1030") {
+                            $state.go('successPage');
+                        }
+						else
+						{
+							$scope.withdraw_Networkerror="Please try again";
+						}
+                    },function(error){
+						
+						$scope.withdraw_Networkerror="Please try again";
+                    });
+					}
+				});
+			}
+			else{
+				$ionicPopup.confirm({
+					title: "Confirm",
+					content: "Withdraw INR"+ $scope.amount +"?"
+				})
+				.then(function(result) {
+					mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode":$sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount":$scope.amount,"folioNo":$sessionStorage.folioNums},function(data){
+							console.log(data.responseCode);
+							if(data.responseCode!="Cali_SUC_1030") {
+								console.log("failed");
+								$scope.withdraw_Networkerror="Unable to accept request. Please try again";
+							}
+							else
+							{
+								console.log("success");
+							}
+						},function(error){
+							$scope.withdraw_Networkerror="Unable to accept request. Please try again";
+						});
+				});
+			}
                 //$state.go('successPage');
-
+/*
                 if($scope.checked_withdraw == true){
 
                     mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"allUnits":"Y","folioNo":$sessionStorage.folioNums},function(data){
@@ -369,9 +428,13 @@ $scope.withdraw_error="Please try again";
                         $scope.withdraw_error="Unable to accept request, please try again";
                     });
 
-                }
+                }*/
 
             }
+			else{
+				$scope.withdraw_error="Please enter a valid amount.";
+			}
+		}
 
         };
 

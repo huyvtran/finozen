@@ -1,7 +1,7 @@
-<ion-view title="PAN">
+<ion-view title="SELFIE">
 <div class="bar bar-header fino_head">
 <button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepback()"></button>
-  <div class="h1 title"><p class="head_title"><span id="title">PAN</span></p></div>
+  <div class="h1 title"><p class="head_title"><span id="title">SELFIE</span></p></div>
   <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
 </div>
 	<ion-content overflow-scroll="true" padding="true" class="has-header">
@@ -9,13 +9,13 @@
 
 		<div ng-controller="PictureCtrl" class="panimageSection text-center">
 			<div class="panimage">
-			<img ng-show="cimage1 !== undefined" ng-src="{{cimage1}} ">
-			<img ng-show="cimage1 === undefined" src="img/account-image1.png ">
+				<img ng-show="selfie !== undefined" ng-src="{{selfie}} ">
+				<img ng-show="selfie === undefined" src="img/account-image1.png ">
 			</div>
 			
 		<div class="text-center">
-		<button class="button button-positive" ng-click="takeit1()" ng-show="cimage1 === undefined">Take Image</button>
-		<button class="button button-positive" ng-controller="panVerifyCtrl" ng-show="cimage1 !== undefined"  ng-click="selfieGo()">submit</button>
+		<button class="button button-positive" ng-click="selfieImage()" ng-show="selfie === undefined">Take Image</button>
+		<button class="button button-positive" ng-controller="panVerifyCtrl" ng-show="selfie !== undefined"   ng-click="addressSelect()">submit</button>
 		</div>
 		</div>
     </ion-content>

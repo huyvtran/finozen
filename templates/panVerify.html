@@ -12,11 +12,11 @@
 		<label class="item item-input" >
 			<input type="text" ng-model="panNumber" placeholder="Enter yourPAN Number">
 		</label>
-		<button class="button button-full button-positive" type="submit" ng-controller="panAuthCtrl" ng-click="panAuth()">submit</button>
+		<button class="button button-full button-positive" type="submit" ng-click="panAuth()">submit</button>
 	</form>
 	<div class="footer" ng-controller="panVerifyCtrl">
 	<button class="button button-half button-positive"  ng-click="kycdone()">KYC Done</button>
-	<button class="button button-half button-positive" ng-click="kycnotdone()">KYC Not done</button>
+	<button class="button button-half button-positive" ng-click="kycdone()">KYC Not done</button>
 </div>
 </div>
     </ion-content>
