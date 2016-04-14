@@ -1,12 +1,13 @@
 <ion-view title="Withdraw" class="withdraw_screen">
 	<span ng-controller="googleanalytics"></span>
-<div class="screen_invest">
+
 <div class="bar bar-header fino_head" ng-controller="popupController as popup">
 	<a class="button button-clear ion-android-arrow-back " href="#/page14/page15" ></a>
 	<div class="h1 title"><p class="head_title"><span id="title">WITHDRAW</span></p></div>
 	<a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
 </div>
     <ion-content overflow-scroll="true" padding="true" class="has-header" ng-controller="AuthWithdrawlCtrl">
+<div class="screen_invest">
 		<div class="row bar bar-subheader invest_subheader">
 		  <p class="title" ng-controller="withdrawCtrl">CURRENT BALANCE : <span style="color:#18bb9c">{{ balance() |currency:"&#x20B9; "}}</span></p>
 		</div>
@@ -19,15 +20,16 @@
 		<label class="item item-input" ng-class="{ 'has-errors' : withdrawForm.amount.$touched && withdrawForm.amount.$invalid, 'no-errors' :  withdrawForm.amount.$touched && withdrawForm.amount.$valid}">
 			<input type="number" name="amount" ng-disabled="checked_withdraw" ng-model="amount" ng-pattern="/^[0-9]{1,9}$/" max="{{balance()}}" step="1">
 		</label>
-		<div class="error-container" ng-hide="checked_withdraw" ng-show="withdrawForm.amount.$error && withdrawForm.$submitted" ng-messages="withdrawForm.amount.$error">
+		<div class="error-container" ng-show="withdrawForm.amount.$error && withdrawForm.$submitted" ng-messages="withdrawForm.amount.$error">
 			<div  class="error" >
-				<div  ng-message="max">
-					Enter valid value
+				<div  ng-message="max" ng-hide="checked_withdraw" >
+					Enter valid amount
 				</div>
-				<div  ng-message="pattern">
+				<div  ng-message="pattern" ng-hide="checked_withdraw" >
 					Enter valid Integer
 				</div>
-				<div>{{withdraw_error}} </div>
+				<div ng-hide="checked_withdraw">{{withdraw_error}} </div>
+				<div>{{withdraw_Networkerror}} </div>
 			</div>
 			
 
@@ -39,12 +41,43 @@
 	<button ion-track-tap="withdraw confirm" class="button button-full button-positive" type="submit" ng-click="Withdrawl(withdrawForm)">
 		WITHDRAW
 	</button>
-	<div class="row" >
-		<p><br>Money will be deposited in your bank account tomorrow by 10 am if you withdraw before 2 pm on a working day (Mon - Fri except Bank Holidays)<br/></p>
-		</div>
-</form>		  
+	<p class="scheduled_text">Schedule for deposit to your registered bank account</p>
+	<div class="row deposit_table" >
+	<!--	<p><br/>
+		
+		Withdraw Sun - Thur, before 2 p.m.: Money will be deposited in your Bank account next day by 10 a.m.<br/>
+		
+		Withdraw Sun - Thur after 2 p.m.: Money will be deposited in your Bank account day after next by 10 a.m.<br/>
+		
+		Withdraw Fri - Sat: Money will be deposited in your Bank account on Monday by 10 a.m.<br/>
+		<br/></p>-->
 
+		<table>
+			<thead>
+				<th>Withdrawl</th>
+				<th>Deposit</th>
+			</thead>
+			<tr>
+				<td>Sun - Thur, before 2 p.m.</td>
+				<td>Next day 10 a.m.</td>
+			</tr>
+			<tr>
+				<td>Sun - Thur, after 2 p.m.</td>
+				<td>Day after next 10 a.m.</td>
+			</tr>
+			<tr>
+				<td>Fri - Sat.</td>
+				<td>Monday 10 a.m.</td>
+			</tr>
+		</table>		
+		
+		
+		</div>
+
+		<p class="small_text">If the day of deposit is a Bank Holiday, money will be deposited the next day.</p>
+</form>		  
+</div>
     </ion-content>
 
-</div>
+
 </ion-view>

@@ -169,7 +169,7 @@ $scope.xirrRate= function(){
 	
 	if($sessionStorage.xirr == null){return 0;}
 	else if($sessionStorage.xirr <= 0){return 0;}
-	else if($sessionStorage.xirr >= 10){return 10;}
+	else if($sessionStorage.xirr >= 15){return 15;}
 	else if($sessionStorage.xirr <= 7.5){return 7.5;}
 	else{return $sessionStorage.xirr;}
 	
@@ -355,7 +355,14 @@ console.log("success");
 
    $scope.closeBrowser= function() {
     //$cordovaInAppBrowser.close();
-$state.go('panVerify');
+$state.go('addressProofImage');
+   }
+
+  
+
+   $scope.closeBrowser2= function() {
+    //$cordovaInAppBrowser.close();
+$state.go('reference');
    }
 
     
@@ -364,25 +371,99 @@ $state.go('panVerify');
     //
 })
 .controller('PictureCtrl', function($scope, $cordovaCamera,$state) {
-$scope.bank=function(){$state.go('bank');}
-$scope.takeit=function(){
-$scope.cimage="img/no_leaves.png";
+$scope.addressSelect=function(){$state.go('imageSelection'); }
+$scope.takeImage=function(){if($scope.choice!==undefined) {$state.go('addressProofImage');} else{$scope.errorProofSelection="select an option";} }
+$scope.addressProof=function(){
+	$scope.addressImage="img/no_leaves.png";
+  document.addEventListener("deviceready", function () {
+    var options = {
+      quality: 100,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.CAMERA,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 300,
+      targetHeight: 400,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: false,
+	  correctOrientation:true
+    };
+
+    $cordovaCamera.getPicture(options).then(function(imageData) {
+      $scope.addressImage = "data:image/jpeg;base64," + imageData;
+    }, function(err) {
+      // error
+    });
+
+  }, false);
+}
+$scope.takeit1=function(){
+$scope.cimage1="img/no_leaves.png";
   document.addEventListener("deviceready", function () {
     var options = {
       quality: 50,
       destinationType: Camera.DestinationType.DATA_URL,
       sourceType: Camera.PictureSourceType.CAMERA,
-      allowEdit: false,
+      allowEdit: true,
       encodingType: Camera.EncodingType.JPEG,
       targetWidth: 300,
       targetHeight: 400,
+	  cameraDirection:1,
       popoverOptions: CameraPopoverOptions,
-      saveToPhotoAlbum: true,
+      saveToPhotoAlbum: false,
 	  correctOrientation:true
     };
 
     $cordovaCamera.getPicture(options).then(function(imageData) {
-      $scope.cimage = "data:image/jpeg;base64," + imageData;
+      $scope.cimage1 = "data:image/jpeg;base64," + imageData;
+    }, function(err) {
+      // error
+    });
+
+  }, false);
+}
+$scope.takeit2=function(){
+$scope.cimage2="img/no_leaves.png";
+  document.addEventListener("deviceready", function () {
+    $scope.options = {
+      quality: 100,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.CAMERA,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 300,
+      targetHeight: 400,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: false,
+	  correctOrientation:true
+    };
+
+    $cordovaCamera.getPicture($scope.options).then(function(imageData) {
+      $scope.cimage2 = "data:image/jpeg;base64," + imageData;
+    }, function(err) {
+      // error
+    });
+
+  }, false);
+}
+$scope.selfieImage=function(){
+$scope.selfie="img/no_leaves.png";
+  document.addEventListener("deviceready", function () {
+    $scope.options = {
+      quality: 100,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.CAMERA,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 300,
+      targetHeight: 400,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: false,
+	  correctOrientation:true
+    };
+
+    $cordovaCamera.getPicture($scope.options).then(function(imageData) {
+      $scope.selfie = "data:image/jpeg;base64," + imageData;
     }, function(err) {
       // error
     });
@@ -391,7 +472,10 @@ $scope.cimage="img/no_leaves.png";
 }
 })
     .controller('panVerifyCtrl', function($scope,$state) {
-		$scope.question=function(){$state.go('verifySuccess');}
+		$scope.selfieGo=function(){$state.go('selfie');}
+		$scope.bank=function(){$state.go('bank');}
+		$scope.question=function(){$state.go('signature');}
+		$scope.signature=function(){$state.go('verifySuccess');}
 		$scope.bankdone=function(){$state.go('questions');}
 		$scope.kycdone=function(){$state.go('panImage');}
 		$scope.kycnotdone=function(){$state.go('aadhar');}
@@ -399,4 +483,19 @@ $scope.cimage="img/no_leaves.png";
 		$scope.otpnotdone=function(){
 			$state.go('pre_verification');
 			}
+		$scope.withdrawSuccess = function() {console.log("here"); history.go(-2);}
     })
+
+.controller('SignatureCtrl', function($scope) {
+    var canvas = document.getElementById('signatureCanvas');
+    var signaturePad = new SignaturePad(canvas);
+ 
+    $scope.clearCanvas = function() {
+        signaturePad.clear();
+    }
+ 
+    $scope.saveCanvas = function() {
+        var sigImg = signaturePad.toDataURL();
+        $scope.signature = sigImg;
+    }
+})

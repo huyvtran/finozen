@@ -247,13 +247,17 @@ font-weight: 600;}
 	}
 	
 }
-/* .withdraw_screen{
-	.invest_info{
-		input[disabled]{
-			background-color:transparent;
-		}
+.scheduled_text{margin-top:28px;}
+.small_text {
+	font-size: 10px;
+}
+.deposit_table{
+	table{
+		margin:auto;
+		th{font-weight:600;}
+		th, td {padding:5px; border:1px solid #ccc;}
 	}
-} */
+}
 ion-popover-view.fit {
   height: auto;
 }

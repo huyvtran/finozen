@@ -1,0 +1,34 @@
+<ion-view title="Address Proof">
+<div class="bar bar-header fino_head">
+<button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepback()"></button>
+  <div class="h1 title"><p class="head_title"><span id="title">ADDRESS PROOF</span></p></div>
+  <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
+</div>
+	<ion-content overflow-scroll="true" padding="true" class="has-header" >
+		<div ng-controller="PictureCtrl" class="panimageSection text-center">
+		<div class="front">
+			<div class="panimage">
+			<img ng-show="addressImage !== undefined" ng-src="{{addressImage}} ">
+			<img ng-show="addressImage === undefined" src="img/account-image1.png ">
+			</div>
+			<div class="text-center">
+			<button class="button button-positive" ng-click="addressProof()" ng-show="addressImage === undefined">Front view</button>
+			</div>
+		</div>
+		<div class="back" ng-hide="addressImage === undefined">
+		<div class="text-center">
+			<button class="button button-positive" ng-click="takeit2()" ng-show="cimage2 === undefined">Back view</button>
+			</div>
+		<div class="panimage">
+			<img ng-show="cimage2 !== undefined" ng-src="{{cimage2}} ">
+			<img ng-show="cimage2 === undefined" src="img/account-image1.png ">
+			</div>
+			<div class="text-center">
+			<button class="button button-positive" ng-controller="panVerifyCtrl" ng-show="cimage2 !== undefined"  ng-click="bank()">submit</button>
+			</div>
+		</div>
+		</div>
+
+    </ion-content>
+
+</ion-view>

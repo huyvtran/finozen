@@ -122,6 +122,32 @@ $ionicAppProvider.identify ({
         
       
     
+             .state('signature', {
+      url: '/signature',         
+          templateUrl: 'templates/signature.html',
+          controller: ''     
+    })
+             .state('selfie', {
+      url: '/selfie',         
+          templateUrl: 'templates/selfi.html',
+          controller: ''     
+    })
+             .state('reference', {
+      url: '/reference',         
+          templateUrl: 'templates/reference.html',
+          controller: ''     
+    })
+             .state('addressProofImage', {
+      url: '/addressProofImage',         
+          templateUrl: 'templates/addressProofImage.html',
+          controller: ''     
+    })
+             .state('imageSelection', {
+      url: '/imageSelection',         
+          templateUrl: 'templates/imageSelection.html',
+          controller: ''     
+    })
+    
              .state('questions', {
       url: '/questions',         
           templateUrl: 'templates/questions.html',
