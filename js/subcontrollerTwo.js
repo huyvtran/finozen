@@ -352,8 +352,8 @@ var signatureImage = function(){
   })
 
 /*google analytics for all pages including trackview,trackevent and transaction*/
-.controller('googleanalytics',function($scope,$cordovaGoogleAnalytics){
-  $cordovaGoogleAnalytics.setUserId('finoZen');
+.controller('googleanalytics',function($scope){
+  /*$cordovaGoogleAnalytics.setUserId('finoZen');
   $cordovaGoogleAnalytics.trackView('login');
   $cordovaGoogleAnalytics.trackView('invite');
   $cordovaGoogleAnalytics.trackView('terms');
@@ -366,5 +366,5 @@ var signatureImage = function(){
   $cordovaGoogleAnalytics.addTransactionItem(
     'mfBuyOder', 'Fluffy Pink Bunnies', '0001', 'Reliance mutual fund', '100', '1', 'INR'
   );
-  //$cordovaGoogleAnalytics.trackEvent('swipe', 'Video Load Time', 'Gone With the Wind', 100);
+  //$cordovaGoogleAnalytics.trackEvent('swipe', 'Video Load Time', 'Gone With the Wind', 100);*/
 })

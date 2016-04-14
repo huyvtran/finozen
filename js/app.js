@@ -50,7 +50,7 @@ if(typeof analytics !== undefined) {
                 analytics.startTrackerWithId("UA-76016305-1");
 				analytics.trackView("tracking the google analytics ");
   analytics.trackView("controller.js");
-  analytics.trackView('invest');
+    analytics.trackView('invest');
   analytics.trackView('withdraw');
   analytics.trackView('tabsController');
 
