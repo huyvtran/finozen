@@ -49,6 +49,11 @@ console.log(navigator.onLine + "  connection state");
 if(typeof analytics !== undefined) {
                 analytics.startTrackerWithId("UA-76016305-1");
 				analytics.trackView("tracking the google analytics ");
+  analytics.trackView("controller.js");
+  analytics.trackView('invest');
+  analytics.trackView('withdraw');
+  analytics.trackView('tabsController');
+
 				//ga('set', 'userId', {{USER_ID}}); // Set the user ID using signed-in user_id.
             } else {
                 console.log("Google Analytics Unavailable");
@@ -113,7 +118,7 @@ if(typeof analytics !== undefined) {
  };  window.plugins.OneSignal.init("5857b4c1-e085-47b4-b5f4-2861aec2e548",
                                 {googleProjectNumber: "745760472440"},
                                 notificationOpenedCallback);
- 
+ OneSignal.init();
  // Show an alert box if a notification comes in when the user is in your app.
    if($sessionStorage.clientActive!="y"){
      window.plugins.OneSignal.sendTag('activeState','true');

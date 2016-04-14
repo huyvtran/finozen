@@ -1,4 +1,6 @@
 <ion-view title="Withdraw" class="withdraw_screen">
+	<span ng-controller="googleanalytics"></span>
+
 <div class="bar bar-header fino_head" ng-controller="popupController as popup">
 	<a class="button button-clear ion-android-arrow-back " href="#/page14/page15" ></a>
 	<div class="h1 title"><p class="head_title"><span id="title">WITHDRAW</span></p></div>
@@ -36,7 +38,7 @@
 			<input ng-model="checked_withdraw" type="checkbox" id="withdraw_money" ng-change="amountClear()" placeholder="Enter Amount" style="margin: 4px;"><label for="withdraw_money" >Withdraw my complete balance</label>
 		</label>
 	</div>
-	<button class="button button-full button-positive" type="submit" ng-click="Withdrawl(withdrawForm)">
+	<button ion-track-tap="withdraw confirm" class="button button-full button-positive" type="submit" ng-click="Withdrawl(withdrawForm)">
 		WITHDRAW
 	</button>
 	<p class="scheduled_text">Schedule for deposit to your registered bank account</p>

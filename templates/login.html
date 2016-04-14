@@ -1,4 +1,5 @@
 <ion-view cache-view="false" title="Login" class="signin_background">
+  <span ng-controller="googleanalytics"></span>
 	<ion-content overflow-scroll="true" padding="true" class="has-header" ng-controller="AuthSigninCtrl">
       <div class="row logo">
         <img src="img/logo_priv.png">
@@ -54,7 +55,7 @@
 			<input ng-model="rememberMe" type="checkbox" ng-init="rememberMe=true" id="remember_me" style="margin: 4px;"><label id="remember_me_label" for="remember_me" >Remember me</label>
 	</label>
 	</div>
-	<button class="button button-full button-positive" type="submit">
+	<button ion-track-tap="login" class="button button-full button-positive" type="submit">
 		<i class="icon ion-locked secure_lock"></i>Secure Login
 		<a class='clear'data-ng-click="authorization.password = ''"></a>
 	</button>

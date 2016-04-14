@@ -1,4 +1,5 @@
 <ion-view title="Invite" class="invite">
+	<span ng-controller="googleanalytics"></span>
 <div class="bar bar-header fino_head" ng-controller="popupController as popup">
 <button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepback()"></button>
 	<div class="h1 title"><p class="head_title"><span id="title">INVITE friends</span></p></div>
@@ -12,7 +13,7 @@
 			<sup><sup>*</sup>Your friend has to invest a minimum of INR 100 for atleast 10 days for both of you to be eligible for referral pay out.<br/> Please contact us for any queries. </sup>
 		</div>
 	<div class="bar bar-footer row  padding " ng-controller="socialShareController">
-	<a class="button button-full button-positive bar-footer invest_button_footer" ng-click="shareViaTwitter()" >Start Inviting</a>
+	<a ion-track-tap="invite" class="button button-full button-positive bar-footer invest_button_footer" ng-click="shareViaTwitter()" >Start Inviting</a>
 	</div>
     </ion-content>
 </ion-view>
