@@ -40,6 +40,222 @@ angular.module('app.subcontrollerTwo', [])
         }
 
     })
+        /*for sending the pan Image*/
+        .controller('panImageCTRL',function(ImageService,$scope,$sessionStorage,$state,$ionicPopup){
+            $scope.Pan = function(uploadPan) {
+                uploadPan.clientCode = $sessionStorage.SessionClientCode;
+                uploadPan.imageData = $sessionStorage.panimage;//replace with session storage of pan
+                uploadPan.imageType = 'PA';
+                uploadPan.addressType = '';
+                uploadPan = JSON.stringify(uploadPan);
+                console.log(uploadPan + 'pan json data');
+                ImageService.save(uploadPan,function(data){
+                    console.log(data);
+                    if(data.responseCode == "Cali_SUC_1030") {
+
+
+
+
+                            $state.go("");//after pan image
+
+                    }
+                    else {
+                        console.log("Error");
+                        $ionicPopup.alert({
+                            title: 'Upload Error',
+                            template: 'Please try again'
+                        });
+                        popup.then(function(res) {
+                            $state.go(""); //pan image page
+                        });
+                    }
+                },function(error){
+                    $ionicPopup.alert({
+                        title: 'Your floating away',
+                        template: 'Please try again'
+                    });
+                    popup.then(function(res) {
+                        $state.go(""); //pan image page
+                    });
+
+                });
+            }
+        })
+
+
+            /*for signature image*/
+    .controller('signImageCTRL',function(ImageService,$scope,$sessionStorage,$state,$ionicPopup){
+        $scope.sign = function(uploadsign) {
+            uploadsign.clientCode = $sessionStorage.SessionClientCode;
+            uploadsign.imageData = $sessionStorage.signimage;//replace with session storage of sign
+            uploadsign.imageType = 'SI';
+            uploadsign.addressType = '';
+            uploadsign = JSON.stringify(uploadPan);
+            console.log(uploadsign + 'pan json data');
+            ImageService.save(uploadsign,function(data){
+                console.log(data);
+                if(data.responseCode == "Cali_SUC_1030") {
+
+
+
+
+                    $state.go("");//after sign image
+
+                }
+                else {
+                    console.log("Error");
+                    $ionicPopup.alert({
+                        title: 'Upload Error',
+                        template: 'Please try again'
+                    });
+                    popup.then(function(res) {
+                        $state.go(""); // sign page
+                    });
+                }
+            },function(error){
+                $ionicPopup.alert({
+                    title: 'Your floating away',
+                    template: 'Please try again'
+                });
+                popup.then(function(res) {
+                    $state.go(""); // sign page
+                });
+
+            });
+        }
+    })
+
+    /*for selfie image*/
+    .controller('selfieImageCTRL',function(ImageService,$scope,$sessionStorage,$state,$ionicPopup){
+        $scope.selfie = function(uploadselfie) {
+            uploadselfie.clientCode = $sessionStorage.SessionClientCode;
+            uploadselfie.imageData = $sessionStorage.signimage;//replace with session storage of selfie
+            uploadselfie.imageType = 'PH';
+            uploadselfie.addressType = '';
+            uploadselfie = JSON.stringify(uploadPan);
+            console.log(uploadselfie + 'pan json data');
+            ImageService.save(uploadselfie,function(data){
+                console.log(data);
+                if(data.responseCode == "Cali_SUC_1030") {
+
+
+
+
+                    $state.go("");//after selfie image
+
+                }
+                else {
+                    console.log("Error");
+                    $ionicPopup.alert({
+                        title: 'Upload Error',
+                        template: 'Please try again'
+                    });
+                    popup.then(function(res) {
+                        $state.go(""); //selfie sign page
+                    });
+                }
+            },function(error){
+                $ionicPopup.alert({
+                    title: 'Your floating away',
+                    template: 'Please try again'
+                });
+                popup.then(function(res) {
+                    $state.go(""); //selfie sign page
+                });
+
+            });
+        }
+    })
+
+
+    /*for address proof image*/
+    .controller('addressImageCTRL',function(ImageService,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
+        $scope.address = function(uploadaddress) {
+            uploadaddress.clientCode = $sessionStorage.SessionClientCode;
+            uploadaddress.imageData = $sessionStorage.signimage;//replace with session storage of selfie
+            uploadaddress.imageType = 'AF';
+            uploadaddress.addressType = ''; //sessionstorage of addressType
+            uploadaddress = JSON.stringify(uploadPan);
+            console.log(uploadaddress + 'pan json data');
+            ImageService.save(uploadaddress,function(data){
+                console.log(data);
+                $ionicLoading.show();
+                if(data.responseCode == "Cali_SUC_1030") {
+
+
+
+
+                    $state.go("");//after selfie image
+                    $ionicLoading.hide();
+                }
+                else {
+                    console.log("Error");
+                    $ionicPopup.alert({
+                        title: 'Upload Error',
+                        template: 'Please try again'
+                    });
+                    $ionicLoading.hide();
+                    popup.then(function(res) {
+                        $state.go(""); //selfie sign page
+                    });
+                }
+            },function(error){
+                $ionicLoading.hide();
+                $ionicPopup.alert({
+                    title: 'Your floating away',
+                    template: 'Please try again'
+                });
+                popup.then(function(res) {
+                    $state.go(""); //selfie sign page
+                });
+
+            });
+        }
+    })
+
+    .controller('adressBackImageService',function(ImageService,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
+        $scope.address = function(uploabackdaddress) {
+            uploabackdaddress.clientCode = $sessionStorage.SessionClientCode;
+            uploabackdaddress.imageData = $sessionStorage.signimage;//replace with session storage of selfie
+            uploabackdaddress.imageType = 'AB';
+            uploabackdaddress.addressType = ''; //sessionstorage of addressType
+            uploabackdaddress = JSON.stringify(uploadPan);
+            console.log(uploabackdaddress + 'pan json data');
+            ImageService.save(uploabackdaddress,function(data){
+                console.log(data);
+                $ionicLoading.show();
+                if(data.responseCode == "Cali_SUC_1030") {
+
+
+
+
+                    $state.go("");//after selfie image
+                    $ionicLoading.hide();
+                }
+                else {
+                    console.log("Error");
+                    $ionicPopup.alert({
+                        title: 'Upload Error',
+                        template: 'Please try again'
+                    });
+                    $ionicLoading.hide();
+                    popup.then(function(res) {
+                        $state.go(""); //selfie sign page
+                    });
+                }
+            },function(error){
+                $ionicLoading.hide();
+                $ionicPopup.alert({
+                    title: 'Your floating away',
+                    template: 'Please try again'
+                });
+                popup.then(function(res) {
+                    $state.go(""); //selfie sign page
+                });
+
+            });
+        }
+    })
 
     /*for destroying the session storage*/
     .controller('signoutCtrl',function($scope,$state,$ionicHistory,$rootScope,$ionicPlatform){
@@ -368,3 +584,5 @@ var signatureImage = function(){
   );
   //$cordovaGoogleAnalytics.trackEvent('swipe', 'Video Load Time', 'Gone With the Wind', 100);*/
 })
+
+
