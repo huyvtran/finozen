@@ -214,7 +214,7 @@ angular.module('app.subcontrollerTwo', [])
     })
 
     .controller('adressBackImageService',function(ImageService,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
-        $scope.address = function(uploabackdaddress) {
+        $scope.addressback = function(uploabackdaddress) {
             uploabackdaddress.clientCode = $sessionStorage.SessionClientCode;
             uploabackdaddress.imageData = $sessionStorage.signimage;//replace with session storage of selfie
             uploabackdaddress.imageType = 'AB';
