@@ -29,7 +29,9 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
 
-Idle.watch();
+var userName = $bindTo($scope.$sessionStorage.mobileNumber);
+      console.log(userName);
+      Idle.watch();
                 if(!navigator.onLine) {
 console.log(navigator.onLine + "  connection state");
 					$ionicPopup.confirm({
@@ -53,6 +55,7 @@ if(typeof analytics !== undefined) {
     analytics.trackView('invest');
   analytics.trackView('withdraw');
   analytics.trackView('tabsController');
+  analytics.setUserId('userName');
 
 				//ga('set', 'userId', {{USER_ID}}); // Set the user ID using signed-in user_id.
             } else {
@@ -77,8 +80,7 @@ if(typeof analytics !== undefined) {
         history.go(-1);
       }
     }, 100);
-	
-	
+
 	/*
 	$ionicPlatform.registerBackButtonAction(function(event) {
 		$ionicPopup.confirm({
