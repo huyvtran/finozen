@@ -1,30 +1,32 @@
 <ion-view title="CONFIRM">
 <div class="bar bar-header fino_head">
 <button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepback()"></button>
-  <div class="h1 title"><p class="head_title"><span id="title">CONFIRM</span></p></div>
+  <div class="h1 title"><p class="head_title"><span id="title">ADDITIONAL DETAILS</span></p></div>
   <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
 </div>
 	<ion-content overflow-scroll="true" padding="true" class="has-header">
 <div class="">
 <br/><br/>
-<div class="row questions">
-<span class="col-40">Gross Annual Income</span>
-	<select class="col-50">
-		<option>1 lac</option>
-		 <option>1 - 5 lac</option>
-		 <option>5 - 10 lac</option>
-		 <option>10 - 25 lac</option>
-		 <option>> 25 lac</option>
+<p class="text-left"><b>Step: 6/6 </b>YOU ARE ALMOST DONE!</p>
+<label for="income" class="row questions">
+<span class="col-40">1) Gross Annual Income</span>
+	<select name="income" class="col-50">
+		<option value="1"> Below 1 Lakh</option>
+		 <option value="oneToFive">1 - 5 Lakh</option>
+		 <option value="fiveToTen" selected>5 - 10 Lakh</option>
+		 <option value="tenToTwentyfive">10 - 25 Lakh</option>
+		 <option value="TwentyfiveToOne">25 Lakh – 1 Cr</option>
+		 <option value="aboveOne">Above 1 Cr</option>
 	</select>
 	<br/>
-</div>
+</label>
 <div class="row questions">
-<span class="col-40">Occupation</span>
-	<select class="col-50">
+<span class="col-40">2) Occupation</span>
+	<select name="occ" class="col-50">
 		<option>Business</option>
 		<option>Professional</option>
 		<option>Public Sector</option>
-		<option>Private Sector</option>
+		<option selected>Private Sector</option>
 		<option>Government Service</option>
 		<option>Agriculturist</option>
 		<option>Housewife</option>
@@ -36,17 +38,32 @@
 	<br/>
 </div>
 <div class="row questions">
-<span class="col-40">PEP</span>
-	<select class="col-50">
+<span class="col-40">3) Political Exposure<span style="color: #18bb9c; font-size: 12px;" class="button-icon ion-information-circled"  ng-controller="PEPpopOverController" ng-click="popover.show($event)"> </span></span>
+	<select name="pep" class="col-50">
+		<option>Not Applicable</option>
 		<option>Politically Exposed Person</option>
 		<option>Related to Politically Exposed Person</option>
-		<option>None</option>
 	</select>
 </div>
-<div class="footer" ng-controller="panVerifyCtrl">
-	<button class="button button-half button-positive"  ng-click="question()">SUBMIT</button>
-</div>
+<!--
+<div class="row questions">
+<span class="col-40">Residential status</span>
+	<select class="col-50">
+		<option>Resident Individual</option>
+		<option>Non – Resident Individual</option>
+		<option>Foreign Portfolio Investor – Category III</option>
+		<option>Foreign National</option>
+		<option>Qualified Foreign Investor</option>
+	</select>
+</div>-->
+<!--<div class="footer" ng-controller="panVerifyCtrl">-->
+<p style="padding: 26px 0; text-align:left;font-size: 10px;"><sup>*By clicking on submit I agree that I am an Indian PAN card holder and a resident individual.</sup>.</p>
 </div>
     </ion-content>
-
+<ion-footer-bar padding="false" style="padding:0;">
+	<div class="button-bar " style="padding:0;" ng-controller="panVerifyCtrl">
+		<button class="button button-positive" ng-click="question()" style="margin:1px;line-height: 44px;">SKIP</button>
+		<button class="button button-positive" ng-click="question()" style="margin:1px;line-height: 44px;">SUBMIT</button>
+	</div>
+</ion-footer-bar>
 </ion-view>

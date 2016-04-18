@@ -39,7 +39,7 @@ $sessionStorage.SessionClientName=signupForm.fName+' '+signupForm.lName;
 $sessionStorage.SessionMobNo=signupForm.mobileNumber;
             if(angular.equals(signupForm.pin,searchText2))
             {
-                if( !angular.equals(signupForm.mobileNumber,signupForm.referal)) {
+                if( !angular.equals(signupForm.mobileNumber,signupForm.referral)) {
 					if(form.$valid) {
 						$ionicLoading.show();
 						$sessionStorage.signUpData = (signupForm);
@@ -47,6 +47,8 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 					}
 				}
 				else{
+					form.referral.$dirty=false;
+					console.log( form.referral.$dirty+ " in cont");
 					$scope.error_referal="Entered mobile number and referral number should be different";
 				}
             }
@@ -135,8 +137,9 @@ console.log($scope.loginDetails);
           $sessionStorage.SessionClientName =data.jsonStr[0].clientName;
           $sessionStorage.SessionClientCode =data.jsonStr[0].clientCode;
           $sessionStorage.SessionMobNo =data.jsonStr[0].mobileNo;
+          $sessionStorage.SessionFolioNums =(data.jsonStr[0].folioNums).length;
           $sessionStorage.clientActive = data.jsonStr[0].clientActive;
-		  console.log($sessionStorage.clientActive);
+		  console.log($sessionStorage.SessionFolioNums);
 		if($sessionStorage.clientActive=='y'){	
 		window.plugins.OneSignal.sendTag("active","true");}
           $sessionStorage.folioNums = data.jsonStr[0].folioNums[0];
@@ -154,15 +157,15 @@ console.log($scope.loginDetails);
     })
 
     .controller('transactionAccessCtrl', function($scope,$sessionStorage){
-
-  if($sessionStorage.clientActive!="Y") {
-    $scope.withdrawUrl="#/status";
-    $scope.investUrl="#/status";
-  }
-  else {
+if($sessionStorage.clientActive=="Y") {
      $scope.withdrawUrl="#/withdraw";
       $scope.investUrl="#/invest";
   }
+  else {
+    $scope.withdrawUrl="#/status";
+    $scope.investUrl="#/status";
+  }
+  
 
 
     })
@@ -229,7 +232,9 @@ $sessionStorage.xirr=data.jsonStr.xirr;
   var Report = getReportService.get();
   Report.$promise.then(function(data){
     if(data.responseCode=="Cali_SUC_1030"){
-      $scope.products=data.jsonStr;
+	$sessionStorage.allTransactions=(data.jsonStr).length ;
+	console.log($sessionStorage.allTransactions + "total number of transactions");
+    $scope.products=data.jsonStr;
 	if((data.jsonStr).length <= 0){console.log(window.Connection + "connection");
 	$scope.noTxnMsg1="There are no transactions to display,";
 	$scope.noTxnMsg2="START INVESTING NOW";
@@ -301,6 +306,17 @@ $scope.$broadcast("scroll.refreshComplete");
 
     })
 
+    .controller('PEPpopOverController',function($scope,$ionicPopover ){
+
+        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item pop_up" href="#" target="_blank">Individuals holding any prominent public function for ex: Head of State or Govt, Senior Politicians etc.</a> </div></ion-content>';
+
+        $scope.popover = $ionicPopover.fromTemplate(template, {
+            scope: $scope
+        });
+
+
+    })
+
 
     .controller('showhistoryController', function($scope,$ionicHistory){
 
@@ -331,14 +347,15 @@ console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
             if(form.$valid) {
             if(($scope.amount!=undefined || $scope.checked_withdraw) && ($scope.amount>0 || $scope.checked_withdraw)) {
 			if($scope.checked_withdraw == true){
-				$ionicPopup.confirm({
+				 var confirmPopup = $ionicPopup.confirm({
 					title: "Confirm",
 					content: "Withdraw complete balance?"
-				})
-				.then(function(result) {
+				});
+				confirmPopup.then(function(result) {
 					if(result) {
 						mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"allUnits":"Y","folioNo":$sessionStorage.folioNums},function(data){
-                        if(data.responseCode=="Cali_SUC_1030") {
+                        console.log(data.responseCode);
+						if(data.responseCode=="Cali_SUC_1030") {
                             $state.go('successPage');
                         }
 						else
@@ -353,24 +370,27 @@ console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
 				});
 			}
 			else{
-				$ionicPopup.confirm({
+				 var confirmPopup =$ionicPopup.confirm({
 					title: "Confirm",
-					content: "Withdraw INR"+ $scope.amount +"?"
-				})
-				.then(function(result) {
+					content: "Withdraw INR "+ $scope.amount +" ?"
+				});
+				confirmPopup.then(function(result) {
+					if(result) {
 					mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode":$sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount":$scope.amount,"folioNo":$sessionStorage.folioNums},function(data){
 							console.log(data.responseCode);
 							if(data.responseCode!="Cali_SUC_1030") {
 								console.log("failed");
-								$scope.withdraw_Networkerror="Unable to accept request. Please try again";
+								$scope.withdraw_Networkerror="Unable to accept request. Please re-login and try again";
 							}
 							else
 							{
 								console.log("success");
+								$state.go('successPage');
 							}
 						},function(error){
-							$scope.withdraw_Networkerror="Unable to accept request. Please try again";
+							$scope.withdraw_Networkerror="Unable to accept request. Please re-login and try again";
 						});
+					}
 				});
 			}
                 //$state.go('successPage');

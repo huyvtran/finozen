@@ -126,6 +126,12 @@ $ionicAppProvider.identify ({
       url: '/signature',         
           templateUrl: 'templates/signature.html',
           controller: ''     
+    })  
+    
+             .state('aboutUs', {
+      url: '/aboutUs',         
+          templateUrl: 'templates/aboutUs.html',
+          controller: ''     
     })
              .state('selfie', {
       url: '/selfie',         

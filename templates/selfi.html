@@ -1,23 +1,30 @@
 <ion-view title="SELFIE">
 <div class="bar bar-header fino_head">
 <button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepback()"></button>
-  <div class="h1 title"><p class="head_title"><span id="title">SELFIE</span></p></div>
+  <div class="h1 title"><p class="head_title"><span id="title">SELF IMAGE WITH PAN</span></p></div>
   <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
 </div>
-	<ion-content overflow-scroll="true" padding="true" class="has-header">
+	<ion-content overflow-scroll="true" padding="true" class="has-header" ng-controller="PictureCtrl" >
 
 
-		<div ng-controller="PictureCtrl" class="panimageSection text-center">
+		<div class="panimageSection text-center">
+		<p style="padding: 26px 0; text-align:left;"><b>Step: 2/6 </b>Please take an image of yourself holding your PAN card. Please ensure that your face and PAN card are captured clearly.</p>
 			<div class="panimage">
 				<img ng-show="selfie !== undefined" ng-src="{{selfie}} ">
 				<img ng-show="selfie === undefined" src="img/account-image1.png ">
 			</div>
 			
-		<div class="text-center">
-		<button class="button button-positive" ng-click="selfieImage()" ng-show="selfie === undefined">Take Image</button>
-		<button class="button button-positive" ng-controller="panVerifyCtrl" ng-show="selfie !== undefined"   ng-click="addressSelect()">submit</button>
+			<div class="text-center">
+			<button class="button button-positive" ng-click="selfieImage()" ng-show="selfie === undefined">Take Image</button>
+			</div>
 		</div>
-		</div>
+		<p style="padding: 26px 0; text-align:left;font-size: 10px;"><sup>*</sup>This image will be used for your identity verification and to ensure that you are creating an account for yourself.</p>
+<ion-footer-bar padding="false" style="padding:0;">
+	<div class="button-bar " style="padding:0;" >
+		<button class="button button-positive" ng-click="addressSelect()" style="margin:1px;line-height: 44px;">SKIP</button>
+		<button class="button button-positive" ng-click="addressSelect()" style="margin:1px;line-height: 44px;" ng-disabled="!selfie">SUBMIT</button>
+	</div>
+</ion-footer-bar>
     </ion-content>
 
 </ion-view>

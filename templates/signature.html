@@ -4,18 +4,21 @@
   <div class="h1 title"><p class="head_title"><span id="title">SIGNATURE</span></p></div>
   <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
 </div>
-	<ion-content overflow-scroll="true" padding="false" class="has-header" ng-controller="SignatureCtrl">
-          <canvas id='signatureCanvas' height='200' width='600' style='border: 1px solid black;'></canvas>
+	<ion-content overflow-scroll="true" padding="false" class="has-header" ng-controller="SignatureCtrl"><br/>
+	<p class="padding">I hereby certify that the information provided is correct to the best of my knowledge and belief.</p>
+          <canvas id='signatureCanvas' height='160' width='600' style='border: 1px solid black;'></canvas>
           <div class='button-bar'>
               <a class='button button-energized' ng-click='clearCanvas()'>Clear</a>
-              <a class='button button-balanced' ng-click='saveCanvas()'>Save</a>
+              <a class='button button-positive' ng-click='saveCanvas()'>Save</a>
           </div>
           <br>
           <img ng-src='{{signature}}'/>
-
-		  <div class="footer" ng-show='signature'>
-			<button class="button button-half button-positive"  ng-controller="panVerifyCtrl" ng-click="signature()">SUBMIT</button>
-		</div>
+		<ion-footer-bar padding="false" style="padding:0;">
+	<div class="button-bar " style="padding:0;">
+		<button class="button button-positive" ng-click="signatureFunction()" style="margin:1px;line-height: 44px;">SKIP</button>
+		<button class="button button-positive" ng-click="signatureFunction()" style="margin:1px;line-height: 44px;" ng-disabled="!signature">SUBMIT</button>
+	</div>
+</ion-footer-bar>
     </ion-content>
 
-</ion-view>
+</ion-view>signatureFunction
