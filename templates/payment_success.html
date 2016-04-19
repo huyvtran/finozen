@@ -15,6 +15,7 @@
 			  <div class="success_block" >
 				<div class="inner_block text-center">
 				<h4 class="message">Thank You<br/></h4>
+	<p class="scheduled_text">Your request has been accepted.</p>
 	<p class="scheduled_text">Schedule for deposit to your registered bank account</p>
 	<div class="row deposit_table" >
 	<!--	<p><br/>
@@ -32,20 +33,27 @@
 				<th>Deposit</th>
 			</thead>
 			<tr>
-				<td>Sun - Thur, before 2 p.m.</td>
+				<td>Mon - Thur, before 2 p.m.</td>
 				<td>Next day 10 a.m.</td>
 			</tr>
 			<tr>
-				<td>Sun - Thur, after 2 p.m.</td>
+				<td>Mon - Thur, after 2 p.m.</td>
 				<td>Day after next 10 a.m.</td>
 			</tr>
 			<tr>
-				<td>Fri - Sat.</td>
+				<td>Fri before 2 p.m.</td>
 				<td>Monday 10 a.m.</td>
 			</tr>
+			<tr>
+				<td>Fri after 2 p.m, Sat and Sun.</td>
+				<td>Tuesday 10 a.m.</td>
+			</tr>
 		</table>		
+		
+		
 		</div>
-		<p class="small_text">If the day of deposit is a Bank Holiday, money will be deposited the next day.</p>
+
+		<p class="small_text">If the day of deposit is a Bank Holiday, money will be deposited the next working day.</p>
 				<button class="button button-positive" ng-controller="panVerifyCtrl"  ng-click="withdrawSuccess()">Done</button>
 				</div>
 			 </div>

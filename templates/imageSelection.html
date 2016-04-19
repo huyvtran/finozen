@@ -1,22 +1,27 @@
 <ion-view title="CONFIRM">
     <div class="bar bar-header fino_head">
         <button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepback()"></button>
-        <div class="h1 title"><p class="head_title"><span id="title">SELECTION</span></p></div>
+        <div class="h1 title"><p class="head_title"><span id="title">ADDRESS PROOF</span></p></div>
         <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
     </div>
     <ion-content overflow-scroll="true" padding="false" class="has-header">
+	<p class="padding" style="padding-top:20px; text-align:left;"><b>Step: 3/6 </b>Please choose ANY ONE address proof that you are providing.</p>
             <ion-list class="imageSelection padding">
 			  <ion-radio ng-model="choice" ng-value="'aadhar'">Aadhar Card</ion-radio>
+			  <ion-radio ng-model="choice" ng-value="'drivingLicence'">Driving Licence</ion-radio>
 			  <ion-radio ng-model="choice" ng-value="'voterID'">Voter ID</ion-radio>
 			  <ion-radio ng-model="choice" ng-value="'passport'">Passport</ion-radio>
+			  <ion-radio ng-model="choice" ng-value="'rationCard'">Ration Card</ion-radio>
 			  <ion-radio ng-model="choice" ng-value="'gas'">Gas Bill</ion-radio>
 			  <ion-radio ng-model="choice" ng-value="'electricity'">Electricity Bill</ion-radio>
-			  <ion-radio ng-model="choice" ng-value="'drivingLicence'">Driving Licence</ion-radio>
 			</ion-list>
-			<div class="text-center" ng-controller="PictureCtrl">
-				<button class="button button-positive" ng-click="takeImage()">SUBMIT</button>
-				<br/><br/><br/><div  class="error" >{{ errorProofSelection }}</div>
-			</div>
-    </ion-content>
+	<p style="padding: 26px 10px; text-align:left;font-size: 10px;"><sup>*</sup>Please ensure that your name and address is visible clearly on your address proof.</p>
 
+<ion-footer-bar padding="false" style="padding:0;">
+	<div class="button-bar " style="padding:0;" ng-controller="PictureCtrl">
+		<button class="button button-positive" ng-click="takeImage()" style="margin:1px;line-height: 44px;">SKIP</button>
+		<button class="button button-positive" ng-click="takeImage()" style="margin:1px;line-height: 44px;" ng-disabled="!choice">SUBMIT</button>
+	</div>
+</ion-footer-bar>
+    </ion-content>
 </ion-view>

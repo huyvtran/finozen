@@ -26,9 +26,10 @@
 			</div>
 			<div class="col"  style="border-left: 3px solid white;">
 				<label class="item item-input" ng-class="{ 'has-errors' : signupForm.$submitted && signupForm.Lname.$invalid, 'no-errors' :  signupForm.Lname.$touched && signupForm.Lname.$valid}">
-					<input type="text" name="Lname" ng-pattern ="/^[a-zA-Z\s]*$/"  ng-model="authorization.lName"  placeholder="Last Name">
+					<input type="text" name="Lname" ng-pattern ="/^[a-zA-Z\s]*$/"  ng-model="authorization.lName"  placeholder="Last Name" required>
 				</label>
 				<div class="error-container" ng-show="signupForm.Lname.$error && signupForm.$submitted" ng-messages="signupForm.Lname.$error">
+					<div class="error"  ng-message="required">You did not enter a field</div>
 					<div class="error"  ng-message="pattern">Enter Alphabets only</div>
 				</div>
 			</div>
@@ -74,16 +75,16 @@
 				<div  class="error" >{{ error_pin }}</div>
 			</div>
 		</div>
-		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.referal.$invalid && signupForm.$submitted, 'no-errors' : signupForm.referal.$valid  && signupForm.$submitted}">
-			<i class="icon ion-android-call signup_icons"></i><input type="number" name="referal" ng-model="authorization.referal" ng-minlength="10" ng-maxlength="10"  placeholder="Referral code(optional)">
+		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.referral.$invalid && signupForm.$submitted, 'no-errors' : signupForm.referral.$valid  && signupForm.$submitted}">
+			<i class="icon ion-android-call signup_icons"></i><input type="number" name="referral" ng-model="authorization.referral" ng-minlength="10" ng-maxlength="10"  placeholder="Referral code(optional)">
 		</label>
 		
-		<div class="error-container last-error-container" ng-show="signupForm.referal.$error && signupForm.$submitted" ng-messages="signupForm.referal.$error">
+		<div class="error-container last-error-container" ng-show="signupForm.referral.$error && signupForm.$submitted" ng-messages="signupForm.referral.$error">
 			<div  class="error" >
 				<div ng-message="maxlength, minlength">
-					Enter valid referal code
+					Enter valid referral code
 				</div>
-				<div  class="error" >{{ error_referal }}</div>
+				<div  class="error" ng-show="authorization.mobileNumber==authorization.referral">{{ error_referal }}</div>
 			</div>
 		</div>
 	
@@ -96,7 +97,7 @@
 		<span class="check_agree item-checkbox item_checkbox">By Signing up, I agree to <a href="#" onclick="window.open('http://finozen.com/t&c.html', '_self')"> T & C</a> and <a href="#" onclick="window.open('http://finozen.com/policy.html', '_self')">Privacy Policy</a></span>
 	</div>
 </form>	
- <div ng-controller="openBrowser">
+<div ng-controller="openBrowser">
  <button class = "button" ng-click = "closeBrowser2()">pan verify</button>
  <button class = "button" ng-click = "closeBrowser()">Sign pad</button>
     </div>

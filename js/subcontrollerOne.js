@@ -275,9 +275,17 @@ $scope.growthRate= function(){
 		
 		$scope.Invest = function(form) {
             if(form.$valid && $scope.initial>=100) {
+				if($sessionStorage.allTransactions > 0 && $sessionStorage.SessionFolioNums==0){
+					$ionicPopup.alert({
+					title: 'Transaction In-Progress',
+					template: 'Your first transaction is in progress. For next transaction, we request you to wait till the first investment reflects in your FinoZen account.'
+				  });
+				  }
+				else{
 				$ionicLoading.show();
                 //$state.go('successPage');
                 $scope.sendMfOrder();
+				}
             }
         }
 
@@ -340,8 +348,6 @@ console.log("enter");
         // error
 		console.log("error");
       });
-
-
     $cordovaInAppBrowser.close();
 
   }, false);
@@ -371,8 +377,10 @@ $state.go('reference');
     //
 })
 .controller('PictureCtrl', function($scope, $cordovaCamera,$state) {
+$scope.bank=function(){$state.go('bank');}
 $scope.addressSelect=function(){$state.go('imageSelection'); }
-$scope.takeImage=function(){if($scope.choice!==undefined) {$state.go('addressProofImage');} else{$scope.errorProofSelection="select an option";} }
+$scope.selfieGo=function(){$state.go('selfie');}
+$scope.takeImage=function(){if($scope.choice!==undefined) {$state.go('addressProofImage');} }
 $scope.addressProof=function(){
 	$scope.addressImage="img/no_leaves.png";
   document.addEventListener("deviceready", function () {
@@ -472,10 +480,9 @@ $scope.selfie="img/no_leaves.png";
 }
 })
     .controller('panVerifyCtrl', function($scope,$state) {
-		$scope.selfieGo=function(){$state.go('selfie');}
-		$scope.bank=function(){$state.go('bank');}
+		
+		
 		$scope.question=function(){$state.go('signature');}
-		$scope.signature=function(){$state.go('verifySuccess');}
 		$scope.bankdone=function(){$state.go('questions');}
 		$scope.kycdone=function(){$state.go('panImage');}
 		$scope.kycnotdone=function(){$state.go('aadhar');}
@@ -486,7 +493,7 @@ $scope.selfie="img/no_leaves.png";
 		$scope.withdrawSuccess = function() {console.log("here"); history.go(-2);}
     })
 
-.controller('SignatureCtrl', function($scope) {
+.controller('SignatureCtrl', function($scope,$state) {
     var canvas = document.getElementById('signatureCanvas');
     var signaturePad = new SignaturePad(canvas);
  
@@ -498,4 +505,6 @@ $scope.selfie="img/no_leaves.png";
         var sigImg = signaturePad.toDataURL();
         $scope.signature = sigImg;
     }
+	$scope.signatureFunction=function(){$state.go('verifySuccess');}
+
 })
