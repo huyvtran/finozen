@@ -267,7 +267,7 @@ angular.module('app.subcontrollerTwo', [])
           }
         })
         /*$scope.signOut = function(){
-           
+
             $timeout(function () {
                 sessionStorage.clear();
                $ionicHistory.clearHistory();
@@ -277,129 +277,52 @@ angular.module('app.subcontrollerTwo', [])
         }*/
     })
 
-.controller('ChequeImageCTRl',function($scope,$sessionStorage,$http,$state,$ionicPopup){
-  $scope.chequeImage=function(){
-  $scope.cheque=JSON.stringify($sessionStorage.clientCode);
-  $scope.cheque=JSON.stringify(image);//image data
+/*for uploading the bank details*/
+  .controller('bankDetailsCTRL',function($scope,$sessionStorage,bankDetailsService,$ionicPopup){
+    var bankDetail=function(bank){
+      var bank = JSON.parse({});
+            bank.clientCode=$sessionStorage.clientCode;
+            bank.bankAccNo= //bank account number
+            bank.ifscCode= //ifsc Code
+            bank.accountType= //savings type either savings or personal
+            bank.updateNach= //either yes or no
+            bank=JSON.stringify(bank);
 
-  $http.post('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/setNewPassword', cheque).success(function(data){
-
-$sessionStorage.KYPH=data.KYPH;
-    if(data.responseCode=="Cali_SUC_1030"){
-
-      var popup= $ionicPopup.alert({
-        title: 'cheque Change status',
-        template: 'cheque Changed Successfully'
-      });
-
-      popup.then(function(res) {
-        $state.go("bankdetails"); //path name for the  bang page
-      });
-    }
-    else {
-      $ionicPopup.alert({
-        title: 'cheque Change status',
-        template: 'cheque Changed UnSuccessfully'
-      });
-      popup.then(function(res) {
-        $state.go("panImage"); //same path name for the panImage page
-      });
-    }
+               bankDetailsService.save(bank,function(data){
+                 console.log(data);
+                 $ionicLoading.show();
+                 if(data.responseCode == "Cali_SUC_1030") {
 
 
-  }).error(function(data){
-    {
-      console.log("Error");
-      $ionicPopup.alert({
-        title: 'cheque Change status',
-        template: 'cheque Changed UnSuccessfully'
-      });
-    }
-  });
-
-  }
-})
-  .controller('SignatureImageCTRL',function($scope,$$sessionStorage,$http,$ionicPopup){
-
-var signatureImage = function(){
-  $scope.signature=JSON.stringify($sessionStorage.KYPH);
-  $scope.signature=JSON.stringify(image);
-  $http.post('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/setNewPassword', signature).success(function(data){
-    if(data.responseCode=="Cali_SUC_1030"){
-
-      var popup= $ionicPopup.alert({
-        title: 'signature Change status',
-        template: 'signature Changed Successfully'
-      });
-
-      popup.then(function(res) {
-
-      });
-    }
-    else {
-      $ionicPopup.alert({
-        title: 'signature Change status',
-        template: 'signature Changed UnSuccessfully'
-      });
-      popup.then(function(res) {
-
-      });
-    }
 
 
-  }).error(function(data){
-    {
-      console.log("Error");
-      $ionicPopup.alert({
-        title: 'signature Change status',
-        template: 'signature Changed UnSuccessfully'
-      });
-    }
-  });
+                   $state.go("");//after selfie image
+                   $ionicLoading.hide();
+                 }
+                 else {
+                   console.log("Error");
+                   $ionicPopup.alert({
+                     title: 'Upload Error',
+                     template: 'Please try again'
+                   });
+                   $ionicLoading.hide();
+                   popup.then(function(res) {
+                     $state.go(""); //selfie sign page
+                   });
+                 }
+               },function(error){
+                 $ionicLoading.hide();
+                 $ionicPopup.alert({
+                   title: 'Your floating away',
+                   template: 'Please try again'
+                 });
+                 popup.then(function(res) {
+                   $state.go(""); //selfie sign page
+                 });
 
-}
-})
-
-  .controller('bankDetailsCTRL',function($scope,$sessionStorage,$http,$ionicPopup){
-    var bankDetail=function(){
-      var bank = JSON.stringify($sessionStorage.clientCode);
-      //bank account number
-      //bank ifsc code
-      $http.post('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/setNewPassword', bank).success(function(data){
-        if(data.responseCode=="Cali_SUC_1030"){
-
-          var popup= $ionicPopup.alert({
-            title: 'bank Change status',
-            template: 'bank Changed Successfully'
-          });
-
-          popup.then(function(res) {
-            //$state.go("login");
-          });
-        }
-        else {
-          $ionicPopup.alert({
-            title: 'bank Change status',
-            template: 'bank Changed UnSuccessfully'
-          });
-          popup.then(function(res) {
-           // $state.go("login");
-          });
-        }
-
-
-      }).error(function(data){
-        {
-          console.log("Error");
-          $ionicPopup.alert({
-            title: 'bank Change status',
-            template: 'bank Changed UnSuccessfully'
-          });
-        }
-      });
-
-    }
-  })
+               });
+             }
+    })
 
   .controller('adhaarCTRL',function($scope,$http,$ionicPopup,$sessionStorage){
     var adhaarFunc=function(){

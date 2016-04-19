@@ -79,16 +79,16 @@ angular.module('app.services', [])
         save:{
             method:'POST',
             headers:{
-            'X-AUTH-TOKEN':jsid  
+            'X-AUTH-TOKEN':jsid
             }
         }
     });
 		return change;
-	
+
 }])
 
 	/*PAN image factory*/
-	.factory('panImageService',['$resource','$sessionStorage',function($resource){
+	.factory('ImageService',['$resource','$sessionStorage',function($resource){
 		var panupload = $resource('http://205.147.99.55:8080/WealthWeb/ws/kycs/kyphImg',{},{
 			save:{
 				method:'POST',
@@ -101,66 +101,18 @@ angular.module('app.services', [])
 
 }])
 
-	/*SIGNATURE image factory*/
-	.factory('signImageService',['$resource','$sessionStorage',function($resource){
+/*Bank Details*/
+    .factory('bankDetailsService',['$resource',function($resource){
+      var bankUpload = $resource('http://205.147.99.55:8080/WealthWeb/ws/kycs/bankDetails',{},{
+        save:{
+          method:'POST',
+          headers:{
+            'Content-Type' :'application/json'
+          }
+        }
+      });
 
-		var signupload = $resource('http://205.147.99.55:8080/WealthWeb/ws/kycs/kyphImg',{},{
-			save:{
-				method:'POST',
-				headers:{
-					'Content-Type' : 'Application/json'
-				}
-			}
-		});
-		return signupload;
-
-	}])
-
-	/*SELFIE image factory*/
-	.factory('selfieImageService',['$resource','$sessionStorage',function($resource){
-
-		var selfieupload = $resource('http://205.147.99.55:8080/WealthWeb/ws/kycs/kyphImg',{},{
-			save:{
-				method:'POST',
-				headers:{
-					'Content-Type' : 'Application/json'
-				}
-			}
-		});
-		return selfieupload;
-
-	}])
-
-		/*address proof front*/
-	.factory('adressFrontImageService',['$resource','$sessionStorage',function($resource){
-
-		var addressFront = $resource('http://205.147.99.55:8080/WealthWeb/ws/kycs/kyphImg',{},{
-			save:{
-				method:'POST',
-				headers:{
-					'Content-Type' : 'Application/json'
-				}
-			}
-		});
-		return addressFront;
-
-	}])
-
-	/*address proof back*/
-	.factory('adressFrontImageService',['$resource','$sessionStorage',function($resource){
-
-		var addressBack = $resource('http://205.147.99.55:8080/WealthWeb/ws/kycs/kyphImg',{},{
-			save:{
-				method:'POST',
-				headers:{
-					'Content-Type' : 'Application/json'
-				}
-			}
-		});
-		return addressBack;
-
-	}])
-
+    }])
 
 /*Sign up Service*/
 .factory('signUpService', ['SignUpUrlService','$q',function(SignUpUrlService,$q){
