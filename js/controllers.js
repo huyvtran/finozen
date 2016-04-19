@@ -1,7 +1,10 @@
 angular.module('app.controllers', [])
 
     .controller('summaryPageCtrl', function($scope) {
-
+$scope.dd=function(){
+	if($scope.pep==undefined){console.log($scope.pep + " undefined");}
+	else{console.log($scope.pep + " selected");}
+	}
     })
 
     .controller('growthRateCtrl', function($scope,$rootScope) {

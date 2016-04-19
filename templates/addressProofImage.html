@@ -4,7 +4,7 @@
   <div class="h1 title"><p class="head_title"><span id="title">ADDRESS PROOF</span></p></div>
   <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
 </div>
-	<ion-content overflow-scroll="true" padding="true" class="has-header" ng-controller="PictureCtrl" >
+	<ion-content overflow-scroll="true" padding="true" class="has-header" ng-controller="addressImageCTRL" >
 		<div class="panimageSection text-center">
 		<p class="text-left"><br/><b>Step: 4/6 </b></p>
 		<div class="front">
@@ -13,12 +13,12 @@
 			<img style="margin-top:0;" ng-show="addressImage === undefined" src="img/account-image1.png ">
 			</div>
 			<div class="text-center">
-			<button class="button button-positive" ng-click="addressProof()" ng-show="addressImage === undefined">Front view</button>
+			<button class="button button-positive" ng-click="addressFrontImg()" ng-show="addressImage === undefined">Front view</button>
 			</div>
 		</div>
-		<div class="back" ng-hide="addressImage === undefined">
+		<div class="back" ng-hide="addressImage === undefined" >
 		<div class="text-center">
-			<button class="button button-positive" ng-click="takeit2()" ng-show="cimage2 === undefined">Back view</button>
+			<button class="button button-positive" ng-click="addressBackImg()" ng-show="cimage2 === undefined">Back view</button>
 			</div>
 		<div class="panimage">
 			<img ng-show="cimage2 !== undefined" ng-src="{{cimage2}} ">
@@ -29,7 +29,7 @@
 <ion-footer-bar padding="false" style="padding:0;">
 	<div class="button-bar " style="padding:0;" >
 		<button class="button button-positive" ng-click="bank()" style="margin:1px;line-height: 44px;">SKIP</button>
-		<button class="button button-positive" ng-click="bank()" style="margin:1px;line-height: 44px;" ng-disabled="!cimage2">SUBMIT</button>
+		<button class="button button-positive" ng-click="addressBack()" style="margin:1px;line-height: 44px;" ng-disabled="!cimage2">SUBMIT</button>
 	</div>
 </ion-footer-bar>
     </ion-content>

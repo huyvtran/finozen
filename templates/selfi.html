@@ -4,9 +4,7 @@
   <div class="h1 title"><p class="head_title"><span id="title">SELF IMAGE WITH PAN</span></p></div>
   <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
 </div>
-	<ion-content overflow-scroll="true" padding="true" class="has-header" ng-controller="PictureCtrl" >
-
-
+	<ion-content overflow-scroll="true" padding="true" class="has-header" ng-controller="selfieImageCTRL" >
 		<div class="panimageSection text-center">
 		<p style="padding: 26px 0; text-align:left;"><b>Step: 2/6 </b>Please take an image of yourself holding your PAN card. Please ensure that your face and PAN card are captured clearly.</p>
 			<div class="panimage">
@@ -22,7 +20,7 @@
 <ion-footer-bar padding="false" style="padding:0;">
 	<div class="button-bar " style="padding:0;" >
 		<button class="button button-positive" ng-click="addressSelect()" style="margin:1px;line-height: 44px;">SKIP</button>
-		<button class="button button-positive" ng-click="addressSelect()" style="margin:1px;line-height: 44px;" ng-disabled="!selfie">SUBMIT</button>
+		<button class="button button-positive" ng-click="selfieUpload()" style="margin:1px;line-height: 44px;" ng-disabled="!selfie">SUBMIT</button>
 	</div>
 </ion-footer-bar>
     </ion-content>

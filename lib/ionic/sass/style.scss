@@ -484,12 +484,21 @@ text-align: center;
 width:100vw;
 img{height: 400px;}
 }
-.questions{
+/*.questions{
 	padding:25px 5px;
 	select{
 		border: 1px solid #18bb9c;
 		padding: 2px;
 		border-radius: 3px;
+	}
+}*/
+.questionsSelect{
+	.item-light{padding-left: 10px;}
+	.input-label{font-size:14px;}
+	.item-select select{max-width: 41%; padding:0 30px 0 10px;direction: ltr;}
+	.item-select::after{
+		right: 9px;
+		margin-top: -1px;
 	}
 }
 .aboutus{

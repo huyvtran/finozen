@@ -41,22 +41,55 @@ angular.module('app.subcontrollerTwo', [])
 
     })
         /*for sending the pan Image*/
-        .controller('panImageCTRL',function(ImageService,$scope,$sessionStorage,$state,$ionicPopup){
-            $scope.Pan = function(uploadPan) {
-                uploadPan.clientCode = $sessionStorage.SessionClientCode;
-                uploadPan.imageData = $sessionStorage.panimage;//replace with session storage of pan
-                uploadPan.imageType = 'PA';
-                uploadPan.addressType = '';
-                uploadPan = JSON.stringify(uploadPan);
-                console.log(uploadPan + 'pan json data');
-                ImageService.save(uploadPan,function(data){
+        .controller('panImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup){
+            $scope.selfieGo=function(){$state.go('selfie');}
+
+			$scope.takeit1=function(){
+			$scope.cimage1="img/no_leaves.png";
+			  document.addEventListener("deviceready", function () {
+				var options = {
+				  quality: 50,
+				  destinationType: Camera.DestinationType.DATA_URL,
+				  sourceType: Camera.PictureSourceType.CAMERA,
+				  allowEdit: true,
+				  encodingType: Camera.EncodingType.JPEG,
+				  targetWidth: 300,
+				  targetHeight: 400,
+				  cameraDirection:1,
+				  popoverOptions: CameraPopoverOptions,
+				  saveToPhotoAlbum: false,
+				  correctOrientation:true
+				};
+
+				$cordovaCamera.getPicture(options).then(function(imageData) {
+				  $scope.panData = "data:image/jpeg;base64," + imageData;
+				  $scope.pan = "data:image/jpeg;base64," + imageData;
+				  $scope.cimage1 = "data:image/jpeg;base64," + imageData;
+				  $sessionStorage.panimage=imageData;
+				}, function(err) {
+				  // error
+				});
+
+			  }, false);
+			}
+			$scope.PanImage = function() {
+				$scope.uploadPan=JSON.parse(JSON.stringify({}));
+                //$scope.uploadPan.kyphCode = $sessionStorage.SessionClientCode;
+                $scope.uploadPan.kyphCode = "CRN23919";
+                //$scope.uploadPan.imageData = $scope.panData ;//replace with session storage of pan
+                $scope.uploadPan.imageData = "fffd";//replace with session storage of pan
+                $scope.uploadPan.imageType = 'PA';
+                $scope.uploadPan.addressType = '';
+                $scope.uploadPan = JSON.stringify($scope.uploadPan);
+                console.log($scope.uploadPan + 'pan json data');
+                panImageService.save($scope.uploadPan,function(data){
                     console.log(data);
                     if(data.responseCode == "Cali_SUC_1030") {
 
 
+console.log("success");
 
-
-                            $state.go("");//after pan image
+                            $state.go("selfie");//after pan image
 
                     }
                     else {
@@ -84,22 +117,34 @@ angular.module('app.subcontrollerTwo', [])
 
 
             /*for signature image*/
-    .controller('signImageCTRL',function(ImageService,$scope,$sessionStorage,$state,$ionicPopup){
-        $scope.sign = function(uploadsign) {
-            uploadsign.clientCode = $sessionStorage.SessionClientCode;
-            uploadsign.imageData = $sessionStorage.signimage;//replace with session storage of sign
+    .controller('signImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup){
+        var canvas = document.getElementById('signatureCanvas');
+		var signaturePad = new SignaturePad(canvas);
+	 
+		$scope.clearCanvas = function() {
+			signaturePad.clear();
+		}
+	 
+		$scope.saveCanvas = function() {
+			var sigImg = signaturePad.toDataURL();
+			$scope.signature = sigImg;
+		}
+		$scope.signatureFunction=function(){$state.go('verifySuccess');}
+
+		
+		$scope.signUpload = function() {
+			var uploadsign=JSON.parse(JSON.stringify({}));
+            //uploadsign.kyphCode = $sessionStorage.SessionClientCode;
+            uploadsign.kyphCode = "CRN23919";;
+            uploadsign.imageData = $scope.signature;//replace with session storage of sign
             uploadsign.imageType = 'SI';
             uploadsign.addressType = '';
-            uploadsign = JSON.stringify(uploadPan);
+            uploadsign = JSON.stringify(uploadsign);
             console.log(uploadsign + 'pan json data');
-            ImageService.save(uploadsign,function(data){
+            panImageService.save(uploadsign,function(data){
                 console.log(data);
                 if(data.responseCode == "Cali_SUC_1030") {
-
-
-
-
-                    $state.go("");//after sign image
+					$state.go("verifySuccess");//after sign image
 
                 }
                 else {
@@ -126,22 +171,48 @@ angular.module('app.subcontrollerTwo', [])
     })
 
     /*for selfie image*/
-    .controller('selfieImageCTRL',function(ImageService,$scope,$sessionStorage,$state,$ionicPopup){
-        $scope.selfie = function(uploadselfie) {
-            uploadselfie.clientCode = $sessionStorage.SessionClientCode;
-            uploadselfie.imageData = $sessionStorage.signimage;//replace with session storage of selfie
+    .controller('selfieImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup){
+		$scope.addressSelect=function(){$state.go('imageSelection'); }
+		$scope.selfieImage=function(){
+		$scope.selfie="img/no_leaves.png";
+		  document.addEventListener("deviceready", function () {
+			$scope.options = {
+			  quality: 100,
+			  destinationType: Camera.DestinationType.DATA_URL,
+			  sourceType: Camera.PictureSourceType.CAMERA,
+			  allowEdit: true,
+			  encodingType: Camera.EncodingType.JPEG,
+			  targetWidth: 300,
+			  targetHeight: 400,
+			  popoverOptions: CameraPopoverOptions,
+			  saveToPhotoAlbum: false,
+			  correctOrientation:true
+			};
+
+			$cordovaCamera.getPicture($scope.options).then(function(imageData) {
+			  $scope.selfieData = imageData;
+			  $scope.selfie = "data:image/jpeg;base64," + imageData;
+			}, function(err) {
+			  // error
+			});
+
+		  }, false);
+		}
+
+		$scope.selfieUpload = function() {
+			var uploadselfie=JSON.parse(JSON.stringify({}));
+            //uploadselfie.kyphCode = $sessionStorage.SessionClientCode;
+            uploadselfie.kyphCode = "CRN23919";
+            //uploadselfie.imageData = $scope.selfieData;//replace with session storage of selfie
+            uploadselfie.imageData = "test";//replace with session storage of selfie
             uploadselfie.imageType = 'PH';
             uploadselfie.addressType = '';
-            uploadselfie = JSON.stringify(uploadPan);
+            uploadselfie = JSON.stringify(uploadselfie);
             console.log(uploadselfie + 'pan json data');
-            ImageService.save(uploadselfie,function(data){
+            panImageService.save(uploadselfie,function(data){
                 console.log(data);
                 if(data.responseCode == "Cali_SUC_1030") {
-
-
-
-
-                    $state.go("");//after selfie image
+					$state.go("imageSelection");//after selfie image
 
                 }
                 else {
@@ -169,23 +240,79 @@ angular.module('app.subcontrollerTwo', [])
 
 
     /*for address proof image*/
-    .controller('addressImageCTRL',function(ImageService,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
-        $scope.address = function(uploadaddress) {
-            uploadaddress.clientCode = $sessionStorage.SessionClientCode;
-            uploadaddress.imageData = $sessionStorage.signimage;//replace with session storage of selfie
+    .controller('addressImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
+		$scope.takeImage=function(){if($scope.choice!==undefined) {$state.go('addressProofImage');$sessionStorage.addressChoice=$scope.choice} }
+		
+		$scope.bank=function(){$state.go('bank');}
+		$scope.addressFrontImg=function(){
+		console.log($sessionStorage.addressChoice);
+		$scope.addressImage="img/no_leaves.png";
+		document.addEventListener("deviceready", function () {
+			var options = {
+			  quality: 100,
+			  destinationType: Camera.DestinationType.DATA_URL,
+			  sourceType: Camera.PictureSourceType.CAMERA,
+			  allowEdit: true,
+			  encodingType: Camera.EncodingType.JPEG,
+			  targetWidth: 300,
+			  targetHeight: 400,
+			  popoverOptions: CameraPopoverOptions,
+			  saveToPhotoAlbum: false,
+			  correctOrientation:true
+			};
+
+			$cordovaCamera.getPicture(options).then(function(imageData) {
+			  $scope.addressImageData = imageData;
+			  $scope.addressImage = "data:image/jpeg;base64," + imageData;
+			}, function(err) {
+			  // error
+			});
+
+		  }, false);
+		}
+		$scope.addressBackImg=function(){
+		$scope.addressFront();
+		$scope.cimage2="img/no_leaves.png";
+		  document.addEventListener("deviceready", function () {
+			var options = {
+			  quality: 50,
+			  destinationType: Camera.DestinationType.DATA_URL,
+			  sourceType: Camera.PictureSourceType.CAMERA,
+			  allowEdit: true,
+			  encodingType: Camera.EncodingType.JPEG,
+			  targetWidth: 300,
+			  targetHeight: 400,
+			  cameraDirection:1,
+			  popoverOptions: CameraPopoverOptions,
+			  saveToPhotoAlbum: false,
+			  correctOrientation:true
+			};
+
+			$cordovaCamera.getPicture(options).then(function(imageData) {
+			  $scope.addressBackData = imageData;
+			  $scope.cimage2 = "data:image/jpeg;base64," + imageData;
+			  $sessionStorage.panimage=imageData;
+			}, function(err) {
+			  // error
+			});
+
+		  }, false);
+		}
+		
+		$scope.addressFront = function() {
+			var uploadaddress=JSON.parse(JSON.stringify({}));
+            //uploadaddress.kyphCode = $sessionStorage.SessionClientCode;
+            uploadaddress.kyphCode = "CRN23919";;
+            //uploadaddress.imageData = $scope.addressImageData;//replace with session storage of selfie
+            uploadaddress.imageData = "fffd";//replace with session storage of selfie
             uploadaddress.imageType = 'AF';
-            uploadaddress.addressType = ''; //sessionstorage of addressType
-            uploadaddress = JSON.stringify(uploadPan);
+            uploadaddress.addressType = $sessionStorage.addressChoice; //sessionstorage of addressType
+            uploadaddress = JSON.stringify(uploadaddress);
             console.log(uploadaddress + 'pan json data');
-            ImageService.save(uploadaddress,function(data){
+            panImageService.save(uploadaddress,function(data){
                 console.log(data);
                 $ionicLoading.show();
                 if(data.responseCode == "Cali_SUC_1030") {
-
-
-
-
-                    $state.go("");//after selfie image
                     $ionicLoading.hide();
                 }
                 else {
@@ -196,7 +323,7 @@ angular.module('app.subcontrollerTwo', [])
                     });
                     $ionicLoading.hide();
                     popup.then(function(res) {
-                        $state.go(""); //selfie sign page
+                        //$state.go(""); //selfie sign page
                     });
                 }
             },function(error){
@@ -211,25 +338,22 @@ angular.module('app.subcontrollerTwo', [])
 
             });
         }
-    })
-
-    .controller('adressBackImageService',function(ImageService,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
-        $scope.addressback = function(uploabackdaddress) {
-            uploabackdaddress.clientCode = $sessionStorage.SessionClientCode;
-            uploabackdaddress.imageData = $sessionStorage.signimage;//replace with session storage of selfie
+		
+        $scope.addressBack = function() {
+			var uploabackdaddress=JSON.parse(JSON.stringify({}));
+            //uploabackdaddress.kyphCode = $sessionStorage.SessionClientCode;
+            uploabackdaddress.kyphCode = "CRN23919";;
+            //uploabackdaddress.imageData = $scope.addressBackData;//replace with session storage of selfie
+            uploabackdaddress.imageData = "fffd";//replace with session storage of selfie
             uploabackdaddress.imageType = 'AB';
-            uploabackdaddress.addressType = ''; //sessionstorage of addressType
-            uploabackdaddress = JSON.stringify(uploadPan);
+            uploabackdaddress.addressType = $sessionStorage.addressChoice; //sessionstorage of addressType
+            uploabackdaddress = JSON.stringify(uploabackdaddress);
             console.log(uploabackdaddress + 'pan json data');
-            ImageService.save(uploabackdaddress,function(data){
+            panImageService.save(uploabackdaddress,function(data){
                 console.log(data);
                 $ionicLoading.show();
                 if(data.responseCode == "Cali_SUC_1030") {
-
-
-
-
-                    $state.go("");//after selfie image
+					$state.go("bank");//after selfie image
                     $ionicLoading.hide();
                 }
                 else {

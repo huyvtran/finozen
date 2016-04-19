@@ -4,29 +4,59 @@
   <div class="h1 title"><p class="head_title"><span id="title">ADDITIONAL DETAILS</span></p></div>
   <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
 </div>
-	<ion-content overflow-scroll="true" padding="true" class="has-header">
+	<ion-content overflow-scroll="true" padding="false" class="has-header">
 <div class="">
 <br/><br/>
-<p class="text-left"><b>Step: 6/6 </b>YOU ARE ALMOST DONE!</p>
+<p class="text-left padding"><b>Step: 6/6 </b>YOU ARE ALMOST DONE!</p>
+<!--
 <label for="income" class="row questions">
-<span class="col-40">1) Gross Annual Income</span>
+<span class="col-40"></span>
 	<select name="income" class="col-50">
-		<option value="1"> Below 1 Lakh</option>
-		 <option value="oneToFive">1 - 5 Lakh</option>
-		 <option value="fiveToTen" selected>5 - 10 Lakh</option>
-		 <option value="tenToTwentyfive">10 - 25 Lakh</option>
-		 <option value="TwentyfiveToOne">25 Lakh – 1 Cr</option>
-		 <option value="aboveOne">Above 1 Cr</option>
+		
 	</select>
 	<br/>
 </label>
 <div class="row questions">
-<span class="col-40">2) Occupation</span>
+<span class="col-40"></span>
 	<select name="occ" class="col-50">
-		<option>Business</option>
+		
+	</select>
+	<br/>
+</div>
+<div class="row questions">
+<span class="col-40"><span style="color: #18bb9c; font-size: 12px;" class="button-icon ion-information-circled"  ng-controller="PEPpopOverController" ng-click="popover.show($event)"> </span></span>
+	<select name="pep" class="col-50">
+		
+	</select>
+</div>
+-->
+<div class = "list questionsSelect">
+   <label class = "item item-input item-select item-light">
+      <div class = "input-label">
+         1) Gross Annual Income
+      </div>
+		
+      <select>
+         <option value="1"> Below 1 Lakh</option>
+		 <option value="oneToFive">1 - 5 Lakh</option>
+		 <option value="fiveToTen" ng-selected="true">5 - 10 Lakh</option>
+		 <option value="tenToTwentyfive">10 - 25 Lakh</option>
+		 <option value="TwentyfiveToOne">25 Lakh – 1 Cr</option>
+		 <option value="aboveOne">Above 1 Cr</option>
+      </select>
+		
+   </label>
+
+   <label class = "item item-input item-select item-light">
+      <div class = "input-label">
+         2) Occupation
+      </div>
+		
+      <select>
+         <option>Business</option>
 		<option>Professional</option>
 		<option>Public Sector</option>
-		<option selected>Private Sector</option>
+		<option ng-selected="true">Private Sector</option>
 		<option>Government Service</option>
 		<option>Agriculturist</option>
 		<option>Housewife</option>
@@ -34,16 +64,22 @@
 		<option>Retired</option>
 		<option>Forex Dealer</option>
 		<option>Others</option>
-	</select>
-	<br/>
-</div>
-<div class="row questions">
-<span class="col-40">3) Political Exposure<span style="color: #18bb9c; font-size: 12px;" class="button-icon ion-information-circled"  ng-controller="PEPpopOverController" ng-click="popover.show($event)"> </span></span>
-	<select name="pep" class="col-50">
-		<option>Not Applicable</option>
-		<option>Politically Exposed Person</option>
-		<option>Related to Politically Exposed Person</option>
-	</select>
+      </select>
+   </label>
+
+   <label class = "item item-input item-select item-light">
+      <div class = "input-label">
+         3) Political Exposure
+      </div>
+		
+      <select ng-model="pep">
+        <option value="no" ng-selected="true">Not Applicable</option>
+		<option value="yes">Politically Exposed Person</option>
+		<option value="Related">Related to Politically Exposed Person</option>
+      </select>
+   </label>
+
+<button ng-controller="summaryPageCtrl" ng-click="dd()">dlo</button>
 </div>
 <!--
 <div class="row questions">
@@ -57,7 +93,7 @@
 	</select>
 </div>-->
 <!--<div class="footer" ng-controller="panVerifyCtrl">-->
-<p style="padding: 26px 0; text-align:left;font-size: 10px;"><sup>*By clicking on submit I agree that I am an Indian PAN card holder and a resident individual.</sup>.</p>
+<p style="padding: 26px 10px; text-align:left;font-size: 12px;"><sup>*By clicking on submit I agree that I am an Indian PAN card holder and a resident individual.</sup>.</p>
 </div>
     </ion-content>
 <ion-footer-bar padding="false" style="padding:0;">
