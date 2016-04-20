@@ -76,8 +76,8 @@ angular.module('app.subcontrollerTwo', [])
 				$scope.uploadPan=JSON.parse(JSON.stringify({}));
                 //$scope.uploadPan.kyphCode = $sessionStorage.SessionClientCode;
                 $scope.uploadPan.kyphCode = "CRN23919";
-                //$scope.uploadPan.imageData = $scope.panData ;//replace with session storage of pan
-                $scope.uploadPan.imageData = "fffd";//replace with session storage of pan
+                $scope.uploadPan.imageData = $scope.panData ;//replace with session storage of pan
+                //$scope.uploadPan.imageData = "fffd";//replace with session storage of pan
                 $scope.uploadPan.imageType = 'PA';
                 $scope.uploadPan.addressType = '';
                 $scope.uploadPan = JSON.stringify($scope.uploadPan);
@@ -203,8 +203,8 @@ console.log("success");
 			var uploadselfie=JSON.parse(JSON.stringify({}));
             //uploadselfie.kyphCode = $sessionStorage.SessionClientCode;
             uploadselfie.kyphCode = "CRN23919";
-            //uploadselfie.imageData = $scope.selfieData;//replace with session storage of selfie
-            uploadselfie.imageData = "test";//replace with session storage of selfie
+            uploadselfie.imageData = $scope.selfieData;//replace with session storage of selfie
+            //uploadselfie.imageData = "test";//replace with session storage of selfie
             uploadselfie.imageType = 'PH';
             uploadselfie.addressType = '';
             uploadselfie = JSON.stringify(uploadselfie);
@@ -241,6 +241,7 @@ console.log("success");
 
     /*for address proof image*/
     .controller('addressImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
+		$scope.takeImageSkip=function(){$state.go('addressProofImage');$sessionStorage.addressChoice=$scope.choice}
 		$scope.takeImage=function(){if($scope.choice!==undefined) {$state.go('addressProofImage');$sessionStorage.addressChoice=$scope.choice} }
 		
 		$scope.bank=function(){$state.go('bank');}
@@ -303,8 +304,8 @@ console.log("success");
 			var uploadaddress=JSON.parse(JSON.stringify({}));
             //uploadaddress.kyphCode = $sessionStorage.SessionClientCode;
             uploadaddress.kyphCode = "CRN23919";;
-            //uploadaddress.imageData = $scope.addressImageData;//replace with session storage of selfie
-            uploadaddress.imageData = "fffd";//replace with session storage of selfie
+            uploadaddress.imageData = $scope.addressImageData;//replace with session storage of selfie
+            //uploadaddress.imageData = "fffd";//replace with session storage of selfie
             uploadaddress.imageType = 'AF';
             uploadaddress.addressType = $sessionStorage.addressChoice; //sessionstorage of addressType
             uploadaddress = JSON.stringify(uploadaddress);
@@ -343,8 +344,8 @@ console.log("success");
 			var uploabackdaddress=JSON.parse(JSON.stringify({}));
             //uploabackdaddress.kyphCode = $sessionStorage.SessionClientCode;
             uploabackdaddress.kyphCode = "CRN23919";;
-            //uploabackdaddress.imageData = $scope.addressBackData;//replace with session storage of selfie
-            uploabackdaddress.imageData = "fffd";//replace with session storage of selfie
+            uploabackdaddress.imageData = $scope.addressBackData;//replace with session storage of selfie
+            //uploabackdaddress.imageData = "fffd";//replace with session storage of selfie
             uploabackdaddress.imageType = 'AB';
             uploabackdaddress.addressType = $sessionStorage.addressChoice; //sessionstorage of addressType
             uploabackdaddress = JSON.stringify(uploabackdaddress);
@@ -402,16 +403,19 @@ console.log("success");
     })
 
 /*for uploading the bank details*/
-  .controller('bankDetailsCTRL',function($scope,$sessionStorage,bankDetailsService,$ionicPopup){
-    var bankDetail=function(bank){
-      var bank = JSON.parse({});
-            bank.clientCode=$sessionStorage.clientCode;
-            bank.bankAccNo= //bank account number
-            bank.ifscCode= //ifsc Code
-            bank.accountType= //savings type either savings or personal
-            bank.updateNach= //either yes or no
+  .controller('bankDetailsCTRL',function($scope,$state,$sessionStorage,bankDetailsService,$ionicPopup,$ionicLoading){
+	  
+    $scope.bankUpload=function(){
+		if($scope.accountType==undefined){$scope.accountType="savings";}
+        var bank = JSON.parse(JSON.stringify({}));
+            //bank.kyphCode=$sessionStorage.clientCode;
+            bank.clientCode="CRN23919";
+            bank.bankAccNo= $scope.accNumber //bank account number
+            bank.ifscCode= $scope.IFSC_code//ifsc Code
+            bank.accountType= $scope.accountType//savings type either savings or personal
+            bank.updateNach= "N" //either yes or no
             bank=JSON.stringify(bank);
-
+			console.log(bank)
                bankDetailsService.save(bank,function(data){
                  console.log(data);
                  $ionicLoading.show();
@@ -420,7 +424,7 @@ console.log("success");
 
 
 
-                   $state.go("");//after selfie image
+                   $state.go("questions");//after selfie image
                    $ionicLoading.hide();
                  }
                  else {
@@ -431,7 +435,7 @@ console.log("success");
                    });
                    $ionicLoading.hide();
                    popup.then(function(res) {
-                     $state.go(""); //selfie sign page
+                     $state.go("questions"); //selfie sign page
                    });
                  }
                },function(error){
@@ -441,11 +445,15 @@ console.log("success");
                    template: 'Please try again'
                  });
                  popup.then(function(res) {
-                   $state.go(""); //selfie sign page
+                   $state.go("questions"); //selfie sign page
                  });
 
                });
              }
+		$scope.bankSkip=function(){
+			$state.go('questions');
+			
+		}
     })
 
   .controller('adhaarCTRL',function($scope,$http,$ionicPopup,$sessionStorage){

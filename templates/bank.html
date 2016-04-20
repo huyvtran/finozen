@@ -4,7 +4,7 @@
   <div class="h1 title"><p class="head_title"><span id="title">BANK DETAILS</span></p></div>
   <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
 </div>
-	<ion-content overflow-scroll="true" padding="true" class="has-header">
+	<ion-content overflow-scroll="true" padding="true" class="has-header" ng-controller="bankDetailsCTRL">
 <div class="">
 		<p style="padding: 20px 0;"><b>Step: 5/6 </b>Please enter the net banking enabled bank details. You will be permitted to transact only thorough this registered account.</p>
 		<label class="item item-input" >
@@ -13,20 +13,26 @@
 		<label class="item item-input" >
 			<input type="text" placeholder="Enter IFSC Code" ng-model="IFSC_code">
 		</label>
-		<label class="item item-input questions" style="padding:12px;">
-			<span class="col-60">Type of account</span>
-			<select class="col-40">
-				<option>Savings</option>
-				 <option>Current</option>
-			</select>
-			<br/>
+
+	<div class = "list questionsSelect">
+		<label class = "item item-input item-select item-light">
+		  <div class = "input-label">
+			 Type of account
+		  </div>
+			
+		  <select ng-model="accountType">
+			<option value="savings" ng-selected="true">Savings</option>
+			<option value="current">Current</option>
+		  </select>
+			
 		</label>
+	</div>
 </div>
 		<p style="padding: 26px 0; text-align:left;font-size: 10px;"><sup>*</sup>Please double check the bank account number and IFSC code as on withdrawal money will be deposited only to this account.</p>
-<ion-footer-bar padding="false" style="padding:0;" ng-controller="panVerifyCtrl" >
+<ion-footer-bar padding="false" style="padding:0;" >
 	<div class="button-bar " style="padding:0;" >
-		<button class="button button-positive" ng-click="bankdone()" style="margin:1px;line-height: 44px;">SKIP</button>
-		<button class="button button-positive" ng-click="bankdone()" style="margin:1px;line-height: 44px;" ng-disabled="!IFSC_code || !accNumber">SUBMIT</button>
+		<button class="button button-positive" ng-click="bankSkip()" style="margin:1px;line-height: 44px;">SKIP</button>
+		<button class="button button-positive" ng-click="bankUpload()" style="margin:1px;line-height: 44px;" ng-disabled="!IFSC_code || !accNumber">SUBMIT</button>
 	</div>
 </ion-footer-bar>
     </ion-content>

@@ -88,7 +88,7 @@ angular.module('app.services', [])
 }])
 
 	/*PAN image factory*/
-	.factory('ImageService',['$resource','$sessionStorage',function($resource){
+	.factory('panImageService',['$resource','$sessionStorage',function($resource){
 		var panupload = $resource('http://205.147.99.55:8080/WealthWeb/ws/kycs/kyphImg',{},{
 			save:{
 				method:'POST',
@@ -111,7 +111,7 @@ angular.module('app.services', [])
           }
         }
       });
-
+		return bankUpload;
     }])
 
 /*Sign up Service*/

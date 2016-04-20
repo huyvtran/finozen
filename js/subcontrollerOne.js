@@ -381,7 +381,7 @@ $state.go('reference');
 		
 		
 		$scope.question=function(){$state.go('signature');}
-		$scope.bankdone=function(){$state.go('questions');}
+		
 		$scope.kycdone=function(){$state.go('panImage');}
 		$scope.kycnotdone=function(){$state.go('aadhar');}
 		$scope.otpdone=function(){$state.go('confirm');}

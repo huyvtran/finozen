@@ -24,8 +24,9 @@ win.addEventListener( "loadstop", function() {
     .controller('inviteCtrl', function($scope) {
 
     })
-    .controller('termsCtrl', function($scope) {
-
+    .controller('termsCtrl', function($scope,$sessionStorage) {
+if($sessionStorage.clientActive=="Y") {$scope.test=true;}
+else{$scope.test=false;}
     })
 
     .controller('recentTransactionsCtrl', function($scope) {
@@ -143,7 +144,7 @@ console.log($scope.loginDetails);
           $sessionStorage.SessionFolioNums =(data.jsonStr[0].folioNums).length;
           $sessionStorage.clientActive = data.jsonStr[0].clientActive;
 		  console.log($sessionStorage.SessionFolioNums);
-		if($sessionStorage.clientActive=='y'){	
+		if($sessionStorage.clientActive=='Y'){	
 		window.plugins.OneSignal.sendTag("active","true");}
           $sessionStorage.folioNums = data.jsonStr[0].folioNums[0];
          $state.go('tabsController.summaryPage');

@@ -24,13 +24,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 
 
 
-.run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage) {
+.run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
 
-var userName = $bindTo($scope.$sessionStorage.mobileNumber);
-      console.log(userName);
+//var userName = $bindTo($scope.$sessionStorage.mobileNumber);
+ //     console.log(userName);
       Idle.watch();
                 if(!navigator.onLine) {
 console.log(navigator.onLine + "  connection state");
@@ -47,7 +47,7 @@ console.log(navigator.onLine + "  connection state");
 				else{console.log(navigator.onLine + "  connection state");}
     $ionicAnalytics.register();
     var io=Ionic.io();
-
+/*
 if(typeof analytics !== undefined) {
                 analytics.startTrackerWithId("UA-76016305-1");
 				analytics.trackView("tracking the google analytics ");
@@ -61,8 +61,10 @@ if(typeof analytics !== undefined) {
             } else {
                 console.log("Google Analytics Unavailable");
             }
+	*/
 	$ionicPlatform.registerBackButtonAction(function (event) {
      if ($ionicHistory.currentStateName() == 'invest'){
+		 console.log("inv");
 		$state.go('tabsController.summaryPage');
 		
       }
@@ -72,7 +74,16 @@ if(typeof analytics !== undefined) {
 		//ionicToast.show(message, position, stick, time); 
 		  ionicToast.show('This is a toast at the top.', 'bottom', false, 2500);
 		};*/
-		navigator.app.exitApp();
+		if(true){
+			//var showToast = function(){
+			  ionicToast.show('Press back to exit.', 'bottom', false, 2500);
+			  $ionicPlatform.registerBackButtonAction(function (event) { navigator.app.exitApp(); }, 100);
+			//}			
+		}
+		else{
+			console.log("zxnn");
+		}
+		//navigator.app.exitApp();
       }
 
 	  else {
