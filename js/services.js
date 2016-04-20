@@ -114,6 +114,18 @@ angular.module('app.services', [])
 		return bankUpload;
     }])
 
+      /*Questions factory*/
+  .factory('questionsService',['$resource',function($resource){
+    var bankUpload = $resource('http://205.147.99.55:8080/WealthWeb/ws/kycs/addlKyc',{},{
+      save:{
+        method:'POST',
+        headers:{
+          'Content-Type' :'application/json'
+        }
+      }
+    });
+    return bankUpload;
+  }])
 /*Sign up Service*/
 .factory('signUpService', ['SignUpUrlService','$q',function(SignUpUrlService,$q){
 

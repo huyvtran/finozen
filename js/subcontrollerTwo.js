@@ -120,18 +120,18 @@ console.log("success");
     .controller('signImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup){
         var canvas = document.getElementById('signatureCanvas');
 		var signaturePad = new SignaturePad(canvas);
-	 
+
 		$scope.clearCanvas = function() {
 			signaturePad.clear();
 		}
-	 
+
 		$scope.saveCanvas = function() {
 			var sigImg = signaturePad.toDataURL();
 			$scope.signature = sigImg;
 		}
 		$scope.signatureFunction=function(){$state.go('verifySuccess');}
 
-		
+
 		$scope.signUpload = function() {
 			var uploadsign=JSON.parse(JSON.stringify({}));
             //uploadsign.kyphCode = $sessionStorage.SessionClientCode;
@@ -238,12 +238,55 @@ console.log("success");
         }
     })
 
+      /*for question's*/
+    .controller('questionsCTRL',function(questionsService,$sessionStorage,$state,$ionicPopup,$ionicLoading)
+    {
+      $scope.questions = function(){
+        var questUpload=JSON.parse(({}));
+        questUpload.kyphCode=$sessionStorage.clientCode;
+        questUpload.income=$sessionStorage.clientActive; // income level from 31-36
+        questUpload.occup=$sessionStorage; // for the occupation
+        questUpload.pep=$sessionStorage; //for the pep status either Y or N
+        questUpload.resStatus="Individual"; // for the resdential status hardcoding it to individual
+        questUpload = JSON.stringify(questUpload);
+
+        questionsService.save(questUpload,function(){
+
+          $ionicLoading.show();
+          if(data.responseCode == "Cali_SUC_1030") {
+            $ionicLoading.hide();
+          }
+          else {
+            console.log("Error");
+            $ionicPopup.alert({
+              title: 'Upload Error',
+              template: 'Please try again'
+            });
+            $ionicLoading.hide();
+            popup.then(function (res) {
+              //$state.go(""); // question page
+            });
+          }
+          },function(error){
+            $ionicLoading.hide();
+            $ionicPopup.alert({
+              title: 'Your floating away',
+              template: 'Please try again'
+            });
+            popup.then(function(res) {
+              $state.go(""); //question's sign page
+            });
+
+          });
+        }
+      }
+    )
 
     /*for address proof image*/
     .controller('addressImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
 		$scope.takeImageSkip=function(){$state.go('addressProofImage');$sessionStorage.addressChoice=$scope.choice}
 		$scope.takeImage=function(){if($scope.choice!==undefined) {$state.go('addressProofImage');$sessionStorage.addressChoice=$scope.choice} }
-		
+
 		$scope.bank=function(){$state.go('bank');}
 		$scope.addressFrontImg=function(){
 		console.log($sessionStorage.addressChoice);
@@ -299,7 +342,7 @@ console.log("success");
 
 		  }, false);
 		}
-		
+
 		$scope.addressFront = function() {
 			var uploadaddress=JSON.parse(JSON.stringify({}));
             //uploadaddress.kyphCode = $sessionStorage.SessionClientCode;
@@ -339,7 +382,7 @@ console.log("success");
 
             });
         }
-		
+
         $scope.addressBack = function() {
 			var uploabackdaddress=JSON.parse(JSON.stringify({}));
             //uploabackdaddress.kyphCode = $sessionStorage.SessionClientCode;
@@ -404,7 +447,7 @@ console.log("success");
 
 /*for uploading the bank details*/
   .controller('bankDetailsCTRL',function($scope,$state,$sessionStorage,bankDetailsService,$ionicPopup,$ionicLoading){
-	  
+
     $scope.bankUpload=function(){
 		if($scope.accountType==undefined){$scope.accountType="savings";}
         var bank = JSON.parse(JSON.stringify({}));
@@ -452,7 +495,7 @@ console.log("success");
              }
 		$scope.bankSkip=function(){
 			$state.go('questions');
-			
+
 		}
     })
 
