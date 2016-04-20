@@ -24,7 +24,7 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 
 
 
-.run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast) {
+.run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -69,6 +69,10 @@ if(typeof analytics !== undefined) {
 		
       }
 
+     else if ($ionicHistory.currentStateName() == 'verifySuccess'){
+		event.preventDefault();
+      }
+
      else if ($ionicHistory.currentStateName() == 'tabsController.summaryPage'){
 		/*var showToast = function(){
 		//ionicToast.show(message, position, stick, time); 
@@ -77,8 +81,9 @@ if(typeof analytics !== undefined) {
 		if(true){
 			//var showToast = function(){
 			  ionicToast.show('Press back to exit.', 'bottom', false, 2500);
+			  $timeout(function(){
 			  $ionicPlatform.registerBackButtonAction(function (event) { navigator.app.exitApp(); }, 100);
-			//}			
+					},500)			
 		}
 		else{
 			console.log("zxnn");
