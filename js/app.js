@@ -61,12 +61,12 @@ if(typeof analytics !== undefined) {
             } else {
                 console.log("Google Analytics Unavailable");
             }
-	*/
+	*/var backbutton = 0;
 	$ionicPlatform.registerBackButtonAction(function (event) {
      if ($ionicHistory.currentStateName() == 'invest'){
 		 console.log("inv");
 		$state.go('tabsController.summaryPage');
-		
+
       }
 
      else if ($ionicHistory.currentStateName() == 'verifySuccess'){
@@ -75,20 +75,21 @@ if(typeof analytics !== undefined) {
 
      else if ($ionicHistory.currentStateName() == 'tabsController.summaryPage'){
 		/*var showToast = function(){
-		//ionicToast.show(message, position, stick, time); 
+		//ionicToast.show(message, position, stick, time);
 		  ionicToast.show('This is a toast at the top.', 'bottom', false, 2500);
 		};*/
-		if(true){
+		if(backbutton==0){
+      backbutton++;
 			//var showToast = function(){
-			  ionicToast.show('Press back to exit.', 'bottom', false, 2500);
-			  $timeout(function(){
-			  $ionicPlatform.registerBackButtonAction(function (event) { navigator.app.exitApp(); }, 100);
-					},500)			
+			  //ionicToast.show('Press back to exit.', 'bottom', false, 2500);
+      window.plugins.toast.bottom('press again to exit');
+			$timeout(function(){backbutton=0},3000);
+
 		}
 		else{
-			console.log("zxnn");
+      navigator.app.exitApp();
 		}
-		//navigator.app.exitApp();
+
       }
 
 	  else {
@@ -108,10 +109,10 @@ if(typeof analytics !== undefined) {
 		}
 		})
 	}, 100);*/
-	
-	
-	
-	
+
+
+
+
     /*var push=new Ionic.Push({
       "onNotification": function(notification) {
     var payload = notification.payload;
@@ -130,7 +131,7 @@ if(typeof analytics !== undefined) {
 
      // Enable to debug issues.
  // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
- 
+
  var notificationOpenedCallback = function(jsonData) {
    console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
  };  window.plugins.OneSignal.init("5857b4c1-e085-47b4-b5f4-2861aec2e548",
