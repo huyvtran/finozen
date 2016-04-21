@@ -64,11 +64,11 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
         $scope.addUserInfo=function(){
             signUpService.sendSignUp($sessionStorage.signUpData).then(function(data){
 				//$sessionStorage.
-				
+
                 if(data.responseCode!="Cali_SUC_1030"){
 					$ionicLoading.hide();
 					if(data.responseCode=="Cali_ERR_2050"){
-						
+
 						$scope.serverError="Mobile number in use";
 					}
 					else{
@@ -98,7 +98,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
  //$state.go('tabsController.summaryPage');
  $scope.mobileNumber=$localStorage.loginData;
   $scope.signIn = function(form,loginForm) {
-	 
+
     if(form.$valid) {
 		if($scope.rememberMe){ $localStorage.loginData=$scope.mobileNumber;}
 		else{$localStorage.loginData='';}
@@ -108,7 +108,7 @@ $scope.loginDetails.login=$scope.mobileNumber;
 $scope.loginDetails.password=$scope.digitPin;
 console.log($scope.loginDetails);
       $sessionStorage.loginData=$scope.loginDetails;
-     
+
 	  console.log($localStorage.loginData);
        $scope.sendSignIn();
         }
@@ -129,7 +129,7 @@ console.log($scope.loginDetails);
 
   $scope.sendSignIn=function() {
     loginInfoService.getJsonId($sessionStorage.loginData).then(function(data){
- 
+
       if(data.responseCode!="Cali_SUC_1030"){
 		  $ionicLoading.hide();
         $scope.serverError="Entered Credentials did not validate";
@@ -144,8 +144,6 @@ console.log($scope.loginDetails);
           $sessionStorage.SessionFolioNums =(data.jsonStr[0].folioNums).length;
           $sessionStorage.clientActive = data.jsonStr[0].clientActive;
 		  console.log($sessionStorage.SessionFolioNums);
-		if($sessionStorage.clientActive=='Y'){	
-		window.plugins.OneSignal.sendTag("active","true");}
           $sessionStorage.folioNums = data.jsonStr[0].folioNums[0];
          $state.go('tabsController.summaryPage');
         $ionicLoading.hide();
@@ -160,6 +158,8 @@ console.log($scope.loginDetails);
   $ionicLoading.hide();
     })
 
+  /*add money page check*/
+
     .controller('transactionAccessCtrl', function($scope,$sessionStorage){
 if($sessionStorage.clientActive=="Y") {
      $scope.withdrawUrl="#/withdraw";
@@ -169,7 +169,7 @@ if($sessionStorage.clientActive=="Y") {
     $scope.withdrawUrl="#/status";
     $scope.investUrl="#/status";
   }
-  
+
 
 
     })
@@ -334,8 +334,8 @@ $scope.$broadcast("scroll.refreshComplete");
 
     /*For social sharing*/
     .controller('socialShareController', function($scope,$cordovaSocialSharing,$sessionStorage){
-		
-		
+
+
 $scope.shareViaTwitter=function(){
 	window.plugins.socialsharing.share('Hey, FinoZen is a great investment app to watch your money grow. Start with Rs.100, download now! Please use my phone number '+ $sessionStorage.SessionMobNo+' as referral code',null,null,'https://goo.gl/uAkHRa');
 }
@@ -367,7 +367,7 @@ console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
 							$scope.withdraw_Networkerror="Please try again";
 						}
                     },function(error){
-						
+
 						$scope.withdraw_Networkerror="Please try again";
                     });
 					}
@@ -407,7 +407,7 @@ console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
                                 title: 'Request has been successfully accepted',
                                 template: 'Success'
                             });
-                            
+
                         }
 						else
 						{
