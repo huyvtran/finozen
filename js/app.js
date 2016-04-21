@@ -20,8 +20,6 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     KeepaliveProvider.interval(2); // in seconds
 })
 
-  
-
 .run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout) {
 
   $ionicPlatform.ready(function() {
@@ -97,17 +95,25 @@ if(typeof analytics !== undefined) {
       }
     }, 100);
 
-	/*
-	$ionicPlatform.registerBackButtonAction(function(event) {
-		$ionicPopup.confirm({
-		title: 'System warning',
-		template: 'are you sure you want to exit?'
-		}).then(function(res) {
-		if (res) {
-		ionic.Platform.exitApp();
-		}
-		})
-	}, 100);*/
+
+    /*Urban Air ship integration*/
+
+    UAirship.getChannelID(function (channelID) {
+      console.log("Channel: " + channelID)
+    })
+
+    UAirship.setUserNotificationsEnabled(true);
+    /*
+      $ionicPlatform.registerBackButtonAction(function(event) {
+          $ionicPopup.confirm({
+          title: 'System warning',
+          template: 'are you sure you want to exit?'
+          }).then(function(res) {
+          if (res) {
+          ionic.Platform.exitApp();
+          }
+          })
+      }, 100);*/
 
 
 

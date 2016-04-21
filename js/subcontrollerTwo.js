@@ -686,8 +686,8 @@ console.log("success");
 /*Nach Mandate check*/
   .controller('nachCTRL',function($scope,$sessionStorage,$state,$timeout){
     console.log('entered');
-    var nach=function(){
-      if ($sessionStorage.nach == 'Y') {
+    $scope.nach=function(){
+      if ($sessionStorage.nachStatus == 'Y') {
         $state.go('tabsController.recentTransactions'); //success page$timeout
         $timeout(function () {
           $state.go('tabsController.summaryPage')

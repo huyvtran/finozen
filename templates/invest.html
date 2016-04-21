@@ -1,6 +1,6 @@
 <ion-view title="Add Money">
 	<span ng-controller="googleanalytics"></span>
-<div class="screen_invest "> 
+<div class="screen_invest ">
 <div class="bar bar-header fino_head" ng-controller="popupController as popup">
 	<a class="button button-clear ion-android-arrow-back " href="#/page14/page15"></a>
 	<div class="h1 title"><p class="head_title"><span id="title">ADD MONEY</span></p></div>
@@ -42,20 +42,20 @@
 		<div class="row" >
 		<p><br>To optimize returns, we will add <span class="suggested"> {{ final(initial,nav,0) | currency:"&#8377;" }} </span> to your investments <br> </p>
 		</div>
-		 
-		
+
+
 <!--		<label class="item item-input">
 		<input type="Date" placeholder="Select Date" name="date"/>
 		</label>-->
 
 
-		<div class="row">
-		<button ion-track-tap="add money" type="submit" class="button button-full button-positive bar-footer invest_button_footer">Add Money</button>
+		<div class="row" ng-controller="nachCTRL">
+		<button ion-track-tap="add money" ng-click="nach()" type="submit" class="button button-full button-positive bar-footer invest_button_footer">Add Money</button>
 		</div>
 
-		
 
-		
+
+
 
 		<p class="item_checkbox">By clicking ADD MONEY you agree to have read <a href="#" onclick="window.open('https://www.reliancemutual.com/FundsAndPerformance/Pages/Reliance-Liquid-Fund---Treasury-Plan.aspx', '_self', 'location=yes'); return false;">Scheme Information Document</a>, <a href="#" onclick="window.open('http://finozen.com/t&c.html', '_self', 'location=yes'); return false;">T&C </a> before making the investment</p>
 		<div class="row" ><p><br>Scheme :<br/><a ng-href="{{schemeLink}}"><span class="suggestedScheme"><!--{{schemeName}}-->Reliance Liquid Fund - Treasury Plan - IP (G) </span> </a>  </p></div>

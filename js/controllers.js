@@ -143,6 +143,7 @@ console.log($scope.loginDetails);
           $sessionStorage.SessionMobNo =data.jsonStr[0].mobileNo;
           $sessionStorage.SessionFolioNums =(data.jsonStr[0].folioNums).length;
           $sessionStorage.clientActive = data.jsonStr[0].clientActive;
+        $sessionStorage.nachStatus=data.jsonStr[0].nachStatus;
 		  console.log($sessionStorage.SessionFolioNums);
           $sessionStorage.folioNums = data.jsonStr[0].folioNums[0];
          $state.go('tabsController.summaryPage');
