@@ -69,9 +69,9 @@ angular.module('app.subcontrollerOne', [])
     .controller('AddMoneyCtrl', function($scope) {
         $scope.groups = [];
         $scope.groups["0"] = {name: "I have signed up, what happens next?",items: ["Congratulations and welcome to Finozen! Here are the next steps:",
-            "  1) Welcome Call: We will call you shortly and collect your personal details like address, email ID and PAN no.No.,Aadhar Card No. and Bank Account No.Our executive will answer all your queries and help you understand the exact document requirement. ",
-            "  2)Account Activation: Post collection of necessary details, It will take us 5 mins. to activate your account. We will get in touch with you to inform you about the activation. ",
-            "  3) Start Investing: Post activation of account, you can click on “Add Money” and start investing through netbanking",
+            "  1) Welcome Call: We will call you shortly (during office hours) and introduce FinoZen to you. Our executive will answer all your queries and will request you to proceed for Account Activation.",
+            "  2) Account Activation: It’s a 6 step process which takes around 3 mins to complete. After you have submitted the necessary details, It will take us 5 mins. to activate your account (during office hours).  We will get in touch with you to inform you about the activation. ",
+            "  3) Start Investing: Post activation of account, you can click on “Add Money” and start investing through netbanking.",
             "  4) Welcome to FinoZen family, now you can watch your money grow! "
         ] };
         $scope.groups["1"] = {name: "Why are these documents required?",items: ["  These requirements are specified by SEBI (Securities and Exchange Board of India) and other regulatore bodies. We submit these documents to the Mutual fund for account creation."] };
@@ -98,10 +98,10 @@ angular.module('app.subcontrollerOne', [])
         $scope.groups["0"] = {name: "Where does my money go?",items: ["FinoZen channels your money to the selected liquid mutual fund which gives the best return at lowest risk. You will have full visibility and control of your money at all times. You can choose to Add or withdraw money anytime, anywhere with no penalties applicable. "] };
         $scope.groups["1"] = {name: "How soon can I start investing?",items: ["It will take us 5 mins to activate your account post you provide your documents to us. We will notify you once your account is activated. Once activated, you can start investing immediately."] };
         $scope.groups["2"] = {name: "How often can I invest/Add money or withdraw?",items: ["You can invest/add money or withdraw as often as you want. There are no restrictions on the frequency of your transactions. Also, there are no penalties or charges applicable when you withdraw your money."] };
-        $scope.groups["3"] = {name: "How soon will my investments reflect on FinoZen?",items: ["All withdrawals made before 2 pm Monday to Friday will reflect in your bank account on the next working day morning before 11 am.","working day morning before 11 am.", "This is also subject to a working day being a Bank Holiday or non-transaction day (as per Mutual Fund Company)"] };
-        $scope.groups["4"] = {name: "Where does my money go once I withdraw?",items: ["Your money will be deposited to the same bank account from which you have invested once you withdraw on FinoZen."] };
-        $scope.groups["5"] = {name: "How soon can I access my withdrawn money?",items: ["All withdrawals made before 1pm Monday to Saturday will reflect in your bank account on the next business day. "] };
-        $scope.groups["6"] = {name: "How much can I invest at a time? Is there a minimum or a maximum?",items: ["You can invest any amount from a minimum of INR 1,00"] };
+        $scope.groups["3"] = {name: "How soon will my investments reflect on FinoZen?",items: ["All Investments will be processed on next working day and will reflect in your FinoZen account at 11:30 am on next day of processing.","Working days are Monday to Friday except Bank Holidays.", "For example: An investment done on Sunday, will be processed on Monday and will reflect in your FinoZen account on 11:30 am Tuesday."] };
+        $scope.groups["4"] = {name: "Where does my money go once I withdraw?",items: ["Your money will be deposited back to the same bank account which you have registered with us at the time of account creation on FinoZen."] };
+        $scope.groups["5"] = {name: "How soon can I access my withdrawn money?",items: ["Mon - Thur, before 2 p.m. : Next day 10 a.m.","Mon - Thur, after 2 p.m. : Day after next 10 a.m.","Fri before 2 p.m. : Monday 10 a.m.","Fri after 2 p.m, Sat and Sun. : Tuesday 10 a.m."] };
+        $scope.groups["6"] = {name: "How much can I invest at a time? Is there a minimum or a maximum?",items: ["You can invest any amount from a minimum of INR 100."] };
         $scope.groups["7"] = {name: "How long do I need to stay invested? Is there a lock-in period?",items: ["There is no minimum period or lock-in. You have the option to withdraw your money anytime. Your money will grow from the very next day that you have invested, irrespective. "] };
         $scope.groups["8"] = {name: "Can I invest through cash/cheque?",items: ["No. You can invest only through app from the bank account that you have declared at the time of registration.  When you invest via the app, you will be automatically re-directed to the net-banking page of your chosen bank. "] };
 
@@ -290,9 +290,6 @@ $scope.growthRate= function(){
         }
 
         $scope.sendMfOrder=function() {
-		console.log($sessionStorage.folioNums);
-		console.log($sessionStorage.amcCode);
-		console.log($sessionStorage.rtaCode);
             var date=dateService.getDate();
             mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums},function(data){
                 if(data.responseCode=="Cali_SUC_1030"){
@@ -300,7 +297,6 @@ $scope.growthRate= function(){
                     window.open('http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_self');
                 }
 				else{
-					console.log("sds");
 					$ionicLoading.hide();
 				}
 
@@ -380,7 +376,7 @@ $state.go('reference');
     .controller('panVerifyCtrl', function($scope,$state) {
 		
 		
-		$scope.question=function(){$state.go('signature');}
+		
 		
 		$scope.kycdone=function(){$state.go('panImage');}
 		$scope.kycnotdone=function(){$state.go('aadhar');}

@@ -190,6 +190,11 @@ $ionicAppProvider.identify ({
         templateUrl: 'templates/panImage.html',
         controller: ''     
     })    
+             .state('mutualFund', {
+      url: '/mutualFund',         
+          templateUrl: 'templates/mutualFund.html',
+          controller: ''     
+    })    
              .state('aadhar', {
       url: '/aadhar',         
           templateUrl: 'templates/aadhar.html',

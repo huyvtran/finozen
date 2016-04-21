@@ -2,8 +2,12 @@ angular.module('app.controllers', [])
 
     .controller('summaryPageCtrl', function($scope) {
 $scope.dd=function(){
-	if($scope.pep==undefined){console.log($scope.pep + " undefined");}
-	else{console.log($scope.pep + " selected");}
+	if($scope.clientIncome== undefined){$scope.clientIncome="33"}
+	if($scope.clientOccupation== undefined){$scope.clientOccupation="Professional_new"}
+	if($scope.clientPEP == undefined){$scope.clientPEP="N"}
+	console.log($scope.clientIncome + " clientIncome");
+	console.log($scope.clientPEP + " clientPEP");
+	console.log($scope.clientOccupation + " clientOccupation");
 	}
     })
 
@@ -144,8 +148,8 @@ console.log($scope.loginDetails);
           $sessionStorage.SessionFolioNums =(data.jsonStr[0].folioNums).length;
           $sessionStorage.clientActive = data.jsonStr[0].clientActive;
 		  console.log($sessionStorage.SessionFolioNums);
-		if($sessionStorage.clientActive=='Y'){	
-		window.plugins.OneSignal.sendTag("active","true");}
+		//if($sessionStorage.clientActive=='Y'){	
+		//window.plugins.OneSignal.sendTag("active","true");}
           $sessionStorage.folioNums = data.jsonStr[0].folioNums[0];
          $state.go('tabsController.summaryPage');
         $ionicLoading.hide();

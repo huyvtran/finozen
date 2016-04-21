@@ -24,7 +24,7 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 
 
 
-.run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout) {
+.run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,$timeout,$cordovaToast) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -61,7 +61,9 @@ if(typeof analytics !== undefined) {
             } else {
                 console.log("Google Analytics Unavailable");
             }
-	*/var backbutton = 0;
+	*/
+
+    var backbutton = 0;
 	$ionicPlatform.registerBackButtonAction(function (event) {
      if ($ionicHistory.currentStateName() == 'invest'){
 		 console.log("inv");
@@ -79,16 +81,12 @@ if(typeof analytics !== undefined) {
 		  ionicToast.show('This is a toast at the top.', 'bottom', false, 2500);
 		};*/
 		if(backbutton==0){
-      backbutton++;
-			//var showToast = function(){
-			  //ionicToast.show('Press back to exit.', 'bottom', false, 2500);
-      window.plugins.toast.bottom('press again to exit');
-			$timeout(function(){backbutton=0},3000);
-
-		}
-		else{
-      navigator.app.exitApp();
-		}
+            backbutton++;
+            window.plugins.toast.showShortBottom('Press back again to exit');
+            $timeout(function(){backbutton=0;},5000);
+        }else{
+            navigator.app.exitApp();
+        }
 
       }
 
@@ -97,8 +95,11 @@ if(typeof analytics !== undefined) {
         history.go(-1);
       }
     }, 100);
-
-	/*
+	UAirship.getChannelID(function (channelID) {
+     console.log("Channel: " + channelID)
+ })
+UAirship.setUserNotificationsEnabled(true)
+/*	
 	$ionicPlatform.registerBackButtonAction(function(event) {
 		$ionicPopup.confirm({
 		title: 'System warning',
@@ -108,8 +109,8 @@ if(typeof analytics !== undefined) {
 		ionic.Platform.exitApp();
 		}
 		})
-	}, 100);*/
-
+	}, 100);
+*/
 
 
 

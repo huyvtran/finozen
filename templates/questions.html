@@ -1,10 +1,10 @@
-<ion-view title="CONFIRM">
+<ion-view title="CONFIRM" ng-controller="questionsCTRL">
 <div class="bar bar-header fino_head">
 <button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepback()"></button>
   <div class="h1 title"><p class="head_title"><span id="title">ADDITIONAL DETAILS</span></p></div>
   <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
 </div>
-	<ion-content overflow-scroll="true" padding="false" class="has-header">
+	<ion-content overflow-scroll="true" padding="false" class="has-header" >
 <div class="">
 <br/><br/>
 <p class="text-left padding"><b>Step: 6/6 </b>YOU ARE ALMOST DONE!</p>
@@ -36,13 +36,13 @@
          1) Gross Annual Income
       </div>
 		
-      <select>
-         <option value="1"> Below 1 Lakh</option>
-		 <option value="oneToFive">1 - 5 Lakh</option>
-		 <option value="fiveToTen" ng-selected="true">5 - 10 Lakh</option>
-		 <option value="tenToTwentyfive">10 - 25 Lakh</option>
-		 <option value="TwentyfiveToOne">25 Lakh – 1 Cr</option>
-		 <option value="aboveOne">Above 1 Cr</option>
+      <select ng-model="clientIncome">
+         <option value="31"> Below 1 Lakh</option>
+		 <option value="32">1 - 5 Lakh</option>
+		 <option value="33" ng-selected="true">5 - 10 Lakh</option>
+		 <option value="34">10 - 25 Lakh</option>
+		 <option value="35">25 Lakh – 1 Cr</option>
+		 <option value="36">Above 1 Cr</option>
       </select>
 		
    </label>
@@ -52,18 +52,18 @@
          2) Occupation
       </div>
 		
-      <select>
-         <option>Business</option>
-		<option>Professional</option>
-		<option>Public Sector</option>
-		<option ng-selected="true">Private Sector</option>
-		<option>Government Service</option>
-		<option>Agriculturist</option>
-		<option>Housewife</option>
-		<option>Student</option>
-		<option>Retired</option>
-		<option>Forex Dealer</option>
-		<option>Others</option>
+      <select ng-model="clientOccupation">
+        <option value="Business_new">Business</option>
+		<option value="Professional_new">Professional</option>
+		<option value="Service_new">Public Sector</option>
+		<option value="Professional_new" ng-selected="true">Private Sector</option>
+		<option value="Service_new">Government Service</option>
+		<option value="Farmer_new">Agriculturist</option>
+		<option value="Household_new">Housewife</option>
+		<option value="Student_new">Student</option>
+		<option value="Retired_new">Retired</option>
+		<option value="Others_new">Forex Dealer</option>
+		<option value="Others_new">Others</option>
       </select>
    </label>
 
@@ -73,10 +73,10 @@
 		 <!--<span style="color: #18bb9c; font-size: 12px;" class="button-icon ion-information-circled"  ng-controller="PEPpopOverController" ng-click="popover.show($event)"> </span>-->
       </div>
 		
-      <select ng-model="pep">
-        <option value="no" ng-selected="true">Not Applicable</option>
-		<option value="yes">Politically Exposed Person</option>
-		<option value="Related">Related to Politically Exposed Person</option>
+      <select ng-model="clientPEP">
+        <option value="N" ng-selected="true">Not Applicable</option>
+		<option value="Y">Politically Exposed Person</option>
+		<option value="R">Related to Politically Exposed Person</option>
       </select>
    </label>
 
@@ -97,9 +97,9 @@
 </div>
     </ion-content>
 <ion-footer-bar padding="false" style="padding:0;">
-	<div class="button-bar " style="padding:0;" ng-controller="panVerifyCtrl">
+	<div class="button-bar " style="padding:0;">
 		<button class="button button-positive" ng-click="question()" style="margin:1px;line-height: 44px;">SKIP</button>
-		<button class="button button-positive" ng-click="question()" style="margin:1px;line-height: 44px;">SUBMIT</button>
+		<button class="button button-positive" ng-click="questionUpload()" style="margin:1px;line-height: 44px;">SUBMIT</button>
 	</div>
 </ion-footer-bar>
 </ion-view>

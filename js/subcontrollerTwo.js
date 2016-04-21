@@ -239,32 +239,41 @@ console.log("success");
     })
 
       /*for question's*/
-    .controller('questionsCTRL',function(questionsService,$sessionStorage,$state,$ionicPopup,$ionicLoading)
+    .controller('questionsCTRL',function($scope,questionsService,$sessionStorage,$state,$ionicPopup,$ionicLoading)
     {
-      $scope.questions = function(){
-        var questUpload=JSON.parse(({}));
-        questUpload.kyphCode=$sessionStorage.clientCode;
-        questUpload.income=$sessionStorage.clientActive; // income level from 31-36
-        questUpload.occup=$sessionStorage; // for the occupation
-        questUpload.pep=$sessionStorage; //for the pep status either Y or N
+      $scope.questionUpload = function(){
+		$scope.question=function(){$state.go('signature');}
+		if($scope.clientIncome== undefined){$scope.clientIncome="33"}
+		if($scope.clientOccupation== undefined){$scope.clientOccupation="Professional_new"}
+		if($scope.clientPEP == undefined){$scope.clientPEP="N"}
+		
+        var questUpload=JSON.parse(JSON.stringify({}));
+        questUpload.kyphCode="CRN23911";
+        questUpload.income=$scope.clientIncome; // income level from 31-36
+        questUpload.occup=$scope.clientOccupation; // for the occupation
+        questUpload.pep=$scope.clientPEP; //for the pep status either Y or N
         questUpload.resStatus="Individual"; // for the resdential status hardcoding it to individual
         questUpload = JSON.stringify(questUpload);
-
-        questionsService.save(questUpload,function(){
+	console.log($scope.clientIncome + " clientIncome");
+	console.log($scope.clientPEP + " clientPEP");
+	console.log($scope.clientOccupation + " clientOccupation");
+	console.log(questUpload + " questUpload");
+        questionsService.save(questUpload,function(data){
 
           $ionicLoading.show();
           if(data.responseCode == "Cali_SUC_1030") {
             $ionicLoading.hide();
+			$state.go("signature");
           }
           else {
             console.log("Error");
+            $ionicLoading.hide();
             $ionicPopup.alert({
               title: 'Upload Error',
               template: 'Please try again'
             });
-            $ionicLoading.hide();
             popup.then(function (res) {
-              //$state.go(""); // question page
+              //$state.go("signature"); // question page
             });
           }
           },function(error){
@@ -274,7 +283,7 @@ console.log("success");
               template: 'Please try again'
             });
             popup.then(function(res) {
-              $state.go(""); //question's sign page
+              //$state.go(""); //question's sign page
             });
 
           });
