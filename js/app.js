@@ -20,11 +20,10 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     KeepaliveProvider.interval(2); // in seconds
 })
 
+  
 
+.run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout) {
 
-
-
-.run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,$cordovaToast) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -67,6 +66,10 @@ if(typeof analytics !== undefined) {
 		 console.log("inv");
 		$state.go('tabsController.summaryPage');
 
+      }
+
+     else if ($ionicHistory.currentStateName() == 'verifySuccess'){
+		event.preventDefault();
       }
 
      else if ($ionicHistory.currentStateName() == 'tabsController.summaryPage'){
