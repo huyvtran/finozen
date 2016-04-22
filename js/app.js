@@ -20,11 +20,7 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     KeepaliveProvider.interval(2); // in seconds
 })
 
-
-
-
-
-.run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,$timeout,$cordovaToast) {
+.run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -61,9 +57,7 @@ if(typeof analytics !== undefined) {
             } else {
                 console.log("Google Analytics Unavailable");
             }
-	*/
-
-    var backbutton = 0;
+	*/var backbutton = 0;
 	$ionicPlatform.registerBackButtonAction(function (event) {
      if ($ionicHistory.currentStateName() == 'invest'){
 		 console.log("inv");
@@ -95,22 +89,27 @@ if(typeof analytics !== undefined) {
         history.go(-1);
       }
     }, 100);
-	UAirship.getChannelID(function (channelID) {
-     console.log("Channel: " + channelID)
- })
-UAirship.setUserNotificationsEnabled(true)
-/*	
-	$ionicPlatform.registerBackButtonAction(function(event) {
-		$ionicPopup.confirm({
-		title: 'System warning',
-		template: 'are you sure you want to exit?'
-		}).then(function(res) {
-		if (res) {
-		ionic.Platform.exitApp();
-		}
-		})
-	}, 100);
-*/
+
+
+    /*Urban Air ship integration*/
+
+    UAirship.getChannelID(function (channelID) {
+      console.log("Channel: " + channelID)
+    })
+
+    UAirship.setUserNotificationsEnabled(true);
+    /*
+      $ionicPlatform.registerBackButtonAction(function(event) {
+          $ionicPopup.confirm({
+          title: 'System warning',
+          template: 'are you sure you want to exit?'
+          }).then(function(res) {
+          if (res) {
+          ionic.Platform.exitApp();
+          }
+          })
+      }, 100);*/
+
 
 
 
@@ -135,7 +134,7 @@ UAirship.setUserNotificationsEnabled(true)
 
  var notificationOpenedCallback = function(jsonData) {
    console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
- };  window.plugins.OneSignal.init("5857b4c1-e085-47b4-b5f4-2861aec2e548",
+ };  window.plugins.OneSignal.init("7b688632-6872-22f5-a33d-6f51b80af61b",
                                 {googleProjectNumber: "745760472440"},
                                 notificationOpenedCallback);
  OneSignal.init();

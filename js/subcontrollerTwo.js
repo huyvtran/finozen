@@ -692,4 +692,19 @@ console.log("success");
   //$cordovaGoogleAnalytics.trackEvent('swipe', 'Video Load Time', 'Gone With the Wind', 100);*/
 })
 
+/*Nach Mandate check*/
+  .controller('nachCTRL',function($scope,$sessionStorage,$state,$timeout){
+    console.log('entered');
+    $scope.nach=function(){
+      if ($sessionStorage.nachStatus == 'Y') {
+        $state.go('tabsController.recentTransactions'); //success page$timeout
+        $timeout(function () {
+          $state.go('tabsController.summaryPage')
+        }, 5000);
+      }
+      else {
+        console.log('this is working');
+      }
+    }
+  })
 
