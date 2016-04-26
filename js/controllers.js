@@ -71,6 +71,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 
                 if(data.responseCode!="Cali_SUC_1030"){
 					$ionicLoading.hide();
+					
 					if(data.responseCode=="Cali_ERR_2050"){
 
 						$scope.serverError="Mobile number in use";
@@ -85,7 +86,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 					$sessionStorage.SessionClientCode=(JSON.parse(data.jsonStr)).clientCode;
 
                     //$state.go('panVerify');    // new sign upflow
-					$state.go('pre_verification');
+					$state.go('reference');
 					$ionicLoading.hide();
                 }
             },function(error){
@@ -342,7 +343,7 @@ $scope.$broadcast("scroll.refreshComplete");
 
 
 $scope.shareViaTwitter=function(){
-	window.plugins.socialsharing.share('Hey, FinoZen is a great investment app to watch your money grow. Start with Rs.100, download now! Please use my phone number '+ $sessionStorage.SessionMobNo+' as referral code',null,null,'https://goo.gl/uAkHRa');
+	window.plugins.socialsharing.share('Watch your money grow at FinoZen with just INR 100. Earn INR 100 for every referral. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code',null,null,'https://goo.gl/uAkHRa');
 }
      })
 

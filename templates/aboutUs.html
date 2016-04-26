@@ -1,38 +1,38 @@
 <ion-view title="aboutUs">
-<div class="bar bar-header fino_head">
+<div class="bar bar-header fino_head" ng-controller="popupController as popup">
 <button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepback()"></button>
   <div class="h1 title"><p class="head_title"><span id="title">ABOUT US</span></p></div>
-  <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
+  <a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
 </div>
 	<ion-content overflow-scroll="true" padding="false" class="has-header aboutus">
 <div class="row aboutus_block aboutus_social">
-	<div class="col-20 aboutus_bar">
-		<img src="img/finotree.png">
+	<div class="col-40 aboutus_bar">
+		<img src="img/finotree.png" style="height:50px; margin:10px auto;">
 	</div>
 	<div class="col-40 aboutus_bar text-center">
-		<p class="padding">About FinoZen<br/></p>
+		<p class="padding" style="font-size: 18px; color: #adadad;"><b>FinoZen</b><br/></p>
 		<div class="row aboutus_icon_block ">
 			<div class="col">
-				<i class = "icon icon ion-social-facebook"></i>
+				<a href="#" onclick="window.open('https://www.facebook.com/FinoZen-1709979945889634/?ref=hl', '_self', 'location=yes'); return false;"><i class = "icon icon ion-social-facebook"></i>
 			</div>
 			<div class="col">
-				<i class = "icon icon ion-social-twitter"></i>
+				<a href="#" onclick="window.open('https://twitter.com/finozen1?lang=en', '_self', 'location=yes'); return false;"><i class = "icon icon ion-social-twitter"></i>
 			</div>
 			<div class="col">
-				<i class = "icon icon ion-social-linkedin"></i>
+				<a href="#" onclick="window.open('https://www.linkedin.com/company/finozen?trk=biz-companies-cym', '_self', 'location=yes'); return false;"><i class = "icon icon ion-social-linkedin"></i></a>
 			</div>
 		</div>
 	</div>
-	<div class="col-30 aboutus_button">
+	<!--<div class="col-30 aboutus_button">
 		<button class="button button-full button-positive">
 			ADD MONEY
 		</button>
-	</div>
+	</div>-->
 </div>
 <div class="row aboutus_block aboutus_intro">
 	<div class="col aboutus_bar">
 		<p>
-FinoZen aims to revolutionize personal investing habits in India. We realize that 99% of Indians aren’t regular investor and our money keeps lying idle in bank account. To solve this problem, we created FinoZen using which you can invest your money instantaneously in one click, and get returns everyday, while this money remains completely safe you can also withdraw this without penalty any time.
+FinoZen aims to revolutionize personal investing habits in India. We realize that most Indians aren’t regular investors and our money lies idle in bank accounts. To solve this problem, we created FinoZen using which you can invest your money in just one click and get returns everyday. While your money remains completely safe you can also withdraw this without penalty any time.
 		</p>
 		<p>We are a bunch of IIT and IIM graduates with cumulative experience of 25 years+ in financial services.
 		</p>
@@ -46,13 +46,13 @@ FinoZen aims to revolutionize personal investing habits in India. We realize tha
 	<p class="padding item_role">CEO</p>
 		<div class="row aboutus_icon_block ">
 			<div class="col social_icon">
-				<i class = "icon icon ion-social-facebook"></i>
+				<a href="#" onclick="window.open('https://www.facebook.com/varunsunnygupta?fref=ts', '_self', 'location=yes'); return false;"><i class = "icon icon ion-social-facebook"></i></a>
 			</div>
 			<div class="col social_icon">
-				<i class = "icon icon ion-social-twitter"></i>
+				<a href="#" onclick="window.open('https://twitter.com/varunsunnygupta', '_self', 'location=yes'); return false;"><i class = "icon icon ion-social-twitter"></i>
 			</div>
 			<div class="col social_icon">
-				<i class = "icon icon ion-social-linkedin"></i>
+				<a href="#" onclick="window.open('https://www.linkedin.com/in/varunsunnygupta', '_self', 'location=yes'); return false;"><i class = "icon icon ion-social-linkedin"></i>
 			</div>
 		</div>
 	</div>

@@ -4,25 +4,32 @@
 	<div class="h1 title"><p class="head_title"><span id="title">STATUS</span></p></div>
 	<a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
 </div>
-    <ion-content overflow-scroll="false" padding="false" class="has-header">
-	<div class="container statusPage padding">
-			<!--<div class="rows"><img src="img/step1.jpg" class="steps"></div>
+   
+			
+			<span ng-controller="showhistoryController"></span>
+    <ion-content overflow-scroll="true" padding="false" class="has-header">
+		<div class="container statusPage">
+			<div class="rows"><img src="img/step1.jpg" class="steps"></div>
 			<div class="rows padding">
-				<p >You are just one step away to activate your account. Please send us these details to <b>support@finozen.com</b> or by WhatsApp @<b>7899825545</b></p>
+				<p >Please activate your account. If you have already uploaded documents kindly wait for an activation confirmation from us.</p>
 			</div>
 			<hr/>
 			<div class="rows padding">
-				<span class="custom_bullets">1</span><p >Photo of your PAN card</p><br/>
-				<span class="custom_bullets">2</span><p >Net banking enabled Bank Account No.</p><br/>
-				<span class="custom_bullets">3</span><p >IFSC code of your bank account</p>
+				<span class="custom_bullets">1</span><p >PAN card</p><br/>
+				<span class="custom_bullets">2</span><p >Address Proof</p><br/>
+				<span class="custom_bullets">3</span><p >Net banking enabled Bank Account No.</p><br/>
+				<span class="custom_bullets">4</span><p >IFSC code of your bank account</p>
 			</div>
 			<hr/>
-			<div class="rows padding">
-				<p >We will update you once your account is ready for transactions. Happy Investing!</p>
-			</div>-->
-			<br/>
-			<p >Please activate your account by going to "Activate Account" in menu by uploading required documents, If you have already uploaded documents kindly wait for a activation confirmation from us.</p>
+		</div>
+    </ion-content>
+
+<ion-footer-bar padding="false" style="padding:0;">
+	<div class="button-bar " style="padding:0;">
+		<a href="#/sliders" class="button button-positive" style="margin:1px;line-height: 44px;" >not now</a>
+		<a href="#/panImage" class="button button-positive" style="margin:1px; line-height: 44px;" >Activate Account</a>
 	</div>
+	
 
     </ion-content>
 </ion-view>

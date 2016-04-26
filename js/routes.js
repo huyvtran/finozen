@@ -143,6 +143,11 @@ $ionicAppProvider.identify ({
           templateUrl: 'templates/reference.html',
           controller: ''     
     })
+             .state('addressProofImageSingle', {
+      url: '/addressProofImageSingle',         
+          templateUrl: 'templates/addressProofImageSingle.html',
+          controller: ''     
+    })
              .state('addressProofImage', {
       url: '/addressProofImage',         
           templateUrl: 'templates/addressProofImage.html',

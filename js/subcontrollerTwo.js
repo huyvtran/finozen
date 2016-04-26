@@ -43,19 +43,18 @@ angular.module('app.subcontrollerTwo', [])
         /*for sending the pan Image*/
         .controller('panImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup){
             $scope.selfieGo=function(){$state.go('selfie');}
-
 			$scope.takeit1=function(){
-			$scope.cimage1="img/no_leaves.png";
+			$scope.cimage1="img/Pancard.jpg";
 			  document.addEventListener("deviceready", function () {
 				var options = {
-				  quality: 50,
+				  quality: 100,
 				  destinationType: Camera.DestinationType.DATA_URL,
 				  sourceType: Camera.PictureSourceType.CAMERA,
 				  allowEdit: true,
 				  encodingType: Camera.EncodingType.JPEG,
 				  targetWidth: 300,
 				  targetHeight: 400,
-				  cameraDirection:1,
+				  cameraDirection:0,
 				  popoverOptions: CameraPopoverOptions,
 				  saveToPhotoAlbum: false,
 				  correctOrientation:true
@@ -69,13 +68,13 @@ angular.module('app.subcontrollerTwo', [])
 				}, function(err) {
 				  // error
 				});
-
 			  }, false);
 			}
 			$scope.PanImage = function() {
 				$scope.uploadPan=JSON.parse(JSON.stringify({}));
-                //$scope.uploadPan.kyphCode = $sessionStorage.SessionClientCode;
-                $scope.uploadPan.kyphCode = "CRN23919";
+                $scope.uploadPan.kyphCode = $sessionStorage.SessionClientCode;
+				console.log($sessionStorage.SessionClientCode+ 'clientCode');
+                //$scope.uploadPan.kyphCode = "CRN24178";
                 $scope.uploadPan.imageData = $scope.panData ;//replace with session storage of pan
                 //$scope.uploadPan.imageData = "fffd";//replace with session storage of pan
                 $scope.uploadPan.imageType = 'PA';
@@ -84,32 +83,24 @@ angular.module('app.subcontrollerTwo', [])
                 console.log($scope.uploadPan + 'pan json data');
                 panImageService.save($scope.uploadPan,function(data){
                     console.log(data);
-                    if(data.responseCode == "Cali_SUC_1030") {
-
-
-console.log("success");
-
-                            $state.go("selfie");//after pan image
-
-                    }
-                    else {
-                        console.log("Error");
-                        $ionicPopup.alert({
+                    if(data.responseCode !== "Cali_SUC_1030") {
+							$ionicPopup.alert({
                             title: 'Upload Error',
                             template: 'Please try again'
                         });
-                        popup.then(function(res) {
-                            $state.go(""); //pan image page
-                        });
+							
+                    }
+                    else {
+                        console.log("Error");
+                       
+                         $state.go("selfie");
                     }
                 },function(error){
                     $ionicPopup.alert({
-                        title: 'Your floating away',
-                        template: 'Please try again'
+                        title: 'Please try again',
+                   template: 'please check your network connection. Unable to connect'
                     });
-                    popup.then(function(res) {
-                        $state.go(""); //pan image page
-                    });
+                    
 
                 });
             }
@@ -159,11 +150,11 @@ console.log("success");
                 }
             },function(error){
                 $ionicPopup.alert({
-                    title: 'Your floating away',
-                    template: 'Please try again'
+                   title: 'Please try again',
+                   template: 'please check your network connection. Unable to connect'
                 });
                 popup.then(function(res) {
-                    $state.go(""); // sign page
+                   // $state.go(""); // sign page
                 });
 
             });
@@ -183,6 +174,7 @@ console.log("success");
 			  allowEdit: true,
 			  encodingType: Camera.EncodingType.JPEG,
 			  targetWidth: 300,
+			  cameraDirection:1,
 			  targetHeight: 400,
 			  popoverOptions: CameraPopoverOptions,
 			  saveToPhotoAlbum: false,
@@ -202,7 +194,7 @@ console.log("success");
 		$scope.selfieUpload = function() {
 			var uploadselfie=JSON.parse(JSON.stringify({}));
             //uploadselfie.kyphCode = $sessionStorage.SessionClientCode;
-            uploadselfie.kyphCode = "CRN23919";
+            uploadselfie.kyphCode = "CRN24178";
             uploadselfie.imageData = $scope.selfieData;//replace with session storage of selfie
             //uploadselfie.imageData = "test";//replace with session storage of selfie
             uploadselfie.imageType = 'PH';
@@ -227,8 +219,8 @@ console.log("success");
                 }
             },function(error){
                 $ionicPopup.alert({
-                    title: 'Your floating away',
-                    template: 'Please try again'
+                  title: 'Please try again',
+                   template: 'please check your network connection. Unable to connect'
                 });
                 popup.then(function(res) {
                     $state.go(""); //selfie sign page
@@ -279,8 +271,8 @@ console.log("success");
           },function(error){
             $ionicLoading.hide();
             $ionicPopup.alert({
-              title: 'Your floating away',
-              template: 'Please try again'
+             title: 'Please try again',
+                   template: 'please check your network connection. Unable to connect'
             });
             popup.then(function(res) {
               //$state.go(""); //question's sign page
@@ -292,14 +284,35 @@ console.log("success");
     )
 
     /*for address proof image*/
+    .controller('addressImageSelectionCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
+				$scope.takeImageSkip=function(){$state.go('bank');$sessionStorage.addressChoice=$scope.choice;}
+		$scope.takeImage=function(){if(
+			$scope.choice!==undefined) {
+			//console.log($scope.choice + "   selected choice");
+			$sessionStorage.addressChoice=$scope.choice;
+			if($scope.choice === 'AA' || $scope.choice === 'VO' || $scope.choice ==='PP'){
+				$state.go('addressProofImage');
+				}
+			else{
+				$state.go('addressProofImageSingle');}
+			} 
+			
+			}
+	})
     .controller('addressImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
-		$scope.takeImageSkip=function(){$state.go('addressProofImage');$sessionStorage.addressChoice=$scope.choice}
-		$scope.takeImage=function(){if($scope.choice!==undefined) {$state.go('addressProofImage');$sessionStorage.addressChoice=$scope.choice} }
-
+		//console.log($sessionStorage.addressChoice + 'fromwhat page your coming');
 		$scope.bank=function(){$state.go('bank');}
+				if($sessionStorage.addressChoice == 'AA'){$scope.cimageFront="img/AADHAR_FRONT.jpg"; $scope.cimageBack="img/AADHAR_BACK.jpg";}
+				else if($sessionStorage.addressChoice == 'PP'){$scope.cimageFront="img/Passport_front.jpg"; $scope.cimageBack="img/Passport_back.jpg";}
+				else if($sessionStorage.addressChoice == 'VO'){$scope.cimageFront="img/VOTER_FRONT.jpg"; $scope.cimageBack="img/VOTER_BACK.jpg";}
+			    else if($sessionStorage.addressChoice == 'DL'){$scope.cimageFront="img/DL.jpg";}
+				else if($sessionStorage.addressChoice == 'RC'){$scope.cimageFront="img/DL.jpg";}
+				else if($sessionStorage.addressChoice == 'GA'){$scope.cimageFront="img/DL.jpg";}
+		
+		//else{$scope.cimageFront="img/DL.jpg";}
 		$scope.addressFrontImg=function(){
 		console.log($sessionStorage.addressChoice);
-		$scope.addressImage="img/no_leaves.png";
+		$scope.addressImage=$scope.cimageFront;
 		document.addEventListener("deviceready", function () {
 			var options = {
 			  quality: 100,
@@ -324,11 +337,10 @@ console.log("success");
 		  }, false);
 		}
 		$scope.addressBackImg=function(){
-		$scope.addressFront();
-		$scope.cimage2="img/no_leaves.png";
+		//$scope.addressFront();
 		  document.addEventListener("deviceready", function () {
 			var options = {
-			  quality: 50,
+			  quality: 100,
 			  destinationType: Camera.DestinationType.DATA_URL,
 			  sourceType: Camera.PictureSourceType.CAMERA,
 			  allowEdit: true,
@@ -352,10 +364,11 @@ console.log("success");
 		  }, false);
 		}
 
+		$scope.addressSubmmitt = function() {$scope.addressBack();$scope.addressFront() ;}
 		$scope.addressFront = function() {
 			var uploadaddress=JSON.parse(JSON.stringify({}));
-            //uploadaddress.kyphCode = $sessionStorage.SessionClientCode;
-            uploadaddress.kyphCode = "CRN23919";;
+            uploadaddress.kyphCode = $sessionStorage.SessionClientCode;
+            //uploadaddress.kyphCode = "CRN23919";;
             uploadaddress.imageData = $scope.addressImageData;//replace with session storage of selfie
             //uploadaddress.imageData = "fffd";//replace with session storage of selfie
             uploadaddress.imageType = 'AF';
@@ -382,8 +395,8 @@ console.log("success");
             },function(error){
                 $ionicLoading.hide();
                 $ionicPopup.alert({
-                    title: 'Your floating away',
-                    template: 'Please try again'
+                   title: 'Please try again',
+                   template: 'Unable to submit request, Please try again.'
                 });
                 popup.then(function(res) {
                     $state.go(""); //selfie sign page
@@ -394,9 +407,9 @@ console.log("success");
 
         $scope.addressBack = function() {
 			var uploabackdaddress=JSON.parse(JSON.stringify({}));
-            //uploabackdaddress.kyphCode = $sessionStorage.SessionClientCode;
-            uploabackdaddress.kyphCode = "CRN23919";;
-            uploabackdaddress.imageData = $scope.addressBackData;//replace with session storage of selfie
+            uploabackdaddress.kyphCode = $sessionStorage.SessionClientCode;
+            //uploabackdaddress.kyphCode = "CRN23919";;
+            uploabackdaddress.imageData = $scope.addressBackData;
             //uploabackdaddress.imageData = "fffd";//replace with session storage of selfie
             uploabackdaddress.imageType = 'AB';
             uploabackdaddress.addressType = $sessionStorage.addressChoice; //sessionstorage of addressType
@@ -423,11 +436,11 @@ console.log("success");
             },function(error){
                 $ionicLoading.hide();
                 $ionicPopup.alert({
-                    title: 'Your floating away',
-                    template: 'Please try again'
+                   title: 'Please try again',
+                   template: 'please check your network connection. Unable to connect'
                 });
                 popup.then(function(res) {
-                    $state.go(""); //selfie sign page
+                  //  $state.go(""); //selfie sign page
                 });
 
             });
@@ -493,8 +506,8 @@ console.log("success");
                },function(error){
                  $ionicLoading.hide();
                  $ionicPopup.alert({
-                   title: 'Your floating away',
-                   template: 'Please try again'
+                   title: 'Please try again',
+                   template: 'please check your network connection. Unable to connect'
                  });
                  popup.then(function(res) {
                    $state.go("questions"); //selfie sign page
@@ -503,7 +516,7 @@ console.log("success");
                });
              }
 		$scope.bankSkip=function(){
-			$state.go('questions');
+			$state.go('signature');
 
 		}
     })
@@ -548,6 +561,17 @@ console.log("success");
     }
   })
 
+  /*for checking the sign upcomplete confirmation*/
+  .controller('tapCTRL',function($scope,$state){
+	  console.log('entered the tap page');
+	$scope.count= {tap:0};
+	console.log($scope.count +'numer of taps');
+	$scope.reportTap=function(tapType){
+		$scope.count[tapType]++;
+		console.log('number of taps' + $scope.count);
+	};
+  })
+  
     .controller('forgotPinCtrl', function($scope,$sessionStorage,$http,$state,$ionicPopup) {
         $scope.resetPin=function(change) {
           $scope.forget5 = JSON.parse(forgotPin2(change));

@@ -401,6 +401,7 @@ box-shadow: 1px 1px 12px 13px #ddd !important;
 }
 .suggestedScheme {
     color: #18bb9c;
+	font-weight: 600;
 padding-left: 3px;
 }
 .noTxn{
@@ -475,9 +476,8 @@ text-align: center;
 .panimageSection{
 	.panimage{
 		height:200px;
-		width:300px;
 		margin: 20px auto;
-		img{max-height:220px;padding: 15px;}
+		img{max-height:200px;padding: 15px;}
 	}
 }
 .confirmimage{

@@ -11,7 +11,7 @@
 		<p style="padding: 26px 0;"><b>Step: 1/6 </b>Please take an image of the front of your PAN card</p>
 			<div class="panimage">
 			<img ng-show="cimage1 !== undefined" ng-src="{{cimage1}} ">
-			<img ng-show="cimage1 === undefined" src="img/account-image1.png ">
+			<img ng-show="cimage1 === undefined" src="img/Pancard.jpg ">
 			</div>
 			
 		<div class="text-center">
@@ -19,9 +19,9 @@
 		</div>
 		</div>
 <ion-footer-bar padding="false" style="padding:0;">
-	<div class="button-bar " style="padding:0;" >
+	<div class="button-bar " style="padding:0;" ng-controller='tapCTRL'>
 		<button class="button button-positive" ng-click="selfieGo()" style="margin:1px;line-height: 44px;">SKIP</button>
-		<button class="button button-positive" ng-click="PanImage()" style="margin:1px;line-height: 44px;" ng-disabled="!cimage1">SUBMIT</button>
+		<button class="button button-positive" on-tap="reportTap()"  ng-click="PanImage()" style="margin:1px;line-height: 44px;" ng-disabled="!cimage1">SUBMIT</button>
 	</div>
 </ion-footer-bar>
     </ion-content>
