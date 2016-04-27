@@ -93,7 +93,9 @@ angular.module('app.subcontrollerTwo', [])
                             template: 'Please try again'
                         });
                       refer.then(function(res){
+                        $ionicLoading.show();
                         $window.location.reload(true)
+                        $ionicLoading.hide();
                       })
 
                     }
@@ -145,19 +147,25 @@ angular.module('app.subcontrollerTwo', [])
                 console.log(data);
                 if(data.responseCode != "Cali_SUC_1030") {
                     $ionicLoading.hide();
-
                   var refer=$ionicPopup.alert({
                     title: 'Upload Error',
                     template: 'Please try again'
                   });
                   refer.then(function(res) {
+                    $ionicLoading.show();
                     $window.location.reload(true)
+                    $ionicLoading.hide();
                   });
                 }
                 else {
                   $ionicLoading.hide();
-                  $state.go("verifySuccess");//after sign image
                   confirmation++;
+                  if(confirmation>=7) {
+                    $state.go("verifySuccess");
+                  }
+                  else {
+                    $state.go('status');
+                  }
                 }
             },function(error){
               $ionicLoading.hide();
@@ -166,7 +174,9 @@ angular.module('app.subcontrollerTwo', [])
                    template: 'Unable to submit request'
                 });
               referesh.then(function(res) {
+                $ionicLoading.show();
                   $window.location.reload(true)
+                $ionicLoading.hide();
                 });
 
             });
@@ -216,14 +226,16 @@ angular.module('app.subcontrollerTwo', [])
             console.log(uploadselfie + 'pan json data');
             panImageService.save(uploadselfie,function(data){
                 console.log(data);
-                if(data.responseCode !== "Cali_SUC_1030") {
+                if(data.responseCode != "Cali_SUC_1030") {
                   $ionicLoading.hide();
                   var refer=$ionicPopup.alert({
                     title: 'Upload Error',
                     template: 'Please try again'
                   });
                   refer.then(function(res) {
+                    $ionicLoading.show();
                     $window.location.reload(true)
+                    $ionicLoading.hide();
                   });
                 }
                 else {
@@ -239,7 +251,9 @@ angular.module('app.subcontrollerTwo', [])
                    template: 'Unable to submit request'
                 });
               refresh.then(function(res) {
+                $ionicLoading.show();
                   $window.location.reload(true)
+                $ionicLoading.hide();
                 });
 
             });
@@ -270,7 +284,7 @@ angular.module('app.subcontrollerTwo', [])
         questionsService.save(questUpload,function(data){
 
           $ionicLoading.show();
-          if(data.responseCode !== "Cali_SUC_1030") {
+          if(data.responseCode != "Cali_SUC_1030") {
 
             $ionicLoading.hide();
             console.log("Error");
@@ -280,7 +294,9 @@ angular.module('app.subcontrollerTwo', [])
               template: 'Please try again'
             });
             refer.then(function (res) {
+              $ionicLoading.show();
               $window.location.reload(true)
+              $ionicLoading.hide();
             });
           }
           else {
@@ -398,19 +414,22 @@ angular.module('app.subcontrollerTwo', [])
             panImageService.save(uploadaddress,function(data){
                 console.log(data);
                 $ionicLoading.show();
-                if(data.responseCode == "Cali_SUC_1030") {
+                if(data.responseCode != "Cali_SUC_1030") {
                     $ionicLoading.hide();
+                  var refer= $ionicPopup.alert({
+                    title: 'Upload Error',
+                    template: 'Please try again'
+                  });
+                  $ionicLoading.hide();
+                  refer.then(function(res) {
+                    $ionicLoading.show();
+                    $window.location.reload(true)
+                    $ionicLoading.hide();
+                  });
                 }
                 else {
                     console.log("Error");
-                  var refer= $ionicPopup.alert({
-                        title: 'Upload Error',
-                        template: 'Please try again'
-                    });
-                    $ionicLoading.hide();
-                  refer.then(function(res) {
-                        //$state.go(""); //selfie sign page
-                    });
+                    confirmation++;
                 }
             },function(error){
                 $ionicLoading.hide();
@@ -419,7 +438,9 @@ angular.module('app.subcontrollerTwo', [])
                    template: 'Unable to submit request.'
                 });
               refeesher.then(function(res) {
-                    $state.go(""); //selfie sign page
+                $ionicLoading.show();
+                $window.location.reload(true)
+                $ionicLoading.hide();
                 });
 
             });
@@ -438,22 +459,24 @@ angular.module('app.subcontrollerTwo', [])
             panImageService.save(uploabackdaddress,function(data){
                 console.log(data);
                 $ionicLoading.show();
-                if(data.responseCode == "Cali_SUC_1030") {
-					$state.go("bank");//after selfie image
+                if(data.responseCode != "Cali_SUC_1030") {
+
                     $ionicLoading.hide();
+                  var refer= $ionicPopup.alert({
+                    title: 'Upload Error',
+                    template: 'Please try again'
+                  });
+                  $ionicLoading.hide();
+                  refer.then(function(res) {
+                    $state.go("signature");
+                  });
                 }
                 else {
+                  confirmation++;
                   $ionicLoading.hide();
-
+                  $state.go("bank");
                     console.log("Error");
-                  var refer= $ionicPopup.alert({
-                        title: 'Upload Error',
-                        template: 'Please try again'
-                    });
-                    $ionicLoading.hide();
-                  refer.then(function(res) {
-                        $state.go(""); //selfie sign page
-                    });
+
                 }
             },function(error){
                 $ionicLoading.hide();
@@ -462,7 +485,9 @@ angular.module('app.subcontrollerTwo', [])
                    template: 'Unable to submit request'
                 });
               refersher.then(function(res) {
-                  //  $state.go(""); //selfie sign page
+                $ionicLoading.show();
+                $window.location.reload(true)
+                $ionicLoading.hide();
                 });
 
             });
@@ -496,11 +521,10 @@ angular.module('app.subcontrollerTwo', [])
 		if($scope.accountType==undefined){$scope.accountType="savings";}
         var bank = JSON.parse(JSON.stringify({}));
             bank.clientCode=$sessionStorage.SessionClientCode;
-            //bank.kyphCode="CRN23919";
-            bank.bankAccNo= $scope.accNumber //bank account number
-            bank.ifscCode= $scope.IFSC_code//ifsc Code
-            bank.accountType= $scope.accountType//savings type either savings or personal
-            bank.updateNach= "N" //either yes or no
+            bank.bankAccNo= $scope.accNumber
+            bank.ifscCode= $scope.IFSC_code
+            bank.accountType= $scope.accountType
+            bank.updateNach= "N"
             bank=JSON.stringify(bank);
 			console.log(bank);
                bankDetailsService.save(bank,function(data){
