@@ -506,13 +506,13 @@ angular.module('app.subcontrollerTwo', [])
                bankDetailsService.save(bank,function(data){
                  console.log(data);
                  $ionicLoading.show();
-                 if(data.responseCode != "Cali_SUC_1030") {
+                 if(data.responseCode == "Cali_SUC_1030") {
 
 
 
 
-                   $state.go("questions");//after selfie image
                    $ionicLoading.hide();
+                   $state.go("questions");//after selfie image
                  }
                  else {
                    console.log("Error");
@@ -522,7 +522,7 @@ angular.module('app.subcontrollerTwo', [])
                    });
                    $ionicLoading.hide();
                    refer.then(function(res) {
-                     $state.go("questions"); //selfie sign page
+                     $state.go(""); //selfie sign page
                    });
                  }
                },function(error){

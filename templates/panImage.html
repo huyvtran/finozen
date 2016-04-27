@@ -16,12 +16,13 @@
 			
 		<div class="text-center">
 		<button class="button button-positive" ng-click="takeit1()" ng-show="cimage1 === undefined">Take Image</button>
+		<button class="button button-positive" ng-click="takeit1()" ng-show="cimage1 !== undefined">Re-Take Image</button>
 		</div>
 		</div>
 <ion-footer-bar padding="false" style="padding:0;">
-	<div class="button-bar " style="padding:0;" ng-controller='tapCTRL'>
+	<div class="button-bar " style="padding:0;">
 		<button class="button button-positive" ng-click="selfieGo()" style="margin:1px;line-height: 44px;">SKIP</button>
-		<button class="button button-positive" on-tap="reportTap()"  ng-click="PanImage()" style="margin:1px;line-height: 44px;" ng-disabled="!cimage1">SUBMIT</button>
+		<button class="button button-positive"  ng-click="PanImage()" style="margin:1px;line-height: 44px;" ng-disabled="!cimage1">SUBMIT</button>
 	</div>
 </ion-footer-bar>
     </ion-content>
