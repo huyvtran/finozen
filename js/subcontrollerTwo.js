@@ -1,5 +1,6 @@
 angular.module('app.subcontrollerTwo', [])
 
+
     .controller('changeCtrl', function(changePinService,$scope,$sessionStorage,$ionicPopup,$state){
 
         $scope.forgotPin=function(changePinForm){
@@ -40,8 +41,9 @@ angular.module('app.subcontrollerTwo', [])
         }
 
     })
+
         /*for sending the pan Image*/
-        .controller('panImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup){
+        .controller('panImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
             $scope.selfieGo=function(){$state.go('selfie');}
 			$scope.takeit1=function(){
 			$scope.cimage1="img/Pancard.jpg";
@@ -66,64 +68,71 @@ angular.module('app.subcontrollerTwo', [])
 				  $scope.cimage1 = "data:image/jpeg;base64," + imageData;
 				  $sessionStorage.panimage=imageData;
 				}, function(err) {
-				  // error
+				  $state.go('panImage');
 				});
 			  }, false);
 			}
 			$scope.PanImage = function() {
+        $ionicLoading.show();
 				$scope.uploadPan=JSON.parse(JSON.stringify({}));
                 $scope.uploadPan.kyphCode = $sessionStorage.SessionClientCode;
 				console.log($sessionStorage.SessionClientCode+ 'clientCode');
                 //$scope.uploadPan.kyphCode = "CRN24178";
-                $scope.uploadPan.imageData = $scope.panData ;//replace with session storage of pan
+                $scope.uploadPan.imageData = $scope.panData;//replace with session storage of pan
                 //$scope.uploadPan.imageData = "fffd";//replace with session storage of pan
                 $scope.uploadPan.imageType = 'PA';
                 $scope.uploadPan.addressType = '';
                 $scope.uploadPan = JSON.stringify($scope.uploadPan);
                 console.log($scope.uploadPan + 'pan json data');
                 panImageService.save($scope.uploadPan,function(data){
-                    console.log(data);
-                    if(data.responseCode !== "Cali_SUC_1030") {
-							$ionicPopup.alert({
+                  console.log(data.responseCode);
+                    if(data.responseCode != "Cali_SUC_1030") {
+                      $ionicLoading.hide();
+                      var refer=  $ionicPopup.alert({
                             title: 'Upload Error',
                             template: 'Please try again'
                         });
-							
+                      refer.then(function(res){
+                        $window.location.reload(true)
+                      })
+
                     }
                     else {
-                        console.log("Error");
-                       
+                      $ionicLoading.hide();
+                          confirmation++;
+                      console.log(confirmation+'the value of the click is');
                          $state.go("selfie");
                     }
                 },function(error){
-                    $ionicPopup.alert({
+                  $ionicLoading.hide();
+                  var refersh = $ionicPopup.alert({
                         title: 'Please try again',
                    template: 'please check your network connection. Unable to connect'
                     });
-                    
+                  refersh.then(function(res){
+                    console.log('this is happening correctly');
+                    $window.location.reload(true)
+                  })
+
 
                 });
             }
         })
 
-
             /*for signature image*/
-    .controller('signImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup){
+    .controller('signImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
         var canvas = document.getElementById('signatureCanvas');
 		var signaturePad = new SignaturePad(canvas);
-
 		$scope.clearCanvas = function() {
 			signaturePad.clear();
 		}
-
 		$scope.saveCanvas = function() {
 			var sigImg = signaturePad.toDataURL();
 			$scope.signature = sigImg;
 		}
 		$scope.signatureFunction=function(){$state.go('verifySuccess');}
-
-
 		$scope.signUpload = function() {
+      $ionicLoading.show();
 			var uploadsign=JSON.parse(JSON.stringify({}));
             //uploadsign.kyphCode = $sessionStorage.SessionClientCode;
             uploadsign.kyphCode = "CRN23919";;
@@ -134,27 +143,30 @@ angular.module('app.subcontrollerTwo', [])
             console.log(uploadsign + 'pan json data');
             panImageService.save(uploadsign,function(data){
                 console.log(data);
-                if(data.responseCode == "Cali_SUC_1030") {
-					$state.go("verifySuccess");//after sign image
+                if(data.responseCode != "Cali_SUC_1030") {
+                    $ionicLoading.hide();
 
+                  var refer=$ionicPopup.alert({
+                    title: 'Upload Error',
+                    template: 'Please try again'
+                  });
+                  refer.then(function(res) {
+                    $window.location.reload(true)
+                  });
                 }
                 else {
-                    console.log("Error");
-                    $ionicPopup.alert({
-                        title: 'Upload Error',
-                        template: 'Please try again'
-                    });
-                    popup.then(function(res) {
-                        $state.go(""); // sign page
-                    });
+                  $ionicLoading.hide();
+                  $state.go("verifySuccess");//after sign image
+                  confirmation++;
                 }
             },function(error){
-                $ionicPopup.alert({
+              $ionicLoading.hide();
+              var referesh= $ionicPopup.alert({
                    title: 'Please try again',
                    template: 'please check your network connection. Unable to connect'
                 });
-                popup.then(function(res) {
-                   // $state.go(""); // sign page
+              referesh.then(function(res) {
+                  $window.location.reload(true)
                 });
 
             });
@@ -162,7 +174,7 @@ angular.module('app.subcontrollerTwo', [])
     })
 
     /*for selfie image*/
-    .controller('selfieImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup){
+    .controller('selfieImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
 		$scope.addressSelect=function(){$state.go('imageSelection'); }
 		$scope.selfieImage=function(){
 		$scope.selfie="img/no_leaves.png";
@@ -192,6 +204,7 @@ angular.module('app.subcontrollerTwo', [])
 		}
 
 		$scope.selfieUpload = function() {
+      $ionicLoading.show();
 			var uploadselfie=JSON.parse(JSON.stringify({}));
             //uploadselfie.kyphCode = $sessionStorage.SessionClientCode;
             uploadselfie.kyphCode = "CRN24178";
@@ -203,27 +216,30 @@ angular.module('app.subcontrollerTwo', [])
             console.log(uploadselfie + 'pan json data');
             panImageService.save(uploadselfie,function(data){
                 console.log(data);
-                if(data.responseCode == "Cali_SUC_1030") {
-					$state.go("imageSelection");//after selfie image
-
+                if(data.responseCode !== "Cali_SUC_1030") {
+                  $ionicLoading.hide();
+                  var refer=$ionicPopup.alert({
+                    title: 'Upload Error',
+                    template: 'Please try again'
+                  });
+                  refer.then(function(res) {
+                    $window.location.reload(true)
+                  });
                 }
                 else {
-                    console.log("Error");
-                    $ionicPopup.alert({
-                        title: 'Upload Error',
-                        template: 'Please try again'
-                    });
-                    popup.then(function(res) {
-                        $state.go(""); //selfie sign page
-                    });
+                  $ionicLoading.hide();
+                  confirmation++;
+                  console.log(confirmation+'value for submit check');
+                  $state.go("imageSelection");//after selfie image
                 }
             },function(error){
-                $ionicPopup.alert({
+              $ionicLoading.hide();
+              var refresh=$ionicPopup.alert({
                   title: 'Please try again',
                    template: 'please check your network connection. Unable to connect'
                 });
-                popup.then(function(res) {
-                    $state.go(""); //selfie sign page
+              refresh.then(function(res) {
+                  $window.location.reload(true)
                 });
 
             });
@@ -231,14 +247,14 @@ angular.module('app.subcontrollerTwo', [])
     })
 
       /*for question's*/
-    .controller('questionsCTRL',function($scope,questionsService,$sessionStorage,$state,$ionicPopup,$ionicLoading)
+    .controller('questionsCTRL',function($scope,questionsService,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window)
     {
       $scope.questionUpload = function(){
 		$scope.question=function(){$state.go('signature');}
 		if($scope.clientIncome== undefined){$scope.clientIncome="33"}
 		if($scope.clientOccupation== undefined){$scope.clientOccupation="Professional_new"}
 		if($scope.clientPEP == undefined){$scope.clientPEP="N"}
-		
+
         var questUpload=JSON.parse(JSON.stringify({}));
         questUpload.kyphCode="CRN23911";
         questUpload.income=$scope.clientIncome; // income level from 31-36
@@ -253,29 +269,32 @@ angular.module('app.subcontrollerTwo', [])
         questionsService.save(questUpload,function(data){
 
           $ionicLoading.show();
-          if(data.responseCode == "Cali_SUC_1030") {
+          if(data.responseCode !== "Cali_SUC_1030") {
+
             $ionicLoading.hide();
-			$state.go("signature");
-          }
-          else {
             console.log("Error");
             $ionicLoading.hide();
-            $ionicPopup.alert({
+            var refer= $ionicPopup.alert({
               title: 'Upload Error',
               template: 'Please try again'
             });
-            popup.then(function (res) {
-              //$state.go("signature"); // question page
+            refer.then(function (res) {
+              $window.location.reload(true)
             });
+          }
+          else {
+            $ionicLoading.hide();
+            $state.go("signature");
+            confirmation++;
           }
           },function(error){
             $ionicLoading.hide();
-            $ionicPopup.alert({
+          var referesher= $ionicPopup.alert({
              title: 'Please try again',
                    template: 'please check your network connection. Unable to connect'
             });
-            popup.then(function(res) {
-              //$state.go(""); //question's sign page
+          referesher.then(function(res) {
+            $window.location.reload(true)
             });
 
           });
@@ -295,8 +314,8 @@ angular.module('app.subcontrollerTwo', [])
 				}
 			else{
 				$state.go('addressProofImageSingle');}
-			} 
-			
+			}
+
 			}
 	})
     .controller('addressImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
@@ -308,7 +327,7 @@ angular.module('app.subcontrollerTwo', [])
 			    else if($sessionStorage.addressChoice == 'DL'){$scope.cimageFront="img/DL.jpg";}
 				else if($sessionStorage.addressChoice == 'RC'){$scope.cimageFront="img/DL.jpg";}
 				else if($sessionStorage.addressChoice == 'GA'){$scope.cimageFront="img/DL.jpg";}
-		
+
 		//else{$scope.cimageFront="img/DL.jpg";}
 		$scope.addressFrontImg=function(){
 		console.log($sessionStorage.addressChoice);
@@ -383,22 +402,22 @@ angular.module('app.subcontrollerTwo', [])
                 }
                 else {
                     console.log("Error");
-                    $ionicPopup.alert({
+                  var refer= $ionicPopup.alert({
                         title: 'Upload Error',
                         template: 'Please try again'
                     });
                     $ionicLoading.hide();
-                    popup.then(function(res) {
+                  refer.then(function(res) {
                         //$state.go(""); //selfie sign page
                     });
                 }
             },function(error){
                 $ionicLoading.hide();
-                $ionicPopup.alert({
+              var refeesher= $ionicPopup.alert({
                    title: 'Please try again',
                    template: 'Unable to submit request, Please try again.'
                 });
-                popup.then(function(res) {
+              refeesher.then(function(res) {
                     $state.go(""); //selfie sign page
                 });
 
@@ -423,23 +442,25 @@ angular.module('app.subcontrollerTwo', [])
                     $ionicLoading.hide();
                 }
                 else {
+                  $ionicLoading.hide();
+
                     console.log("Error");
-                    $ionicPopup.alert({
+                  var refer= $ionicPopup.alert({
                         title: 'Upload Error',
                         template: 'Please try again'
                     });
                     $ionicLoading.hide();
-                    popup.then(function(res) {
+                  refer.then(function(res) {
                         $state.go(""); //selfie sign page
                     });
                 }
             },function(error){
                 $ionicLoading.hide();
-                $ionicPopup.alert({
+              var refersher= $ionicPopup.alert({
                    title: 'Please try again',
                    template: 'please check your network connection. Unable to connect'
                 });
-                popup.then(function(res) {
+              refersher.then(function(res) {
                   //  $state.go(""); //selfie sign page
                 });
 
@@ -468,7 +489,7 @@ angular.module('app.subcontrollerTwo', [])
     })
 
 /*for uploading the bank details*/
-  .controller('bankDetailsCTRL',function($scope,$state,$sessionStorage,bankDetailsService,$ionicPopup,$ionicLoading){
+  .controller('bankDetailsCTRL',function($scope,$state,$sessionStorage,bankDetailsService,$ionicPopup,$ionicLoading,$window){
 
     $scope.bankUpload=function(){
 		if($scope.accountType==undefined){$scope.accountType="savings";}
@@ -484,7 +505,7 @@ angular.module('app.subcontrollerTwo', [])
                bankDetailsService.save(bank,function(data){
                  console.log(data);
                  $ionicLoading.show();
-                 if(data.responseCode == "Cali_SUC_1030") {
+                 if(data.responseCode != "Cali_SUC_1030") {
 
 
 
@@ -494,22 +515,22 @@ angular.module('app.subcontrollerTwo', [])
                  }
                  else {
                    console.log("Error");
-                   $ionicPopup.alert({
+                   var refer= $ionicPopup.alert({
                      title: 'Upload Error',
                      template: 'Please try again'
                    });
                    $ionicLoading.hide();
-                   popup.then(function(res) {
+                   refer.then(function(res) {
                      $state.go("questions"); //selfie sign page
                    });
                  }
                },function(error){
                  $ionicLoading.hide();
-                 $ionicPopup.alert({
+                 var referesh= $ionicPopup.alert({
                    title: 'Please try again',
                    template: 'please check your network connection. Unable to connect'
                  });
-                 popup.then(function(res) {
+                 referesh.then(function(res) {
                    $state.go("questions"); //selfie sign page
                  });
 
@@ -521,57 +542,7 @@ angular.module('app.subcontrollerTwo', [])
 		}
     })
 
-  .controller('adhaarCTRL',function($scope,$http,$ionicPopup,$sessionStorage){
-    var adhaarFunc=function(){
-      $sessionStorage.adhaar= //data from the page where it is coming from
-      $http.post('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/setNewPassword', adhaar).success(function(data){
-        console.log(data+'response');
-        if(data.responseCode=="Cali_SUC_1030"){
-
-          var popup= $ionicPopup.alert({
-            title: 'adhaar Change status',
-            template: 'adhaar Changed Successfully'
-          });
-
-          popup.then(function(res) {
-           // $state.go("login");
-          });
-        }
-        else {
-          $ionicPopup.alert({
-            title: 'adhaar Change status',
-            template: 'adhaar Changed UnSuccessfully'
-          });
-          popup.then(function(res) {
-           // $state.go("login");
-          });
-        }
-
-
-      }).error(function(data){
-        {
-          console.log("Error");
-          $ionicPopup.alert({
-            title: 'adhaar Change status',
-            template: 'adhaar Changed UnSuccessfully'
-          });
-        }
-      });
-
-    }
-  })
-
-  /*for checking the sign upcomplete confirmation*/
-  .controller('tapCTRL',function($scope,$state){
-	  console.log('entered the tap page');
-	$scope.count= {tap:0};
-	console.log($scope.count +'numer of taps');
-	$scope.reportTap=function(tapType){
-		$scope.count[tapType]++;
-		console.log('number of taps' + $scope.count);
-	};
-  })
-  
+  /*forgot pin controller*/
     .controller('forgotPinCtrl', function($scope,$sessionStorage,$http,$state,$ionicPopup) {
         $scope.resetPin=function(change) {
           $scope.forget5 = JSON.parse(forgotPin2(change));
@@ -659,44 +630,6 @@ angular.module('app.subcontrollerTwo', [])
 
 })
 
-  .controller('adhaarVerification',function($scope,$sessionStorage,$http,$ionicPopup){
-
-    var adhaarVerify=function(){
-      $scope.adhaar= JSON.stringify($sessionStorage.adhaar);
-      $scope.adhaar= JSON.stringify(otp);
-      $http.post('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/setNewPassword', adhaar).success(function(data){
-        if(data.responseCode=="Cali_SUC_1030"){
-
-          var popup= $ionicPopup.alert({
-            title: 'Verification status',
-            template: 'Verification done Successfully'
-          });
-
-          popup.then(function(res) {
-            //$state.go("login");welcome page
-          });
-        }
-        else {
-          $ionicPopup.alert({
-            title: 'Verification status',
-            template: 'Verification was UnSuccessful'
-          });
-          popup.then(function(res) {
-          });
-        }
-      }).error(function(data){
-        {
-          console.log("Error");
-          $ionicPopup.alert({
-            title: 'Verification status',
-            template: 'Their was a problem please try again'
-            //$state.go('signup'); give the path name for the last page before welcome page
-          });
-        }
-      });
-
-    }
-  })
 
 /*google analytics for all pages including trackview,trackevent and transaction*/
 .controller('googleanalytics',function($scope){
