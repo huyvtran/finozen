@@ -5,14 +5,16 @@
   <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
 </div>
 	<ion-content overflow-scroll="true" padding="false" class="has-header" ng-controller="signImageCTRL"><br/>
-	<p class="padding">I hereby certify that the information provided is correct to the best of my knowledge and belief.</p>
-          <canvas id='signatureCanvas' height='160' width='600' style='border: 1px solid black;'></canvas>
+	<p class="padding">I hereby certify that the information provided is correct to the best of my knowledge and belief. <br/>PLEASE SIGN IN THE BOX BELOW</p>
+          <canvas id='signatureCanvas' height='130' width='600' style='border: 1px solid black;'></canvas>
           <div class='button-bar'>
               <a class='button button-energized' ng-click='clearCanvas()' style="font-size: 12px;margin:1px;line-height: 44px;">Clear</a>
               <a class='button button-positive' ng-click='saveCanvas()' style="font-size: 12px;margin:1px;line-height: 44px;">Save</a>
           </div>
           <br>
-          <img ng-src='{{signature}}'/>
+		  <div class="">
+			<img ng-src='{{signature}}' style="height: 8vh; margin-top: 5px;"/>
+		  </div>
 		<ion-footer-bar padding="false" style="padding:0;">
 	<div class="button-bar " style="padding:0;">
 		<button class="button button-positive" ng-click="signatureFunction()" style="margin:1px;line-height: 44px;">SKIP</button>

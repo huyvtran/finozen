@@ -6,7 +6,7 @@
 </div>
 	<ion-content overflow-scroll="true" padding="true" class="has-header" ng-controller="bankDetailsCTRL">
 <div class="">
-		<p style="padding: 20px 0;"><b>Step: 5/6 </b>Please enter the net banking enabled bank details. You will be permitted to transact only thorough this registered account.</p>
+		<p style="padding: 20px 0;"><b>Step: 4/5 </b>Please enter the net banking enabled bank details. You will be permitted to transact only thorough this registered account.</p>
 		<label class="item item-input" >
 			<input type="number" placeholder="Enter Bank Account Number" ng-model="accNumber">
 		</label>
@@ -21,14 +21,14 @@
 		  </div>
 			
 		  <select ng-model="accountType">
-			<option value="savings" ng-selected="true">Savings</option>
+			<option value="" ng-selected="true">Savings</option>
 			<option value="current">Current</option>
 		  </select>
 			
 		</label>
 	</div>
 </div>
-		<p style="padding: 26px 0; text-align:left;font-size: 10px;"><sup>*</sup>Please double check the bank account number and IFSC code as on withdrawal money will be deposited only to this account.</p>
+		<p style="padding: 26px 0; text-align:left;font-size: 10px;"><sup>*</sup>Please double check the bank account number and IFSC code. On withdrawal, money will be deposited only to this account.</p>
 <ion-footer-bar padding="false" style="padding:0;" >
 	<div class="button-bar " style="padding:0;" >
 		<button class="button button-positive" ng-click="bankSkip()" style="margin:1px;line-height: 44px;">SKIP</button>

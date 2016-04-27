@@ -53,7 +53,7 @@ angular.module('app.subcontrollerTwo', [])
 				  allowEdit: true,
 				  encodingType: Camera.EncodingType.JPEG,
 				  targetWidth: 300,
-				  targetHeight: 400,
+				  targetHeight: 200,
 				  cameraDirection:0,
 				  popoverOptions: CameraPopoverOptions,
 				  saveToPhotoAlbum: false,
@@ -98,7 +98,7 @@ angular.module('app.subcontrollerTwo', [])
                 },function(error){
                     $ionicPopup.alert({
                         title: 'Please try again',
-                   template: 'please check your network connection. Unable to connect'
+                   template: 'Unable to submit request'
                     });
                     
 
@@ -111,7 +111,7 @@ angular.module('app.subcontrollerTwo', [])
     .controller('signImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup){
         var canvas = document.getElementById('signatureCanvas');
 		var signaturePad = new SignaturePad(canvas);
-
+		signaturePad.clear();
 		$scope.clearCanvas = function() {
 			signaturePad.clear();
 		}
@@ -125,8 +125,8 @@ angular.module('app.subcontrollerTwo', [])
 
 		$scope.signUpload = function() {
 			var uploadsign=JSON.parse(JSON.stringify({}));
-            //uploadsign.kyphCode = $sessionStorage.SessionClientCode;
-            uploadsign.kyphCode = "CRN23919";;
+            uploadsign.kyphCode = $sessionStorage.SessionClientCode;
+            //uploadsign.kyphCode = "CRN23919";;
             uploadsign.imageData = $scope.signature;//replace with session storage of sign
             uploadsign.imageType = 'SI';
             uploadsign.addressType = '';
@@ -151,7 +151,7 @@ angular.module('app.subcontrollerTwo', [])
             },function(error){
                 $ionicPopup.alert({
                    title: 'Please try again',
-                   template: 'please check your network connection. Unable to connect'
+                   template: 'Unable to submit request'
                 });
                 popup.then(function(res) {
                    // $state.go(""); // sign page
@@ -165,7 +165,7 @@ angular.module('app.subcontrollerTwo', [])
     .controller('selfieImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup){
 		$scope.addressSelect=function(){$state.go('imageSelection'); }
 		$scope.selfieImage=function(){
-		$scope.selfie="img/no_leaves.png";
+		//$scope.selfie="img/no_leaves.png";
 		  document.addEventListener("deviceready", function () {
 			$scope.options = {
 			  quality: 100,
@@ -193,8 +193,8 @@ angular.module('app.subcontrollerTwo', [])
 
 		$scope.selfieUpload = function() {
 			var uploadselfie=JSON.parse(JSON.stringify({}));
-            //uploadselfie.kyphCode = $sessionStorage.SessionClientCode;
-            uploadselfie.kyphCode = "CRN24178";
+            uploadselfie.kyphCode = $sessionStorage.SessionClientCode;
+            //uploadselfie.kyphCode = "CRN24178";
             uploadselfie.imageData = $scope.selfieData;//replace with session storage of selfie
             //uploadselfie.imageData = "test";//replace with session storage of selfie
             uploadselfie.imageType = 'PH';
@@ -220,7 +220,7 @@ angular.module('app.subcontrollerTwo', [])
             },function(error){
                 $ionicPopup.alert({
                   title: 'Please try again',
-                   template: 'please check your network connection. Unable to connect'
+                   template: 'Unable to submit request'
                 });
                 popup.then(function(res) {
                     $state.go(""); //selfie sign page
@@ -233,14 +233,15 @@ angular.module('app.subcontrollerTwo', [])
       /*for question's*/
     .controller('questionsCTRL',function($scope,questionsService,$sessionStorage,$state,$ionicPopup,$ionicLoading)
     {
-      $scope.questionUpload = function(){
 		$scope.question=function(){$state.go('signature');}
+      $scope.questionUpload = function(){
 		if($scope.clientIncome== undefined){$scope.clientIncome="33"}
 		if($scope.clientOccupation== undefined){$scope.clientOccupation="Professional_new"}
 		if($scope.clientPEP == undefined){$scope.clientPEP="N"}
 		
         var questUpload=JSON.parse(JSON.stringify({}));
-        questUpload.kyphCode="CRN23911";
+		questUpload.kyphCode = $sessionStorage.SessionClientCode;
+        //questUpload.kyphCode="CRN23911";
         questUpload.income=$scope.clientIncome; // income level from 31-36
         questUpload.occup=$scope.clientOccupation; // for the occupation
         questUpload.pep=$scope.clientPEP; //for the pep status either Y or N
@@ -272,7 +273,7 @@ angular.module('app.subcontrollerTwo', [])
             $ionicLoading.hide();
             $ionicPopup.alert({
              title: 'Please try again',
-                   template: 'please check your network connection. Unable to connect'
+             template: 'Unable to submit request'
             });
             popup.then(function(res) {
               //$state.go(""); //question's sign page
@@ -285,12 +286,13 @@ angular.module('app.subcontrollerTwo', [])
 
     /*for address proof image*/
     .controller('addressImageSelectionCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
-				$scope.takeImageSkip=function(){$state.go('bank');$sessionStorage.addressChoice=$scope.choice;}
+		//$scope.choice="";
+		$scope.takeImageSkip=function(){$state.go('bank');$sessionStorage.addressChoice=$scope.choice;}
 		$scope.takeImage=function(){if(
 			$scope.choice!==undefined) {
 			//console.log($scope.choice + "   selected choice");
 			$sessionStorage.addressChoice=$scope.choice;
-			if($scope.choice === 'AA' || $scope.choice === 'VO' || $scope.choice ==='PP'){
+			if($scope.choice === 'AA' || $scope.choice === 'VO' || $scope.choice ==='PP' || $scope.choice ==='RC'){
 				$state.go('addressProofImage');
 				}
 			else{
@@ -306,8 +308,8 @@ angular.module('app.subcontrollerTwo', [])
 				else if($sessionStorage.addressChoice == 'PP'){$scope.cimageFront="img/Passport_front.jpg"; $scope.cimageBack="img/Passport_back.jpg";}
 				else if($sessionStorage.addressChoice == 'VO'){$scope.cimageFront="img/VOTER_FRONT.jpg"; $scope.cimageBack="img/VOTER_BACK.jpg";}
 			    else if($sessionStorage.addressChoice == 'DL'){$scope.cimageFront="img/DL.jpg";}
-				else if($sessionStorage.addressChoice == 'RC'){$scope.cimageFront="img/DL.jpg";}
-				else if($sessionStorage.addressChoice == 'GA'){$scope.cimageFront="img/DL.jpg";}
+				else if($sessionStorage.addressChoice == 'RC'){$scope.cimageFront="img/ration1.jpg";  $scope.cimageBack="img/ration2.jpg";}
+				else if($sessionStorage.addressChoice == 'GA'){$scope.cimageFront="img/sample.png";}
 		
 		//else{$scope.cimageFront="img/DL.jpg";}
 		$scope.addressFrontImg=function(){
@@ -321,7 +323,7 @@ angular.module('app.subcontrollerTwo', [])
 			  allowEdit: true,
 			  encodingType: Camera.EncodingType.JPEG,
 			  targetWidth: 300,
-			  targetHeight: 400,
+			  targetHeight: 200,
 			  popoverOptions: CameraPopoverOptions,
 			  saveToPhotoAlbum: false,
 			  correctOrientation:true
@@ -396,7 +398,7 @@ angular.module('app.subcontrollerTwo', [])
                 $ionicLoading.hide();
                 $ionicPopup.alert({
                    title: 'Please try again',
-                   template: 'Unable to submit request, Please try again.'
+                   template: 'Unable to submit request.'
                 });
                 popup.then(function(res) {
                     $state.go(""); //selfie sign page
@@ -437,7 +439,7 @@ angular.module('app.subcontrollerTwo', [])
                 $ionicLoading.hide();
                 $ionicPopup.alert({
                    title: 'Please try again',
-                   template: 'please check your network connection. Unable to connect'
+                   template: 'Unable to submit request'
                 });
                 popup.then(function(res) {
                   //  $state.go(""); //selfie sign page
@@ -473,14 +475,14 @@ angular.module('app.subcontrollerTwo', [])
     $scope.bankUpload=function(){
 		if($scope.accountType==undefined){$scope.accountType="savings";}
         var bank = JSON.parse(JSON.stringify({}));
-            //bank.kyphCode=$sessionStorage.clientCode;
-            bank.clientCode="CRN23919";
+            bank.clientCode=$sessionStorage.SessionClientCode;
+            //bank.kyphCode="CRN23919";
             bank.bankAccNo= $scope.accNumber //bank account number
             bank.ifscCode= $scope.IFSC_code//ifsc Code
             bank.accountType= $scope.accountType//savings type either savings or personal
             bank.updateNach= "N" //either yes or no
             bank=JSON.stringify(bank);
-			console.log(bank)
+			console.log(bank);
                bankDetailsService.save(bank,function(data){
                  console.log(data);
                  $ionicLoading.show();
@@ -507,7 +509,7 @@ angular.module('app.subcontrollerTwo', [])
                  $ionicLoading.hide();
                  $ionicPopup.alert({
                    title: 'Please try again',
-                   template: 'please check your network connection. Unable to connect'
+                   template: 'Unable to submit request'
                  });
                  popup.then(function(res) {
                    $state.go("questions"); //selfie sign page
@@ -516,7 +518,7 @@ angular.module('app.subcontrollerTwo', [])
                });
              }
 		$scope.bankSkip=function(){
-			$state.go('signature');
+			$state.go('questions');
 
 		}
     })

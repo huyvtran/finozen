@@ -4,9 +4,18 @@
   <div class="h1 title"><p class="head_title"><span id="title">ADDRESS PROOF</span></p></div>
   <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
 </div>
-	<ion-content overflow-scroll="true" padding="true" class="has-header" ng-controller="addressImageCTRL" >
-		<div class="panimageSection text-center">
-		<p class="text-left"><br/><b>Step: 4/6 </b></p>
+	<ion-content overflow-scroll="true" padding="false" class="has-header" ng-controller="addressImageCTRL" >
+		<div class="panimageSection text-center padding">
+		<p class="text-left"><br/><b>Step: 3/5 </b></p>
+		<div class="back" ng-hide="addressImage === undefined" >
+		<div class="panimage">
+			<img ng-show="cimage2 !== undefined" ng-src="{{cimage2}} ">
+			<img ng-show="cimage2 === undefined" ng-src="{{cimageBack}} ">
+		</div>
+		<div class="text-center">
+			<button class="button button-positive" ng-click="addressBackImg()" ng-show="cimage2 === undefined">Back view</button>
+		</div>
+		</div>
 		<div class="front">
 			<div class="panimage">
 			<img style="margin-top:0;" ng-show="addressImage !== undefined" ng-src="{{addressImage}} ">
@@ -14,15 +23,6 @@
 			</div>
 			<div class="text-center">
 			<button class="button button-positive" ng-click="addressFrontImg()" ng-show="addressImage === undefined">Front view</button>
-			</div>
-		</div>
-		<div class="back" ng-hide="addressImage === undefined" >
-		<div class="text-center">
-			<button class="button button-positive" ng-click="addressBackImg()" ng-show="cimage2 === undefined">Back view</button>
-			</div>
-		<div class="panimage">
-			<img ng-show="cimage2 !== undefined" ng-src="{{cimage2}} ">
-			<img ng-show="cimage2 === undefined" ng-src="{{cimageBack}} ">
 			</div>
 		</div>
 		</div>
