@@ -71,7 +71,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 
                 if(data.responseCode!="Cali_SUC_1030"){
 					$ionicLoading.hide();
-					
+
 					if(data.responseCode=="Cali_ERR_2050"){
 
 						$scope.serverError="Mobile number in use";
@@ -136,37 +136,37 @@ console.log($scope.loginDetails);
   $scope.sendSignIn=function() {
     loginInfoService.getJsonId($sessionStorage.loginData).then(function(data){
 
-      if(data.responseCode!="Cali_SUC_1030"){
-		  $ionicLoading.hide();
-        $scope.serverError="Entered Credentials did not validate";
-        }
-        else {
-          $sessionStorage.SessionIdstorage = data.msg;
-          $sessionStorage.SessionPortfolio =data.jsonStr[0].pfolioCode;
-          $sessionStorage.SessionStatus =data.jsonStr[0].activeStatus;
-          $sessionStorage.SessionClientName =data.jsonStr[0].clientName;
-          $sessionStorage.SessionClientCode =data.jsonStr[0].clientCode;
-          $sessionStorage.SessionMobNo =data.jsonStr[0].mobileNo;
-          $sessionStorage.SessionFolioNums =(data.jsonStr[0].folioNums).length;
-          $sessionStorage.clientActive = data.jsonStr[0].clientActive;
+      if(data.responseCode=="Cali_SUC_1030"){
+        $sessionStorage.SessionIdstorage = data.msg;
+        $sessionStorage.SessionPortfolio =data.jsonStr[0].pfolioCode;
+        $sessionStorage.SessionStatus =data.jsonStr[0].activeStatus;
+        $sessionStorage.SessionClientName =data.jsonStr[0].clientName;
+        $sessionStorage.SessionClientCode =data.jsonStr[0].clientCode;
+        $sessionStorage.SessionMobNo =data.jsonStr[0].mobileNo;
+        $sessionStorage.SessionFolioNums =(data.jsonStr[0].folioNums).length;
+        $sessionStorage.clientActive = data.jsonStr[0].clientActive;
         $sessionStorage.nachStatus=data.jsonStr[0].nachStatus;
-		  console.log($sessionStorage.SessionFolioNums);
-          $sessionStorage.folioNums = data.jsonStr[0].folioNums[0];
-         $state.go('tabsController.summaryPage');
+        console.log($sessionStorage.SessionFolioNums);
+        $sessionStorage.folioNums = data.jsonStr[0].folioNums[0];
+        $state.go('tabsController.summaryPage');
         $ionicLoading.hide();
+        }
+        else if(data.responseCode=="Cali_ERR_9002") {
+        $ionicLoading.hide();
+        $scope.serverError="Password not valid";
        }
 
         },function(error){
-			$ionicLoading.hide();
-      $scope.serverError="Entered Credentials did not validate";
+      $ionicLoading.hide();
+        $scope.serverError = "Entered Credentials did not validate";
     });
 
   }
   $ionicLoading.hide();
     })
 
-  /*add money page check*/
 
+  /*add money page check*/
     .controller('transactionAccessCtrl', function($scope,$sessionStorage){
 if($sessionStorage.clientActive=="Y") {
      $scope.withdrawUrl="#/withdraw";
@@ -176,9 +176,6 @@ if($sessionStorage.clientActive=="Y") {
     $scope.withdrawUrl="#/status";
     $scope.investUrl="#/status";
   }
-
-
-
     })
 
 

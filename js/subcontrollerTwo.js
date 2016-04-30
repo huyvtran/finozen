@@ -95,7 +95,6 @@ angular.module('app.subcontrollerTwo', [])
                       refer.then(function(res){
                         $window.location.reload(true)
                       })
-
                     }
                     else {
                       $ionicLoading.hide();
@@ -256,19 +255,19 @@ angular.module('app.subcontrollerTwo', [])
     {
 
 	   $scope.clientIncomeOptions = [
-    { name: 'Below 1 Lakh', value: '31' }, 
-    { name: '1 - 5 Lakh', value: '32' }, 
-    { name: '5 - 10 Lakh', value: '33' }, 
-    { name: '10 - 25 Lakh', value: '34' }, 
-    { name: '25 Lakh – 1 Cr', value: '35' }, 
+    { name: 'Below 1 Lakh', value: '31' },
+    { name: '1 - 5 Lakh', value: '32' },
+    { name: '5 - 10 Lakh', value: '33' },
+    { name: '10 - 25 Lakh', value: '34' },
+    { name: '25 Lakh – 1 Cr', value: '35' },
     { name: 'Above 1 Cr', value: '36' }
     ];
     $scope.clientIncome = {type : $scope.clientIncomeOptions[2].value};
-	
+
 	   $scope.clientOccupationOptions = [
-    { name: 'Business', value: 'Business_New' }, 
-    { name: 'Professional', value: 'Professional_New' }, 
-    { name: 'Public Sector', value: 'Service_New' }, 
+    { name: 'Business', value: 'Business_New' },
+    { name: 'Professional', value: 'Professional_New' },
+    { name: 'Public Sector', value: 'Service_New' },
     { name: 'Private Sector', value: 'Professional_New' },
     { name: 'Government Service', value: 'Service_New' },
     { name: 'Agriculturist', value: 'Farmer_New' },
@@ -277,18 +276,18 @@ angular.module('app.subcontrollerTwo', [])
     { name: 'Retired', value: 'Retired_New' },
     { name: 'Others', value: 'Others_New' }
     ];
-    
+
     $scope.clientOccupation = {type : $scope.clientOccupationOptions[3].value};
-	
+
 	   $scope.clientPEPOptions = [
-    { name: 'Not Applicable', value: 'N' }, 
-    { name: 'Politically Exposed Person', value: 'Y' }, 
+    { name: 'Not Applicable', value: 'N' },
+    { name: 'Politically Exposed Person', value: 'Y' },
     { name: 'Related to Politically Exposed Person', value: 'R' }
     ];
-    
+
     $scope.clientPEP = {type : $scope.clientPEPOptions[0].value};
-	
-	
+
+
 		$scope.question=function(){$state.go('signature');}
       $scope.questionUpload = function(){
 		$ionicLoading.show();
@@ -414,7 +413,7 @@ angular.module('app.subcontrollerTwo', [])
             console.log(uploadaddress + 'pan json data');
             panImageService.save(uploadaddress,function(data){
                 console.log(data);
-                
+
                 if(data.responseCode == "Cali_SUC_1030") {
                     $ionicLoading.hide();
                 }
@@ -455,7 +454,7 @@ angular.module('app.subcontrollerTwo', [])
             console.log(uploabackdaddress + 'pan json data');
             panImageService.save(uploabackdaddress,function(data){
                 if(data.responseCode == "Cali_SUC_1030") {
-					
+
                     $ionicLoading.hide();
 					$state.go("bank");
                 }
@@ -510,12 +509,12 @@ angular.module('app.subcontrollerTwo', [])
 /*for uploading the bank details*/
   .controller('bankDetailsCTRL',function($scope,$state,$sessionStorage,bankDetailsService,$ionicPopup,$ionicLoading,$window){
     $scope.accountTypeOptions = [
-    { name: 'Savings', value: 'savings' }, 
+    { name: 'Savings', value: 'savings' },
     { name: 'Current', value: 'current' }
     ];
-    
+
     $scope.accountType = {type : $scope.accountTypeOptions[0].value};
-	
+
     $scope.test=function(dData){
 		console.log(dData);
 		console.log(dData.ifsc);
@@ -538,37 +537,49 @@ angular.module('app.subcontrollerTwo', [])
                    $ionicLoading.hide();
                    $state.go("questions");//after selfie image
                  }
-                 
-                 else { 
+
+                 else {
 				 console.log(data.responseCode);
 					$ionicLoading.hide();
                    var refer= $ionicPopup.alert({
                      title: 'Upload Error',
                      template: 'Please try again'
                    });
-                  
+
                    refer.then(function(res) {
                      $window.location.reload(true)
-					 
+
                    });
                  }
-				 
+
                },function(error){
-				 
+
                  $ionicLoading.hide();
-				 if(error.data.responseCode == "Cali_ERR_2021"){ 
+				 if(error.data.responseCode == "Cali_ERR_2021"){
 					$ionicLoading.hide();
                    var ifsc_error= $ionicPopup.alert({
                      title: 'IFSC Code invalid',
                      template: 'Please try again'
                    });
-                  
+
                    ifsc_error.then(function(res) {
                      $window.location.reload(true)
-					 
+
                    });
                  }
-				 else{
+				 else if(error.data.responseCode == "Cali_ERR_2035"){
+           $ionicLoading.hide();
+           var bankdetails_error= $ionicPopup.alert({
+             title: 'Account Number Duplicate',
+             template: 'Please try again'
+           });
+
+           bankdetails_error.then(function(res) {
+             $window.location.reload(true)
+
+           });
+         }
+         else{
 				$ionicLoading.hide();
                  var referesh= $ionicPopup.alert({
                    title: 'Please try again',
