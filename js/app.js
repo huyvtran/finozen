@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var confirmation=0;
+var confirmation = 0;
 angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', 'app.controllers', 'app.subcontrollerOne','app.subcontrollerTwo' , 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages','ngStorage','ngIdle','ngCordova', 'ionic-toast'])
 
 /*.constant('$ionicLoadingConfig', {
@@ -83,6 +83,9 @@ if(typeof analytics !== undefined) {
             navigator.app.exitApp();
         }
 
+      }
+	   else if ($ionicHistory.currentStateName() == 'login'){
+		navigator.app.exitApp();
       }
 
 	  else {

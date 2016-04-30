@@ -75,6 +75,7 @@ angular.module('app.services', [])
 .factory('changePinService', ['$resource','$sessionStorage', function($resource,$sessionStorage){
 //console.log();
 	var jsid=$sessionStorage.SessionIdstorage;
+	console.log(jsid + "  jsid");
 	 var change = $resource('http://205.147.99.55:8080/WealthWeb/ws/secure/fcpSecure/changePassword',{},{
         save:{
             method:'POST',

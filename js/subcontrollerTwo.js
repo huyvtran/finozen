@@ -3,7 +3,7 @@ angular.module('app.subcontrollerTwo', [])
 
     .controller('changeCtrl', function(changePinService,$scope,$sessionStorage,$ionicPopup,$state){
 
-        $scope.forgotPin=function(changePinForm){
+        $scope.resetPin=function(changePinForm){
 
             changePinForm.clientCode=$sessionStorage.SessionClientCode;
             changePinForm=JSON.stringify(changePinForm);
@@ -63,7 +63,7 @@ angular.module('app.subcontrollerTwo', [])
 				};
 
 				$cordovaCamera.getPicture(options).then(function(imageData) {
-				  $scope.panData = "data:image/jpeg;base64," + imageData;
+				  $scope.panData = imageData;
 				  $scope.pan = "data:image/jpeg;base64," + imageData;
 				  $scope.cimage1 = "data:image/jpeg;base64," + imageData;
 				  $sessionStorage.panimage=imageData;
@@ -156,8 +156,13 @@ angular.module('app.subcontrollerTwo', [])
                 }
                 else {
                   $ionicLoading.hide();
-                  $state.go("verifySuccess");//after sign image
                   confirmation++;
+				  if(confirmation>=7){
+					$state.go("verifySuccess");//after sign image
+				  }
+				  else{
+					$state.go("verifySuccess");
+				  }
                 }
             },function(error){
               $ionicLoading.hide();
@@ -249,54 +254,62 @@ angular.module('app.subcontrollerTwo', [])
       /*for question's*/
     .controller('questionsCTRL',function($scope,questionsService,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window)
     {
+
+	   $scope.clientIncomeOptions = [
+    { name: 'Below 1 Lakh', value: '31' }, 
+    { name: '1 - 5 Lakh', value: '32' }, 
+    { name: '5 - 10 Lakh', value: '33' }, 
+    { name: '10 - 25 Lakh', value: '34' }, 
+    { name: '25 Lakh – 1 Cr', value: '35' }, 
+    { name: 'Above 1 Cr', value: '36' }
+    ];
+    $scope.clientIncome = {type : $scope.clientIncomeOptions[2].value};
+	
+	   $scope.clientOccupationOptions = [
+    { name: 'Business', value: 'Business_New' }, 
+    { name: 'Professional', value: 'Professional_New' }, 
+    { name: 'Public Sector', value: 'Service_New' }, 
+    { name: 'Private Sector', value: 'Professional_New' },
+    { name: 'Government Service', value: 'Service_New' },
+    { name: 'Agriculturist', value: 'Farmer_New' },
+    { name: 'Housewife', value: 'Household_New' },
+    { name: 'Student', value: 'Student_New' },
+    { name: 'Retired', value: 'Retired_New' },
+    { name: 'Others', value: 'Others_New' }
+    ];
+    
+    $scope.clientOccupation = {type : $scope.clientOccupationOptions[3].value};
+	
+	   $scope.clientPEPOptions = [
+    { name: 'Not Applicable', value: 'N' }, 
+    { name: 'Politically Exposed Person', value: 'Y' }, 
+    { name: 'Related to Politically Exposed Person', value: 'R' }
+    ];
+    
+    $scope.clientPEP = {type : $scope.clientPEPOptions[0].value};
+	
+	
 		$scope.question=function(){$state.go('signature');}
       $scope.questionUpload = function(){
-		if($scope.clientIncome== undefined){$scope.clientIncome="33"}
-		if($scope.clientOccupation== undefined){$scope.clientOccupation="Professional_new"}
-		if($scope.clientPEP == undefined){$scope.clientPEP="N"}
-
+		$ionicLoading.show();
         var questUpload=JSON.parse(JSON.stringify({}));
 		questUpload.kyphCode = $sessionStorage.SessionClientCode;
         //questUpload.kyphCode="CRN23911";
-        questUpload.income=$scope.clientIncome; // income level from 31-36
-        questUpload.occup=$scope.clientOccupation; // for the occupation
-        questUpload.pep=$scope.clientPEP; //for the pep status either Y or N
+        questUpload.income=$scope.clientIncome.type; // income level from 31-36
+        questUpload.occup=$scope.clientOccupation.type; // for the occupation
+        questUpload.pep=$scope.clientPEP.type; //for the pep status either Y or N
         questUpload.resStatus="Individual"; // for the resdential status hardcoding it to individual
         questUpload = JSON.stringify(questUpload);
-	console.log($scope.clientIncome + " clientIncome");
-	console.log($scope.clientPEP + " clientPEP");
-	console.log($scope.clientOccupation + " clientOccupation");
+	console.log($scope.clientIncome.type + " clientIncome");
+	console.log($scope.clientPEP.type + " clientPEP");
+	console.log($scope.clientOccupation.type + " clientOccupation");
 	console.log(questUpload + " questUpload");
         questionsService.save(questUpload,function(data){
-
-          $ionicLoading.show();
-          if(data.responseCode !== "Cali_SUC_1030") {
-
-            $ionicLoading.hide();
-            console.log("Error");
-            $ionicLoading.hide();
-            var refer= $ionicPopup.alert({
-              title: 'Upload Error',
-              template: 'Please try again'
-            });
-            refer.then(function (res) {
-              $window.location.reload(true)
-            });
-          }
-          else {
-            $ionicLoading.hide();
-            $state.go("signature");
-            confirmation++;
-          }
+		$ionicLoading.hide();
+         $state.go('signature');
           },function(error){
             $ionicLoading.hide();
-          var referesher= $ionicPopup.alert({
-             title: 'Please try again',
-             template: 'Unable to submit request'
-            });
-          referesher.then(function(res) {
-            $window.location.reload(true)
-            });
+         $state.go('signature');
 
           });
         }
@@ -310,7 +323,7 @@ angular.module('app.subcontrollerTwo', [])
 			$scope.choice!==undefined) {
 			//console.log($scope.choice + "   selected choice");
 			$sessionStorage.addressChoice=$scope.choice;
-			if($scope.choice === 'AA' || $scope.choice === 'VO' || $scope.choice ==='PP' || $scope.choice ==='RC'){
+			if($scope.choice === 'AA' || $scope.choice === 'VO' || $scope.choice ==='PP' || $scope.choice ==='RC' || $scope.choice ==='DL'){
 				$state.go('addressProofImage');
 				}
 			else{
@@ -319,17 +332,18 @@ angular.module('app.subcontrollerTwo', [])
 
 			}
 	})
-    .controller('addressImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
+    .controller('addressImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
 		//console.log($sessionStorage.addressChoice + 'fromwhat page your coming');
 		$scope.bank=function(){$state.go('bank');}
 				if($sessionStorage.addressChoice == 'AA'){$scope.cimageFront="img/AADHAR_FRONT.jpg"; $scope.cimageBack="img/AADHAR_BACK.jpg";}
 				else if($sessionStorage.addressChoice == 'PP'){$scope.cimageFront="img/Passport_front.jpg"; $scope.cimageBack="img/Passport_back.jpg";}
 				else if($sessionStorage.addressChoice == 'VO'){$scope.cimageFront="img/VOTER_FRONT.jpg"; $scope.cimageBack="img/VOTER_BACK.jpg";}
-			    else if($sessionStorage.addressChoice == 'DL'){$scope.cimageFront="img/DL.jpg";}
+			    else if($sessionStorage.addressChoice == 'DL'){$scope.cimageFront="img/DL.jpg";$scope.cimageBack="img/DL_back.png";}
 				else if($sessionStorage.addressChoice == 'RC'){$scope.cimageFront="img/ration1.jpg";  $scope.cimageBack="img/ration2.jpg";}
 				else if($sessionStorage.addressChoice == 'GA'){$scope.cimageFront="img/sample.png";}
 
 		//else{$scope.cimageFront="img/DL.jpg";}
+		$scope.addressRetake=function(){$window.location.reload(true)}
 		$scope.addressFrontImg=function(){
 		console.log($sessionStorage.addressChoice);
 		$scope.addressImage=$scope.cimageFront;
@@ -365,8 +379,8 @@ angular.module('app.subcontrollerTwo', [])
 			  sourceType: Camera.PictureSourceType.CAMERA,
 			  allowEdit: true,
 			  encodingType: Camera.EncodingType.JPEG,
-			  targetWidth: 300,
-			  targetHeight: 200,
+			  targetWidth: 200,
+			  targetHeight: 300,
 			  cameraDirection:1,
 			  popoverOptions: CameraPopoverOptions,
 			  saveToPhotoAlbum: false,
@@ -384,8 +398,11 @@ angular.module('app.subcontrollerTwo', [])
 		  }, false);
 		}
 
-		$scope.addressSubmmitt = function() {$scope.addressBack();$scope.addressFront() ;}
+		$scope.addressSubmmitt = function() {
+			$scope.addressFront();
+			$scope.addressBack();}
 		$scope.addressFront = function() {
+			$ionicLoading.show();
 			var uploadaddress=JSON.parse(JSON.stringify({}));
             uploadaddress.kyphCode = $sessionStorage.SessionClientCode;
             //uploadaddress.kyphCode = "CRN23919";;
@@ -397,7 +414,7 @@ angular.module('app.subcontrollerTwo', [])
             console.log(uploadaddress + 'pan json data');
             panImageService.save(uploadaddress,function(data){
                 console.log(data);
-                $ionicLoading.show();
+                
                 if(data.responseCode == "Cali_SUC_1030") {
                     $ionicLoading.hide();
                 }
@@ -426,6 +443,7 @@ angular.module('app.subcontrollerTwo', [])
         }
 
         $scope.addressBack = function() {
+			$ionicLoading.show();
 			var uploabackdaddress=JSON.parse(JSON.stringify({}));
             uploabackdaddress.kyphCode = $sessionStorage.SessionClientCode;
             //uploabackdaddress.kyphCode = "CRN23919";;
@@ -436,11 +454,10 @@ angular.module('app.subcontrollerTwo', [])
             uploabackdaddress = JSON.stringify(uploabackdaddress);
             console.log(uploabackdaddress + 'pan json data');
             panImageService.save(uploabackdaddress,function(data){
-                console.log(data);
-                $ionicLoading.show();
                 if(data.responseCode == "Cali_SUC_1030") {
-					$state.go("bank");//after selfie image
+					
                     $ionicLoading.hide();
+					$state.go("bank");
                 }
                 else {
                   $ionicLoading.hide();
@@ -452,7 +469,7 @@ angular.module('app.subcontrollerTwo', [])
                     });
                     $ionicLoading.hide();
                   refer.then(function(res) {
-                        $state.go(""); //selfie sign page
+						 $window.location.reload(true)
                     });
                 }
             },function(error){
@@ -463,6 +480,7 @@ angular.module('app.subcontrollerTwo', [])
                 });
               refersher.then(function(res) {
                   //  $state.go(""); //selfie sign page
+				   $window.location.reload(true)
                 });
 
             });
@@ -491,51 +509,79 @@ angular.module('app.subcontrollerTwo', [])
 
 /*for uploading the bank details*/
   .controller('bankDetailsCTRL',function($scope,$state,$sessionStorage,bankDetailsService,$ionicPopup,$ionicLoading,$window){
-
-    $scope.bankUpload=function(){
-		if($scope.accountType==undefined){$scope.accountType="savings";}
+    $scope.accountTypeOptions = [
+    { name: 'Savings', value: 'savings' }, 
+    { name: 'Current', value: 'current' }
+    ];
+    
+    $scope.accountType = {type : $scope.accountTypeOptions[0].value};
+	
+    $scope.test=function(dData){
+		console.log(dData);
+		console.log(dData.ifsc);
+		console.log(dData.accNo);
+		}
+    $scope.bankUpload=function(bankData){
+		if(bankData.$valid){
         var bank = JSON.parse(JSON.stringify({}));
+		$ionicLoading.show();
             bank.clientCode=$sessionStorage.SessionClientCode;
             //bank.kyphCode="CRN23919";
             bank.bankAccNo= $scope.accNumber //bank account number
             bank.ifscCode= $scope.IFSC_code//ifsc Code
-            bank.accountType= $scope.accountType//savings type either savings or personal
+            bank.accountType= $scope.accountType.type//savings type either savings or personal
             bank.updateNach= "N" //either yes or no
             bank=JSON.stringify(bank);
 			console.log(bank);
                bankDetailsService.save(bank,function(data){
-                 console.log(data);
-                 $ionicLoading.show();
                  if(data.responseCode == "Cali_SUC_1030") {
-
-
-
-
                    $ionicLoading.hide();
                    $state.go("questions");//after selfie image
                  }
-                 else {
-                   console.log("Error");
+                 
+                 else { 
+				 console.log(data.responseCode);
+					$ionicLoading.hide();
                    var refer= $ionicPopup.alert({
                      title: 'Upload Error',
                      template: 'Please try again'
                    });
-                   $ionicLoading.hide();
+                  
                    refer.then(function(res) {
-                     $state.go(""); //selfie sign page
+                     $window.location.reload(true)
+					 
                    });
                  }
+				 
                },function(error){
+				 
                  $ionicLoading.hide();
+				 if(error.data.responseCode == "Cali_ERR_2021"){ 
+					$ionicLoading.hide();
+                   var ifsc_error= $ionicPopup.alert({
+                     title: 'IFSC Code invalid',
+                     template: 'Please try again'
+                   });
+                  
+                   ifsc_error.then(function(res) {
+                     $window.location.reload(true)
+					 
+                   });
+                 }
+				 else{
+				$ionicLoading.hide();
                  var referesh= $ionicPopup.alert({
                    title: 'Please try again',
                    template: 'Unable to submit request'
                  });
                  referesh.then(function(res) {
-                   $state.go("questions"); //selfie sign page
+                   //$state.go("questions"); //selfie sign page
+				   $window.location.reload(true)
                  });
+				 }
 
                });
+	}
              }
 		$scope.bankSkip=function(){
 			$state.go('questions');

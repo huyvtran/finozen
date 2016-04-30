@@ -5,36 +5,45 @@
   <a class="button button-clear button-positive  ion-android-call" ng-href="tel:080-41245883"></a>
 </div>
 	<ion-content overflow-scroll="true" padding="true" class="has-header" ng-controller="bankDetailsCTRL">
-<div class="">
-		<p style="padding: 20px 0;"><b>Step: 4/5 </b>Please enter the net banking enabled bank details. You will be permitted to transact only thorough this registered account.</p>
+		<p style="padding: 20px 0;"><b>Step: 4/5 </b>Please enter the net banking enabled bank details. You will be permitted to transact only through this registered account.</p>
+<form name="bankDetailsTest" novalidate="" >
 		<label class="item item-input" >
-			<input type="number" placeholder="Enter Bank Account Number" ng-model="accNumber">
+			<input type="text" name="accNo" placeholder="Enter Bank Account Number" ng-model="accNumber" required>
 		</label>
 		<label class="item item-input" >
-			<input type="text" placeholder="Enter IFSC Code" ng-model="IFSC_code">
+			<input type="text" name="ifsc" placeholder="Enter IFSC Code"ng-model="IFSC_code" minlength="11" required maxlength="11">
 		</label>
+		
+
 
 	<div class = "list questionsSelect">
 		<label class = "item item-input item-select item-light">
 		  <div class = "input-label">
 			 Type of account
 		  </div>
-			
-		  <select ng-model="accountType">
-			<option value="" ng-selected="true">Savings</option>
-			<option value="current">Current</option>
-		  </select>
-			
+		  <select ng-model='accountType.type' required ng-options='option.value as option.name for option in accountTypeOptions'></select>
 		</label>
 	</div>
-</div>
-		<p style="padding: 26px 0; text-align:left;font-size: 10px;"><sup>*</sup>Please double check the bank account number and IFSC code. On withdrawal, money will be deposited only to this account.</p>
+	<div class="error-container" ng-show="bankDetailsTest.ifsc.$error && bankDetailsTest.$submitted" ng-messages="bankDetailsTest.ifsc.$error">
+		<div  class="error" >
+			<div ng-message="required">All fields are mandatory.</div>
+			<div ng-message="minlength, maxlength">
+				IFSC code must be 11 digits.
+			</div>
+		</div>
+	</div>
+	
+
+
+		<p style="padding: 5px 0; text-align:left;font-size: 10px;"><sup>*</sup>Please double check the bank account number and IFSC code. On withdrawal, money will be deposited only to this account.</p>
+		<p style="padding: 5px 0; text-align:left;font-size: 10px;"><sup>*</sup>By clicking on SUBMIT you agree that these are your personal bank account details and not of anyone else. Per regulations, investments are permitted only through your personal bank account.</p>
 <ion-footer-bar padding="false" style="padding:0;" >
 	<div class="button-bar " style="padding:0;" >
 		<button class="button button-positive" ng-click="bankSkip()" style="margin:1px;line-height: 44px;">SKIP</button>
-		<button class="button button-positive" ng-click="bankUpload()" style="margin:1px;line-height: 44px;" ng-disabled="!IFSC_code || !accNumber">SUBMIT</button>
+		<button type="submit" class="button button-positive" ng-click="bankUpload(bankDetailsTest)" style="margin:1px;line-height: 44px;" >SUBMIT</button>
 	</div>
 </ion-footer-bar>
+</form>
     </ion-content>
 
 </ion-view>

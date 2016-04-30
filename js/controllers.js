@@ -120,8 +120,9 @@ console.log($scope.loginDetails);
 		else{$ionicLoading.hide();}
       }
     $scope.forgotPin=function(signinformData){
+		console.log(signinformData);
   if(signinformData.$valid){
-    $sessionStorage.forgotPinPhone = $scope.authorization.login;
+    $sessionStorage.forgotPinPhone = $scope.mobileNumber;
     var ph=$sessionStorage.forgotPinPhone;
 
     $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
