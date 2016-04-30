@@ -148,7 +148,7 @@ angular.module('app.subcontrollerOne', [])
 //FAQ controllers END
 //TAB's DATA controller
 	.controller('withdrawCtrl', function($scope,$sessionStorage,$ionicLoading,getReportService,$ionicHistory,ionicToast,$ionicPlatform,$state) {
-		
+
 $scope.faq = function(){$state.go('faq')}
 $scope.policy = function()
 {
@@ -160,31 +160,29 @@ $scope.terms = function()
 	window.open('http://finozen.com/t&c.html','_self');
   //$ionicHistory.goBack(-1);
 
-}	
+}
 
   $scope.clientName= $sessionStorage.SessionClientName;
   $scope.clientMobile= $sessionStorage.SessionMobNo;
-  //$scope.xirr=$sessionStorage.xirr;
 $scope.xirrRate= function(){
-	
+
 	if($sessionStorage.xirr == null){return 0;}
 	else if($sessionStorage.xirr <= 0){return 0;}
 	else if($sessionStorage.xirr >= 15){return 15;}
 	else if($sessionStorage.xirr <= 7.5){return 7.5;}
 	else{return $sessionStorage.xirr;}
-	
 }
-console.log($scope.xirrRate());
-
-  $scope.balance= function(){
-    if($sessionStorage.mktValue == null){return 0;}
-    else {return $sessionStorage.mktValue;
+  $scope.balance= function() {
+    if ($sessionStorage.mktValue == null) {
+      return 0;
+    }
+    else {
+      return $sessionStorage.mktValue;
     }
   }
-  
     $scope.investAmount= function(){
     if($sessionStorage.netInv == null){return 0;}
-	
+
     else {return $sessionStorage.netInv;
     }
   }
@@ -202,12 +200,12 @@ $scope.growthRate= function(){
 	else{return 7.5;}
 }
   */
-  
+
         $scope.gainToday=function(){
             if($sessionStorage.gainToday == null){return 0;}
             else {return $sessionStorage.gainToday;
             }
-        }			
+        }
         $scope.netGain=function(){
             if($sessionStorage.gainTotal == null){return 0;}
             else {return $scope.balance()-$scope.investAmount();
@@ -228,9 +226,9 @@ $scope.growthRate= function(){
          }
          })
         $ionicLoading.hide();
-  
+
     })
- 
+
  // NAV Calculator controller
 .controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup,$ionicLoading) {
   var finalComputedVal;
@@ -238,17 +236,17 @@ $scope.growthRate= function(){
     if($scope.schemeName=="RELIANCE LIQUID FUND - TREASURY PLAN - GROWTH PLAN - GROWTH OPTION - G"){
 		$scope.schemeLink="http://www.moneycontrol.com/mutual-funds/nav/reliance-liquid-fund-treasury-plan-ip/MRC046";
 	}
-	// to be changed 
+	// to be changed
 	var dayNow = new Date().getDay();
 	console.log(dayNow);
 	if(dayNow >=1 && dayNow <5){$scope.nav=$sessionStorage.nav*(1+ 0.0002);}
 	else if(dayNow ==5) {$scope.nav=$sessionStorage.nav*(Math.pow((1+ 0.0002),3));}
 	else if(dayNow ==6) {$scope.nav=$sessionStorage.nav*(Math.pow((1+ 0.0002),2));}
 	else if(dayNow ==0) {$scope.nav=$sessionStorage.nav;}
-	
+
 	console.log($scope.nav);
 	// till here
-	
+
     $scope.final=function(initial,nav,suggest){
 		console.log($scope.nav + "nav");
     var theory=initial/nav ;
@@ -271,9 +269,8 @@ $scope.growthRate= function(){
     initial=initial+1;
             return $scope.final(initial,nav,suggest);
         }
-        
-		
-		$scope.Invest = function(form) {
+
+	  $scope.Invest = function(form) {
             if(form.$valid && $scope.initial>=100) {
 				if($sessionStorage.allTransactions > 0 && $sessionStorage.SessionFolioNums==0){
 					$ionicPopup.alert({
@@ -281,11 +278,15 @@ $scope.growthRate= function(){
 					template: 'Your first transaction is in progress. For next transaction, we request you to wait till the first investment reflects in your FinoZen account.'
 				  });
 				  }
-				else{
-				$ionicLoading.show();
-                //$state.go('successPage');
-                $scope.sendMfOrder();
+				else if($sessionStorage.nachStatus !='Y'){
+				        $ionicLoading.show();
+          console.log('its entering the nach mandate');
+          $scope.sendMfOrder();
 				}
+              else{
+          $ionicLoading.show();
+          $scope.nach();
+        }
             }
         }
 
@@ -302,25 +303,48 @@ $scope.growthRate= function(){
 
             },function(error){
 				$ionicLoading.hide();
-				$ionicPopup.alert({
+				var log=$ionicPopup.alert({
 					title: 'Sorry for the inconvince',
 					template: 'Please Login again'
 				  });
-				  popup.then(function(res) {
+              log.then(function(res) {
 					$state.go("login");
 				  });
 				$scope.mess="Enter a value";
             });
         };
+
+  //nach status
+  $scope.nach=function() {
+    var date=dateService.getDate();
+    mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums},function(data){
+      if(data.responseCode=="Cali_SUC_1030"){
+        $ionicLoading.hide();
+       $state.go('tabsController.summaryPage');
+      }
+      else{
+        $ionicLoading.hide();
+      }
+
+    },function(error){
+      $ionicLoading.hide();
+      var log=$ionicPopup.alert({
+        title: 'Sorry for the inconvince',
+        template: 'Please Login again'
+      });
+      log.then(function(res) {
+        $state.go("login");
+      });
+      $scope.mess="Enter a value";
+    });
+  };
         var mid=$sessionStorage.orderId;//dynamic id
-
-
     })
 .controller('goOneStep', function($scope,$ionicHistory ){
 	$scope.goOneStepback=function(){
 		history.go(-1);
 	}
-	
+
 })
 
 
@@ -360,24 +384,24 @@ console.log("success");
 $state.go('addressProofImage');
    }
 
-  
+
 
    $scope.closeBrowser2= function() {
     //$cordovaInAppBrowser.close();
 $state.go('reference');
    }
 
-    
 
-   
+
+
     //
 })
 
     .controller('panVerifyCtrl', function($scope,$state) {
-		
-		
-		
-		
+
+
+
+
 		$scope.kycdone=function(){$state.go('panImage');}
 		$scope.kycnotdone=function(){$state.go('aadhar');}
 		$scope.otpdone=function(){$state.go('confirm');}
