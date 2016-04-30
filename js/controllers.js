@@ -49,7 +49,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
             {
                 if( !angular.equals(signupForm.mobileNumber,signupForm.referral)) {
 					if(form.$valid) {
-						$ionicLoading.show();
+						$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
 						$sessionStorage.signUpData = (signupForm);
 						$scope.addUserInfo();
 					}
@@ -107,7 +107,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
     if(form.$valid) {
 		if($scope.rememberMe){ $localStorage.loginData=$scope.mobileNumber;}
 		else{$localStorage.loginData='';}
-    $ionicLoading.show();
+$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
 $scope.loginDetails=JSON.parse(JSON.stringify({}));
 $scope.loginDetails.login=$scope.mobileNumber;
 $scope.loginDetails.password=$scope.digitPin;
@@ -217,7 +217,12 @@ if($sessionStorage.clientActive=="Y") {
 
     .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,$ionicLoading,getReportService,$timeout) {
 var timeNow = new Date().getUTCHours();
-$ionicLoading.show();
+/*$ionicLoading.show({
+            template: 
+'<div class="loading visible active" style="margin-left: -53px; margin-top: 76px"><span><img style="max-height:50px" src="img/loading.gif"></img><br/>Custom Loading...</span></div>',
+            noBackdrop: true
+        });*/
+	$ionicLoading.show({templateUrl:"templates/loading.html"});
 var reportDate = getPerformanceService.get();
 reportDate.$promise.then(function(data){
  if (data.responseCode == "Cali_SUC_1030") {

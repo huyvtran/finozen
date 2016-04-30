@@ -73,7 +73,7 @@ angular.module('app.subcontrollerTwo', [])
 			  }, false);
 			}
 			$scope.PanImage = function() {
-        $ionicLoading.show();
+        $ionicLoading.show({templateUrl:"templates/loading.html"});
 				$scope.uploadPan=JSON.parse(JSON.stringify({}));
                 $scope.uploadPan.kyphCode = $sessionStorage.SessionClientCode;
 				console.log($sessionStorage.SessionClientCode+ 'clientCode');
@@ -131,7 +131,7 @@ angular.module('app.subcontrollerTwo', [])
 		}
 		$scope.signatureFunction=function(){$state.go('verifySuccess');}
 		$scope.signUpload = function() {
-      $ionicLoading.show();
+      $ionicLoading.show({templateUrl:"templates/loading.html"});
 			var uploadsign=JSON.parse(JSON.stringify({}));
             uploadsign.kyphCode = $sessionStorage.SessionClientCode;
             //uploadsign.kyphCode = "CRN23919";;
@@ -208,7 +208,7 @@ angular.module('app.subcontrollerTwo', [])
 		}
 
 		$scope.selfieUpload = function() {
-      $ionicLoading.show();
+      $ionicLoading.show({templateUrl:"templates/loading.html"});
 			var uploadselfie=JSON.parse(JSON.stringify({}));
             uploadselfie.kyphCode = $sessionStorage.SessionClientCode;
             //uploadselfie.kyphCode = "CRN24178";
@@ -290,7 +290,7 @@ angular.module('app.subcontrollerTwo', [])
 
 		$scope.question=function(){$state.go('signature');}
       $scope.questionUpload = function(){
-		$ionicLoading.show();
+		$ionicLoading.show({templateUrl:"templates/loading.html"});
         var questUpload=JSON.parse(JSON.stringify({}));
 		questUpload.kyphCode = $sessionStorage.SessionClientCode;
         //questUpload.kyphCode="CRN23911";
@@ -378,8 +378,8 @@ angular.module('app.subcontrollerTwo', [])
 			  sourceType: Camera.PictureSourceType.CAMERA,
 			  allowEdit: true,
 			  encodingType: Camera.EncodingType.JPEG,
-			  targetWidth: 200,
-			  targetHeight: 300,
+			  targetWidth: 300,
+			  targetHeight: 200,
 			  cameraDirection:1,
 			  popoverOptions: CameraPopoverOptions,
 			  saveToPhotoAlbum: false,
@@ -401,7 +401,7 @@ angular.module('app.subcontrollerTwo', [])
 			$scope.addressFront();
 			$scope.addressBack();}
 		$scope.addressFront = function() {
-			$ionicLoading.show();
+			$ionicLoading.show({templateUrl:"templates/loading.html"});
 			var uploadaddress=JSON.parse(JSON.stringify({}));
             uploadaddress.kyphCode = $sessionStorage.SessionClientCode;
             //uploadaddress.kyphCode = "CRN23919";;
@@ -442,7 +442,7 @@ angular.module('app.subcontrollerTwo', [])
         }
 
         $scope.addressBack = function() {
-			$ionicLoading.show();
+			$ionicLoading.show({templateUrl:"templates/loading.html"});
 			var uploabackdaddress=JSON.parse(JSON.stringify({}));
             uploabackdaddress.kyphCode = $sessionStorage.SessionClientCode;
             //uploabackdaddress.kyphCode = "CRN23919";;
@@ -523,7 +523,7 @@ angular.module('app.subcontrollerTwo', [])
     $scope.bankUpload=function(bankData){
 		if(bankData.$valid){
         var bank = JSON.parse(JSON.stringify({}));
-		$ionicLoading.show();
+		$ionicLoading.show({templateUrl:"templates/loading.html"});
             bank.clientCode=$sessionStorage.SessionClientCode;
             //bank.kyphCode="CRN23919";
             bank.bankAccNo= $scope.accNumber //bank account number
