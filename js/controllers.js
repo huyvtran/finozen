@@ -222,7 +222,7 @@ var timeNow = new Date().getUTCHours();
 '<div class="loading visible active" style="margin-left: -53px; margin-top: 76px"><span><img style="max-height:50px" src="img/loading.gif"></img><br/>Custom Loading...</span></div>',
             noBackdrop: true
         });*/
-	$ionicLoading.show({templateUrl:"templates/loading.html"});
+	$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
 var reportDate = getPerformanceService.get();
 reportDate.$promise.then(function(data){
  if (data.responseCode == "Cali_SUC_1030") {

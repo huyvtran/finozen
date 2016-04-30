@@ -184,7 +184,7 @@ angular.module('app.subcontrollerTwo', [])
 		//$scope.selfie="img/no_leaves.png";
 		  document.addEventListener("deviceready", function () {
 			$scope.options = {
-			  quality: 100,
+			  quality: 70,
 			  destinationType: Camera.DestinationType.DATA_URL,
 			  sourceType: Camera.PictureSourceType.CAMERA,
 			  allowEdit: true,
@@ -290,7 +290,7 @@ angular.module('app.subcontrollerTwo', [])
 
 		$scope.question=function(){$state.go('signature');}
       $scope.questionUpload = function(){
-		$ionicLoading.show({templateUrl:"templates/loading.html"});
+		$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
         var questUpload=JSON.parse(JSON.stringify({}));
 		questUpload.kyphCode = $sessionStorage.SessionClientCode;
         //questUpload.kyphCode="CRN23911";
@@ -523,7 +523,7 @@ angular.module('app.subcontrollerTwo', [])
     $scope.bankUpload=function(bankData){
 		if(bankData.$valid){
         var bank = JSON.parse(JSON.stringify({}));
-		$ionicLoading.show({templateUrl:"templates/loading.html"});
+		$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
             bank.clientCode=$sessionStorage.SessionClientCode;
             //bank.kyphCode="CRN23919";
             bank.bankAccNo= $scope.accNumber //bank account number
