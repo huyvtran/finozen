@@ -71,6 +71,13 @@ padding:0;margin-top: 10px;}
 	&.green{color:green;}
 	&.red{color:red;}
 }
+.invest_button{
+border:none; background:#e5ecf4; height:180px;text-align: -moz-center;
+& a{display: block;
+height: 70px;
+background: red none repeat scroll 0% 0%;
+width: 30%;}
+}
 }
 .bar-dark.bar.bar-header.disable-user-behavior {
     display: none;
@@ -586,3 +593,12 @@ img{height: 400px;}
   stroke: #18bb9c;
   fill: #18bb9c;
 }
+fader {
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,.8);
+  opacity: 0;
+  z-index: -1; }
+

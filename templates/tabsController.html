@@ -1,3 +1,4 @@
+
 <ion-side-menus enable-menu-with-back-views="false">
   <ion-side-menu-content  drag-content="false" class="tab_controller">
 <div class="bar bar-header fino_head" ng-controller="popupController as popup">
@@ -28,9 +29,10 @@
 
   </ion-side-menu-content>
 
-   <!-- Side Menu (left) -->
+   
     <ion-side-menu side="left" class="screen_sidemenu" >
-		<!--<a href="#/account">-->
+	<fader></fader>
+		<a href="#/account">
 			<div class="row title account_block bar-subheader">
 				<div class="col-20 account_bar"><img src="img/account-image1.png"></div>
 				<div class="col-70 account_bar">
@@ -39,13 +41,11 @@
 					</div>
 				</div>
 			</div>
-		<!--</a>-->
+		</a>
     <ion-content>
             <ion-list class="menulist">
                  <ion-item nav-clear menu-close  href="#/invite" ><i class="icon ion-ios-people-outline"></i>Invite & Earn</ion-item>
                  <ion-item nav-clear menu-close  href="#/faq" ><i class="icon ion-ios-help-outline"></i>FAQ</ion-item>
-                 <!--<ion-item nav-clear menu-close ng-controller="withdrawCtrl" href="#" ng-click="policy()" menu-close=""><i class="icon ion-ios-locked-outline"></i>Privacy </ion-item>-->
-                 <!--<ion-item nav-clear menu-close ng-controller="withdrawCtrl"  href="#" ng-click="terms()" menu-close=""><i class="icon ion-ios-list-outline"></i>Terms & Conditions</ion-item>-->
                  <ion-item nav-clear menu-close  href="#/contact" menu-close=""><i class="icon ion-ios-email-outline"></i>contact us</ion-item>
                  <ion-item nav-clear menu-close  href="#/aboutUs"  menu-close=""><i class="icon ion-ios-person-outline"></i>About us</ion-item>
                  <ion-item nav-clear menu-close ng-controller="termsCtrl" ng-hide="test" href="#/panImage" menu-close=""><i class="icon ion-android-checkmark-circle"></i>Activate account</ion-item>
@@ -54,3 +54,70 @@
     </ion-content>
   </ion-side-menu>
 </ion-side-menus>
+
+
+
+
+ <!--  
+    <ion-side-menus  ng-controller="menuOverlay" class="tab_controller">
+      
+    
+<ion-side-menu  enable-menu-with-back-views="false" width="{{width()}}" >
+<div class="bar bar-header fino_head">
+	<a menu-close class="button button-clear button-positive ion-navicon-round" ></a>
+	<div class="h1 title"><p class="head_title"><span id="title fino">FinoZen</span></p></div>
+	<a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
+</div>
+	<ion-content scroll="false" style="z-index:10">
+		<ion-slide-box slide-tabs-scrollable="false"  show-pager="false" ion-slide-tabs>
+
+		  <ion-slide ion-slide-tab-label="SUMMARY">
+			<summary-page></summary-page>
+		  </ion-slide>
+					<ion-slide ion-slide-tab-label="GROWTH RATE">
+					 <growth-rate></growth-rate>
+					</ion-slide>
+					<ion-slide ion-slide-tab-label="TRANSACTIONS">
+						<span><recent-transact></recent-transact></span>
+
+					</ion-slide>
+
+		</ion-slide-box>
+
+		<div class="bar bar-footer row invest_button_footer" style="width: 100%; background:#E5ECF4 ;" ng-controller="transactionAccessCtrl">
+		  <div ion-track-tap="withdraw" ng-click="addId()" class="col invest_button"><a ng-href={{withdrawUrl}} class="button button-clear button-positive  ion-ios-minus-empty invest_btn red" ></a><br /><span class="invest_bottom_button red">WITHDRAW</span></div>
+		  <div ion-track-tap="invest" class="col invest_button"><a ng-href={{investUrl}} class="button button-clear button-positive  ion-ios-plus-empty invest_btn green" ></a><br /><span class="invest_bottom_button green">ADD MONEY</span></div>
+		</div>
+	</ion-content>
+</ion-side-menu>
+         <fader></fader>
+    
+      <ion-side-menu-content style="width:70%;" class="screen_sidemenu" >
+		<a href="#/account">
+			<div class="row title account_block bar-subheader">
+				<div class="col-20 account_bar"><img src="img/account-image1.png"></div>
+				<div class="col-70 account_bar">
+					<div class="account_bar_info"><p>{{clientName}} </p>
+						<p>+91-{{clientMobile}}</p>
+					</div>
+				</div>
+			</div>
+		</a>
+        
+
+        
+        <ion-content class="has-footer has-wallet">
+			<ion-list class="menulist">
+                 <ion-item nav-clear menu-close  href="#/invite" ><i class="icon ion-ios-people-outline"></i>Invite & Earn</ion-item>
+                 <ion-item nav-clear menu-close  href="#/faq" ><i class="icon ion-ios-help-outline"></i>FAQ</ion-item>
+                 <ion-item nav-clear menu-close  href="#/contact" menu-close=""><i class="icon ion-ios-email-outline"></i>contact us</ion-item>
+                 <ion-item nav-clear menu-close  href="#/aboutUs"  menu-close=""><i class="icon ion-ios-person-outline"></i>About us</ion-item>
+                 <ion-item nav-clear menu-close ng-controller="termsCtrl" ng-hide="test" href="#/panImage" menu-close=""><i class="icon ion-android-checkmark-circle"></i>Activate account</ion-item>
+                 <ion-item nav-clear menu-close  ng-controller="signoutCtrl"  href="#page7" menu-close="" ng-click="signOut()"><i class="icon ion-power"></i>Sign Out</ion-item>
+            </ion-list>
+        </ion-content>
+
+      </ion-side-menu-content>
+   
+    </ion-side-menus>
+-->

@@ -412,3 +412,14 @@ $state.go('reference');
 			}
 		$scope.withdrawSuccess = function() {console.log("here"); history.go(-2);}
     })
+
+.controller('menuOverlay', function($scope, $window, $ionicSideMenuDelegate) {
+ 
+  $scope.width = function () {
+    return $window.innerWidth;
+  };
+  
+  $scope.openMenu = function() {
+    $ionicSideMenuDelegate.toggleRight(true);
+  }; 
+})
