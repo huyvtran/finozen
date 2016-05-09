@@ -723,3 +723,113 @@ angular.module('app.subcontrollerTwo', [])
     }
   })
 
+
+  /*language selection at pop up*/
+    .controller('langCTRL',function($scope,$localStorage,$ionicPopup,$ionicPlatform) {
+      $ionicPlatform.ready(function()
+      {
+        if (language == 0) {
+          var myPopup = $ionicPopup.show({
+            template: '<input class="item-select" ng-model="data.wifi"> <select>' +
+            ' <option >Bengali</optionselected>' +
+            '<option selected>English</option>' +
+            '<option>Gujarati</option>' +
+            '<option>Hindi</option>' +
+            '<option>kanada</option>' +
+            '<option>Malyalam</option>' +
+            '<option>Marathi</option>' +
+            '<option>Tamil</option>' +
+            '<option>Telgu</option></select>',
+            title: 'Language',
+            subTitle: 'Please select your language',
+            scope: $scope,
+            buttons: [
+
+              {
+                text: '<b>Save</b>',
+                type: 'button-positive',
+                onTap: function(e) {
+                  if (!$scope.data.wifi) {
+                    //don't allow the user to close unless he enters wifi password
+                    e.preventDefault();
+                    $localStorage.language++;
+
+                  } else {
+                    console.log($scope.data.wifi+"language selected");
+                    return $scope.data.wifi;
+                  }
+                }
+              }
+            ]
+          });
+          myPopup.then(function(res){
+            console.log($scope.data.wifi);
+          })
+        }
+        else {
+          var popup = $ionicPopup.alert({
+            title: 'Please select your language',
+            template: 'Languages available are'
+          });
+
+          popup.then(function (res) {
+            $state.go("login");
+          });
+
+        }
+      });
+    })
+
+/*card.io scanning*/
+.controller('cardScanCTRL',function($scope,$state,$ionicPlatform,cardIO)
+{
+  var scan=function(){
+    console.log('entering scanner');
+    $scope.scanCard = function(){
+      var cardIOResponseFields = [
+        "card_type",
+        "redacted_card_number",
+        "card_number",
+        "expiry_month",
+        "expiry_year",
+        "cvv",
+        "zip"
+      ];
+
+      var onCardIOComplete = function(response) {
+        for (var i = 0, len = cardIOResponseFields.length; i < len; i++) {
+          var field = cardIOResponseFields[i];
+          console.log(field + ": " + response[field]);
+        }
+      };
+
+      var onCardIOCancel = function() {
+        console.log("card.io scan cancelled");
+      };
+
+      var onCardIOCheck = function (canScan) {
+        console.log("card.io canScan? " + canScan);
+        var scanBtn = angular.element($("#scanBtn")).scope();
+        //var scanBtn = document.getElementById("scanBtn");
+        if (!canScan) {
+          scanBtn.innerHTML = "Manual entry";
+        }
+      };
+
+      CardIO.scan({
+          "collect_expiry": true,
+          "collect_cvv": false,
+          "collect_zip": false,
+          "shows_first_use_alert": true,
+          "disable_manual_entry_buttons": false
+        },
+        onCardIOComplete,
+        onCardIOCancel
+      );
+
+      CardIO.canScan(onCardIOCheck);
+    }
+
+
+}
+})

@@ -6,6 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 var confirmation = 0;
+var language=0;
 angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', 'app.controllers', 'app.subcontrollerOne','app.subcontrollerTwo' , 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages','ngStorage','ngIdle','ngCordova', 'ionic-toast'])
 
 /*.constant('$ionicLoadingConfig', {
@@ -21,7 +22,7 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     KeepaliveProvider.interval(2); // in seconds
 })
 
-.run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout) {
+.run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout,$localStorage) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -29,6 +30,7 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 //var userName = $bindTo($scope.$sessionStorage.mobileNumber);
  //     console.log(userName);
       Idle.watch();
+
                 if(!navigator.onLine) {
 console.log(navigator.onLine + "  connection state");
 					$ionicPopup.confirm({
