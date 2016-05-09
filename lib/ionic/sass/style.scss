@@ -579,3 +579,10 @@ img{height: 400px;}
 		td, tr, th{padding:5px; border: 1px solid #adadad; text-align:center;}
 	}
 }
+.loading{
+  background-color: whitesmoke !important;
+}
+.spinner svg {
+  stroke: #18bb9c;
+  fill: #18bb9c;
+}

@@ -217,7 +217,9 @@ $scope.growthRate= function(){
             }
         }
         console.log('entered');
-        $ionicLoading.show();
+        $ionicLoading.show({
+      template: 'Loading...'
+    });
 
          var Report = getReportService.get();
          Report.$promise.then(function(data){
@@ -279,12 +281,12 @@ $scope.growthRate= function(){
 				  });
 				  }
 				else if($sessionStorage.nachStatus !='Y'){
-				        $ionicLoading.show();
+				        $ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
           console.log('its entering the nach mandate');
           $scope.sendMfOrder();
 				}
               else{
-          $ionicLoading.show();
+          $ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
           $scope.nach();
         }
             }
