@@ -3,19 +3,19 @@
 	<span ng-controller="showhistoryController"></span>
 	<div class="row circle">
 		<p class="total_value" ><span style="font-size:28px"><sup>&#x20B9;</sup></span>{{ balance()|currency:""}}
-		<br/><span class="current_bal item-note">Current Balance</span></p>
-		
+		<br/><span class="current_bal item-note" translate="TEXT_LANG_BALANCE"></span></p>
+
 	</div>
 	<div  class="row summary_values">
 		<div class="col text-center" style="font-size:18px">
 			<p class="inner_numbers"><span style="font-size:28px"><sup>&#x20B9;</sup></span>{{ investAmount()|currency:""}}</p>
-			<p class="item-note left"  style="margin:0; ">Net Investement</p>
+			<p class="item-note left"  style="margin:0; " translate="TEXT_LANG_INVEST"></p>
 
 			</div>
-							 
+
 
 		<div class="col" style="text-align:center; font-size:18px;">
 		<p class="inner_numbers" style="margin:0;  border-left: 3px solid #808080;"><span style="font-size:28px"><sup>&#x20B9;</sup></span>{{netGain() | currency:""}} </p>
-		<p  style="margin:0;  border-left: 3px solid #808080;" class="item-note left">Net Gains</p></div>
+		<p  style="margin:0;  border-left: 3px solid #808080;" class="item-note left" translate="TEXT_LANG_NETGAIN"></p></div>
 	</div>
 </ion-view>
