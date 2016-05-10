@@ -16,109 +16,91 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 .config(function ($translateProvider) {
 
   $translateProvider.translations('1', {
-	selectedLanguage:'Select your desired Language bengali',
-	tabTitle1:'SUMMARY',
-	tabTitle2:'GROWTH RATE',
-	tabTitle3:'TRANSACTIONS',
-    TITLE: 'This is english',
-    FOO: 'This is a paragraph.',
-    BUTTON_LANG_EN: ' সিকিউর লগইন',
-    BUTTON_LANG_DE: 'deutsch',
-    BUTTON_LANG_HI: 'hindi'
+	selectedLanguage:'Select your desired Language Bengali',
+	tabTitle1:'সংক্ষিপ্তসার',
+	tabTitle2:'বৃদ্ধির হার',
+	tabTitle3:'লেনদেন',
+    BUTTON_LANG_FORGOT:'ভুলে গেছি পিন?',
+    BUTTON_LANG_SIGNUP:'অথবা একটি অ্যাকাউন্ট তৈরি ',
+    BUTTON_LANG_EN: ' সিকিউর লগইন'
   });
     $translateProvider.translations('2', {
-	selectedLanguage:'Select your desired Language english',
+	selectedLanguage:'Select your desired Language English',
 	tabTitle1:'SUMMARY',
 	tabTitle2:'GROWTH RATE',
 	tabTitle3:'TRANSACTIONS',
-    TITLE: 'This is english',
-    FOO: 'This is a paragraph.',
-    BUTTON_LANG_EN: ' Secure Login',
-    BUTTON_LANG_DE: 'deutsch',
-    BUTTON_LANG_HI: 'Hindi'
+      BUTTON_LANG_FORGOT:'Forgot Pin?',
+      BUTTON_LANG_SIGNUP:'or Create an account ',
+    BUTTON_LANG_EN: ' Secure Login'
   });
     $translateProvider.translations('3', {
 	selectedLanguage:'Select your desired Language Gujarati',
 	tabTitle1:'SUMMARY',
 	tabTitle2:'GROWTH RATE',
 	tabTitle3:'TRANSACTIONS',
-    TITLE: 'This is english 3',
-    FOO: 'This is a paragraph 3.',
-    BUTTON_LANG_EN: ' સુરક્ષિત લૉગિન',
-    BUTTON_LANG_DE: 'deutsch',
-    BUTTON_LANG_HI: 'Hindi'
+      BUTTON_LANG_FORGOT:'ભૂલી ગયા છો પિન?',
+      BUTTON_LANG_SIGNUP:'અથવા એક એકાઉન્ટ બનાવો',
+    BUTTON_LANG_EN: ' સુરક્ષિત લૉગિન'
   });
   $translateProvider.translations('4', {
 	selectedLanguage:'अपनी इच्छित भाषा का चयन करें',
 	tabTitle1:'सारांश',
 	tabTitle2:'विकास दर',
 	tabTitle3:'लेनदेन',
-    TITLE: 'यह हिन्दी है',
-    FOO: 'यह एक पैरा है.',
-    BUTTON_LANG_EN: ' सुरक्षित लॉगइन',
-    BUTTON_LANG_DE: 'deutsch',
-    BUTTON_LANG_HI: 'हिंदी'
+    BUTTON_LANG_FORGOT:'भूल गया पिन?',
+    BUTTON_LANG_SIGNUP:'या खाता बनाना',
+    BUTTON_LANG_EN: ' सुरक्षित लॉगइन'
   });
     $translateProvider.translations('5', {
 	selectedLanguage:'Select your desired Language kannada',
 	tabTitle1:'SUMMARY',
 	tabTitle2:'GROWTH RATE',
 	tabTitle3:'TRANSACTIONS',
-    TITLE: 'This is english',
-    FOO: 'This is a paragraph.',
-    BUTTON_LANG_EN: ' ಸುರಕ್ಷಿತ ಲಾಗಿನ್',
-    BUTTON_LANG_DE: 'deutsch',
-    BUTTON_LANG_HI: 'Hindi'
+      BUTTON_LANG_FORGOT:'ಮರೆತು ಪಿನ್?',
+      BUTTON_LANG_SIGNUP:'ಅಥವಾ ಖಾತೆಯನ್ನು ರಚಿಸಿ ',
+    BUTTON_LANG_EN: ' ಸುರಕ್ಷಿತ ಲಾಗಿನ್'
   });
     $translateProvider.translations('6', {
 	selectedLanguage:'Select your desired Language Malyalam',
 	tabTitle1:'SUMMARY',
 	tabTitle2:'GROWTH RATE',
 	tabTitle3:'TRANSACTIONS',
-    TITLE: 'This is english',
-    FOO: 'This is a paragraph.',
-    BUTTON_LANG_EN: ' സുരക്ഷിത ലോഗിൻ',
-    BUTTON_LANG_DE: 'deutsch',
-    BUTTON_LANG_HI: 'Hindi'
+      BUTTON_LANG_FORGOT:'പിൻ മറന്നോ್?',
+      BUTTON_LANG_SIGNUP:'അല്ലെങ്കിൽ ഒരു അക്കൗണ്ട് സൃഷ്ടിക്കുക ',
+    BUTTON_LANG_EN: ' സുരക്ഷിത ലോഗിൻ'
   });
     $translateProvider.translations('7', {
 	selectedLanguage:'Select your desired Language Marathi',
 	tabTitle1:'SUMMARY',
 	tabTitle2:'GROWTH RATE',
 	tabTitle3:'TRANSACTIONS',
-    TITLE: 'This is english',
-    FOO: 'This is a paragraph.',
-    BUTTON_LANG_EN: ' सुरक्षित लॉग-इन',
-    BUTTON_LANG_DE: 'deutsch',
-    BUTTON_LANG_HI: 'Hindi'
+      BUTTON_LANG_FORGOT:'विसरले पिन?',
+      BUTTON_LANG_SIGNUP:'किंवा एक खाते तयार करा ',
+    BUTTON_LANG_EN: ' सुरक्षित लॉग-इन'
   });
     $translateProvider.translations('8', {
-	selectedLanguage:'Select your desired Language tamil',
+	selectedLanguage:'Select your desired Language Tamil',
 	tabTitle1:'SUMMARY',
 	tabTitle2:'GROWTH RATE',
 	tabTitle3:'TRANSACTIONS',
-    TITLE: 'This is english',
-    FOO: 'This is a paragraph.',
-    BUTTON_LANG_EN: ' பாதுகாப்பான தேதி',
-    BUTTON_LANG_DE: 'deutsch',
-    BUTTON_LANG_HI: 'Hindi'
+      BUTTON_LANG_FORGOT:'மறந்துவிட்டேன் முள?',
+      BUTTON_LANG_SIGNUP:'அல்லது ஒரு கணக்கை உருவாக்க',
+    BUTTON_LANG_EN: ' பாதுகாப்பான தேதி'
   });
     $translateProvider.translations('9', {
-	selectedLanguage:'Select your desired Language trlugu',
+	selectedLanguage:'Select your desired Language Telgu',
 	tabTitle1:'SUMMARY',
 	tabTitle2:'GROWTH RATE',
 	tabTitle3:'TRANSACTIONS',
-    TITLE: 'This is english',
-    FOO: 'This is a paragraph.',
-    BUTTON_LANG_EN: 'సురక్షిత లాగిన్',
-    BUTTON_LANG_DE: 'deutsch',
-    BUTTON_LANG_HI: 'Hindi'
+      BUTTON_LANG_FORGOT:'మర్చిపోయాను పిన్?',
+      BUTTON_LANG_SIGNUP:'లేదా ఖాతా సృష్టించుకోండి',
+    BUTTON_LANG_EN: 'సురక్షిత లాగిన్'
   });
   //con
   //console.log($sessionStorage.LanguageSession);
   $translateProvider.preferredLanguage('2');
 })
-	
+
 .config(function(IdleProvider, KeepaliveProvider) {
     // configure Idle settings
     IdleProvider.idle(5); // in seconds
