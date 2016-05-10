@@ -1,18 +1,17 @@
 <ion-view title="Withdraw" class="withdraw_screen">
-	<span ng-controller="googleanalytics"></span>
 
 <div class="bar bar-header fino_head" ng-controller="popupController as popup">
 	<a class="button button-clear ion-android-arrow-back " href="#/page14/page15" ></a>
-	<div class="h1 title"><p class="head_title"><span id="title">WITHDRAW</span></p></div>
+	<div class="h1 title"><p class="head_title"><span id="title" translate="BUTTON_LANG_WITH"></span></p></div>
 	<a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
 </div>
     <ion-content overflow-scroll="true" padding="true" class="has-header" ng-controller="AuthWithdrawlCtrl">
 <div class="screen_invest">
 		<div class="row bar bar-subheader invest_subheader">
-		  <p class="title" ng-controller="withdrawCtrl">CURRENT BALANCE : <span style="color:#18bb9c">{{ balance() |currency:"&#x20B9; "}}</span></p>
+		  <p class="title" ng-controller="withdrawCtrl" translate="TEXT_CURRENT_BALANCE"> <span style="color:#18bb9c">{{ balance() |currency:"&#x20B9; "}}</span></p>
 		</div>
 		<div class="row invest_info">
-		<p>How much would you like to Withdraw ?</p>
+		<p translate="TEXT_WIHTDRAW_BALANCE"></p>
 		</div>
 		<form name="withdrawForm" novalidate="" >
 
@@ -31,24 +30,24 @@
 				<div ng-hide="checked_withdraw">{{withdraw_error}} </div>
 				<div>{{withdraw_Networkerror}} </div>
 			</div>
-			
+
 
 		</div>
 		<label class="row withdraw_all">
-			<input ng-model="checked_withdraw" type="checkbox" id="withdraw_money" ng-change="amountClear()" placeholder="Enter Amount" style="margin: 4px;"><label for="withdraw_money" >Withdraw my complete balance</label>
+			<input ng-model="checked_withdraw" type="checkbox" id="withdraw_money" ng-change="amountClear()" placeholder="Enter Amount" style="margin: 4px;"><label for="withdraw_money" >{{'TEXT_WITHDRAW_COMPLETEBALANCE' | translate}}</label>
 		</label>
 	</div>
-	<button ion-track-tap="withdraw confirm" class="button button-full button-positive" type="submit" ng-click="Withdrawl(withdrawForm)">
-		WITHDRAW
+	<button ion-track-tap="withdraw confirm" class="button button-full button-positive" type="submit" ng-click="Withdrawl(withdrawForm)" translate="BUTTON_LANG_WITH">
+
 	</button>
-	<p class="scheduled_text">Schedule for deposit to your registered bank account</p>
+	<p class="scheduled_text" translate="TEXT_WITHDRAW_SCHEDULE_TEXT"></p>
 	<div class="row deposit_table" >
 	<!--	<p><br/>
-		
+
 		Withdraw Sun - Thur, before 2 p.m.: Money will be deposited in your Bank account next day by 10 a.m.<br/>
-		
+
 		Withdraw Sun - Thur after 2 p.m.: Money will be deposited in your Bank account day after next by 10 a.m.<br/>
-		
+
 		Withdraw Fri - Sat: Money will be deposited in your Bank account on Monday by 10 a.m.<br/>
 		<br/></p>-->
 
@@ -73,13 +72,13 @@
 				<td>Fri after 2 p.m, Sat and Sun.</td>
 				<td>Tuesday 10 a.m.</td>
 			</tr>
-		</table>		
-		
-		
+		</table>
+
+
 		</div>
 
 		<p class="small_text">Working days Mon-Fri. If the day of deposit is a Bank Holiday, money will be deposited the next working day.</p>
-</form>		  
+</form>
 </div>
     </ion-content>
 

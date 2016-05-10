@@ -47,7 +47,14 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	proof1:'PAN Card',
 	proof2:'Address Proof',
 	proof3:'Net Banking enabled Banc Account No',
-	proof4:'IFSC Code of your Bank account'
+	proof4:'IFSC Code of your Bank account',
+      TEXT_LANG_INVEST_TERMS_1:'By clicking ADD MONEY you agree to have read',
+      TEXT_LANG_INVEST_TERMS_2:'before making the investment',
+      TranscationID:'Transaction ID',
+      TEXT_CURRENT_BALANCE:'CURRENT BALANCE :',
+      TEXT_WIHTDRAW_BALANCE:'How much would you like to withdraw ?',
+      TEXT_WITHDRAW_COMPLETEBALANCE:'withdraw my complete balance',
+      TEXT_WITHDRAW_SCHEDULE_TEXT:'Schedule for deposit to your registered bank account'
   });
   $translateProvider.translations('1', {
 	selectedLanguage:'Select your desired Language Bengali',
@@ -80,7 +87,14 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	proof1:'PAN কার্ড',
 	proof2:'ঠিকানার প্রমাণ দলিল',
 	proof3:'নেট ব্যাংকিং সক্রিয় ব্যাঙ্ক অ্যাকাউন্ট নম্বর',
-	proof4:'আপনার ব্যাংক অ্যাকাউন্টের IFSC কোড'
+	proof4:'আপনার ব্যাংক অ্যাকাউন্টের IFSC কোড',
+    TEXT_LANG_INVEST_TERMS_1:'টাকা যোগ এ ক্লিক করে আপনি পড়া আছে সম্মত হন',
+    TEXT_LANG_INVEST_TERMS_2:'বিনিয়োগ করার আগে',
+    TranscationID:'লেনদেন নাম্বার',
+    TEXT_CURRENT_BALANCE:'বর্তমান হিসাব :',
+    TEXT_WIHTDRAW_BALANCE:'কত আপনি উঠাতে চান?',
+    TEXT_WITHDRAW_COMPLETEBALANCE:'আমার সম্পূর্ণ ভারসাম্য প্রত্যাহার',
+    TEXT_WITHDRAW_SCHEDULE_TEXT:'আপনার রেজিস্টার্ড ব্যাংক অ্যাকাউন্টে ডিপোজিট জন্য সূচি'
   });
     $translateProvider.translations('3', {
 	selectedLanguage:'Select your desired Language Gujarati',
@@ -113,7 +127,14 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	proof1:'PAN પત્તાની',
 	proof2:'એડ્રેસ પ્રૂફ દસ્તાવેજ',
 	proof3:'નેટ બેન્કિંગ સક્ષમ બૅન્ક એકાઉન્ટ નંબર',
-	proof4:'તમારી બેંક એકાઉન્ટ IFSC કોડ'
+	proof4:'તમારી બેંક એકાઉન્ટ IFSC કોડ',
+      TEXT_LANG_INVEST_TERMS_1:'પૈસા ઉમેરો પર ક્લિક કરીને તમે વાંચી છે સંમત',
+      TEXT_LANG_INVEST_TERMS_2:'રોકાણ કરતા પહેલા',
+      TranscationID:'ટ્રાન્ઝેક્શન આઈડી',
+      TEXT_CURRENT_BALANCE:'વર્તમાન રકમ :',
+      TEXT_WIHTDRAW_BALANCE:'કેટલી તમે પાછી ખેંચી કરવા માંગો છો?',
+      TEXT_WITHDRAW_COMPLETEBALANCE:'મારી સંપૂર્ણ સંતુલન પાછી ખેંચી',
+      TEXT_WITHDRAW_SCHEDULE_TEXT:'તમારી રજીસ્ટર બેંક એકાઉન્ટમાં ડિપોઝિટ માટે સુનિશ્ચિત'
   });
   $translateProvider.translations('4', {
 	selectedLanguage:'अपनी इच्छित भाषा का चयन करें',
@@ -146,7 +167,14 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	proof1:'PAN कार्ड',
 	proof2:'पता प्रमाण दस्तावेजों',
 	proof3:'नेट बैंकिंग सक्षम बैंक खाता संख्या',
-	proof4:'अपने बैंक खाते का IFSC कोड'
+	proof4:'अपने बैंक खाते का IFSC कोड',
+    TEXT_LANG_INVEST_TERMS_1:'पैसा जोड़ें पर क्लिक करके आप पढ़ लिया है के लिए सहमत',
+    TEXT_LANG_INVEST_TERMS_2:'निवेश करने से पहले',
+    TranscationID:'लेनदेन आईडी',
+    TEXT_CURRENT_BALANCE:'वर्तमान शेष :',
+    TEXT_WIHTDRAW_BALANCE:'तुम कितना वापस लेने के लिए चाहते हैं?',
+    TEXT_WITHDRAW_COMPLETEBALANCE:'मेरा पूरा संतुलन को वापस लेने',
+    TEXT_WITHDRAW_SCHEDULE_TEXT:'अपने पंजीकृत बैंक खाते में जमा करने के लिए अनुसूची'
   });
     $translateProvider.translations('5', {
 	selectedLanguage:'Select your desired Language kannada',
@@ -179,7 +207,14 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	proof1:'PAN ಕಾರ್ಡ್',
 	proof2:'ವಿಳಾಸ ಪುರಾವೆ ದಾಖಲೆಗಳನ್ನು',
 	proof3:'ನನೆಟ್ ಬ್ಯಾಂಕಿಂಗ್ ಶಕ್ತಗೊಂಡ ಬ್ಯಾಂಕ್ ಖಾತೆ ಸಂಖ್ಯೆ',
-	proof4:'ನಿಮ್ಮ ಬ್ಯಾಂಕ್ ಖಾತೆಯ IFSC ಕೋಡ್'
+	proof4:'ನಿಮ್ಮ ಬ್ಯಾಂಕ್ ಖಾತೆಯ IFSC ಕೋಡ್',
+      TEXT_LANG_INVEST_TERMS_1:'ಹಣ ಸೇರಿಸು ಗುಂಡಿ ಒತ್ತುವುದರ ಮೂಲಕ ನೀವು ಓದಲು ಒಪ್ಪುತ್ತೀರಿ',
+      TEXT_LANG_INVEST_TERMS_2:'ಹೂಡಿಕೆ ಮಾಡುವ ಮೊದಲು',
+      TranscationID:'ವ್ಯವಹಾರ ಐಡಿ',
+      TEXT_CURRENT_BALANCE:'ಪ್ರಸ್ತುತ ಬಾಕಿ:',
+      TEXT_WIHTDRAW_BALANCE:'ಎಷ್ಟು ನೀವು ಹಿಂದಕ್ಕೆ ಬಯಸುತ್ತೀರಿ?',
+      TEXT_WITHDRAW_COMPLETEBALANCE:'ನನ್ನ ಸಂಪೂರ್ಣ ಸಮತೋಲನ ಹಿಂದಕ್ಕೆ',
+      TEXT_WITHDRAW_SCHEDULE_TEXT:'ನಿಮ್ಮ ನೋಂದಾಯಿತ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ಠೇವಣಿ ವೇಳಾಪಟ್ಟಿ'
   });
     $translateProvider.translations('6', {
 	selectedLanguage:'Select your desired Language Malyalam',
@@ -212,7 +247,14 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	proof1:'PAN കാർഡ്',
 	proof2:'മേൽവിലാസം പ്രമാണങ്ങൾ',
 	proof3:'നെറ്റ് ബാങ്കിങ് പ്രാപ്തമാക്കി ബാങ്ക് അക്കൗണ്ട് നമ്പർ',
-	proof4:'നിങ്ങളുടെ ബാങ്ക് അക്കൗണ്ട് IFSC കോഡ്'
+	proof4:'നിങ്ങളുടെ ബാങ്ക് അക്കൗണ്ട് IFSC കോഡ്',
+      TEXT_LANG_INVEST_TERMS_1:'പണം ചേർക്കുക ക്ലിക്കുചെയ്യുന്നതിലൂടെ നിങ്ങൾ വായിക്കുകയും അംഗീകരിക്കുന്നു',
+      TEXT_LANG_INVEST_TERMS_2:'നിക്ഷേപം നടത്തുന്നതിന് മുമ്പ്',
+      TranscationID:'ഇടപാട് ഐഡി',
+      TEXT_CURRENT_BALANCE:'वर्तमान शिल्लक:',
+      TEXT_WIHTDRAW_BALANCE:'നിങ്ങളുടെ എത്രത്തോളം പിൻവലിക്കാൻ ആഗ്രഹിക്കുന്നത്?',
+      TEXT_WITHDRAW_COMPLETEBALANCE:'എന്റെ പൂർണ്ണമായ ബാലൻസ് പിൻവലിക്കാൻ',
+      TEXT_WITHDRAW_SCHEDULE_TEXT:'നിങ്ങളുടെ രജിസ്റ്റർ ബാങ്ക് അക്കൗണ്ടിലേക്ക് ഡെപ്പോസിറ്റ് പട്ടിക'
   });
     $translateProvider.translations('7', {
 	selectedLanguage:'Select your desired Language Marathi',
@@ -245,7 +287,14 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	proof1:'PAN कार्ड',
 	proof2:'पुरावा',
 	proof3:'नेट बँकिंग सक्षम बँक खाते क्रमांक',
-	proof4:'आपल्या बँक खाते IFSC कोड'
+	proof4:'आपल्या बँक खाते IFSC कोड',
+      TEXT_LANG_INVEST_TERMS_1:'मनी जोडा क्लिक करून आपण वाचले आहे सहमत',
+      TEXT_LANG_INVEST_TERMS_2:'गुंतवणूक करण्यापूर्वी',
+      TranscationID:'व्यवहार आयडी',
+      TEXT_CURRENT_BALANCE:'वर्तमान शिल्लक:',
+      TEXT_WIHTDRAW_BALANCE:'आपण किती मागे आवडेल?',
+      TEXT_WITHDRAW_COMPLETEBALANCE:'माझे पूर्ण शिल्लक मागे',
+      TEXT_WITHDRAW_SCHEDULE_TEXT:'आपले नोंदणीकृत बँक खात्यात जमा वेळापत्रक'
   });
     $translateProvider.translations('8', {
 	selectedLanguage:'Select your desired Language Tamil',
@@ -278,7 +327,14 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	proof1:'PAN அட்டை',
 	proof2:'முகவரி சான்று',
 	proof3:'நெட் பேங்கிங் செயல்படுத்தப்படும் வங்கி கணக்கு எண்',
-	proof4:'உங்கள் வங்கி கணக்கு Code என்ன குறியீடு'
+	proof4:'உங்கள் வங்கி கணக்கு Code என்ன குறியீடு',
+      TEXT_LANG_INVEST_TERMS_1:'பணம் சேர்க்க கிளிக் செய்வதன் மூலம் நீங்கள் படிக்க ஒப்புக்கொள்கிறேன்பை',
+      TEXT_LANG_INVEST_TERMS_2:'முதலீடு செய்யும் முன்',
+      TranscationID:'பரிவர்த்தனை ஐடி',
+      TEXT_CURRENT_BALANCE:'தற்போதைய இருப்பு :',
+      TEXT_WIHTDRAW_BALANCE:'நீங்கள் எவ்வளவு திரும்பப் பெற வேண்டும் என்று விரும்புகிறீர்கள்?',
+      TEXT_WITHDRAW_COMPLETEBALANCE:'எனது முழு சமநிலை வாபஸ்',
+      TEXT_WITHDRAW_SCHEDULE_TEXT:'உங்கள் பதிவு வங்கி கணக்கில் வைப்பு அட்டவணை'
   });
     $translateProvider.translations('9', {
 	selectedLanguage:'Select your desired Language Telgu',
@@ -311,7 +367,14 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	proof1:'PAN కార్డ్',
 	proof2:'చిరునామా నిరూపణ పత్రం',
 	proof3:'నెట్ బ్యాంకింగ్ కలిగి ఉన్న బ్యాంక్ ఖాతా సంఖ్య',
-	proof4:'మీ బ్యాంక్ ఖాతా యొక్క IFSC కోడ్'
+	proof4:'మీ బ్యాంక్ ఖాతా యొక్క IFSC కోడ్',
+      TEXT_LANG_INVEST_TERMS_1:'డబ్బు ADD క్లిక్ చేయడం ద్వారా మీరు చదివి అంగీకరిస్తున్నారు',
+      TEXT_LANG_INVEST_TERMS_2:'పెట్టుబడి చేయడానికి ముందు',
+      TranscationID:'లావాదేవి ఐడి',
+      TEXT_CURRENT_BALANCE:'ప్రస్తుత నిల్వ :',
+      TEXT_WIHTDRAW_BALANCE:'మీరు ఎంత వెనక్కి చేయాలనుకుంటున్నారు?',
+      TEXT_WITHDRAW_COMPLETEBALANCE:'నా పూర్తి సంతులనం ఉపసంహరించుకోవాలని',
+      TEXT_WITHDRAW_SCHEDULE_TEXT:'మీ నమోదిత బ్యాంకు ఖాతాకు జమ షెడ్యూల్'
   });
   //con
   //console.log($sessionStorage.LanguageSession);
@@ -383,7 +446,7 @@ if(typeof analytics !== undefined) {
 		if(backbutton==0){
             backbutton++;
             window.plugins.toast.showShortBottom('Press back again to exit');
-            $timeout(function(){backbutton=0;},5000);
+            $timeout(function(){backbutton=0;},3000);
         }else{
             navigator.app.exitApp();
         }
