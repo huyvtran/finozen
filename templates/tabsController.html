@@ -9,13 +9,13 @@
     <ion-content scroll="false">
     <ion-slide-box slide-tabs-scrollable="false"  show-pager="false" ion-slide-tabs>
 
-      <ion-slide ion-slide-tab-label="SUMMARY">
+      <ion-slide ion-slide-tab-label="{{'tabTitle1' | translate}}">
         <summary-page></summary-page>
       </ion-slide>
-                <ion-slide ion-slide-tab-label="GROWTH RATE">
+                <ion-slide ion-slide-tab-label="{{'tabTitle2' | translate}}">
                  <growth-rate></growth-rate>
                 </ion-slide>
-                <ion-slide ion-slide-tab-label="TRANSACTIONS">
+                <ion-slide ion-slide-tab-label="{{'tabTitle3' | translate}}">
                     <span><recent-transact></recent-transact></span>
 
                 </ion-slide>
@@ -23,13 +23,13 @@
     </ion-slide-box>
  </ion-content>
     <div class="bar bar-footer row invest_button_footer" style="width: 100%; background:#E5ECF4 ;" ng-controller="transactionAccessCtrl">
-  <div ion-track-tap="withdraw" ng-click="addId()" class="col invest_button"><a ng-href={{withdrawUrl}} class="button button-clear button-positive  ion-ios-minus-empty invest_btn red" ></a><br /><span class="invest_bottom_button red">WITHDRAW</span></div>
-  <div ion-track-tap="invest" class="col invest_button"><a ng-href={{investUrl}} class="button button-clear button-positive  ion-ios-plus-empty invest_btn green" ></a><br /><span class="invest_bottom_button green">ADD MONEY</span></div>
+  <div ion-track-tap="withdraw" ng-click="addId()" class="col invest_button"><a ng-href={{withdrawUrl}} class="button button-clear button-positive  ion-ios-minus-empty invest_btn red" ></a><br /><span class="invest_bottom_button red" translate="BUTTON_LANG_WITH"></span></div>
+  <div ion-track-tap="invest" class="col invest_button"><a ng-href={{investUrl}} class="button button-clear button-positive  ion-ios-plus-empty invest_btn green" ></a><br /><span class="invest_bottom_button green" translate="BUTTON_LANG_ADD"></span></div>
 </div>
 
   </ion-side-menu-content>
 
-   
+
     <ion-side-menu side="left" class="screen_sidemenu" >
 	<fader></fader>
 		<a href="#/account">
@@ -58,10 +58,10 @@
 
 
 
- <!--  
+ <!--
     <ion-side-menus  ng-controller="menuOverlay" class="tab_controller">
-      
-    
+
+
 <ion-side-menu  enable-menu-with-back-views="false" width="{{width()}}" >
 <div class="bar bar-header fino_head">
 	<a menu-close class="button button-clear button-positive ion-navicon-round" ></a>
@@ -91,7 +91,7 @@
 	</ion-content>
 </ion-side-menu>
          <fader></fader>
-    
+
       <ion-side-menu-content style="width:70%;" class="screen_sidemenu" >
 		<a href="#/account">
 			<div class="row title account_block bar-subheader">
@@ -103,9 +103,9 @@
 				</div>
 			</div>
 		</a>
-        
 
-        
+
+
         <ion-content class="has-footer has-wallet">
 			<ion-list class="menulist">
                  <ion-item nav-clear menu-close  href="#/invite" ><i class="icon ion-ios-people-outline"></i>Invite & Earn</ion-item>
@@ -118,6 +118,6 @@
         </ion-content>
 
       </ion-side-menu-content>
-   
+
     </ion-side-menus>
 -->
