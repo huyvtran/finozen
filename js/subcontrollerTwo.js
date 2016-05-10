@@ -724,24 +724,31 @@ angular.module('app.subcontrollerTwo', [])
   })
 
 
-  /*language selection at pop up*/
-    .controller('langCTRL',function($scope,$localStorage,$ionicPopup,$ionicPlatform) {
+  //   language selection at pop up
+    .controller('langCTRL',function($scope,$localStorage,$ionicPopup,$ionicPlatform,$state,$translate) {
+	$scope.clientLanguageOptions = [
+			{ name: 'Bengali', value: '1' },
+			{ name: 'English', value: '2' },
+			{ name: 'Gujarati', value: '3' },
+			{ name: 'Hindi', value: '4' },
+			{ name: 'Kannada', value: '5' },
+			{ name: 'Malyalam', value: '6' },
+			{ name: 'Marathi', value: '7' },
+			{ name: 'Tamil', value: '8' },
+			{ name: 'Telugu', value: '9' }
+			];
+			$scope.clientLanguage = {type : $scope.clientLanguageOptions[1].value};
       $ionicPlatform.ready(function()
       {
-        if (language == 0) {
+		console.log($localStorage.language+"  localStorage selected");
+        //if ($localStorage.language == undefined) {
+        if ($localStorage.language) {
           var myPopup = $ionicPopup.show({
-            template: '<input class="item-select" ng-model="data.wifi"> <select>' +
-            ' <option >Bengali</optionselected>' +
-            '<option selected>English</option>' +
-            '<option>Gujarati</option>' +
-            '<option>Hindi</option>' +
-            '<option>kanada</option>' +
-            '<option>Malyalam</option>' +
-            '<option>Marathi</option>' +
-            '<option>Tamil</option>' +
-            '<option>Telgu</option></select>',
-            title: 'Language',
-            subTitle: 'Please select your language',
+            template:
+			'<label class = "item item-input item-select item-light popUpSelect">'+
+				'<select ng-model="clientLanguage.type" required ng-options="option.value as option.name for option in clientLanguageOptions"></select>'+
+			'</label>',
+            title: 'Please select your language',
             scope: $scope,
             buttons: [
 
@@ -749,38 +756,29 @@ angular.module('app.subcontrollerTwo', [])
                 text: '<b>Save</b>',
                 type: 'button-positive',
                 onTap: function(e) {
-                  if (!$scope.data.wifi) {
+                  if (!$scope.clientLanguage.type) {
                     //don't allow the user to close unless he enters wifi password
                     e.preventDefault();
-                    $localStorage.language++;
+				    console.log($scope.clientLanguage.type+"not selected");
 
                   } else {
-                    console.log($scope.data.wifi+"language selected");
-                    return $scope.data.wifi;
+                    console.log($scope.clientLanguage.type+"  language selected");
+					$localStorage.language = $scope.clientLanguage.type;
+                    console.log($localStorage.language+"  localStorage");
+					$translate.use($localStorage.language);
+                    //return $scope.clientLanguage.type;
                   }
                 }
               }
             ]
           });
-          myPopup.then(function(res){
-            console.log($scope.data.wifi);
-          })
         }
-        else {
-          var popup = $ionicPopup.alert({
-            title: 'Please select your language',
-            template: 'Languages available are'
-          });
-
-          popup.then(function (res) {
+			$translate.use($localStorage.language);
             $state.go("login");
-          });
-
-        }
       });
     })
 
-/*card.io scanning*/
+//   card.io scanning
 .controller('cardScanCTRL',function($scope,$state,$ionicPlatform,cardIO)
 {
   var scan=function(){

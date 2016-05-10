@@ -602,3 +602,11 @@ fader {
   opacity: 0;
   z-index: -1; }
 
+.popUpSelect{
+	min-height:45px;
+	select{
+		min-width: 100%;
+		direction: ltr;
+	}
+
+}

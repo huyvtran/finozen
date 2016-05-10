@@ -6,15 +6,119 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 var confirmation = 0;
-var language=0;
-angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', 'app.controllers', 'app.subcontrollerOne','app.subcontrollerTwo' , 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages','ngStorage','ngIdle','ngCordova', 'ionic-toast'])
+angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', 'app.controllers', 'app.subcontrollerOne','pascalprecht.translate','app.subcontrollerTwo' , 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages','ngStorage','ngIdle','ngCordova', 'ionic-toast'])
 
 /*.constant('$ionicLoadingConfig', {
   template: '<ion-spinner icon="android"></ion-spinner>',
   showBackdrop: true,
 })
 */
+.config(function ($translateProvider) {
 
+  $translateProvider.translations('1', {
+	selectedLanguage:'Select your desired Language bengali',
+	tabTitle1:'SUMMARY',
+	tabTitle2:'GROWTH RATE',
+	tabTitle3:'TRANSACTIONS',
+    TITLE: 'This is english',
+    FOO: 'This is a paragraph.',
+    BUTTON_LANG_EN: ' সিকিউর লগইন',
+    BUTTON_LANG_DE: 'deutsch',
+    BUTTON_LANG_HI: 'hindi'
+  });
+    $translateProvider.translations('2', {
+	selectedLanguage:'Select your desired Language english',
+	tabTitle1:'SUMMARY',
+	tabTitle2:'GROWTH RATE',
+	tabTitle3:'TRANSACTIONS',
+    TITLE: 'This is english',
+    FOO: 'This is a paragraph.',
+    BUTTON_LANG_EN: ' Secure Login',
+    BUTTON_LANG_DE: 'deutsch',
+    BUTTON_LANG_HI: 'Hindi'
+  });
+    $translateProvider.translations('3', {
+	selectedLanguage:'Select your desired Language Gujarati',
+	tabTitle1:'SUMMARY',
+	tabTitle2:'GROWTH RATE',
+	tabTitle3:'TRANSACTIONS',
+    TITLE: 'This is english 3',
+    FOO: 'This is a paragraph 3.',
+    BUTTON_LANG_EN: ' સુરક્ષિત લૉગિન',
+    BUTTON_LANG_DE: 'deutsch',
+    BUTTON_LANG_HI: 'Hindi'
+  });
+  $translateProvider.translations('4', {
+	selectedLanguage:'अपनी इच्छित भाषा का चयन करें',
+	tabTitle1:'सारांश',
+	tabTitle2:'विकास दर',
+	tabTitle3:'लेनदेन',
+    TITLE: 'यह हिन्दी है',
+    FOO: 'यह एक पैरा है.',
+    BUTTON_LANG_EN: ' सुरक्षित लॉगइन',
+    BUTTON_LANG_DE: 'deutsch',
+    BUTTON_LANG_HI: 'हिंदी'
+  });
+    $translateProvider.translations('5', {
+	selectedLanguage:'Select your desired Language kannada',
+	tabTitle1:'SUMMARY',
+	tabTitle2:'GROWTH RATE',
+	tabTitle3:'TRANSACTIONS',
+    TITLE: 'This is english',
+    FOO: 'This is a paragraph.',
+    BUTTON_LANG_EN: ' ಸುರಕ್ಷಿತ ಲಾಗಿನ್',
+    BUTTON_LANG_DE: 'deutsch',
+    BUTTON_LANG_HI: 'Hindi'
+  });
+    $translateProvider.translations('6', {
+	selectedLanguage:'Select your desired Language Malyalam',
+	tabTitle1:'SUMMARY',
+	tabTitle2:'GROWTH RATE',
+	tabTitle3:'TRANSACTIONS',
+    TITLE: 'This is english',
+    FOO: 'This is a paragraph.',
+    BUTTON_LANG_EN: ' സുരക്ഷിത ലോഗിൻ',
+    BUTTON_LANG_DE: 'deutsch',
+    BUTTON_LANG_HI: 'Hindi'
+  });
+    $translateProvider.translations('7', {
+	selectedLanguage:'Select your desired Language Marathi',
+	tabTitle1:'SUMMARY',
+	tabTitle2:'GROWTH RATE',
+	tabTitle3:'TRANSACTIONS',
+    TITLE: 'This is english',
+    FOO: 'This is a paragraph.',
+    BUTTON_LANG_EN: ' सुरक्षित लॉग-इन',
+    BUTTON_LANG_DE: 'deutsch',
+    BUTTON_LANG_HI: 'Hindi'
+  });
+    $translateProvider.translations('8', {
+	selectedLanguage:'Select your desired Language tamil',
+	tabTitle1:'SUMMARY',
+	tabTitle2:'GROWTH RATE',
+	tabTitle3:'TRANSACTIONS',
+    TITLE: 'This is english',
+    FOO: 'This is a paragraph.',
+    BUTTON_LANG_EN: ' பாதுகாப்பான தேதி',
+    BUTTON_LANG_DE: 'deutsch',
+    BUTTON_LANG_HI: 'Hindi'
+  });
+    $translateProvider.translations('9', {
+	selectedLanguage:'Select your desired Language trlugu',
+	tabTitle1:'SUMMARY',
+	tabTitle2:'GROWTH RATE',
+	tabTitle3:'TRANSACTIONS',
+    TITLE: 'This is english',
+    FOO: 'This is a paragraph.',
+    BUTTON_LANG_EN: 'సురక్షిత లాగిన్',
+    BUTTON_LANG_DE: 'deutsch',
+    BUTTON_LANG_HI: 'Hindi'
+  });
+  //con
+  //console.log($sessionStorage.LanguageSession);
+  $translateProvider.preferredLanguage('2');
+})
+	
 .config(function(IdleProvider, KeepaliveProvider) {
     // configure Idle settings
     IdleProvider.idle(5); // in seconds
@@ -30,7 +134,7 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 //var userName = $bindTo($scope.$sessionStorage.mobileNumber);
  //     console.log(userName);
       Idle.watch();
-
+//$localStorage.language=0;
                 if(!navigator.onLine) {
 console.log(navigator.onLine + "  connection state");
 					$ionicPopup.confirm({
