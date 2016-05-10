@@ -28,6 +28,11 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     BUTTON_LANG_ADD:"যোগ",
     BUTTON_LANG_WITH:"প্রত্যাহার",
     BUTTON_LANG_SIGNUP:'অথবা একটি অ্যাকাউন্ট তৈরি ',
+    TEXT_LANG_HEADER:'টাকা যোগ',
+    TEXT_LANG_INVEST:'আপনি কত যোগ করতে চাই  ?',
+    TEXT_LANG_EXPECTEDVALUE:'বছরে প্রত্যাশিত মান :',
+    TEXT_LANG_INVEST1:'আয় নিখুত , আমরা যোগ হবে',
+    TEXT_LANG_INVEST12:'আপনার বিনিয়োগে',
     BUTTON_LANG_EN: ' সিকিউর লগইন'
   });
     $translateProvider.translations('2', {
@@ -43,6 +48,11 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       BUTTON_LANG_WITH:"WITHDRAW",
       BUTTON_LANG_FORGOT:'Forgot Pin?',
       BUTTON_LANG_SIGNUP:'or Create an account ',
+      TEXT_LANG_HEADER:'ADD Money',
+      TEXT_LANG_INVEST:'How much would you like to add ?',
+      TEXT_LANG_INVEST1:'To optimize returns, we will add',
+      TEXT_LANG_INVEST12:'to your investments',
+      TEXT_LANG_EXPECTEDVALUE:'Expected Value in a year :',
     BUTTON_LANG_EN: ' Secure Login'
   });
     $translateProvider.translations('3', {
@@ -58,6 +68,11 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       BUTTON_LANG_WITH:"પાછી ખેંચી",
       BUTTON_LANG_FORGOT:'ભૂલી ગયા છો પિન?',
       BUTTON_LANG_SIGNUP:'અથવા એક એકાઉન્ટ બનાવો',
+      TEXT_LANG_HEADER:'નાણાં ઉમેરો',
+      TEXT_LANG_INVEST:'કેટલી તમે ઉમેરવા માંગો છો ?',
+      TEXT_LANG_EXPECTEDVALUE:'એક વર્ષમાં અપેક્ષિત કિંમત :',
+      TEXT_LANG_INVEST1:'વળતર ઑપ્ટિમાઇઝ કરવા માટે, અમે ઉમેરશે',
+      TEXT_LANG_INVEST12:'તમારા રોકાણના',
     BUTTON_LANG_EN: ' સુરક્ષિત લૉગિન'
   });
   $translateProvider.translations('4', {
@@ -73,6 +88,11 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     BUTTON_LANG_WITH:"निकालना",
     BUTTON_LANG_FORGOT:'भूल गया पिन?',
     BUTTON_LANG_SIGNUP:'या खाता बनाना',
+    TEXT_LANG_HEADER:'पैसे जोड़ें',
+    TEXT_LANG_INVEST:'आप कितना निवेश करना चाहते हैं ?',
+    TEXT_LANG_EXPECTEDVALUE:'एक साल में होने की उम्मीद मूल्य:',
+    TEXT_LANG_INVEST1:'रिटर्न का अनुकूलन करने के लिए , हम जोड़ देगा',
+    TEXT_LANG_INVEST12:'अपने निवेश के लिए',
     BUTTON_LANG_EN: ' सुरक्षित लॉगइन'
   });
     $translateProvider.translations('5', {
@@ -88,6 +108,11 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       BUTTON_LANG_WITH:"ಹಿಂದಕ್ಕೆ",
       BUTTON_LANG_FORGOT:'ಮರೆತು ಪಿನ್?',
       BUTTON_LANG_SIGNUP:'ಅಥವಾ ಖಾತೆಯನ್ನು ರಚಿಸಿ ',
+      TEXT_LANG_HEADER:'ಹಣ ಸೇರಿಸಬಹುದು',
+      TEXT_LANG_INVEST:'ಎಷ್ಟು ನೀವು ಹೂಡಿಕೆ ಮಾಡಲು ಬಯಸುತ್ತೀರಿ?',
+      TEXT_LANG_EXPECTEDVALUE:'ಒಂದು ವರ್ಷದಲ್ಲಿ ನಿರೀಕ್ಷೆಗಿಂತ ಮೌಲ್ಯ:',
+      TEXT_LANG_INVEST1:'ಆದಾಯ ಅತ್ಯುತ್ತಮಗೊಳಿಸಲು , ನಾವು ಸೇರಿಸುತ್ತದೆ',
+      TEXT_LANG_INVEST12:'ನಿಮ್ಮ ಹೂಡಿಕೆ',
     BUTTON_LANG_EN: ' ಸುರಕ್ಷಿತ ಲಾಗಿನ್'
   });
     $translateProvider.translations('6', {
@@ -103,6 +128,11 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       BUTTON_LANG_WITH:"പിൻവലിക്കാൻ",
       BUTTON_LANG_FORGOT:'പിൻ മറന്നോ್?',
       BUTTON_LANG_SIGNUP:'അല്ലെങ്കിൽ ഒരു അക്കൗണ്ട് സൃഷ്ടിക്കുക ',
+      TEXT_LANG_HEADER:'പണം ചേർക്കുക',
+      TEXT_LANG_INVEST:'എത്ര നിക്ഷേപിക്കാൻ ആഗ്രഹിക്കുന്നത്?',
+      TEXT_LANG_EXPECTEDVALUE:'ഒരു വർഷം പ്രതീക്ഷിക്കുന്ന മൂല്യം:',
+      TEXT_LANG_INVEST1:'റിട്ടേണുകൾ ഒപ്റ്റിമൈസുചെയ്യുന്നതിനായി , ഞങ്ങൾ ചേർക്കും',
+      TEXT_LANG_INVEST12:'നിങ്ങളുടെ നിക്ഷേപങ്ങൾക്ക്',
     BUTTON_LANG_EN: ' സുരക്ഷിത ലോഗിൻ'
   });
     $translateProvider.translations('7', {
@@ -118,6 +148,11 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       BUTTON_LANG_WITH:"मागे",
       BUTTON_LANG_FORGOT:'विसरले पिन?',
       BUTTON_LANG_SIGNUP:'किंवा एक खाते तयार करा ',
+      TEXT_LANG_HEADER:'पैसा जोडा',
+      TEXT_LANG_INVEST:'किती गुंतवणूक करायला आवडेल?',
+      TEXT_LANG_EXPECTEDVALUE:'एक वर्ष अपेक्षित मूल्य:',
+      TEXT_LANG_INVEST1:'परतावा अनुकूल , आम्ही जोडेल',
+      TEXT_LANG_INVEST12:'तुमच्या गुंतवणुकीमध्ये',
     BUTTON_LANG_EN: ' सुरक्षित लॉग-इन'
   });
     $translateProvider.translations('8', {
@@ -133,6 +168,11 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       BUTTON_LANG_WITH:"வாபஸ்",
       BUTTON_LANG_FORGOT:'மறந்துவிட்டேன் முள?',
       BUTTON_LANG_SIGNUP:'அல்லது ஒரு கணக்கை உருவாக்க',
+      TEXT_LANG_HEADER:'பணம் சேர்க்க',
+      TEXT_LANG_INVEST:'எவ்வளவு நீங்கள் முதலீடு செய்ய விரும்புகிறீர்கள்?',
+      TEXT_LANG_EXPECTEDVALUE:'ஒரு வருடம் எதிர்பார்க்கும் மதிப்பு :',
+      TEXT_LANG_INVEST1:'வருமானத்தை மேம்படுத்த , நாம் சேர்க்க வேண்டும்',
+      TEXT_LANG_INVEST12:'உங்கள் முதலீடுகளுக்கு',
     BUTTON_LANG_EN: ' பாதுகாப்பான தேதி'
   });
     $translateProvider.translations('9', {
@@ -148,6 +188,11 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       BUTTON_LANG_WITH:"వెనక్కి",
       BUTTON_LANG_FORGOT:'మర్చిపోయాను పిన్?',
       BUTTON_LANG_SIGNUP:'లేదా ఖాతా సృష్టించుకోండి',
+      TEXT_LANG_HEADER:'డబ్బు జోడించడానికి',
+      TEXT_LANG_INVEST:'మీరు ఎంత పెట్టుబడి చేయాలనుకుంటున్నారు?',
+      TEXT_LANG_EXPECTEDVALUE:'ఒక సంవత్సరంలో అంచనా విలువ:',
+      TEXT_LANG_INVEST1:'తిరిగి ఆప్టిమైజ్ , మేము జోడిస్తుంది',
+      TEXT_LANG_INVEST12:'మీ పెట్టుబడులను',
     BUTTON_LANG_EN: 'సురక్షిత లాగిన్'
   });
   //con

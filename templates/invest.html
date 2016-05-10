@@ -1,9 +1,8 @@
 <ion-view title="Add Money">
-	<span ng-controller="googleanalytics"></span>
 <div class="screen_invest ">
 <div class="bar bar-header fino_head" ng-controller="popupController as popup">
 	<a class="button button-clear ion-android-arrow-back " href="#/page14/page15"></a>
-	<div class="h1 title"><p class="head_title"><span id="title">ADD MONEY</span></p></div>
+	<div class="h1 title"><p class="head_title"><span id="title" translate="TEXT_LANG_HEADER"></span></p></div>
 	<a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
 </div>
     <ion-content overflow-scroll="true" padding="true" class="has-header">
@@ -11,10 +10,10 @@
 		  <h2 class="title">CURRENT BALANCE : <span style="color:#18bb9c" ng-controller="withdrawCtrl">{{balance() | currency:"&#8377;" }}</span></h2>
 		</div>
 		<div class="row invest_info">
-		<p>How much would you like to add ?</p>
+		<p translate="TEXT_LANG_INVEST"></p>
 		</div>
 		<div class="list invest_info"  ng-controller="sampleCtrl">
-			<p class="returns_hint" >Expected Value in a year:
+			<p class="returns_hint" ><span translate="TEXT_LANG_EXPECTEDVALUE"></span>
 				<span style="color:#18bb9c;"><label id="income" >&nbsp; {{apprxVal | currency:"&#8377;" }} </label></span>
 			</p>
 <form name="investForm" novalidate="" ng-submit="Invest(investForm)">
@@ -40,7 +39,7 @@
 </div>-->
 
 		<div class="row" >
-		<p><br>To optimize returns, we will add <span class="suggested"> {{ final(initial,nav,0) | currency:"&#8377;" }} </span> to your investments <br> </p>
+		<p><br><span translate="TEXT_LANG_INVEST1"></span> <span class="suggested"> {{ final(initial,nav,0) | currency:"&#8377;" }} </span> <span translate="TEXT_LANG_INVEST2"></span><br> </p>
 		</div>
 
 
@@ -50,7 +49,7 @@
 
 
 		<div class="row" ng-controller="nachCTRL">
-		<button ion-track-tap="add money" ng-click="nach()" type="submit" class="button button-full button-positive bar-footer invest_button_footer">Add Money</button>
+		<button ion-track-tap="add money" ng-click="nach()" type="submit" class="button button-full button-positive bar-footer invest_button_footer" translate="TEXT_LANG_HEADER"></button>
 		</div>
 
 
