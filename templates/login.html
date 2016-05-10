@@ -39,7 +39,7 @@
 		<label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.password.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid  && authorizationForm.$submitted}">
 			<input type="password" name="password" ng-pattern="/^[0-9]{1,4}$/" ng-model="digitPin" maxlength="4" ng-minlength="4" ng-maxlength="4" required placeholder="4 digit PIN" >
 		</label>
-		<p class="text-right forgot_pin" ng-click="forgotPin(authorizationForm.mobile)">Forgot PIN?</p>
+		<p class="text-right forgot_pin" ng-click="forgotPin(authorizationForm.mobile)"translate="BUTTON_LANG_FORGOT"></p>
 		<div class="error-container last-error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">
 			<div  class="error" >
 				<div ng-message="required">
@@ -59,7 +59,7 @@
 		<i class="icon ion-locked secure_lock" translate="BUTTON_LANG_EN"></i>
 		<a class='clear'data-ng-click="authorization.password = ''"></a>
 	</button>
-	<a href="#page8" class="button button-positive button-clear button-block create_acc_btn ">Or create an account</a>
+	<a href="#page8" class="button button-positive button-clear button-block create_acc_btn " translate="BUTTON_LANG_SIGNUP"></a>
 	<div  class="agree_terms" >
 		<span class="check_agree item-checkbox item_checkbox">By clicking Login, I agree to <a href="#" onclick="window.open('http://finozen.com/t&c.html', '_self')"> T & C</a> and <a href="#" onclick="window.open('http://finozen.com/policy.html', '_self', 'location=true')">Privacy Policy</a></span>
 	</div>
