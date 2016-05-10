@@ -15,15 +15,6 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 */
 .config(function ($translateProvider) {
 
-  $translateProvider.translations('1', {
-	selectedLanguage:'Select your desired Language Bengali',
-	tabTitle1:'সংক্ষিপ্তসার',
-	tabTitle2:'বৃদ্ধির হার',
-	tabTitle3:'লেনদেন',
-    BUTTON_LANG_FORGOT:'ভুলে গেছি পিন?',
-    BUTTON_LANG_SIGNUP:'অথবা একটি অ্যাকাউন্ট তৈরি ',
-    BUTTON_LANG_EN: ' সিকিউর লগইন'
-  });
     $translateProvider.translations('2', {
 	selectedLanguage:'Select your desired Language English',
 	tabTitle1:'SUMMARY',
@@ -31,7 +22,44 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	tabTitle3:'TRANSACTIONS',
       BUTTON_LANG_FORGOT:'Forgot Pin?',
       BUTTON_LANG_SIGNUP:'or Create an account ',
-    BUTTON_LANG_EN: ' Secure Login'
+    BUTTON_LANG_EN: ' Secure Login',
+	signUpTitle:'Sign Up',
+	firstName:'First Name',
+	lastName:'Last Name',
+	mobileNo:'Mobile Number',
+	setPIN:'Set digit PIN ',
+	confirmPin:'Confirm 4 digit PIN',
+	referralCode:'Referral code(optional)',
+	activationText:'You will now need to activate your account. Please keep the following documents ready.',
+	notNow:'NOT NOW',
+	activateAcc:'ACTIVATE ACCOUNT',
+	proof1:'PAN Card',
+	proof2:'Address Proof',
+	proof3:'Net Banking enabled Banc Account No',
+	proof4:'IFSC Code of your Bank account'
+  });
+  $translateProvider.translations('1', {
+	selectedLanguage:'Select your desired Language Bengali',
+	tabTitle1:'সংক্ষিপ্তসার',
+	tabTitle2:'বৃদ্ধির হার',
+	tabTitle3:'লেনদেন',
+    BUTTON_LANG_FORGOT:'ভুলে গেছি পিন?',
+    BUTTON_LANG_SIGNUP:'অথবা একটি অ্যাকাউন্ট তৈরি ',
+    BUTTON_LANG_EN: ' সিকিউর লগইন',
+	signUpTitle:'নিবন্ধন করুন',
+	firstName:'প্রথম নাম',
+	lastName:'নামের শেষাংশ',
+	mobileNo:'মোবাইল নম্বর',
+	setPIN:'ডিজিটের পিন সেট',
+	confirmPin:'চার অঙ্ক পিন নিশ্চিত',
+	referralCode:'রেফারেল কোড (ঐচ্ছিক)',
+	activationText:'এখন আপনি আপনার অ্যাকাউন্ট সক্রিয় করার জন্য প্রয়োজন হবে. অনুগ্রহ করে নিম্নলিখিত কাগজপত্র প্রস্তুত রাখা.',
+	notNow:'এখন না',
+	activateAcc:'অ্যাকাউন্ট সক্রিয়',
+	proof1:'PAN কার্ড',
+	proof2:'ঠিকানার প্রমাণ দলিল',
+	proof3:'নেট ব্যাংকিং সক্রিয় ব্যাঙ্ক অ্যাকাউন্ট নম্বর',
+	proof4:'আপনার ব্যাংক অ্যাকাউন্টের IFSC কোড'
   });
     $translateProvider.translations('3', {
 	selectedLanguage:'Select your desired Language Gujarati',
@@ -40,7 +68,21 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	tabTitle3:'TRANSACTIONS',
       BUTTON_LANG_FORGOT:'ભૂલી ગયા છો પિન?',
       BUTTON_LANG_SIGNUP:'અથવા એક એકાઉન્ટ બનાવો',
-    BUTTON_LANG_EN: ' સુરક્ષિત લૉગિન'
+    BUTTON_LANG_EN: ' સુરક્ષિત લૉગિન',
+	signUpTitle:'સાઇન અપ કરો',
+	firstName:'પ્રથમ નામ',
+	lastName:'છેલ્લું નામ',
+	mobileNo:'મોબાઇલ નંબર',
+	setPIN:'અંકની PIN સેટ',
+	confirmPin:'PIN ખાતરી',
+	referralCode:'રેફરલ કોડ (વૈકલ્પિક)',
+	activationText:'હવે તમે તમારું એકાઉન્ટ સક્રિય કરવાની જરૂર પડશે. કૃપા કરીને નીચેના દસ્તાવેજો તૈયાર રાખો.',
+	notNow:'અત્યારે નહિ',
+	activateAcc:'એકાઉન્ટ સક્રિય',
+	proof1:'PAN પત્તાની',
+	proof2:'એડ્રેસ પ્રૂફ દસ્તાવેજ',
+	proof3:'નેટ બેન્કિંગ સક્ષમ બૅન્ક એકાઉન્ટ નંબર',
+	proof4:'તમારી બેંક એકાઉન્ટ IFSC કોડ'
   });
   $translateProvider.translations('4', {
 	selectedLanguage:'अपनी इच्छित भाषा का चयन करें',
@@ -49,7 +91,21 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	tabTitle3:'लेनदेन',
     BUTTON_LANG_FORGOT:'भूल गया पिन?',
     BUTTON_LANG_SIGNUP:'या खाता बनाना',
-    BUTTON_LANG_EN: ' सुरक्षित लॉगइन'
+    BUTTON_LANG_EN: ' सुरक्षित लॉगइन',
+	signUpTitle:'साइन अप करें',
+	firstName:'पहला नाम',
+	lastName:'अंतिम नाम',
+	mobileNo:'मोबाइल नंबर',
+	setPIN:'अंकों का पिन सेट',
+	confirmPin:'पिन की पुष्टि',
+	referralCode:'रेफरल कोड (वैकल्पिक)',
+	activationText:'अब आप अपने खाते को सक्रिय करने की आवश्यकता होगी। कृपया निम्नलिखित दस्तावेजों के लिए तैयार रहते हैं।',
+	notNow:'अभी नहीं',
+	activateAcc:'खाते को सक्रिय करें',
+	proof1:'PAN कार्ड',
+	proof2:'पता प्रमाण दस्तावेजों',
+	proof3:'नेट बैंकिंग सक्षम बैंक खाता संख्या',
+	proof4:'अपने बैंक खाते का IFSC कोड'
   });
     $translateProvider.translations('5', {
 	selectedLanguage:'Select your desired Language kannada',
@@ -58,7 +114,21 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	tabTitle3:'TRANSACTIONS',
       BUTTON_LANG_FORGOT:'ಮರೆತು ಪಿನ್?',
       BUTTON_LANG_SIGNUP:'ಅಥವಾ ಖಾತೆಯನ್ನು ರಚಿಸಿ ',
-    BUTTON_LANG_EN: ' ಸುರಕ್ಷಿತ ಲಾಗಿನ್'
+    BUTTON_LANG_EN: ' ಸುರಕ್ಷಿತ ಲಾಗಿನ್',
+	signUpTitle:'ಸೈನ್ ಅಪ್',
+	firstName:'ಮೊದಲ ಹೆಸರು',
+	lastName:'ಕೊನೆಯ ಹೆಸರು',
+	mobileNo:'ಮೊಬೈಲ್ ನಂಬರ',
+	setPIN:'4 ಅಂಕಿಯ PIN ಅನ್ನು',
+	confirmPin:'ನಾಲ್ಕು ಅಂಕಿಯ ಪಿನ್ ಖಚಿತಪಡಿಸಿ',
+	referralCode:'ಉಲ್ಲೇಖಿತ ಕೋಡ್ (ಐಚ್ಛಿಕ)',
+	activationText:'ನೀವು ಈಗ ನಿಮ್ಮ ಖಾತೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು ಅಗತ್ಯವಿದೆ. ದಯವಿಟ್ಟು ಕೆಳಗಿನ ದಾಖಲೆಗಳನ್ನು ಸಿದ್ಧ ಇರಿಸಿಕೊಳ್ಳಲು.',
+	notNow:'ಈಗ ಸಾಧ್ಯವಿಲ್ಲ',
+	activateAcc:'ಖಾತೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲು',
+	proof1:'PAN ಕಾರ್ಡ್',
+	proof2:'ವಿಳಾಸ ಪುರಾವೆ ದಾಖಲೆಗಳನ್ನು',
+	proof3:'ನನೆಟ್ ಬ್ಯಾಂಕಿಂಗ್ ಶಕ್ತಗೊಂಡ ಬ್ಯಾಂಕ್ ಖಾತೆ ಸಂಖ್ಯೆ',
+	proof4:'ನಿಮ್ಮ ಬ್ಯಾಂಕ್ ಖಾತೆಯ IFSC ಕೋಡ್'
   });
     $translateProvider.translations('6', {
 	selectedLanguage:'Select your desired Language Malyalam',
@@ -67,7 +137,21 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	tabTitle3:'TRANSACTIONS',
       BUTTON_LANG_FORGOT:'പിൻ മറന്നോ್?',
       BUTTON_LANG_SIGNUP:'അല്ലെങ്കിൽ ഒരു അക്കൗണ്ട് സൃഷ്ടിക്കുക ',
-    BUTTON_LANG_EN: ' സുരക്ഷിത ലോഗിൻ'
+    BUTTON_LANG_EN: ' സുരക്ഷിത ലോഗിൻ',
+	signUpTitle:'സൈൻ അപ്പ് ചെയ്യുക',
+	firstName:'പേരിന്റെ ആദ്യഭാഗം',
+	lastName:'പേരിന്റെ അവസാന ഭാഗം',
+	mobileNo:'മൊബൈൽ നമ്പർ',
+	setPIN:'4 അക്ക PIN സജ്ജമാക്കുക',
+	confirmPin:'നാലക്ക പിൻ സ്ഥിരീകരിക്കുക',
+	referralCode:'റഫറൽ കോഡ് (ഓപ്ഷണൽ)',
+	activationText:'നിങ്ങൾ ഇപ്പോൾ നിങ്ങളുടെ അക്കൗണ്ട് സജീവമാക്കാൻ ആവശ്യമാണ്. താഴെ പ്രമാണങ്ങൾ തയ്യാറാണ് സൂക്ഷിക്കുക.',
+	notNow:'ഇപ്പോൾ വേണ്ട',
+	activateAcc:'അക്കൗണ്ട് സജീവമാക്കുക',
+	proof1:'PAN കാർഡ്',
+	proof2:'മേൽവിലാസം പ്രമാണങ്ങൾ',
+	proof3:'നെറ്റ് ബാങ്കിങ് പ്രാപ്തമാക്കി ബാങ്ക് അക്കൗണ്ട് നമ്പർ',
+	proof4:'നിങ്ങളുടെ ബാങ്ക് അക്കൗണ്ട് IFSC കോഡ്'
   });
     $translateProvider.translations('7', {
 	selectedLanguage:'Select your desired Language Marathi',
@@ -76,7 +160,21 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	tabTitle3:'TRANSACTIONS',
       BUTTON_LANG_FORGOT:'विसरले पिन?',
       BUTTON_LANG_SIGNUP:'किंवा एक खाते तयार करा ',
-    BUTTON_LANG_EN: ' सुरक्षित लॉग-इन'
+    BUTTON_LANG_EN: ' सुरक्षित लॉग-इन',
+	signUpTitle:'साइन अप',
+	firstName:'पहिले नाव',
+	lastName:'आडनाव',
+	mobileNo:'मोबाइल क्रमांक',
+	setPIN:'4 अंकी पिन सेट करा',
+	confirmPin:'चार अंकी पिन पुष्टी',
+	referralCode:'रेफरल कोड (पर्यायी)',
+	activationText:'आपण आता आपले खाते सक्रिय करण्यासाठी आवश्यक आहे. कृपया खालील कागदपत्रे तयार ठेवा.',
+	notNow:'आत्ता नको',
+	activateAcc:'खाते सक्रिय',
+	proof1:'PAN कार्ड',
+	proof2:'पुरावा',
+	proof3:'नेट बँकिंग सक्षम बँक खाते क्रमांक',
+	proof4:'आपल्या बँक खाते IFSC कोड'
   });
     $translateProvider.translations('8', {
 	selectedLanguage:'Select your desired Language Tamil',
@@ -85,7 +183,21 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	tabTitle3:'TRANSACTIONS',
       BUTTON_LANG_FORGOT:'மறந்துவிட்டேன் முள?',
       BUTTON_LANG_SIGNUP:'அல்லது ஒரு கணக்கை உருவாக்க',
-    BUTTON_LANG_EN: ' பாதுகாப்பான தேதி'
+    BUTTON_LANG_EN: ' பாதுகாப்பான தேதி',
+	signUpTitle:'பதிவு',
+	firstName:'முதல் பெயர்',
+	lastName:'கடைசி பெயர்',
+	mobileNo:'மொபைல் எண்',
+	setPIN:'4 இலக்க PIN அமைக்க',
+	confirmPin:'4 ஐக்கிய பின்னை உறுதிப்படுத்தவும்',
+	referralCode:'பரிந்துரை குறியீடு (விரும்பினால்)',
+	activationText:'நீங்கள் இப்போது உங்கள் கணக்கை செயல்படுத்த வேண்டும். பின்வரும் ஆவணங்களை தயாராக வைத்து கொள்ளவும்.',
+	notNow:'இப்போது இல்லை',
+	activateAcc:'செயல்படுத்த',
+	proof1:'PAN அட்டை',
+	proof2:'முகவரி சான்று',
+	proof3:'நெட் பேங்கிங் செயல்படுத்தப்படும் வங்கி கணக்கு எண்',
+	proof4:'உங்கள் வங்கி கணக்கு Code என்ன குறியீடு'
   });
     $translateProvider.translations('9', {
 	selectedLanguage:'Select your desired Language Telgu',
@@ -94,7 +206,21 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	tabTitle3:'TRANSACTIONS',
       BUTTON_LANG_FORGOT:'మర్చిపోయాను పిన్?',
       BUTTON_LANG_SIGNUP:'లేదా ఖాతా సృష్టించుకోండి',
-    BUTTON_LANG_EN: 'సురక్షిత లాగిన్'
+    BUTTON_LANG_EN: 'సురక్షిత లాగిన్',
+	signUpTitle:'సృష్టించండి',
+	firstName:'మొదటి పేరు',
+	lastName:'చివరి పేరు',
+	mobileNo:'మొబైల్ నంబర్',
+	setPIN:'4 అంకెల PIN సృష్టించుకోండి',
+	confirmPin:'4 అంకెల PIN ను నిర్ధారించండి',
+	referralCode:'రెఫరల్ కోడ్(Optional)',
+	activationText:'మీరు ఇప్పుడు మీ ఖాతాను సక్రియం చేయాలి. దయచేసి కింది పత్రాలు  సిద్ధంగా ఉంచండి.',
+	notNow:'ఇప్పుడు కాదు',
+	activateAcc:'ఖాతాను సక్రియం',
+	proof1:'PAN కార్డ్',
+	proof2:'చిరునామా నిరూపణ పత్రం',
+	proof3:'నెట్ బ్యాంకింగ్ కలిగి ఉన్న బ్యాంక్ ఖాతా సంఖ్య',
+	proof4:'మీ బ్యాంక్ ఖాతా యొక్క IFSC కోడ్'
   });
   //con
   //console.log($sessionStorage.LanguageSession);

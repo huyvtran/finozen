@@ -1,13 +1,11 @@
 <ion-view title="Signup" class="sign_up">
 <div class="bar bar-header fino_head">
 	<a class="button button-clear ion-android-arrow-back " href="#/page7"></a>
-	<div class="h1 title"><p class="head_title"><span id="title">SIGN UP</span></p></div>
+	<div class="h1 title"><p class="head_title"><span id="title" translate="signUpTitle" ></span></p></div>
 	<a class="button button-clear button-positive  ion-android-call"  ng-href="tel:080-41245883"></a>
 	<!--<button ng-click="clos()">close</button>-->
 </div>
     <ion-content overflow-scroll="true" padding="true" scroll="false" class="has-header"  ng-controller="AuthSignUpCtrl">
-	
- 
 <form name="signupForm" novalidate="" ng-submit="signUp(signupForm,confirmPassword,authorization)" >
 
 	<div class="list">
@@ -17,7 +15,7 @@
 		<div class="row">
 			<div class="col" style="border-right: 3px solid white;">
 				<label class="item item-input" ng-class="{ 'has-errors' : signupForm.$submitted && signupForm.Fname.$invalid, 'no-errors' :  signupForm.Fname.$touched && signupForm.Fname.$valid}">
-					<i class="icon ion-person signup_icons"></i><input type="text" name="Fname" ng-pattern ="/^[a-zA-Z\s]*$/" ng-model="authorization.fName"  required placeholder="First Name">
+					<i class="icon ion-person signup_icons"></i><input type="text" name="Fname" ng-pattern ="/^[a-zA-Z\s]*$/" ng-model="authorization.fName"  required placeholder="{{'firstName' | translate}}">
 				</label>
 				<div class="error-container" ng-show="signupForm.Fname.$error && signupForm.$submitted" ng-messages="signupForm.Fname.$error">
 					<div class="error"  ng-message="required">You did not enter a field</div>
@@ -26,7 +24,7 @@
 			</div>
 			<div class="col"  style="border-left: 3px solid white;">
 				<label class="item item-input" ng-class="{ 'has-errors' : signupForm.$submitted && signupForm.Lname.$invalid, 'no-errors' :  signupForm.Lname.$touched && signupForm.Lname.$valid}">
-					<input type="text" name="Lname" ng-pattern ="/^[a-zA-Z\s]*$/"  ng-model="authorization.lName"  placeholder="Last Name" required>
+					<input type="text" name="Lname" ng-pattern ="/^[a-zA-Z\s]*$/"  ng-model="authorization.lName"  placeholder="{{'lastName' | translate}}" required>
 				</label>
 				<div class="error-container" ng-show="signupForm.Lname.$error && signupForm.$submitted" ng-messages="signupForm.Lname.$error">
 					<div class="error"  ng-message="required">You did not enter a field</div>
@@ -35,7 +33,7 @@
 			</div>
 		</div>
 		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.$submitted && signupForm.mobile.$invalid, 'no-errors' :  signupForm.mobile.$touched && signupForm.mobile.$valid}">
-			<i class="icon ion-android-call signup_icons"></i><input type="number" name="mobile" ng-model="authorization.mobileNumber" maxlength="10" ng-minlength="10" ng-maxlength="10" required placeholder="Mobile Number" >
+			<i class="icon ion-android-call signup_icons"></i><input type="number" name="mobile" ng-model="authorization.mobileNumber" maxlength="10" ng-minlength="10" ng-maxlength="10" required placeholder="{{'mobileNo' | translate}}" >
 		</label>
 		<div class="error-container" ng-show="signupForm.mobile.$error && signupForm.$submitted" ng-messages="signupForm.mobile.$error">
 			<div class="error"  ng-message="required">You did not enter a field</div>
@@ -47,7 +45,7 @@
 			</div>
 		</div>
 		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.password.$invalid && signupForm.$submitted, 'no-errors' : signupForm.password.$valid  && signupForm.$submitted}">
-			<i class="icon ion-android-lock signup_icons"></i><input type="password" name="password" ng-model="authorization.pin" maxlength="4" ng-minlength="4" ng-maxlength="4" required placeholder="Set 4 digit PIN" ng-pattern="/^[0-9]{1,4}$/">
+			<i class="icon ion-android-lock signup_icons"></i><input type="password" name="password" ng-model="authorization.pin" maxlength="4" ng-minlength="4" ng-maxlength="4" required placeholder="{{'setPIN' | translate}}" ng-pattern="/^[0-9]{1,4}$/">
 		</label>
 		<div class="error-container last-error-container" ng-show="signupForm.password.$error && signupForm.$submitted" ng-messages="signupForm.password.$error">
 			<div  class="error" >
@@ -61,7 +59,7 @@
 			</div>
 		</div>
 		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.confirm.$invalid && signupForm.$submitted, 'no-errors' : signupForm.confirm.$valid  && signupForm.$submitted}">
-			<i class="icon ion-android-lock signup_icons"></i><input type="password" name="confirm" ng-model="confirmPassword" maxlength="4" ng-minlength="4" ng-maxlength="4" required placeholder="Confirm 4 digit PIN" ng-pattern="/^[0-9]{1,4}$/">
+			<i class="icon ion-android-lock signup_icons"></i><input type="password" name="confirm" ng-model="confirmPassword" maxlength="4" ng-minlength="4" ng-maxlength="4" required placeholder="{{'confirmPin' | translate}}" ng-pattern="/^[0-9]{1,4}$/">
 		</label>
 		<div class="error-container last-error-container" ng-show="signupForm.confirm.$error && signupForm.$submitted" ng-messages="signupForm.confirm.$error">
 			<div  class="error" >
@@ -76,7 +74,7 @@
 			</div>
 		</div>
 		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.referral.$invalid && signupForm.$submitted, 'no-errors' : signupForm.referral.$valid  && signupForm.$submitted}">
-			<i class="icon ion-android-call signup_icons"></i><input type="number" name="referral" ng-model="authorization.referral" ng-minlength="10" ng-maxlength="10"  placeholder="Referral code(optional)">
+			<i class="icon ion-android-call signup_icons"></i><input type="number" name="referral" ng-model="authorization.referral" ng-minlength="10" ng-maxlength="10"  placeholder="{{'referralCode' | translate}}">
 		</label>
 		
 		<div class="error-container last-error-container" ng-show="signupForm.referral.$error && signupForm.$submitted" ng-messages="signupForm.referral.$error">
@@ -90,8 +88,7 @@
 	
 
 	</div>
-	<button class="button button-full button-positive" type="submit">
-	Sign Up
+	<button class="button button-full button-positive" type="submit" translate="signUpTitle">
 	</button>
 	<div  class="agree_terms" >
 		<span class="check_agree item-checkbox item_checkbox">By Signing up, I agree to <a href="#" onclick="window.open('http://finozen.com/t&c.html', '_self')"> T & C</a> and <a href="#" onclick="window.open('http://finozen.com/policy.html', '_self')">Privacy Policy</a></span>

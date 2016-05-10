@@ -737,11 +737,10 @@ angular.module('app.subcontrollerTwo', [])
 			{ name: 'Tamil', value: '8' },
 			{ name: 'Telugu', value: '9' }
 			];
-			$scope.clientLanguage = {type : $scope.clientLanguageOptions[1].value};
-      $ionicPlatform.ready(function()
-      {
+	$scope.clientLanguage = {type : $scope.clientLanguageOptions[1].value};
+    $ionicPlatform.ready(function(){
 		console.log($localStorage.language+"  localStorage selected");
-        //if ($localStorage.language == undefined) {
+        //if ($localStorage.language == undefined ) {
         if ($localStorage.language) {
           var myPopup = $ionicPopup.show({
             template:
@@ -767,6 +766,7 @@ angular.module('app.subcontrollerTwo', [])
                     console.log($localStorage.language+"  localStorage");
 					$translate.use($localStorage.language);
                     //return $scope.clientLanguage.type;
+					//$state.go("login");
                   }
                 }
               }
@@ -774,7 +774,7 @@ angular.module('app.subcontrollerTwo', [])
           });
         }
 			$translate.use($localStorage.language);
-            $state.go("login");
+            //$state.go("login");
       });
     })
 
