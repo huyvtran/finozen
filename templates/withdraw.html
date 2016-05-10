@@ -51,26 +51,25 @@
 		
 		Withdraw Fri - Sat: Money will be deposited in your Bank account on Monday by 10 a.m.<br/>
 		<br/></p>-->
-
 		<table>
 			<thead>
-				<th>Withdrawal</th>
-				<th>Deposit</th>
+				<th translate="withdrawl"></th>
+				<th translate="deposit"></th>
 			</thead>
 			<tr>
-				<td>Mon - Thur, before 2 p.m.</td>
-				<td>Next day 10 a.m.</td>
+				<td>Mon - Thur, <span translate="withdrawlTimeBefore"></span></td>
+				<td><span translate="dayAfter"></span> 10 a.m.</td>
 			</tr>
 			<tr>
-				<td>Mon - Thur, after 2 p.m.</td>
-				<td>Day after next 10 a.m.</td>
+				<td>Mon - Thur, <span translate="withdrawlTimeAfter"></span>.</td>
+				<td><span translate="dayAfterNext"></span> 10 a.m.</td>
 			</tr>
 			<tr>
-				<td>Fri before 2 p.m.</td>
+				<td>Fri <span translate="withdrawlTimeBefore"></span></td>
 				<td>Monday 10 a.m.</td>
 			</tr>
 			<tr>
-				<td>Fri after 2 p.m, Sat and Sun.</td>
+				<td>Fri <span translate="withdrawlTimeAfter"></span>, Sat <span translate="andText"></span> Sun.</td>
 				<td>Tuesday 10 a.m.</td>
 			</tr>
 		</table>		
@@ -78,7 +77,7 @@
 		
 		</div>
 
-		<p class="small_text">Working days Mon-Fri. If the day of deposit is a Bank Holiday, money will be deposited the next working day.</p>
+		<p class="small_text" translate="withdrawBottomLine"></p>
 </form>		  
 </div>
     </ion-content>

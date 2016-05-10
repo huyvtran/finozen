@@ -47,7 +47,15 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	proof1:'PAN Card',
 	proof2:'Address Proof',
 	proof3:'Net Banking enabled Banc Account No',
-	proof4:'IFSC Code of your Bank account'
+	proof4:'IFSC Code of your Bank account',
+	withdrawlTimeBefore:'before 2pm',
+	withdrawlTimeAfter:'after 2pm',
+	dayAfter:'Next day',
+	dayAfterNext:'Day after next',
+	andText:'and',
+	withdrawl:'Withdrawl',
+	deposit:'Deposit',
+	withdrawBottomLine:'Working days Mon-Fri. If the day of deposit is a Bank Holiday, money will be deposited the next working day.'
   });
   $translateProvider.translations('1', {
 	selectedLanguage:'Select your desired Language Bengali',
@@ -80,7 +88,15 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	proof1:'PAN কার্ড',
 	proof2:'ঠিকানার প্রমাণ দলিল',
 	proof3:'নেট ব্যাংকিং সক্রিয় ব্যাঙ্ক অ্যাকাউন্ট নম্বর',
-	proof4:'আপনার ব্যাংক অ্যাকাউন্টের IFSC কোড'
+	proof4:'আপনার ব্যাংক অ্যাকাউন্টের IFSC কোড',
+	withdrawlTimeBefore:'2 আগে',
+	withdrawlTimeAfter:'2 পরে',
+	dayAfter:'পরবর্তী দিন',
+	dayAfterNext:'পরশু',
+	andText:'এবং',
+	withdrawl:'প্রত্যাহার',
+	deposit:'আমানত',
+	withdrawBottomLine:'কার্যদিবসের সোমবার-শুক্রবার. যদি আমানত দিনে একটি ব্যাংক হলিডে হয়, টাকা পরবর্তী কর্মদিবসে জমা হয়ে যাবে.'
   });
     $translateProvider.translations('3', {
 	selectedLanguage:'Select your desired Language Gujarati',
@@ -113,7 +129,15 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	proof1:'PAN પત્તાની',
 	proof2:'એડ્રેસ પ્રૂફ દસ્તાવેજ',
 	proof3:'નેટ બેન્કિંગ સક્ષમ બૅન્ક એકાઉન્ટ નંબર',
-	proof4:'તમારી બેંક એકાઉન્ટ IFSC કોડ'
+	proof4:'તમારી બેંક એકાઉન્ટ IFSC કોડ',
+	withdrawlTimeBefore:'2 પહેલાં',
+	withdrawlTimeAfter:'2 પછી',
+	dayAfter:'આવતો દિવસ',
+	dayAfterNext:'કાલે પછી દિવસ',
+	andText:'અને',
+	withdrawl:'ખસી',
+	deposit:'થાપણ',
+	withdrawBottomLine:'કામ ટ્રેડીંગ સોમવાર, શુક્રવાર. જો ડિપોઝિટ દિવસ એક બેંક રજા છે, પૈસા આગામી કામ દિવસ જમા કરવામાં આવશે.'
   });
   $translateProvider.translations('4', {
 	selectedLanguage:'अपनी इच्छित भाषा का चयन करें',
@@ -146,7 +170,15 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	proof1:'PAN कार्ड',
 	proof2:'पता प्रमाण दस्तावेजों',
 	proof3:'नेट बैंकिंग सक्षम बैंक खाता संख्या',
-	proof4:'अपने बैंक खाते का IFSC कोड'
+	proof4:'अपने बैंक खाते का IFSC कोड',
+	withdrawlTimeBefore:'2pm से पहले',
+	withdrawlTimeAfter:'2pm के बाद',
+	dayAfter:'अगले दिन',
+	dayAfterNext:'परसों',
+	andText:'तथा',
+	withdrawl:'वापसी',
+	deposit:'जमा',
+	withdrawBottomLine:'कार्य दिवसों सोमवार से शुक्रवार। यदि जमा के दिन एक बैंक अवकाश है, पैसा अगले कार्य दिवस जमा किया जाएगा।'
   });
     $translateProvider.translations('5', {
 	selectedLanguage:'Select your desired Language kannada',
@@ -179,7 +211,15 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	proof1:'PAN ಕಾರ್ಡ್',
 	proof2:'ವಿಳಾಸ ಪುರಾವೆ ದಾಖಲೆಗಳನ್ನು',
 	proof3:'ನನೆಟ್ ಬ್ಯಾಂಕಿಂಗ್ ಶಕ್ತಗೊಂಡ ಬ್ಯಾಂಕ್ ಖಾತೆ ಸಂಖ್ಯೆ',
-	proof4:'ನಿಮ್ಮ ಬ್ಯಾಂಕ್ ಖಾತೆಯ IFSC ಕೋಡ್'
+	proof4:'ನಿಮ್ಮ ಬ್ಯಾಂಕ್ ಖಾತೆಯ IFSC ಕೋಡ್',
+	withdrawlTimeBefore:'2pm ಮೊದಲು',
+	withdrawlTimeAfter:'2pm ನಂತರ',
+	dayAfter:'ಮರುದಿನ',
+	dayAfterNext:'ನಾಡಿದ್ದು',
+	andText:'ಮತ್ತು',
+	withdrawl:'ವಾಪಸಾತಿ',
+	deposit:'ಠೇವಣಿ',
+	withdrawBottomLine:'ವರ್ಕಿಂಗ್ ದಿನಗಳು ಸೋಮವಾರ-ಶುಕ್ರವಾರ. ಠೇವಣಿ ದಿನ ಬ್ಯಾಂಕ್ ಹಾಲಿಡೇ ವೇಳೆ, ಹಣ ಮುಂದಿನ ಕೆಲಸ ದಿನ ಸಂಗ್ರಹಿಸಿದ ಆಗುತ್ತದೆ.'
   });
     $translateProvider.translations('6', {
 	selectedLanguage:'Select your desired Language Malyalam',
@@ -212,7 +252,15 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	proof1:'PAN കാർഡ്',
 	proof2:'മേൽവിലാസം പ്രമാണങ്ങൾ',
 	proof3:'നെറ്റ് ബാങ്കിങ് പ്രാപ്തമാക്കി ബാങ്ക് അക്കൗണ്ട് നമ്പർ',
-	proof4:'നിങ്ങളുടെ ബാങ്ക് അക്കൗണ്ട് IFSC കോഡ്'
+	proof4:'നിങ്ങളുടെ ബാങ്ക് അക്കൗണ്ട് IFSC കോഡ്',
+	withdrawlTimeBefore:'2pm മുമ്പിൽ',
+	withdrawlTimeAfter:'2pm ശേഷം',
+	dayAfter:'അടുത്ത ദിവസം',
+	dayAfterNext:'മറ്റന്നാൾ',
+	andText:'ഒപ്പം',
+	withdrawl:'പിൻവലിക്കൽ',
+	deposit:'നിക്ഷേപം',
+	withdrawBottomLine:'പ്രവർത്തി ദിവസങ്ങളിൽ തിങ്കളാഴ്ച-വെള്ളിയാഴ്ച. ഡെപ്പോസിറ്റ് ദിവസമോ ബാങ്ക് അവധി ആണെങ്കിൽ, പണം അടുത്ത പ്രവൃത്തി ദിവസം നിക്ഷേപിക്കും.'
   });
     $translateProvider.translations('7', {
 	selectedLanguage:'Select your desired Language Marathi',
@@ -245,7 +293,16 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	proof1:'PAN कार्ड',
 	proof2:'पुरावा',
 	proof3:'नेट बँकिंग सक्षम बँक खाते क्रमांक',
-	proof4:'आपल्या बँक खाते IFSC कोड'
+	proof4:'आपल्या बँक खाते IFSC कोड',
+	withdrawlTimeBefore:'2pm आधी',
+	withdrawlTimeAfter:'2pm नंतर',
+	dayAfter:'उद्या',
+	dayAfterNext:'परवा',
+	andText:'आणि',
+	withdrawl:'पैसे काढणे',
+	deposit:'ठेव',
+	withdrawBottomLine:'कामाचे दिवस सोमवार-शुक्रवारी. ठेव दिवशी एक बँक सुट्टी असेल, तर पैसे पुढील कार्यालयीन दिवशी जमा केले जातील.'
+	
   });
     $translateProvider.translations('8', {
 	selectedLanguage:'Select your desired Language Tamil',
@@ -278,10 +335,18 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	proof1:'PAN அட்டை',
 	proof2:'முகவரி சான்று',
 	proof3:'நெட் பேங்கிங் செயல்படுத்தப்படும் வங்கி கணக்கு எண்',
-	proof4:'உங்கள் வங்கி கணக்கு Code என்ன குறியீடு'
+	proof4:'உங்கள் வங்கி கணக்கு Code என்ன குறியீடு',
+	withdrawlTimeBefore:'2pm முன்',
+	withdrawlTimeAfter:'2pm பின்னர்',
+	dayAfter:'மறுநாள்',
+	dayAfterNext:'நாளை மறுநாள்',
+	andText:'மற்றும்',
+	withdrawl:'திரும்பப் பெற',
+	deposit:'வைப்பு',
+	withdrawBottomLine:'வேலை நாட்கள் திங்கள், வெள்ளி. வைப்பு நாள் ஒரு வங்கி விடுமுறை இருந்தால், பணம் அடுத்த வேலை நாளில் டெபாசிட் செய்யப்படும்.'
   });
     $translateProvider.translations('9', {
-	selectedLanguage:'Select your desired Language Telgu',
+	selectedLanguage:'Select your desired Language Telugu',
 	tabTitle1:'సారాంశం',
 	tabTitle2:'వృద్ధి రేటు',
 	tabTitle3:'లావాదేవీలు',
@@ -311,7 +376,15 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	proof1:'PAN కార్డ్',
 	proof2:'చిరునామా నిరూపణ పత్రం',
 	proof3:'నెట్ బ్యాంకింగ్ కలిగి ఉన్న బ్యాంక్ ఖాతా సంఖ్య',
-	proof4:'మీ బ్యాంక్ ఖాతా యొక్క IFSC కోడ్'
+	proof4:'మీ బ్యాంక్ ఖాతా యొక్క IFSC కోడ్',
+	withdrawlTimeBefore:'2pm ముందు',
+	withdrawlTimeAfter:'2pm తరువాత',
+	dayAfter:'మరుసటి రోజు',
+	dayAfterNext:'రేపు తర్వాత రోజు',
+	andText:'మరియు',
+	withdrawl:'ఉపసంహరణ',
+	deposit:'డిపాజిట్',
+	withdrawBottomLine:'పని రోజుల సోమవారం-శుక్రవారం. డిపాజిట్ రోజున ఒక బ్యాంక్ హాలిడే ఉంటే, డబ్బు తదుపరి రోజు జమ అవుతుంది.'
   });
   //con
   //console.log($sessionStorage.LanguageSession);
