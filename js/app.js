@@ -62,7 +62,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_INVITE_MESSAGE1:'Invite now and get INR 100 for every referral, your friend will also get INR 100',
       TEXT_INVITE_MESSAGE2:'Your friend has to invest a minimum of INR 100 and keep it invested for atleast 10 days for both of you to be eligible for referral pay out',
       TEXT_INVITE_MESSAGE3:'Please contact us for any queries.',
-      TEXT_INVITE_BUTTON:'Start Inviting'
+      TEXT_INVITE_BUTTON:'Start Inviting',
+      TEXT_LANG_MENU1:'Invite & Earn',
+      TEXT_LANG_MENU2:'FAQ',
+      TEXT_LANG_MENU3:'contact us',
+      TEXT_LANG_MENU4:'About us',
+      TEXT_LANG_MENU5:'Activate account',
+      TEXT_LANG_MENU6:'Sign Out'
   });
   $translateProvider.translations('1', {
 	selectedLanguage:'Select your desired Language Bengali',
@@ -110,7 +116,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     TEXT_INVITE_MESSAGE1:'এখন আমন্ত্রণ এবং প্রতি রেফারেল জন্য আইএনআর 100 পেতে , আপনার বন্ধু এছাড়াও আইএনআর 100 পেতে হবে',
     TEXT_INVITE_HEADER3:'আপনার বন্ধু রেফারেল জন্য আউট পরিশোধ যোগ্য হতে আইএনআর 100 একটি সর্বনিম্ন বিনিয়োগ এবং এটা অন্তত 10 দিনের জন্য বিনিয়োগ রাখা আপনাদের উভয়ের জন্য রয়েছে',
     TEXT_INVITE_MESSAGE3:'যে কোন প্রশ্নের জন্য আমাদের সাথে যোগাযোগ করুন .',
-    TEXT_INVITE_BUTTON:'আমন্ত্রণ জানানো হচ্ছে শুরু'
+    TEXT_INVITE_BUTTON:'আমন্ত্রণ জানানো হচ্ছে শুরু',
+    TEXT_LANG_MENU1:'আমন্ত্রণ ও রোজগার',
+    TEXT_LANG_MENU2:'অনবরত জিজ্ঞাসিত প্রশ্ন',
+    TEXT_LANG_MENU3:'আমাদের সাথে যোগাযোগ করুন',
+    TEXT_LANG_MENU4:'আমাদের সম্পর্কে',
+    TEXT_LANG_MENU5:'অ্যাকাউন্ট সক্রিয়',
+    TEXT_LANG_MENU6:'সাইন আউট'
   });
     $translateProvider.translations('3', {
 	selectedLanguage:'Select your desired Language Gujarati',
@@ -158,7 +170,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_INVITE_MESSAGE1:'હવે આમંત્રણ આપો અને દરેક રેફરલ માટે રૂ 100 મેળવવા માટે, તમારા મિત્ર પણ રૂપિયા 100 મળશે',
       TEXT_INVITE_HEADER3:'તમારા મિત્ર રેફરલ માટે ચૂકવણી પાત્ર થવા માટે રૂ 100 ઓછામાં ઓછા રોકાણ અને તે ઓછામાં ઓછા 10 દિવસ માટે રોકાણ રાખવા તમે બંને માટે છે',
       TEXT_INVITE_MESSAGE3:'કોઈપણ પ્રશ્નો માટે અમને સંપર્ક કરો.',
-      TEXT_INVITE_BUTTON:'આમંત્રિત શરૂ'
+      TEXT_INVITE_BUTTON:'આમંત્રિત શરૂ',
+      TEXT_LANG_MENU1:'આમંત્રણ આપો અને કમાઓ',
+      TEXT_LANG_MENU2:'FAQ',
+      TEXT_LANG_MENU3:'અમારો સંપર્ક કરો',
+      TEXT_LANG_MENU4:'અમારા વિશે',
+      TEXT_LANG_MENU5:'એકાઉન્ટ સક્રિય',
+      TEXT_LANG_MENU6:'સાઇન આઉટ કરો'
   });
   $translateProvider.translations('4', {
 	selectedLanguage:'अपनी इच्छित भाषा का चयन करें',
@@ -206,7 +224,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     TEXT_INVITE_MESSAGE1:'अब आमंत्रित करें और हर सिफ़ारिश के लिए INR 100 मिलता है, अपने दोस्त भी INR 100 मिल जाएगा',
     TEXT_INVITE_HEADER3:'आपके मित्र सिफ़ारिश के लिए बाहर का भुगतान पात्र होने के लिए INR 100 का एक न्यूनतम निवेश करते हैं और यह कम से कम 10 दिनों के लिए निवेश रखने के लिए आप दोनों के लिए करना पड़ता है',
     TEXT_INVITE_MESSAGE3:'कृपया किसी भी जानकारी के लिए हमसे संपर्क करें।',
-    TEXT_INVITE_BUTTON:'आमंत्रित करना प्रारंभ'
+    TEXT_INVITE_BUTTON:'आमंत्रित करना प्रारंभ',
+    TEXT_LANG_MENU1:'आमंत्रित करें और कमाने के लिए',
+    TEXT_LANG_MENU2:'सामान्य प्रश्न',
+    TEXT_LANG_MENU3:'हमसे संपर्क करें',
+    TEXT_LANG_MENU4:'हमारे बारे में',
+    TEXT_LANG_MENU5:'खाते को सक्रिय करें',
+    TEXT_LANG_MENU6:'साइन आउट'
   });
     $translateProvider.translations('5', {
 	selectedLanguage:'Select your desired Language kannada',
@@ -254,7 +278,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_INVITE_MESSAGE1:'ಈಗ ಆಹ್ವಾನಿಸಿ ಮತ್ತು ಪ್ರತಿ ಉಲ್ಲೇಖಿತ ರೂಪಾಯಿ 100 , ನಿಮ್ಮ ಸ್ನೇಹಿತ ಕೂಡ ರೂಪಾಯಿ 100 ಪಡೆಯುತ್ತಾನೆ',
       TEXT_INVITE_HEADER3:'ನಿಮ್ಮ ಸ್ನೇಹಿತನ ಉಲ್ಲೇಖಿತ ಪಾವತಿ ಅರ್ಹವಾಗಿರುತ್ತವೆ ರೂಪಾಯಿ 100 ಕನಿಷ್ಠ ಹೂಡಿಕೆ ಮತ್ತು ನೀವು ಎರಡೂ ಇದು ಕನಿಷ್ಠ 10 ದಿನಗಳ ಹೂಡಿಕೆ ಇರಿಸಿಕೊಳ್ಳಲು ಹೊಂದಿದೆ',
       TEXT_INVITE_MESSAGE3:'ಯಾವುದೇ ಪ್ರಶ್ನೆಗಳನ್ನು ನಮಗೆ ಸಂಪರ್ಕಿಸಿ.',
-      TEXT_INVITE_BUTTON:'ಆಹ್ವಾನಿಸುವ ಪ್ರಾರಂಭಿಸಿ'
+      TEXT_INVITE_BUTTON:'ಆಹ್ವಾನಿಸುವ ಪ್ರಾರಂಭಿಸಿ',
+      TEXT_LANG_MENU1:'ಆಹ್ವಾನಿಸಿ & ಗಳಿಸಿ',
+      TEXT_LANG_MENU2:'ಎಫ್ಎಕ್ಯೂ',
+      TEXT_LANG_MENU3:'ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ',
+      TEXT_LANG_MENU4:'ನಮ್ಮ ಬಗ್ಗೆ',
+      TEXT_LANG_MENU5:'ಖಾತೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ',
+      TEXT_LANG_MENU6:'ಸೈನ್ ಔಟ್'
   });
     $translateProvider.translations('6', {
 	selectedLanguage:'Select your desired Language Malyalam',
@@ -302,7 +332,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_INVITE_MESSAGE1:'ഇപ്പോൾ ക്ഷണിക്കുക ഒപ്പം രൂപ 100 നേടുകയും ഓരോ റഫറൽ , നിങ്ങളുടെ സുഹൃത്ത് പുറമേ രൂപ 100 ലഭിക്കും',
       TEXT_INVITE_HEADER3:'നിങ്ങളുടെ സുഹൃത്ത് രൂപ 100 മിനിമം നിക്ഷേപം അതു റഫറൽ അടക്കാൻ യോഗ്യത നിങ്ങൾക്കു രണ്ടുപേർക്കും കുറയാതെ 10 ദിവസം നിക്ഷേപിക്കാനും മാറ്റി നിർത്തുകയും',
       TEXT_INVITE_MESSAGE3:'എല്ലാ ചോദ്യങ്ങളിലും ഞങ്ങളെ ബന്ധപ്പെടുക.',
-      TEXT_INVITE_BUTTON:'ക്ഷണിക്കുന്നു ആരംഭിക്കുക'
+      TEXT_INVITE_BUTTON:'ക്ഷണിക്കുന്നു ആരംഭിക്കുക',
+      TEXT_LANG_MENU1:'ക്ഷണിക്കുക & നേടുക',
+      TEXT_LANG_MENU2:'പതിവുചോദ്യങ്ങൾ',
+      TEXT_LANG_MENU3:'ഞങ്ങളെ സമീപിക്കുക',
+      TEXT_LANG_MENU4:'ഞങ്ങളേക്കുറിച്ച്',
+      TEXT_LANG_MENU5:'അക്കൗണ്ട് സജീവമാക്കുക',
+      TEXT_LANG_MENU6:'സൈൻ ഔട്ട്'
   });
     $translateProvider.translations('7', {
 	selectedLanguage:'Select your desired Language Marathi',
@@ -350,7 +386,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_INVITE_MESSAGE1:'ഇപ്പോൾ ക്ഷണിക്കുക ഒപ്പം രൂപ 100 നേടുകയും ഓരോ റഫറൽ , നിങ്ങളുടെ സുഹൃത്ത് പുറമേ രൂപ 100 ലഭിക്കും',
       TEXT_INVITE_HEADER3:'आपले मित्र संदर्भ बाहेर द्या पात्र रुपये 100 किमान गुंतवणूक आणि आपण दोन्ही तो किमान 10 दिवस गुंतवणूक ठेवणे आहे',
       TEXT_INVITE_MESSAGE3:'काही शंका आमच्याशी संपर्क साधा .',
-      TEXT_INVITE_BUTTON:'आमंत्रित करत आहे प्रारंभ'
+      TEXT_INVITE_BUTTON:'आमंत्रित करत आहे प्रारंभ',
+      TEXT_LANG_MENU1:'आमंत्रित करा & कमवा',
+      TEXT_LANG_MENU2:'नेहमी विचारले जाणारे प्रश्न',
+      TEXT_LANG_MENU3:'आमच्याशी संपर्क',
+      TEXT_LANG_MENU4:'आमच्या विषयी',
+      TEXT_LANG_MENU5:'खाते सक्रिय',
+      TEXT_LANG_MENU6:'साइन आउट'
   });
     $translateProvider.translations('8', {
 	selectedLanguage:'Select your desired Language Tamil',
@@ -398,7 +440,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_INVITE_MESSAGE1:'இப்போது அழை மற்றும் ரூபாய் 100 கிடைக்கும் ஒவ்வொரு குறிப்பு , உங்கள் நண்பர் கூட இந்திய ரூபாய் 100 பெறுவார்கள்',
       TEXT_INVITE_HEADER3:'உங்கள் நண்பர் குறிப்பு அவுட் கொடுக்க தகுதி பெற இந்திய ரூபாய் 100 ஒரு குறைந்தபட்ச முதலீடு மற்றும் நீங்கள் இருவரும் அதை குறைந்தது 10 நாட்களுக்கு முதலீடு வைத்திருக்க வேண்டும்',
       TEXT_INVITE_MESSAGE3:'எந்த கேள்விகள் எங்களை தொடர்பு கொள்ளவும்.',
-      TEXT_INVITE_BUTTON:'அழைப்பதால் தொடக்கம்'
+      TEXT_INVITE_BUTTON:'அழைப்பதால் தொடக்கம்',
+      TEXT_LANG_MENU1:'அழை & சம்பாதிக்க',
+      TEXT_LANG_MENU2:'கேள்விகள்',
+      TEXT_LANG_MENU3:'எங்களை தொடர்பு',
+      TEXT_LANG_MENU4:'எங்களை பற்றி',
+      TEXT_LANG_MENU5:'கணக்கு செயல்படுத்தவும்',
+      TEXT_LANG_MENU6:'வெளியேறு'
   });
     $translateProvider.translations('9', {
 	selectedLanguage:'Select your desired Language Telgu',
@@ -446,7 +494,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_INVITE_MESSAGE1:'ఇప్పుడు ఆహ్వానించు మరియు ప్రతి రిఫెరల్ కోసం INR 100 ను మీ స్నేహితుడు కూడా INR 100 పొందుతారు',
       TEXT_INVITE_HEADER3:'మీ స్నేహితుడు చెల్లించాలి నివేదన అర్హులు అవుతారు INR 100 కనీసం పెట్టుబడి మరియు మీరు రెండు కోసం ఇది కనీసం 10 రోజులు పెట్టుబడి ఉంచడానికి ఉంది',
       TEXT_INVITE_MESSAGE3:'ఏ ప్రశ్నలు కోసం దయచేసి మమ్మల్ని సంప్రదించండి.',
-      TEXT_INVITE_BUTTON:'ఆహ్వానిస్తోంది ప్రారంభం'
+      TEXT_INVITE_BUTTON:'ఆహ్వానిస్తోంది ప్రారంభం',
+      TEXT_LANG_MENU1:'ఆహ్వానం & సంపాదించండి',
+      TEXT_LANG_MENU2:'ఎఫ్ ఎ క్యూ',
+      TEXT_LANG_MENU3:'మమ్మల్ని సంప్రదించండి',
+      TEXT_LANG_MENU4:'మా గురించి',
+      TEXT_LANG_MENU5:'ఖాతాను సక్రియం',
+      TEXT_LANG_MENU6:'సైన్ ఔట్'
   });
   //con
   //console.log($sessionStorage.LanguageSession);
