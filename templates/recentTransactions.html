@@ -1,5 +1,4 @@
 <ion-view cache-view="false" title="Recent Transactions">
-  <span ng-controller="googleanalytics"></span>
 <span ng-controller="showhistoryController"></span>
 <ion-content  has-bouncing="true"  scrollbar-y="false" ng-controller="transListController as listControl">
 
@@ -11,12 +10,9 @@
 	<span class="item-note right">{{'TranscationID' | translate}}: {{ lists.orderId}}</span><br/>
 	<span class="item-note left">{{lists.txnDate}} </span>
 	<i class="icon ion-ios-checkmark-outline payment"></i>
-
   </div>
-  <div class="noTxn"><p>{{noTxnMsg1}}<br/>{{noTxnMsg2}} <img ng-src="{{noTxnIcon}}"></p>
+  <div class="noTxn"><p>{{'noTxnMsg1'| translate}}<br/>{{'noTxnMsg2' | translate}} <img ng-src="{{noTxnIcon}}"></p>
   </div>
-
-
 </div>
 </ion-content>
 </ion-view>

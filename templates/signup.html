@@ -18,7 +18,7 @@
 					<i class="icon ion-person signup_icons"></i><input type="text" name="Fname" ng-pattern ="/^[a-zA-Z\s]*$/" ng-model="authorization.fName"  required placeholder="{{'firstName' | translate}}">
 				</label>
 				<div class="error-container" ng-show="signupForm.Fname.$error && signupForm.$submitted" ng-messages="signupForm.Fname.$error">
-					<div class="error"  ng-message="required">You did not enter a field</div>
+					<div class="error"  ng-message="required">{{'fieldEmpty' | translate}}</div>
 					<div class="error"  ng-message="pattern">Enter Alphabets only</div>
 				</div>
 			</div>
@@ -27,7 +27,7 @@
 					<input type="text" name="Lname" ng-pattern ="/^[a-zA-Z\s]*$/"  ng-model="authorization.lName"  placeholder="{{'lastName' | translate}}" required>
 				</label>
 				<div class="error-container" ng-show="signupForm.Lname.$error && signupForm.$submitted" ng-messages="signupForm.Lname.$error">
-					<div class="error"  ng-message="required">You did not enter a field</div>
+					<div class="error"  ng-message="required">{{'fieldEmpty' | translate}}</div>
 					<div class="error"  ng-message="pattern">Enter Alphabets only</div>
 				</div>
 			</div>
@@ -36,12 +36,12 @@
 			<i class="icon ion-android-call signup_icons"></i><input type="number" name="mobile" ng-model="authorization.mobileNumber" maxlength="10" ng-minlength="10" ng-maxlength="10" required placeholder="{{'mobileNo' | translate}}" >
 		</label>
 		<div class="error-container" ng-show="signupForm.mobile.$error && signupForm.$submitted" ng-messages="signupForm.mobile.$error">
-			<div class="error"  ng-message="required">You did not enter a field</div>
+			<div class="error"  ng-message="required">{{'fieldEmpty' | translate}}</div>
 			<div class="error"  ng-message="minlength, maxlength">
-				Mobile number must be 10 digits.
+				{{'mobileLength' | translate}}
 			</div>
 			<div class="error"  ng-message="min, max, step">
-				Enter valid mobile number
+				{{'mobileInvalid' | translate}}
 			</div>
 		</div>
 		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.password.$invalid && signupForm.$submitted, 'no-errors' : signupForm.password.$valid  && signupForm.$submitted}">
@@ -50,12 +50,13 @@
 		<div class="error-container last-error-container" ng-show="signupForm.password.$error && signupForm.$submitted" ng-messages="signupForm.password.$error">
 			<div  class="error" >
 				<div ng-message="required">
-					You did not enter a field
+					{{'fieldEmpty' | translate}}
 				</div>
 				<div ng-message="minlength, maxlength">
-					Enter 4 digit PIN
+				{{'passwordLength' | translate}}
 				</div>
-				<div ng-message="pattern">Enter digits only</div>
+				<div ng-message="pattern">
+				{{'digitsOnly' | translate}}</div>
 			</div>
 		</div>
 		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.confirm.$invalid && signupForm.$submitted, 'no-errors' : signupForm.confirm.$valid  && signupForm.$submitted}">
@@ -64,7 +65,7 @@
 		<div class="error-container last-error-container" ng-show="signupForm.confirm.$error && signupForm.$submitted" ng-messages="signupForm.confirm.$error">
 			<div  class="error" >
 				<div ng-message="required">
-					You did not enter a field
+					{{'fieldEmpty' | translate}}
 				</div>
 				<div ng-message="minlength, maxlength">
 					Enter 4 digit PIN

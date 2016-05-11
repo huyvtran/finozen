@@ -74,7 +74,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 
 					if(data.responseCode=="Cali_ERR_2050"){
 
-						$scope.serverError="Mobile number in use";
+						$scope.mobileError="Mobile number in use";
 					}
 					else{
 						$scope.serverError="Sign Up failed, please try again";
@@ -99,7 +99,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 
     /*For Sign In*/
 
-.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,$ionicLoading,$localStorage,$translate,$ionicPopup) {
+.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,$ionicLoading,$localStorage,$translate,$ionicPopup,$timeout) {
 	
 	$scope.clientLanguageOptions = [
 			{ name: 'বাঙালি', value: '1' },
@@ -126,7 +126,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
             buttons: [
 
               {
-                text: '<b>Save</b>',
+                text: '<b>OK</b>',
                 type: 'button-positive',
                 onTap: function(e) {
                   if (!$scope.clientLanguage.type) {
@@ -178,7 +178,11 @@ console.log($scope.loginDetails);
     $state.go('forgot_pin');
     }
     else{
-      $scope.message="Please enter your mobile number to reset PIN";
+		$scope.message="Please enter your mobile number to reset PIN";
+	$timeout(function(){
+		$scope.message="";
+	},3000)
+      
     }
   }
 
@@ -202,12 +206,18 @@ console.log($scope.loginDetails);
         }
         else if(data.responseCode=="Cali_ERR_9002") {
         $ionicLoading.hide();
-        $scope.serverError="Password not valid";
+        $scope.passwordError="Password not valid";
+		$timeout(function(){
+		$scope.passwordError="";
+	},3000)
        }
 
         },function(error){
       $ionicLoading.hide();
         $scope.serverError = "Entered Credentials did not validate";
+		$timeout(function(){
+		$scope.serverError="";
+	},3000)
     });
 
   }
@@ -267,7 +277,7 @@ if($sessionStorage.clientActive=="Y") {
     .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,$ionicLoading,getReportService,$timeout) {
 var timeNow = new Date().getUTCHours();
 /*$ionicLoading.show({
-            template: 
+            template:
 '<div class="loading visible active" style="margin-left: -53px; margin-top: 76px"><span><img style="max-height:50px" src="img/loading.gif"></img><br/>Custom Loading...</span></div>',
             noBackdrop: true
         });*/
@@ -298,8 +308,6 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 	console.log($sessionStorage.allTransactions + "total number of transactions");
     $scope.products=data.jsonStr;
 	if((data.jsonStr).length <= 0){console.log(window.Connection + "connection");
-	$scope.noTxnMsg1="There are no transactions to display,";
-	$scope.noTxnMsg2="START INVESTING NOW";
 	$scope.noTxnIcon="img/no_leaves.png";
     }
     }
@@ -357,9 +365,9 @@ $scope.$broadcast("scroll.refreshComplete");
 
     })
 
-    .controller('popOverController',function($scope,$ionicPopover ){
+    .controller('popOverController',function($scope,$ionicPopover,$translate ){
 
-        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item pop_up" href="#" target="_blank">Estimated annual returns for your investments till date, and should not be construed as projected returns or actual performance.</a> </div></ion-content>';
+        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item pop_up" href="#" target="_blank" translate="TEXT_POPOVER"></a> </div></ion-content>';
 
         $scope.popover = $ionicPopover.fromTemplate(template, {
             scope: $scope

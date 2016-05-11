@@ -8,50 +8,49 @@
         <p class="padding">Watch Your Money Grow</p>
       </div>
 <form name="authorizationForm" novalidate="" ng-submit="signIn(authorizationForm)">
-
-
 	<div class="list">
 		<div  class="error" >
-			<div>{{serverError}} </div>
+			<div ng-show="serverError">  {{'credentialsInvalid' | translate}} </div>
+			<div ng-show="passwordError">  {{'passwordInvalid' | translate}} </div>
 		</div>
 		<label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.mobile.$touched && authorizationForm.mobile.$invalid, 'no-errors' :  authorizationForm.mobile.$touched && authorizationForm.mobile.$valid}">
-			<input type="number" name="mobile" ng-model="mobileNumber"  maxlength="10" ng-minlength="10" ng-maxlength="10" required placeholder="Mobile Number">
+			<input type="number" name="mobile" ng-model="mobileNumber"  maxlength="10" ng-minlength="10" ng-maxlength="10" ng-pattern="/^[0-9]{1,10}$/" required placeholder="{{'mobileNo' | translate}}" step="1">
 		</label>
 		<div class="error-container" ng-show="authorizationForm.mobile.$error && authorizationForm.$submitted" ng-messages="authorizationForm.mobile.$error">
 			<div  class="error" >
 
-				<div ng-message="required">You did not enter a field</div>
+				<div ng-message="required">{{'fieldEmpty' | translate}}</div>
 				<div ng-message="minlength, maxlength">
-					Mobile number must be 10 digits.
+					{{'mobileLength' | translate}}
 				</div>
-				<div  ng-message="step">
-					Enter valid mobile number
+				<div  ng-message="step, pattern">
+					{{'mobileInvalid' | translate}}
 				</div>
 
 			</div>
 		</div>
 		<div class="error-container" ng-hide="authorizationForm.mobile.$error && authorizationForm.$submitted">
-			<div  class="error" >
-					{{message}}
+			<div  class="error" ng-show="message" >
+					{{'resetPinError' | translate}}
 			</div>
 		</div>
 		<label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.password.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid  && authorizationForm.$submitted}">
-			<input type="password" name="password" ng-pattern="/^[0-9]{1,4}$/" ng-model="digitPin" maxlength="4" ng-minlength="4" ng-maxlength="4" required placeholder="4 digit PIN" >
+			<input type="password" name="password" ng-pattern="/^[0-9]{1,4}$/" ng-model="digitPin" maxlength="4" ng-minlength="4" ng-maxlength="4" required placeholder="{{'passwordLength' | translate}}" >
 		</label>
 		<p class="text-right forgot_pin" ng-click="forgotPin(authorizationForm.mobile)"translate="BUTTON_LANG_FORGOT"></p>
 		<div class="error-container last-error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">
 			<div  class="error" >
 				<div ng-message="required">
-					You did not enter a field
+					{{'fieldEmpty' | translate}}
 				</div>
 				<div ng-message="minlength, maxlength">
-					Enter 4 digit PIN
+					{{'passwordLength' | translate}}
 				</div>
-				<div ng-message="pattern">Enter digits only</div>
+				<div ng-message="pattern">{{'digitsOnly' | translate}}</div>
 			</div>
 		</div>
 	<label class="row rememberme">
-			<input ng-model="rememberMe" type="checkbox" ng-init="rememberMe=true" id="remember_me" style="margin: 4px;"><label id="remember_me_label" for="remember_me" >Remember me</label>
+			<input ng-model="rememberMe" type="checkbox" ng-init="rememberMe=true" id="remember_me" style="margin: 4px;"><label id="remember_me_label" for="remember_me" >{{'rememberMe' | translate}}</label>
 	</label>
 	</div>
 	<button ion-track-tap="login" class="button button-full button-positive" type="submit">

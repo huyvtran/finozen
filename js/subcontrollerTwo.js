@@ -776,7 +776,7 @@ angular.module('app.subcontrollerTwo', [])
             buttons: [
 
               {
-                text: '<b>Save</b>',
+                text: '<b>OK</b>',
                 type: 'button-positive',
                 onTap: function(e) {
                   if (!$scope.clientLanguage.type) {
