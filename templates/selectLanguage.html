@@ -1,0 +1,15 @@
+<ion-view  title="Language" >
+
+		<div ng-controller="selectedLanguageCtrl">
+			<p>{{"selectedLanguage" | translate}}</p>
+			<label class = "item item-input item-select item-light">
+			  <div class = "input-label">
+				 Language
+				 <!--<span style="color: #18bb9c; font-size: 12px;" class="button-icon ion-information-circled"  ng-controller="PEPpopOverController" ng-click="popover.show($event)"> </span>-->
+			  </div>
+					<select ng-model='clientLanguage.type' required ng-options='option.value as option.name for option in clientLanguageOptions'></select>
+		    </label>
+			<br/>
+			<button ng-click="changeLang()">Change</button>
+		</div>
+</ion-view>

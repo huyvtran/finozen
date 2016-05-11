@@ -304,8 +304,8 @@ angular.module('app.subcontrollerTwo', [])
 	console.log($scope.clientOccupation.type + " clientOccupation");
 	console.log(questUpload + " questUpload");
         questionsService.save(questUpload,function(data){
-		$ionicLoading.hide();
-         $state.go('signature');
+			if(data.responseCode !== "Cali_SUC_1030") {$ionicLoading.hide();}
+         else{$ionicLoading.hide();$state.go('signature');}
           },function(error){
             $ionicLoading.hide();
          $state.go('signature');
@@ -722,26 +722,50 @@ angular.module('app.subcontrollerTwo', [])
       }
     }
   })
-
+    .controller('selectedLanguageCtrl', function($scope,$translate,$state,$localStorage,$ionicLoading,$window) {
+				$scope.clientLanguageOptions = [
+			{ name: 'বাঙালি', value: '1' },
+			{ name: 'English', value: '2' },
+			{ name: 'ગુજરાતી', value: '3' },
+			{ name: 'हिन्दी', value: '4' },
+			{ name: 'ಕನ್ನಡ', value: '5' },
+			{ name: 'മലയാളം', value: '6' },
+			{ name: 'मराठी', value: '7' },
+			{ name: 'தமிழ்', value: '8' },
+			{ name: 'తెలుగు', value: '9' }
+			];
+	$scope.clientLanguage = {type : $scope.clientLanguageOptions[$localStorage.language-1].value};
+			$scope.changeLang=function(){
+				console.log($scope.clientLanguage.type);
+				$localStorage.language = $scope.clientLanguage.type;
+				$translate.use($localStorage.language);
+				$ionicLoading.show();
+				//$state.go('tabsController.recentTransactions', {}, {reload: true});
+				history.go(-1);
+				$window.location.reload(true);
+				$ionicLoading.hide();
+			}
+			
+		    
+    })
 
   //   language selection at pop up
     .controller('langCTRL',function($scope,$localStorage,$ionicPopup,$ionicPlatform,$state,$translate) {
 	$scope.clientLanguageOptions = [
-			{ name: 'Bengali', value: '1' },
+			{ name: 'বাঙালি', value: '1' },
 			{ name: 'English', value: '2' },
-			{ name: 'Gujarati', value: '3' },
-			{ name: 'Hindi', value: '4' },
-			{ name: 'Kannada', value: '5' },
-			{ name: 'Malyalam', value: '6' },
-			{ name: 'Marathi', value: '7' },
-			{ name: 'Tamil', value: '8' },
-			{ name: 'Telugu', value: '9' }
+			{ name: 'ગુજરાતી', value: '3' },
+			{ name: 'हिन्दी', value: '4' },
+			{ name: 'ಕನ್ನಡ', value: '5' },
+			{ name: 'മലയാളം', value: '6' },
+			{ name: 'मराठी', value: '7' },
+			{ name: 'தமிழ்', value: '8' },
+			{ name: 'తెలుగు', value: '9' }
 			];
-	$scope.clientLanguage = {type : $scope.clientLanguageOptions[1].value};
-    $ionicPlatform.ready(function(){
+	$scope.clientLanguage = {type : $scope.clientLanguageOptions[$localStorage.language-1].value};
 		console.log($localStorage.language+"  localStorage selected");
         //if ($localStorage.language == undefined ) {
-        if ($localStorage.language) {
+        if ($localStorage.language || $localStorage.language==undefined) {
           var myPopup = $ionicPopup.show({
             template:
 			'<label class = "item item-input item-select item-light popUpSelect">'+
@@ -775,7 +799,6 @@ angular.module('app.subcontrollerTwo', [])
         }
 			$translate.use($localStorage.language);
             //$state.go("login");
-      });
     })
 
 //   card.io scanning

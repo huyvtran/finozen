@@ -99,7 +99,56 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 
     /*For Sign In*/
 
-.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,$ionicLoading,$localStorage) {
+.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,$ionicLoading,$localStorage,$translate,$ionicPopup) {
+	
+	$scope.clientLanguageOptions = [
+			{ name: 'বাঙালি', value: '1' },
+			{ name: 'English', value: '2' },
+			{ name: 'ગુજરાતી', value: '3' },
+			{ name: 'हिन्दी', value: '4' },
+			{ name: 'ಕನ್ನಡ', value: '5' },
+			{ name: 'മലയാളം', value: '6' },
+			{ name: 'मराठी', value: '7' },
+			{ name: 'தமிழ்', value: '8' },
+			{ name: 'తెలుగు', value: '9' }
+			];
+	$scope.clientLanguage = {type : $scope.clientLanguageOptions[$localStorage.language-1].value};
+		console.log($localStorage.language+"  localStorage selected");
+        //if ($localStorage.language == undefined ) {
+        if ($localStorage.language || $localStorage.language==undefined) {
+          var myPopup = $ionicPopup.show({
+            template:
+			'<label class = "item item-input item-select item-light popUpSelect">'+
+				'<select ng-model="clientLanguage.type" required ng-options="option.value as option.name for option in clientLanguageOptions"></select>'+
+			'</label>',
+            title: 'Please select your language',
+            scope: $scope,
+            buttons: [
+
+              {
+                text: '<b>Save</b>',
+                type: 'button-positive',
+                onTap: function(e) {
+                  if (!$scope.clientLanguage.type) {
+                    //don't allow the user to close unless he enters wifi password
+                    e.preventDefault();
+				    console.log($scope.clientLanguage.type+"not selected");
+
+                  } else {
+                    console.log($scope.clientLanguage.type+"  language selected");
+					$localStorage.language = $scope.clientLanguage.type;
+                    console.log($localStorage.language+"  localStorage");
+					$translate.use($localStorage.language);
+                    //return $scope.clientLanguage.type;
+					//$state.go("login");
+                  }
+                }
+              }
+            ]
+          });
+        }
+			$translate.use($localStorage.language);
+            //$state.go("login");	
  //$state.go('tabsController.summaryPage');
  $scope.mobileNumber=$localStorage.loginData;
   $scope.signIn = function(form,loginForm) {

@@ -42,6 +42,10 @@ angular.module('app.subcontrollerOne', [])
 
     })
 
+    .controller('languageCtrl', function($scope,$translate,$state,$localStorage) {
+		console.log($localStorage.language + " language selected");
+		$translate.use($localStorage.language);
+	})
     .controller('AccountfaqCtrl', function($scope) {
         $scope.groups = [];
         $scope.groups["0"] = {name: "What is FinoZen?",items: ["FinoZen is a mobile app where you can watch your money grow, literally! It enables you to invest and withdraw in just a click while your money grows at an expected rate of 7.5 – 8.5% p.a."] };

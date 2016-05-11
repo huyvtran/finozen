@@ -18,7 +18,11 @@ $ionicAppProvider.identify ({
       url: '/page7',
 	  templateUrl: 'templates/login.html',
     })
-        
+    .state('selectLanguage', {
+      url: '/selectLanguage',
+	  templateUrl: 'templates/selectLanguage.html',
+    })
+     
      .state('sliders', {
 		url: '/sliders',
 		templateUrl: 'templates/slides.html',

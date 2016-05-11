@@ -6,20 +6,19 @@
 	<div class="h1 title"><p class="head_title"><span id="title fino">FinoZen</span></p></div>
   <a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
 </div>
-    <ion-content scroll="false">
-    <ion-slide-box slide-tabs-scrollable="false"  show-pager="false" ion-slide-tabs>
-
-      <ion-slide ion-slide-tab-label="{{'tabTitle1' | translate}}">
-        <summary-page></summary-page>
-      </ion-slide>
-                <ion-slide ion-slide-tab-label="{{'tabTitle2' | translate}}">
-                 <growth-rate></growth-rate>
-                </ion-slide>
-                <ion-slide ion-slide-tab-label="{{'tabTitle3' | translate}}">
-                    <span><recent-transact></recent-transact></span>
-
-                </ion-slide>
-
+<ion-content scroll="false">
+<span ng-controller="languageCtrl"></span>
+    <ion-slide-box slide-tabs-scrollable="false"  show-pager="false" ion-slide-tabs >
+		<ion-slide ion-slide-tab-label="{{'tabTitle1' | translate}}" >
+			<summary-page></summary-page>
+		</ion-slide>
+		<ion-slide ion-slide-tab-label="{{'tabTitle2' | translate}}">
+			<growth-rate></growth-rate>
+		</ion-slide>
+		<ion-slide ion-slide-tab-label="{{'tabTitle3' | translate}}">
+			<recent-transact></recent-transact>
+		</ion-slide>
+		
     </ion-slide-box>
  </ion-content>
     <div class="bar bar-footer row invest_button_footer" style="width: 100%; background:#E5ECF4 ;" ng-controller="transactionAccessCtrl">
@@ -48,6 +47,7 @@
                  <ion-item nav-clear menu-close  href="#/faq" ><i class="icon ion-ios-help-outline"></i>FAQ</ion-item>
                  <ion-item nav-clear menu-close  href="#/contact" menu-close=""><i class="icon ion-ios-email-outline"></i>contact us</ion-item>
                  <ion-item nav-clear menu-close  href="#/aboutUs"  menu-close=""><i class="icon ion-ios-person-outline"></i>About us</ion-item>
+                 <ion-item nav-clear menu-close  href="#/selectLanguage" menu-close=""><i class="icon ion-ios-email-outline"></i>Language</ion-item>
                  <ion-item nav-clear menu-close ng-controller="termsCtrl" ng-hide="test" href="#/panImage" menu-close=""><i class="icon ion-android-checkmark-circle"></i>Activate account</ion-item>
                  <ion-item nav-clear menu-close  ng-controller="signoutCtrl"  href="#page7" menu-close="" ng-click="signOut()"><i class="icon ion-power"></i>Sign Out</ion-item>
             </ion-list>
