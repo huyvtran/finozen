@@ -218,7 +218,7 @@ if($sessionStorage.clientActive=="Y") {
     .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,$ionicLoading,getReportService,$timeout) {
 var timeNow = new Date().getUTCHours();
 /*$ionicLoading.show({
-            template: 
+            template:
 '<div class="loading visible active" style="margin-left: -53px; margin-top: 76px"><span><img style="max-height:50px" src="img/loading.gif"></img><br/>Custom Loading...</span></div>',
             noBackdrop: true
         });*/
@@ -249,8 +249,6 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 	console.log($sessionStorage.allTransactions + "total number of transactions");
     $scope.products=data.jsonStr;
 	if((data.jsonStr).length <= 0){console.log(window.Connection + "connection");
-	$scope.noTxnMsg1="There are no transactions to display,";
-	$scope.noTxnMsg2="START INVESTING NOW";
 	$scope.noTxnIcon="img/no_leaves.png";
     }
     }

@@ -1,19 +1,18 @@
 <ion-view title="Invite" class="invite">
-	<span ng-controller="googleanalytics"></span>
 <div class="bar bar-header fino_head" ng-controller="popupController as popup">
 <button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepback()"></button>
-	<div class="h1 title"><p class="head_title"><span id="title">INVITE friends</span></p></div>
+	<div class="h1 title"><p class="head_title"><span id="title" translate="TEXT_INVITE_HEADER"></span></p></div>
 	<a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
 </div>
     <ion-content overflow-scroll="true" padding="true" class="has-header">
 		<div class="rows text-center">
 			<img src="img/1.png" alt="">
-			<h3 class="slide3">Invite your friends</h3>
-			<p>Invite now and get INR 100 for every referral, your friend will also get INR 100<sup>*</sup></p><br/>
-			<sup><sup>*</sup>Your friend has to invest a minimum of INR 100 and keep it invested for atleast 10 days for both of you to be eligible for referral pay out.<br/> Please contact us for any queries. </sup>
+			<h3 class="slide3">{{ 'TEXT_INVITE_HEADER2' | translate}}</h3>
+			<p translate="TEXT_INVITE_MESSAGE1"><sup>*</sup></p><br/>
+			<sup><sup>*</sup>{{'TEXT_INVITE_MESSAGE2' | translate}}<br/> {{'TEXT_INVITE_MESSAGE3' | translate}}</sup>
 		</div>
 	<div class="bar row  padding " ng-controller="socialShareController">
-	<a ion-track-tap="invite" style="bottom: -10px;" class="button button-full button-positive bar-footer invest_button_footer" ng-click="shareViaTwitter()" >Start Inviting</a>
+	<a ion-track-tap="invite" style="bottom: -10px;" class="button button-full button-positive bar-footer invest_button_footer" ng-click="shareViaTwitter()"  translate="TEXT_INVITE_BUTTON"></a>
 	</div>
     </ion-content>
 </ion-view>

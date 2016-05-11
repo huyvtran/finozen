@@ -56,7 +56,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_WITHDRAW_COMPLETEBALANCE:'withdraw my complete balance',
       TEXT_WITHDRAW_SCHEDULE_TEXT:'Schedule for deposit to your registered bank account',
       noTxnMsg1:'There are no transactions to display,',
-      noTxnMsg12:'START INVESTING NOW'
+      noTxnMsg12:'START INVESTING NOW',
+      TEXT_INVITE_HEADER:'INVITE FRIENDS',
+      TEXT_INVITE_HEADER2:'Invite Your Friends',
+      TEXT_INVITE_MESSAGE1:'Invite now and get INR 100 for every referral, your friend will also get INR 100',
+      TEXT_INVITE_MESSAGE2:'Your friend has to invest a minimum of INR 100 and keep it invested for atleast 10 days for both of you to be eligible for referral pay out',
+      TEXT_INVITE_MESSAGE3:'Please contact us for any queries.',
+      TEXT_INVITE_BUTTON:'Start Inviting'
   });
   $translateProvider.translations('1', {
 	selectedLanguage:'Select your desired Language Bengali',
@@ -98,7 +104,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     TEXT_WITHDRAW_COMPLETEBALANCE:'আমার সম্পূর্ণ ভারসাম্য প্রত্যাহার',
     TEXT_WITHDRAW_SCHEDULE_TEXT:'আপনার রেজিস্টার্ড ব্যাংক অ্যাকাউন্টে ডিপোজিট জন্য সূচি',
     noTxnMsg1:'প্রদর্শনের জন্য কোন লেনদেন আছে ,',
-    noTxnMsg12:'এখন বিনিয়োগ শুরু করুন'
+    noTxnMsg12:'এখন বিনিয়োগ শুরু করুন',
+    TEXT_INVITE_HEADER:'বন্ধুদের আমন্ত্রণ',
+    TEXT_INVITE_HEADER2:'আপনার বন্ধুদের আমন্ত্রণ জানান',
+    TEXT_INVITE_MESSAGE1:'এখন আমন্ত্রণ এবং প্রতি রেফারেল জন্য আইএনআর 100 পেতে , আপনার বন্ধু এছাড়াও আইএনআর 100 পেতে হবে',
+    TEXT_INVITE_HEADER3:'আপনার বন্ধু রেফারেল জন্য আউট পরিশোধ যোগ্য হতে আইএনআর 100 একটি সর্বনিম্ন বিনিয়োগ এবং এটা অন্তত 10 দিনের জন্য বিনিয়োগ রাখা আপনাদের উভয়ের জন্য রয়েছে',
+    TEXT_INVITE_MESSAGE3:'যে কোন প্রশ্নের জন্য আমাদের সাথে যোগাযোগ করুন .',
+    TEXT_INVITE_BUTTON:'আমন্ত্রণ জানানো হচ্ছে শুরু'
   });
     $translateProvider.translations('3', {
 	selectedLanguage:'Select your desired Language Gujarati',
@@ -140,7 +152,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_WITHDRAW_COMPLETEBALANCE:'મારી સંપૂર્ણ સંતુલન પાછી ખેંચી',
       TEXT_WITHDRAW_SCHEDULE_TEXT:'તમારી રજીસ્ટર બેંક એકાઉન્ટમાં ડિપોઝિટ માટે સુનિશ્ચિત',
       noTxnMsg1:'પ્રદર્શિત કરવા માટે કોઈ વ્યવહારો છે,',
-      noTxnMsg12:'હવે રોકાણ શરૂ કરો'
+      noTxnMsg12:'હવે રોકાણ શરૂ કરો',
+      TEXT_INVITE_HEADER:'મિત્રોને આમંત્રિત કરો',
+      TEXT_INVITE_HEADER2:'તમારા મિત્રોને આમંત્રણ આપો',
+      TEXT_INVITE_MESSAGE1:'હવે આમંત્રણ આપો અને દરેક રેફરલ માટે રૂ 100 મેળવવા માટે, તમારા મિત્ર પણ રૂપિયા 100 મળશે',
+      TEXT_INVITE_HEADER3:'તમારા મિત્ર રેફરલ માટે ચૂકવણી પાત્ર થવા માટે રૂ 100 ઓછામાં ઓછા રોકાણ અને તે ઓછામાં ઓછા 10 દિવસ માટે રોકાણ રાખવા તમે બંને માટે છે',
+      TEXT_INVITE_MESSAGE3:'કોઈપણ પ્રશ્નો માટે અમને સંપર્ક કરો.',
+      TEXT_INVITE_BUTTON:'આમંત્રિત શરૂ'
   });
   $translateProvider.translations('4', {
 	selectedLanguage:'अपनी इच्छित भाषा का चयन करें',
@@ -182,7 +200,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     TEXT_WITHDRAW_COMPLETEBALANCE:'मेरा पूरा संतुलन को वापस लेने',
     TEXT_WITHDRAW_SCHEDULE_TEXT:'अपने पंजीकृत बैंक खाते में जमा करने के लिए अनुसूची',
     noTxnMsg1:'प्रदर्शित करने के लिए कोई लेनदेन नहीं कर रहे हैं,',
-    noTxnMsg12:'अब निवेश शुरू करें'
+    noTxnMsg12:'अब निवेश शुरू करें',
+    TEXT_INVITE_HEADER:'मित्रों को आमंत्रित करें',
+    TEXT_INVITE_HEADER2:'अपने दोस्तों को आमंत्रित करें',
+    TEXT_INVITE_MESSAGE1:'अब आमंत्रित करें और हर सिफ़ारिश के लिए INR 100 मिलता है, अपने दोस्त भी INR 100 मिल जाएगा',
+    TEXT_INVITE_HEADER3:'आपके मित्र सिफ़ारिश के लिए बाहर का भुगतान पात्र होने के लिए INR 100 का एक न्यूनतम निवेश करते हैं और यह कम से कम 10 दिनों के लिए निवेश रखने के लिए आप दोनों के लिए करना पड़ता है',
+    TEXT_INVITE_MESSAGE3:'कृपया किसी भी जानकारी के लिए हमसे संपर्क करें।',
+    TEXT_INVITE_BUTTON:'आमंत्रित करना प्रारंभ'
   });
     $translateProvider.translations('5', {
 	selectedLanguage:'Select your desired Language kannada',
@@ -224,7 +248,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_WITHDRAW_COMPLETEBALANCE:'ನನ್ನ ಸಂಪೂರ್ಣ ಸಮತೋಲನ ಹಿಂದಕ್ಕೆ',
       TEXT_WITHDRAW_SCHEDULE_TEXT:'ನಿಮ್ಮ ನೋಂದಾಯಿತ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ಠೇವಣಿ ವೇಳಾಪಟ್ಟಿ',
       noTxnMsg1:'ಪ್ರದರ್ಶಿಸಲು ಯಾವುದೇ ವ್ಯವಹಾರ ಇವೆ,',
-      noTxnMsg12:'ಈಗ ಹೂಡಿಕೆ ಆರಂಭಿಸಲು'
+      noTxnMsg12:'ಈಗ ಹೂಡಿಕೆ ಆರಂಭಿಸಲು',
+      TEXT_INVITE_HEADER:'ಸ್ನೇಹಿತರನ್ನು ಆಹ್ವಾನಿಸಿ',
+      TEXT_INVITE_HEADER2:'ನಿಮ್ಮ ಸ್ನೇಹಿತರನ್ನು ಆಹ್ವಾನಿಸಿ',
+      TEXT_INVITE_MESSAGE1:'ಈಗ ಆಹ್ವಾನಿಸಿ ಮತ್ತು ಪ್ರತಿ ಉಲ್ಲೇಖಿತ ರೂಪಾಯಿ 100 , ನಿಮ್ಮ ಸ್ನೇಹಿತ ಕೂಡ ರೂಪಾಯಿ 100 ಪಡೆಯುತ್ತಾನೆ',
+      TEXT_INVITE_HEADER3:'ನಿಮ್ಮ ಸ್ನೇಹಿತನ ಉಲ್ಲೇಖಿತ ಪಾವತಿ ಅರ್ಹವಾಗಿರುತ್ತವೆ ರೂಪಾಯಿ 100 ಕನಿಷ್ಠ ಹೂಡಿಕೆ ಮತ್ತು ನೀವು ಎರಡೂ ಇದು ಕನಿಷ್ಠ 10 ದಿನಗಳ ಹೂಡಿಕೆ ಇರಿಸಿಕೊಳ್ಳಲು ಹೊಂದಿದೆ',
+      TEXT_INVITE_MESSAGE3:'ಯಾವುದೇ ಪ್ರಶ್ನೆಗಳನ್ನು ನಮಗೆ ಸಂಪರ್ಕಿಸಿ.',
+      TEXT_INVITE_BUTTON:'ಆಹ್ವಾನಿಸುವ ಪ್ರಾರಂಭಿಸಿ'
   });
     $translateProvider.translations('6', {
 	selectedLanguage:'Select your desired Language Malyalam',
@@ -266,7 +296,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_WITHDRAW_COMPLETEBALANCE:'എന്റെ പൂർണ്ണമായ ബാലൻസ് പിൻവലിക്കാൻ',
       TEXT_WITHDRAW_SCHEDULE_TEXT:'നിങ്ങളുടെ രജിസ്റ്റർ ബാങ്ക് അക്കൗണ്ടിലേക്ക് ഡെപ്പോസിറ്റ് പട്ടിക',
       noTxnMsg1:'പ്രദർശിപ്പിക്കുന്നതിന് ഇടപാടുകൾ ഉണ്ട്,',
-      noTxnMsg12:'ഇപ്പോൾ മുടക്കുന്ന START'
+      noTxnMsg12:'ഇപ്പോൾ മുടക്കുന്ന START',
+      TEXT_INVITE_HEADER:'സുഹൃത്തുക്കളെ ക്ഷണിക്കുക',
+      TEXT_INVITE_HEADER2:'നിങ്ങളുടെ സുഹൃത്തുക്കളെ ക്ഷണിക്കുക',
+      TEXT_INVITE_MESSAGE1:'ഇപ്പോൾ ക്ഷണിക്കുക ഒപ്പം രൂപ 100 നേടുകയും ഓരോ റഫറൽ , നിങ്ങളുടെ സുഹൃത്ത് പുറമേ രൂപ 100 ലഭിക്കും',
+      TEXT_INVITE_HEADER3:'നിങ്ങളുടെ സുഹൃത്ത് രൂപ 100 മിനിമം നിക്ഷേപം അതു റഫറൽ അടക്കാൻ യോഗ്യത നിങ്ങൾക്കു രണ്ടുപേർക്കും കുറയാതെ 10 ദിവസം നിക്ഷേപിക്കാനും മാറ്റി നിർത്തുകയും',
+      TEXT_INVITE_MESSAGE3:'എല്ലാ ചോദ്യങ്ങളിലും ഞങ്ങളെ ബന്ധപ്പെടുക.',
+      TEXT_INVITE_BUTTON:'ക്ഷണിക്കുന്നു ആരംഭിക്കുക'
   });
     $translateProvider.translations('7', {
 	selectedLanguage:'Select your desired Language Marathi',
@@ -308,7 +344,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_WITHDRAW_COMPLETEBALANCE:'माझे पूर्ण शिल्लक मागे',
       TEXT_WITHDRAW_SCHEDULE_TEXT:'आपले नोंदणीकृत बँक खात्यात जमा वेळापत्रक',
       noTxnMsg1:'प्रदर्शित करण्यासाठी कोणतीही व्यवहार आहेत,',
-      noTxnMsg12:'आता गुंतवणूक सुरू'
+      noTxnMsg12:'आता गुंतवणूक सुरू',
+      TEXT_INVITE_HEADER:'मित्रांना आमंत्रित',
+      TEXT_INVITE_HEADER2:'आपल्या मित्रांना आमंत्रित करा',
+      TEXT_INVITE_MESSAGE1:'ഇപ്പോൾ ക്ഷണിക്കുക ഒപ്പം രൂപ 100 നേടുകയും ഓരോ റഫറൽ , നിങ്ങളുടെ സുഹൃത്ത് പുറമേ രൂപ 100 ലഭിക്കും',
+      TEXT_INVITE_HEADER3:'आपले मित्र संदर्भ बाहेर द्या पात्र रुपये 100 किमान गुंतवणूक आणि आपण दोन्ही तो किमान 10 दिवस गुंतवणूक ठेवणे आहे',
+      TEXT_INVITE_MESSAGE3:'काही शंका आमच्याशी संपर्क साधा .',
+      TEXT_INVITE_BUTTON:'आमंत्रित करत आहे प्रारंभ'
   });
     $translateProvider.translations('8', {
 	selectedLanguage:'Select your desired Language Tamil',
@@ -350,7 +392,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_WITHDRAW_COMPLETEBALANCE:'எனது முழு சமநிலை வாபஸ்',
       TEXT_WITHDRAW_SCHEDULE_TEXT:'உங்கள் பதிவு வங்கி கணக்கில் வைப்பு அட்டவணை',
       noTxnMsg1:'காண்பிக்க எந்த பரிமாற்றங்கள் உள்ளன ,',
-      noTxnMsg12:'இப்போது முதலீடு தொடங்க'
+      noTxnMsg12:'இப்போது முதலீடு தொடங்க',
+      TEXT_INVITE_HEADER:'நண்பர்களை அழைக்க',
+      TEXT_INVITE_HEADER2:'உனது நண்பர்களை அழை',
+      TEXT_INVITE_MESSAGE1:'இப்போது அழை மற்றும் ரூபாய் 100 கிடைக்கும் ஒவ்வொரு குறிப்பு , உங்கள் நண்பர் கூட இந்திய ரூபாய் 100 பெறுவார்கள்',
+      TEXT_INVITE_HEADER3:'உங்கள் நண்பர் குறிப்பு அவுட் கொடுக்க தகுதி பெற இந்திய ரூபாய் 100 ஒரு குறைந்தபட்ச முதலீடு மற்றும் நீங்கள் இருவரும் அதை குறைந்தது 10 நாட்களுக்கு முதலீடு வைத்திருக்க வேண்டும்',
+      TEXT_INVITE_MESSAGE3:'எந்த கேள்விகள் எங்களை தொடர்பு கொள்ளவும்.',
+      TEXT_INVITE_BUTTON:'அழைப்பதால் தொடக்கம்'
   });
     $translateProvider.translations('9', {
 	selectedLanguage:'Select your desired Language Telgu',
@@ -392,7 +440,13 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_WITHDRAW_COMPLETEBALANCE:'నా పూర్తి సంతులనం ఉపసంహరించుకోవాలని',
       TEXT_WITHDRAW_SCHEDULE_TEXT:'మీ నమోదిత బ్యాంకు ఖాతాకు జమ షెడ్యూల్',
       noTxnMsg1:'ప్రదర్శించడానికి ఏ లావాదేవీలు ఉన్నాయి,',
-      noTxnMsg12:'ఇప్పుడు ఇన్వెస్టింగ్'
+      noTxnMsg12:'ఇప్పుడు ఇన్వెస్టింగ్',
+      TEXT_INVITE_HEADER:'స్నేహితులను ఆహ్వానించండి',
+      TEXT_INVITE_HEADER2:'మీ స్నేహితులను ఆహ్వానించండి',
+      TEXT_INVITE_MESSAGE1:'ఇప్పుడు ఆహ్వానించు మరియు ప్రతి రిఫెరల్ కోసం INR 100 ను మీ స్నేహితుడు కూడా INR 100 పొందుతారు',
+      TEXT_INVITE_HEADER3:'మీ స్నేహితుడు చెల్లించాలి నివేదన అర్హులు అవుతారు INR 100 కనీసం పెట్టుబడి మరియు మీరు రెండు కోసం ఇది కనీసం 10 రోజులు పెట్టుబడి ఉంచడానికి ఉంది',
+      TEXT_INVITE_MESSAGE3:'ఏ ప్రశ్నలు కోసం దయచేసి మమ్మల్ని సంప్రదించండి.',
+      TEXT_INVITE_BUTTON:'ఆహ్వానిస్తోంది ప్రారంభం'
   });
   //con
   //console.log($sessionStorage.LanguageSession);
