@@ -306,9 +306,9 @@ $scope.$broadcast("scroll.refreshComplete");
 
     })
 
-    .controller('popOverController',function($scope,$ionicPopover ){
+    .controller('popOverController',function($scope,$ionicPopover,$translate ){
 
-        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item pop_up" href="#" target="_blank">Estimated annual returns for your investments till date, and should not be construed as projected returns or actual performance.</a> </div></ion-content>';
+        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item pop_up" href="#" target="_blank" translate="TEXT_POPOVER"></a> </div></ion-content>';
 
         $scope.popover = $ionicPopover.fromTemplate(template, {
             scope: $scope

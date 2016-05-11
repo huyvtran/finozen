@@ -68,7 +68,8 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_LANG_MENU3:'contact us',
       TEXT_LANG_MENU4:'About us',
       TEXT_LANG_MENU5:'Activate account',
-      TEXT_LANG_MENU6:'Sign Out'
+      TEXT_LANG_MENU6:'Sign Out',
+      TEXT_POPOVER:'Estimated annual returns for your investments till date, and should not be construed as projected returns or actual performance.'
   });
   $translateProvider.translations('1', {
 	selectedLanguage:'Select your desired Language Bengali',
@@ -122,7 +123,8 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     TEXT_LANG_MENU3:'আমাদের সাথে যোগাযোগ করুন',
     TEXT_LANG_MENU4:'আমাদের সম্পর্কে',
     TEXT_LANG_MENU5:'অ্যাকাউন্ট সক্রিয়',
-    TEXT_LANG_MENU6:'সাইন আউট'
+    TEXT_LANG_MENU6:'সাইন আউট',
+    TEXT_POPOVER:'তারিখ পর্যন্ত আপনার বিনিয়োগের জন্য বার্ষিক আয় আনুমানিক , এবং অভিক্ষিপ্ত আয় বা প্রকৃত কর্মক্ষমতা হিসাবে construed করা উচিত নয় .'
   });
     $translateProvider.translations('3', {
 	selectedLanguage:'Select your desired Language Gujarati',
@@ -176,7 +178,8 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_LANG_MENU3:'અમારો સંપર્ક કરો',
       TEXT_LANG_MENU4:'અમારા વિશે',
       TEXT_LANG_MENU5:'એકાઉન્ટ સક્રિય',
-      TEXT_LANG_MENU6:'સાઇન આઉટ કરો'
+      TEXT_LANG_MENU6:'સાઇન આઉટ કરો',
+      TEXT_POPOVER:'તારીખ સુધી તમારા રોકાણ માટે વાર્ષિક વળતર અંદાજ છે, અને અંદાજ વળતર અથવા વાસ્તવિક કામગીરી તરીકે અર્થઘટન કરી શકાય જોઈએ.'
   });
   $translateProvider.translations('4', {
 	selectedLanguage:'अपनी इच्छित भाषा का चयन करें',
@@ -230,7 +233,8 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     TEXT_LANG_MENU3:'हमसे संपर्क करें',
     TEXT_LANG_MENU4:'हमारे बारे में',
     TEXT_LANG_MENU5:'खाते को सक्रिय करें',
-    TEXT_LANG_MENU6:'साइन आउट'
+    TEXT_LANG_MENU6:'साइन आउट',
+    TEXT_POPOVER:'आज तक अपने निवेश के लिए वार्षिक रिटर्न अनुमानित , और अनुमानित रिटर्न या वास्तविक प्रदर्शन के रूप में नहीं लगाया जाना चाहिए ।'
   });
     $translateProvider.translations('5', {
 	selectedLanguage:'Select your desired Language kannada',
@@ -284,7 +288,8 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_LANG_MENU3:'ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ',
       TEXT_LANG_MENU4:'ನಮ್ಮ ಬಗ್ಗೆ',
       TEXT_LANG_MENU5:'ಖಾತೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ',
-      TEXT_LANG_MENU6:'ಸೈನ್ ಔಟ್'
+      TEXT_LANG_MENU6:'ಸೈನ್ ಔಟ್',
+      TEXT_POPOVER:'ಇಲ್ಲಿಯವರೆಗೆ ನಿಮ್ಮ ಹೂಡಿಕೆಗಳನ್ನು ವಾರ್ಷಿಕ ಲಾಭಗಳು ಅಂದಾಜು , ಮತ್ತು ಯೋಜಿತ ಆದಾಯ ಅಥವಾ ನಿಜವಾದ ಸಾಧನೆ ಮಾಹಿತಿ ನಿರ್ಬಂಧಿಸಿತು ಮಾಡಬಾರದು .'
   });
     $translateProvider.translations('6', {
 	selectedLanguage:'Select your desired Language Malyalam',
@@ -338,7 +343,8 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_LANG_MENU3:'ഞങ്ങളെ സമീപിക്കുക',
       TEXT_LANG_MENU4:'ഞങ്ങളേക്കുറിച്ച്',
       TEXT_LANG_MENU5:'അക്കൗണ്ട് സജീവമാക്കുക',
-      TEXT_LANG_MENU6:'സൈൻ ഔട്ട്'
+      TEXT_LANG_MENU6:'സൈൻ ഔട്ട്',
+      TEXT_POPOVER:'തീയതി വരെ നിങ്ങളുടെ നിക്ഷേപങ്ങൾ വാർഷിക റിട്ടേൺ കണക്കാക്കിയ , ഒപ്പം പ്രൊജക്റ്റ് റിട്ടേൺ അല്ലെങ്കിൽ യഥാർത്ഥ പ്രകടനം കരുതേണ്ടതാണ് പാടില്ല.'
   });
     $translateProvider.translations('7', {
 	selectedLanguage:'Select your desired Language Marathi',
@@ -392,7 +398,8 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_LANG_MENU3:'आमच्याशी संपर्क',
       TEXT_LANG_MENU4:'आमच्या विषयी',
       TEXT_LANG_MENU5:'खाते सक्रिय',
-      TEXT_LANG_MENU6:'साइन आउट'
+      TEXT_LANG_MENU6:'साइन आउट',
+      TEXT_POPOVER:'आजपर्यंत आपल्या गुंतवणूक वार्षिक परतावा गाठेल, असा अंदाज परतावा किंवा प्रत्यक्ष कामगिरी मानली जाऊ नये .'
   });
     $translateProvider.translations('8', {
 	selectedLanguage:'Select your desired Language Tamil',
@@ -446,7 +453,8 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_LANG_MENU3:'எங்களை தொடர்பு',
       TEXT_LANG_MENU4:'எங்களை பற்றி',
       TEXT_LANG_MENU5:'கணக்கு செயல்படுத்தவும்',
-      TEXT_LANG_MENU6:'வெளியேறு'
+      TEXT_LANG_MENU6:'வெளியேறு',
+      TEXT_POPOVER:'தேதி வரை உங்கள் முதலீடுகளை ஆண்டு வருமானத்தை மதிப்பிடப்பட்டுள்ளது , மற்றும் உத்தேச வருமானம் அல்லது உண்மையான செயல்திறனை அமைக்கக்கூடாது வேண்டும் .'
   });
     $translateProvider.translations('9', {
 	selectedLanguage:'Select your desired Language Telgu',
@@ -500,7 +508,8 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_LANG_MENU3:'మమ్మల్ని సంప్రదించండి',
       TEXT_LANG_MENU4:'మా గురించి',
       TEXT_LANG_MENU5:'ఖాతాను సక్రియం',
-      TEXT_LANG_MENU6:'సైన్ ఔట్'
+      TEXT_LANG_MENU6:'సైన్ ఔట్',
+      TEXT_POPOVER:'తేదీ వరకు మీ పెట్టుబడులకు సాలీనా రాబడి అంచనా, మరియు ఊహించబడిన తిరిగి లేదా వాస్తవ ప్రదర్శన ఆటంకాలు చేయరాదు.'
   });
   //con
   //console.log($sessionStorage.LanguageSession);
