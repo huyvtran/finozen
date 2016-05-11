@@ -54,7 +54,9 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_CURRENT_BALANCE:'CURRENT BALANCE :',
       TEXT_WIHTDRAW_BALANCE:'How much would you like to withdraw ?',
       TEXT_WITHDRAW_COMPLETEBALANCE:'withdraw my complete balance',
-      TEXT_WITHDRAW_SCHEDULE_TEXT:'Schedule for deposit to your registered bank account'
+      TEXT_WITHDRAW_SCHEDULE_TEXT:'Schedule for deposit to your registered bank account',
+      noTxnMsg1:'There are no transactions to display,',
+      noTxnMsg12:'START INVESTING NOW'
   });
   $translateProvider.translations('1', {
 	selectedLanguage:'Select your desired Language Bengali',
@@ -94,7 +96,9 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     TEXT_CURRENT_BALANCE:'বর্তমান হিসাব :',
     TEXT_WIHTDRAW_BALANCE:'কত আপনি উঠাতে চান?',
     TEXT_WITHDRAW_COMPLETEBALANCE:'আমার সম্পূর্ণ ভারসাম্য প্রত্যাহার',
-    TEXT_WITHDRAW_SCHEDULE_TEXT:'আপনার রেজিস্টার্ড ব্যাংক অ্যাকাউন্টে ডিপোজিট জন্য সূচি'
+    TEXT_WITHDRAW_SCHEDULE_TEXT:'আপনার রেজিস্টার্ড ব্যাংক অ্যাকাউন্টে ডিপোজিট জন্য সূচি',
+    noTxnMsg1:'প্রদর্শনের জন্য কোন লেনদেন আছে ,',
+    noTxnMsg12:'এখন বিনিয়োগ শুরু করুন'
   });
     $translateProvider.translations('3', {
 	selectedLanguage:'Select your desired Language Gujarati',
@@ -134,7 +138,9 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_CURRENT_BALANCE:'વર્તમાન રકમ :',
       TEXT_WIHTDRAW_BALANCE:'કેટલી તમે પાછી ખેંચી કરવા માંગો છો?',
       TEXT_WITHDRAW_COMPLETEBALANCE:'મારી સંપૂર્ણ સંતુલન પાછી ખેંચી',
-      TEXT_WITHDRAW_SCHEDULE_TEXT:'તમારી રજીસ્ટર બેંક એકાઉન્ટમાં ડિપોઝિટ માટે સુનિશ્ચિત'
+      TEXT_WITHDRAW_SCHEDULE_TEXT:'તમારી રજીસ્ટર બેંક એકાઉન્ટમાં ડિપોઝિટ માટે સુનિશ્ચિત',
+      noTxnMsg1:'પ્રદર્શિત કરવા માટે કોઈ વ્યવહારો છે,',
+      noTxnMsg12:'હવે રોકાણ શરૂ કરો'
   });
   $translateProvider.translations('4', {
 	selectedLanguage:'अपनी इच्छित भाषा का चयन करें',
@@ -174,7 +180,9 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     TEXT_CURRENT_BALANCE:'वर्तमान शेष :',
     TEXT_WIHTDRAW_BALANCE:'तुम कितना वापस लेने के लिए चाहते हैं?',
     TEXT_WITHDRAW_COMPLETEBALANCE:'मेरा पूरा संतुलन को वापस लेने',
-    TEXT_WITHDRAW_SCHEDULE_TEXT:'अपने पंजीकृत बैंक खाते में जमा करने के लिए अनुसूची'
+    TEXT_WITHDRAW_SCHEDULE_TEXT:'अपने पंजीकृत बैंक खाते में जमा करने के लिए अनुसूची',
+    noTxnMsg1:'प्रदर्शित करने के लिए कोई लेनदेन नहीं कर रहे हैं,',
+    noTxnMsg12:'अब निवेश शुरू करें'
   });
     $translateProvider.translations('5', {
 	selectedLanguage:'Select your desired Language kannada',
@@ -214,7 +222,9 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_CURRENT_BALANCE:'ಪ್ರಸ್ತುತ ಬಾಕಿ:',
       TEXT_WIHTDRAW_BALANCE:'ಎಷ್ಟು ನೀವು ಹಿಂದಕ್ಕೆ ಬಯಸುತ್ತೀರಿ?',
       TEXT_WITHDRAW_COMPLETEBALANCE:'ನನ್ನ ಸಂಪೂರ್ಣ ಸಮತೋಲನ ಹಿಂದಕ್ಕೆ',
-      TEXT_WITHDRAW_SCHEDULE_TEXT:'ನಿಮ್ಮ ನೋಂದಾಯಿತ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ಠೇವಣಿ ವೇಳಾಪಟ್ಟಿ'
+      TEXT_WITHDRAW_SCHEDULE_TEXT:'ನಿಮ್ಮ ನೋಂದಾಯಿತ ಬ್ಯಾಂಕ್ ಖಾತೆಗೆ ಠೇವಣಿ ವೇಳಾಪಟ್ಟಿ',
+      noTxnMsg1:'ಪ್ರದರ್ಶಿಸಲು ಯಾವುದೇ ವ್ಯವಹಾರ ಇವೆ,',
+      noTxnMsg12:'ಈಗ ಹೂಡಿಕೆ ಆರಂಭಿಸಲು'
   });
     $translateProvider.translations('6', {
 	selectedLanguage:'Select your desired Language Malyalam',
@@ -254,7 +264,9 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_CURRENT_BALANCE:'वर्तमान शिल्लक:',
       TEXT_WIHTDRAW_BALANCE:'നിങ്ങളുടെ എത്രത്തോളം പിൻവലിക്കാൻ ആഗ്രഹിക്കുന്നത്?',
       TEXT_WITHDRAW_COMPLETEBALANCE:'എന്റെ പൂർണ്ണമായ ബാലൻസ് പിൻവലിക്കാൻ',
-      TEXT_WITHDRAW_SCHEDULE_TEXT:'നിങ്ങളുടെ രജിസ്റ്റർ ബാങ്ക് അക്കൗണ്ടിലേക്ക് ഡെപ്പോസിറ്റ് പട്ടിക'
+      TEXT_WITHDRAW_SCHEDULE_TEXT:'നിങ്ങളുടെ രജിസ്റ്റർ ബാങ്ക് അക്കൗണ്ടിലേക്ക് ഡെപ്പോസിറ്റ് പട്ടിക',
+      noTxnMsg1:'പ്രദർശിപ്പിക്കുന്നതിന് ഇടപാടുകൾ ഉണ്ട്,',
+      noTxnMsg12:'ഇപ്പോൾ മുടക്കുന്ന START'
   });
     $translateProvider.translations('7', {
 	selectedLanguage:'Select your desired Language Marathi',
@@ -294,7 +306,9 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_CURRENT_BALANCE:'वर्तमान शिल्लक:',
       TEXT_WIHTDRAW_BALANCE:'आपण किती मागे आवडेल?',
       TEXT_WITHDRAW_COMPLETEBALANCE:'माझे पूर्ण शिल्लक मागे',
-      TEXT_WITHDRAW_SCHEDULE_TEXT:'आपले नोंदणीकृत बँक खात्यात जमा वेळापत्रक'
+      TEXT_WITHDRAW_SCHEDULE_TEXT:'आपले नोंदणीकृत बँक खात्यात जमा वेळापत्रक',
+      noTxnMsg1:'प्रदर्शित करण्यासाठी कोणतीही व्यवहार आहेत,',
+      noTxnMsg12:'आता गुंतवणूक सुरू'
   });
     $translateProvider.translations('8', {
 	selectedLanguage:'Select your desired Language Tamil',
@@ -334,7 +348,9 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_CURRENT_BALANCE:'தற்போதைய இருப்பு :',
       TEXT_WIHTDRAW_BALANCE:'நீங்கள் எவ்வளவு திரும்பப் பெற வேண்டும் என்று விரும்புகிறீர்கள்?',
       TEXT_WITHDRAW_COMPLETEBALANCE:'எனது முழு சமநிலை வாபஸ்',
-      TEXT_WITHDRAW_SCHEDULE_TEXT:'உங்கள் பதிவு வங்கி கணக்கில் வைப்பு அட்டவணை'
+      TEXT_WITHDRAW_SCHEDULE_TEXT:'உங்கள் பதிவு வங்கி கணக்கில் வைப்பு அட்டவணை',
+      noTxnMsg1:'காண்பிக்க எந்த பரிமாற்றங்கள் உள்ளன ,',
+      noTxnMsg12:'இப்போது முதலீடு தொடங்க'
   });
     $translateProvider.translations('9', {
 	selectedLanguage:'Select your desired Language Telgu',
@@ -374,7 +390,9 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
       TEXT_CURRENT_BALANCE:'ప్రస్తుత నిల్వ :',
       TEXT_WIHTDRAW_BALANCE:'మీరు ఎంత వెనక్కి చేయాలనుకుంటున్నారు?',
       TEXT_WITHDRAW_COMPLETEBALANCE:'నా పూర్తి సంతులనం ఉపసంహరించుకోవాలని',
-      TEXT_WITHDRAW_SCHEDULE_TEXT:'మీ నమోదిత బ్యాంకు ఖాతాకు జమ షెడ్యూల్'
+      TEXT_WITHDRAW_SCHEDULE_TEXT:'మీ నమోదిత బ్యాంకు ఖాతాకు జమ షెడ్యూల్',
+      noTxnMsg1:'ప్రదర్శించడానికి ఏ లావాదేవీలు ఉన్నాయి,',
+      noTxnMsg12:'ఇప్పుడు ఇన్వెస్టింగ్'
   });
   //con
   //console.log($sessionStorage.LanguageSession);
