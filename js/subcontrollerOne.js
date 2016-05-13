@@ -242,6 +242,9 @@ $scope.growthRate= function(){
     if($scope.schemeName=="RELIANCE LIQUID FUND - TREASURY PLAN - GROWTH PLAN - GROWTH OPTION - G"){
 		$scope.schemeLink="http://www.moneycontrol.com/mutual-funds/nav/reliance-liquid-fund-treasury-plan-ip/MRC046";
 	}
+  else{
+      $scope.schemeLink="http://www.google.com";
+    }
 	// to be changed
 	var dayNow = new Date().getDay();
 	console.log(dayNow);
@@ -310,7 +313,7 @@ $scope.growthRate= function(){
             },function(error){
 				$ionicLoading.hide();
 				var log=$ionicPopup.alert({
-					title: 'Sorry for the inconvince',
+					title: 'Sorry for the inconvenience',
 					template: 'Please Login again'
 				  });
               log.then(function(res) {
@@ -335,7 +338,7 @@ $scope.growthRate= function(){
     },function(error){
       $ionicLoading.hide();
       var log=$ionicPopup.alert({
-        title: 'Sorry for the inconvince',
+        title: 'Sorry for the inconvenience',
         template: 'Please Login again'
       });
       log.then(function(res) {
@@ -353,7 +356,7 @@ $scope.growthRate= function(){
 
 })
 
-
+  /*for testing only*/
 .controller('openBrowser', function($scope,$cordovaInAppBrowser,$rootScope,$state) {
    var options = {
       location: 'no',
@@ -404,10 +407,6 @@ $state.go('reference');
 })
 
     .controller('panVerifyCtrl', function($scope,$state) {
-
-
-
-
 		$scope.kycdone=function(){$state.go('panImage');}
 		$scope.kycnotdone=function(){$state.go('aadhar');}
 		$scope.otpdone=function(){$state.go('confirm');}
@@ -418,12 +417,12 @@ $state.go('reference');
     })
 
 .controller('menuOverlay', function($scope, $window, $ionicSideMenuDelegate) {
- 
+
   $scope.width = function () {
     return $window.innerWidth;
   };
-  
+
   $scope.openMenu = function() {
     $ionicSideMenuDelegate.toggleRight(true);
-  }; 
+  };
 })
