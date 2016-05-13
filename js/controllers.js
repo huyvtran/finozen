@@ -112,7 +112,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 			{ name: 'தமிழ்', value: '8' },
 			{ name: 'తెలుగు', value: '9' }
 			];
-	$scope.clientLanguage = {type : $scope.clientLanguageOptions[$localStorage.language].value};
+	$scope.clientLanguage = {type : $scope.clientLanguageOptions[$localStorage.language-1].value};
 		console.log($localStorage.language+"  localStorage selected");
         //if ($localStorage.language == undefined ) {
         if ($localStorage.language || $localStorage.language==undefined) {
@@ -201,7 +201,7 @@ console.log($scope.loginDetails);
         $sessionStorage.nachStatus=data.jsonStr[0].nachStatus;
         console.log($sessionStorage.SessionFolioNums);
         $sessionStorage.folioNums = data.jsonStr[0].folioNums[0];
-        $sessionStorage.clientType= data.jsonStr[0].clientType[0];
+        $sessionStorage.clientType= data.jsonStr[0].clientType;
         $state.go('tabsController.summaryPage');
         $ionicLoading.hide();
         }
@@ -320,10 +320,26 @@ $sessionStorage.xirr=data.jsonStr.xirr;
     if(data.responseCode=="Cali_SUC_1030"){
     for(var i = 0; i < (data.jsonStr).length; i++) {
       if(data.jsonStr[i].recco=="Accumulate"){
-        $sessionStorage.schemeName=data.jsonStr[i].schemeName;
-        $sessionStorage.nav=data.jsonStr[i].nav;
-        $sessionStorage.rtaCode=data.jsonStr[i].rtaCode;
-        $sessionStorage.amcCode=data.jsonStr[i].amcCode;
+		  console.log($sessionStorage.clientType+ "   client type")
+		  if($sessionStorage.clientType=="PL"){
+			if(JSON.stringify(data.jsonStr[i].schemeName)[1]=="P"){
+				console.log(JSON.stringify(data.jsonStr[i].schemeName)[1] +"   i am platinum");
+				$sessionStorage.schemeName=data.jsonStr[i].schemeName;
+				$sessionStorage.nav=data.jsonStr[i].nav;
+				$sessionStorage.rtaCode=data.jsonStr[i].rtaCode;
+				$sessionStorage.amcCode=data.jsonStr[i].amcCode;
+			}
+		  }
+		  else if($sessionStorage.clientType=="G0"){
+			  if(JSON.stringify(data.jsonStr[i].schemeName)[1]=="G"){
+				console.log("i am gold");
+				$sessionStorage.schemeName=data.jsonStr[i].schemeName;
+				$sessionStorage.nav=data.jsonStr[i].nav;
+				$sessionStorage.rtaCode=data.jsonStr[i].rtaCode;
+				$sessionStorage.amcCode=data.jsonStr[i].amcCode;
+			}
+		  }
+        
       }
 
     }

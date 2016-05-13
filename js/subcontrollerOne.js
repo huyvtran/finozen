@@ -416,10 +416,10 @@ $state.go('reference');
 		$scope.withdrawSuccess = function() {console.log("here"); history.go(-2);}
     })
 
-.controller('schemeText', function($scope) {
-	if(false){
+.controller('schemeText', function($scope,$sessionStorage) {
+	if($sessionStorage.clientType=='GO'){
 		$scope.schemeName="Reliance Liquid Fund Cash Plan - Growth";
-		$scope.schemeBody="Reliance Liquid Fund ensure that your investments are risk free, no-lock in on withdrawl and generate stable returns. This fund primarily invests in money market instruments of public sector banks like Axis Bank, Kotak Mahindra Bank and undertakings such as Steel Authority of India, Idea Cellular, Tata Capital making it ultra-safe (almost as safe as your savings bank deposits) to invest your money. ";
+		$scope.schemeBody="Reliance Liquid Fund ensure that your investments are very low risk, no-lock in on withdrawl and generate stable returns. This fund primarily invests in money market instruments of public sector banks like Axis Bank, Kotak Mahindra Bank and undertakings such as Steel Authority of India, Idea Cellular, Tata Capital making it ultra-safe (almost as safe as your savings bank deposits) to invest your money. ";
 		$scope.returnsOneM="7.2%";
 		$scope.returnsThreeM="7.6%";
 		$scope.returnsOneY="7.4%";
@@ -432,7 +432,7 @@ $state.go('reference');
 	}
 	else{
 		$scope.schemeName="Reliance Liquid Fund Treasury Plan (IP) – G";
-		$scope.schemeBody="Reliance Liquid Fund ensure that your investments are risk free, no-lock in on withdrawl and generate stable returns. This fund primarily invests in money market instruments of public sector banks and undertakings such as HUDCO, L&T and Tata Steel  making it ultra-safe (almost as safe as your savings bank deposits) to invest your money.";
+		$scope.schemeBody="Reliance Liquid Fund ensure that your investments are very low risk, no-lock in on withdrawl and generate stable returns. This fund primarily invests in money market instruments of public sector banks and undertakings such as HUDCO, L&T and Tata Steel  making it ultra-safe (almost as safe as your savings bank deposits) to invest your money.";
 		$scope.returnsOneM="9.48%";
 		$scope.returnsThreeM="8.2%";
 		$scope.returnsOneY="8.2%";
