@@ -100,7 +100,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
     /*For Sign In*/
 
 .controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,$ionicLoading,$localStorage,$translate,$ionicPopup,$timeout) {
-	
+
 	$scope.clientLanguageOptions = [
 			{ name: 'বাঙালি', value: '1' },
 			{ name: 'English', value: '2' },
@@ -112,7 +112,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 			{ name: 'தமிழ்', value: '8' },
 			{ name: 'తెలుగు', value: '9' }
 			];
-	$scope.clientLanguage = {type : $scope.clientLanguageOptions[$localStorage.language-1].value};
+	$scope.clientLanguage = {type : $scope.clientLanguageOptions[$localStorage.language].value};
 		console.log($localStorage.language+"  localStorage selected");
         //if ($localStorage.language == undefined ) {
         if ($localStorage.language || $localStorage.language==undefined) {
@@ -148,7 +148,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
           });
         }
 			$translate.use($localStorage.language);
-            //$state.go("login");	
+            //$state.go("login");
  //$state.go('tabsController.summaryPage');
  $scope.mobileNumber=$localStorage.loginData;
   $scope.signIn = function(form,loginForm) {
@@ -182,7 +182,7 @@ console.log($scope.loginDetails);
 	$timeout(function(){
 		$scope.message="";
 	},3000)
-      
+
     }
   }
 
@@ -201,6 +201,7 @@ console.log($scope.loginDetails);
         $sessionStorage.nachStatus=data.jsonStr[0].nachStatus;
         console.log($sessionStorage.SessionFolioNums);
         $sessionStorage.folioNums = data.jsonStr[0].folioNums[0];
+        $sessionStorage.clientType= data.jsonStr[0].clientType[0];
         $state.go('tabsController.summaryPage');
         $ionicLoading.hide();
         }
