@@ -416,6 +416,34 @@ $state.go('reference');
 		$scope.withdrawSuccess = function() {console.log("here"); history.go(-2);}
     })
 
+.controller('schemeText', function($scope) {
+	if(false){
+		$scope.schemeName="Reliance Liquid Fund Cash Plan - Growth";
+		$scope.schemeBody="Reliance Liquid Fund ensure that your investments are risk free, no-lock in on withdrawl and generate stable returns. This fund primarily invests in money market instruments of public sector banks like Axis Bank, Kotak Mahindra Bank and undertakings such as Steel Authority of India, Idea Cellular, Tata Capital making it ultra-safe (almost as safe as your savings bank deposits) to invest your money. ";
+		$scope.returnsOneM="7.2%";
+		$scope.returnsThreeM="7.6%";
+		$scope.returnsOneY="7.4%";
+		$scope.returnsThreeY="8.1%";
+		$scope.returnsFiveY="8.5%";
+		$scope.currentAUM=" Rs. 3,775 Crores";
+		$scope.TaxBenifits=" Unlike FD, there is no TDS for investments in this fund. Also, for investments more than 3 years, tax payout becomes negligible as there is indexation benefits. However for investments less than 3 years, you will have to declare the returns from this investment at the time of tax filing and pay tax as per your salary bracket.";
+		$scope.schemeLink="http://www.moneycontrol.com/mutual-funds/nav/reliance-liquid-fund-cash-plan/MRC014";
+		$scope.schemeLinkText=" to read more about Reliance Liquid Fund Cash Plan – Growth on moneycontrol.";
+	}
+	else{
+		$scope.schemeName="Reliance Liquid Fund Treasury Plan (IP) – G";
+		$scope.schemeBody="Reliance Liquid Fund ensure that your investments are risk free, no-lock in on withdrawl and generate stable returns. This fund primarily invests in money market instruments of public sector banks and undertakings such as HUDCO, L&T and Tata Steel  making it ultra-safe (almost as safe as your savings bank deposits) to invest your money.";
+		$scope.returnsOneM="9.48%";
+		$scope.returnsThreeM="8.2%";
+		$scope.returnsOneY="8.2%";
+		$scope.returnsThreeY="8.84%";
+		$scope.returnsFiveY="9.06%";
+		$scope.currentAUM=" Rs. 14,469 Crores";
+		$scope.TaxBenifits=" Unlike FD, there is no TDS for investments in this fund. Also, for investments more than 3 years, tax payout becomes negligible as there is indexation benefits. However for investments less than 3 years, you will have to declare the returns from this investment at the time of tax filing and pay tax as per your salary bracket.";
+		$scope.schemeLink="http://www.moneycontrol.com/mutual-funds/nav/reliance-liquid-fund-treasury-plan-ip/MRC046";
+		$scope.schemeLinkText=" to read more about Reliance Liquid Fund Treasury Plan (IP) – G on moneycontrol.";
+	}
+})
 .controller('menuOverlay', function($scope, $window, $ionicSideMenuDelegate) {
 
   $scope.width = function () {

@@ -6,12 +6,11 @@
 	<a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
 </div>
     <ion-content overflow-scroll="false" padding="true" class="has-header payment_success">
-		<div class="padding">
-
+		<div class="padding" ng-controller="schemeText">
 			<div class="list">
 			  <div class="item_success" >
-				<h4 class="text-center">Reliance Liquid Fund Treasury Plan (IP) – G</h4>
-				<p class="">Reliance Liquid Fund ensure that your investments are risk free, no-lock in on withdrawl and generate stable returns. This fund primarily invests in money market instruments of public sector banks and undertakings such as HUDCO, L&T and Tata Steel  making it ultra-safe (almost as safe as your savings bank deposits) to invest your money. </p></i>
+				<h4 class="text-center">{{schemeName}}</h4>
+				<p class="">{{schemeBody}} </p></i>
 			  </div>
 			  <div class="selectedFund" >
 				<table>
@@ -21,29 +20,29 @@
 					</thead>
 					<tr>
 						<td>1 Month</td>
-						<td>9.48%</td>
+						<td>{{returnsOneM}}</td>
 					</tr>
 					<tr>
 						<td>3 Month</td>
-						<td>8.2%</td>
+						<td>{{returnsThreeM}}</td>
 					</tr>
 					<tr>
 						<td>1 Year</td>
-						<td>8.2%</td>
+						<td>{{returnsOneY}}</td>
 					</tr>
 					<tr>
 						<td>3 Year</td>
-						<td>8.84%</td>
+						<td>{{returnsThreeY}}</td>
 					</tr>
 					<tr>
 						<td>5 Year</td>
-						<td>9.06%</td>
+						<td>{{returnsFiveY}}</td>
 					</tr>
 				</table>
 			  </div>
-			  <p><b>Current AUM:</b> Rs. 14,469 Crores</p>
-			  <p><b>Tax Benefit: </b> Unlike FD, there is no TDS for investments in this fund. Also, for investments more than 3 years, tax payout becomes negligible as there is indexation benefits. However for investments less than 3 years, you will have to declare the returns from this investment at the time of tax filing and pay tax as per your salary bracket.</p>
-			  <p><b><a ng-href="http://www.moneycontrol.com/mutual-funds/nav/reliance-liquid-fund-treasury-plan-ip/MRC046">Click here</a></b>  to read more about Reliance Liquid Fund Treasury Plan (IP) – G on moneycontrol.</p>
+			  <p><b>Current AUM:</b>{{currentAUM}}</p>
+			  <p><b>Tax Benefit: </b>{{TaxBenifits}}</p>
+			  <p><b><a ng-href={{schemeLink}}>Click here</a></b>  {{schemeLinkText}}</p>
 			<p><sup>* As of April 2016</sup></p>
 			  </div>
 			

@@ -162,9 +162,9 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	credentialsInvalid:'প্রবেশ পরিচয়পত্র যাচাই করতে পারে',
 	resetPinError:'পিন রিসেট করতে আপনার মোবাইল নম্বর লিখুন দয়া করে',
 	digitsOnly:'শুধুমাত্র সংখ্যা প্রবেশ করান',
-	signUpError:'Mobile',
-	mobileError:'Mobile',
-	alphaOnly:'Mobile'
+	signUpError:'সাইন আপ করতে ব্যর্থ, আবার চেষ্টা করুন',
+	mobileError:'ব্যবহারে মোবাইল নম্বর',
+	alphaOnly:'লিখুন বর্ণমালা শুধুমাত্র'
   });
     $translateProvider.translations('3', {
 	selectedLanguage:'Select your desired Language Gujarati',
@@ -237,9 +237,9 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	credentialsInvalid:'દાખલ ઓળખપત્રો માન્ય ન કરી શકે',
 	resetPinError:'PIN ફરીથી સેટ કરવા માટે તમારા મોબાઇલ નંબર દાખલ કરો',
 	digitsOnly:'માત્ર એ દાખલ',
-	signUpError:'Mobile',
-	mobileError:'Mobile',
-	alphaOnly:'Mobile'
+	signUpError:'સાઇન અપ કરો નિષ્ફળ, ફરીથી પ્રયત્ન કરો',
+	mobileError:'ઉપયોગમાં લેવાતા મોબાઇલ નંબર',
+	alphaOnly:'દાખલ વર્ણમાળાઓ માત્ર'
   });
   $translateProvider.translations('4', {
 	selectedLanguage:'अपनी इच्छित भाषा का चयन करें',
@@ -312,9 +312,9 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	credentialsInvalid:'में प्रवेश किया क्रेडेंशियल्स सत्यापित नहीं कर सका',
 	resetPinError:'पिन रीसेट करने के लिए अपना मोबाइल नंबर दर्ज करें',
 	digitsOnly:'केवल अंक दर्ज करें',
-	signUpError:'Mobile',
-	mobileError:'Mobile',
-	alphaOnly:'Mobile'
+	signUpError:'साइन अप करने में विफल रहा है , कृपया पुनः प्रयास करें',
+	mobileError:'उपयोग में मोबाइल नंबर',
+	alphaOnly:'दर्ज अक्षर ही'
 	
   });
     $translateProvider.translations('5', {
@@ -388,9 +388,9 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	credentialsInvalid:'ಪ್ರವೇಶಿಸಿತು ರುಜುವಾತುಗಳು ಮೌಲ್ಯೀಕರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ',
 	resetPinError:'ದಯವಿಟ್ಟು PIN ಮರುಹೊಂದಿಸಲು ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ',
 	digitsOnly:'ಅಂಕೆಗಳು ಮಾತ್ರ ನಮೂದಿಸಿ',
-	signUpError:'Mobile',
-	mobileError:'Mobile',
-	alphaOnly:'Mobile'
+	signUpError:'ಸೈನ್ ಅಪ್ ವಿಫಲವಾಗಿದೆ , ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ',
+	mobileError:'ಬಳಕೆಯಲ್ಲಿರುವ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ',
+	alphaOnly:'ನಮೂದಿಸಿ ಅಕ್ಷರಮಾಲೆ ಮಾತ್ರ'
   });
     $translateProvider.translations('6', {
 	selectedLanguage:'Select your desired Language Malyalam',
@@ -463,9 +463,9 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	credentialsInvalid:'നൽകി ക്രെഡൻഷ്യലുകളൊന്നും ഉറപ്പിക്കാൻ സാധിച്ചില്ല',
 	resetPinError:'പിൻ പുനഃക്രമീകരിക്കാൻ ദയവായി നിങ്ങളുടെ മൊബൈൽ നമ്പർ നൽകുക',
 	digitsOnly:'അക്കങ്ങൾ മാത്രം നൽകുക',
-	signUpError:'Mobile',
-	mobileError:'Mobile',
-	alphaOnly:'Mobile'
+	signUpError:'സൈൻ അപ്പ് ചെയ്യൽ പരാജയപ്പെട്ടു , വീണ്ടും ശ്രമിക്കുക',
+	mobileError:'ഉപയോഗത്തിലുള്ള മൊബൈൽ നമ്പർ',
+	alphaOnly:'അക്ഷരമാല മാത്രം നൽകുക'
 
   });
     $translateProvider.translations('7', {
@@ -539,9 +539,9 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	credentialsInvalid:'मध्ये प्रवेश केला क्रेडेन्शियल सत्यापित करू शकत नाही',
 	resetPinError:'पिन रीसेट करण्यासाठी आपल्या मोबाईल नंबर प्रविष्ट करा',
 	digitsOnly:'फक्त अंक प्रविष्ट',
-	signUpError:'Mobile',
-	mobileError:'Mobile',
-	alphaOnly:'Mobile'
+	signUpError:'साइन अप करा अयशस्वी, कृपया पुन्हा प्रयत्न करा',
+	mobileError:'वापरात मोबाइल क्रमांक',
+	alphaOnly:'फक्त प्रविष्ट करा मूळाक्षरे'
   });
     $translateProvider.translations('8', {
 	selectedLanguage:'Select your desired Language Tamil',
@@ -614,9 +614,9 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	credentialsInvalid:'உள்ளிட்டது தகைமை மதிப்பிட முடியவில்லை',
 	resetPinError:'PIN ஐ மீட்டமைக்க உங்கள் மொபைல் எண்ணை நுழைய',
 	digitsOnly:'இலக்கங்கள் மட்டுமே நிரப்ப',
-	signUpError:'Mobile',
-	mobileError:'Mobile',
-	alphaOnly:'Mobile'
+	signUpError:'பதிவு தோல்வி , மீண்டும் முயற்சிக்கவும்',
+	mobileError:'பயன்பாட்டில் மொபைல் எண்',
+	alphaOnly:'உள்ளிடவும் எழுத்துக்களும் மட்டுமே'
   });
     $translateProvider.translations('9', {
 	selectedLanguage:'Select your desired Language Telugu',
@@ -689,9 +689,9 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	credentialsInvalid:'ప్రవేశించింది ఆధారాల ధృవీకరించడం సాధ్యం కాలేదు',
 	resetPinError:'పిన్ రీసెట్ చేయడానికి మీ మొబైల్ నంబర్ను నమోదు చేయండి',
 	digitsOnly:'అంకెలు మాత్రమే పూరించడానికి',
-	signUpError:'Mobile',
-	mobileError:'Mobile',
-	alphaOnly:'Mobile'
+	signUpError:'సైన్ అప్ విఫలమైంది , దయచేసి మళ్ళీ ప్రయత్నించండి',
+	mobileError:'వినియోగంలో ఉన్న మొబైల్ సంఖ్య',
+	alphaOnly:'అక్షరాలూ మాత్రమే'
   });
   //con
   //console.log($sessionStorage.LanguageSession);
