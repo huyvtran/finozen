@@ -12,6 +12,15 @@
           <p class="">{{clientMobile}} </p>
         </div>
 		<div class="list">
+		<a class="row item item-icon-right" style="padding:12px;">
+			<div class="col ">
+				<p style="color: rgb(66, 66, 66);font-size:18px">Account Type</p>
+			</div>
+			<div class="col">
+				<p class="text-right" style="color: rgb(66, 66, 66);font-size:18px" ng-controller="withdrawCtrl"><span>{{schemeNamep}}</span></p>
+			</div>
+		</a>
+		
 		  <a class="item item-icon-right" href="#/change_pin"><i class="icon ion-ios-arrow-right"></i>Change PIN</a>
 		  <a class="item item-icon-right" href="#/page7" ng-controller="signoutCtrl" ng-click="signOut()"><i class="icon ion-ios-arrow-right"></i>Sign Out</a>
 		</div>

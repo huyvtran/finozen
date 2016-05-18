@@ -304,11 +304,29 @@ angular.module('app.subcontrollerTwo', [])
 	console.log($scope.clientOccupation.type + " clientOccupation");
 	console.log(questUpload + " questUpload");
         questionsService.save(questUpload,function(data){
-			if(data.responseCode !== "Cali_SUC_1030") {$ionicLoading.hide();}
-         else{$ionicLoading.hide();$state.go('signature');}
+			if(data.responseCode !== "Cali_SUC_1030") {
+				$ionicLoading.hide();
+				var refer=$ionicPopup.alert({
+					title: 'Upload Error',
+					template: 'Please try again'
+				});
+					refer.then(function(res) {
+					$window.location.reload(true)
+				});
+			}
+			else{
+				$ionicLoading.hide();
+				$state.go('signature');
+			}
           },function(error){
             $ionicLoading.hide();
-         $state.go('signature');
+			var refresh=$ionicPopup.alert({
+                  title: 'Please try again',
+                   template: 'Unable to submit request'
+                });
+              refresh.then(function(res) {
+                  $window.location.reload(true)
+                });
 
           });
         }
@@ -741,8 +759,8 @@ angular.module('app.subcontrollerTwo', [])
 				$translate.use($localStorage.language);
 				$ionicLoading.show();
 				//$state.go('tabsController.recentTransactions', {}, {reload: true});
+				//$window.location.reload(true);
 				history.go(-1);
-				$window.location.reload(true);
 				$ionicLoading.hide();
 			}
 			

@@ -16,13 +16,13 @@ angular.module('app.subcontrollerOne', [])
 
 //FAQ controllers START
     .controller('FundsMethodCtrl', function($scope) {
-        $scope.message = "In FinoZen, we have ensured that there is minimal risk to your investments with high returns and instantaneous liquidity. Your investments directly go to a pre-selected liquid mutual fund. We rank all the liquid fund internally and select the highest ranking liquid fund for you. FinoZen ranking algorithm is based on following parameters –";
+        $scope.message = "In FinoZen, we have ensured that there is minimal risk to your investments with high returns and almost instantaneous liquidity. Your investments directly go to a pre-selected liquid mutual fund. FinoZen selection algorithm is based on following parameters –";
         $scope.groups = [];
-        $scope.groups["0"] = {name: "A. Net Assets of Liquid Fund", items: ["We give high weightage to the Net Amount Invested in a fund, and only those funds with greater than Rs. 5,000 Cr. in net assets are considered. This ensures that there is no liquidity crunch."] };
+        $scope.groups["0"] = {name: "A. Net Assets of Liquid Fund", items: ["We give high weightage to the Net Amount Invested in a fund, and only those funds with greater than Rs. 2,000 Cr. in net assets are considered. This ensures that there is no liquidity crunch."] };
         $scope.groups["1"] = {name: "B. Size of Asset Management Company" , items: ["Size of Asset Management Company is given due importance and only top 10 fund houses are selected by us."] };
-        $scope.groups["2"] = {name: "C. Expense Ratio" , items: ["The expense ratio of a stock or asset fund is the total percentage of fund assets used for administrative, management, advertising and all other expenses. We select only the funds with very low expense ratio to ensure higher returns."] };
-        $scope.groups["3"] = {name: "D. Average Credit Quality" , items: ["To ensure safety of investments, we select only those funds which invest in short term AAA rated securities, ensuring that funds are extremely low risk."] };
-        $scope.groups["4"] = {name: "E. Technical Indicators" , items: ["Our algorithm takes into factors 5 important technical indicators – Standard Deviation, Sharpe Ratio, Alpha, Beta and R-Squared to benchmark liquid funds. This ensures highest returns with lowest risk."] };
+        //$scope.groups["2"] = {name: "C. Expense Ratio" , items: ["The expense ratio of a stock or asset fund is the total percentage of fund assets used for administrative, management, advertising and all other expenses. We select only the funds with very low expense ratio to ensure higher returns."] };
+        $scope.groups["2"] = {name: "C. Average Credit Quality" , items: ["To ensure safety of investments, we select only those funds which invest in short term AAA or AA rated securities, ensuring that funds are extremely low risk."] };
+        $scope.groups["3"] = {name: "D. Technical Indicators" , items: ["Our algorithm takes into factors 5 important technical indicators – Standard Deviation, Sharpe Ratio, Alpha, Beta and R-Squared to benchmark liquid funds. This ensures high returns with lowest risk."] };
 
 
         /*
@@ -99,7 +99,7 @@ angular.module('app.subcontrollerOne', [])
 
     .controller('WithdrawMoneyCtrl', function($scope) {
         $scope.groups = [];
-        $scope.groups["0"] = {name: "Where does my money go?",items: ["FinoZen channels your money to the selected liquid mutual fund which gives the best return at lowest risk. You will have full visibility and control of your money at all times. You can choose to Add or withdraw money anytime, anywhere with no penalties applicable. "] };
+        $scope.groups["0"] = {name: "Where does my money go?",items: ["FinoZen channels your money to the selected liquid mutual fund. You will have full visibility and control of your money at all times. You can choose to Add or withdraw money anytime, anywhere with no penalties applicable. "] };
         $scope.groups["1"] = {name: "How soon can I start investing?",items: ["It will take us 5 mins to activate your account post you provide your documents to us. We will notify you once your account is activated. Once activated, you can start investing immediately."] };
         $scope.groups["2"] = {name: "How often can I invest/Add money or withdraw?",items: ["You can invest/add money or withdraw as often as you want. There are no restrictions on the frequency of your transactions. Also, there are no penalties or charges applicable when you withdraw your money."] };
         $scope.groups["3"] = {name: "How soon will my investments reflect on FinoZen?",items: ["All Investments will be processed on next working day and will reflect in your FinoZen account at 11:30 am on next day of processing.","Working days are Monday to Friday except Bank Holidays.", "For example: An investment done on Sunday, will be processed on Monday and will reflect in your FinoZen account on 11:30 am Tuesday."] };
@@ -142,6 +142,7 @@ angular.module('app.subcontrollerOne', [])
                 $scope.shownGroup = null;
             } else {
                 $scope.shownGroup = group;
+                
             }
         };
         $scope.isGroupShown = function(group) {
@@ -153,6 +154,13 @@ angular.module('app.subcontrollerOne', [])
 //TAB's DATA controller
 	.controller('withdrawCtrl', function($scope,$sessionStorage,$ionicLoading,getReportService,$ionicHistory,ionicToast,$ionicPlatform,$state) {
 
+	if($sessionStorage.clientType=="GO"){
+		$scope.schemeNamep = "GOLD";
+	}
+	else if($sessionStorage.clientType=="PL") {
+		$scope.schemeNamep = "PLATINUM";
+  }
+	
 $scope.faq = function(){$state.go('faq')}
 $scope.policy = function()
 {
@@ -173,7 +181,7 @@ $scope.xirrRate= function(){
 	if($sessionStorage.xirr == null){return 0;}
 	else if($sessionStorage.xirr <= 0){return 0;}
 	else if($sessionStorage.xirr >= 15){return 15;}
-	else if($sessionStorage.xirr <= 7.5){return 7.5;}
+	else if($sessionStorage.xirr <= 6.5){return 6.5;}
 	else{return $sessionStorage.xirr;}
 }
   $scope.balance= function() {
@@ -236,16 +244,18 @@ $scope.growthRate= function(){
     })
 
  // NAV Calculator controller
-.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup,$ionicLoading) {
+.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup,$ionicLoading,$ionicPlatform) {
   var finalComputedVal;
-    $scope.schemeName=$sessionStorage.schemeName;
-    if($scope.schemeName=="RELIANCE LIQUID FUND - TREASURY PLAN - GROWTH PLAN - GROWTH OPTION - G"){
-		$scope.schemeLink="http://www.moneycontrol.com/mutual-funds/nav/reliance-liquid-fund-treasury-plan-ip/MRC046";
+  	if($sessionStorage.clientType=="GO"){
+		console.log($sessionStorage.clientType+ "  gold")
+		$scope.schemePlan="RELIANCE LIQUID FUND-CASH PLAN-GROWTH";
+		$scope.averageRate=7.5;
 	}
-  else{
-      $scope.schemeLink="http://www.google.com";
+	  else if($sessionStorage.clientType=="PL") {
+	  console.log($sessionStorage.clientType+ "  platinum")
+      $scope.schemePlan="RELIANCE LIQUID FUND - TREASURY PLAN - IP - Growth";
+	  $scope.averageRate=8.3;
     }
-	// to be changed
 	var dayNow = new Date().getDay();
 	console.log(dayNow);
 	if(dayNow >=1 && dayNow <5){$scope.nav=$sessionStorage.nav*(1+ 0.0002);}
@@ -317,7 +327,7 @@ $scope.growthRate= function(){
 					template: 'Please Login again'
 				  });
               log.then(function(res) {
-					$state.go("login");
+					ionic.Platform.exitApp();
 				  });
 				$scope.mess="Enter a value";
             });
@@ -342,7 +352,7 @@ $scope.growthRate= function(){
         template: 'Please Login again'
       });
       log.then(function(res) {
-        $state.go("login");
+        ionic.Platform.exitApp();
       });
       $scope.mess="Enter a value";
     });

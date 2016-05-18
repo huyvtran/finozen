@@ -100,7 +100,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
     /*For Sign In*/
 
 .controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,$ionicLoading,$localStorage,$translate,$ionicPopup,$timeout) {
-
+/*
 	$scope.clientLanguageOptions = [
 			{ name: 'বাঙালি', value: '1' },
 			{ name: 'English', value: '2' },
@@ -112,7 +112,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 			{ name: 'தமிழ்', value: '8' },
 			{ name: 'తెలుగు', value: '9' }
 			];
-	$scope.clientLanguage = {type : $scope.clientLanguageOptions[$localStorage.language-1].value};
+	$scope.clientLanguage = {type : $scope.clientLanguageOptions[$localStorage.language].value};
 		console.log($localStorage.language+"  localStorage selected");
         //if ($localStorage.language == undefined ) {
         if ($localStorage.language || $localStorage.language==undefined) {
@@ -146,8 +146,16 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
               }
             ]
           });
-        }
+        }*/
+		
+		if($localStorage.language== undefined){
+			$localStorage.language="2";
 			$translate.use($localStorage.language);
+		}
+		else{
+			$translate.use($localStorage.language);
+		}
+			
             //$state.go("login");
  //$state.go('tabsController.summaryPage');
  $scope.mobileNumber=$localStorage.loginData;
@@ -308,7 +316,7 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 	$sessionStorage.allTransactions=(data.jsonStr).length ;
 	console.log($sessionStorage.allTransactions + "total number of transactions");
     $scope.products=data.jsonStr;
-	if((data.jsonStr).length <= 0){console.log(window.Connection + "connection");
+	if((data.jsonStr).length <= 0){
 	$scope.noTxnIcon="img/no_leaves.png";
     }
     }
@@ -320,25 +328,29 @@ $sessionStorage.xirr=data.jsonStr.xirr;
     if(data.responseCode=="Cali_SUC_1030"){
     for(var i = 0; i < (data.jsonStr).length; i++) {
       if(data.jsonStr[i].recco=="Accumulate"){
-		  console.log($sessionStorage.clientType+ "   client type")
-		  if($sessionStorage.clientType=="PL"){
+		  console.log($sessionStorage.clientType+ "   client type");
+		  if($sessionStorage.clientType ==="PL"){
 			if(JSON.stringify(data.jsonStr[i].schemeName)[1]=="P"){
 				console.log(JSON.stringify(data.jsonStr[i].schemeName)[1] +"   i am platinum");
 				$sessionStorage.schemeName=data.jsonStr[i].schemeName;
 				$sessionStorage.nav=data.jsonStr[i].nav;
+				console.log($sessionStorage.nav + "  platinum");
 				$sessionStorage.rtaCode=data.jsonStr[i].rtaCode;
 				$sessionStorage.amcCode=data.jsonStr[i].amcCode;
 			}
 		  }
-		  else if($sessionStorage.clientType=="G0"){
+		  else if($sessionStorage.clientType  ==='GO'){
 			  if(JSON.stringify(data.jsonStr[i].schemeName)[1]=="G"){
 				console.log("i am gold");
 				$sessionStorage.schemeName=data.jsonStr[i].schemeName;
 				$sessionStorage.nav=data.jsonStr[i].nav;
+				console.log($sessionStorage.nav + "  Gold");
 				$sessionStorage.rtaCode=data.jsonStr[i].rtaCode;
 				$sessionStorage.amcCode=data.jsonStr[i].amcCode;
 			}
+			
 		  }
+		 // else{console.log("not enteringg goo");}
         
       }
 
@@ -425,7 +437,7 @@ $scope.shareViaTwitter=function(){
      })
 
 
-    .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$sessionStorage,$ionicPopup) {
+    .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$sessionStorage,$ionicPopup,$ionicPlatform) {
         $scope.Withdrawl = function(form) {
 console.log($scope.amount);
 console.log($scope.checked_withdraw );
@@ -468,6 +480,13 @@ console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
 							if(data.responseCode!="Cali_SUC_1030") {
 								console.log("failed");
 								$scope.withdraw_Networkerror="Unable to accept request. Please re-login and try again";
+								var log=$ionicPopup.alert({
+									title: 'Sorry for the inconvenience',
+									template: 'Please Login again'
+								  });
+							  log.then(function(res) {
+									ionic.Platform.exitApp();
+								  });
 							}
 							else
 							{
@@ -476,6 +495,13 @@ console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
 							}
 						},function(error){
 							$scope.withdraw_Networkerror="Unable to accept request. Please re-login and try again";
+							var log=$ionicPopup.alert({
+								title: 'Sorry for the inconvenience',
+								template: 'Please Login again'
+							  });
+								log.then(function(res) {
+								ionic.Platform.exitApp();
+							  });
 						});
 					}
 				});
