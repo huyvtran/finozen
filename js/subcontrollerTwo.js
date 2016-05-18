@@ -59,7 +59,7 @@ angular.module('app.subcontrollerTwo', [])
 				  cameraDirection:0,
 				  popoverOptions: CameraPopoverOptions,
 				  saveToPhotoAlbum: false,
-				  correctOrientation:true
+				  correctOrientation:false
 				};
 
 				$cordovaCamera.getPicture(options).then(function(imageData) {
@@ -401,7 +401,7 @@ angular.module('app.subcontrollerTwo', [])
 			  cameraDirection:1,
 			  popoverOptions: CameraPopoverOptions,
 			  saveToPhotoAlbum: false,
-			  correctOrientation:true
+			  correctOrientation:false
 			};
 
 			$cordovaCamera.getPicture(options).then(function(imageData) {
@@ -763,8 +763,8 @@ angular.module('app.subcontrollerTwo', [])
 				history.go(-1);
 				$ionicLoading.hide();
 			}
-			
-		    
+
+
     })
 
   //   language selection at pop up
