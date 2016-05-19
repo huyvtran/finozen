@@ -297,7 +297,7 @@ $scope.growthRate= function(){
 					template: 'Your first transaction is in progress. For next transaction, we request you to wait till the first investment reflects in your FinoZen account.'
 				  });
 				  }
-				else if($sessionStorage.nachStatus !='Y'){
+				else if($sessionStorage.nachStatus !='A'){
 				        $ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
           console.log('its entering the nach mandate');
           $scope.sendMfOrder();
