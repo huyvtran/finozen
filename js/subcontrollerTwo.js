@@ -527,8 +527,8 @@ angular.module('app.subcontrollerTwo', [])
 /*for uploading the bank details*/
   .controller('bankDetailsCTRL',function($scope,$state,$sessionStorage,bankDetailsService,$ionicPopup,$ionicLoading,$window){
     $scope.accountTypeOptions = [
-    { name: 'Savings', value: 'savings' },
-    { name: 'Current', value: 'current' }
+    { name: 'Savings', value: 'SB_New' },
+    { name: 'Current', value: 'CA_new' }
     ];
 
     $scope.accountType = {type : $scope.accountTypeOptions[0].value};
