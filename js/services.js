@@ -4,27 +4,6 @@ angular.module('app.services', [])
 
 }])
 
-
-
-// .service('loginService', [function(){
-
-// }]);
-
-
-/*.factory('accessUrlService', ['$resource',function($resource){
-	var postRequest= $resource('http://205.147.99.55:8080/WealthWeb/ws/login/restLogin',{},{
-		save:{
-			method:'POST',
-			headers:{
-				'X-AUTH-TOKEN':'05173DAB80610F314F510E2FB48D85AC',
-				'content-tyoe'/: UTF-8, JSON
-			}
-		},
-	});
-	return postRequest;
-}])*/
-
-
 .factory('accessUrlService', ['$resource',function($resource){
 	return $resource('http://205.147.99.55:8080/WealthWeb/ws/login/restLogin');
 }])

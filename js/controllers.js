@@ -147,7 +147,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
             ]
           });
         }*/
-		
+
 		if($localStorage.language== undefined){
 			$localStorage.language="2";
 			$translate.use($localStorage.language);
@@ -155,7 +155,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 		else{
 			$translate.use($localStorage.language);
 		}
-			
+
             //$state.go("login");
  //$state.go('tabsController.summaryPage');
  $scope.mobileNumber=$localStorage.loginData;
@@ -260,7 +260,7 @@ if($sessionStorage.clientActive=="Y") {
                 buttons: [
                     { text: 'Call',
                         onTap:function(e){
-                            window.location.href="tel:+91-7899825545";
+                            window.location.href="tel:07899825545";
                         }
 
                     },
@@ -348,10 +348,10 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 				$sessionStorage.rtaCode=data.jsonStr[i].rtaCode;
 				$sessionStorage.amcCode=data.jsonStr[i].amcCode;
 			}
-			
+
 		  }
 		 // else{console.log("not enteringg goo");}
-        
+
       }
 
     }

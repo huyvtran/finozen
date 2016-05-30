@@ -5,9 +5,13 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
+function DeepLinkHandler(data) {
+  alert('Data from initSession: ' + data.data);
+}
+
+
 var confirmation = 0;
 angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', 'app.controllers', 'app.subcontrollerOne','pascalprecht.translate','app.subcontrollerTwo' , 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages','ngStorage','ngIdle','ngCordova', 'ionic-toast'])
-
 /*.constant('$ionicLoadingConfig', {
   template: '<ion-spinner icon="android"></ion-spinner>',
   showBackdrop: true,
@@ -315,7 +319,7 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	signUpError:'साइन अप करने में विफल रहा है , कृपया पुनः प्रयास करें',
 	mobileError:'उपयोग में मोबाइल नंबर',
 	alphaOnly:'दर्ज अक्षर ही'
-	
+
   });
     $translateProvider.translations('5', {
 	selectedLanguage:'Select your desired Language kannada',
@@ -707,11 +711,24 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 
 .run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout,$localStorage) {
   $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
 
-//var userName = $bindTo($scope.$sessionStorage.mobileNumber);
- //     console.log(userName);
+//bracnh.io intizialiton
+      Branch.initSession();
+    Branch.userCompletedAction(
+      "purchase_event",
+      {
+        "inr": "100"
+      }
+    );
+    Branch.userCompletedAction(
+      "click",
+      {
+        "inr": "100"
+      }
+    );
+
+
+
       Idle.watch();
 //$localStorage.language=0;
                 if(!navigator.onLine) {
@@ -729,28 +746,28 @@ console.log(navigator.onLine + "  connection state");
 				else{console.log(navigator.onLine + "  connection state");}
     $ionicAnalytics.register();
     var io=Ionic.io();
-/*
+
 if(typeof analytics !== undefined) {
-                analytics.startTrackerWithId("UA-76016305-1");
+                analytics.startTrackerWithId("UA-76016305-2");
 				analytics.trackView("tracking the google analytics ");
   analytics.trackView("controller.js");
     analytics.trackView('invest');
   analytics.trackView('withdraw');
   analytics.trackView('tabsController');
   analytics.setUserId('userName');
+  analytics.setApplicationIconBadgeNumber('username');
 
 				//ga('set', 'userId', {{USER_ID}}); // Set the user ID using signed-in user_id.
             } else {
                 console.log("Google Analytics Unavailable");
             }
-	*/var backbutton = 0;
+	var backbutton = 0;
 	$ionicPlatform.registerBackButtonAction(function (event) {
      if ($ionicHistory.currentStateName() == 'invest'){
 		 console.log("inv");
 		$state.go('tabsController.summaryPage');
 
       }
-
      else if ($ionicHistory.currentStateName() == 'verifySuccess'){
 		event.preventDefault();
       }
