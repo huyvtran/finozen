@@ -260,7 +260,7 @@ if($sessionStorage.clientActive=="Y") {
                 buttons: [
                     { text: 'Call',
                         onTap:function(e){
-                            window.location.href="tel:080-41245883";
+                            window.location.href="tel:+91-7899825545";
                         }
 
                     },

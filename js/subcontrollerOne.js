@@ -14,6 +14,27 @@ angular.module('app.subcontrollerOne', [])
 }*/
     })
 
+    .controller('quotesCtrl', function($scope,$timeout,$interval) {
+		$scope.headsUpData=[
+		"\"An investment in knowledge pays the best interest.' - Benjamin Franklin",
+		"\"The individual investor should act consistently as an investor and not as a speculator.\"",
+		"\"Know what you own, and know why you own it.\" - Peter Lynch",
+		"\"I would not pre-pay. I would invest instead and let the investments cover it.\"",
+		"\"We will only do with your money what we would do with our own\"",
+		"\"Do not save what is left after spending but spend what is left after saving\"",
+		"\"You will either tell your money what to do or the lack of it will always manage you\"",
+		"\"never depend on a single income. Make investments to create a second source\"",
+		"\"Do not save what is left after spending but spend what is left after saving \""
+		];
+		$scope.textt =$scope.headsUpData[Math.floor(Math.random() * 9)];
+		$scope.plzWait2=function(){
+			$interval(function () {
+				$scope.textt =$scope.headsUpData[Math.floor(Math.random() * 9)];
+            }, 3000);
+		}
+	$scope.plzWait2();
+		
+	})
 //FAQ controllers START
     .controller('FundsMethodCtrl', function($scope) {
         $scope.message = "In FinoZen, we have ensured that there is minimal risk to your investments with high returns and almost instantaneous liquidity. Your investments directly go to a pre-selected liquid mutual fund. FinoZen selection algorithm is based on following parameters –";
@@ -46,7 +67,8 @@ angular.module('app.subcontrollerOne', [])
 		console.log($localStorage.language + " language selected");
 		$translate.use($localStorage.language);
 	})
-    .controller('AccountfaqCtrl', function($scope) {
+    .controller('AccountfaqCtrl', function($scope,$ionicLoading) {
+		$ionicLoading.show({templateUrl:"templates/loading.html"});
         $scope.groups = [];
         $scope.groups["0"] = {name: "What is FinoZen?",items: ["FinoZen is a mobile app where you can watch your money grow, literally! It enables you to invest and withdraw in just a click while your money grows at an expected rate of 7.5 – 8.5% p.a."] };
         $scope.groups["1"] = {name: "How does FinoZen work?" , items: ["FinoZen channels your money to the selected liquid mutual fund which gives the best return at lowest risk. You will have full visibility and control of your money at all times. You can choose to Add or withdraw money anytime, anywhere with no penalties applicable. "] };
@@ -298,12 +320,12 @@ $scope.growthRate= function(){
 				  });
 				  }
 				else if($sessionStorage.nachStatus !='A'){
-				        $ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
+				        $ionicLoading.show({templateUrl:"templates/loading.html"});
           console.log('its entering the nach mandate');
           $scope.sendMfOrder();
 				}
               else{
-          $ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
+          $ionicLoading.show({templateUrl:"templates/loading.html"});
           $scope.nach();
         }
             }
