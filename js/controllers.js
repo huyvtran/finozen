@@ -295,7 +295,6 @@ var reportDate = getPerformanceService.get();
 reportDate.$promise.then(function(data){
  if (data.responseCode == "Cali_SUC_1030") {
 
-$sessionStorage.amcCode=data.jsonStr.amcCode;
 $sessionStorage.gainMonth=data.jsonStr.gainMonth;
 $sessionStorage.gainToday=data.jsonStr.gainToday;
 $sessionStorage.gainTotal=data.jsonStr.gainTotal;
@@ -305,7 +304,6 @@ $sessionStorage.msg=data.jsonStr.msg;
 $sessionStorage.netInv=data.jsonStr.netInv;
 $sessionStorage.paymentMode=data.jsonStr.paymentMode;
 $sessionStorage.quantity=data.jsonStr.quantity;
-$sessionStorage.rtaCode=data.jsonStr.rtaCode;
 $sessionStorage.xirr=data.jsonStr.xirr;
  }
 })
