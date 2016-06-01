@@ -319,6 +319,16 @@ $scope.growthRate= function(){
 					template: 'Your first transaction is in progress. For next transaction, we request you to wait till the first investment reflects in your FinoZen account.'
 				  });
 				  }
+				  // comment this part for nachStatus
+				  
+				  $ionicLoading.show({templateUrl:"templates/loading.html"});
+          console.log('its entering the nach mandate');
+          $scope.sendMfOrder()
+				  
+				  // till here
+				  
+				  //Nach status redirection
+				  /*
 				else if($sessionStorage.nachStatus !='A'){
 				        $ionicLoading.show({templateUrl:"templates/loading.html"});
           console.log('its entering the nach mandate');
@@ -327,7 +337,7 @@ $scope.growthRate= function(){
               else{
           $ionicLoading.show({templateUrl:"templates/loading.html"});
           $scope.nach();
-        }
+        }*/
             }
         }
 
