@@ -872,13 +872,24 @@ angular.module('app.subcontrollerTwo', [])
 
 }
 })
+  
+.controller('deviceid', function($scope, $cordovaDevice) {
 
-.controller('deviceid',function($scope,$cordovaDevice){
-  $scope.device=$cordovaDevice.device;
-  var name=$cordovaDevice.getName();
-  var manufacturer=$cordovaDevice.manufacturer;
-  var version=$cordovaDevice.getVersion();
-  var model=$cordovaDevice.model;
-  var uuid=$cordovaDevice.getUUID();
+  document.addEventListener("deviceready", function () {
 
+    var device = $cordovaDevice.getDevice();
+
+    var cordova = $cordovaDevice.getCordova();
+
+    var model = $cordovaDevice.getModel();
+
+    var platform = $cordovaDevice.getPlatform();
+
+    var uuid = $cordovaDevice.getUUID();
+
+    var version = $cordovaDevice.getVersion();
+
+  }, false);
 })
+
+
