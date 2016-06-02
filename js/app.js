@@ -709,8 +709,10 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     KeepaliveProvider.interval(2); // in seconds
 })
 
-.run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout,$localStorage) {
+.run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout) {
   $ionicPlatform.ready(function() {
+
+    console.log( window.device.uuid +   "uuid is here");
 
 //bracnh.io intizialiton
       Branch.initSession();
@@ -750,13 +752,24 @@ console.log(navigator.onLine + "  connection state");
 if(typeof analytics !== undefined) {
                 analytics.startTrackerWithId("UA-76016305-2");
 				analytics.trackView("tracking the google analytics ");
+  analytics.addTransactionItem('money', 'Name', 'INR', 'Funds', Price, Quantity, 'Currency Code')
+  analytics.trackEvent('Category', 'click', 'Label', Value)
+if($sessionStorage.clientActive==y){
+  analytics.setUserId("active");
   analytics.trackView("controller.js");
-    analytics.trackView('invest');
+  analytics.trackView('invest');
   analytics.trackView('withdraw');
   analytics.trackView('tabsController');
   analytics.setUserId('userName');
-  analytics.setApplicationIconBadgeNumber('username');
-
+}
+  else {
+  analytics.setUserId("notAvitce");
+  analytics.trackView("controller.js");
+  analytics.trackView('invest');
+  analytics.trackView('withdraw');
+  analytics.trackView('tabsController');
+  analytics.setUserId('userName');
+}
 				//ga('set', 'userId', {{USER_ID}}); // Set the user ID using signed-in user_id.
             } else {
                 console.log("Google Analytics Unavailable");

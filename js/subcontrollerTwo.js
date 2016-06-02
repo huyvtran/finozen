@@ -872,3 +872,13 @@ angular.module('app.subcontrollerTwo', [])
 
 }
 })
+
+.controller('deviceid',function($scope,$cordovaDevice){
+  $scope.device=$cordovaDevice.device;
+  var name=$cordovaDevice.getName();
+  var manufacturer=$cordovaDevice.manufacturer;
+  var version=$cordovaDevice.getVersion();
+  var model=$cordovaDevice.model;
+  var uuid=$cordovaDevice.getUUID();
+
+})
