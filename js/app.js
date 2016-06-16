@@ -18,6 +18,7 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 })
 
 */
+
 .config(function ($translateProvider) {
 
     $translateProvider.translations('2', {
@@ -713,6 +714,7 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
   $ionicPlatform.ready(function() {
 
     console.log( window.device.uuid +   "uuid is here");
+    console.log(UAirship.android_tokens +  'Token Number');
 
 //bracnh.io intizialiton
       Branch.initSession();
@@ -870,6 +872,7 @@ window.plugins.OneSignal.getTags(function(tags){
   console.log('Tags Received: ' + JSON.stringify(tags));
     })
 
+    console.log(UAirship.android_tokens +  'Token Number');
 
 
     var user=Ionic.User.current();
