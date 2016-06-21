@@ -365,53 +365,18 @@ angular.module('app.subcontrollerTwo', [])
 		console.log($sessionStorage.addressChoice);
 		$scope.addressImage=$scope.cimageFront;
 		document.addEventListener("deviceready", function () {
-				if($sessionStorage.addressChoice === 'AA' || $sessionStorage.addressChoice ==='DL'){
-					var options = {
-					  quality: 100,
-					  destinationType: Camera.DestinationType.DATA_URL,
-					  sourceType: Camera.PictureSourceType.CAMERA,
-					  allowEdit: true,
-					  encodingType: Camera.EncodingType.JPEG,
-					  targetWidth: 400,
-					  targetHeight: 300,
-					  popoverOptions: CameraPopoverOptions,
-					  saveToPhotoAlbum: false,
-					  correctOrientation:true
-					};
-				}
-			
-			else if($sessionStorage.addressChoice ==='PP' || $sessionStorage.addressChoice ==='RC'){
-					var options = {
-					  quality: 100,
-					  destinationType: Camera.DestinationType.DATA_URL,
-					  sourceType: Camera.PictureSourceType.CAMERA,
-					  allowEdit: true,
-					  encodingType: Camera.EncodingType.JPEG,
-					  targetWidth: 400,
-					  targetHeight: 400,
-					  popoverOptions: CameraPopoverOptions,
-					  saveToPhotoAlbum: false,
-					  correctOrientation:true
-					};
-				}
-			
-			else if($sessionStorage.addressChoice === 'VO' || $sessionStorage.addressChoice ==='GA'){
-					var options = {
-					  quality: 100,
-					  destinationType: Camera.DestinationType.DATA_URL,
-					  sourceType: Camera.PictureSourceType.CAMERA,
-					  allowEdit: true,
-					  encodingType: Camera.EncodingType.JPEG,
-					  targetWidth: 300,
-					  targetHeight: 400,
-					  popoverOptions: CameraPopoverOptions,
-					  saveToPhotoAlbum: false,
-					  correctOrientation:true
-					};
-				}
-			
-			console.log(options);
-
+			var options = {
+			  quality: 100,
+			  destinationType: Camera.DestinationType.DATA_URL,
+			  sourceType: Camera.PictureSourceType.CAMERA,
+			  allowEdit: true,
+			  encodingType: Camera.EncodingType.JPEG,
+			  targetWidth: 300,
+			  targetHeight: 200,
+			  popoverOptions: CameraPopoverOptions,
+			  saveToPhotoAlbum: false,
+			  correctOrientation:true
+			};
 
 			$cordovaCamera.getPicture(options).then(function(imageData) {
 			  $scope.addressImageData = imageData;
@@ -425,53 +390,19 @@ angular.module('app.subcontrollerTwo', [])
 		$scope.addressBackImg=function(){
 		//$scope.addressFront();
 		  document.addEventListener("deviceready", function () {
-				if($sessionStorage.addressChoice === 'AA' || $sessionStorage.addressChoice ==='DL'){
-					var options = {
-					  quality: 100,
-					  destinationType: Camera.DestinationType.DATA_URL,
-					  sourceType: Camera.PictureSourceType.CAMERA,
-					  allowEdit: true,
-					  encodingType: Camera.EncodingType.JPEG,
-					  targetWidth: 400,
-					  targetHeight: 300,
-					  popoverOptions: CameraPopoverOptions,
-					  saveToPhotoAlbum: false,
-					  correctOrientation:true
-					};
-				}
-			
-			else if($sessionStorage.addressChoice ==='PP' || $sessionStorage.addressChoice ==='RC'){
-					var options = {
-					  quality: 100,
-					  destinationType: Camera.DestinationType.DATA_URL,
-					  sourceType: Camera.PictureSourceType.CAMERA,
-					  allowEdit: true,
-					  encodingType: Camera.EncodingType.JPEG,
-					  targetWidth: 400,
-					  targetHeight: 400,
-					  popoverOptions: CameraPopoverOptions,
-					  saveToPhotoAlbum: false,
-					  correctOrientation:true
-					};
-				}
-			
-			else if($sessionStorage.addressChoice === 'VO' || $sessionStorage.addressChoice ==='GA'){
-					var options = {
-					  quality: 100,
-					  destinationType: Camera.DestinationType.DATA_URL,
-					  sourceType: Camera.PictureSourceType.CAMERA,
-					  allowEdit: true,
-					  encodingType: Camera.EncodingType.JPEG,
-					  targetWidth: 300,
-					  targetHeight: 400,
-					  popoverOptions: CameraPopoverOptions,
-					  saveToPhotoAlbum: false,
-					  correctOrientation:true
-					};
-				}
-			
-			console.log(options);
-
+			var options = {
+			  quality: 100,
+			  destinationType: Camera.DestinationType.DATA_URL,
+			  sourceType: Camera.PictureSourceType.CAMERA,
+			  allowEdit: true,
+			  encodingType: Camera.EncodingType.JPEG,
+			  targetWidth: 300,
+			  targetHeight: 200,
+			  cameraDirection:1,
+			  popoverOptions: CameraPopoverOptions,
+			  saveToPhotoAlbum: false,
+			  correctOrientation:false
+			};
 
 			$cordovaCamera.getPicture(options).then(function(imageData) {
 			  $scope.addressBackData = imageData;
