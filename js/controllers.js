@@ -76,7 +76,11 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 
 						$scope.mobileError="Mobile number in use";
 					}
+					else if(data.responseCode=="Cali_ERR_1838" || data.responseCode=="Cali_ERR_1838" ){
+						$scope.serverError="Please enter your full name";
+					}
 					else{
+						console.log(data.responseCode + "hdfdhskjhkjh");
 						$scope.serverError="Sign Up failed, please try again";
 					}
 				}
@@ -91,6 +95,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
                 }
             },function(error){
 				$ionicLoading.hide();
+				console.log(data.responseCode + "hdfdhskjhkjh");
                 $scope.serverError="Sign Up failed, please call us";
 
             });
@@ -235,7 +240,7 @@ console.log($scope.loginDetails);
 
 
   /*add money page check*/
-    .controller('transactionAccessCtrl', function($scope,$sessionStorage){
+.controller('transactionAccessCtrl', function($scope,$sessionStorage){
 if($sessionStorage.clientActive=="Y") {
      $scope.withdrawUrl="#/withdraw";
       $scope.investUrl="#/invest";
@@ -244,7 +249,7 @@ if($sessionStorage.clientActive=="Y") {
     $scope.withdrawUrl="#/status";
     $scope.investUrl="#/status";
   }
-    })
+})
 
 
 

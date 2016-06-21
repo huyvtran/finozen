@@ -30,7 +30,7 @@ angular.module('app.subcontrollerOne', [])
 		$scope.plzWait2=function(){
 			$interval(function () {
 				$scope.textt =$scope.headsUpData[Math.floor(Math.random() * 9)];
-            }, 3000);
+            }, 5000);
 		}
 	$scope.plzWait2();
 		
@@ -67,8 +67,7 @@ angular.module('app.subcontrollerOne', [])
 		console.log($localStorage.language + " language selected");
 		$translate.use($localStorage.language);
 	})
-    .controller('AccountfaqCtrl', function($scope,$ionicLoading) {
-		$ionicLoading.show({templateUrl:"templates/loading.html"});
+    .controller('AccountfaqCtrl', function($scope) {
         $scope.groups = [];
         $scope.groups["0"] = {name: "What is FinoZen?",items: ["FinoZen is a mobile app where you can watch your money grow, literally! It enables you to invest and withdraw in just a click while your money grows at an expected rate of 7.5 – 8.5% p.a."] };
         $scope.groups["1"] = {name: "How does FinoZen work?" , items: ["FinoZen channels your money to the selected liquid mutual fund which gives the best return at lowest risk. You will have full visibility and control of your money at all times. You can choose to Add or withdraw money anytime, anywhere with no penalties applicable. "] };
@@ -320,15 +319,15 @@ $scope.growthRate= function(){
 				  });
 				  }
 				  // comment this part for nachStatus
-				  
+				  /*
 				  $ionicLoading.show({templateUrl:"templates/loading.html"});
           console.log('its entering the nach mandate');
           $scope.sendMfOrder()
-				  
+				  */
 				  // till here
 				  
 				  //Nach status redirection
-				  /*
+				  
 				else if($sessionStorage.nachStatus !='A'){
 				        $ionicLoading.show({templateUrl:"templates/loading.html"});
           console.log('its entering the nach mandate');
@@ -337,7 +336,7 @@ $scope.growthRate= function(){
               else{
           $ionicLoading.show({templateUrl:"templates/loading.html"});
           $scope.nach();
-        }*/
+        }
             }
         }
 
@@ -368,7 +367,7 @@ $scope.growthRate= function(){
   //nach status
   $scope.nach=function() {
     var date=dateService.getDate();
-    mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums},function(data){
+    mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums,"paymentMode" : "a"},function(data){
       if(data.responseCode=="Cali_SUC_1030"){
         $ionicLoading.hide();
        $state.go('tabsController.summaryPage');
