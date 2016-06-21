@@ -105,23 +105,6 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 .run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout) {
   $ionicPlatform.ready(function() {
 
-//bracnh.io intizialiton
-      Branch.initSession();
-    Branch.userCompletedAction(
-      "purchase_event",
-      {
-        "inr": "100"
-      }
-    );
-    Branch.userCompletedAction(
-      "click",
-      {
-        "inr": "100"
-      }
-    );
-
-
-
       Idle.watch();
 //$localStorage.language=0;
                 if(!navigator.onLine) {
@@ -137,23 +120,7 @@ console.log(navigator.onLine + "  connection state");
                     });
 				}
 				else{console.log(navigator.onLine + "  connection state");}
-    $ionicAnalytics.register();
-    var io=Ionic.io();
 
-if(typeof analytics !== undefined) {
-                analytics.startTrackerWithId("UA-76016305-2");
-				analytics.trackView("tracking the google analytics ");
-  analytics.trackView("controller.js");
-  analytics.trackView('invest');
-  analytics.trackView('withdraw');
-  analytics.trackView('tabsController');
-  analytics.setUserId('userName');
-  analytics.setApplicationIconBadgeNumber('username');
-
-				//ga('set', 'userId', {{USER_ID}}); // Set the user ID using signed-in user_id.
-            } else {
-                console.log("Google Analytics Unavailable");
-            }
 	var backbutton = 0;
 	$ionicPlatform.registerBackButtonAction(function (event) {
      if ($ionicHistory.currentStateName() == 'invest'){
