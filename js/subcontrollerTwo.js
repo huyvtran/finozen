@@ -365,18 +365,55 @@ angular.module('app.subcontrollerTwo', [])
 		console.log($sessionStorage.addressChoice);
 		$scope.addressImage=$scope.cimageFront;
 		document.addEventListener("deviceready", function () {
-			var options = {
-			  quality: 100,
-			  destinationType: Camera.DestinationType.DATA_URL,
-			  sourceType: Camera.PictureSourceType.CAMERA,
-			  allowEdit: true,
-			  encodingType: Camera.EncodingType.JPEG,
-			  targetWidth: 300,
-			  targetHeight: 200,
-			  popoverOptions: CameraPopoverOptions,
-			  saveToPhotoAlbum: false,
-			  correctOrientation:true
-			};
+
+				if($sessionStorage.addressChoice === 'AA' || $sessionStorage.addressChoice ==='DL'){
+					var options = {
+					  quality: 100,
+					  destinationType: Camera.DestinationType.DATA_URL,
+					  sourceType: Camera.PictureSourceType.CAMERA,
+					  allowEdit: true,
+					  encodingType: Camera.EncodingType.JPEG,
+					  targetWidth: 400,
+					  targetHeight: 300,
+					  popoverOptions: CameraPopoverOptions,
+					  saveToPhotoAlbum: false,
+					  correctOrientation:true
+					};
+				}
+			
+			else if($sessionStorage.addressChoice ==='PP' || $sessionStorage.addressChoice ==='RC'){
+					var options = {
+					  quality: 100,
+					  destinationType: Camera.DestinationType.DATA_URL,
+					  sourceType: Camera.PictureSourceType.CAMERA,
+					  allowEdit: true,
+					  encodingType: Camera.EncodingType.JPEG,
+					  targetWidth: 400,
+					  targetHeight: 400,
+					  popoverOptions: CameraPopoverOptions,
+					  saveToPhotoAlbum: false,
+					  correctOrientation:true
+					};
+				}
+			
+			else if($sessionStorage.addressChoice === 'VO' || $sessionStorage.addressChoice ==='GA'){
+					var options = {
+					  quality: 100,
+					  destinationType: Camera.DestinationType.DATA_URL,
+					  sourceType: Camera.PictureSourceType.CAMERA,
+					  allowEdit: true,
+					  encodingType: Camera.EncodingType.JPEG,
+					  targetWidth: 300,
+					  targetHeight: 400,
+					  popoverOptions: CameraPopoverOptions,
+					  saveToPhotoAlbum: false,
+					  correctOrientation:true
+					};
+				}
+			
+			console.log(options);
+
+
 
 			$cordovaCamera.getPicture(options).then(function(imageData) {
 			  $scope.addressImageData = imageData;
@@ -398,11 +435,58 @@ angular.module('app.subcontrollerTwo', [])
 			  encodingType: Camera.EncodingType.JPEG,
 			  targetWidth: 300,
 			  targetHeight: 200,
-			  cameraDirection:1,
 			  popoverOptions: CameraPopoverOptions,
 			  saveToPhotoAlbum: false,
-			  correctOrientation:false
+			  correctOrientation:true
 			};
+				if($sessionStorage.addressChoice === 'AA' || $sessionStorage.addressChoice ==='DL'){
+					var options = {
+					  quality: 100,
+					  destinationType: Camera.DestinationType.DATA_URL,
+					  sourceType: Camera.PictureSourceType.CAMERA,
+					  allowEdit: true,
+					  encodingType: Camera.EncodingType.JPEG,
+					  targetWidth: 400,
+					  targetHeight: 300,
+					  popoverOptions: CameraPopoverOptions,
+					  saveToPhotoAlbum: false,
+					  correctOrientation:true
+					};
+				}
+			
+			else if($sessionStorage.addressChoice ==='PP' || $sessionStorage.addressChoice ==='RC'){
+					var options = {
+					  quality: 100,
+					  destinationType: Camera.DestinationType.DATA_URL,
+					  sourceType: Camera.PictureSourceType.CAMERA,
+					  allowEdit: true,
+					  encodingType: Camera.EncodingType.JPEG,
+					  targetWidth: 400,
+					  targetHeight: 400,
+					  popoverOptions: CameraPopoverOptions,
+					  saveToPhotoAlbum: false,
+					  correctOrientation:true
+					};
+				}
+			
+			else if($sessionStorage.addressChoice === 'VO' || $sessionStorage.addressChoice ==='GA'){
+					var options = {
+					  quality: 100,
+					  destinationType: Camera.DestinationType.DATA_URL,
+					  sourceType: Camera.PictureSourceType.CAMERA,
+					  allowEdit: true,
+					  encodingType: Camera.EncodingType.JPEG,
+					  targetWidth: 300,
+					  targetHeight: 400,
+					  popoverOptions: CameraPopoverOptions,
+					  saveToPhotoAlbum: false,
+					  correctOrientation:true
+					};
+				}
+			
+			console.log(options);
+
+
 
 			$cordovaCamera.getPicture(options).then(function(imageData) {
 			  $scope.addressBackData = imageData;
@@ -818,57 +902,3 @@ angular.module('app.subcontrollerTwo', [])
 			$translate.use($localStorage.language);
             //$state.go("login");
     })
-
-//   card.io scanning
-.controller('cardScanCTRL',function($scope,$state,$ionicPlatform,cardIO)
-{
-  var scan=function(){
-    console.log('entering scanner');
-    $scope.scanCard = function(){
-      var cardIOResponseFields = [
-        "card_type",
-        "redacted_card_number",
-        "card_number",
-        "expiry_month",
-        "expiry_year",
-        "cvv",
-        "zip"
-      ];
-
-      var onCardIOComplete = function(response) {
-        for (var i = 0, len = cardIOResponseFields.length; i < len; i++) {
-          var field = cardIOResponseFields[i];
-          console.log(field + ": " + response[field]);
-        }
-      };
-
-      var onCardIOCancel = function() {
-        console.log("card.io scan cancelled");
-      };
-
-      var onCardIOCheck = function (canScan) {
-        console.log("card.io canScan? " + canScan);
-        var scanBtn = angular.element($("#scanBtn")).scope();
-        //var scanBtn = document.getElementById("scanBtn");
-        if (!canScan) {
-          scanBtn.innerHTML = "Manual entry";
-        }
-      };
-
-      CardIO.scan({
-          "collect_expiry": true,
-          "collect_cvv": false,
-          "collect_zip": false,
-          "shows_first_use_alert": true,
-          "disable_manual_entry_buttons": false
-        },
-        onCardIOComplete,
-        onCardIOCancel
-      );
-
-      CardIO.canScan(onCardIOCheck);
-    }
-
-
-}
-})
