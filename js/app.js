@@ -104,11 +104,6 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 .run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout) {
   $ionicPlatform.ready(function() {
 
-<<<<<<< HEAD
-=======
-    console.log( window.device.uuid +   "uuid is here");
-
->>>>>>> parent of 8bbc5ea... addedd console log for ua token number
 //bracnh.io intizialiton
       Branch.initSession();
     Branch.userCompletedAction(
