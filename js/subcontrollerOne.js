@@ -370,7 +370,8 @@ $scope.growthRate= function(){
     mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums,"paymentMode" : "a"},function(data){
       if(data.responseCode=="Cali_SUC_1030"){
         $ionicLoading.hide();
-       $state.go('tabsController.summaryPage');
+		
+       $state.go('successPage');
       }
       else{
         $ionicLoading.hide();
