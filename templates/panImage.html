@@ -10,14 +10,15 @@
 		<div class="panimageSection text-center">
 		<p style="padding: 26px 0;"><b>Step: 1/5 </b>Please take an image of the front of your PAN card</p>
 			<div class="panimage">
-			<img ng-show="cimage1 !== undefined" ng-src="{{cimage1}} " id={{temp}}>
-			<img ng-show="cimage1 === undefined" src="img/Pancard.jpg " id="target" >
+			<img ng-show="cimage1 !== undefined" ng-src="{{cimage1}} " id="target">
+			<img ng-show="cimage1 === undefined" src="img/Pancard.jpg "  >
 			</div>
 			<p>Please ensure that uploaded image is similar to sample. This will ensure clarity of images required for KYC</p>
 		<div class="text-center">
-		<button class="button button-positive" ng-click="cropImg()">crop image</button>
 		<button class="button button-positive" ng-click="takeit1()" ng-show="cimage1 === undefined">Take Image</button>
+		<button class="button button-positive" ng-click="cropImage()" ng-disabled="isDisabled" ng-show="cimage1 !== undefined">crop</button>
 		<button class="button button-positive" ng-click="takeit1()" ng-show="cimage1 !== undefined">Re-Take Image</button>
+		
 		</div>
 		</div>
 <ion-footer-bar padding="false" style="padding:0;">
@@ -28,4 +29,4 @@
 </ion-footer-bar>
     </ion-content>
 
-</ion-view>
+</ion-view><use xlink:href="#save"></use>

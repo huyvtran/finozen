@@ -44,8 +44,10 @@ angular.module('app.subcontrollerTwo', [])
 
         /*for sending the pan Image*/
         .controller('panImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
+			 
             $scope.selfieGo=function(){$state.go('selfie');}
 			$scope.takeit1=function(){
+			$scope.isDisabled = false;
 			$scope.cimage1="img/Pancard.jpg";
 			  document.addEventListener("deviceready", function () {
 				var options = {
@@ -58,7 +60,7 @@ angular.module('app.subcontrollerTwo', [])
 				  targetHeight: 200,
 				  cameraDirection:0,
 				  popoverOptions: CameraPopoverOptions,
-				  saveToPhotoAlbum: false,
+				  saveToPhotoAlbum: true,
 				  correctOrientation:false
 				};
 
@@ -116,7 +118,39 @@ angular.module('app.subcontrollerTwo', [])
 
                 });
             }
-        })
+			
+			$scope.cropImage = function() {
+				 $scope.isDisabled = true;
+				var dkrm = new Darkroom('#target', {
+				  // Size options
+				  minWidth: 100,
+				  minHeight: 100,
+				  maxWidth: 600,
+				  maxHeight: 500,
+				  ratio: 4/3,
+				  backgroundColor: '#000',
+
+				  // Plugins options
+				  plugins: {
+					//save: false,
+					crop: {
+					  quickCropKey: 67, //key "c"
+					  //minHeight: 50,
+					  //minWidth: 50,
+					  ratio: 4/3
+					}
+				  },
+
+				  // Post initialize script
+				  initialize: function() {
+					var cropPlugin = this.plugins['crop'];
+					// cropPlugin.selectZone(170, 25, 300, 300);
+					cropPlugin.requireFocus();
+					console.log(dkrm.canvas.toDataURL() + "   image data cropped");
+				  }
+				});
+			}
+		})
 
             /*for signature image*/
     .controller('signImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){

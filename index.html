@@ -1,3 +1,4 @@
+			
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,7 +10,7 @@
     <link href="lib/ionic/css/style.css" rel="stylesheet">
 	<link href="lib/ionic/css/global.css" rel="stylesheet">
     <link href="lib/ionic/css/slidingTabs.css" rel="stylesheet">
-    <link href="lib/ionic/css/darkroom.css" rel="stylesheet">
+	<link rel="stylesheet" href="build/darkroom.css">
 
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 <script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
@@ -18,6 +19,8 @@
 <script src="lib/angular-resource/angular-resource.js"></script>
 <script src="lib/ngstorage/ngStorage.min.js"></script>
 <script src="lib/ionic-toast/dist/ionic-toast.bundle.min.js"></script>
+
+
 
     <!-- cordova script (this will be a 404 during development) -->
     <!-- Cordova is bootstrapped by ionic-platform-web-client, uncomment this if you remove ionic-platform-web-client... -->
@@ -59,7 +62,10 @@
             <span  style="color:black" ng-controller="quotesCtrl">{{textt}}</span>
           </script>
 
-    <script src="js/darkroom.js"></script>
-    <script src="js/fabric.js"></script>
+		  
+  <script src="vendor/fabric.js"></script>
+  <script src="build/darkroom.js"></script>
+
+
   </body>
 </html>
