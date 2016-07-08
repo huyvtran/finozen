@@ -1,3 +1,4 @@
+.bar.bar-footer{position:fixed;}
 img{margin:2em auto 0;display: block;}
 .has-header2{margin-top:6%;}
 .item p.Buy{color:#02a315}
@@ -610,4 +611,14 @@ fader {
 		direction: ltr;
 	}
 
+}
+.previousInvestments.item-select{
+	.input-label{
+		white-space: normal;
+		max-width: 220px;
+		width: 76%;
+	}
+	select{
+		padding: 0 40px 0 16px;
+	}
 }

@@ -486,6 +486,40 @@ $state.go('reference');
 		$scope.schemeLinkText=" to read more about Reliance Liquid Fund Treasury Plan (IP) – G on moneycontrol.";
 	}
 })
+.controller('verifySuccessCtrl', function($scope,$sessionStorage) {
+	$scope.initial= function(){
+		$sessionStorage.clientResponse=Math.floor(Math.random() * 3)+1;
+		console.log($sessionStorage.clientResponse);
+
+	if ($sessionStorage.clientResponse==1){
+		$scope.statusImage="img/step1.jpg";
+		$scope.clientType="In active";
+		$scope.startInvesting="Not Now";
+		$scope.notNow="Activate Now";
+		$scope.startInvestingUrl="#/sliders";
+		$scope.notNowUrl="#/bank";
+	}	
+	else if ($sessionStorage.clientResponse==2){
+		$scope.statusImage="img/step3.jpg";
+		$scope.clientType="Partial active";
+		$scope.startInvesting="Start Investing";
+		$scope.notNow="Know more";
+		$scope.notNowUrl="#/sliders";
+		$scope.startInvestingUrl="#/tour";
+	}
+	else if ($sessionStorage.clientResponse==3){
+		$scope.statusImage="img/step3.jpg";
+		$scope.clientType="Under process";
+		$scope.startInvesting="Not Now";
+		$scope.notNow="Activate Now";
+		$scope.notNowUrl="#/panImage";
+		$scope.startInvestingUrl="#/sliders";
+	}
+}
+
+$scope.initial();
+		
+})
 .controller('menuOverlay', function($scope, $window, $ionicSideMenuDelegate) {
 
   $scope.width = function () {
