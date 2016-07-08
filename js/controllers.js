@@ -47,17 +47,20 @@ $sessionStorage.SessionClientName=signupForm.fName+' '+signupForm.lName;
 $sessionStorage.SessionMobNo=signupForm.mobileNumber;
             if(angular.equals(signupForm.pin,searchText2))
             {
-                if( !angular.equals(signupForm.mobileNumber,signupForm.referral)) {
-					if(form.$valid) {
-						$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
-						$sessionStorage.signUpData = (signupForm);
-						$scope.addUserInfo();
-					}
-				}
-				else{
+                if( signupForm.mobileNumber==signupForm.referral) {
+					console.log("same number");
 					form.referral.$dirty=false;
 					console.log( form.referral.$dirty+ " in cont");
 					$scope.error_referal="Entered mobile number and referral number should be different";
+				}
+				else{
+					
+					if(form.$valid) {
+						console.log("not same number");
+						//$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
+						$sessionStorage.signUpData = (signupForm);
+						//$scope.addUserInfo();
+					}
 				}
             }
             else{
