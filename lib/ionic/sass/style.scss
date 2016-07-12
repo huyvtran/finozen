@@ -484,11 +484,10 @@ text-align: center;
 }
 .panimageSection{
 	.panimage{
-		height:175px;
+		max-height: 250px;
 		margin: 20px auto;
 		img{
-			max-height: 175px;
-			max-width: 250px;
+			max-height: 200px;
 			padding: 15px;}
 	}
 }
@@ -610,4 +609,8 @@ fader {
 		direction: ltr;
 	}
 
+}
+.SaveText {
+    font-size: 19px;
+	img{display:inline-block;}
 }

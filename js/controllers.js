@@ -59,7 +59,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 						console.log("not same number");
 						//$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
 						$sessionStorage.signUpData = (signupForm);
-						//$scope.addUserInfo();
+						$scope.addUserInfo();
 					}
 				}
             }

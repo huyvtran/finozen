@@ -17,7 +17,7 @@
 			<button class="button button-positive" ng-click="selfieImage()" ng-show="selfie !== undefined">Re-Take Image</button>
 			</div>
 		</div>
-		<p style="padding: 26px 0; text-align:left;font-size: 10px;"><sup>*</sup>This image will be used for your identity verification and to ensure that you are creating an account for yourself.</p>
+		<p ng-show="selfie === undefined" style="padding: 26px 0; text-align:left;font-size: 10px;"><sup>*</sup>This image will be used for your identity verification and to ensure that you are creating an account for yourself.</p>
 <ion-footer-bar padding="false" style="padding:0;">
 	<div class="button-bar " style="padding:0;" >
 		<button class="button button-positive" ng-click="addressSelect()" style="margin:1px;line-height: 44px;">SKIP</button>
