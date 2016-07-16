@@ -44,23 +44,22 @@ angular.module('app.subcontrollerTwo', [])
 
         /*for sending the pan Image*/
         .controller('panImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
-			 
+//			$scope.addressRetake=function(){ window.location.reload(true);}
             $scope.selfieGo=function(){$state.go('selfie');}
 			$scope.takeit1=function(){
-			$scope.isDisabled = false;
-			$scope.cimage1="img/Pancard.jpg";
+			//$scope.cimage1="img/Pancard.jpg";
 			  document.addEventListener("deviceready", function () {
 				var options = {
-				  quality: 100,
+				  quality: 90,
 				  destinationType: Camera.DestinationType.DATA_URL,
 				  sourceType: Camera.PictureSourceType.CAMERA,
-				  allowEdit: true,
+				  allowEdit: false,
 				  encodingType: Camera.EncodingType.JPEG,
-				  targetWidth: 300,
-				  targetHeight: 200,
-				  cameraDirection:0,
+				  cameraDirection:1,
+					targetWidth: 700,
+				    targetHeight: 500,
 				  popoverOptions: CameraPopoverOptions,
-				  saveToPhotoAlbum: true,
+				  saveToPhotoAlbum: false,
 				  correctOrientation:false
 				};
 
@@ -75,12 +74,12 @@ angular.module('app.subcontrollerTwo', [])
 			  }, false);
 			}
 			$scope.PanImage = function() {
-        $ionicLoading.show({templateUrl:"templates/loading.html"});
+        $ionicLoading.show({templateUrl:"templates/loading.html",duration: 5000});
 				$scope.uploadPan=JSON.parse(JSON.stringify({}));
                 $scope.uploadPan.kyphCode = $sessionStorage.SessionClientCode;
 				console.log($sessionStorage.SessionClientCode+ 'clientCode');
                 //$scope.uploadPan.kyphCode = "CRN24178";
-                $scope.uploadPan.imageData = $scope.panData;//replace with session storage of pan
+                $scope.uploadPan.imageData = $scope.pan;//replace with session storage of pan
                 //$scope.uploadPan.imageData = "fffd";//replace with session storage of pan
                 $scope.uploadPan.imageType = 'PA';
                 $scope.uploadPan.addressType = '';
@@ -118,39 +117,7 @@ angular.module('app.subcontrollerTwo', [])
 
                 });
             }
-			
-			$scope.cropImage = function() {
-				 $scope.isDisabled = true;
-				var dkrm = new Darkroom('#target', {
-				  // Size options
-				  minWidth: 100,
-				  minHeight: 100,
-				  maxWidth: 600,
-				  maxHeight: 500,
-				  ratio: 4/3,
-				  backgroundColor: '#000',
-
-				  // Plugins options
-				  plugins: {
-					//save: false,
-					crop: {
-					  quickCropKey: 67, //key "c"
-					  //minHeight: 50,
-					  //minWidth: 50,
-					  ratio: 4/3
-					}
-				  },
-
-				  // Post initialize script
-				  initialize: function() {
-					var cropPlugin = this.plugins['crop'];
-					// cropPlugin.selectZone(170, 25, 300, 300);
-					cropPlugin.requireFocus();
-					console.log(dkrm.canvas.toDataURL() + "   image data cropped");
-				  }
-				});
-			}
-		})
+})
 
             /*for signature image*/
     .controller('signImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
@@ -225,14 +192,14 @@ angular.module('app.subcontrollerTwo', [])
 			  encodingType: Camera.EncodingType.JPEG,
 			  targetWidth: 300,
 			  cameraDirection:1,
-			  targetHeight: 400,
+			  targetHeight: 500,
 			  popoverOptions: CameraPopoverOptions,
 			  saveToPhotoAlbum: false,
 			  correctOrientation:true
 			};
 
 			$cordovaCamera.getPicture($scope.options).then(function(imageData) {
-			  $scope.selfieData = imageData;
+			  //$scope.selfieData = imageData;
 			  $scope.selfie = "data:image/jpeg;base64," + imageData;
 			}, function(err) {
 			  // error
@@ -246,7 +213,7 @@ angular.module('app.subcontrollerTwo', [])
 			var uploadselfie=JSON.parse(JSON.stringify({}));
             uploadselfie.kyphCode = $sessionStorage.SessionClientCode;
             //uploadselfie.kyphCode = "CRN24178";
-            uploadselfie.imageData = $scope.selfieData;//replace with session storage of selfie
+            uploadselfie.imageData = $scope.selfie;//replace with session storage of selfie
             //uploadselfie.imageData = "test";//replace with session storage of selfie
             uploadselfie.imageType = 'PH';
             uploadselfie.addressType = '';
@@ -337,8 +304,11 @@ angular.module('app.subcontrollerTwo', [])
 	console.log($scope.clientPEP.type + " clientPEP");
 	console.log($scope.clientOccupation.type + " clientOccupation");
 	console.log(questUpload + " questUpload");
+	
         questionsService.save(questUpload,function(data){
-			if(data.responseCode !== "Cali_SUC_1030") {
+			$ionicLoading.hide();
+			$state.go('signature');
+		/*	if(data.responseCode !== "Cali_SUC_1030") {
 				$ionicLoading.hide();
 				var refer=$ionicPopup.alert({
 					title: 'Upload Error',
@@ -351,17 +321,18 @@ angular.module('app.subcontrollerTwo', [])
 			else{
 				$ionicLoading.hide();
 				$state.go('signature');
-			}
-          },function(error){
-            $ionicLoading.hide();
-			var refresh=$ionicPopup.alert({
+			}*/
+			},function(error){
+				$ionicLoading.hide();
+				$state.go('signature');
+				/*var refresh=$ionicPopup.alert({
                   title: 'Please try again',
                    template: 'Unable to submit request'
                 });
               refresh.then(function(res) {
                   $window.location.reload(true)
-                });
-
+				  
+			});*/
           });
         }
       }
@@ -370,87 +341,49 @@ angular.module('app.subcontrollerTwo', [])
     /*for address proof image*/
     .controller('addressImageSelectionCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
 				$scope.takeImageSkip=function(){$state.go('bank');$sessionStorage.addressChoice=$scope.choice;}
-		$scope.takeImage=function(){if(
-			$scope.choice!==undefined) {
+		$scope.takeImage=function(){
+			if($scope.choice!==undefined) {
 			//console.log($scope.choice + "   selected choice");
 			$sessionStorage.addressChoice=$scope.choice;
-			if($scope.choice === 'AA' || $scope.choice === 'VO' || $scope.choice ==='PP' || $scope.choice ==='RC' || $scope.choice ==='DL'){
-				$state.go('addressProofImage');
-				}
-			else{
-				$state.go('addressProofImageSingle');}
+			$state.go('addressProofImageSingle');
 			}
-
-			}
+		}
 	})
-    .controller('addressImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
+    
+	.controller('addressFrontCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
 		//console.log($sessionStorage.addressChoice + 'fromwhat page your coming');
-		$scope.bank=function(){$state.go('bank');}
+				//$scope.addressRetake=function(){ window.location.reload(true);}
+				$scope.bank=function(){$state.go('bank');}
 				if($sessionStorage.addressChoice == 'AA'){$scope.cimageFront="img/AADHAR_FRONT.jpg"; $scope.cimageBack="img/AADHAR_BACK.jpg";}
-				else if($sessionStorage.addressChoice == 'PP'){$scope.cimageFront="img/Passport_front.jpg"; $scope.cimageBack="img/Passport_back.jpg";}
-				else if($sessionStorage.addressChoice == 'VO'){$scope.cimageFront="img/VOTER_FRONT.jpg"; $scope.cimageBack="img/VOTER_BACK.jpg";}
-			    else if($sessionStorage.addressChoice == 'DL'){$scope.cimageFront="img/DL.jpg";$scope.cimageBack="img/DL_back.png";}
-				else if($sessionStorage.addressChoice == 'RC'){$scope.cimageFront="img/ration1.jpg";  $scope.cimageBack="img/ration2.jpg";}
+				else if($sessionStorage.addressChoice == 'PP'){$scope.cimageFront="img/Passport_front.jpg"; }
+				else if($sessionStorage.addressChoice == 'VO'){$scope.cimageFront="img/VOTER_FRONT.jpg";}
+			    else if($sessionStorage.addressChoice == 'DL'){$scope.cimageFront="img/DL.jpg";}
+				else if($sessionStorage.addressChoice == 'RC'){$scope.cimageFront="img/ration1.jpg";}
 				else if($sessionStorage.addressChoice == 'GA'){$scope.cimageFront="img/sample.png";}
 
 		//else{$scope.cimageFront="img/DL.jpg";}
-		$scope.addressRetake=function(){$window.location.reload(true)}
 		$scope.addressFrontImg=function(){
-		console.log($sessionStorage.addressChoice);
-		$scope.addressImage=$scope.cimageFront;
+		//console.log($sessionStorage.addressChoice);
+		//$scope.addressImage=$scope.cimageFront;
 		document.addEventListener("deviceready", function () {
-
-				if($sessionStorage.addressChoice === 'AA' || $sessionStorage.addressChoice ==='DL'){
 					var options = {
-					  quality: 100,
+					  quality: 90,
 					  destinationType: Camera.DestinationType.DATA_URL,
 					  sourceType: Camera.PictureSourceType.CAMERA,
-					  allowEdit: true,
+					  allowEdit: false,
 					  encodingType: Camera.EncodingType.JPEG,
-					  targetWidth: 400,
-					  targetHeight: 300,
+					  targetWidth: 700,
+					  targetHeight: 500,
 					  popoverOptions: CameraPopoverOptions,
 					  saveToPhotoAlbum: false,
 					  correctOrientation:true
 					};
-				}
-			
-			else if($sessionStorage.addressChoice ==='PP' || $sessionStorage.addressChoice ==='RC'){
-					var options = {
-					  quality: 100,
-					  destinationType: Camera.DestinationType.DATA_URL,
-					  sourceType: Camera.PictureSourceType.CAMERA,
-					  allowEdit: true,
-					  encodingType: Camera.EncodingType.JPEG,
-					  targetWidth: 400,
-					  targetHeight: 400,
-					  popoverOptions: CameraPopoverOptions,
-					  saveToPhotoAlbum: false,
-					  correctOrientation:true
-					};
-				}
-			
-			else if($sessionStorage.addressChoice === 'VO' || $sessionStorage.addressChoice ==='GA'){
-					var options = {
-					  quality: 100,
-					  destinationType: Camera.DestinationType.DATA_URL,
-					  sourceType: Camera.PictureSourceType.CAMERA,
-					  allowEdit: true,
-					  encodingType: Camera.EncodingType.JPEG,
-					  targetWidth: 300,
-					  targetHeight: 400,
-					  popoverOptions: CameraPopoverOptions,
-					  saveToPhotoAlbum: false,
-					  correctOrientation:true
-					};
-				}
-			
 			console.log(options);
 
 
 
 			$cordovaCamera.getPicture(options).then(function(imageData) {
-			  $scope.addressImageData = imageData;
+			  //$scope.addressImageData = imageData;
 			  $scope.addressImage = "data:image/jpeg;base64," + imageData;
 			}, function(err) {
 			  // error
@@ -458,90 +391,13 @@ angular.module('app.subcontrollerTwo', [])
 
 		  }, false);
 		}
-		$scope.addressBackImg=function(){
-		//$scope.addressFront();
-		  document.addEventListener("deviceready", function () {
-			var options = {
-			  quality: 100,
-			  destinationType: Camera.DestinationType.DATA_URL,
-			  sourceType: Camera.PictureSourceType.CAMERA,
-			  allowEdit: true,
-			  encodingType: Camera.EncodingType.JPEG,
-			  targetWidth: 300,
-			  targetHeight: 200,
-			  popoverOptions: CameraPopoverOptions,
-			  saveToPhotoAlbum: false,
-			  correctOrientation:true
-			};
-				if($sessionStorage.addressChoice === 'AA' || $sessionStorage.addressChoice ==='DL'){
-					var options = {
-					  quality: 100,
-					  destinationType: Camera.DestinationType.DATA_URL,
-					  sourceType: Camera.PictureSourceType.CAMERA,
-					  allowEdit: true,
-					  encodingType: Camera.EncodingType.JPEG,
-					  targetWidth: 400,
-					  targetHeight: 300,
-					  popoverOptions: CameraPopoverOptions,
-					  saveToPhotoAlbum: false,
-					  correctOrientation:true
-					};
-				}
-			
-			else if($sessionStorage.addressChoice ==='PP' || $sessionStorage.addressChoice ==='RC'){
-					var options = {
-					  quality: 100,
-					  destinationType: Camera.DestinationType.DATA_URL,
-					  sourceType: Camera.PictureSourceType.CAMERA,
-					  allowEdit: true,
-					  encodingType: Camera.EncodingType.JPEG,
-					  targetWidth: 400,
-					  targetHeight: 400,
-					  popoverOptions: CameraPopoverOptions,
-					  saveToPhotoAlbum: false,
-					  correctOrientation:true
-					};
-				}
-			
-			else if($sessionStorage.addressChoice === 'VO' || $sessionStorage.addressChoice ==='GA'){
-					var options = {
-					  quality: 100,
-					  destinationType: Camera.DestinationType.DATA_URL,
-					  sourceType: Camera.PictureSourceType.CAMERA,
-					  allowEdit: true,
-					  encodingType: Camera.EncodingType.JPEG,
-					  targetWidth: 300,
-					  targetHeight: 400,
-					  popoverOptions: CameraPopoverOptions,
-					  saveToPhotoAlbum: false,
-					  correctOrientation:true
-					};
-				}
-			
-			console.log(options);
 
-
-
-			$cordovaCamera.getPicture(options).then(function(imageData) {
-			  $scope.addressBackData = imageData;
-			  $scope.cimage2 = "data:image/jpeg;base64," + imageData;
-			  $sessionStorage.panimage=imageData;
-			}, function(err) {
-			  // error
-			});
-
-		  }, false);
-		}
-
-		$scope.addressSubmmitt = function() {
-			$scope.addressFront();
-			$scope.addressBack();}
-		$scope.addressFront = function() {
+		$scope.addressFrontSubmit = function() {
 			$ionicLoading.show({templateUrl:"templates/loading.html"});
 			var uploadaddress=JSON.parse(JSON.stringify({}));
             uploadaddress.kyphCode = $sessionStorage.SessionClientCode;
             //uploadaddress.kyphCode = "CRN23919";;
-            uploadaddress.imageData = $scope.addressImageData;//replace with session storage of selfie
+            uploadaddress.imageData = $scope.addressImage;//replace with session storage of selfie
             //uploadaddress.imageData = "fffd";//replace with session storage of selfie
             uploadaddress.imageType = 'AF';
             uploadaddress.addressType = $sessionStorage.addressChoice; //sessionstorage of addressType
@@ -552,6 +408,12 @@ angular.module('app.subcontrollerTwo', [])
 
                 if(data.responseCode == "Cali_SUC_1030") {
                     $ionicLoading.hide();
+					if($sessionStorage.addressChoice == 'GA' ){
+						$state.go('bank');
+					}
+					else{
+						$state.go('addressProofImage');
+					}
                 }
                 else {
                     console.log("Error");
@@ -576,13 +438,59 @@ angular.module('app.subcontrollerTwo', [])
 
             });
         }
+	
+})
 
-        $scope.addressBack = function() {
+      
+	.controller('addressBackCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
+		//console.log($sessionStorage.addressChoice + 'fromwhat page your coming');
+		$scope.bank=function(){$state.go('bank');}
+				if($sessionStorage.addressChoice == 'AA'){$scope.cimageFront="img/AADHAR_FRONT.jpg"; $scope.cimageBack="img/AADHAR_BACK.jpg";}
+				else if($sessionStorage.addressChoice == 'PP'){$scope.cimageBack="img/Passport_back.jpg";}
+				else if($sessionStorage.addressChoice == 'VO'){$scope.cimageBack="img/VOTER_BACK.jpg";}
+			    else if($sessionStorage.addressChoice == 'DL'){$scope.cimageBack="img/DL_back.png";}
+				else if($sessionStorage.addressChoice == 'RC'){ $scope.cimageBack="img/ration2.jpg";}
+				else if($sessionStorage.addressChoice == 'GA'){$scope.cimageFront="img/sample.png";}
+
+		//else{$scope.cimageFront="img/DL.jpg";}
+		$scope.addressBackImg=function(){
+		//$scope.cimage2=$scope.cimageBack;
+		//$scope.addressFront();
+		  document.addEventListener("deviceready", function () {
+			var options = {
+			  quality: 90,
+			  destinationType: Camera.DestinationType.DATA_URL,
+			  sourceType: Camera.PictureSourceType.CAMERA,
+			  allowEdit: false,
+			  targetWidth: 700,
+			  targetHeight: 500,
+			  encodingType: Camera.EncodingType.JPEG,
+			  popoverOptions: CameraPopoverOptions,
+			  saveToPhotoAlbum: false,
+			  correctOrientation:true
+			};
+
+			console.log(options);
+
+
+
+			$cordovaCamera.getPicture(options).then(function(imageData) {
+			  //$scope.addressBackData = imageData;
+			  $scope.cimage2 = "data:image/jpeg;base64," + imageData;
+			  $sessionStorage.panimage=imageData;
+			}, function(err) {
+			  // error
+			});
+
+		  }, false);
+		}
+
+        $scope.addressBackSubmit = function() {
 			$ionicLoading.show({templateUrl:"templates/loading.html"});
 			var uploabackdaddress=JSON.parse(JSON.stringify({}));
             uploabackdaddress.kyphCode = $sessionStorage.SessionClientCode;
             //uploabackdaddress.kyphCode = "CRN23919";;
-            uploabackdaddress.imageData = $scope.addressBackData;
+            uploabackdaddress.imageData = $scope.cimage2;
             //uploabackdaddress.imageData = "fffd";//replace with session storage of selfie
             uploabackdaddress.imageType = 'AB';
             uploabackdaddress.addressType = $sessionStorage.addressChoice; //sessionstorage of addressType
