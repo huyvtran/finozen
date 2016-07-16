@@ -165,8 +165,8 @@ console.log(navigator.onLine + "  connection state");
     })
 
     UAirship.setUserNotificationsEnabled(true);
-	
-	
+
+
     /*
       $ionicPlatform.registerBackButtonAction(function(event) {
           $ionicPopup.confirm({
@@ -223,8 +223,8 @@ window.plugins.OneSignal.getTags(function(tags){
 	    $ionicAnalytics.register();
     var io=Ionic.io();
 
-	
-	
+
+
 if(typeof analytics !== undefined) {
                 analytics.startTrackerWithId("UA-78900035-2");
 				analytics.trackView("tracking the google analytics ");
@@ -239,20 +239,6 @@ if(typeof analytics !== undefined) {
             } else {
                 console.log("Google Analytics Unavailable");
             }
-	//bracnh.io intizialiton
-      Branch.initSession();
-    Branch.userCompletedAction(
-      "purchase_event",
-      {
-        "inr": "100"
-      }
-    );
-    Branch.userCompletedAction(
-      "click",
-      {
-        "inr": "100"
-      }
-    );
   });
 })
 
