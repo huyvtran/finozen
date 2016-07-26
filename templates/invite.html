@@ -5,7 +5,16 @@
 	<a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
 </div>
     <ion-content overflow-scroll="true" padding="true" class="has-header">
-		<div class="rows text-center">
+      <div class="bar row  padding " ng-controller="contacts">
+        <a ion-track-tap="invite" style="bottom: -10px;" class="button button-full button-positive bar-footer invest_button_footer" ng-click="getcontacts()"  translate="TEXT_INVITE_BUTTON"></a>
+        <ion-list>
+          <ion-item ng-repeat="contact in contacts">
+            {{contact.displayName}}
+          </ion-item>
+        </ion-list>
+      </div>
+
+      <div class="rows text-center">
 			<img src="img/1.png" alt="">
 			<h3 class="slide3">{{ 'TEXT_INVITE_HEADER2' | translate}}</h3>
 			<p translate="TEXT_INVITE_MESSAGE1"><sup>*</sup></p><br/>
@@ -14,5 +23,6 @@
 	<div class="bar row  padding " ng-controller="socialShareController">
 	<a ion-track-tap="invite" style="bottom: -10px;" class="button button-full button-positive bar-footer invest_button_footer" ng-click="shareViaTwitter()"  translate="TEXT_INVITE_BUTTON"></a>
 	</div>
+
     </ion-content>
 </ion-view>

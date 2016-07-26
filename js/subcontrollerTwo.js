@@ -304,7 +304,7 @@ angular.module('app.subcontrollerTwo', [])
 	console.log($scope.clientPEP.type + " clientPEP");
 	console.log($scope.clientOccupation.type + " clientOccupation");
 	console.log(questUpload + " questUpload");
-	
+
         questionsService.save(questUpload,function(data){
 			$ionicLoading.hide();
 			$state.go('signature');
@@ -331,7 +331,7 @@ angular.module('app.subcontrollerTwo', [])
                 });
               refresh.then(function(res) {
                   $window.location.reload(true)
-				  
+
 			});*/
           });
         }
@@ -349,7 +349,7 @@ angular.module('app.subcontrollerTwo', [])
 			}
 		}
 	})
-    
+
 	.controller('addressFrontCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
 		//console.log($sessionStorage.addressChoice + 'fromwhat page your coming');
 				//$scope.addressRetake=function(){ window.location.reload(true);}
@@ -438,10 +438,10 @@ angular.module('app.subcontrollerTwo', [])
 
             });
         }
-	
+
 })
 
-      
+
 	.controller('addressBackCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
 		//console.log($sessionStorage.addressChoice + 'fromwhat page your coming');
 		$scope.bank=function(){$state.go('bank');}
@@ -792,6 +792,26 @@ angular.module('app.subcontrollerTwo', [])
 
 
     })
+
+      //contacts
+      .controller('contacts',function($scope,$window,$ionicPopup,$cordovaContacts){
+        $scope.getcontacts=function(){
+          $cordovaContacts.find({filter:''}).then(function(result){
+            $scope.contacts=result;
+            console.log(contacts+ "contacts");
+          },
+          function(error){
+            var con=$ionicPopup.alert({
+              title: 'Seems you need more fiends',
+              template: 'Give it another try'
+            });
+            log.then(function(res) {
+              $window.reload(true);
+            });
+          })
+        }
+      })
+
 
   //   language selection at pop up
     .controller('langCTRL',function($scope,$localStorage,$ionicPopup,$ionicPlatform,$state,$translate) {
