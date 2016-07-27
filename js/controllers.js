@@ -36,17 +36,17 @@ else{$scope.test=false;}
 $scope.test=false;
 $scope.activateAcc= function(){
 	$scope.test=false;
-	console.log($sessionStorage.clientResponse);
-	if($sessionStorage.clientResponse==1){
+	console.log($sessionStorage.clientActive);
+	if($sessionStorage.clientActive=="N"){
 		$scope.test=false;
 		$scope.activateAccUrl="#/bank";
 		$scope.activateUrl="Bank";
 		console.log($scope.test  +  $scope.activateAccUrl  +  $scope.activateUrl);
 	}
-	else if($sessionStorage.clientResponse==2){
+	else if($sessionStorage.clientActive="T"){
 		$scope.test=true;	
 	}
-	else if($sessionStorage.clientResponse==3){
+	else if($sessionStorage.clientActive=="P"){
 		$scope.test=false;
 		$scope.activateAccUrl="#/panImage";
 		$scope.activateUrl="Pan Image";
@@ -269,15 +269,26 @@ console.log($scope.loginDetails);
 
 
   /*add money page check*/
-.controller('transactionAccessCtrl', function($scope,$sessionStorage){
-if($sessionStorage.clientActive=="Y") {
-     $scope.withdrawUrl="#/withdraw";
-      $scope.investUrl="#/invest";
-  }
-  else {
-    $scope.withdrawUrl="#/status";
-    $scope.investUrl="#/status";
-  }
+.controller('transactionAccessCtrl', function($scope,$sessionStorage,$state){
+	$scope.investCheck=function(){
+	console.log($sessionStorage.clientActive + " add money");
+		if($sessionStorage.clientActive=="N") {
+			$state.go("status");
+		  }
+		  else {
+			  $state.go("invest");
+		  }		
+	}
+	$scope.withdrawCheck=function(){
+	console.log($sessionStorage.clientActive + " add money");
+		if($sessionStorage.clientActive=="N") {
+			$state.go("status");
+		  }
+		  else {
+			$state.go("withdraw");
+		  }		
+	}
+
 })
 
 
@@ -324,7 +335,7 @@ var timeNow = new Date().getUTCHours();
 '<div class="loading visible active" style="margin-left: -53px; margin-top: 76px"><span><img style="max-height:50px" src="img/loading.gif"></img><br/>Custom Loading...</span></div>',
             noBackdrop: true
         });*/
-	$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
+	//$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
 var reportDate = getPerformanceService.get();
 reportDate.$promise.then(function(data){
  if (data.responseCode == "Cali_SUC_1030") {

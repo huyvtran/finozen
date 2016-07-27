@@ -64,8 +64,9 @@ angular.module('app.subcontrollerOne', [])
     })
 
     .controller('languageCtrl', function($scope,$translate,$state,$localStorage) {
-		console.log($localStorage.language + " language selected");
-		$translate.use($localStorage.language);
+		//console.log($localStorage.language + " language selected");
+		$scope.changeLan=function(){$translate.use("1");}
+		
 	})
     .controller('AccountfaqCtrl', function($scope) {
         $scope.groups = [];
@@ -266,6 +267,7 @@ $scope.growthRate= function(){
 
  // NAV Calculator controller
 .controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup,$ionicLoading,$ionicPlatform) {
+		 
   var finalComputedVal;
   	if($sessionStorage.clientType=="GO"){
 		console.log($sessionStorage.clientType+ "  gold")
@@ -311,6 +313,7 @@ $scope.growthRate= function(){
         }
 
 	  $scope.Invest = function(form) {
+		  console.log($sessionStorage.clientActive + " clientActive status in add money page");
             if(form.$valid && $scope.initial>=100) {
 				if($sessionStorage.allTransactions > 0 && $sessionStorage.SessionFolioNums==0){
 					$ionicPopup.alert({
@@ -330,13 +333,28 @@ $scope.growthRate= function(){
 				  
 				else if($sessionStorage.nachStatus !='A'){
 				        $ionicLoading.show({templateUrl:"templates/loading.html"});
-          console.log('its entering the nach mandate');
-          $scope.sendMfOrder();
-				}
-              else{
-          $ionicLoading.show({templateUrl:"templates/loading.html"});
-          $scope.nach();
-        }
+						  console.log('its entering the nach mandate');
+						  if($sessionStorage.clientActive=="P" ){
+							  if($scope.initial<=1000){$scope.sendMfOrder();}
+							  else{
+								  $ionicLoading.hide();
+								  var log=$ionicPopup.alert({
+										title: 'Acctivate account',
+										template: 'You are not allowed to Invest more than Rs.1000 untill you submit all documents'
+									  });
+								    log.then(function(res) {
+										state.go("invest");
+									});
+							  }
+							}
+							else{
+							  $scope.sendMfOrder();
+							}
+						}
+						else{
+						  $ionicLoading.show({templateUrl:"templates/loading.html"});
+						  $scope.nach();
+						}
             }
         }
 
@@ -371,7 +389,7 @@ $scope.growthRate= function(){
       if(data.responseCode=="Cali_SUC_1030"){
         $ionicLoading.hide();
 		
-       $state.go('successPage');
+       $state.go('invest_success');
       }
       else{
         $ionicLoading.hide();
@@ -488,29 +506,34 @@ $state.go('reference');
 })
 .controller('verifySuccessCtrl', function($scope,$sessionStorage) {
 	$scope.initial= function(){
-		$sessionStorage.clientResponse=Math.floor(Math.random() * 3)+1;
-		console.log($sessionStorage.clientResponse);
+		console.log($sessionStorage.clientActive);
 
-	if ($sessionStorage.clientResponse==1){
+	if ($sessionStorage.clientActive=="N"){
+		console.log($sessionStorage.clientActive);
 		$scope.statusImage="img/step1.jpg";
 		$scope.clientType="In active";
 		$scope.startInvesting="Not Now";
 		$scope.notNow="Activate Now";
 		$scope.startInvestingUrl="#/sliders";
+		$scope.para1="Your account is currently inactive, please go back on the previous page to enter your details and begin investing";
 		$scope.notNowUrl="#/bank";
 	}	
-	else if ($sessionStorage.clientResponse==2){
+	else if ($sessionStorage.clientActive=="T" || $sessionStorage.clientActive=="Q" ){
+		console.log($sessionStorage.clientActive);
 		$scope.statusImage="img/step3.jpg";
 		$scope.clientType="Partial active";
 		$scope.startInvesting="Start Investing";
 		$scope.notNow="Know more";
+		$scope.para1="Your account is now active, you can begin investing.";
 		$scope.notNowUrl="#/sliders";
 		$scope.startInvestingUrl="#/tour";
 	}
-	else if ($sessionStorage.clientResponse==3){
+	else if ($sessionStorage.clientActive=="P"){
+		console.log($sessionStorage.clientActive);
 		$scope.statusImage="img/step3.jpg";
 		$scope.clientType="Under process";
 		$scope.startInvesting="Not Now";
+		$scope.para1="Your account is now partially active, you can begin investing upto Rs. 1000, we will contact you in next one hour to completely activate your account and remove any limit on investments";
 		$scope.notNow="Activate Now";
 		$scope.notNowUrl="#/panImage";
 		$scope.startInvestingUrl="#/sliders";

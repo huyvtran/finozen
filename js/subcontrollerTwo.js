@@ -118,34 +118,6 @@ angular.module('app.subcontrollerTwo', [])
                 });
             }
         
-		
-			var dkrm = new Darkroom('#target', {
-			  // Size options
-			  minWidth: 100,
-			  minHeight: 100,
-			  maxWidth: 600,
-			  maxHeight: 500,
-			  ratio: 4/3,
-			  backgroundColor: '#000',
-
-			  // Plugins options
-			  plugins: {
-				//save: false,
-				crop: {
-				  quickCropKey: 67, //key "c"
-				  //minHeight: 50,
-				  //minWidth: 50,
-				  ratio: 4/3
-				}
-			  },
-
-			  // Post initialize script
-			  initialize: function() {
-				var cropPlugin = this.plugins['crop'];
-				// cropPlugin.selectZone(170, 25, 300, 300);
-				cropPlugin.requireFocus();
-			  }
-			});
 		})
 
             /*for signature image*/
@@ -159,7 +131,7 @@ angular.module('app.subcontrollerTwo', [])
 			var sigImg = signaturePad.toDataURL();
 			$scope.signature = sigImg;
 		}
-		$scope.signatureFunction=function(){$state.go('verifySuccess');}
+		$scope.signatureFunction=function(){$sessionStorage.clientActive="Q";$state.go('verifySuccess');}
 		$scope.signUpload = function() {
       $ionicLoading.show({templateUrl:"templates/loading.html"});
 			var uploadsign=JSON.parse(JSON.stringify({}));
@@ -187,9 +159,11 @@ angular.module('app.subcontrollerTwo', [])
                   $ionicLoading.hide();
                   confirmation++;
 				  if(confirmation>=7){
+					$sessionStorage.clientActive="Q";
 					$state.go("verifySuccess");//after sign image
 				  }
 				  else{
+					$sessionStorage.clientActive="Q";
 					$state.go("verifySuccess");
 				  }
                 }
@@ -647,8 +621,8 @@ angular.module('app.subcontrollerTwo', [])
     $scope.accountType = {type : $scope.accountTypeOptions[0].value};
 
     $scope.pastInvestmentsOptions = [
-    { name: 'Yes', value: 'SB_New' },
-    { name: 'No', value: 'CA_new' }
+    { name: 'Yes', value: 'Y' },
+    { name: 'No', value: 'N' }
     ];
 
     $scope.pastInvestments = {type : $scope.pastInvestmentsOptions[0].value};
@@ -729,11 +703,21 @@ angular.module('app.subcontrollerTwo', [])
 	}
              }
 		$scope.bankSkip=function(){
+			$sessionStorage.clientActive="N";
 			$state.go('verifySuccess');
 
 		}
-		$scope.bankTest=function(){
-			$state.go('verifySuccess');
+		$scope.bankTest=function(previousInvestments){
+			if(previousInvestments=="Y"){
+				console.log(previousInvestments + "   previousInvestments" );
+				$sessionStorage.clientActive="T";
+				$state.go('verifySuccess');
+			}
+			else if(previousInvestments=="N"){
+				console.log(previousInvestments + "   previousInvestments" );
+				$sessionStorage.clientActive="P";
+				$state.go('verifySuccess');
+			}
 
 		}
     })

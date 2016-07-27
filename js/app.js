@@ -15,6 +15,7 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 */
 .config(function ($translateProvider) {
 
+
     $translateProvider.translations('2', {
 	selectedLanguage:'Select your desired Language English',
 	tabTitle1:'SUMMARY',
@@ -88,6 +89,14 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 	digitsOnly:'Enter digits only',
 	signUpError:'Sign Up failed, please try again',
 	mobileError:'Mobile number in use',
+	statusHead:'status',
+	statusRequest:'REQUEST STATUS',
+	statusThanks:'Thank you',
+	paymentSuccess1:'Your request has been accepted.',
+	paymentSuccess2:'Schedule for deposit to your registered bank account',
+	paymentSuccess3:'If the day of deposit is a Bank Holiday, money will be deposited the next working day.',
+	paymentSuccessDone:'Done',
+	investSuccess1:'Your request for investment has been accepted',
 	alphaOnly:'Enter Alphabets only'
   });
 
@@ -103,7 +112,6 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
 
 .run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout,$localStorage) {
   $ionicPlatform.ready(function() {
-
 
 
       Idle.watch();
