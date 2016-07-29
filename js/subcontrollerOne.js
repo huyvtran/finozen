@@ -174,8 +174,44 @@ angular.module('app.subcontrollerOne', [])
     })
 //FAQ controllers END
 //TAB's DATA controller
-	.controller('withdrawCtrl', function($scope,$sessionStorage,$ionicLoading,getReportService,$ionicHistory,ionicToast,$ionicPlatform,$state) {
+	.controller('calculatorCtrl', function($scope) {
+		$scope.errorInputs="";
+		$scope.calculateValues=function(){
+			var count=0;
+			var investAmount=$scope.investmentAmount;
+			var returnsAmount=$scope.returnsAmount;
+			var totalDays=$scope.totalDays;
+			var constant=8.3/(365*100);
+			if(investAmount==undefined){count++}
+			if(returnsAmount==undefined){count++}
+			if(totalDays==undefined){count++}
+			if(count>=2){
+				$scope.errorInputs="You should enter atleast two inputs";
+			}
+			else{
+				$scope.errorInputs="";
+				if(investAmount==undefined && returnsAmount!=undefined && totalDays!=undefined){
+					investAmount= Math.ceil((returnsAmount)/(totalDays*constant));
+					console.log("calculate investment amount");$scope.investmentAmount=investAmount;
+				}
+				else if(investAmount!=undefined && returnsAmount==undefined && totalDays!=undefined){
+					returnsAmount=(Math.ceil(investAmount*constant*totalDays*100))/100;
+					console.log("calculate returns amount");$scope.returnsAmount=returnsAmount;
+				}
+				else if(investAmount!=undefined && returnsAmount!=undefined && totalDays==undefined){
+					totalDays=Math.ceil(returnsAmount/(investAmount*constant) );
+					console.log("calculate no of days to invest");$scope.totalDays=totalDays;
+				}
+				
+				console.log( $scope.investmentAmount + "  " + $scope.returnsAmount+ "  " + $scope.totalDays);
+			}
+		}
 
+	})
+	.controller('withdrawCtrl', function($scope,$sessionStorage,$ionicLoading,getReportService,$ionicHistory,ionicToast,$ionicPlatform,$state,$interval,$rootScope) {
+  $interval(function () {
+		$rootScope.$broadcast('flip',{});
+		},3000)
 	if($sessionStorage.clientType=="GO"){
 		$scope.schemeNamep = "GOLD";
 	}

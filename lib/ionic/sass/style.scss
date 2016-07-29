@@ -235,8 +235,8 @@ width: 30%;}
 	text-align: center;	
 	width: 100%;
 	color:white;
-	display: table-cell;
-	vertical-align: middle;
+	padding-top: 8%;
+
 	.summary_values{margin-top: 15px;}
 
 	}
@@ -620,5 +620,100 @@ fader {
 	}
 	select{
 		padding: 0 40px 0 16px;
+	}
+}
+
+.flip-container {
+	-webkit-perspective: 1000;
+	-moz-perspective: 1000;
+	-o-perspective: 1000;
+	perspective: 1000;
+	width: 100%;
+	text-align: center;
+	.card{
+		margin:0;
+	}
+	&.flip-container2{
+		height:100%;
+		.flipper{
+
+		}
+		.front, .back{
+			display:table;
+			height:100%;
+
+		}
+	}
+}
+.flip-container.flip {
+	.flipper {
+		-webkit-transform: rotateY(-180deg);
+		-moz-transform: rotateY(-180deg);
+		-o-transform: rotateY(-180deg);
+		-ms-transform: rotateY(-180deg);
+		transform: rotateY(-180deg);
+	}
+	background:transparent;
+}
+.front {
+	background:transparent;
+	width: 100%;
+	text-align: center;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	-webkit-transform: rotateY(0deg);
+	-moz-transform: rotateY(0deg);
+	-o-transform: rotateY(0deg);
+	-ms-transform: rotateY(0deg);
+	transform: rotateY(0deg);
+
+}
+.back {
+	width: 100%;
+	text-align: center;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+	left: 0;
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	transform: rotateY(180deg);
+}
+.front.success , .back.success{
+	background:transparent;
+}
+
+.flipper {
+	transition: 1s;
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	-o-transition: 1s;
+	-ms-transition: 1s;
+	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	position: relative;
+}
+.calculator{
+	width:100%;
+	.calcLabelDiv{
+		width:55%;
+		.calcLabel{padding:15px 0; color:#929292; font-size:18px;}
+	}
+	.calcInputDiv{
+		width:40%;
+		input{border-bottom: 1px solid #18bb9c; outline:none;padding: 8px;}
 	}
 }
