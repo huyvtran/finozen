@@ -48,7 +48,7 @@
 		</div>
 		
 		<label class="item item-input" ng-class="{ 'has-errors' : signupForm.$submitted && signupForm.email.$invalid, 'no-errors' :  signupForm.email.$touched && signupForm.email.$valid}">
-			<i class="icon ion-ios-email signup_icons"></i><input type="email" name="email" ng-model="authorization.email" required placeholder="Email Id" >
+			<i class="icon ion-android-call signup_icons"></i><input type="email" name="email" ng-model="authorization.email" required placeholder="Email Id" >
 		</label>
 		<div class="error-container" ng-if="signupForm.email.$error && signupForm.$submitted" ng-messages="signupForm.email.$error">
 			<div class="error"  ng-message="required">{{'fieldEmpty' | translate}}</div>

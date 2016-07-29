@@ -130,7 +130,7 @@ angular.module('app.subcontrollerTwo', [])
 			var sigImg = signaturePad.toDataURL();
 			$scope.signature = sigImg;
 		}
-		$scope.signatureFunction=function(){$state.go('verifySuccess');}
+		$scope.signatureFunction=function(){$sessionStorage.clientActive="Q";$state.go('verifySuccess');}
 		$scope.signUpload = function() {
       $ionicLoading.show({templateUrl:"templates/loading.html"});
 			var uploadsign=JSON.parse(JSON.stringify({}));
@@ -158,9 +158,11 @@ angular.module('app.subcontrollerTwo', [])
                   $ionicLoading.hide();
                   confirmation++;
 				  if(confirmation>=7){
+					$sessionStorage.clientActive="Q";
 					$state.go("verifySuccess");//after sign image
 				  }
 				  else{
+					$sessionStorage.clientActive="Q";
 					$state.go("verifySuccess");
 				  }
                 }
@@ -559,11 +561,14 @@ angular.module('app.subcontrollerTwo', [])
 
     $scope.accountType = {type : $scope.accountTypeOptions[0].value};
 
-    $scope.test=function(dData){
-		console.log(dData);
-		console.log(dData.ifsc);
-		console.log(dData.accNo);
-		}
+    $scope.pastInvestmentsOptions = [
+    { name: 'Yes', value: 'SB_New' },
+    { name: 'No', value: 'CA_new' }
+    ];
+
+    $scope.pastInvestments = {type : $scope.pastInvestmentsOptions[0].value};
+
+
     $scope.bankUpload=function(bankData){
 		if(bankData.$valid){
         var bank = JSON.parse(JSON.stringify({}));
@@ -639,7 +644,11 @@ angular.module('app.subcontrollerTwo', [])
 	}
              }
 		$scope.bankSkip=function(){
-			$state.go('questions');
+			$state.go('verifySuccess');
+
+		}
+		$scope.bankTest=function(){
+			$state.go('verifySuccess');
 
 		}
     })

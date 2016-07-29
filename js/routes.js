@@ -61,6 +61,11 @@ $ionicAppProvider.identify ({
 		templateUrl: 'templates/terms.html',
 		controller: 'termsCtrl'
     })
+     .state('invest_success', {
+		url: '/investSuccess',
+		templateUrl: 'templates/invest_success.html',
+		controller: ''
+    })
      .state('successPage', {
 		url: '/success',
 		templateUrl: 'templates/payment_success.html',

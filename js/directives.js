@@ -77,3 +77,31 @@ angular.module('app.directives', [])
   }
 })
 
+.directive('flipContainer1', function() {
+ 	return {
+ 		restrict: 'C',
+ 		link: function($scope, $elem, $attrs) {
+ 			$scope.flip1 = function() {
+ 				$elem.toggleClass('flip');
+ 			}
+			$scope.$on('flip',function(event, data){
+             $scope.flip1()
+         });
+		 
+ 		}
+ 	};
+ })
+.directive('flipContainer2', function() {
+ 	return {
+ 		restrict: 'C',
+ 		link: function($scope, $elem, $attrs) {
+ 			$scope.flip2 = function() {
+ 				$elem.toggleClass('flip');
+ 			}
+			$scope.$on('flip',function(event, data){
+             $scope.flip2()
+         });
+ 		}
+ 	};
+ });
+
