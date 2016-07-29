@@ -234,8 +234,8 @@ width: 30%;}
 	text-align: center;	
 	width: 100%;
 	color:white;
-	display: table-cell;
-	vertical-align: middle;
+	padding-top: 8%;
+
 	.summary_values{margin-top: 15px;}
 
 	}
@@ -488,6 +488,7 @@ text-align: center;
 		margin: 20px auto;
 		img{
 			max-height: 200px;
+			max-width: 250px;
 			padding: 15px;}
 	}
 }
@@ -610,7 +611,13 @@ fader {
 	}
 
 }
-.SaveText {
-    font-size: 19px;
-	img{display:inline-block;}
+.previousInvestments.item-select{
+	.input-label{
+		white-space: normal;
+		max-width: 220px;
+		width: 76%;
+	}
+	select{
+		padding: 0 40px 0 16px;
+	}
 }

@@ -31,6 +31,28 @@ win.addEventListener( "loadstop", function() {
     .controller('termsCtrl', function($scope,$sessionStorage) {
 if($sessionStorage.clientActive=="Y") {$scope.test=true;}
 else{$scope.test=false;}
+*/
+$scope.test=false;
+$scope.activateAcc= function(){
+	$scope.test=false;
+	console.log($sessionStorage.clientResponse);
+	if($sessionStorage.clientResponse==1){
+		$scope.test=false;
+		$scope.activateAccUrl="#/bank";
+		$scope.activateUrl="Bank";
+		console.log($scope.test  +  $scope.activateAccUrl  +  $scope.activateUrl);
+	}
+	else if($sessionStorage.clientResponse==2){
+		$scope.test=true;	
+	}
+	else if($sessionStorage.clientResponse==3){
+		$scope.test=false;
+		$scope.activateAccUrl="#/panImage";
+		$scope.activateUrl="Pan Image";
+		console.log($scope.test  +  $scope.activateAccUrl  +  $scope.activateUrl);
+	}	
+}
+$scope.activateAcc();
     })
 
     .controller('recentTransactionsCtrl', function($scope) {
@@ -243,15 +265,26 @@ console.log($scope.loginDetails);
 
 
   /*add money page check*/
-.controller('transactionAccessCtrl', function($scope,$sessionStorage){
-if($sessionStorage.clientActive=="Y") {
-     $scope.withdrawUrl="#/withdraw";
-      $scope.investUrl="#/invest";
-  }
-  else {
-    $scope.withdrawUrl="#/status";
-    $scope.investUrl="#/status";
-  }
+.controller('transactionAccessCtrl', function($scope,$sessionStorage,$state){
+	$scope.investCheck=function(){
+	console.log($sessionStorage.clientActive + " add money");
+		if($sessionStorage.clientActive=="N") {
+			$state.go("status");
+		  }
+		  else {
+			  $state.go("invest");
+		  }		
+	}
+	$scope.withdrawCheck=function(){
+	console.log($sessionStorage.clientActive + " add money");
+		if($sessionStorage.clientActive=="N") {
+			$state.go("status");
+		  }
+		  else {
+			$state.go("withdraw");
+		  }		
+	}
+
 })
 
 
