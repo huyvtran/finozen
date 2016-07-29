@@ -29,24 +29,23 @@ win.addEventListener( "loadstop", function() {
 
     })
     .controller('termsCtrl', function($scope,$sessionStorage) {
-		/*
 if($sessionStorage.clientActive=="Y") {$scope.test=true;}
 else{$scope.test=false;}
 */
 $scope.test=false;
 $scope.activateAcc= function(){
 	$scope.test=false;
-	console.log($sessionStorage.clientActive);
-	if($sessionStorage.clientActive=="N"){
+	console.log($sessionStorage.clientResponse);
+	if($sessionStorage.clientResponse==1){
 		$scope.test=false;
 		$scope.activateAccUrl="#/bank";
 		$scope.activateUrl="Bank";
 		console.log($scope.test  +  $scope.activateAccUrl  +  $scope.activateUrl);
 	}
-	else if($sessionStorage.clientActive="T"){
+	else if($sessionStorage.clientResponse==2){
 		$scope.test=true;	
 	}
-	else if($sessionStorage.clientActive=="P"){
+	else if($sessionStorage.clientResponse==3){
 		$scope.test=false;
 		$scope.activateAccUrl="#/panImage";
 		$scope.activateUrl="Pan Image";
@@ -66,8 +65,6 @@ $scope.activateAcc();
     .controller('AuthSignUpCtrl', function($scope, $state,signUpService,$sessionStorage,$ionicLoading) {
 
         $scope.signUp = function(form,searchText2,signupForm) {
-			$ionicLoading.hide();
-			$state.go('bank');
 $sessionStorage.SessionClientName=signupForm.fName+' '+signupForm.lName;
 $sessionStorage.SessionMobNo=signupForm.mobileNumber;
             if(angular.equals(signupForm.pin,searchText2))
@@ -91,9 +88,6 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
         }
 
         $scope.addUserInfo=function(){
-			$ionicLoading.hide();
-			$state.go('bank');
-			/*
             signUpService.sendSignUp($sessionStorage.signUpData).then(function(data){
 				//$sessionStorage.
 
@@ -127,7 +121,6 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
                 $scope.serverError="Sign Up failed, please call us";
 
             });
-			*/
         }
     })
 
@@ -335,7 +328,7 @@ var timeNow = new Date().getUTCHours();
 '<div class="loading visible active" style="margin-left: -53px; margin-top: 76px"><span><img style="max-height:50px" src="img/loading.gif"></img><br/>Custom Loading...</span></div>',
             noBackdrop: true
         });*/
-	//$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
+	$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
 var reportDate = getPerformanceService.get();
 reportDate.$promise.then(function(data){
  if (data.responseCode == "Cali_SUC_1030") {

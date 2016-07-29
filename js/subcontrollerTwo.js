@@ -43,7 +43,6 @@ angular.module('app.subcontrollerTwo', [])
     })
 
         /*for sending the pan Image*/
-
         .controller('panImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
             $scope.selfieGo=function(){$state.go('selfie');}
 			$scope.takeit1=function(){
@@ -59,7 +58,7 @@ angular.module('app.subcontrollerTwo', [])
 				  targetHeight: 200,
 				  cameraDirection:0,
 				  popoverOptions: CameraPopoverOptions,
-				  saveToPhotoAlbum: true,
+				  saveToPhotoAlbum: false,
 				  correctOrientation:false
 				};
 
@@ -117,8 +116,7 @@ angular.module('app.subcontrollerTwo', [])
 
                 });
             }
-        
-		})
+        })
 
             /*for signature image*/
     .controller('signImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
@@ -195,6 +193,7 @@ angular.module('app.subcontrollerTwo', [])
 			  encodingType: Camera.EncodingType.JPEG,
 			  targetWidth: 300,
 			  cameraDirection:1,
+			  targetHeight: 400,
 			  popoverOptions: CameraPopoverOptions,
 			  saveToPhotoAlbum: false,
 			  correctOrientation:true
@@ -338,7 +337,7 @@ angular.module('app.subcontrollerTwo', [])
 
     /*for address proof image*/
     .controller('addressImageSelectionCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
-				$scope.takeImageSkip=function(){$state.go('questions');$sessionStorage.addressChoice=$scope.choice;}
+				$scope.takeImageSkip=function(){$state.go('bank');$sessionStorage.addressChoice=$scope.choice;}
 		$scope.takeImage=function(){if(
 			$scope.choice!==undefined) {
 			//console.log($scope.choice + "   selected choice");
@@ -354,7 +353,7 @@ angular.module('app.subcontrollerTwo', [])
 	})
     .controller('addressImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
 		//console.log($sessionStorage.addressChoice + 'fromwhat page your coming');
-		$scope.bank=function(){$state.go('questions');}
+		$scope.bank=function(){$state.go('bank');}
 				if($sessionStorage.addressChoice == 'AA'){$scope.cimageFront="img/AADHAR_FRONT.jpg"; $scope.cimageBack="img/AADHAR_BACK.jpg";}
 				else if($sessionStorage.addressChoice == 'PP'){$scope.cimageFront="img/Passport_front.jpg"; $scope.cimageBack="img/Passport_back.jpg";}
 				else if($sessionStorage.addressChoice == 'VO'){$scope.cimageFront="img/VOTER_FRONT.jpg"; $scope.cimageBack="img/VOTER_BACK.jpg";}
@@ -561,7 +560,7 @@ angular.module('app.subcontrollerTwo', [])
                 if(data.responseCode == "Cali_SUC_1030") {
 
                     $ionicLoading.hide();
-					$state.go("questions");
+					$state.go("bank");
                 }
                 else {
                   $ionicLoading.hide();
@@ -621,8 +620,8 @@ angular.module('app.subcontrollerTwo', [])
     $scope.accountType = {type : $scope.accountTypeOptions[0].value};
 
     $scope.pastInvestmentsOptions = [
-    { name: 'Yes', value: 'Y' },
-    { name: 'No', value: 'N' }
+    { name: 'Yes', value: 'SB_New' },
+    { name: 'No', value: 'CA_new' }
     ];
 
     $scope.pastInvestments = {type : $scope.pastInvestmentsOptions[0].value};
@@ -703,21 +702,11 @@ angular.module('app.subcontrollerTwo', [])
 	}
              }
 		$scope.bankSkip=function(){
-			$sessionStorage.clientActive="N";
 			$state.go('verifySuccess');
 
 		}
-		$scope.bankTest=function(previousInvestments){
-			if(previousInvestments=="Y"){
-				console.log(previousInvestments + "   previousInvestments" );
-				$sessionStorage.clientActive="T";
-				$state.go('verifySuccess');
-			}
-			else if(previousInvestments=="N"){
-				console.log(previousInvestments + "   previousInvestments" );
-				$sessionStorage.clientActive="P";
-				$state.go('verifySuccess');
-			}
+		$scope.bankTest=function(){
+			$state.go('verifySuccess');
 
 		}
     })

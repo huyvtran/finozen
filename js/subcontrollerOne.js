@@ -542,34 +542,28 @@ $state.go('reference');
 })
 .controller('verifySuccessCtrl', function($scope,$sessionStorage) {
 	$scope.initial= function(){
-		console.log($sessionStorage.clientActive);
-
-	if ($sessionStorage.clientActive=="N"){
-		console.log($sessionStorage.clientActive);
+		$sessionStorage.clientResponse=Math.floor(Math.random() * 3)+1;
+		console.log($sessionStorage.clientResponse);
+	if ($sessionStorage.clientResponse==1){
 		$scope.statusImage="img/step1.jpg";
 		$scope.clientType="In active";
 		$scope.startInvesting="Not Now";
 		$scope.notNow="Activate Now";
 		$scope.startInvestingUrl="#/sliders";
-		$scope.para1="Your account is currently inactive, please go back on the previous page to enter your details and begin investing";
 		$scope.notNowUrl="#/bank";
 	}	
-	else if ($sessionStorage.clientActive=="T" || $sessionStorage.clientActive=="Q" ){
-		console.log($sessionStorage.clientActive);
+	else if ($sessionStorage.clientResponse==2){
 		$scope.statusImage="img/step3.jpg";
 		$scope.clientType="Partial active";
 		$scope.startInvesting="Start Investing";
 		$scope.notNow="Know more";
-		$scope.para1="Your account is now active, you can begin investing.";
 		$scope.notNowUrl="#/sliders";
 		$scope.startInvestingUrl="#/tour";
 	}
-	else if ($sessionStorage.clientActive=="P"){
-		console.log($sessionStorage.clientActive);
+	else if ($sessionStorage.clientResponse==3){
 		$scope.statusImage="img/step3.jpg";
 		$scope.clientType="Under process";
 		$scope.startInvesting="Not Now";
-		$scope.para1="Your account is now partially active, you can begin investing upto Rs. 1000, we will contact you in next one hour to completely activate your account and remove any limit on investments";
 		$scope.notNow="Activate Now";
 		$scope.notNowUrl="#/panImage";
 		$scope.startInvestingUrl="#/sliders";
