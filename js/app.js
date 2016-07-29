@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 var confirmation = 0;
-angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', 'app.controllers', 'app.subcontrollerOne','pascalprecht.translate','app.subcontrollerTwo' , 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages','ngStorage','ngIdle','ngCordova', 'ionic-toast'])
+angular.module('app', ['ionic','ionic.service.core','app.controllers', 'app.subcontrollerOne','pascalprecht.translate','app.subcontrollerTwo' , 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages','ngStorage','ngIdle','ngCordova', 'ionic-toast'])
 /*.constant('$ionicLoadingConfig', {
   template: '<ion-spinner icon="android"></ion-spinner>',
   showBackdrop: true,
@@ -100,7 +100,7 @@ angular.module('app', ['ionic','ionic.service.core','ionic.service.analytics', '
     KeepaliveProvider.interval(2); // in seconds
 })
 
-.run(function($ionicPlatform, $ionicAnalytics, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout,$localStorage) {
+.run(function($ionicPlatform, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout,$localStorage) {
   $ionicPlatform.ready(function() {
 
 
@@ -219,8 +219,7 @@ window.plugins.OneSignal.getTags(function(tags){
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-	    $ionicAnalytics.register();
-    var io=Ionic.io();
+
 
 
 
