@@ -1,3 +1,6 @@
+<!-- new signup flow
+
+
 <ion-view title="Success" class="verification">
 <div class="bar bar-header fino_head" ng-controller="popupController as popup">
 	<div class="h1 title"><p class="head_title"><span id="title">ACCOUNT ACTIVATION</span></p></div>
@@ -9,6 +12,30 @@
 			<div class="rows padding"><br/><br/>
 				<p class="text-center">CONGRATULATIONS!</p><br/>
 				<p class="padding">{{para1}}</p>
+				<p class="padding"><sup>*Business hours Mon-Sat 10 A.M to 9 P.M.</sup></p>
+			</div>
+		</div>
+    </ion-content>
+
+<ion-footer-bar padding="false">
+	<div class="button-bar " style="padding:0;">
+		<a href="#/sliders" class="button button-positive" style="margin:1px;line-height: 44px;" >know more</a>
+		<a href="#/tour" class="button button-positive" style="margin:1px; line-height: 44px;" >start investing</a>
+	</div>
+</ion-footer-bar>
+</ion-view>
+-->
+<ion-view title="Success" class="verification">
+<div class="bar bar-header fino_head" ng-controller="popupController as popup">
+	<div class="h1 title"><p class="head_title"><span id="title">ACCOUNT ACTIVATION</span></p></div>
+	<a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
+</div>
+    <ion-content overflow-scroll="true" padding="false" class="has-header">
+		<div class="container">
+			<div class="rows"><img src="img/step3.jpg" class="steps"></div>
+			<div class="rows padding"><br/><br/>
+				<p class="text-center">CONGRATULATIONS!</p><br/>
+				<p class="padding">Your account is now created. It is under review and will be activated within 1 hour if all documents are submitted and valid. We will inform you once activated.</p>
 				<p class="padding"><sup>*Business hours Mon-Sat 10 A.M to 9 P.M.</sup></p>
 			</div>
 		</div>

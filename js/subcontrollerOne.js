@@ -209,9 +209,6 @@ angular.module('app.subcontrollerOne', [])
 
 	})
 	.controller('withdrawCtrl', function($scope,$sessionStorage,$ionicLoading,getReportService,$ionicHistory,ionicToast,$ionicPlatform,$state,$interval,$rootScope) {
-  $interval(function () {
-		$rootScope.$broadcast('flip',{});
-		},3000)
 	if($sessionStorage.clientType=="GO"){
 		$scope.schemeNamep = "GOLD";
 	}
@@ -298,7 +295,9 @@ $scope.growthRate= function(){
          }
          })
         $ionicLoading.hide();
-
+  $interval(function () {
+		$rootScope.$broadcast('flip',{});
+		},3000);
     })
 
  // NAV Calculator controller

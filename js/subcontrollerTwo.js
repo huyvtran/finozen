@@ -553,6 +553,7 @@ angular.module('app.subcontrollerTwo', [])
     })
 
 /*for uploading the bank details*/
+/*
   .controller('bankDetailsCTRL',function($scope,$state,$sessionStorage,bankDetailsService,$ionicPopup,$ionicLoading,$window){
     $scope.accountTypeOptions = [
     { name: 'Savings', value: 'SB_New' },
@@ -649,6 +650,102 @@ angular.module('app.subcontrollerTwo', [])
 		}
 		$scope.bankTest=function(){
 			$state.go('verifySuccess');
+
+		}
+    })
+*/
+
+
+/*for uploading the bank details*/
+  .controller('bankDetailsCTRL',function($scope,$state,$sessionStorage,bankDetailsService,$ionicPopup,$ionicLoading,$window){
+    $scope.accountTypeOptions = [
+    { name: 'Savings', value: 'SB_New' },
+    { name: 'Current', value: 'CA_new' }
+    ];
+
+    $scope.accountType = {type : $scope.accountTypeOptions[0].value};
+
+    $scope.test=function(dData){
+		console.log(dData);
+		console.log(dData.ifsc);
+		console.log(dData.accNo);
+		}
+    $scope.bankUpload=function(bankData){
+		if(bankData.$valid){
+        var bank = JSON.parse(JSON.stringify({}));
+		$ionicLoading.show({templateUrl:"templates/loading.html"});
+            bank.clientCode=$sessionStorage.SessionClientCode;
+            //bank.kyphCode="CRN23919";
+            bank.bankAccNo= $scope.accNumber //bank account number
+            bank.ifscCode= $scope.IFSC_code//ifsc Code
+            bank.accountType= $scope.accountType.type//savings type either savings or personal
+            bank.updateNach= "N" //either yes or no
+            bank=JSON.stringify(bank);
+			console.log(bank);
+               bankDetailsService.save(bank,function(data){
+                 if(data.responseCode == "Cali_SUC_1030") {
+                   $ionicLoading.hide();
+                   $state.go("questions");//after selfie image
+                 }
+
+                 else {
+				 console.log(data.responseCode);
+					$ionicLoading.hide();
+                   var refer= $ionicPopup.alert({
+                     title: 'Upload Error',
+                     template: 'Please try again'
+                   });
+
+                   refer.then(function(res) {
+                     $window.location.reload(true)
+
+                   });
+                 }
+
+               },function(error){
+
+                 $ionicLoading.hide();
+				 if(error.data.responseCode == "Cali_ERR_2021"){
+					$ionicLoading.hide();
+                   var ifsc_error= $ionicPopup.alert({
+                     title: 'IFSC Code invalid',
+                     template: 'Please try again'
+                   });
+
+                   ifsc_error.then(function(res) {
+                     $window.location.reload(true)
+
+                   });
+                 }
+				 else if(error.data.responseCode == "Cali_ERR_2035"){
+           $ionicLoading.hide();
+           var bankdetails_error= $ionicPopup.alert({
+             title: 'Account Number Duplicate',
+             template: 'Please try again'
+           });
+
+           bankdetails_error.then(function(res) {
+             $window.location.reload(true)
+
+           });
+         }
+         else{
+				$ionicLoading.hide();
+                 var referesh= $ionicPopup.alert({
+                   title: 'Please try again',
+                   template: 'Unable to submit request'
+                 });
+                 referesh.then(function(res) {
+                   //$state.go("questions"); //selfie sign page
+				   $window.location.reload(true)
+                 });
+				 }
+
+               });
+	}
+             }
+		$scope.bankSkip=function(){
+			$state.go('questions');
 
 		}
     })

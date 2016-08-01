@@ -29,10 +29,13 @@ win.addEventListener( "loadstop", function() {
 
     })
     .controller('termsCtrl', function($scope,$sessionStorage) {
+		console.log($sessionStorage.clientActive +"$sessionStorage.clientActive");
+$scope.test=false;
+		
 if($sessionStorage.clientActive=="Y") {$scope.test=true;}
 else{$scope.test=false;}
-*/
-$scope.test=false;
+
+/*
 $scope.activateAcc= function(){
 	$scope.test=false;
 	console.log($sessionStorage.clientResponse);
@@ -53,6 +56,8 @@ $scope.activateAcc= function(){
 	}	
 }
 $scope.activateAcc();
+*/
+
     })
 
     .controller('recentTransactionsCtrl', function($scope) {
