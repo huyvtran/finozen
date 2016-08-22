@@ -7,10 +7,10 @@
 	<ion-content overflow-scroll="true" padding="false" class="has-header" ng-controller="addressFrontCTRL" >
 		<div class="panimageSection text-center padding" >
 		<p class="text-left"><br/><b>Step: 3/5 </b></p>
-		<div class="front">
+		<div class="frontImg">
 			<div class="panimage">
-				<img ng-show="addressImage !== undefined" ng-src="{{addressImage}} " id="addressFrontImage">
-				<img ng-show="addressImage === undefined" ng-src="{{cimageFront}}">
+				<img ng-show="addressImage !== undefined" ng-src="{{addressImage}} " id="addressFrontImage" />
+				<img ng-show="addressImage === undefined" ng-src="{{cimageFront}}"/>
 			</div>
 			<div class="text-center">
 				<button class="button button-positive" ng-click="addressFrontImg()" ng-show="addressImage === undefined">Take image</button>
@@ -20,7 +20,7 @@
 		</div>
 <ion-footer-bar padding="false" style="padding:0;">
 	<div class="button-bar " style="padding:0;" >
-		<button class="button button-positive" ng-click="bank()" style="margin:1px;line-height: 44px;">SKIP</button>
+		<button class="button button-positive" ng-click="bank()"  ng-disable="diasbleSkip" style="margin:1px;line-height: 44px;">SKIP</button>
 		<button class="button button-positive" ng-click="addressFrontSubmit()" style="margin:1px;line-height: 44px;" ng-disabled="!addressImage">SUBMIT</button>
 	</div>
 </ion-footer-bar>

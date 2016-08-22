@@ -1,6 +1,6 @@
 <ion-view title="Sign">
 <div class="bar bar-header fino_head">
-<button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepback()"></button>
+<button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepbacktoAddress()"></button>
   <div class="h1 title"><p class="head_title"><span id="title">SIGNATURE</span></p></div>
   <a class="button button-clear button-positive  ion-android-call" ng-href="tel:07899825545"></a>
 </div>
@@ -17,7 +17,7 @@
 		  </div>
 		<ion-footer-bar padding="false" style="padding:0;">
 	<div class="button-bar " style="padding:0;">
-		<button class="button button-positive" ng-click="signatureFunction()" style="margin:1px;line-height: 44px;">SKIP</button>
+		<button class="button button-positive" ng-click="signatureFunction()" ng-disable="diasbleSkip" style="margin:1px;line-height: 44px;">SKIP</button>
 		<button class="button button-positive" ng-click="signUpload()" style="margin:1px;line-height: 44px;" ng-disabled="!signature">SUBMIT</button>
 	</div>
 </ion-footer-bar>

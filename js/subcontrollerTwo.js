@@ -43,9 +43,26 @@ angular.module('app.subcontrollerTwo', [])
     })
 
         /*for sending the pan Image*/
-        .controller('panImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
+        .controller('panImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window,myService,proofRedirectFactory){
+			$scope.diasbleSkip=$sessionStorage.disbledSkip;
 //			$scope.addressRetake=function(){ window.location.reload(true);}
-            $scope.selfieGo=function(){$state.go('selfie');}
+            $scope.selfieGo=function(){
+				$sessionStorage.stepCount=0;
+				
+		var nextSteps=myService.myFunction(00001);
+		var nextStepsUrl=proofRedirectFactory.name;
+		$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+		console.log($sessionStorage.stepCount + "step count");
+		console.log(nextSteps + "next step");
+		console.log(nextStepsUrl[1] + "next step url");
+		console.log(nextStepsUrl[nextSteps[$sessionStorage.stepCount]] + "next state");
+		var totalSteps=myService.myFunction(00001).length;
+		if(totalSteps==$sessionStorage.stepCount){$sessionStorage.clientResponse=2;$state.go(nextStepsUrl[6]);}
+			else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+						 
+					
+				//$state.go('selfie');
+			}
 			$scope.takeit1=function(){
 			//$scope.cimage1="img/Pancard.jpg";
 			  document.addEventListener("deviceready", function () {
@@ -101,7 +118,17 @@ angular.module('app.subcontrollerTwo', [])
                       $ionicLoading.hide();
                           confirmation++;
                       console.log(confirmation+'the value of the click is');
-                         $state.go("selfie");
+                        // $state.go("selfie");
+						 		
+		var nextSteps=myService.myFunction(10111);
+		var nextStepsUrl=proofRedirectFactory.name;
+		$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+		console.log($sessionStorage.stepCount + "step count");
+		var totalSteps=myService.myFunction(00001).length;
+		if(totalSteps==$sessionStorage.stepCount){$sessionStorage.clientResponse=2;$state.go(nextStepsUrl[6]);}
+			else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+						 
+						 
                     }
                 },function(error){
                   $ionicLoading.hide();
@@ -120,7 +147,8 @@ angular.module('app.subcontrollerTwo', [])
 })
 
             /*for signature image*/
-    .controller('signImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
+    .controller('signImageCTRL',function(panImageService,myService,proofRedirectFactory,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
+		$scope.diasbleSkip=$sessionStorage.disbledSkip;
         var canvas = document.getElementById('signatureCanvas');
 		var signaturePad = new SignaturePad(canvas);
 		$scope.clearCanvas = function() {
@@ -130,7 +158,21 @@ angular.module('app.subcontrollerTwo', [])
 			var sigImg = signaturePad.toDataURL();
 			$scope.signature = sigImg;
 		}
-		$scope.signatureFunction=function(){$sessionStorage.clientActive="Q";$state.go('verifySuccess');}
+		$scope.signatureFunction=function(){
+			$sessionStorage.clientActive="Q";
+			//$state.go('verifySuccess');
+			
+		var nextSteps=myService.myFunction(00001);
+		var totalSteps=myService.myFunction(00001).length;
+		var nextStepsUrl=proofRedirectFactory.name;
+		$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+		console.log($sessionStorage.stepCount + "    step count");
+		console.log(nextSteps + "    next step");
+		console.log(nextStepsUrl + "    next step url");		
+		var totalSteps=myService.myFunction(00001).length;
+		if(totalSteps==$sessionStorage.stepCount){$sessionStorage.clientResponse=2;$state.go(nextStepsUrl[6]);}
+			else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+			}
 		$scope.signUpload = function() {
       $ionicLoading.show({templateUrl:"templates/loading.html"});
 			var uploadsign=JSON.parse(JSON.stringify({}));
@@ -181,8 +223,17 @@ angular.module('app.subcontrollerTwo', [])
     })
 
     /*for selfie image*/
-    .controller('selfieImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
-		$scope.addressSelect=function(){$state.go('imageSelection'); }
+    .controller('selfieImageCTRL',function(panImageService,myService,proofRedirectFactory,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
+		$scope.diasbleSkip=$sessionStorage.disbledSkip;
+		$scope.addressSelect=function(){
+			//$state.go('imageSelection'); 
+		var nextSteps=myService.myFunction(00001);
+		var nextStepsUrl=proofRedirectFactory.name;
+		$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+		var totalSteps=myService.myFunction(00001).length;
+		if(totalSteps==$sessionStorage.stepCount){$sessionStorage.clientResponse=2;$state.go(nextStepsUrl[6]);}
+			else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+		}
 		$scope.selfieImage=function(){
 		//$scope.selfie="img/no_leaves.png";
 		  document.addEventListener("deviceready", function () {
@@ -254,9 +305,8 @@ angular.module('app.subcontrollerTwo', [])
     })
 
       /*for question's*/
-    .controller('questionsCTRL',function($scope,questionsService,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window)
-    {
-
+    .controller('questionsCTRL',function($scope,myService,proofRedirectFactory,questionsService,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
+$scope.diasbleSkip=$sessionStorage.disbledSkip;
 	   $scope.clientIncomeOptions = [
     { name: 'Below 1 Lakh', value: '31' },
     { name: '1 - 5 Lakh', value: '32' },
@@ -291,7 +341,15 @@ angular.module('app.subcontrollerTwo', [])
     $scope.clientPEP = {type : $scope.clientPEPOptions[0].value};
 
 
-		$scope.question=function(){$state.go('signature');}
+		$scope.question=function(){
+			//$state.go('signature');
+		var nextSteps=myService.myFunction(00001);
+		var nextStepsUrl=proofRedirectFactory.name;
+		$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+		var totalSteps=myService.myFunction(00001).length;
+		if(totalSteps==$sessionStorage.stepCount){$sessionStorage.clientResponse=2;$state.go(nextStepsUrl[6]);}
+			else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+		}
       $scope.questionUpload = function(){
 		$ionicLoading.show({templateUrl:"templates/loading.html"});
         var questUpload=JSON.parse(JSON.stringify({}));
@@ -341,8 +399,18 @@ angular.module('app.subcontrollerTwo', [])
     )
 
     /*for address proof image*/
-    .controller('addressImageSelectionCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
-				$scope.takeImageSkip=function(){$state.go('bank');$sessionStorage.addressChoice=$scope.choice;}
+    .controller('addressImageSelectionCTRL',function(panImageService,myService,proofRedirectFactory,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
+		$scope.diasbleSkip=$sessionStorage.disbledSkip;
+				$scope.takeImageSkip=function(){
+					//$state.go('bank');
+		var nextSteps=myService.myFunction(00001);
+		var nextStepsUrl=proofRedirectFactory.name;
+		$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+		var totalSteps=myService.myFunction(00001).length;
+		if(totalSteps==$sessionStorage.stepCount){$sessionStorage.clientResponse=2;$state.go(nextStepsUrl[6]);}
+			else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+					
+					}
 		$scope.takeImage=function(){
 			if($scope.choice!==undefined) {
 			//console.log($scope.choice + "   selected choice");
@@ -353,6 +421,7 @@ angular.module('app.subcontrollerTwo', [])
 	})
 
 	.controller('addressFrontCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
+		$scope.diasbleSkip=$sessionStorage.disbledSkip;
 		//console.log($sessionStorage.addressChoice + 'fromwhat page your coming');
 				//$scope.addressRetake=function(){ window.location.reload(true);}
 				$scope.bank=function(){$state.go('bank');}
@@ -366,7 +435,7 @@ angular.module('app.subcontrollerTwo', [])
 		//else{$scope.cimageFront="img/DL.jpg";}
 		$scope.addressFrontImg=function(){
 		//console.log($sessionStorage.addressChoice);
-		//$scope.addressImage=$scope.cimageFront;
+		$scope.addressImage=$scope.cimageFront;
 		document.addEventListener("deviceready", function () {
 					var options = {
 					  quality: 90,
@@ -447,16 +516,15 @@ angular.module('app.subcontrollerTwo', [])
 	.controller('addressBackCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
 		//console.log($sessionStorage.addressChoice + 'fromwhat page your coming');
 		$scope.bank=function(){$state.go('bank');}
-				if($sessionStorage.addressChoice == 'AA'){$scope.cimageFront="img/AADHAR_FRONT.jpg"; $scope.cimageBack="img/AADHAR_BACK.jpg";}
+				if($sessionStorage.addressChoice == 'AA'){$scope.cimageBack="img/AADHAR_BACK.jpg";}
 				else if($sessionStorage.addressChoice == 'PP'){$scope.cimageBack="img/Passport_back.jpg";}
 				else if($sessionStorage.addressChoice == 'VO'){$scope.cimageBack="img/VOTER_BACK.jpg";}
 			    else if($sessionStorage.addressChoice == 'DL'){$scope.cimageBack="img/DL_back.png";}
 				else if($sessionStorage.addressChoice == 'RC'){ $scope.cimageBack="img/ration2.jpg";}
 				else if($sessionStorage.addressChoice == 'GA'){$scope.cimageFront="img/sample.png";}
 
-		//else{$scope.cimageFront="img/DL.jpg";}
 		$scope.addressBackImg=function(){
-		//$scope.cimage2=$scope.cimageBack;
+		$scope.cimage2=$scope.cimageBack;
 		//$scope.addressFront();
 		  document.addEventListener("deviceready", function () {
 			var options = {
@@ -553,8 +621,9 @@ angular.module('app.subcontrollerTwo', [])
     })
 
 /*for uploading the bank details*/
-/*
-  .controller('bankDetailsCTRL',function($scope,$state,$sessionStorage,bankDetailsService,$ionicPopup,$ionicLoading,$window){
+
+  .controller('bankDetailsCTRL',function($scope,$state,$sessionStorage,bankDetailsService,$ionicPopup,$ionicLoading,$window,proofRedirectFactory,myService){
+	 $scope.diasbleSkip=$sessionStorage.disbledSkip;
     $scope.accountTypeOptions = [
     { name: 'Savings', value: 'SB_New' },
     { name: 'Current', value: 'CA_new' }
@@ -585,7 +654,10 @@ angular.module('app.subcontrollerTwo', [])
                bankDetailsService.save(bank,function(data){
                  if(data.responseCode == "Cali_SUC_1030") {
                    $ionicLoading.hide();
-                   $state.go("questions");//after selfie image
+				//   $sessionStorage.documentStatus=data.; // document status received on bank submittion of bank details  (have to update value according to response)
+				
+				   
+                   $state.go('verifySuccess');//after selfie image
                  }
 
                  else {
@@ -645,18 +717,25 @@ angular.module('app.subcontrollerTwo', [])
 	}
              }
 		$scope.bankSkip=function(){
+			//console.log( "service return")	;
+		    
+			$sessionStorage.clientResponse=1;
 			$state.go('verifySuccess');
 
 		}
 		$scope.bankTest=function(){
+			totalSteps=(myService.myFunction(00001) ).length;
+			console.log(totalSteps + "service return")	;
+			$sessionStorage.clientResponse=3;
 			$state.go('verifySuccess');
 
 		}
     })
-*/
+
 
 
 /*for uploading the bank details*/
+/*  Old sign up flow
   .controller('bankDetailsCTRL',function($scope,$state,$sessionStorage,bankDetailsService,$ionicPopup,$ionicLoading,$window){
     $scope.accountTypeOptions = [
     { name: 'Savings', value: 'SB_New' },
@@ -749,7 +828,7 @@ angular.module('app.subcontrollerTwo', [])
 
 		}
     })
-
+*/
   /*forgot pin controller*/
     .controller('forgotPinCtrl', function($scope,$sessionStorage,$http,$state,$ionicPopup) {
         $scope.resetPin=function(change) {

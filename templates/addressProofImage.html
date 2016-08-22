@@ -1,16 +1,16 @@
 <ion-view title="Address Proof">
 <div class="bar bar-header fino_head">
-<button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepback()"></button>
+<button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepbacktoAddress()"></button>
   <div class="h1 title"><p class="head_title"><span id="title">ADDRESS PROOF</span></p></div>
   <a class="button button-clear button-positive  ion-android-call" ng-href="tel:07899825545"></a>
 </div>
 	<ion-content overflow-scroll="true" padding="false" class="has-header" ng-controller="addressBackCTRL" >
 		<div class="panimageSection text-center padding">
 		<p class="text-left"><br/><b>Step: 3/5 </b></p>
-		<div class="back">
+		<div class="backImg">
 		<div class="panimage">
-			<img ng-show="cimage2 !== undefined" ng-src="{{cimage2}} " id="addressBackImage">
-			<img ng-show="cimage2 === undefined" ng-src="{{cimageBack}} ">
+			<img ng-show="cimage2 !== undefined" ng-src="{{cimage2}} " id="addressBackImage" />
+			<img ng-show="cimage2 === undefined" ng-src="{{cimageBack}} "/>
 		</div>
 		<div class="text-center">
 			<button class="button button-positive" ng-click="addressBackImg()" ng-show="cimage2 === undefined">Back view</button>

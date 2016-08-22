@@ -398,7 +398,7 @@ $scope.growthRate= function(){
             mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums},function(data){
                 if(data.responseCode=="Cali_SUC_1030"){
 					$ionicLoading.hide();
-                    window.open('http://205.147.99.55:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_self');
+                    window.open('https://finotrust.com/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_self');
                 }
 				else{
 					$ionicLoading.hide();
@@ -444,8 +444,13 @@ $scope.growthRate= function(){
   };
         var mid=$sessionStorage.orderId;//dynamic id
     })
-.controller('goOneStep', function($scope,$ionicHistory ){
+.controller('goOneStep', function($scope,$ionicHistory ,$sessionStorage){
 	$scope.goOneStepback=function(){
+		history.go(-1);
+	}
+	$scope.goOneStepbacktoAddress=function(){
+		$sessionStorage.stepCount=$sessionStorage.stepCount-1;
+		
 		history.go(-1);
 	}
 
@@ -539,33 +544,75 @@ $state.go('reference');
 		$scope.schemeLinkText=" to read more about Reliance Liquid Fund Treasury Plan (IP) – G on moneycontrol.";
 	}
 })
-.controller('verifySuccessCtrl', function($scope,$sessionStorage) {
-	$scope.initial= function(){
-		$sessionStorage.clientResponse=Math.floor(Math.random() * 3)+1;
+.controller('verifySuccessCtrl', function($scope,$sessionStorage,$state,myService,proofRedirectFactory) {
+	
+	$scope.initial1= function(){
+		$sessionStorage.clientResponse=Math.floor(Math.random() * 2)+2;
+		$scope.initial();
+	}
+	$scope.notnowFunction= function(){
+		//$sessionStorage.clientResponse=Math.floor(Math.random() * 3)+1;
 		console.log($sessionStorage.clientResponse);
 	if ($sessionStorage.clientResponse==1){
+		$state.go("sliders");
+	}	
+	else if ($sessionStorage.clientResponse==2){
+		$state.go("sliders");
+	}
+	else if ($sessionStorage.clientResponse==3){
+		$sessionStorage.disbledSkip=true;
+		var nextStepsUrl=proofRedirectFactory.name;
+		var totalSteps=myService.myFunction(00001).length;
+		if($sessionStorage.stepCount==undefined){$state.go(nextStepsUrl[1]);}
+		else{$sessionStorage.stepCount=-1;  var nextSteps=myService.myFunction(00001);
+		$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+		console.log($sessionStorage.stepCount + "step count");
+		console.log(nextSteps + "next step");
+		console.log(nextStepsUrl[1] + "next step url");
+		console.log(nextStepsUrl[nextSteps[$sessionStorage.stepCount]] + "next state");
+		if(totalSteps==$sessionStorage.stepCount){$state.go(nextStepsUrl[6]);}
+	else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}}
+	}
+}
+	$scope.investNowFunction= function(){
+		//$sessionStorage.clientResponse=Math.floor(Math.random() * 3)+1;
+		console.log($sessionStorage.clientResponse);
+	if ($sessionStorage.clientResponse==1){
+		$state.go("bank");
+	}	
+	else if ($sessionStorage.clientResponse==2){
+		$state.go("sliders");
+	}
+	else if ($sessionStorage.clientResponse==3){
+		$sessionStorage.disbledSkip=true;
+		$state.go("sliders");
+	}
+}
+	$scope.initial= function(){
+		//$sessionStorage.clientResponse=Math.floor(Math.random() * 3)+1;
+		console.log($sessionStorage.clientResponse);
+	if ($sessionStorage.clientResponse==1){
+		
 		$scope.statusImage="img/step1.jpg";
+		$scope.para1="In active add text here";
 		$scope.clientType="In active";
-		$scope.startInvesting="Not Now";
-		$scope.notNow="Activate Now";
-		$scope.startInvestingUrl="#/sliders";
-		$scope.notNowUrl="#/bank";
+		$scope.notNow ="Not Now";
+		$scope.startInvesting="Activate Now";
 	}	
 	else if ($sessionStorage.clientResponse==2){
 		$scope.statusImage="img/step3.jpg";
-		$scope.clientType="Partial active";
+		$scope.para1="Partial active  add text here";
+		$scope.clientType="active";
 		$scope.startInvesting="Start Investing";
 		$scope.notNow="Know more";
-		$scope.notNowUrl="#/sliders";
-		$scope.startInvestingUrl="#/tour";
 	}
 	else if ($sessionStorage.clientResponse==3){
+		$sessionStorage.disbledSkip=true;
 		$scope.statusImage="img/step3.jpg";
+		$scope.para1="Under process  add text here";
 		$scope.clientType="Under process";
-		$scope.startInvesting="Not Now";
 		$scope.notNow="Activate Now";
-		$scope.notNowUrl="#/panImage";
-		$scope.startInvestingUrl="#/sliders";
+		$scope.startInvesting="Start Investing";
 	}
 }
 

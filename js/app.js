@@ -165,14 +165,6 @@ console.log(navigator.onLine + "  connection state");
     }, 100);
 
 
-    /*Urban Air ship integration*/
-
-    UAirship.getChannelID(function (channelID) {
-      console.log("Channel: " + channelID)
-    })
-
-    UAirship.setUserNotificationsEnabled(true);
-
 
     /*
       $ionicPlatform.registerBackButtonAction(function(event) {
@@ -207,7 +199,7 @@ console.log(navigator.onLine + "  connection state");
 
      // Enable to debug issues.
  // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
-
+/*
  var notificationOpenedCallback = function(jsonData) {
    console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
  };  window.plugins.OneSignal.init("7b688632-6872-22f5-a33d-6f51b80af61b",
@@ -219,6 +211,12 @@ console.log(navigator.onLine + "  connection state");
 window.plugins.OneSignal.getTags(function(tags){
   console.log('Tags Received: ' + JSON.stringify(tags));
     })
+	
+	*/
+	
+	//mo-enage start
+	var moe = new MoECordova.init();
+	moe.setExistingUser(true);
 
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);

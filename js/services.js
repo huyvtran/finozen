@@ -5,34 +5,63 @@ angular.module('app.services', [])
 }])
 
 .factory('accessUrlService', ['$resource',function($resource){
-	return $resource('http://205.147.99.55:8080/WealthWeb/ws/login/restLogin');
+	return $resource('https://finotrust.com/WealthWeb/ws/login/restLogin');
 }])
 
 /*For Sign up*/
 .factory('SignUpUrlService', ['$resource',function($resource){
-	return $resource('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/clientFcp');
+	return $resource('https://finotrust.com/WealthWeb/ws/clientFcps/clientFcp');
 }])
 
 .factory('getPerformanceService', ['$resource','$filter','$sessionStorage',function($resource,$filter,$sessionStorage){
 	var date = new Date();
     date = $filter('date')(date,'MM/dd/yyyy');
-	return $resource('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode='+$sessionStorage.SessionPortfolio+'&endDate='+date+'&noOfDays=40');
+	return $resource('https://finotrust.com/WealthWeb/ws/clientRepos/getPerfomRepo?pfolioCode='+$sessionStorage.SessionPortfolio+'&endDate='+date+'&noOfDays=40');
 }])
 
 /*For fetching the NAV webservices*/
   .factory('getNAVService', ['$resource','$sessionStorage',function($resource,$sessionStorage){
-    return $resource('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getInvReco?pfolioCode='+$sessionStorage.SessionPortfolio);
+    return $resource('https://finotrust.com/WealthWeb/ws/clientRepos/getInvReco?pfolioCode='+$sessionStorage.SessionPortfolio);
   }])
 
 
   /*For fetching the transaction webservices*/
   .factory('getReportService', ['$resource','$sessionStorage',function($resource,$sessionStorage){
-    return $resource('http://205.147.99.55:8080/WealthWeb/ws/clientRepos/getOrders?pfolioCode='+$sessionStorage.SessionPortfolio+'&noOfOrders=30');
+    return $resource('https://finotrust.com/WealthWeb/ws/clientRepos/getOrders?pfolioCode='+$sessionStorage.SessionPortfolio+'&noOfOrders=30');
   }])
 
 
+.factory('proofRedirectFactory', function() {
+  return {
+      name : ['bank','panImage','selfie','imageSelection','questions','signature','verifySuccess']
+  };
+})
 
-
+.factory('myService', function() {
+ return {
+ myFunction: function(proofStatus){
+	 var proofStatusValue=(proofStatus+100000).toString();
+var fromIndex=0;
+var totalIndex = [];
+var keepGoing= true;
+angular.forEach([1,2,3,4,5,6], function(value) {
+     if(keepGoing) {
+     var currentIndex = proofStatusValue.indexOf("0",fromIndex);
+    if(currentIndex == -1){
+      keepGoing = false;
+    }
+    else{
+		this.push(currentIndex);
+    }
+  }
+  fromIndex=currentIndex+1;
+  
+}, totalIndex);
+console.log(totalIndex +"     in service");
+return totalIndex;
+}
+ };
+ })
 /*Get data*/
 .factory('loginInfoService', ['accessUrlService','$q',function(accessUrlService,$q){
 	return  {
@@ -55,7 +84,7 @@ angular.module('app.services', [])
 //console.log();
 	var jsid=$sessionStorage.SessionIdstorage;
 	console.log(jsid + "  jsid");
-	 var change = $resource('http://205.147.99.55:8080/WealthWeb/ws/secure/fcpSecure/changePassword',{},{
+	 var change = $resource('https://finotrust.com/WealthWeb/ws/secure/fcpSecure/changePassword',{},{
         save:{
             method:'POST',
             headers:{
@@ -69,7 +98,7 @@ angular.module('app.services', [])
 
 	/*PAN image factory*/
 	.factory('panImageService',['$resource','$sessionStorage',function($resource){
-		var panupload = $resource('http://205.147.99.55:8080/WealthWeb/ws/kycs/kyphImg',{},{
+		var panupload = $resource('https://finotrust.com/WealthWeb/ws/kycs/kyphImg',{},{
 			save:{
 				method:'POST',
 					headers:{
@@ -83,7 +112,7 @@ angular.module('app.services', [])
 
 /*Bank Details*/
     .factory('bankDetailsService',['$resource',function($resource){
-      var bankUpload = $resource('http://205.147.99.55:8080/WealthWeb/ws/kycs/bankDetails',{},{
+      var bankUpload = $resource('https://finotrust.com/WealthWeb/ws/kycs/bankDetails',{},{
         save:{
           method:'POST',
           headers:{
@@ -125,7 +154,7 @@ angular.module('app.services', [])
 
 /*send MF orders*/
 .factory('mfOrderUrlService', ['$resource',function($resource){
-	var mfOrderRequest= $resource('http://205.147.99.55:8080/WealthWeb/ws/clientOrders/clientOrderMfBuy',{},{
+	var mfOrderRequest= $resource('https://finotrust.com/WealthWeb/ws/clientOrders/clientOrderMfBuy',{},{
 		save:{
 			method:'POST',
 		},
@@ -135,7 +164,7 @@ angular.module('app.services', [])
 
 /*send MF sell order*/
 .factory('mfSellUrlService', ['$resource',function($resource){
-	var mfSellRequest= $resource('http://205.147.99.55:8080/WealthWeb/ws/clientOrders/clientOrderMfSell',{},{
+	var mfSellRequest= $resource('https://finotrust.com/WealthWeb/ws/clientOrders/clientOrderMfSell',{},{
 		save:{
 			method:'POST',
 		},

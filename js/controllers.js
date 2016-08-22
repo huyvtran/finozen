@@ -28,35 +28,31 @@ win.addEventListener( "loadstop", function() {
     .controller('inviteCtrl', function($scope) {
 
     })
-    .controller('termsCtrl', function($scope,$sessionStorage) {
+    .controller('termsCtrl', function($scope,$sessionStorage,$state) {
 		console.log($sessionStorage.clientActive +"$sessionStorage.clientActive");
 $scope.test=false;
 		
-if($sessionStorage.clientActive=="Y") {$scope.test=true;}
+if($sessionStorage.clientActive=="A" || $sessionStorage.clientActive=="I" ) {$scope.test=true;}
 else{$scope.test=false;}
 
-/*
+
 $scope.activateAcc= function(){
 	$scope.test=false;
-	console.log($sessionStorage.clientResponse);
-	if($sessionStorage.clientResponse==1){
+	console.log($sessionStorage.docStatus);
+	if($sessionStorage.docStatus="00000" ||$sessionStorage.docStatus=="01111"){
 		$scope.test=false;
-		$scope.activateAccUrl="#/bank";
-		$scope.activateUrl="Bank";
-		console.log($scope.test  +  $scope.activateAccUrl  +  $scope.activateUrl);
+		$state.go('panImage');
 	}
-	else if($sessionStorage.clientResponse==2){
-		$scope.test=true;	
-	}
-	else if($sessionStorage.clientResponse==3){
+	else if($sessionStorage.docStatus=="10000" || $sessionStorage.docStatus==="10111"){
 		$scope.test=false;
-		$scope.activateAccUrl="#/panImage";
-		$scope.activateUrl="Pan Image";
-		console.log($scope.test  +  $scope.activateAccUrl  +  $scope.activateUrl);
+		$state.go('selfie');
+	}
+	else if($sessionStorage.docStatus=="11000"|| $sessionStorage.docStatus==="00011"){
+		$scope.test=false;
+		$state.go('addressProofImage');
 	}	
 }
-$scope.activateAcc();
-*/
+
 
     })
 
@@ -110,7 +106,6 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 						$scope.serverError="Please enter your full name";
 					}
 					else{
-						console.log(data.responseCode + "hdfdhskjhkjh");
 						$scope.serverError="Sign Up failed, please try again";
 					}
 				}
@@ -118,9 +113,10 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 					//saving the signUp data with similar name convention as per sign in controller
 					$sessionStorage.SessionPortfolio=(JSON.parse(data.jsonStr)).portfolioCode;
 					$sessionStorage.SessionClientCode=(JSON.parse(data.jsonStr)).clientCode;
-
-                    //$state.go('panVerify');    // new sign upflow
-					$state.go('reference');
+					$sessionStorage.stepCount=0;
+					$sessionStorage.disbledSkip=false;
+                    $state.go('bank');    // new sign upflow
+					//$state.go('reference');
 					$ionicLoading.hide();
                 }
             },function(error){
@@ -245,6 +241,8 @@ console.log($scope.loginDetails);
         console.log($sessionStorage.SessionFolioNums);
         $sessionStorage.folioNums = data.jsonStr[0].folioNums[0];
         $sessionStorage.clientType= data.jsonStr[0].clientType;
+		$sessionStorage.docStatus=data.jsonStr[0].docStatus;
+		console.log($sessionStorage.docStatus + "docStatus");
         $state.go('tabsController.summaryPage');
         $ionicLoading.hide();
         }
