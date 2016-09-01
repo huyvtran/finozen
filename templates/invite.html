@@ -5,24 +5,18 @@
 	<a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
 </div>
     <ion-content overflow-scroll="true" padding="true" class="has-header">
-      <div class="bar row  padding " ng-controller="contacts">
-        <a ion-track-tap="invite" style="bottom: -10px;" class="button button-full button-positive bar-footer invest_button_footer" ng-click="getcontacts()"  translate="TEXT_INVITE_BUTTON"></a>
-        <ion-list>
-          <ion-item ng-repeat="contact in contacts">
-            {{contact.displayName}}
-          </ion-item>
-        </ion-list>
-      </div>
-
       <div class="rows text-center">
 			<img src="img/1.png" alt="">
 			<h3 class="slide3">{{ 'TEXT_INVITE_HEADER2' | translate}}</h3>
 			<p translate="TEXT_INVITE_MESSAGE1"><sup>*</sup></p><br/>
 			<sup><sup>*</sup>{{'TEXT_INVITE_MESSAGE2' | translate}}<br/></sup>
+			<!--<button onclick="window.plugins.socialsharing.shareViaSMS({'message':'My cool message', 'subject':'The subject', 'image':'https://www.google.nl/images/srpr/logo4w.png'}, '0612345678,0687654321', function(msg) {console.log('ok: ' + msg)}, function(msg) {alert('error: ' + msg)})">share via SMS</button>-->
 		</div>
-	<div class="bar row  padding " ng-controller="socialShareController">
-	<a ion-track-tap="invite" style="bottom: -10px;" class="button button-full button-positive bar-footer invest_button_footer" ng-click="shareViaTwitter()"  translate="TEXT_INVITE_BUTTON"></a>
+<ion-footer-bar padding="false" style="padding:0;" ng-controller="socialShareController">
+	<div class="button-bar " style="padding:0;" >
+		<button ion-track-tap="invite" class="button button-positive" ng-click="shareViaContacts()" style="margin:1px;line-height: 44px;">Contacts</button>
+		<button ion-track-tap="invite" class="button button-positive" ng-click="shareViaTwitter()" style="margin:1px;line-height: 44px;">{{'TEXT_INVITE_BUTTON' | translate}}</button>
 	</div>
-
+</ion-footer-bar>
     </ion-content>
 </ion-view>

@@ -25,35 +25,41 @@ win.addEventListener( "loadstop", function() {
 }
     })
 
-    .controller('inviteCtrl', function($scope) {
+    .controller('navCtrlCtrl', function($scope,getNAVService) {
 
     })
-    .controller('termsCtrl', function($scope,$sessionStorage,$state) {
+    .controller('termsCtrl', function($scope,$sessionStorage,$state,myService,proofRedirectFactory) {
 		console.log($sessionStorage.clientActive +"$sessionStorage.clientActive");
-$scope.test=false;
-		
-if($sessionStorage.clientActive=="A" || $sessionStorage.clientActive=="I" ) {$scope.test=true;}
-else{$scope.test=false;}
-
+		console.log($sessionStorage.docStatus +"$sessionStorage.docStatus");
+		if($sessionStorage.clientActive=="T" && $sessionStorage.docStatus=="11111"){$scope.test=true;}
+		else{
+			if($sessionStorage.clientActive=="A"  || $sessionStorage.clientActive=='S') {$scope.test=true;}
+			else{$scope.test=false;}
+		}
 
 $scope.activateAcc= function(){
 	$scope.test=false;
+	if($sessionStorage.docStatus=="11111"){}
+	else{
+	if($sessionStorage.clientActive=="I" || $sessionStorage.clientActive=="N" ||  $sessionStorage.clientActive==null){$state.go('bank');}
+	else{
 	console.log($sessionStorage.docStatus);
-	if($sessionStorage.docStatus="00000" ||$sessionStorage.docStatus=="01111"){
-		$scope.test=false;
-		$state.go('panImage');
+	$sessionStorage.stepCount=-1;
+	var nextSteps=myService.myFunction($sessionStorage.docStatus);
+	var nextStepsUrl=proofRedirectFactory.name;
+	$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+	console.log($sessionStorage.stepCount + "step count");
+	console.log(nextSteps + "all next step");
+	console.log(nextStepsUrl[1] + "next step url");
+	console.log(nextStepsUrl[nextSteps[$sessionStorage.stepCount]] + "next state");
+	var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+	if(totalSteps==$sessionStorage.stepCount){$state.go(nextStepsUrl[6]);}
+	else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
 	}
-	else if($sessionStorage.docStatus=="10000" || $sessionStorage.docStatus==="10111"){
-		$scope.test=false;
-		$state.go('selfie');
-	}
-	else if($sessionStorage.docStatus=="11000"|| $sessionStorage.docStatus==="00011"){
-		$scope.test=false;
-		$state.go('addressProofImage');
-	}	
+
 }
 
-
+}
     })
 
     .controller('recentTransactionsCtrl', function($scope) {
@@ -98,7 +104,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
                 if(data.responseCode!="Cali_SUC_1030"){
 					$ionicLoading.hide();
 
-					if(data.responseCode=="Cali_ERR_2050"){
+					if(data.responseCode=="Cali_ERR_2050" || data.responseCode=="Cali_ERR_2066" ){
 
 						$scope.mobileError="Mobile number in use";
 					}
@@ -113,6 +119,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 					//saving the signUp data with similar name convention as per sign in controller
 					$sessionStorage.SessionPortfolio=(JSON.parse(data.jsonStr)).portfolioCode;
 					$sessionStorage.SessionClientCode=(JSON.parse(data.jsonStr)).clientCode;
+				
 					$sessionStorage.stepCount=0;
 					$sessionStorage.disbledSkip=false;
                     $state.go('bank');    // new sign upflow
@@ -213,7 +220,7 @@ console.log($scope.loginDetails);
     $sessionStorage.forgotPinPhone = $scope.mobileNumber;
     var ph=$sessionStorage.forgotPinPhone;
 
-    $http.get('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
+    $http.get('https://finotrust.com/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
     $state.go('forgot_pin');
     }
     else{
@@ -470,12 +477,20 @@ $scope.$broadcast("scroll.refreshComplete");
     })
 
     /*For social sharing*/
-    .controller('socialShareController', function($scope,$cordovaSocialSharing,$sessionStorage){
+    .controller('socialShareController', function($scope,$cordovaSocialSharing,$sessionStorage,$state){
 
 
-$scope.shareViaTwitter=function(){
-	window.plugins.socialsharing.share('Watch your money grow at FinoZen with just INR 100. Earn INR 100 for every referral. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code',null,null,'https://goo.gl/uAkHRa');
-}
+		$scope.shareViaContacts=function(){
+			$state.go('inviteContacts');	
+		}
+		$scope.closeViaContacts=function(){
+			var ref = cordova.InAppBrowser.open('http://google.com', '_blank', 'location=yes');
+			ref.addEventListener('loadstop', function(event) { if( event.url.match('facebook') ){ref.close();} });
+			//$state.go('inviteContacts');
+		}
+		$scope.shareViaTwitter=function(){
+			window.plugins.socialsharing.share('Watch your money grow at FinoZen with just INR 100. Earn INR 100 for every referral. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code',null,null,'https://goo.gl/uAkHRa');
+		}
      })
 
 

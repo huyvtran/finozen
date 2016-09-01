@@ -77,6 +77,12 @@ $ionicAppProvider.identify ({
       templateUrl: 'templates/signup.html',
       controller: 'signupCtrl'
     })
+                
+    .state('inviteContacts', {
+      url: '/inviteContacts',
+      templateUrl: 'templates/inviteContacts.html',
+      controller: 'contactsCtrl'
+    })
 
     .state('status', {
       url: '/status',
@@ -260,7 +266,8 @@ $ionicAppProvider.identify ({
     }) 
     .state('tour', {
       url: '/tour',         
-          templateUrl: 'templates/tour.html'    
+          templateUrl: 'templates/tour.html' ,
+          controller: 'navCtrlCtrl'    
     })  
 
     .state('feedback', {

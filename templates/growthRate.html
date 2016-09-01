@@ -1,33 +1,34 @@
 <ion-view cache-view="false" title="GrowthRate" class="summary" ng-controller="calculatorCtrl">
   <span ng-controller="googleanalytics"></span>
-        <div class="calculator padding" >
-			<div class="row padding" >
-				<div class="calcLabelDiv">
-					<p class="calcLabel">Investments</p>
+        <div class="calculator" >
+		
+			<div class="row returnsBlock">
+				<p class="padding returnsBlockText text-center" >Your expected returns<br/><br/> <span class="total_value expectedReturn">{{returnsAmount | currency:""}}</span></p>
+			</div>
+			<div class="padding" >
+				<div class="row" >
+					<div class="calcLabelDiv">
+						<p class="calcLabel">Investments</p>
+					</div>
+					<div class="calcInputDiv">
+						<input type="number" ng-model="investmentAmount">
+					</div>
 				</div>
-				<div class="calcInputDiv">
-					<input type="number" ng-model="investmentAmount">
+				<div class="row" >
+					<div class="calcLabelDiv">
+						<p class="calcLabel">No, of days</p>
+					</div>
+					<div class="calcInputDiv">
+						<input type="number" ng-model="totalDays">
+					</div>
+				</div>
+				<p class="error" style="margin:0;">{{errorInputs}}</p>
+				<div class="row padding text-center" >
+					<button  class="button button-positive invest_button" style="margin: auto;" ng-click="calculateValues()">calculate</button>
 				</div>
 			</div>
-			<div class="row padding" >
-				<div class="calcLabelDiv">
-					<p class="calcLabel">Returns</p>
-				</div>
-				<div class="calcInputDiv">
-					<input type="number" ng-model="returnsAmount" step="0.01">
-				</div>
-			</div>
-			<div class="row padding" >
-				<div class="calcLabelDiv">
-					<p class="calcLabel">No, of days</p>
-				</div>
-				<div class="calcInputDiv">
-					<input type="number" ng-model="totalDays">
-				</div>
-			</div>
-			<p class="error">{{errorInputs}}</p>
-			<div class="row padding text-center" >
-				<button  class="button button-positive invest_button" style="margin: auto;" ng-click="calculateValues()">calculate</button>
+			<div class="button-bar " style="padding-top:30px;padding-left:20px; font-size:15px;" >
+				<sup >*<sup>Based on scheme performance last year</sup></sup>
 			</div>
         </div>
 </ion-view>

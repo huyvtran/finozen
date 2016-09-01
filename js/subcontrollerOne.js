@@ -174,35 +174,29 @@ angular.module('app.subcontrollerOne', [])
     })
 //FAQ controllers END
 //TAB's DATA controller
-	.controller('calculatorCtrl', function($scope) {
+	.controller('calculatorCtrl', function($scope,$timeout) {
+		$scope.returnsAmount=0;
 		$scope.errorInputs="";
 		$scope.calculateValues=function(){
 			var count=0;
 			var investAmount=$scope.investmentAmount;
 			var returnsAmount=$scope.returnsAmount;
 			var totalDays=$scope.totalDays;
+			console.log(returnsAmount , investAmount);
 			var constant=8.3/(365*100);
 			if(investAmount==undefined){count++}
-			if(returnsAmount==undefined){count++}
 			if(totalDays==undefined){count++}
 			if(count>=2){
 				$scope.errorInputs="You should enter atleast two inputs";
+					$timeout(function(){
+						$scope.errorInputs="";
+					},5000)
 			}
 			else{
 				$scope.errorInputs="";
-				if(investAmount==undefined && returnsAmount!=undefined && totalDays!=undefined){
-					investAmount= Math.ceil((returnsAmount)/(totalDays*constant));
-					console.log("calculate investment amount");$scope.investmentAmount=investAmount;
-				}
-				else if(investAmount!=undefined && returnsAmount==undefined && totalDays!=undefined){
+
 					returnsAmount=(Math.ceil(investAmount*constant*totalDays*100))/100;
 					console.log("calculate returns amount");$scope.returnsAmount=returnsAmount;
-				}
-				else if(investAmount!=undefined && returnsAmount!=undefined && totalDays==undefined){
-					totalDays=Math.ceil(returnsAmount/(investAmount*constant) );
-					console.log("calculate no of days to invest");$scope.totalDays=totalDays;
-				}
-				
 				console.log( $scope.investmentAmount + "  " + $scope.returnsAmount+ "  " + $scope.totalDays);
 			}
 		}
@@ -253,38 +247,23 @@ $scope.xirrRate= function(){
     else {return $sessionStorage.netInv;
     }
   }
-/*  this is to be removed
-$scope.growthRate= $sessionStorage.xirr;
-$scope.growthRate= function(){
-	console.log("growth");
-	if($scope.growth != null)
-	 {
-		if($scope.growth <= 0){return 0;}
-			if($scope.growth >= 10){return 10;}
-			else if($scope.growth <= 7.5){return 7.5;}
-			else{return $scope.growth;}
+	$scope.gainToday=function(){
+		if($sessionStorage.gainToday == null){return 0;}
+		else {return $sessionStorage.gainToday;
+		}
 	}
-	else{return 7.5;}
-}
-  */
-
-        $scope.gainToday=function(){
-            if($sessionStorage.gainToday == null){return 0;}
-            else {return $sessionStorage.gainToday;
-            }
-        }
-        $scope.netGain=function(){
-            if($sessionStorage.gainTotal == null){return 0;}
-            else {return $scope.balance()-$scope.investAmount();
-            }
-        }
-        $scope.gainMonth=function(){
-            if($sessionStorage.gainMonth == null){return 0;}
-            else {return $sessionStorage.gainMonth;
-            }
-        }
-        console.log('entered');
-        $ionicLoading.show({
+	$scope.netGain=function(){
+		if($sessionStorage.gainTotal == null){return 0;}
+		else {return $scope.balance()-$scope.investAmount();
+		}
+	}
+	$scope.gainMonth=function(){
+		if($sessionStorage.gainMonth == null){return 0;}
+		else {return $sessionStorage.gainMonth;
+		}
+	}
+	console.log('entered');
+	$ionicLoading.show({
       template: 'Loading...'
     });
 
@@ -297,11 +276,11 @@ $scope.growthRate= function(){
         $ionicLoading.hide();
   $interval(function () {
 		$rootScope.$broadcast('flip',{});
-		},3000);
+		},5000);
     })
 
  // NAV Calculator controller
-.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup,$ionicLoading,$ionicPlatform) {
+.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup,$ionicLoading,$ionicPlatform,$timeout) {
 		 
   var finalComputedVal;
   	if($sessionStorage.clientType=="GO"){
@@ -398,12 +377,17 @@ $scope.growthRate= function(){
             mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums},function(data){
                 if(data.responseCode=="Cali_SUC_1030"){
 					$ionicLoading.hide();
-                    window.open('https://finotrust.com/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_self');
+                    var ref = cordova.InAppBrowser.open('https://finotrust.com/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_blank', 'location=no');
+					ref.addEventListener('loadstop', function(event) { if( event.url.match('pymt/bdesk') ){
+						$timeout(function () {
+							ref.close();
+						},4000)
+					;} });
+					$state.go('tabsController.SummaryPage');
                 }
 				else{
 					$ionicLoading.hide();
 				}
-
             },function(error){
 				$ionicLoading.hide();
 				var log=$ionicPopup.alert({
@@ -513,7 +497,7 @@ $state.go('reference');
 		$scope.otpnotdone=function(){
 			$state.go('pre_verification');
 			}
-		$scope.withdrawSuccess = function() {console.log("here"); history.go(-2);}
+		$scope.withdrawSuccess = function() {console.log("here"); $state.go('tabsController.summaryPage');}
     })
 
 .controller('schemeText', function($scope,$sessionStorage) {
@@ -545,26 +529,22 @@ $state.go('reference');
 	}
 })
 .controller('verifySuccessCtrl', function($scope,$sessionStorage,$state,myService,proofRedirectFactory) {
-	
-	$scope.initial1= function(){
-		$sessionStorage.clientResponse=Math.floor(Math.random() * 2)+2;
-		$scope.initial();
-	}
+
 	$scope.notnowFunction= function(){
-		//$sessionStorage.clientResponse=Math.floor(Math.random() * 3)+1;
-		console.log($sessionStorage.clientResponse);
-	if ($sessionStorage.clientResponse==1){
+		console.log($sessionStorage.clientActive);
+	if ($sessionStorage.clientActive=='I' || $sessionStorage.clientActive=='N' || $sessionStorage.clientActive==null ){
 		$state.go("sliders");
 	}	
-	else if ($sessionStorage.clientResponse==2){
+	else if ($sessionStorage.clientActive=='A' ||$sessionStorage.clientActive=='Q'){
 		$state.go("sliders");
 	}
-	else if ($sessionStorage.clientResponse==3){
+	else if ($sessionStorage.clientActive=='P' || $sessionStorage.clientActive=='T' ){
 		$sessionStorage.disbledSkip=true;
+		console.log($sessionStorage.docStatus + " I am here")
 		var nextStepsUrl=proofRedirectFactory.name;
-		var totalSteps=myService.myFunction(00001).length;
+		var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
 		if($sessionStorage.stepCount==undefined){$state.go(nextStepsUrl[1]);}
-		else{$sessionStorage.stepCount=-1;  var nextSteps=myService.myFunction(00001);
+		else{$sessionStorage.stepCount=-1;  var nextSteps=myService.myFunction($sessionStorage.docStatus);
 		$sessionStorage.stepCount=$sessionStorage.stepCount+1;
 		console.log($sessionStorage.stepCount + "step count");
 		console.log(nextSteps + "next step");
@@ -575,23 +555,21 @@ $state.go('reference');
 	}
 }
 	$scope.investNowFunction= function(){
-		//$sessionStorage.clientResponse=Math.floor(Math.random() * 3)+1;
-		console.log($sessionStorage.clientResponse);
-	if ($sessionStorage.clientResponse==1){
+		console.log($sessionStorage.clientActive);
+	if ($sessionStorage.clientActive=='I' || $sessionStorage.clientActive=='N' || $sessionStorage.clientActive==null ){
 		$state.go("bank");
 	}	
-	else if ($sessionStorage.clientResponse==2){
+	else if ($sessionStorage.clientActive=='P' || $sessionStorage.clientActive=='T'){
 		$state.go("sliders");
 	}
-	else if ($sessionStorage.clientResponse==3){
+	else if ($sessionStorage.clientActive=='A' ||$sessionStorage.clientActive=='Q' ){
 		$sessionStorage.disbledSkip=true;
-		$state.go("sliders");
+		$state.go("tour");
 	}
 }
 	$scope.initial= function(){
-		//$sessionStorage.clientResponse=Math.floor(Math.random() * 3)+1;
-		console.log($sessionStorage.clientResponse);
-	if ($sessionStorage.clientResponse==1){
+		//$sessionStorage.clientActive=Math.floor(Math.random() * 3)+1;
+	if ($sessionStorage.clientActive=='I' || $sessionStorage.clientActive=='N' || $sessionStorage.clientActive==null ){
 		
 		$scope.statusImage="img/step1.jpg";
 		$scope.para1="In active add text here";
@@ -599,17 +577,17 @@ $state.go('reference');
 		$scope.notNow ="Not Now";
 		$scope.startInvesting="Activate Now";
 	}	
-	else if ($sessionStorage.clientResponse==2){
+	else if ($sessionStorage.clientActive=='A' ||$sessionStorage.clientActive=='Q'){
 		$scope.statusImage="img/step3.jpg";
-		$scope.para1="Partial active  add text here";
+		$scope.para1="Active  add text here";
 		$scope.clientType="active";
 		$scope.startInvesting="Start Investing";
 		$scope.notNow="Know more";
 	}
-	else if ($sessionStorage.clientResponse==3){
+	else if ($sessionStorage.clientActive=='P' ||$sessionStorage.clientActive=='T'){
 		$sessionStorage.disbledSkip=true;
 		$scope.statusImage="img/step3.jpg";
-		$scope.para1="Under process  add text here";
+		$scope.para1="PARTIAL ACTIVE  add text here";
 		$scope.clientType="Under process";
 		$scope.notNow="Activate Now";
 		$scope.startInvesting="Start Investing";

@@ -1,0 +1,22 @@
+<ion-view title="Invite" class="invite">
+<div class="bar bar-header fino_head" ng-controller="popupController as popup">
+<button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepback()"></button>
+	<div class="h1 title"><p class="head_title"><span id="title" translate="TEXT_INVITE_HEADER"></span></p></div>
+	<a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
+</div>
+    <ion-content overflow-scroll="true" padding="false" class="has-header" style="margin-top:10px;">
+        <ion-list >
+          <ion-item ng-repeat="contact in contacts">
+			<div class="row">
+			  <div class="col col-75">{{contact.displayName}}</div>
+			  <div class="col button button-positive" ng-click="selectedIndex($index)">Invite</div>
+			</div>
+          </ion-item>
+        </ion-list>
+    </ion-content>
+	<ion-footer-bar padding="false" style="padding:0;" ng-controller="socialShareController">
+	<div class="button-bar " style="padding:0;" >
+		<button ion-track-tap="invite" class="button-full button button-positive" ng-click="shareViaTwitter()" style="margin:1px;line-height: 44px;">{{'TEXT_INVITE_BUTTON' | translate}}</button>
+	</div>
+</ion-footer-bar>
+</ion-view>

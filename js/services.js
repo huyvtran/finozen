@@ -33,13 +33,15 @@ angular.module('app.services', [])
 
 .factory('proofRedirectFactory', function() {
   return {
-      name : ['bank','panImage','selfie','imageSelection','questions','signature','verifySuccess']
+      name : ['panImage','selfie','imageSelection','questions','signature','verifySuccess']
   };
 })
 
 .factory('myService', function() {
  return {
  myFunction: function(proofStatus){
+	 /*
+	 console.log(proofStatus)
 	 var proofStatusValue=(proofStatus+100000).toString();
 var fromIndex=0;
 var totalIndex = [];
@@ -59,6 +61,36 @@ angular.forEach([1,2,3,4,5,6], function(value) {
 }, totalIndex);
 console.log(totalIndex +"     in service");
 return totalIndex;
+
+
+
+
+*/
+
+var values = [1,2,3,4,5];
+//var xx=(proofStatus+100000).toString();
+xx=proofStatus;
+var ss=0;
+var totalIndex = [];
+var keepGoing= true;
+angular.forEach(values, function(value) {
+  //this.push(': xzczx ' + value);
+     if(keepGoing) {
+     var a = xx.indexOf("0",ss);
+    if(a == -1){
+      keepGoing = false;
+    }
+    else{
+    this.push(a);
+    }
+  }
+  ss=a+1;
+  
+}, totalIndex);
+console.log(totalIndex +"     in service");
+return totalIndex;
+
+
 }
  };
  })
@@ -101,6 +133,7 @@ return totalIndex;
 		var panupload = $resource('https://finotrust.com/WealthWeb/ws/kycs/kyphImg',{},{
 			save:{
 				method:'POST',
+				method:'POST',
 					headers:{
 					'Content-Type' :'application/json'
 				}
@@ -125,7 +158,7 @@ return totalIndex;
 
       /*Questions factory*/
   .factory('questionsService',['$resource',function($resource){
-    var bankUpload = $resource('http://205.147.99.55:8080/WealthWeb/ws/kycs/addlKyc',{},{
+    var bankUpload = $resource('https://finotrust.com/WealthWeb/ws/kycs/addlKyc',{},{
       save:{
         method:'POST',
         headers:{

@@ -62,7 +62,15 @@
 		<span class="check_agree item-checkbox item_checkbox">By clicking Login, I agree to <a href="#" onclick="window.open('http://finozen.com/t&c.html', '_self')"> T & C</a> and <a href="#" onclick="window.open('http://finozen.com/policy.html', '_self', 'location=true')">Privacy Policy</a></span>
 	</div>
 </form>
-<!--    <div ng-controller="openBrowser">
+<!--  		
+
+
+		<button  ng-controller="socialShareController" class="button button-positive" ng-click="closeViaContacts()" style="margin:1px;line-height: 44px;">Contacts</button>
+		<button onclick="window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null , null , function() {console.log('share ok')}, function(errormsg){alert(errormsg)})">msg via WhatsAp</button>
+		<button onclick="window.plugins.socialsharing.shareViaWhatsAppToReceiver(9949899497, 'Message via WhatsApp', null , null , function() {console.log('share ok')})">msg via WhatsApp</button>
+		<button onclick="cordova.InAppBrowser.open('https://google.com', '_self', 'location=yes')">inApp</button>
+
+<div ng-controller="openBrowser">
       <button class = "button" ng-click = "openBrowser()">OPEN BROWSER</button>
 
  <button class = "button" ng-click = "closeBrowser()">Close BROWSER</button>

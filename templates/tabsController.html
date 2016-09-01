@@ -20,7 +20,7 @@
 		
     </ion-slide-box>
  </ion-content>
-    <div class="bar bar-footer row invest_button_footer" style="width: 100%; background:#E5ECF4 ;" ng-controller="transactionAccessCtrl">
+<div class="bar bar-footer row invest_button_footer" ng-hide="keyboardOpen" style="width: 100%; background:#E5ECF4 ;" ng-controller="transactionAccessCtrl">
   <div ion-track-tap="withdraw" ng-click="addId()" class="col invest_button"><a href="#"  ng-click="withdrawCheck()"   class="button button-clear button-positive  ion-ios-minus-empty invest_btn red" ></a><br /><span class="invest_bottom_button red" translate="BUTTON_LANG_WITH"></span></div>
   <div ion-track-tap="invest" class="col invest_button"><a href="#" ng-click="investCheck()" class="button button-clear button-positive  ion-ios-plus-empty invest_btn green" ></a><br /><span class="invest_bottom_button green" translate="TEXT_LANG_HEADER"></span></div>
 </div>
@@ -47,7 +47,7 @@
                  <ion-item nav-clear menu-close  href="#/contact" menu-close=""><i class="icon ion-ios-email-outline"></i>{{'TEXT_LANG_MENU3'|translate}}</ion-item>
                  <ion-item nav-clear menu-close  href="#/aboutUs"  menu-close=""><i class="icon ion-ios-person-outline"></i>{{'TEXT_LANG_MENU4'|translate}}</ion-item>
                 <!-- <ion-item nav-clear menu-close  href="#" ng-controller="languageCtrl" ng-click="changeLan()" menu-close=""><i class="icon ion-ios-email-outline"></i>Language {{'TEXT_LANG_MENU2'|translate}}</ion-item>-->
-                 <ion-item nav-clear menu-close ng-controller="termsCtrl" ng-hide="test" ng-click="activateAcc()" menu-close=""><i class="icon ion-android-checkmark-circle"></i>{{'TEXT_LANG_MENU5'|translate}}</ion-item>
+                 <ion-item nav-clear menu-close ng-controller="termsCtrl"  href="#" ng-hide="test" ng-click="activateAcc()" menu-close=""><i class="icon ion-android-checkmark-circle"></i>{{'TEXT_LANG_MENU5'|translate}}</ion-item>
                  <ion-item nav-clear menu-close  ng-controller="signoutCtrl"  href="#page7" menu-close="" ng-click="signOut()"><i class="icon ion-power"></i>{{'TEXT_LANG_MENU6'|translate}}</ion-item>
             </ion-list>
     </ion-content>

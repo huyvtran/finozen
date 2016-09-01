@@ -47,20 +47,12 @@ angular.module('app.subcontrollerTwo', [])
 			$scope.diasbleSkip=$sessionStorage.disbledSkip;
 //			$scope.addressRetake=function(){ window.location.reload(true);}
             $scope.selfieGo=function(){
-				$sessionStorage.stepCount=0;
-				
-		var nextSteps=myService.myFunction(00001);
-		var nextStepsUrl=proofRedirectFactory.name;
-		$sessionStorage.stepCount=$sessionStorage.stepCount+1;
-		console.log($sessionStorage.stepCount + "step count");
-		console.log(nextSteps + "next step");
-		console.log(nextStepsUrl[1] + "next step url");
-		console.log(nextStepsUrl[nextSteps[$sessionStorage.stepCount]] + "next state");
-		var totalSteps=myService.myFunction(00001).length;
-		if(totalSteps==$sessionStorage.stepCount){$sessionStorage.clientResponse=2;$state.go(nextStepsUrl[6]);}
-			else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
-						 
-					
+				var nextSteps=myService.myFunction($sessionStorage.docStatus);
+				var nextStepsUrl=proofRedirectFactory.name;
+				$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+				var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+				if(totalSteps==$sessionStorage.stepCount){$state.go(nextStepsUrl[5]);}
+				else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}	
 				//$state.go('selfie');
 			}
 			$scope.takeit1=function(){
@@ -115,20 +107,15 @@ angular.module('app.subcontrollerTwo', [])
                       })
                     }
                     else {
-                      $ionicLoading.hide();
-                          confirmation++;
-                      console.log(confirmation+'the value of the click is');
-                        // $state.go("selfie");
-						 		
-		var nextSteps=myService.myFunction(10111);
-		var nextStepsUrl=proofRedirectFactory.name;
-		$sessionStorage.stepCount=$sessionStorage.stepCount+1;
-		console.log($sessionStorage.stepCount + "step count");
-		var totalSteps=myService.myFunction(00001).length;
-		if(totalSteps==$sessionStorage.stepCount){$sessionStorage.clientResponse=2;$state.go(nextStepsUrl[6]);}
-			else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
-						 
-						 
+						$ionicLoading.hide();
+						confirmation++;
+						var nextSteps=myService.myFunction($sessionStorage.docStatus);
+						var nextStepsUrl=proofRedirectFactory.name;
+						$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+						console.log($sessionStorage.stepCount + "step count");
+						var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+						if(totalSteps==$sessionStorage.stepCount){$state.go(nextStepsUrl[5]);}
+						else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
                     }
                 },function(error){
                   $ionicLoading.hide();
@@ -159,18 +146,14 @@ angular.module('app.subcontrollerTwo', [])
 			$scope.signature = sigImg;
 		}
 		$scope.signatureFunction=function(){
-			$sessionStorage.clientActive="Q";
 			//$state.go('verifySuccess');
 			
-		var nextSteps=myService.myFunction(00001);
-		var totalSteps=myService.myFunction(00001).length;
+		var nextSteps=myService.myFunction($sessionStorage.docStatus);
+		var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
 		var nextStepsUrl=proofRedirectFactory.name;
-		$sessionStorage.stepCount=$sessionStorage.stepCount+1;
-		console.log($sessionStorage.stepCount + "    step count");
-		console.log(nextSteps + "    next step");
-		console.log(nextStepsUrl + "    next step url");		
-		var totalSteps=myService.myFunction(00001).length;
-		if(totalSteps==$sessionStorage.stepCount){$sessionStorage.clientResponse=2;$state.go(nextStepsUrl[6]);}
+		$sessionStorage.stepCount=$sessionStorage.stepCount+1;		
+		var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+		if(totalSteps==$sessionStorage.stepCount){$state.go(nextStepsUrl[5]);}
 			else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
 			}
 		$scope.signUpload = function() {
@@ -197,16 +180,14 @@ angular.module('app.subcontrollerTwo', [])
                   });
                 }
                 else {
-                  $ionicLoading.hide();
-                  confirmation++;
-				  if(confirmation>=7){
-					$sessionStorage.clientActive="Q";
-					$state.go("verifySuccess");//after sign image
-				  }
-				  else{
-					$sessionStorage.clientActive="Q";
-					$state.go("verifySuccess");
-				  }
+					$ionicLoading.hide();
+					confirmation++;
+					var nextSteps=myService.myFunction($sessionStorage.docStatus);
+					var nextStepsUrl=proofRedirectFactory.name;
+					$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+					var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+					if(totalSteps==$sessionStorage.stepCount){$state.go(nextStepsUrl[5]);}
+					else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
                 }
             },function(error){
               $ionicLoading.hide();
@@ -226,12 +207,11 @@ angular.module('app.subcontrollerTwo', [])
     .controller('selfieImageCTRL',function(panImageService,myService,proofRedirectFactory,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
 		$scope.diasbleSkip=$sessionStorage.disbledSkip;
 		$scope.addressSelect=function(){
-			//$state.go('imageSelection'); 
-		var nextSteps=myService.myFunction(00001);
-		var nextStepsUrl=proofRedirectFactory.name;
-		$sessionStorage.stepCount=$sessionStorage.stepCount+1;
-		var totalSteps=myService.myFunction(00001).length;
-		if(totalSteps==$sessionStorage.stepCount){$sessionStorage.clientResponse=2;$state.go(nextStepsUrl[6]);}
+			var nextSteps=myService.myFunction($sessionStorage.docStatus);
+			var nextStepsUrl=proofRedirectFactory.name;
+			$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+			var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+			if(totalSteps==$sessionStorage.stepCount){$state.go(nextStepsUrl[5]);}
 			else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
 		}
 		$scope.selfieImage=function(){
@@ -285,10 +265,14 @@ angular.module('app.subcontrollerTwo', [])
                   });
                 }
                 else {
-                  $ionicLoading.hide();
-                  confirmation++;
-                  console.log(confirmation+'value for submit check');
-                  $state.go("imageSelection");//after selfie image
+					$ionicLoading.hide();
+					confirmation++;
+					var nextSteps=myService.myFunction($sessionStorage.docStatus);
+					var nextStepsUrl=proofRedirectFactory.name;
+					$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+					var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+					if(totalSteps==$sessionStorage.stepCount){$state.go(nextStepsUrl[5]);}
+					else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
                 }
             },function(error){
               $ionicLoading.hide();
@@ -343,31 +327,31 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 
 		$scope.question=function(){
 			//$state.go('signature');
-		var nextSteps=myService.myFunction(00001);
-		var nextStepsUrl=proofRedirectFactory.name;
-		$sessionStorage.stepCount=$sessionStorage.stepCount+1;
-		var totalSteps=myService.myFunction(00001).length;
-		if(totalSteps==$sessionStorage.stepCount){$sessionStorage.clientResponse=2;$state.go(nextStepsUrl[6]);}
+			var nextSteps=myService.myFunction($sessionStorage.docStatus);
+			var nextStepsUrl=proofRedirectFactory.name;
+			$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+			var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+			if(totalSteps==$sessionStorage.stepCount){$state.go(nextStepsUrl[5]);}
 			else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
 		}
       $scope.questionUpload = function(){
 		$ionicLoading.show({templateUrl:"templates/loading.html"});
-        var questUpload=JSON.parse(JSON.stringify({}));
+		var questUpload=JSON.parse(JSON.stringify({}));
 		questUpload.kyphCode = $sessionStorage.SessionClientCode;
-        //questUpload.kyphCode="CRN23911";
-        questUpload.income=$scope.clientIncome.type; // income level from 31-36
-        questUpload.occup=$scope.clientOccupation.type; // for the occupation
-        questUpload.pep=$scope.clientPEP.type; //for the pep status either Y or N
-        questUpload.resStatus="Individual"; // for the resdential status hardcoding it to individual
-        questUpload = JSON.stringify(questUpload);
-	console.log($scope.clientIncome.type + " clientIncome");
-	console.log($scope.clientPEP.type + " clientPEP");
-	console.log($scope.clientOccupation.type + " clientOccupation");
-	console.log(questUpload + " questUpload");
+		//questUpload.kyphCode="CRN23911";
+		questUpload.income=$scope.clientIncome.type; // income level from 31-36
+		questUpload.occup=$scope.clientOccupation.type; // for the occupation
+		questUpload.pep=$scope.clientPEP.type; //for the pep status either Y or N
+		questUpload.resStatus="Individual"; // for the resdential status hardcoding it to individual
+		questUpload = JSON.stringify(questUpload);
+		console.log($scope.clientIncome.type + " clientIncome");
+		console.log($scope.clientPEP.type + " clientPEP");
+		console.log($scope.clientOccupation.type + " clientOccupation");
+		console.log(questUpload + " questUpload");
 
         questionsService.save(questUpload,function(data){
-			$ionicLoading.hide();
-			$state.go('signature');
+		//	$ionicLoading.hide();			//comment this line if api is working
+		//	$state.go('signature');			//comment this line if api is working
 		/*	if(data.responseCode !== "Cali_SUC_1030") {
 				$ionicLoading.hide();
 				var refer=$ionicPopup.alert({
@@ -378,13 +362,18 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 					$window.location.reload(true)
 				});
 			}
-			else{
+			else{*/
 				$ionicLoading.hide();
-				$state.go('signature');
-			}*/
+				var nextSteps=myService.myFunction($sessionStorage.docStatus);
+				var nextStepsUrl=proofRedirectFactory.name;
+				$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+				var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+				if(totalSteps==$sessionStorage.stepCount){$state.go(nextStepsUrl[5]);}
+				else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+			//}
 			},function(error){
-				$ionicLoading.hide();
-				$state.go('signature');
+				$ionicLoading.hide();			//comment this line if api is working
+				$state.go('signature');			//comment this line if api is working
 				/*var refresh=$ionicPopup.alert({
                   title: 'Please try again',
                    template: 'Unable to submit request'
@@ -399,32 +388,38 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
     )
 
     /*for address proof image*/
-    .controller('addressImageSelectionCTRL',function(panImageService,myService,proofRedirectFactory,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
-		$scope.diasbleSkip=$sessionStorage.disbledSkip;
-				$scope.takeImageSkip=function(){
-					//$state.go('bank');
-		var nextSteps=myService.myFunction(00001);
+.controller('addressImageSelectionCTRL',function(panImageService,myService,proofRedirectFactory,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading){
+	$scope.diasbleSkip=$sessionStorage.disbledSkip;
+	$scope.takeImageSkip=function(){
+		//$state.go('bank');
+		var nextSteps=myService.myFunction($sessionStorage.docStatus);
 		var nextStepsUrl=proofRedirectFactory.name;
 		$sessionStorage.stepCount=$sessionStorage.stepCount+1;
-		var totalSteps=myService.myFunction(00001).length;
-		if(totalSteps==$sessionStorage.stepCount){$sessionStorage.clientResponse=2;$state.go(nextStepsUrl[6]);}
-			else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
-					
-					}
-		$scope.takeImage=function(){
-			if($scope.choice!==undefined) {
-			//console.log($scope.choice + "   selected choice");
-			$sessionStorage.addressChoice=$scope.choice;
-			$state.go('addressProofImageSingle');
-			}
+		var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+		if(totalSteps==$sessionStorage.stepCount){$state.go(nextStepsUrl[5]);}
+		else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+	}
+	$scope.takeImage=function(){
+		if($scope.choice!==undefined) {
+		//console.log($scope.choice + "   selected choice");
+		$sessionStorage.addressChoice=$scope.choice;
+		$state.go('addressProofImageSingle');
 		}
-	})
+	}
+})
 
-	.controller('addressFrontCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
+	.controller('addressFrontCTRL',function(panImageService,myService,proofRedirectFactory,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
 		$scope.diasbleSkip=$sessionStorage.disbledSkip;
 		//console.log($sessionStorage.addressChoice + 'fromwhat page your coming');
 				//$scope.addressRetake=function(){ window.location.reload(true);}
-				$scope.bank=function(){$state.go('bank');}
+				$scope.bank=function(){
+					var nextSteps=myService.myFunction($sessionStorage.docStatus);
+					var nextStepsUrl=proofRedirectFactory.name;
+					$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+					var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+					if(totalSteps==$sessionStorage.stepCount){$state.go(nextStepsUrl[5]);}
+					else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+				}
 				if($sessionStorage.addressChoice == 'AA'){$scope.cimageFront="img/AADHAR_FRONT.jpg"; $scope.cimageBack="img/AADHAR_BACK.jpg";}
 				else if($sessionStorage.addressChoice == 'PP'){$scope.cimageFront="img/Passport_front.jpg"; }
 				else if($sessionStorage.addressChoice == 'VO'){$scope.cimageFront="img/VOTER_FRONT.jpg";}
@@ -477,10 +472,15 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
             panImageService.save(uploadaddress,function(data){
                 console.log(data);
 
-                if(data.responseCode == "Cali_SUC_1030") {
-                    $ionicLoading.hide();
-					if($sessionStorage.addressChoice == 'GA' ){
-						$state.go('bank');
+					if(data.responseCode == "Cali_SUC_1030") {
+						$ionicLoading.hide();
+						if($sessionStorage.addressChoice == 'GA' ){
+						var nextSteps=myService.myFunction($sessionStorage.docStatus);
+						var nextStepsUrl=proofRedirectFactory.name;
+						$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+						var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+						if(totalSteps==$sessionStorage.stepCount){$state.go(nextStepsUrl[5]);}
+						else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
 					}
 					else{
 						$state.go('addressProofImage');
@@ -513,7 +513,7 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 })
 
 
-	.controller('addressBackCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
+	.controller('addressBackCTRL',function(panImageService,myService,proofRedirectFactory,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
 		//console.log($sessionStorage.addressChoice + 'fromwhat page your coming');
 		$scope.bank=function(){$state.go('bank');}
 				if($sessionStorage.addressChoice == 'AA'){$scope.cimageBack="img/AADHAR_BACK.jpg";}
@@ -540,10 +540,6 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 			  correctOrientation:true
 			};
 
-			console.log(options);
-
-
-
 			$cordovaCamera.getPicture(options).then(function(imageData) {
 			  //$scope.addressBackData = imageData;
 			  $scope.cimage2 = "data:image/jpeg;base64," + imageData;
@@ -567,10 +563,15 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
             uploabackdaddress = JSON.stringify(uploabackdaddress);
             console.log(uploabackdaddress + 'pan json data');
             panImageService.save(uploabackdaddress,function(data){
+				console.log(data);
                 if(data.responseCode == "Cali_SUC_1030") {
-
                     $ionicLoading.hide();
-					$state.go("bank");
+					var nextSteps=myService.myFunction($sessionStorage.docStatus);
+					var nextStepsUrl=proofRedirectFactory.name;
+					$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+					var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+					if(totalSteps==$sessionStorage.stepCount){$state.go(nextStepsUrl[5]);}
+					else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
                 }
                 else {
                   $ionicLoading.hide();
@@ -653,16 +654,16 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 			console.log(bank);
                bankDetailsService.save(bank,function(data){
                  if(data.responseCode == "Cali_SUC_1030") {
-                   $ionicLoading.hide();
-				//   $sessionStorage.documentStatus=data.; // document status received on bank submittion of bank details  (have to update value according to response)
-				
-				   
+                   $ionicLoading.hide(); 
+				  $sessionStorage.docStatus=data.jsonStr.docStatus; // document status received on bank submittion of bank details  (have to update value according to response)
+				  $sessionStorage.clientActive=data.jsonStr.clientActive;
                    $state.go('verifySuccess');//after selfie image
                  }
 
                  else {
 				 console.log(data.responseCode);
 					$ionicLoading.hide();
+					console.log("  response");
                    var refer= $ionicPopup.alert({
                      title: 'Upload Error',
                      template: 'Please try again'
@@ -717,16 +718,13 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 	}
              }
 		$scope.bankSkip=function(){
-			//console.log( "service return")	;
-		    
-			$sessionStorage.clientResponse=1;
+   
 			$state.go('verifySuccess');
 
 		}
 		$scope.bankTest=function(){
-			totalSteps=(myService.myFunction(00001) ).length;
+			totalSteps=(myService.myFunction($sessionStorage.docStatus) ).length;
 			console.log(totalSteps + "service return")	;
-			$sessionStorage.clientResponse=3;
 			$state.go('verifySuccess');
 
 		}
@@ -836,7 +834,7 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
           $scope.forget5.mobileNumber = JSON.stringify($sessionStorage.forgotPinPhone);
           var forgotpinPass = JSON.stringify($scope.forget5);
           console.log(forgotpinPass + 'string');
-          $http.post('http://205.147.99.55:8080/WealthWeb/ws/clientFcps/setNewPassword', forgotpinPass).success(function(data){
+          $http.post('https://finotrust.com/WealthWeb/ws/clientFcps/setNewPassword', forgotpinPass).success(function(data){
             console.log(data+'response');
             if(data.responseCode=="Cali_SUC_1030"){
 
@@ -979,11 +977,12 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
     })
 
       //contacts
-      .controller('contacts',function($scope,$window,$ionicPopup,$cordovaContacts){
-        $scope.getcontacts=function(){
+      .controller('contactsCtrl',function($scope,$window,$ionicPopup,$cordovaContacts,$ionicLoading,$sessionStorage){
+		  $ionicLoading.show({templateUrl:"templates/loading.html"});
           $cordovaContacts.find({filter:''}).then(function(result){
+			$ionicLoading.hide();
             $scope.contacts=result;
-            console.log(contacts+ "contacts");
+            console.log($scope.contacts.phoneNumbers+ "contacts");
           },
           function(error){
             var con=$ionicPopup.alert({
@@ -994,7 +993,22 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
               $window.reload(true);
             });
           })
-        }
+		  
+		  $scope.selectedIndex=function(valu){
+			console.log($scope.contacts[valu].phoneNumbers[0].value + " contact value selected");
+
+			window.plugins.socialsharing.shareViaSMS({'message':'Watch your money grow at FinoZen with just INR 100. Earn INR 100 for every referral. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code', 'subject':'The subject', 'image':'https://www.google.nl/images/srpr/logo4w.png'}, $scope.contacts[valu].phoneNumbers[0].value, $scope.contacts[valu].phoneNumbers[0].value, function(msg) {console.log('ok: ' + msg)}, function(msg) {console.log('error: ' + msg)})
+		  }
+		  
+		  $scope.pickContact=function(pickUp){
+					console.log('Error: ' + $scope.contacts.phoneNumbers);
+					console.log('Error: ' + $scope.contacts.phoneNumbers);
+			  navigator.contacts.pickContact(function(contact){
+					console.log('The following contact has been selected:' + JSON.stringify(contact));
+				},function(err){
+					console.log('Error: ' + err);
+				});
+		  }
       })
 
 

@@ -19,9 +19,10 @@ angular.module('app', ['ionic','ionic.service.core','app.controllers', 'app.subc
     $translateProvider.translations('2', {
 	selectedLanguage:'Select your desired Language English',
 	tabTitle1:'SUMMARY',
-	tabTitle2:'GROWTH RATE',
+	tabTitle2:'CALCULATOR',
+	tabTitleFlip:'GROWTH RATE',
 	tabTitle3:'TRANSACTIONS',
-	TEXT_LANG_BALANCE:'Current Balance',
+	TEXT_LANG_BALANCE:'CURRENT BALANCE',
 	TEXT_LANG_NETGAIN:'Net Gains',
 	TEXT_LANG_NETGAINTODAY:'Net Gains Today',
 	TEXT_LANG_INVEST:'Net Investment',
@@ -109,10 +110,15 @@ angular.module('app', ['ionic','ionic.service.core','app.controllers', 'app.subc
     KeepaliveProvider.interval(2); // in seconds
 })
 
-.run(function($ionicPlatform, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout,$localStorage) {
+.run(function($ionicPlatform, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaKeyboard,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout,$localStorage) {
   $ionicPlatform.ready(function() {
 
-
+$rootScope.$watch(function() {
+return $cordovaKeyboard.isVisible();
+}, function(value) {
+	console.log(value);
+$rootScope.keyboardOpen = value;
+});
       Idle.watch();
 //$localStorage.language=0;
                 if(!navigator.onLine) {
@@ -215,9 +221,10 @@ window.plugins.OneSignal.getTags(function(tags){
 	*/
 	
 	//mo-enage start
-	var moe = new MoECordova.init();
+/*	var moe = new MoECordova.init();
 	moe.setExistingUser(true);
 
+*/
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -225,7 +232,6 @@ window.plugins.OneSignal.getTags(function(tags){
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-
 
 
 
