@@ -266,8 +266,7 @@ $ionicAppProvider.identify ({
     }) 
     .state('tour', {
       url: '/tour',         
-          templateUrl: 'templates/tour.html' ,
-          controller: 'navCtrlCtrl'    
+          templateUrl: 'templates/tour.html'  
     })  
 
     .state('feedback', {

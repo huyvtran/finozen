@@ -381,9 +381,12 @@ $scope.xirrRate= function(){
 					ref.addEventListener('loadstop', function(event) { if( event.url.match('pymt/bdesk') ){
 						$timeout(function () {
 							ref.close();
-						},4000)
+						},4000);
 					;} });
-					$state.go('tabsController.SummaryPage');
+					$timeout(function () {
+							$state.go('tabsController.recentTransactions');
+						},1000);
+					
                 }
 				else{
 					$ionicLoading.hide();
