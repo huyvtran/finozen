@@ -8,13 +8,13 @@
 		<p style="padding: 20px 0;">Please enter the net banking enabled bank details. All transactions, including withdrawals are permtted only through your personal registered bank account.</p>
 <form name="bankDetailsTest" novalidate="" >
 		<label class="item item-input" >
-			<input type="text" name="panNo" placeholder="Enter Your PAN Number" ng-model="panNo" required />
+			<input type="text" name="panNo" placeholder="Enter Your PAN Number" uppercase-only ng-model="panNo" required />
 		</label>
 		<label class="item item-input" >
 			<input type="text" name="accNo" placeholder="Enter Bank Account Number" ng-model="accNumber" required />
 		</label>
 		<label class="item item-input" >
-			<input type="text" name="ifsc" placeholder="Enter IFSC Code" ng-model="IFSC_code" minlength="11" required maxlength="11" />
+			<input type="text" name="ifsc" placeholder="Enter IFSC Code"  uppercase-only ng-model="IFSC_code" minlength="11" required maxlength="11" />
 		</label>
 		
 
