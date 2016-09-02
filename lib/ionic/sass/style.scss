@@ -726,7 +726,9 @@ fader {
   -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
-
+.flip-container1 {
+    min-width: 163px;
+}
 .calculator{
 	width: 100%;
 	.returnsBlock{
