@@ -33,7 +33,7 @@ angular.module('app.services', [])
 
 .factory('proofRedirectFactory', function() {
   return {
-      name : ['panImage','selfie','imageSelection','questions','signature','verifySuccess']
+      name : ['panImage','selfie','imageSelection','addressProofImage','signature','verifySuccess']
   };
 })
 

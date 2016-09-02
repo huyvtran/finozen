@@ -474,17 +474,12 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 
 					if(data.responseCode == "Cali_SUC_1030") {
 						$ionicLoading.hide();
-						if($sessionStorage.addressChoice == 'GA' ){
 						var nextSteps=myService.myFunction($sessionStorage.docStatus);
 						var nextStepsUrl=proofRedirectFactory.name;
 						$sessionStorage.stepCount=$sessionStorage.stepCount+1;
 						var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
 						if(totalSteps==$sessionStorage.stepCount){$state.go(nextStepsUrl[5]);}
 						else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
-					}
-					else{
-						$state.go('addressProofImage');
-					}
                 }
                 else {
                     console.log("Error");
