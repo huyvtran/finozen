@@ -38,8 +38,7 @@ $ionicAppProvider.identify ({
          
      .state('invite', {
 		url: '/invite',
-		templateUrl: 'templates/invite.html',
-		controller: 'inviteCtrl'
+		templateUrl: 'templates/invite.html'
     })     
      .state('contact', {
 		url: '/contact',
@@ -68,8 +67,7 @@ $ionicAppProvider.identify ({
     })
      .state('successPage', {
 		url: '/success',
-		templateUrl: 'templates/payment_success.html',
-		controller: ''
+		templateUrl: 'templates/payment_success.html'
     })
                 
     .state('signup', {
@@ -180,11 +178,12 @@ $ionicAppProvider.identify ({
           controller: ''     
     })
     
+
              .state('confirm', {
       url: '/confirm',         
-          templateUrl: 'templates/confirm.html',
-          controller: ''     
+          templateUrl: 'templates/confirm.html'
     })
+	
              .state('verifySuccess', {
       url: '/verifySuccess',         
           templateUrl: 'templates/success.html',
@@ -268,13 +267,12 @@ $ionicAppProvider.identify ({
       url: '/tour',         
           templateUrl: 'templates/tour.html'  
     })  
-
     .state('feedback', {
       url: '/feedback',         
           templateUrl: 'templates/feedback.html'   
     })  
  
-     
+   
     ;
 
   // if none of the above states are matched, use this as the fallback

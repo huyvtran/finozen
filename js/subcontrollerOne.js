@@ -381,7 +381,7 @@ $scope.xirrRate= function(){
 					ref.addEventListener('loadstop', function(event) { if( event.url.match('pymt/bdesk') ){
 						$timeout(function () {
 							ref.close();
-						},4000);
+						},10000);
 					;} });
 					$timeout(function () {
 							$state.go('tabsController.recentTransactions');
@@ -431,6 +431,34 @@ $scope.xirrRate= function(){
   };
         var mid=$sessionStorage.orderId;//dynamic id
     })
+.controller('statusPageCtrl', function($scope ,$sessionStorage,$state,proofRedirectFactory,myService){
+	if($sessionStorage.clientActive=='I'){
+		$scope.investNowFunction= function(){$state.go('invest');}
+		$scope.notnowFunction= function(){
+			var nextStepsUrl=proofRedirectFactory.name;
+			var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+	//		var nextSteps=myService.myFunction($sessionStorage.docStatus);
+			$sessionStorage.stepCount=0;
+			$state.go(nextStepsUrl[$scope.nextSteps[$sessionStorage.stepCount]]);
+		}
+		$scope.docsToSubmit=['Photo of your PAN card ', 'Your selfie with PAN Card', 'Photo of your Address Proof Front', 'Photo of your AddressProof back', 'Your Signature'];
+		$scope.nextSteps=myService.myFunction($sessionStorage.docStatus);
+		console.log($scope.nextSteps);
+	}
+	else{
+		$scope.investNowFunction= function(){$state.go('invest');}
+		$scope.notnowFunction= function(){
+			var nextStepsUrl=proofRedirectFactory.name;
+			var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+	//		var nextSteps=myService.myFunction($sessionStorage.docStatus);
+			$sessionStorage.stepCount=0;
+			$state.go(nextStepsUrl[$scope.nextSteps[$sessionStorage.stepCount]]);
+		}
+		$scope.docsToSubmit=['Photo of your PAN card ', 'Your selfie with PAN Card', 'Photo of your Address Proof Front', 'Photo of your AddressProof back', 'Your Signature'];
+		$scope.nextSteps=myService.myFunction($sessionStorage.docStatus);
+		console.log($scope.nextSteps);
+	}
+})
 .controller('goOneStep', function($scope,$ionicHistory ,$sessionStorage){
 	$scope.goOneStepback=function(){
 		history.go(-1);
@@ -441,56 +469,6 @@ $scope.xirrRate= function(){
 		history.go(-1);
 	}
 
-})
-
-  /*for testing only*/
-.controller('openBrowser', function($scope,$cordovaInAppBrowser,$rootScope,$state) {
-   var options = {
-      location: 'no',
-      clearcache: 'yes',
-      toolbar: 'no'
-    };
-
-
-    $scope.openBrowser = function() {
-console.log("enter");
-   document.addEventListener('deviceready',function () {
-    $cordovaInAppBrowser.open('http://ngcordova.com', '_system', options)
-      .then(function(event) {
-        // success
-		console.log("success");
-      })
-      .catch(function(event) {
-        // error
-		console.log("error");
-      });
-    $cordovaInAppBrowser.close();
-
-  }, false);
-     $rootScope.$on('$cordovaInAppBrowser:loadstart', function(e, event){
-console.log("success");
-  });
-
-   }
-
-
-
-   $scope.closeBrowser= function() {
-    //$cordovaInAppBrowser.close();
-$state.go('addressProofImage');
-   }
-
-
-
-   $scope.closeBrowser2= function() {
-    //$cordovaInAppBrowser.close();
-$state.go('reference');
-   }
-
-
-
-
-    //
 })
 
     .controller('panVerifyCtrl', function($scope,$state) {
@@ -531,75 +509,124 @@ $state.go('reference');
 		$scope.schemeLinkText=" to read more about Reliance Liquid Fund Treasury Plan (IP) – G on moneycontrol.";
 	}
 })
-.controller('verifySuccessCtrl', function($scope,$sessionStorage,$state,myService,proofRedirectFactory) {
 
+.controller('verifySuccessCtrl', function($scope,$sessionStorage,$state,myService,proofRedirectFactory,$timeout,$window) {
+console.log(confirmation+"   last step");
+	$timeout(function(){
+		//$window.location.reload(true)
+		$scope.initial();
+	},3000)
 	$scope.notnowFunction= function(){
-		console.log($sessionStorage.clientActive);
-	if ($sessionStorage.clientActive=='I' || $sessionStorage.clientActive=='N' || $sessionStorage.clientActive==null ){
-		$state.go("sliders");
-	}	
-	else if ($sessionStorage.clientActive=='A' ||$sessionStorage.clientActive=='Q'){
-		$state.go("sliders");
-	}
-	else if ($sessionStorage.clientActive=='P' || $sessionStorage.clientActive=='T' ){
-		$sessionStorage.disbledSkip=true;
-		console.log($sessionStorage.docStatus + " I am here")
-		var nextStepsUrl=proofRedirectFactory.name;
-		var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
-		if($sessionStorage.stepCount==undefined){$state.go(nextStepsUrl[1]);}
-		else{$sessionStorage.stepCount=-1;  var nextSteps=myService.myFunction($sessionStorage.docStatus);
-		$sessionStorage.stepCount=$sessionStorage.stepCount+1;
-		console.log($sessionStorage.stepCount + "step count");
-		console.log(nextSteps + "next step");
-		console.log(nextStepsUrl[1] + "next step url");
-		console.log(nextStepsUrl[nextSteps[$sessionStorage.stepCount]] + "next state");
-		if(totalSteps==$sessionStorage.stepCount){$state.go(nextStepsUrl[6]);}
-	else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}}
+	if(confirmation==1){$state.go("tour");}
+		//console.log($sessionStorage.clientActive);
+	else{
+		if ($sessionStorage.clientActive=='I' || $sessionStorage.clientActive=='N' || $sessionStorage.clientActive==null ){
+			$state.go("tour");
+		}	
+		else if ($sessionStorage.clientActive=='T'){
+			$state.go("tour");
+		}
+		else if ($sessionStorage.clientActive=='P' || $sessionStorage.clientActive=='Q' ){
+			if($sessionStorage.docStatus !="11111"){
+				$sessionStorage.disbledSkip=true;
+				console.log($sessionStorage.docStatus + " I am here")
+				var nextStepsUrl=proofRedirectFactory.name;
+				var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+				$sessionStorage.stepCount=-1;  var nextSteps=myService.myFunction($sessionStorage.docStatus);
+				$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+				console.log($sessionStorage.stepCount + "step count");
+				console.log(nextSteps + "next step");
+				console.log(nextStepsUrl[1] + "next step url");
+				console.log(nextStepsUrl[nextSteps[$sessionStorage.stepCount]] + "next state");
+				if(nextSteps[$sessionStorage.stepCount]==2 && nextSteps[$sessionStorage.stepCount+1]==3){$sessionStorage.stepCount=$sessionStorage.stepCount+1; $state.go('imageSelection');}
+				else if(nextSteps[$sessionStorage.stepCount]==2 || nextSteps[$sessionStorage.stepCount]==3){$state.go('imageSelection');}
+				else{
+				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
+					else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+				}	
+			}
+		}
 	}
 }
 	$scope.investNowFunction= function(){
-		console.log($sessionStorage.clientActive);
-	if ($sessionStorage.clientActive=='I' || $sessionStorage.clientActive=='N' || $sessionStorage.clientActive==null ){
-		$state.go("bank");
-	}	
-	else if ($sessionStorage.clientActive=='P' || $sessionStorage.clientActive=='T'){
-		$state.go("sliders");
-	}
-	else if ($sessionStorage.clientActive=='A' ||$sessionStorage.clientActive=='Q' ){
-		$sessionStorage.disbledSkip=true;
-		$state.go("tour");
-	}
+		if(confirmation==1){$state.go("tour");}
+		//	console.log($sessionStorage.clientActive);
+		else{
+			if ($sessionStorage.clientActive=='I' || $sessionStorage.clientActive=='N' || $sessionStorage.clientActive==null ){
+				$state.go("bank");
+			}	
+			else if ($sessionStorage.clientActive=='T'){
+				$state.go("tour");
+			}
+			else if ($sessionStorage.clientActive=='P' || $sessionStorage.clientActive=='Q' ){
+				$state.go("tour");
+			}
+		}
 }
 	$scope.initial= function(){
-		//$sessionStorage.clientActive=Math.floor(Math.random() * 3)+1;
-	if ($sessionStorage.clientActive=='I' || $sessionStorage.clientActive=='N' || $sessionStorage.clientActive==null ){
-		
-		$scope.statusImage="img/step1.jpg";
-		$scope.para1="In active add text here";
-		$scope.clientType="In active";
-		$scope.notNow ="Not Now";
-		$scope.startInvesting="Activate Now";
-	}	
-	else if ($sessionStorage.clientActive=='A' ||$sessionStorage.clientActive=='Q'){
-		$scope.statusImage="img/step3.jpg";
-		$scope.para1="Active  add text here";
-		$scope.clientType="active";
-		$scope.startInvesting="Start Investing";
-		$scope.notNow="Know more";
+		console.log(confirmation+ "    confirmation")
+			//$sessionStorage.clientActive=Math.floor(Math.random() * 3)+1;
+		if(confirmation==1){
+			//$scope.disbledSkip=true;
+			$scope.statusImage="img/steplast.jpg";
+			$scope.para1="Congratulations! We have received your details, we will update you within 12 hours on account activation";
+			$scope.para2="You can start investing now. Happy Investing!";
+			$scope.notNow="Know more";
+			$scope.startInvesting="Start Investing";
+		}
+		else{
+			if ($sessionStorage.clientActive=='I' || $sessionStorage.clientActive=='N' || $sessionStorage.clientActive== null ){
+				
+				$scope.statusImage="img/step1.jpg";
+				$scope.para1="Congratulations! We have received and verified your details and you can start investing by submitting your PAN number and Bank details.";
+				$scope.para2="Please click on 'Activate Now' to provide these details";
+				$scope.notNow ="Not Now";
+				$scope.startInvesting="Activate Now";
+			}	
+			else if ($sessionStorage.clientActive=='T'){
+				//$scope.disbledSkip=true;
+				$scope.statusImage="img/steplast.jpg";
+				$scope.para1="Congratulations! We have received and verified your details, your FinoZen account is now active.";
+				$scope.para2="You can start investing now. Happy Investing!";
+				$scope.startInvesting="Start Investing";
+				$scope.notNow="Know more";
+			}
+			else if ($sessionStorage.clientActive=='P'){
+				//$scope.disbledSkip=false;
+				$scope.statusImage="img/step1.jpg";
+				$scope.para1="Congratulations! We have received and verified your details and you can start investing.";
+				$scope.para2="However, we will need additional details to process your investments, Please click on 'Activate Now' to provide these details";
+				//$scope.para3="Pan Card.";
+				//$scope.para4="Address proof (all the acceptable documents).";
+				//$scope.para2="We will update you within 12 hours on account activation. Happy Investing!";
+				$scope.notNow="Activate Now";
+				$scope.startInvesting="Start Investing";
+			}
+			else if ($sessionStorage.clientActive=='Q'){
+				if ($sessionStorage.docStatus=='11111'){
+					//$scope.disbledSkip=true;
+					$scope.statusImage="img/steplast.jpg";
+					$scope.para1="Congratulations! We have received your details, we will update you within 12 hours on account activation";
+					$scope.para2="You can start investing now. Happy Investing!";
+					$scope.notNow="Know more";
+					$scope.startInvesting="Start Investing";
+				}
+				else{
+					//$scope.disbledSkip=false;
+					$scope.statusImage="img/step3.jpg";
+					$scope.para1="One of your details is pending for account activation.";
+					$scope.para2="Please click on 'Activate Now' to provide that detail.";
+					$scope.notNow="Activate Now";
+					$scope.startInvesting="Start Investing";
+				}
+			}
+		}
 	}
-	else if ($sessionStorage.clientActive=='P' ||$sessionStorage.clientActive=='T'){
-		$sessionStorage.disbledSkip=true;
-		$scope.statusImage="img/step3.jpg";
-		$scope.para1="PARTIAL ACTIVE  add text here";
-		$scope.clientType="Under process";
-		$scope.notNow="Activate Now";
-		$scope.startInvesting="Start Investing";
-	}
-}
 
 $scope.initial();
 		
 })
+
 .controller('menuOverlay', function($scope, $window, $ionicSideMenuDelegate) {
 
   $scope.width = function () {

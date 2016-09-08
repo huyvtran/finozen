@@ -1,24 +1,22 @@
-<ion-view title="Feedback">
-<div class="change_password feedback">
+<ion-view title="Success" class="verification" >
 <div class="bar bar-header fino_head" ng-controller="popupController as popup">
-	<a class="button button-clear ion-android-arrow-back " href="#/page14/page15"></a>
-	<div class="h1 title"><p class="head_title"><span id="title">FEEDBACK</span></p></div>
+	<div class="h1 title"><p class="head_title"><span id="title">ACCOUNT ACTIVATION</span></p></div>
 	<a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
 </div>
-    <ion-content overflow-scroll="false" padding="false" class="has-header feedback_body">
-		<div class="list">
-			<p>We’re actively trying to improve FinoZen to better cater to your needs. Tap a star to rate. Leave us a note too, if u can!</p>
+    <ion-content overflow-scroll="false" padding="false" class="has-header">
+		<div class="container">
+			<div class="rows"><img src="img/steplast.jpg" class="steps" /></div>
+			<div class="rows padding"><br/><br/>
+				<p class="padding">Congratulations! We have received your details, we will update you within 12 hours on account activation</p>
+				<p class="padding">You can start investing now. Happy Investing!</p>
+			</div>
 		</div>
-<!--		<div class="list item">
-		  <img src="img/star.png">
-		</div>
-		-->
-		<div class="input_list">
-		  <textarea placeholder="Comments - Max 260 characters" maxlength="260"></textarea>
-		  <input type="submit" value="SUBMIT">
-		</div>
-
     </ion-content>
 
-</div>
+<ion-footer-bar padding="false">
+	<div class="button-bar " style="padding:0;">
+		<a class="button button-positive" href="#/tour" style="margin:1px;line-height: 44px;" >Know More</a>
+		<a class="button button-positive" href="#/tour" style="margin:1px; line-height: 44px;" >Start Investing</a>
+	</div>
+</ion-footer-bar>
 </ion-view>

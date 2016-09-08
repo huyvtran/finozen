@@ -12,30 +12,21 @@ $scope.dd=function(){
     })
 
     .controller('growthRateCtrl', function($scope,$rootScope) {
-$scope.terms = function()
-{
-	//window.open('http://finozen.com/t&c.html','_self');
-	var win = window.open( "http://finozen.com", "_system" );
-win.addEventListener( "loadstop", function() {
 
-        win.close();
-});
-	//window.open = cordova.InAppBrowser.open;
-	//var ref = cordova.InAppBrowser.open('http://finozen.com/t&c.html', '_self', 'location=yes');
-}
     })
 
-    .controller('navCtrlCtrl', function($scope,getNAVService) {
+    .controller('inviteCtrl', function($scope,getNAVService) {
 
     })
     .controller('termsCtrl', function($scope,$sessionStorage,$state,myService,proofRedirectFactory) {
 		console.log($sessionStorage.clientActive +"$sessionStorage.clientActive");
 		console.log($sessionStorage.docStatus +"$sessionStorage.docStatus");
-		if($sessionStorage.clientActive=="T" && $sessionStorage.docStatus=="11111"){$scope.test=true;}
-		else{
-			if($sessionStorage.clientActive=="A"  || $sessionStorage.clientActive=='S') {$scope.test=true;}
-			else{$scope.test=false;}
+		$scope.test=false;
+		if($sessionStorage.docStatus!="11111"){
+			if($sessionStorage.clientActive=="Q" || $sessionStorage.clientActive=="P" ){$scope.test=false;}
+			else{$scope.test=true;}
 		}
+		
 
 $scope.activateAcc= function(){
 	$scope.test=false;
@@ -48,13 +39,16 @@ $scope.activateAcc= function(){
 	var nextSteps=myService.myFunction($sessionStorage.docStatus);
 	var nextStepsUrl=proofRedirectFactory.name;
 	$sessionStorage.stepCount=$sessionStorage.stepCount+1;
-	console.log($sessionStorage.stepCount + "step count");
-	console.log(nextSteps + "all next step");
-	console.log(nextStepsUrl[1] + "next step url");
-	console.log(nextStepsUrl[nextSteps[$sessionStorage.stepCount]] + "next state");
 	var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
-	if(totalSteps==$sessionStorage.stepCount){$state.go(nextStepsUrl[6]);}
-	else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+	//if(totalSteps==$sessionStorage.stepCount){confirmation=1;   $state.go(nextStepsUrl[5]);}
+	//else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+	
+	if(nextSteps[$sessionStorage.stepCount]==2 && nextSteps[$sessionStorage.stepCount+1]==3){$sessionStorage.stepCount=$sessionStorage.stepCount+1; $state.go('imageSelection');}
+	else if(nextSteps[$sessionStorage.stepCount]==2 || nextSteps[$sessionStorage.stepCount]==3){$state.go('imageSelection');}
+	else{
+		if(totalSteps==$sessionStorage.stepCount){$state.go("feedback");}
+		else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+	}	
 	}
 
 }
@@ -119,10 +113,10 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 					//saving the signUp data with similar name convention as per sign in controller
 					$sessionStorage.SessionPortfolio=(JSON.parse(data.jsonStr)).portfolioCode;
 					$sessionStorage.SessionClientCode=(JSON.parse(data.jsonStr)).clientCode;
-				
+					$sessionStorage.clientType=(JSON.parse(data.jsonStr)).clientType;
 					$sessionStorage.stepCount=0;
 					$sessionStorage.disbledSkip=false;
-                    $state.go('bank');    // new sign upflow
+                    $state.go('sliders');    // new sign upflow
 					//$state.go('reference');
 					$ionicLoading.hide();
                 }
@@ -208,7 +202,6 @@ $scope.loginDetails.login=$scope.mobileNumber;
 $scope.loginDetails.password=$scope.digitPin;
 console.log($scope.loginDetails);
       $sessionStorage.loginData=$scope.loginDetails;
-
 	  console.log($localStorage.loginData);
        $scope.sendSignIn();
         }
@@ -219,7 +212,6 @@ console.log($scope.loginDetails);
   if(signinformData.$valid){
     $sessionStorage.forgotPinPhone = $scope.mobileNumber;
     var ph=$sessionStorage.forgotPinPhone;
-
     $http.get('https://finotrust.com/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
     $state.go('forgot_pin');
     }
@@ -278,21 +270,34 @@ console.log($scope.loginDetails);
 .controller('transactionAccessCtrl', function($scope,$sessionStorage,$state){
 	$scope.investCheck=function(){
 	console.log($sessionStorage.clientActive + " add money");
-		if($sessionStorage.clientActive=="N") {
+	console.log($sessionStorage.clientActive + " add money");
+	if($sessionStorage.clientActive=="N" || $sessionStorage.clientActive=="I" || $sessionStorage.clientActive== 'null' ||$sessionStorage.clientActive==undefined ){
+		$state.go("verifySuccess");
+	}
+	else{
+		  if($sessionStorage.clientActive=="P" || $sessionStorage.clientActive=="Q") {
 			$state.go("status");
 		  }
 		  else {
-			  $state.go("invest");
-		  }		
+			$state.go("invest");
+		  }
+	}
+		
 	}
 	$scope.withdrawCheck=function(){
 	console.log($sessionStorage.clientActive + " add money");
-		if($sessionStorage.clientActive=="N") {
+	if($sessionStorage.clientActive=="N" || $sessionStorage.clientActive=="I" || $sessionStorage.clientActive== 'null' ||$sessionStorage.clientActive==undefined ){
+		$state.go("verifySuccess");
+	}
+	else{
+		  if($sessionStorage.clientActive=="P" || $sessionStorage.clientActive=="Q") {
 			$state.go("status");
 		  }
 		  else {
 			$state.go("withdraw");
-		  }		
+		  }
+	}
+			
 	}
 
 })
@@ -482,11 +487,6 @@ $scope.$broadcast("scroll.refreshComplete");
 
 		$scope.shareViaContacts=function(){
 			$state.go('inviteContacts');	
-		}
-		$scope.closeViaContacts=function(){
-			var ref = cordova.InAppBrowser.open('http://google.com', '_blank', 'location=yes');
-			ref.addEventListener('loadstop', function(event) { if( event.url.match('facebook') ){ref.close();} });
-			//$state.go('inviteContacts');
 		}
 		$scope.shareViaTwitter=function(){
 			window.plugins.socialsharing.share('Watch your money grow at FinoZen with just INR 100. Earn INR 100 for every referral. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code',null,null,'https://goo.gl/uAkHRa');

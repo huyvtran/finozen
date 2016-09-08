@@ -5,13 +5,13 @@
 	<div class="h1 title"><p class="head_title"><span id="title">ACCOUNT ACTIVATION</span></p></div>
 	<a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
 </div>
-    <ion-content overflow-scroll="true" padding="false" class="has-header">
+    <ion-content overflow-scroll="false" padding="false" class="has-header">
 		<div class="container">
-			<div class="rows"><img src="img/step3.jpg" class="steps" /></div>
+			<div class="rows"><img ng-src={{statusImage}} class="steps" /></div>
 			<div class="rows padding"><br/><br/>
-				<p class="text-center">CONGRATULATIONS!</p><br/>
 				<p class="padding">{{para1}}</p>
-				<p class="padding"><sup>*Business hours Mon-Sat 10 A.M to 9 P.M.</sup></p>
+				<!--<p class="padding" style="padding: 0px 10px; margin: 0px;" ng-hide="disbledSkip"><b>1. {{para3}}<br/>2. {{para4}}</b></p>-->
+				<p class="padding">{{para2}}</p>
 			</div>
 		</div>
     </ion-content>
