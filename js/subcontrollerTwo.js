@@ -53,7 +53,7 @@ angular.module('app.subcontrollerTwo', [])
 				var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
 				console.log(nextSteps[$sessionStorage.stepCount]  + " next state" );
 				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
-				else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}	
+				else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
 				//$state.go('selfie');
 			}
 			$scope.takeit1=function(){
@@ -109,7 +109,7 @@ angular.module('app.subcontrollerTwo', [])
                     }
                     else {
 						$ionicLoading.hide();
-						
+
 						var nextSteps=myService.myFunction($sessionStorage.docStatus);
 						var nextStepsUrl=proofRedirectFactory.name;
 						$sessionStorage.stepCount=$sessionStorage.stepCount+1;
@@ -208,7 +208,7 @@ angular.module('app.subcontrollerTwo', [])
 			else{
 				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
 				else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
-			}	
+			}
 		}
 		$scope.selfieImage=function(){
 		//$scope.selfie="img/no_leaves.png";
@@ -274,7 +274,7 @@ angular.module('app.subcontrollerTwo', [])
 					else{
 						if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
 						else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
-					}	
+					}
                 }
             },function(error){
               $ionicLoading.hide();
@@ -401,8 +401,8 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 		//if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
 		//else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
 		console.log(nextSteps[$sessionStorage.stepCount]  + " next state" );
-		
-		
+
+
 		if(nextSteps[$sessionStorage.stepCount]==2 || nextSteps[$sessionStorage.stepCount]==3){
 			$sessionStorage.stepCount=$sessionStorage.stepCount+1;
 			if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
@@ -410,7 +410,7 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 		}
 		else{
 				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
-			else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}	
+			else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
 		}
 
 	}
@@ -537,14 +537,14 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
 			else{
 				$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);
-				
+
 			}
 		}
 		else{
 				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
-			else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}			
+			else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
 		}
-		
+
 		}
 				if($sessionStorage.addressChoice == 'AA'){$scope.cimageBack="img/AADHAR_BACK.jpg";}
 				else if($sessionStorage.addressChoice == 'PP'){$scope.cimageBack="img/Passport_back.jpg";}
@@ -606,19 +606,19 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
 						else{
 							$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);
-							
+
 						}
 					}
 					else{
 				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
-						else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}			
+						else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
 					}
 					/*
 				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
 					else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
 
 					*/
-					
+
 					/*
 					var nextSteps=myService.myFunction($sessionStorage.docStatus);
 					var nextStepsUrl=proofRedirectFactory.name;
@@ -710,7 +710,7 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 			console.log(bank);
                bankDetailsService.save(bank,function(data){
                  if(data.responseCode == "Cali_SUC_1030") {
-                   $ionicLoading.hide(); 
+                   $ionicLoading.hide();
 				  $sessionStorage.docStatus=data.jsonStr.docStatus; // document status received on bank submittion of bank details  (have to update value according to response)
 				  $sessionStorage.clientActive=data.jsonStr.clientActive;
                    $state.go('verifySuccess');//after selfie image
@@ -774,7 +774,7 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 	}
              }
 		$scope.bankSkip=function(){
-   
+
 			$state.go('verifySuccess');
 
 		}
@@ -890,7 +890,7 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
           $scope.forget5.mobileNumber = JSON.stringify($sessionStorage.forgotPinPhone);
           var forgotpinPass = JSON.stringify($scope.forget5);
           console.log(forgotpinPass + 'string');
-          $http.post('https://finotrust.com/WealthWeb/ws/clientFcps/setNewPassword', forgotpinPass).success(function(data){
+          $http.post('http://52.66.96.81/WealthWeb/ws/clientFcps/setNewPassword', forgotpinPass).success(function(data){
             console.log(data+'response');
             if(data.responseCode=="Cali_SUC_1030"){
 
@@ -1035,7 +1035,9 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
       //contacts
       .controller('contactsCtrl',function($scope,$window,$ionicPopup,$cordovaContacts,$ionicLoading,$sessionStorage){
 		  $ionicLoading.show({templateUrl:"templates/loading.html"});
-  
+
+        //hasPhoneNumber: true shows only the contacts who have a phone number
+
           $cordovaContacts.find({filter:'',hasPhoneNumber:true}).then(function(result){
 			$ionicLoading.hide();
             $scope.contacts=result;
@@ -1050,8 +1052,8 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
               $window.reload(true);
             });
           })
-		  
-		 /* 
+
+		 /*
 		     navigator.contactsPhoneNumbers.list(function(result) {
       console.log(result.length + ' contacts found');
       for(var i = 0; i < result.length; i++) {
@@ -1064,15 +1066,15 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
    }, function(error) {
       console.error(error);
    });
-   
+
    */
-		  
+
 		  $scope.selectedIndex=function(valu){
 			console.log($scope.contacts[valu].phoneNumbers[0].value + " contact value selected");
 
 			window.plugins.socialsharing.shareViaSMS({'message':'Watch your money grow at FinoZen with just INR 100. Earn INR 100 for every referral. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code', 'subject':'The subject', 'image':'https://www.google.nl/images/srpr/logo4w.png'}, $scope.contacts[valu].phoneNumbers[0].value, $scope.contacts[valu].phoneNumbers[0].value, function(msg) {console.log('ok: ' + msg)}, function(msg) {console.log('error: ' + msg)})
 		  }
-		  
+
 		  $scope.pickContact=function(pickUp){
 					console.log('Error: ' + $scope.contacts.phoneNumbers);
 					console.log('Error: ' + $scope.contacts.phoneNumbers);

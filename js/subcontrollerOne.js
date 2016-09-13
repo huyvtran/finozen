@@ -33,7 +33,7 @@ angular.module('app.subcontrollerOne', [])
             }, 5000);
 		}
 	$scope.plzWait2();
-		
+
 	})
 //FAQ controllers START
     .controller('FundsMethodCtrl', function($scope) {
@@ -66,7 +66,7 @@ angular.module('app.subcontrollerOne', [])
     .controller('languageCtrl', function($scope,$translate,$state,$localStorage) {
 		//console.log($localStorage.language + " language selected");
 		$scope.changeLan=function(){$translate.use("1");}
-		
+
 	})
     .controller('AccountfaqCtrl', function($scope) {
         $scope.groups = [];
@@ -164,7 +164,7 @@ angular.module('app.subcontrollerOne', [])
                 $scope.shownGroup = null;
             } else {
                 $scope.shownGroup = group;
-                
+
             }
         };
         $scope.isGroupShown = function(group) {
@@ -209,7 +209,7 @@ angular.module('app.subcontrollerOne', [])
 	else if($sessionStorage.clientType=="PL") {
 		$scope.schemeNamep = "PLATINUM";
   }
-	
+
 $scope.faq = function(){$state.go('faq')}
 $scope.policy = function()
 {
@@ -281,7 +281,7 @@ $scope.xirrRate= function(){
 
  // NAV Calculator controller
 .controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup,$ionicLoading,$ionicPlatform,$timeout) {
-		 
+
   var finalComputedVal;
   	if($sessionStorage.clientType=="GO"){
 		console.log($sessionStorage.clientType+ "  gold")
@@ -342,9 +342,9 @@ $scope.xirrRate= function(){
           $scope.sendMfOrder()
 				  */
 				  // till here
-				  
+
 				  //Nach status redirection
-				  
+
 				else if($sessionStorage.nachStatus !='A'){
 				        $ionicLoading.show({templateUrl:"templates/loading.html"});
 						  console.log('its entering the nach mandate');
@@ -377,7 +377,7 @@ $scope.xirrRate= function(){
             mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums},function(data){
                 if(data.responseCode=="Cali_SUC_1030"){
 					$ionicLoading.hide();
-                    var ref = cordova.InAppBrowser.open('https://finotrust.com/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_blank', 'location=no');
+                    var ref = window.open('http://52.66.96.81/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_blank', 'location=no');
 					ref.addEventListener('loadstop', function(event) { if( event.url.match('pymt/bdesk') ){
 						$timeout(function () {
 							ref.close();
@@ -386,7 +386,7 @@ $scope.xirrRate= function(){
 					$timeout(function () {
 							$state.go('tabsController.recentTransactions');
 						},1000);
-					
+
                 }
 				else{
 					$ionicLoading.hide();
@@ -410,7 +410,7 @@ $scope.xirrRate= function(){
     mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums,"paymentMode" : "a"},function(data){
       if(data.responseCode=="Cali_SUC_1030"){
         $ionicLoading.hide();
-		
+
        $state.go('invest_success');
       }
       else{
@@ -465,7 +465,7 @@ $scope.xirrRate= function(){
 	}
 	$scope.goOneStepbacktoAddress=function(){
 		$sessionStorage.stepCount=$sessionStorage.stepCount-1;
-		
+
 		history.go(-1);
 	}
 
@@ -522,7 +522,7 @@ console.log(confirmation+"   last step");
 	else{
 		if ($sessionStorage.clientActive=='I' || $sessionStorage.clientActive=='N' || $sessionStorage.clientActive==null ){
 			$state.go("tour");
-		}	
+		}
 		else if ($sessionStorage.clientActive=='T'){
 			$state.go("tour");
 		}
@@ -543,7 +543,7 @@ console.log(confirmation+"   last step");
 				else{
 				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
 					else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
-				}	
+				}
 			}
 		}
 	}
@@ -554,7 +554,7 @@ console.log(confirmation+"   last step");
 		else{
 			if ($sessionStorage.clientActive=='I' || $sessionStorage.clientActive=='N' || $sessionStorage.clientActive==null ){
 				$state.go("bank");
-			}	
+			}
 			else if ($sessionStorage.clientActive=='T'){
 				$state.go("tour");
 			}
@@ -576,13 +576,13 @@ console.log(confirmation+"   last step");
 		}
 		else{
 			if ($sessionStorage.clientActive=='I' || $sessionStorage.clientActive=='N' || $sessionStorage.clientActive== null ){
-				
+
 				$scope.statusImage="img/step1.jpg";
 				$scope.para1="Congratulations! We have received and verified your details and you can start investing by submitting your PAN number and Bank details.";
 				$scope.para2="Please click on 'Activate Now' to provide these details";
 				$scope.notNow ="Not Now";
 				$scope.startInvesting="Activate Now";
-			}	
+			}
 			else if ($sessionStorage.clientActive=='T'){
 				//$scope.disbledSkip=true;
 				$scope.statusImage="img/steplast.jpg";
@@ -624,7 +624,7 @@ console.log(confirmation+"   last step");
 	}
 
 $scope.initial();
-		
+
 })
 
 .controller('menuOverlay', function($scope, $window, $ionicSideMenuDelegate) {
