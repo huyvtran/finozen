@@ -24,7 +24,7 @@ $scope.dd=function(){
 			if($sessionStorage.SessionStatus=="Q" || $sessionStorage.SessionStatus=="P" || $sessionStorage.SessionStatus=="I"){$scope.test=false;}
 			else{$scope.test=true;}
 		}
-		
+
 
 $scope.activateAcc= function(){
 	$scope.test=false;
@@ -40,13 +40,13 @@ $scope.activateAcc= function(){
 	var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
 	//if(totalSteps==$sessionStorage.stepCount){confirmation=1;   $state.go(nextStepsUrl[5]);}
 	//else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
-	
+
 	if(nextSteps[$sessionStorage.stepCount]==2 && nextSteps[$sessionStorage.stepCount+1]==3){$sessionStorage.stepCount=$sessionStorage.stepCount+1; $state.go('imageSelection');}
 	else if(nextSteps[$sessionStorage.stepCount]==2 || nextSteps[$sessionStorage.stepCount]==3){$state.go('imageSelection');}
 	else{
 		if(totalSteps==$sessionStorage.stepCount){$state.go("feedback");}
 		else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
-	}	
+	}
 	}
 
 }
@@ -75,7 +75,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 					$scope.error_referal="Entered mobile number and referral number should be different";
 				}
 				else{
-					
+
 					if(form.$valid) {
 						console.log("not same number");
 						//$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
@@ -210,7 +210,7 @@ console.log($scope.loginDetails);
   if(signinformData.$valid){
     $sessionStorage.forgotPinPhone = $scope.mobileNumber;
     var ph=$sessionStorage.forgotPinPhone;
-    $http.get('https://finotrust.com/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
+    $http.get('http://52.66.96.81/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
     $state.go('forgot_pin');
     }
     else{
@@ -292,7 +292,7 @@ console.log($scope.loginDetails);
 			$state.go("invest");
 		  }
 	}
-		
+
 	}
 	$scope.withdrawCheck=function(){
 	if($sessionStorage.SessionStatus=="N" || $sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus== 'null' ||$sessionStorage.SessionStatus==undefined ){
@@ -306,7 +306,7 @@ console.log($scope.loginDetails);
 			$state.go("withdraw");
 		  }
 	}
-			
+
 	}
 
 })
@@ -496,7 +496,7 @@ $scope.$broadcast("scroll.refreshComplete");
 
 
 		$scope.shareViaContacts=function(){
-			$state.go('inviteContacts');	
+			$state.go('inviteContacts');
 		}
 		$scope.shareViaTwitter=function(){
 			window.plugins.socialsharing.share('Watch your money grow at FinoZen with just INR 100. Earn INR 100 for every referral. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code',null,null,'https://goo.gl/uAkHRa');
