@@ -100,8 +100,8 @@
 	</div>
 	<button class="button button-full button-positive" type="submit" translate="signUpTitle">
 	</button>
-	<div  class="agree_terms" >
-		<span class="check_agree item-checkbox item_checkbox">By Signing up, I agree to <a href="#" onclick="window.open('http://finozen.com/t&c.html', '_self')"> T & C</a> and <a href="#" onclick="window.open('http://finozen.com/policy.html', '_self')">Privacy Policy</a></span>
+	<div  class="agree_terms" ng-controller="FundsMethodCtrl">
+		<span class="check_agree item-checkbox item_checkbox">By Signing up, I agree to  <span class="inappLinks" ng-click="terms()"> T & C</span> and <span  class="inappLinks" ng-click="policy()">Privacy Policy.</span> 
 	</div>
 </form>	
 	

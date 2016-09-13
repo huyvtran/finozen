@@ -24,7 +24,7 @@ border-color:#18bb9c;
 	padding: 0px 10px;
 	display: inline-block;
 	float: left;
-	width: 78vw;
+//width: 78vw;
 	
 	.check_agree{padding-left:10px;font-size: 14px;}
 	a {
@@ -546,7 +546,7 @@ img{height: 400px;}
 		font-size: 24px;
 		text-align: center;
 		font-weight: 300;
-		padding: 0 15px 18px;
+		padding: 0 15px 10px;
 	}
 	margin: 10px;
 	.success_block {
@@ -561,7 +561,7 @@ img{height: 400px;}
 		.message {
 			font-weight: 600;
 			width: 100%;
-			padding: 3%;
+			padding: 2%;
 			text-align: center;
 		}
 		.disclaimer {
@@ -738,13 +738,26 @@ fader {
 	}
 	.calcLabelDiv{
 		width:40%;
-		.calcLabel{padding:5px 0;font-size: 14px;}
+		.calcLabel{padding: 10px 0;font-size: 14px;}
 	}
 	.calcInputDiv{
-		width:55%;
-		input{outline:none; width:95%;border: 1px solid #18bb9c; padding: 0px 5px;border-radius: 5px;}
+		width:55%;border: 1px solid #18bb9c; padding: 0px 5px;border-radius: 5px;margin: 5px;
+		input{
+			width: 94%;
+			outline: none;
+			display: inline-block;
+			float: right;
+		}
 		
 	}
 }
-
-	.pane .slidingTabs ul li{font-size: 13px !important;}
+.flipImage{
+	margin: 0 0 -10px;
+	padding: 0px;
+	display: inline-block;
+}
+.inappLinks{
+	text-decoration:underline;
+	&:active, &:hover, &:visited, &:focus{color:red}
+}
+.pane .slidingTabs ul li{font-size: 13px !important;}

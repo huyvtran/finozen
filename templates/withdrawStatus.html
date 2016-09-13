@@ -8,7 +8,7 @@
 		<div class="container statusPage" >
 			<div class="rows"><img src="img/step1.jpg" class="steps"></div>
 			<div class="rows padding">
-				<p>Congratulations you can start investing. However, we will need additional details to process your investments, Please click on 'Activate Now' to provide these details.</p>
+				<p>Congratulations you can start investing.We will need the following additional details to process your investments</p>
 			</div>
 			<hr/>
 			<div class="rows padding" ng-repeat="n in nextSteps track by $index">
@@ -23,7 +23,7 @@
 
 <ion-footer-bar padding="false">
 	<div class="button-bar " style="padding:0;">
-		<button class="button button-positive" ng-click="investNowFunction()" style="margin:1px; line-height: 44px;" >Not Now</button>
+		<button class="button button-positive" ng-click="withdrawNowFunction()" style="margin:1px; line-height: 44px;" >Not Now</button>
 		<button class="button button-positive" ng-controller="termsCtrl" ng-click="activateAcc()" style="margin:1px;line-height: 44px;" >Activate Now</button>
 	</div>
 </ion-footer-bar>

@@ -51,9 +51,17 @@ angular.module('app.subcontrollerTwo', [])
 				var nextStepsUrl=proofRedirectFactory.name;
 				$sessionStorage.stepCount=$sessionStorage.stepCount+1;
 				var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+				console.log($sessionStorage.stepCount + " next state    " +  totalSteps +"  total steps ");
+				//if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
+				//else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
 				console.log(nextSteps[$sessionStorage.stepCount]  + " next state" );
-				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
-				else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}	
+				if(nextSteps[$sessionStorage.stepCount]==2 && nextSteps[$sessionStorage.stepCount+1]==3){$sessionStorage.stepCount=$sessionStorage.stepCount+1; $state.go('imageSelection');}
+				else if(nextSteps[$sessionStorage.stepCount]==2 || nextSteps[$sessionStorage.stepCount]==3){$state.go('imageSelection');}
+				else{
+					console.log($sessionStorage.stepCount + " next state    " +  totalSteps +"  total steps ");
+					if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
+					else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+				}
 				//$state.go('selfie');
 			}
 			$scope.takeit1=function(){
@@ -113,10 +121,18 @@ angular.module('app.subcontrollerTwo', [])
 						var nextSteps=myService.myFunction($sessionStorage.docStatus);
 						var nextStepsUrl=proofRedirectFactory.name;
 						$sessionStorage.stepCount=$sessionStorage.stepCount+1;
-						console.log($sessionStorage.stepCount + "step count");
 						var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
-						if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
-						else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+						console.log($sessionStorage.stepCount + " next state    " +  totalSteps +"  total steps ");
+						//if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
+						//else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+						console.log(nextSteps[$sessionStorage.stepCount]  + " next state" );
+						if(nextSteps[$sessionStorage.stepCount]==2 && nextSteps[$sessionStorage.stepCount+1]==3){$sessionStorage.stepCount=$sessionStorage.stepCount+1; $state.go('imageSelection');}
+						else if(nextSteps[$sessionStorage.stepCount]==2 || nextSteps[$sessionStorage.stepCount]==3){$state.go('imageSelection');}
+						else{
+							console.log($sessionStorage.stepCount + " next state    " +  totalSteps +"  total steps ");
+							if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
+							else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+						}
                     }
                 },function(error){
                   $ionicLoading.hide();
@@ -148,7 +164,7 @@ angular.module('app.subcontrollerTwo', [])
 			$scope.signature = sigImg;
 		}
 		$scope.signatureFunction=function(){
-			$state.go('verifySuccess');
+			$state.go('feedback');
 			//$state.go(nextStepsUrl[5]);
 		}
 		$scope.signUpload = function() {
@@ -200,12 +216,14 @@ angular.module('app.subcontrollerTwo', [])
 			var nextStepsUrl=proofRedirectFactory.name;
 			$sessionStorage.stepCount=$sessionStorage.stepCount+1;
 			var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+			console.log($sessionStorage.stepCount + " next state    " +  totalSteps +"  total steps ");
 			//if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
 			//else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
 			console.log(nextSteps[$sessionStorage.stepCount]  + " next state" );
 			if(nextSteps[$sessionStorage.stepCount]==2 && nextSteps[$sessionStorage.stepCount+1]==3){$sessionStorage.stepCount=$sessionStorage.stepCount+1; $state.go('imageSelection');}
 			else if(nextSteps[$sessionStorage.stepCount]==2 || nextSteps[$sessionStorage.stepCount]==3){$state.go('imageSelection');}
 			else{
+				console.log($sessionStorage.stepCount + " next state    " +  totalSteps +"  total steps ");
 				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
 				else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
 			}	
@@ -265,6 +283,7 @@ angular.module('app.subcontrollerTwo', [])
 					var nextSteps=myService.myFunction($sessionStorage.docStatus);
 					var nextStepsUrl=proofRedirectFactory.name;
 					$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+					console.log($sessionStorage.stepCount + " next state    " +  totalSteps +"  total steps ");
 					var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
 					//if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
 					//else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
@@ -532,6 +551,7 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 		console.log(totalSteps + " totalSteps" );
 		console.log($sessionStorage.stepCount + " $sessionStorage.stepCount" );
 		$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+		console.log($sessionStorage.stepCount + " next state    " +  totalSteps +"  total steps ");
 		if(nextSteps[$sessionStorage.stepCount]==3 || nextSteps[$sessionStorage.stepCount]==4 ){
 			console.log(nextSteps[$sessionStorage.stepCount]  + " next state" );
 				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
@@ -712,7 +732,7 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
                  if(data.responseCode == "Cali_SUC_1030") {
                    $ionicLoading.hide(); 
 				  $sessionStorage.docStatus=data.jsonStr.docStatus; // document status received on bank submittion of bank details  (have to update value according to response)
-				  $sessionStorage.clientActive=data.jsonStr.clientActive;
+				  $sessionStorage.SessionStatus=data.jsonStr.activeStatus;
                    $state.go('verifySuccess');//after selfie image
                  }
 

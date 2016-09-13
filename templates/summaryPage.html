@@ -5,13 +5,16 @@
 	<div class="flip-container2 flip-container">
         <div class="flipper clearfix">
           <div class="front">
-			<p class="total_value" ><span style="font-size:28px"><sup>&#x20B9;</sup></span>{{ balance()|currency:""}}
-				<br/><span class="current_bal item-note" translate="TEXT_LANG_BALANCE"></span></p>
+			
+			<p class="total_value" ><span style="font-size:28px"><img class="flipImage" src="img/left.png"style="float: left;" /><sup>&#x20B9;</sup></span>{{ balance()|currency:""}}
+				<img class="flipImage" src="img/right.png"style="float: right;"/><br/><span class="current_bal item-note" translate="TEXT_LANG_BALANCE"></span>
+				</p>
           </div>
           <div class="back success">
-				<p class="total_value">{{xirrRate()}}%
+			
+				<p class="total_value"><img class="flipImage" src="img/left.png"style="float: left;" />{{xirrRate()}}%<img class="flipImage" src="img/right.png"style="float: right;"/>
 			<br/><span class="current_bal item-note" translate="tabTitleFlip"></span> <span style="color: #fff; font-size: 16px;" class="button-icon ion-information-circled"  ng-controller="popOverController" ng-click="popover.show($event)"> </span> </p>
-		
+				
           </div>
         </div>
     </div>

@@ -60,6 +60,21 @@ angular.module('app.subcontrollerOne', [])
         $scope.isGroupShown = function(group) {
             return $scope.shownGroup === group;
         };
+		
+		
+$scope.policy = function()
+{
+	//window.open('http://finozen.com/policy.html','_self');
+	var ref = cordova.InAppBrowser.open('http://finozen.com/policy.html','_blank', location="no");
+  //$ionicHistory.goBack(-1);
+}
+$scope.terms = function()
+{
+	//window.open('http://finozen.com/t&c.html','_self');
+	var ref = cordova.InAppBrowser.open('http://finozen.com/t&c.html','_blank', location="no");
+  //$ionicHistory.goBack(-1);
+
+}
 
     })
 
@@ -172,11 +187,17 @@ angular.module('app.subcontrollerOne', [])
         };
 
     })
+	
 //FAQ controllers END
 //TAB's DATA controller
 	.controller('calculatorCtrl', function($scope,$timeout) {
 		$scope.returnsAmount=0;
 		$scope.errorInputs="";
+		$scope.clearValues=function(){
+			$scope.investmentAmount='';
+			$scope.returnsAmount='';
+			$scope.totalDays='';
+		}
 		$scope.calculateValues=function(){
 			var count=0;
 			var investAmount=$scope.investmentAmount;
@@ -213,12 +234,14 @@ angular.module('app.subcontrollerOne', [])
 $scope.faq = function(){$state.go('faq')}
 $scope.policy = function()
 {
-	window.open('http://finozen.com/policy.html','_self');
+	//window.open('http://finozen.com/policy.html','_self');
+	var ref = cordova.InAppBrowser.open('http://finozen.com/policy.html','_blank');
   //$ionicHistory.goBack(-1);
 }
 $scope.terms = function()
 {
-	window.open('http://finozen.com/t&c.html','_self');
+	//window.open('http://finozen.com/t&c.html','_self');
+	var ref = cordova.InAppBrowser.open('http://finozen.com/t&c.html','_blank');
   //$ionicHistory.goBack(-1);
 
 }
@@ -327,7 +350,6 @@ $scope.xirrRate= function(){
         }
 
 	  $scope.Invest = function(form) {
-		  console.log($sessionStorage.clientActive + " clientActive status in add money page");
             if(form.$valid && $scope.initial>=100) {
 				if($sessionStorage.allTransactions > 0 && $sessionStorage.SessionFolioNums==0){
 					$ionicPopup.alert({
@@ -348,7 +370,7 @@ $scope.xirrRate= function(){
 				else if($sessionStorage.nachStatus !='A'){
 				        $ionicLoading.show({templateUrl:"templates/loading.html"});
 						  console.log('its entering the nach mandate');
-						  if($sessionStorage.clientActive=="P" ){
+						  if($sessionStorage.SessionStatus=="P" ){
 							  if($scope.initial<=1000){$scope.sendMfOrder();}
 							  else{
 								  $ionicLoading.hide();
@@ -432,8 +454,9 @@ $scope.xirrRate= function(){
         var mid=$sessionStorage.orderId;//dynamic id
     })
 .controller('statusPageCtrl', function($scope ,$sessionStorage,$state,proofRedirectFactory,myService){
-	if($sessionStorage.clientActive=='I'){
+	if($sessionStorage.SessionStatus=='I'){
 		$scope.investNowFunction= function(){$state.go('invest');}
+		$scope.withdrawNowFunction= function(){$state.go('withdraw');}
 		$scope.notnowFunction= function(){
 			var nextStepsUrl=proofRedirectFactory.name;
 			var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
@@ -441,12 +464,13 @@ $scope.xirrRate= function(){
 			$sessionStorage.stepCount=0;
 			$state.go(nextStepsUrl[$scope.nextSteps[$sessionStorage.stepCount]]);
 		}
-		$scope.docsToSubmit=['Photo of your PAN card ', 'Your selfie with PAN Card', 'Photo of your Address Proof Front', 'Photo of your AddressProof back', 'Your Signature'];
+		$scope.docsToSubmit=['Photo of your PAN card ', 'Your selfie with PAN Card', 'Photo of your Address Proof Front', 'Photo of your Address Proof back', 'Your Signature'];
 		$scope.nextSteps=myService.myFunction($sessionStorage.docStatus);
 		console.log($scope.nextSteps);
 	}
 	else{
 		$scope.investNowFunction= function(){$state.go('invest');}
+		$scope.withdrawNowFunction= function(){$state.go('withdraw');}
 		$scope.notnowFunction= function(){
 			var nextStepsUrl=proofRedirectFactory.name;
 			var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
@@ -518,15 +542,14 @@ console.log(confirmation+"   last step");
 	},3000)
 	$scope.notnowFunction= function(){
 	if(confirmation==1){$state.go("tour");}
-		//console.log($sessionStorage.clientActive);
 	else{
-		if ($sessionStorage.clientActive=='I' || $sessionStorage.clientActive=='N' || $sessionStorage.clientActive==null ){
+		if ($sessionStorage.SessionStatus=='I' || $sessionStorage.SessionStatus=='N' || $sessionStorage.SessionStatus==null ){
 			$state.go("tour");
 		}	
-		else if ($sessionStorage.clientActive=='T'){
+		else if ($sessionStorage.SessionStatus=='T'){
 			$state.go("tour");
 		}
-		else if ($sessionStorage.clientActive=='P' || $sessionStorage.clientActive=='Q' ){
+		else if ($sessionStorage.SessionStatus=='P' || $sessionStorage.SessionStatus=='Q' ){
 			if($sessionStorage.docStatus !="11111"){
 				$sessionStorage.disbledSkip=true;
 				console.log($sessionStorage.docStatus + " I am here")
@@ -550,24 +573,21 @@ console.log(confirmation+"   last step");
 }
 	$scope.investNowFunction= function(){
 		if(confirmation==1){$state.go("tour");}
-		//	console.log($sessionStorage.clientActive);
 		else{
-			if ($sessionStorage.clientActive=='I' || $sessionStorage.clientActive=='N' || $sessionStorage.clientActive==null ){
+			if ($sessionStorage.SessionStatus=='I' || $sessionStorage.SessionStatus=='N' || $sessionStorage.SessionStatus==null ){
 				$state.go("bank");
 			}	
-			else if ($sessionStorage.clientActive=='T'){
+			else if ($sessionStorage.SessionStatus=='T'){
 				$state.go("tour");
 			}
-			else if ($sessionStorage.clientActive=='P' || $sessionStorage.clientActive=='Q' ){
+			else if ($sessionStorage.SessionStatus=='P' || $sessionStorage.SessionStatus=='Q' ){
 				$state.go("tour");
 			}
 		}
 }
 	$scope.initial= function(){
-		console.log(confirmation+ "    confirmation")
-			//$sessionStorage.clientActive=Math.floor(Math.random() * 3)+1;
 		if(confirmation==1){
-			//$scope.disbledSkip=true;
+			$scope.disbledSkip=true;
 			$scope.statusImage="img/steplast.jpg";
 			$scope.para1="Congratulations! We have received your details, we will update you within 12 hours on account activation";
 			$scope.para2="You can start investing now. Happy Investing!";
@@ -575,36 +595,36 @@ console.log(confirmation+"   last step");
 			$scope.startInvesting="Start Investing";
 		}
 		else{
-			if ($sessionStorage.clientActive=='I' || $sessionStorage.clientActive=='N' || $sessionStorage.clientActive== null ){
-				
+			if ($sessionStorage.SessionStatus=='I' || $sessionStorage.SessionStatus=='N' || $sessionStorage.SessionStatus== null ){
+				$scope.disbledSkip=true;
 				$scope.statusImage="img/step1.jpg";
-				$scope.para1="Congratulations! We have received and verified your details and you can start investing by submitting your PAN number and Bank details.";
-				$scope.para2="Please click on 'Activate Now' to provide these details";
+				$scope.para1="Your FinoZen account is currently inactive. Do you wish to start saving and growing your money everyday?.";
+				$scope.para2="If yes, please click on “Activate Now” and submit your PAN Number and Bank Details. We will activate your account instantaneously!";
 				$scope.notNow ="Not Now";
 				$scope.startInvesting="Activate Now";
 			}	
-			else if ($sessionStorage.clientActive=='T'){
-				//$scope.disbledSkip=true;
+			else if ($sessionStorage.SessionStatus=='T'){
+				$scope.disbledSkip=true;
 				$scope.statusImage="img/steplast.jpg";
 				$scope.para1="Congratulations! We have received and verified your details, your FinoZen account is now active.";
 				$scope.para2="You can start investing now. Happy Investing!";
 				$scope.startInvesting="Start Investing";
 				$scope.notNow="Know more";
 			}
-			else if ($sessionStorage.clientActive=='P'){
-				//$scope.disbledSkip=false;
+			else if ($sessionStorage.SessionStatus=='P'){
+				$scope.disbledSkip=false;
 				$scope.statusImage="img/step1.jpg";
 				$scope.para1="Congratulations! We have received and verified your details and you can start investing.";
 				$scope.para2="However, we will need additional details to process your investments, Please click on 'Activate Now' to provide these details";
-				//$scope.para3="Pan Card.";
-				//$scope.para4="Address proof (all the acceptable documents).";
+				$scope.para3="Pan Card";
+				$scope.para4="Address proof (Aadhar/ Driving Licence/ Voter ID/ Passport/ Ration Card)";
 				//$scope.para2="We will update you within 12 hours on account activation. Happy Investing!";
-				$scope.notNow="Activate Now";
+				$scope.notNow="Complete Activation";
 				$scope.startInvesting="Start Investing";
 			}
-			else if ($sessionStorage.clientActive=='Q'){
+			else if ($sessionStorage.SessionStatus=='Q'){
 				if ($sessionStorage.docStatus=='11111'){
-					//$scope.disbledSkip=true;
+					$scope.disbledSkip=true;
 					$scope.statusImage="img/steplast.jpg";
 					$scope.para1="Congratulations! We have received your details, we will update you within 12 hours on account activation";
 					$scope.para2="You can start investing now. Happy Investing!";
@@ -612,7 +632,7 @@ console.log(confirmation+"   last step");
 					$scope.startInvesting="Start Investing";
 				}
 				else{
-					//$scope.disbledSkip=false;
+					$scope.disbledSkip=false;
 					$scope.statusImage="img/step3.jpg";
 					$scope.para1="One of your details is pending for account activation.";
 					$scope.para2="Please click on 'Activate Now' to provide that detail.";

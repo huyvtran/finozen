@@ -27,13 +27,14 @@ angular.module('app.services', [])
 
   /*For fetching the transaction webservices*/
   .factory('getReportService', ['$resource','$sessionStorage',function($resource,$sessionStorage){
+	  console.log($sessionStorage +"    $sessionStorage.SessionPortfolio");
     return $resource('https://finotrust.com/WealthWeb/ws/clientRepos/getOrders?pfolioCode='+$sessionStorage.SessionPortfolio+'&noOfOrders=30');
   }])
 
 
 .factory('proofRedirectFactory', function() {
   return {
-      name : ['panImage','selfie','imageSelection','addressProofImage','signature','verifySuccess']
+      name : ['panImage','selfie','imageSelection','addressProofImage','signature','feedback']
   };
 })
 

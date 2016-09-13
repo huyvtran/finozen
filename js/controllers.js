@@ -19,11 +19,9 @@ $scope.dd=function(){
 
     })
     .controller('termsCtrl', function($scope,$sessionStorage,$state,myService,proofRedirectFactory) {
-		console.log($sessionStorage.clientActive +"$sessionStorage.clientActive");
-		console.log($sessionStorage.docStatus +"$sessionStorage.docStatus");
-		$scope.test=false;
+		$scope.test=true;
 		if($sessionStorage.docStatus!="11111"){
-			if($sessionStorage.clientActive=="Q" || $sessionStorage.clientActive=="P" ){$scope.test=false;}
+			if($sessionStorage.SessionStatus=="Q" || $sessionStorage.SessionStatus=="P" || $sessionStorage.SessionStatus=="I"){$scope.test=false;}
 			else{$scope.test=true;}
 		}
 		
@@ -32,7 +30,7 @@ $scope.activateAcc= function(){
 	$scope.test=false;
 	if($sessionStorage.docStatus=="11111"){}
 	else{
-	if($sessionStorage.clientActive=="I" || $sessionStorage.clientActive=="N" ||  $sessionStorage.clientActive==null){$state.go('bank');}
+	if($sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus=="N" ||  $sessionStorage.SessionStatus==null){$state.go('bank');}
 	else{
 	console.log($sessionStorage.docStatus);
 	$sessionStorage.stepCount=-1;
@@ -252,6 +250,20 @@ console.log($scope.loginDetails);
 		$scope.passwordError="";
 	},3000)
        }
+        else if(data.responseCode=="Cali_ERR_1969") {
+        $ionicLoading.hide();
+        $scope.passwordError="Password not valid";
+		$timeout(function(){
+		$scope.passwordError="";
+	},3000)
+       }
+        else{
+        $ionicLoading.hide();
+        $scope.passwordError="Signin failed, Please try again later";
+		$timeout(function(){
+		$scope.passwordError="";
+	},3000)
+       }
 
         },function(error){
       $ionicLoading.hide();
@@ -269,13 +281,11 @@ console.log($scope.loginDetails);
   /*add money page check*/
 .controller('transactionAccessCtrl', function($scope,$sessionStorage,$state){
 	$scope.investCheck=function(){
-	console.log($sessionStorage.clientActive + " add money");
-	console.log($sessionStorage.clientActive + " add money");
-	if($sessionStorage.clientActive=="N" || $sessionStorage.clientActive=="I" || $sessionStorage.clientActive== 'null' ||$sessionStorage.clientActive==undefined ){
+	if($sessionStorage.SessionStatus=="N" || $sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus== 'null' ||$sessionStorage.SessionStatus==undefined ){
 		$state.go("verifySuccess");
 	}
 	else{
-		  if($sessionStorage.clientActive=="P" || $sessionStorage.clientActive=="Q") {
+		  if($sessionStorage.SessionStatus=="P" || ($sessionStorage.SessionStatus=="Q" && $sessionStorage.docStatus!='11111')) {
 			$state.go("status");
 		  }
 		  else {
@@ -285,13 +295,12 @@ console.log($scope.loginDetails);
 		
 	}
 	$scope.withdrawCheck=function(){
-	console.log($sessionStorage.clientActive + " add money");
-	if($sessionStorage.clientActive=="N" || $sessionStorage.clientActive=="I" || $sessionStorage.clientActive== 'null' ||$sessionStorage.clientActive==undefined ){
+	if($sessionStorage.SessionStatus=="N" || $sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus== 'null' ||$sessionStorage.SessionStatus==undefined ){
 		$state.go("verifySuccess");
 	}
 	else{
-		  if($sessionStorage.clientActive=="P" || $sessionStorage.clientActive=="Q") {
-			$state.go("status");
+		  if($sessionStorage.SessionStatus=="P" || ($sessionStorage.SessionStatus=="Q" && $sessionStorage.docStatus!='11111')) {
+			$state.go("withdrawStatus");
 		  }
 		  else {
 			$state.go("withdraw");
@@ -371,7 +380,8 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 	console.log($sessionStorage.allTransactions + "total number of transactions");
     $scope.products=data.jsonStr;
 	if((data.jsonStr).length <= 0){
-	$scope.noTxnIcon="img/no_leaves.png";
+		console.log("no txn");
+		$scope.noTxnIcon="img/no_leaves.png";
     }
     }
   })
