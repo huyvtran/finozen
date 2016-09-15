@@ -21,7 +21,7 @@ $scope.dd=function(){
     .controller('termsCtrl', function($scope,$sessionStorage,$state,myService,proofRedirectFactory) {
 		$scope.test=true;
 		if($sessionStorage.docStatus!="11111"){
-			if($sessionStorage.SessionStatus=="Q" || $sessionStorage.SessionStatus=="P" || $sessionStorage.SessionStatus=="I"){$scope.test=false;}
+			if($sessionStorage.SessionStatus=="Q" || $sessionStorage.SessionStatus=="P" || $sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus==null || $sessionStorage.SessionStatus==undefined){$scope.test=false;}
 			else{$scope.test=true;}
 		}
 
@@ -210,7 +210,7 @@ console.log($scope.loginDetails);
   if(signinformData.$valid){
     $sessionStorage.forgotPinPhone = $scope.mobileNumber;
     var ph=$sessionStorage.forgotPinPhone;
-    $http.get('http://52.66.96.81/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
+    $http.get('https://finotrust.com/WealthWeb/ws/clientFcps/forgotPassword?mobileNumber='+ph); //sending the otp to the phone number
     $state.go('forgot_pin');
     }
     else{
@@ -282,7 +282,7 @@ console.log($scope.loginDetails);
 .controller('transactionAccessCtrl', function($scope,$sessionStorage,$state){
 	$scope.investCheck=function(){
 	if($sessionStorage.SessionStatus=="N" || $sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus== 'null' ||$sessionStorage.SessionStatus==undefined ){
-		$state.go("verifySuccess");
+		$state.go("inactiveClient");
 	}
 	else{
 		  if($sessionStorage.SessionStatus=="P" || ($sessionStorage.SessionStatus=="Q" && $sessionStorage.docStatus!='11111')) {
@@ -295,16 +295,11 @@ console.log($scope.loginDetails);
 
 	}
 	$scope.withdrawCheck=function(){
-	if($sessionStorage.SessionStatus=="N" || $sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus== 'null' ||$sessionStorage.SessionStatus==undefined ){
+	if($sessionStorage.SessionStatus=="N" || $sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus== 'null' || $sessionStorage.SessionStatus==undefined ){
 		$state.go("verifySuccess");
 	}
 	else{
-		  if($sessionStorage.SessionStatus=="P" || ($sessionStorage.SessionStatus=="Q" && $sessionStorage.docStatus!='11111')) {
-			$state.go("withdrawStatus");
-		  }
-		  else {
 			$state.go("withdraw");
-		  }
 	}
 
 	}

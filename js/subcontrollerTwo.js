@@ -55,8 +55,13 @@ angular.module('app.subcontrollerTwo', [])
 				//if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
 				//else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
 				console.log(nextSteps[$sessionStorage.stepCount]  + " next state" );
-				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
-				else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}	
+					if(nextSteps[$sessionStorage.stepCount]==2 && nextSteps[$sessionStorage.stepCount+1]==3){$sessionStorage.stepCount=$sessionStorage.stepCount+1; $state.go('imageSelection');}
+						else if(nextSteps[$sessionStorage.stepCount]==2 || nextSteps[$sessionStorage.stepCount]==3){$state.go('imageSelection');}
+						else{
+							console.log($sessionStorage.stepCount + " next state    " +  totalSteps +"  total steps ");
+							if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
+							else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+						}
 				//$state.go('selfie');
 			}
 			$scope.takeit1=function(){
@@ -187,7 +192,7 @@ angular.module('app.subcontrollerTwo', [])
                 }
                 else {
 					$ionicLoading.hide();
-					$state.go('verifySuccess');
+					$state.go('feedback');
                 }
             },function(error){
               $ionicLoading.hide();
@@ -690,7 +695,6 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 /*for uploading the bank details*/
 
   .controller('bankDetailsCTRL',function($scope,$state,$sessionStorage,bankDetailsService,$ionicPopup,$ionicLoading,$window,proofRedirectFactory,myService){
-	 $scope.diasbleSkip=$sessionStorage.disbledSkip;
     $scope.accountTypeOptions = [
     { name: 'Savings', value: 'SB_New' },
     { name: 'Current', value: 'CA_new' }
@@ -724,7 +728,12 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
                    $ionicLoading.hide();
 				  $sessionStorage.docStatus=data.jsonStr.docStatus; // document status received on bank submittion of bank details  (have to update value according to response)
 				  $sessionStorage.SessionStatus=data.jsonStr.activeStatus;
-                   $state.go('verifySuccess');//after selfie image
+				  console.log($sessionStorage.SessionStatus+ "   bank submit $sessionStorage.SessionStatus");
+				  console.log($sessionStorage.docStatus+ "   bank submit $sessionStorage.docStatus");
+				  if($sessionStorage.SessionStatus=="T"){$state.go('activeClientStatus');}
+				  else if($sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus==null || $sessionStorage.SessionStatus==undefined ){$state.go('inactiveClient');}
+				  else{$state.go('verifySuccess');}
+                   
                  }
 
                  else {
@@ -785,16 +794,11 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 	}
              }
 		$scope.bankSkip=function(){
-
-			$state.go('verifySuccess');
-
-		}
-		$scope.bankTest=function(){
-			totalSteps=(myService.myFunction($sessionStorage.docStatus) ).length;
-			console.log(totalSteps + "service return")	;
-			$state.go('verifySuccess');
-
-		}
+			console.log($sessionStorage.SessionStatus + "    $sessionStorage.SessionStatus");
+			if($sessionStorage.SessionStatus=="T"){$state.go('activeClientStatus');}
+				  else if($sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus==null || $sessionStorage.SessionStatus=="null" || $sessionStorage.SessionStatus==undefined ){$state.go('inactiveClient');}
+				  else{$state.go('verifySuccess');}
+				   }
     })
 
 
@@ -901,7 +905,7 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
           $scope.forget5.mobileNumber = JSON.stringify($sessionStorage.forgotPinPhone);
           var forgotpinPass = JSON.stringify($scope.forget5);
           console.log(forgotpinPass + 'string');
-          $http.post('http://52.66.96.81/WealthWeb/ws/clientFcps/setNewPassword', forgotpinPass).success(function(data){
+          $http.post('https://finotrust.com/WealthWeb/ws/clientFcps/setNewPassword', forgotpinPass).success(function(data){
             console.log(data+'response');
             if(data.responseCode=="Cali_SUC_1030"){
 

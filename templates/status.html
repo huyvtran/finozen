@@ -8,23 +8,28 @@
 		<div class="container statusPage" >
 			<div class="rows"><img src="img/step1.jpg" class="steps"></div>
 			<div class="rows padding">
-				<p>Congratulations you can start investing. However, we will need additional details to process your investments, Please click on 'Activate Now' to provide these details.</p>
+				<p>{{para1}}</p>
 			</div>
-			<hr/>
-			<div class="rows padding" ng-repeat="n in nextSteps track by $index">
-				<span class="custom_bullets">{{ $index+1}}</span><p >{{docsToSubmit[nextSteps[$index]]}}</p>
+			<div ng-hide="docstatus">
+				<hr/>
+				<div class="rows padding" ng-repeat="n in nextSteps track by $index">
+					<span class="custom_bullets">{{ $index+1}}</span><p >{{docsToSubmit[nextSteps[$index]]}}</p>
+				</div>
+				<hr/>
 			</div>
-			<hr/>
-			<div class="rows padding">
-				<p >We will update you once your account is ready for transactions. Happy Investing!</p>
+			<div ng-if="docstatus">
+				<p class="padding" style="padding: 0px 10px; margin: 0px;"><b>FinoZen Key Features -<br/></b></p>
+				<p>
+					<span style="color: rgb(24, 187, 156); padding: 11px;" class="ion-checkmark-circled"></span>Completely safe and secure<br/><span style="color: rgb(24, 187, 156); padding: 11px;" class="ion-checkmark-circled"></span>Expected returns better than FD<br/><span style="color: rgb(24, 187, 156); padding: 11px;" class="ion-checkmark-circled"></span>Withdraw anytime without penalty<br/><span style="color: rgb(24, 187, 156); padding: 11px;" class="ion-checkmark-circled"></span>24X7 Customer Support</li>
+				</p>
 			</div>
 		</div>
     </ion-content>
 
 <ion-footer-bar padding="false">
 	<div class="button-bar " style="padding:0;">
-		<button class="button button-positive" ng-click="investNowFunction()" style="margin:1px; line-height: 44px;" >Not Now</button>
-		<button class="button button-positive" ng-controller="termsCtrl" ng-click="activateAcc()" style="margin:1px;line-height: 44px;" >Activate Now</button>
+		<button class="button button-positive" ng-click="investNowFunction()" style="margin:1px; line-height: 44px;" >{{notNow}}</button>
+		<button class="button button-positive" ng-controller="termsCtrl" ng-disabled="docstatus" ng-click="activateAcc()" style="margin:1px;line-height: 44px;" >Activate Now</button>
 	</div>
 </ion-footer-bar>
 </ion-view>

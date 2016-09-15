@@ -65,13 +65,13 @@ angular.module('app.subcontrollerOne', [])
 $scope.policy = function()
 {
 	//window.open('http://finozen.com/policy.html','_self');
-	var ref = cordova.InAppBrowser.open('http://finozen.com/policy.html','_blank', location="no");
+	cordova.InAppBrowser.open('http://finozen.com/policy.html','_blank', 'location=no');
   //$ionicHistory.goBack(-1);
 }
 $scope.terms = function()
 {
 	//window.open('http://finozen.com/t&c.html','_self');
-	var ref = cordova.InAppBrowser.open('http://finozen.com/t&c.html','_blank', location="no");
+	cordova.InAppBrowser.open('http://finozen.com/t&c.html','_blank', 'location=no');
   //$ionicHistory.goBack(-1);
 
 }
@@ -297,8 +297,8 @@ $scope.xirrRate= function(){
          }
          })
         $ionicLoading.hide();
-  $interval(function () {
-		$rootScope.$broadcast('flip',{});
+		$interval(function () {
+			$rootScope.$broadcast('flip',{});
 		},5000);
     })
 
@@ -399,7 +399,7 @@ $scope.xirrRate= function(){
             mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums},function(data){
                 if(data.responseCode=="Cali_SUC_1030"){
 					$ionicLoading.hide();
-                    var ref = window.open('http://52.66.96.81/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_blank', 'location=no');
+                    var ref = cordova.InAppBrowser.open('https://finotrust.com/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_blank', 'location=no');
 					ref.addEventListener('loadstop', function(event) { if( event.url.match('pymt/bdesk') ){
 						$timeout(function () {
 							ref.close();
@@ -454,6 +454,22 @@ $scope.xirrRate= function(){
         var mid=$sessionStorage.orderId;//dynamic id
     })
 .controller('statusPageCtrl', function($scope ,$sessionStorage,$state,proofRedirectFactory,myService){
+	
+	
+	
+	
+	if($sessionStorage.docStatus=='11111'){
+		$scope.para1="We have received your details and they are being verified. We will update you within 12 hours on status of your account activation.";
+		$scope.para2="However, you can start investing right away. Happy Investing!";
+		$scope.docstatus=true;
+		$scope.notNow="Start Investing";
+	} 
+	else{
+		$scope.para1="Congratulations you can start investing. However, we will need additional details to process your investments, Please click on 'Activate Now' to provide these details.";
+		$scope.para2="We will update you once your account is ready for transactions. Happy Investing!";
+		$scope.docstatus=false;
+		$scope.notNow="Not Now";
+	}
 	if($sessionStorage.SessionStatus=='I'){
 		$scope.investNowFunction= function(){$state.go('invest');}
 		$scope.withdrawNowFunction= function(){$state.go('withdraw');}
@@ -478,7 +494,7 @@ $scope.xirrRate= function(){
 			$sessionStorage.stepCount=0;
 			$state.go(nextStepsUrl[$scope.nextSteps[$sessionStorage.stepCount]]);
 		}
-		$scope.docsToSubmit=['Photo of your PAN card ', 'Your selfie with PAN Card', 'Photo of your Address Proof Front', 'Photo of your AddressProof back', 'Your Signature'];
+		$scope.docsToSubmit=['Photo of your PAN card ', 'Your selfie with PAN Card', 'Photo of your Address Proof Front', 'Photo of your Address Proof Back', 'Your Signature'];
 		$scope.nextSteps=myService.myFunction($sessionStorage.docStatus);
 		console.log($scope.nextSteps);
 	}
@@ -535,7 +551,7 @@ $scope.xirrRate= function(){
 })
 
 .controller('verifySuccessCtrl', function($scope,$sessionStorage,$state,myService,proofRedirectFactory,$timeout,$window) {
-console.log(confirmation+"   last step");
+console.log($sessionStorage.SessionStatus+"   $sessionStorage.SessionStatus verifySuccessCtrl");
 	$timeout(function(){
 		//$window.location.reload(true)
 		$scope.initial();
@@ -586,36 +602,37 @@ console.log(confirmation+"   last step");
 		}
 }
 	$scope.initial= function(){
+		$scope.features=true;
 		if(confirmation==1){
 			$scope.disbledSkip=true;
 			$scope.statusImage="img/steplast.jpg";
-			$scope.para1="Congratulations! We have received your details, we will update you within 12 hours on account activation";
+			$scope.para1="We have received your details, we will update you within 12 hours on account activation";
 			$scope.para2="You can start investing now. Happy Investing!";
 			$scope.notNow="Know more";
 			$scope.startInvesting="Start Investing";
 		}
 		else{
-			if ($sessionStorage.clientActive=='I' || $sessionStorage.clientActive=='N' || $sessionStorage.clientActive== null ){
-				
+			if ($sessionStorage.SessionStatus=='I' || $sessionStorage.SessionStatus=='N' || $sessionStorage.SessionStatus== null ){
+				$scope.disbledSkip=true;
 				$scope.statusImage="img/step1.jpg";
-				$scope.para1="Your FinoZen account is currently inactive. Do you wish to start saving and growing your money everyday?.";
+				$scope.para1="Your FinoZen account is currently inactive. Do you wish to start saving and growing your money everyday?";
 				$scope.para2="If yes, please click on “Activate Now” and submit your PAN Number and Bank Details. We will activate your account instantaneously!";
 				$scope.notNow ="Not Now";
 				$scope.startInvesting="Activate Now";
 			}
 			else if ($sessionStorage.SessionStatus=='T'){
-				$scope.disbledSkip=true;
+				$scope.disbledSkip=false;
 				$scope.statusImage="img/steplast.jpg";
-				$scope.para1="Congratulations! We have received and verified your details, your FinoZen account is now active.";
+				$scope.para1="We have received and verified your details, your FinoZen account is now active.";
 				$scope.para2="You can start investing now. Happy Investing!";
 				$scope.startInvesting="Start Investing";
-				$scope.notNow="Know more";
+				$scope.notNow="Activate Now";
 			}
 			else if ($sessionStorage.SessionStatus=='P'){
 				$scope.disbledSkip=false;
 				$scope.statusImage="img/step1.jpg";
-				$scope.para1="Congratulations! We have received and verified your details and you can start investing.";
-				$scope.para2="However, we will need additional details to process your investments, Please click on 'Activate Now' to provide these details";
+				$scope.para1="We have received and verified your details and you can start investing.";
+				$scope.para2="However, we will need additional details to process your investments, Please click on 'Complete Activatation' to provide these details";
 				$scope.para3="Pan Card";
 				$scope.para4="Address proof (Aadhar/ Driving Licence/ Voter ID/ Passport/ Ration Card)";
 				//$scope.para2="We will update you within 12 hours on account activation. Happy Investing!";
@@ -626,7 +643,7 @@ console.log(confirmation+"   last step");
 				if ($sessionStorage.docStatus=='11111'){
 					$scope.disbledSkip=true;
 					$scope.statusImage="img/steplast.jpg";
-					$scope.para1="Congratulations! We have received your details, we will update you within 12 hours on account activation";
+					$scope.para1="We have received your details, we will update you within 12 hours on account activation";
 					$scope.para2="You can start investing now. Happy Investing!";
 					$scope.notNow="Know more";
 					$scope.startInvesting="Start Investing";

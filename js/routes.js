@@ -184,10 +184,14 @@ $ionicAppProvider.identify ({
           templateUrl: 'templates/confirm.html'
     })
 	
+             .state('inactiveClient', {
+      url: '/inactiveClient',         
+          templateUrl: 'templates/inactiveClient.html'
+    })
+	
              .state('verifySuccess', {
       url: '/verifySuccess',         
-          templateUrl: 'templates/success.html',
-          controller: ''     
+          templateUrl: 'templates/success.html'
     })
              .state('account', {
       url: '/account',         
@@ -252,9 +256,9 @@ $ionicAppProvider.identify ({
     })  
 
 
-    .state('withdrawStatus', {
-      url: '/withdrawStatus',         
-          templateUrl: 'templates/withdrawStatus.html'
+    .state('activeClientStatus', {
+      url: '/activeClientStatus',         
+          templateUrl: 'templates/activeClientStatus.html'
 
     })  
     .state('invest', {

@@ -75,7 +75,7 @@ angular.module('app', ['ionic','ionic.service.core','app.controllers', 'app.subc
 	dayAfter:'Next day',
 	dayAfterNext:'Day after next',
 	andText:'and',
-	withdrawl:'Withdrawl',
+	Withdrawal:'Withdrawal',
 	deposit:'Deposit',
 	withdrawBottomLine:'Working days Mon-Fri. If the day of deposit is a Bank Holiday, money will be deposited the next working day.',
 	rememberMe:'Remember Me',

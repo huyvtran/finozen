@@ -8,7 +8,7 @@
 		<p style="padding: 20px 0 3px;">Please enter your valid PAN No. and net banking enabled bank details to activate your FinoZen account instantaneously.</p>
 <form name="bankDetailsTest" novalidate="" >
 		<label class="item item-input" >
-			<input type="text" name="panNo" placeholder="Enter Your PAN Number"  uppercase-only ng-model="panNo" minlength="10"  required />
+			<input type="text" name="panNo" placeholder="Enter Your PAN Number"  uppercase-only ng-model="panNo" minlength="10"  maxlength="10"  required />
 		</label>
 		<label class="item item-input" >
 			<input type="text" name="accNo" placeholder="Enter Bank Account Number" ng-model="accNumber" required />
