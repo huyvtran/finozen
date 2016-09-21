@@ -60,8 +60,8 @@ angular.module('app.subcontrollerOne', [])
         $scope.isGroupShown = function(group) {
             return $scope.shownGroup === group;
         };
-		
-		
+
+
 $scope.policy = function()
 {
 	//window.open('http://finozen.com/policy.html','_self');
@@ -187,7 +187,7 @@ $scope.terms = function()
         };
 
     })
-	
+
 //FAQ controllers END
 //TAB's DATA controller
 	.controller('calculatorCtrl', function($scope,$timeout,$sessionStorage) {
@@ -409,6 +409,13 @@ $scope.xirrRate= function(){
             mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums},function(data){
                 if(data.responseCode=="Cali_SUC_1030"){
 					$ionicLoading.hide();
+                  //clevertap charging notification
+                  clevertap.event.push("Charged", {
+                    "Amount": finalComputedVal, //amount entered
+                    "Fund Name": $sessionStorage.rtaCode, //reliance code
+                    "Charged ID":data.id ,  // important to avoid duplicate transactions due to network failure
+
+                  });
                     var ref = cordova.InAppBrowser.open('https://finotrust.com/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_blank', 'location=no');
 					ref.addEventListener('loadstop', function(event) { if( event.url.match('pymt/bdesk') ){
 						$timeout(function () {
@@ -464,16 +471,16 @@ $scope.xirrRate= function(){
         var mid=$sessionStorage.orderId;//dynamic id
     })
 .controller('statusPageCtrl', function($scope ,$sessionStorage,$state,proofRedirectFactory,myService){
-	
-	
-	
-	
+
+
+
+
 	if($sessionStorage.docStatus=='11111'){
 		$scope.para1="We have received your details and they are being verified. We will update you within 12 hours on status of your account activation.";
 		$scope.para2="However, you can start investing right away. Happy Investing!";
 		$scope.docstatus=true;
 		$scope.notNow="Start Investing";
-	} 
+	}
 	else{
 		$scope.para1="Congratulations you can start investing. However, we will need additional details to process your investments, Please click on 'Activate Now' to provide these details.";
 		$scope.para2="We will update you once your account is ready for transactions. Happy Investing!";

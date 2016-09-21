@@ -113,8 +113,8 @@ angular.module('app', ['ionic','ionic.service.core','app.controllers', 'app.subc
 .run(function($ionicPlatform, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaKeyboard,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout,$localStorage) {
   $ionicPlatform.ready(function() {
 
-$rootScope.$watch(function() {
-return $cordovaKeyboard.isVisible();
+  $rootScope.$watch(function() {
+  return $cordovaKeyboard.isVisible();
 }, function(value) {
 	console.log(value);
 $rootScope.keyboardOpen = value;
@@ -123,6 +123,7 @@ $rootScope.keyboardOpen = value;
 //$localStorage.language=0;
                 if(!navigator.onLine) {
 console.log(navigator.onLine + "  connection state");
+                  // all details are for
 					$ionicPopup.confirm({
                         title: "Internet Disconnected",
                         content: "The internet is disconnected on your device."
@@ -171,60 +172,28 @@ console.log(navigator.onLine + "  connection state");
     }, 100);
 
 
+//clevertap integration
+    CleverTap.registerPush(); //registering for push notifications
 
-    /*
-      $ionicPlatform.registerBackButtonAction(function(event) {
-          $ionicPopup.confirm({
-          title: 'System warning',
-          template: 'are you sure you want to exit?'
-          }).then(function(res) {
-          if (res) {
-          ionic.Platform.exitApp();
-          }
-          })
-      }, 100);*/
+    document.addEventListener('onCleverTapProfileSync', this.onCleverTapProfileSync, true); // optional: to be notified of CleverTap user profile synchronization updates
+    document.addEventListener('onCleverTapProfileDidInitialize', this.onCleverTapProfileDidInitialize, true); // optional, to be notified when the CleverTap user profile is initialized
+    document.addEventListener('onCleverTapInAppNotificationDismissed', this.onCleverTapInAppNotificationDismissed, true); // optional, to be receive a callback with custom in-app notification click data
+    document.addEventListener('onDeepLink', this.onDeepLink, false); // optional, register to receive deep links.
+    document.addEventListener('onPushNotification', this.onPushNotification, true); // optional, register to receive push notification payloads.
+    var customerType = clevertap.profile.getAttribute("Customer type");
+    // Returns the time elapsed in seconds
+    var timeElapsed = clevertap.session.getTimeElapsed();
+
+// Total Visit Count
+    var totalVisits = clevertap.user.getTotalVisits();
+
+// Page Count
+    var pageCount = clevertap.session.getPageCount();
+
+// Last Active Session
+    var lastVisit = clevertap.user.getLastVisit();
 
 
-
-
-    /*var push=new Ionic.Push({
-      "onNotification": function(notification) {
-    var payload = notification.payload;
-    console.log(notification, payload);
-  },
-  "onRegister": function(data) {
-    console.log(data.token);
-  },
-      "pluginConfig":{
-        "android":{
-          "iconColor":"#0000FF",
-          "icon":"icon"
-        }
-      }
-    });*/
-
-     // Enable to debug issues.
- // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
-/*
- var notificationOpenedCallback = function(jsonData) {
-   console.log('didReceiveRemoteNotificationCallBack: ' + JSON.stringify(jsonData));
- };  window.plugins.OneSignal.init("7b688632-6872-22f5-a33d-6f51b80af61b",
-                                {googleProjectNumber: "745760472440"},
-                                notificationOpenedCallback);
- OneSignal.init();
- window.plugins.OneSignal.enableInAppAlertNotification(true);
- window.plugins.OneSignal.enableVibrate(true);
-window.plugins.OneSignal.getTags(function(tags){
-  console.log('Tags Received: ' + JSON.stringify(tags));
-    })
-	
-	*/
-	
-	//mo-enage start
-/*	var moe = new MoECordova.init();
-	moe.setExistingUser(true);
-
-*/
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }

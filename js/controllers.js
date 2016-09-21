@@ -81,7 +81,20 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 						//$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
 						$sessionStorage.signUpData = (signupForm);
 						$scope.addUserInfo();
-					}
+
+            //clevertap creating a new user profile
+// if set, these populate demographic information in the Dashboard
+            clevertap.profile.push({
+              "Android_app": {
+                "FirstName": authorization.fName,             //string
+                "LastName": authorization.lName,             // String
+                "Email":authorization.email ,               // Email address of the user
+                "Phone": authorization.mobileNumber,       // Phone (with the country code)
+                "Referral":authorization.referral,        // phone number or code of the referral
+              }
+            });
+
+          }
 				}
             }
             else{
@@ -240,6 +253,18 @@ console.log($scope.loginDetails);
         $sessionStorage.clientType= data.jsonStr[0].clientType;
 		$sessionStorage.docStatus=data.jsonStr[0].docStatus;
 		console.log($sessionStorage.docStatus + "docStatus");
+
+        //clever tap login.(if exsisting user update the user's values)
+        /* clevertap.onUserLogin.push({
+          "Android_app": {
+            "Name": $sessionStorage.SessionClientName,            // String
+            "ClientStatus": $sessionStorage.clientActive,        // string(char)
+            "Phone":$sessionStorage.SessionMobNo,               // Phone
+            "DocStatus":$sessionStorage.docStatus,             //string
+            "ActiveStatus":$sessionStorage.SessionStatus,     //string
+            "ClientType":$sessionStorage.clientType,         // string(char)
+          }
+        });*/
         $state.go('tabsController.summaryPage');
         $ionicLoading.hide();
         }
