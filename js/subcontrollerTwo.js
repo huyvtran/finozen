@@ -344,13 +344,8 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 
 
 		$scope.question=function(){
-			//$state.go('signature');
-			var nextSteps=myService.myFunction($sessionStorage.docStatus);
-			var nextStepsUrl=proofRedirectFactory.name;
-			$sessionStorage.stepCount=$sessionStorage.stepCount+1;
-			var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
-				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
-			else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+			$state.go('signature');
+		
 		}
       $scope.questionUpload = function(){
 		$ionicLoading.show({templateUrl:"templates/loading.html"});
@@ -368,26 +363,8 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 		console.log(questUpload + " questUpload");
 
         questionsService.save(questUpload,function(data){
-		//	$ionicLoading.hide();			//comment this line if api is working
-		//	$state.go('signature');			//comment this line if api is working
-		/*	if(data.responseCode !== "Cali_SUC_1030") {
 				$ionicLoading.hide();
-				var refer=$ionicPopup.alert({
-					title: 'Upload Error',
-					template: 'Please try again'
-				});
-					refer.then(function(res) {
-					$window.location.reload(true)
-				});
-			}
-			else{*/
-				$ionicLoading.hide();
-				var nextSteps=myService.myFunction($sessionStorage.docStatus);
-				var nextStepsUrl=proofRedirectFactory.name;
-				$sessionStorage.stepCount=$sessionStorage.stepCount+1;
-				var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
-				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
-				else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+				$state.go('signature');
 			//}
 			},function(error){
 				$ionicLoading.hide();			//comment this line if api is working

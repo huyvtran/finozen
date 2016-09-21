@@ -160,7 +160,7 @@ width: 30%;}
 .inner_numbers{
 	font-family: 'bebas_neueregular' !important;
 	margin:0;
-	font-size: 38px;
+	font-size: 32px;
 	font-weight: 500;
 	padding: 9px;
 	color: #929292;
@@ -187,8 +187,8 @@ width: 30%;}
 		}
 	.rememberme{
 	margin-top: 20px;
-	width: 60%;
-	#remember_me_label{line-height:1.82857} }
+	width: 150px;
+	#remember_me_label{line-height:1.82857; width:100px} }
 }  
 .signin_background, .sign_up{
 .item-input{
@@ -204,7 +204,7 @@ width: 30%;}
 	}  
 	.agree_terms {
     display: block;
-    margin: 40px 2px 70px 0px;
+    margin: 14px 2px 70px 0px;
 }
   .button{
 	background:#18bb9c;
@@ -733,7 +733,7 @@ fader {
 	width: 100%;
 	.returnsBlock{
 		background:#F3F3FE;
-		.returnsBlockText{color:#A6A6A6;width: 100%; margin-bottom: 6px; .expectedReturn{font-size:42px;color: #999;}}
+		.returnsBlockText{color:#A6A6A6;width: 100%; margin-bottom: 0px; .expectedReturn{font-size:38px;color: #999;}}
 		
 	}
 	.calcLabelDiv{
@@ -741,12 +741,13 @@ fader {
 		.calcLabel{padding: 10px 0;font-size: 14px;}
 	}
 	.calcInputDiv{
-		width:55%;border: 1px solid #18bb9c; padding: 0px 5px;border-radius: 5px;margin: 5px;
+		width:55%;border: 1px solid #18bb9c; padding: 0px 5px;border-radius: 5px;margin: 5px; height: 32px;
 		input{
-			width: 94%;
+			width: 90%;
 			outline: none;
 			display: inline-block;
 			float: right;
+			height: 28px;
 		}
 		
 	}

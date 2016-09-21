@@ -85,10 +85,10 @@ $scope.terms = function()
 	})
     .controller('AccountfaqCtrl', function($scope) {
         $scope.groups = [];
-        $scope.groups["0"] = {name: "What is FinoZen?",items: ["FinoZen is a mobile app where you can watch your money grow, literally! It enables you to invest and withdraw in just a click while your money grows at an expected rate of 7.5 – 8.5% p.a."] };
+        $scope.groups["0"] = {name: "What is FinoZen?",items: ["FinoZen is a mobile app where you can watch your money grow, literally! It enables you to invest and withdraw in just a click while your money grows at an expected rate of 7.0 – 8.5% p.a."] };
         $scope.groups["1"] = {name: "How does FinoZen work?" , items: ["FinoZen channels your money to the selected liquid mutual fund which gives the best return at lowest risk. You will have full visibility and control of your money at all times. You can choose to Add or withdraw money anytime, anywhere with no penalties applicable. "] };
-        $scope.groups["2"] = {name: "Who is FinoZen meant for?" , items: ["FinoZen is meant for anyone who has excess money parked in their bank account. If you wish to make your money work for you and earn you interest to the tune of 7.5-8.5% p.a. in just a click, then FinoZen is meant for you.  You should be an Indian National investing in individual capacity.FinoZen is not available for NRIs, companies, firms, trusts etc."] };
-        $scope.groups["3"] = {name: "Why should I use Finozen over other options like savings accounts, fixed deposits?" , items: ["If your money is in Savings account, you get low returns at best quarterly.  Fixed Deposits  and other saving instruments will have higher returns but have a lock in period. With FinoZen, your returns are usually 7.5-8.5%, returns get credited in your account everyday, and you can add or withdraw any time!"] };
+        $scope.groups["2"] = {name: "Who is FinoZen meant for?" , items: ["FinoZen is meant for anyone who has excess money parked in their bank account. If you wish to make your money work for you and earn you interest to the tune of 7.0-8.5% p.a. in just a click, then FinoZen is meant for you.  You should be an Indian National investing in individual capacity.FinoZen is not available for NRIs, companies, firms, trusts etc."] };
+        $scope.groups["3"] = {name: "Why should I use Finozen over other options like savings accounts, fixed deposits?" , items: ["If your money is in Savings account, you get low returns at best quarterly.  Fixed Deposits  and other saving instruments will have higher returns but have a lock in period. With FinoZen, your returns are usually 7.0-8.5%, returns get credited in your account everyday, and you can add or withdraw any time!"] };
 
 
         /*
@@ -190,7 +190,7 @@ $scope.terms = function()
 	
 //FAQ controllers END
 //TAB's DATA controller
-	.controller('calculatorCtrl', function($scope,$timeout) {
+	.controller('calculatorCtrl', function($scope,$timeout,$sessionStorage) {
 		$scope.returnsAmount=0;
 		$scope.errorInputs="";
 		$scope.clearValues=function(){
@@ -204,7 +204,14 @@ $scope.terms = function()
 			var returnsAmount=$scope.returnsAmount;
 			var totalDays=$scope.totalDays;
 			console.log(returnsAmount , investAmount);
-			var constant=8.3/(365*100);
+			
+  	if($sessionStorage.clientType=="GO"){
+		$scope.averageRate=7.0;
+	}
+	  else if($sessionStorage.clientType=="PL") {
+	  $scope.averageRate=8.0;
+    }
+			var constant=$scope.averageRate/(365*100);
 			if(investAmount==undefined){count++}
 			if(totalDays==undefined){count++}
 			if(count>=2){
@@ -223,7 +230,7 @@ $scope.terms = function()
 		}
 
 	})
-	.controller('withdrawCtrl', function($scope,$sessionStorage,$ionicLoading,getReportService,$ionicHistory,ionicToast,$ionicPlatform,$state,$interval,$rootScope) {
+	.controller('withdrawCtrl', function($scope,$sessionStorage,$ionicLoading,getReportService,$ionicHistory,ionicToast,$ionicPlatform,$state,$interval,$rootScope,$timeout) {
 	if($sessionStorage.clientType=="GO"){
 		$scope.schemeNamep = "GOLD";
 	}
@@ -298,7 +305,10 @@ $scope.xirrRate= function(){
          })
         $ionicLoading.hide();
 		$interval(function () {
-			$rootScope.$broadcast('flip',{});
+			$timeout(function(){
+				$rootScope.$broadcast('flip',{});
+			},4000)
+			
 		},5000);
     })
 
@@ -309,12 +319,12 @@ $scope.xirrRate= function(){
   	if($sessionStorage.clientType=="GO"){
 		console.log($sessionStorage.clientType+ "  gold")
 		$scope.schemePlan="RELIANCE LIQUID FUND-CASH PLAN-GROWTH";
-		$scope.averageRate=7.5;
+		$scope.averageRate=7.0;
 	}
 	  else if($sessionStorage.clientType=="PL") {
 	  console.log($sessionStorage.clientType+ "  platinum")
       $scope.schemePlan="RELIANCE LIQUID FUND - TREASURY PLAN - IP - Growth";
-	  $scope.averageRate=8.3;
+	  $scope.averageRate=8.0;
     }
 	var dayNow = new Date().getDay();
 	console.log(dayNow);
