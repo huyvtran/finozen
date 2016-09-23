@@ -255,7 +255,7 @@ console.log($scope.loginDetails);
 		console.log($sessionStorage.docStatus + "docStatus");
 
         //clever tap login.(if exsisting user update the user's values)
-        /* clevertap.onUserLogin.push({
+         clevertap.onUserLogin.push({
           "Android_app": {
             "Name": $sessionStorage.SessionClientName,            // String
             "ClientStatus": $sessionStorage.clientActive,        // string(char)
@@ -264,7 +264,7 @@ console.log($scope.loginDetails);
             "ActiveStatus":$sessionStorage.SessionStatus,     //string
             "ClientType":$sessionStorage.clientType,         // string(char)
           }
-        });*/
+        });
         $state.go('tabsController.summaryPage');
         $ionicLoading.hide();
         }
@@ -524,7 +524,7 @@ $scope.$broadcast("scroll.refreshComplete");
      })
 
 
-    .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$sessionStorage,$ionicPopup,$ionicPlatform) {
+    .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$sessionStorage,$ionicPopup,$ionicLoading,relianceUserBank,relianceInstantAmount) {
         $scope.Withdrawl = function(form) {
 console.log($scope.amount);
 console.log($scope.checked_withdraw );
@@ -661,5 +661,38 @@ $scope.withdraw_error="Please try again";
         $scope.amountClear= function() {
             $scope.amount='';
         }
+
+      //reliance Api call
+      $scope.RelianceInstaAmounandBank=function(){
+        console.log("it is entering");
+        $ionicLoading.show({
+          noBackdrop :false,
+          template: ' <ion-spinner icon="lines"></ion-spinner>',
+          duration :20000//Optional
+        });
+        var IntstantRedemtion = relianceInstantAmount.get();
+        IntstantRedemtion.$promise.then(function(data){
+          if (data.responseCode == "Cali_SUC_1030") {  //check the succes response or code which the provide
+            //$sessionStorage."Insta_Amount":"0.00"   //read just the instant amount
+          }
+          else{
+            // please refersh again button call the function RelianceInstaAmounandBank() again
+          }
+        })
+          var bankdetails=relianceUserBank.get();
+        bankdetails.$promise.then(function(data){
+          if(data.responseCode == "Cali_SUC_1030"){
+
+            //$sessionStorage.BankAccNo":"05721610029032"," + //read just the bank account number
+            //$sessionStorage.BankName":"HDFC Bank"          // read just the bank number
+          }
+          else {
+            // please refersh again button call the function RelianceInstaAmounandBank() again
+          }
+        })
+        $ionicLoading.hide();//Hide it after
+        //update the front end
+      }
+
 
     })

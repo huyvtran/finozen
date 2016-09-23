@@ -30,6 +30,17 @@ angular.module('app.services', [])
     return $resource('https://finotrust.com/WealthWeb/ws/clientRepos/getOrders?pfolioCode='+$sessionStorage.SessionPortfolio+'&noOfOrders=30');
   }])
 
+/*For reliance api instant redemption and getting the bank details*/
+  .factory('relianceInstantAmount',['$filter',function($resource,$sessionStorage){
+    //arn code needs to be added as per the we get from the back-end
+    return('https://220.226.201.234/rmfuat/mowblyserver/wsapi/rmf/prod/wsapi/RedInvbankDetails_V1?acno=499155246676&scheme=LP&plan=IG&arncode=ARN-107100&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=0fe4fcca-63c2-453d-b4f0-06adb516923c');
+    return $resource(' https://220.226.201.234/rmfuat/mowblyserver/wsapi/rmf/prod/wsapi/RedemptionSchemeDetails?acno=499155246676&scheme=LP&plan=IG&arncode=ARN-107100&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=0fe4fcca-63c2-453d-b4f0-06adb516923c') ;
+}])
+  .factory('relianceUserBank',['$filter',function($resource,$sessionStorage){
+    //arn code needs to be added as per the we get from the back-end
+    return('https://220.226.201.234/rmfuat/mowblyserver/wsapi/rmf/prod/wsapi/RedInvbankDetails_V1?acno=499155246676&scheme=LP&plan=IG&arncode=ARN-107100&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=0fe4fcca-63c2-453d-b4f0-06adb516923c');
+      }])
+
 
 .factory('proofRedirectFactory', function() {
   return {
@@ -108,7 +119,6 @@ return totalIndex;
 		return deferred.promise;
 		}
 	}
-
 }])
 
 
