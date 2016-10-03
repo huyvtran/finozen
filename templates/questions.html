@@ -52,6 +52,13 @@
       </div>
 	<select ng-model='clientPEP.type' required ng-options='option.value as option.name for option in clientPEPOptions'></select>
    </label>
+   <label class = "item item-input item-select item-light">
+      <div class = "input-label">
+         4) Date of Birth*
+		 <!--<span style="color: #18bb9c; font-size: 12px;" class="button-icon ion-information-circled"  ng-controller="PEPpopOverController" ng-click="popover.show($event)"> </span>-->
+      </div>
+	<input type="number" ng-model='clientDOB' required />
+   </label>
 
 </div>
 <!--

@@ -478,6 +478,17 @@ $scope.$broadcast("scroll.refreshComplete");
 
     })
 
+    .controller('AVGGainPopOverController',function($scope,$ionicPopover,$translate ){
+
+        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item pop_up" href="#" target="_blank" >Average gains for last 7 days </a> </div></ion-content>';
+
+        $scope.popover = $ionicPopover.fromTemplate(template, {
+            scope: $scope
+        });
+
+
+    })
+
     .controller('popOverController',function($scope,$ionicPopover,$translate ){
 
         var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item pop_up" href="#" target="_blank" translate="TEXT_POPOVER"></a> </div></ion-content>';
