@@ -1,0 +1,59 @@
+{
+  "name": "ionic-process-spinner",
+  "version": "0.0.1",
+  "description": "Angular and Ionic Framework extension. It provides the ionProcessSpinner directive to show a loading spinner until a process has finished. It replaces the child content with a loading spinner while processing.",
+  "author": {
+    "name": "Bengt Weiße",
+    "email": "bengtler@gmail.com"
+  },
+  "homepage": "https://github.com/KillerCodeMonkey/ionic-process-spinner",
+  "main": "src/ionic-process-spinner.min.js",
+  "devDependencies": {
+    "grunt": "~0.4.3",
+    "grunt-contrib-uglify": "~0.6.0"
+  },
+  "engines": {
+    "node": ">=0.10"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KillerCodeMonkey/ionic-process-spinner.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KillerCodeMonkey/ionic-process-spinner/issues"
+  },
+  "keywords": [
+    "loader",
+    "process",
+    "spinner",
+    "ionic framework",
+    "ionic-process-spinner",
+    "ionic",
+    "angular",
+    "directive"
+  ],
+  "gitHead": "55659b811c5b4b8d6caca0e0f4a9c805d4e031e5",
+  "_id": "ionic-process-spinner@0.0.1",
+  "scripts": {},
+  "_shasum": "db52b961d189409969c20ffc179192e1f45e2e70",
+  "_from": "ionic-process-spinner@*",
+  "_npmVersion": "2.11.3",
+  "_nodeVersion": "0.12.7",
+  "_npmUser": {
+    "name": "killercodemonkey",
+    "email": "bengtler@gmail.com"
+  },
+  "dist": {
+    "shasum": "db52b961d189409969c20ffc179192e1f45e2e70",
+    "tarball": "https://registry.npmjs.org/ionic-process-spinner/-/ionic-process-spinner-0.0.1.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "killercodemonkey",
+      "email": "bengtler@gmail.com"
+    }
+  ],
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/ionic-process-spinner/-/ionic-process-spinner-0.0.1.tgz"
+}

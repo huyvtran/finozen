@@ -31,20 +31,20 @@ angular.module('app.services', [])
   }])
 
 /*For reliance api instant redemption and getting the bank details*/
-  .factory('relianceInstantAmount',['$filter',function($resource,$sessionStorage){
+  .factory('relianceInstantAmount',['$resource','$sessionStorage',function($resource,$sessionStorage){
     //arn code needs to be added as per the we get from the back-end
-    return('https://220.226.201.234/rmfuat/mowblyserver/wsapi/rmf/prod/wsapi/RedInvbankDetails_V1?acno=499155246676&scheme=LP&plan=IG&arncode=ARN-107100&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=0fe4fcca-63c2-453d-b4f0-06adb516923c');
-    return $resource(' https://220.226.201.234/rmfuat/mowblyserver/wsapi/rmf/prod/wsapi/RedemptionSchemeDetails?acno=499155246676&scheme=LP&plan=IG&arncode=ARN-107100&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=0fe4fcca-63c2-453d-b4f0-06adb516923c') ;
+    //return('https://220.226.201.234/rmfuat/mowblyserver/wsapi/rmf/prod/wsapi/RedInvbankDetails_V1?acno=499155246676&scheme=LP&plan=IG&arncode=ARN-107100&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=0fe4fcca-63c2-453d-b4f0-06adb516923c');
+    return $resource('https://online.reliancemf.com/rmf/mowblyserver/wsapi/rmf/prod/wsapi/RedemptionSchemeDetails?acno='+$sessionStorage.folioNums+'&scheme=LP&plan=IG&arncode=ARN-107100&branch=FP99&proxybranch=&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=c3d2f2f3-7d23-4f48-9fe6-82db5449a562') ;
 }])
-  .factory('relianceUserBank',['$filter',function($resource,$sessionStorage){
+  .factory('relianceUserBank',['$resource','$sessionStorage',function($resource,$sessionStorage){
     //arn code needs to be added as per the we get from the back-end
-    return('https://220.226.201.234/rmfuat/mowblyserver/wsapi/rmf/prod/wsapi/RedInvbankDetails_V1?acno=499155246676&scheme=LP&plan=IG&arncode=ARN-107100&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=0fe4fcca-63c2-453d-b4f0-06adb516923c');
+    return $resource('https://online.reliancemf.com/rmf/mowblyserver/wsapi/rmf/prod/wsapi/RedInvbankDetails_V1?arncode=ARN-107100&acno='+$sessionStorage.folioNums+'&scheme=LP&plan=IG&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=c3d2f2f3-7d23-4f48-9fe6-82db5449a562');
       }])
 
 
 .factory('proofRedirectFactory', function() {
   return {
-      name : ['panImage','selfie','imageSelection','addressProofImage','questions','feedback']
+      name : ['panImage','selfie','imageSelection','addressProofImage','signature','feedback']
   };
 })
 

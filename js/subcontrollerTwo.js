@@ -344,8 +344,9 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 
 
 		$scope.question=function(){
-			$state.go('signature');
-		
+			if($sessionStorage.SessionStatus=="T"){$state.go('activeClientStatus');}
+			else if($sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus==null || $sessionStorage.SessionStatus==undefined ){$state.go('inactiveClient');}
+			else{$state.go('verifySuccess');}
 		}
       $scope.questionUpload = function(){
 		$ionicLoading.show({templateUrl:"templates/loading.html"});
@@ -364,11 +365,18 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 
         questionsService.save(questUpload,function(data){
 				$ionicLoading.hide();
-				$state.go('signature');
+				if($sessionStorage.SessionStatus=="T"){$state.go('activeClientStatus');}
+				else if($sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus==null || $sessionStorage.SessionStatus==undefined ){$state.go('inactiveClient');}
+				else{$state.go('verifySuccess');}
+                   
 			//}
 			},function(error){
 				$ionicLoading.hide();			//comment this line if api is working
-				$state.go('signature');			//comment this line if api is working
+				//$state.go('signature');			//comment this line if api is working
+				if($sessionStorage.SessionStatus=="T"){$state.go('activeClientStatus');}
+				else if($sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus==null || $sessionStorage.SessionStatus==undefined ){$state.go('inactiveClient');}
+				else{$state.go('verifySuccess');}
+                   
 				/*var refresh=$ionicPopup.alert({
                   title: 'Please try again',
                    template: 'Unable to submit request'
@@ -654,7 +662,9 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 
         $ionicPlatform.ready(function(){
           $scope.signOut = function(){
-           // navigator.app.exitApp();
+				
+				//$state.go('login');
+           //navigator.app.exitApp();
             ionic.Platform.exitApp();
           }
         })
@@ -707,10 +717,7 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 				  $sessionStorage.SessionStatus=data.jsonStr.activeStatus;
 				  console.log($sessionStorage.SessionStatus+ "   bank submit $sessionStorage.SessionStatus");
 				  console.log($sessionStorage.docStatus+ "   bank submit $sessionStorage.docStatus");
-				  if($sessionStorage.SessionStatus=="T"){$state.go('activeClientStatus');}
-				  else if($sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus==null || $sessionStorage.SessionStatus==undefined ){$state.go('inactiveClient');}
-				  else{$state.go('verifySuccess');}
-                   
+				  $state.go('questions');
                  }
 
                  else {

@@ -43,7 +43,12 @@
 	<button ion-track-tap="withdraw confirm" class="button button-full button-positive" type="submit" ng-click="Withdrawl(withdrawForm)" translate="BUTTON_LANG_WITH">
 
 	</button>
-      <button class="button button-full button-positive" ng-click="RelianceInstaAmounandBank()"> </button>
+	<div class="text-center">
+            <ion-process-spinner style="width:100%; text-align: center;" processing="processing" spinner="bubbles" css-class="spinner-balanced">
+				<button class="button button-full button-clear" ng-click="RelianceInstaAmounandBank()">click </button>
+            </ion-process-spinner>
+	</div>
+	 
 	<p class="scheduled_text" translate="TEXT_WITHDRAW_SCHEDULE_TEXT"></p>
 	<div class="row deposit_table" >
 	<!--	<p><br/>

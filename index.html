@@ -18,6 +18,7 @@
 <script src="lib/angular-resource/angular-resource.js"></script>
 <script src="lib/ngstorage/ngStorage.min.js"></script>
 <script src="lib/ionic-toast/dist/ionic-toast.bundle.min.js"></script>
+<script src="lib/ionic-process-spinner/src/ionic-process-spinner.min.js"></script>
 
 
     <!-- cordova script (this will be a 404 during development) -->
@@ -56,6 +57,8 @@
         var s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(wzrk, s);
       })();
+	      CleverTap.registerPush(); //registering for push notifications
+
     </script>
   </head>
   <body ng-app="app" animation="slide-left-right-ios7">

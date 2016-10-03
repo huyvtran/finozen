@@ -368,7 +368,7 @@ console.log($scope.loginDetails);
     })
 
 
-    .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,$ionicLoading,getReportService,$timeout) {
+    .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,$ionicLoading,getReportService,$timeout,relianceUserBank,relianceInstantAmount) {
 var timeNow = new Date().getUTCHours();
 /*$ionicLoading.show({
             template:
@@ -376,6 +376,7 @@ var timeNow = new Date().getUTCHours();
             noBackdrop: true
         });*/
 	$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
+	
 var reportDate = getPerformanceService.get();
 reportDate.$promise.then(function(data){
  if (data.responseCode == "Cali_SUC_1030") {
@@ -445,8 +446,6 @@ $sessionStorage.xirr=data.jsonStr.xirr;
     console.log("error");
     $ionicLoading.hide();
   })
-
-
 
 
   $scope.doRefresh=function() {
@@ -535,8 +534,26 @@ $scope.$broadcast("scroll.refreshComplete");
      })
 
 
-    .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$sessionStorage,$ionicPopup,$ionicLoading,relianceUserBank,relianceInstantAmount) {
-        $scope.Withdrawl = function(form) {
+    .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$http,$sessionStorage,$ionicPopup,$ionicLoading,relianceUserBank,relianceInstantAmount,$timeout,$http) {
+			
+       var IntstantRedemtion = relianceInstantAmount.get();
+        IntstantRedemtion.$promise.then(function(data){
+          console.log(data.BankName + "dataa");
+		  $sessionStorage.instaAmt=data.Insta_Amount;
+        })
+		
+          var bankdetails=relianceUserBank.query();
+        bankdetails.$promise.then(function(data){
+			$sessionStorage.bankName= data[0].BankName;
+			$sessionStorage.bankAccNo= data[0].BankAccNo;
+          console.log(data + "bsnk  dataa ");
+          console.log(JSON.stringify(data) + "bsnk  dataa string");
+          console.log(data[0].BankAccNo + "bsnk  dataa ");
+        })
+		
+      
+
+	   $scope.Withdrawl = function(form) {
 console.log($scope.amount);
 console.log($scope.checked_withdraw );
 console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
@@ -676,33 +693,24 @@ $scope.withdraw_error="Please try again";
       //reliance Api call
       $scope.RelianceInstaAmounandBank=function(){
         console.log("it is entering");
-        $ionicLoading.show({
-          noBackdrop :false,
-          template: ' <ion-spinner icon="lines"></ion-spinner>',
-          duration :20000//Optional
-        });
-        var IntstantRedemtion = relianceInstantAmount.get();
+		$scope.processing = true;
+		$timeout(function () {
+       var IntstantRedemtion = relianceInstantAmount.get();
         IntstantRedemtion.$promise.then(function(data){
-          if (data.responseCode == "Cali_SUC_1030") {  //check the succes response or code which the provide
-            //$sessionStorage."Insta_Amount":"0.00"   //read just the instant amount
-          }
-          else{
-            // please refersh again button call the function RelianceInstaAmounandBank() again
-          }
+          console.log(data.BankName + "dataa");
+		  $sessionStorage.instaAmt=data.Insta_Amount;
         })
-          var bankdetails=relianceUserBank.get();
+		
+          var bankdetails=relianceUserBank.query();
         bankdetails.$promise.then(function(data){
-          if(data.responseCode == "Cali_SUC_1030"){
-
-            //$sessionStorage.BankAccNo":"05721610029032"," + //read just the bank account number
-            //$sessionStorage.BankName":"HDFC Bank"          // read just the bank number
-          }
-          else {
-            // please refersh again button call the function RelianceInstaAmounandBank() again
-          }
+			$sessionStorage.bankName= data[0].BankName;
+			$sessionStorage.bankAccNo= data[0].BankAccNo;
+          console.log(data + "bsnk  dataa ");
+          console.log(JSON.stringify(data) + "bsnk  dataa string");
+          console.log(data[0].BankAccNo + "bsnk  dataa ");
         })
-        $ionicLoading.hide();//Hide it after
-        //update the front end
+		 $scope.processing = false;
+		}, 5000);
       }
 
 
