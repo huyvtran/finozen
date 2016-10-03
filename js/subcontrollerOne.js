@@ -37,7 +37,7 @@ angular.module('app.subcontrollerOne', [])
 	})
 //FAQ controllers START
     .controller('FundsMethodCtrl', function($scope) {
-        $scope.message = "In FinoZen, we have ensured that there is minimal risk to your investments with high returns and almost instantaneous liquidity. Your investments directly go to a pre-selected liquid mutual fund. FinoZen selection algorithm is based on following parameters –";
+        $scope.message = "In FinoZen, we have ensured that there is minimal risk to your investments with high returns and almost instantaneous liquidity. Your Investments directly go to a pre-selected liquid/ultra-short term debt fund. FinoZen selection algorithm is based on following parameters –";
         $scope.groups = [];
         $scope.groups["0"] = {name: "A. Net Assets of Liquid Fund", items: ["We give high weightage to the Net Amount Invested in a fund, and only those funds with greater than Rs. 2,000 Cr. in net assets are considered. This ensures that there is no liquidity crunch."] };
         $scope.groups["1"] = {name: "B. Size of Asset Management Company" , items: ["Size of Asset Management Company is given due importance and only top 10 fund houses are selected by us."] };
@@ -88,7 +88,8 @@ $scope.terms = function()
         $scope.groups["0"] = {name: "What is FinoZen?",items: ["FinoZen is a mobile app where you can watch your money grow, literally! It enables you to invest and withdraw in just a click while your money grows at an expected rate of 7.0 – 8.5% p.a."] };
         $scope.groups["1"] = {name: "How does FinoZen work?" , items: ["FinoZen channels your money to the selected liquid/ultra-short term debt mutual fund which gives the best return at lowest risk. You will have full visibility and control of your money at all times. You can choose to Add or withdraw money anytime, anywhere with no penalties applicable."] };
         $scope.groups["2"] = {name: "Who is FinoZen meant for?" , items: ["FinoZen is meant for anyone who has excess money parked in their bank account. If you wish to make your money work for you and earn you interest to the tune of 7.0-8.5% p.a. in just a click, then FinoZen is meant for you.  You should be an Indian National, NRI or an Indian Company investing in person capacity. "] };
-        $scope.groups["3"] = {name: "Why should I use Finozen over other options like savings accounts, fixed deposits?" , items: ["If your money is in Savings account, you get low returns at best quarterly.  Fixed Deposits and other saving instruments will have higher returns but have a lock in period. With FinoZen, your returns are usually 7.0-8.5%, returns get credited in your account everyday, and you can add or withdraw any time!"] };
+        $scope.groups["4"] = {name: "Why should I use Finozen over other options like savings accounts, fixed deposits?" , items: ["If your money is in Savings account, you get low returns at best quarterly.  Fixed Deposits and other saving instruments will have higher returns but have a lock in period. With FinoZen, your returns are usually 7.0-8.5%, returns get credited in your account everyday, and you can add or withdraw any time!"] };
+        $scope.groups["3"] = {name: "How does FinoZen make money?",items: ["FinoZen earns 0.05% - 0.25% per annum for investments made through its app i.e. if you invest Rs. 10,000 through FinoZen and keep it for a year, FinoZen gets anywhere between Rs. 5 to Rs. 25. This commission is paid to FinoZen by the Mutual Fund company."] };
 
 
         /*
@@ -167,7 +168,7 @@ $scope.terms = function()
     .controller('OthersCtrl', function($scope) {
         $scope.groups = [];
         $scope.groups["0"] = {name: "Where is your office?",items: ["Our office is located at:","25, 18th Cross,","9th Main, Behind McDonald,","HSR Layout,Sector 7, ","Bengaluru, 560102 Karnataka","Our business hours are Monday to Friday 10 am to 8 pm."] };
-        $scope.groups["1"] = {name: "How can I reach you in case of any questions?",items: ["You can call us Monday to Friday 10am to 8 pm by using the dialer icon on the top right corner on any page of the app.","You can also reach us via email at support@finozen.com. We will respond to your queries within 1 business day.","You can also send us your feedback by going to the “Contact Us” section on the left menu panel of the app."] };
+        $scope.groups["1"] = {name: "How can I reach you in case of any questions?",items: ["You can call us Monday to Friday 10am to 8 pm by using the dialer icon on the top right corner on any page of the app. ","You can also reach us via email at support@finozen.com. We will respond to your queries within 1 business days. ","You can also send us your feedback by going to the “Contact Us” section on the left menu panel of the app."] };
 
 
         /*
