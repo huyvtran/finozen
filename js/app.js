@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 var confirmation = 0;
-angular.module('app', ['ionic','ionic.service.core','app.controllers', 'ionicProcessSpinner' , 'app.subcontrollerOne','pascalprecht.translate','app.subcontrollerTwo' , 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages','ngStorage','ngIdle','ngCordova', 'ionic-toast'])
+angular.module('app', ['ionic','ionic.service.core','app.controllers', 'ionicProcessSpinner' , 'app.subcontrollerOne','pascalprecht.translate','app.subcontrollerTwo' , 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages','ngStorage','ngIdle','ngCordova', 'ionic-toast','ionic-datepicker'])
 /*.constant('$ionicLoadingConfig', {
   template: '<ion-spinner icon="android"></ion-spinner>',
   showBackdrop: true,
@@ -180,6 +180,7 @@ console.log(navigator.onLine + "  connection state");
     document.addEventListener('onCleverTapInAppNotificationDismissed', this.onCleverTapInAppNotificationDismissed, false); // optional, to be receive a callback with custom in-app notification click data
     document.addEventListener('onDeepLink', this.onDeepLink, false); // optional, register to receive deep links.
     document.addEventListener('onPushNotification', this.onPushNotification, false); // optional, register to receive push notification payloads.
+	 CleverTap.setDebugLevel(1277182231);
     var customerType = clevertap.profile.getAttribute("Customer type");
     // Returns the time elapsed in seconds
     var timeElapsed = clevertap.session.getTimeElapsed();

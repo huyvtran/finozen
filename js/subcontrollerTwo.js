@@ -307,7 +307,7 @@ angular.module('app.subcontrollerTwo', [])
     })
 
       /*for question's*/
-    .controller('questionsCTRL',function($scope,myService,proofRedirectFactory,questionsService,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window){
+    .controller('questionsCTRL',function($scope,myService,proofRedirectFactory,questionsService,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window,ionicDatePicker,$filter){
 $scope.diasbleSkip=$sessionStorage.disbledSkip;
 	   $scope.clientIncomeOptions = [
     { name: 'Below 1 Lakh', value: '31' },
@@ -348,6 +348,42 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 			else if($sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus==null || $sessionStorage.SessionStatus==undefined ){$state.go('inactiveClient');}
 			else{$state.go('verifySuccess');}
 		}
+		
+		//for datepicker
+		$scope.selectedDate = new Date();
+    var ipObj1 = {
+      callback: function (val) {  //Mandatory
+        console.log('Return value from the datepicker modal is : ' + val, new Date(val));
+		$scope.selectedDate = new Date(val);
+		var dateof= val;
+		dateof = $filter('date')(val,'dd/MM/yyyy');
+		console.log(dateof);
+		$sessionStorage.dob=dateof;
+		console.log($sessionStorage.dob);
+      },
+      disabledDates: [            //Optional
+        new Date(),
+        new Date('Wednesday, August 12, 2015'),
+        new Date("08-16-2016"),
+        new Date(1439676000000)
+      ],
+      from: new Date(1940, 1, 1), //Optional
+      to: new Date(), 			  //Optional
+      inputDate: new Date(),      //Optional
+      mondayFirst: true,          //Optional
+	  titleLabel: 'Select a Date',
+	  setLabel: 'Happy Birthday',
+      disableWeekdays: [],       //Optional
+      closeOnSelect: false,       //Optional
+      templateType: 'modal'       //Optional
+    };
+
+    $scope.openDatePicker = function(){
+      ionicDatePicker.openDatePicker(ipObj1);
+    };
+
+
+		
       $scope.questionUpload = function(){
 		$ionicLoading.show({templateUrl:"templates/loading.html"});
 		var questUpload=JSON.parse(JSON.stringify({}));
@@ -357,6 +393,7 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 		questUpload.occup=$scope.clientOccupation.type; // for the occupation
 		questUpload.pep=$scope.clientPEP.type; //for the pep status either Y or N
 		questUpload.resStatus="Individual"; // for the resdential status hardcoding it to individual
+		questUpload.dob=$sessionStorage.dob // for the client's date of birth
 		questUpload = JSON.stringify(questUpload);
 		console.log($scope.clientIncome.type + " clientIncome");
 		console.log($scope.clientPEP.type + " clientPEP");
@@ -681,7 +718,7 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 
 /*for uploading the bank details*/
 
-  .controller('bankDetailsCTRL',function($scope,$state,$sessionStorage,bankDetailsService,$ionicPopup,$ionicLoading,$window,proofRedirectFactory,myService){
+  .controller('bankDetailsCTRL',function($scope,$state,$sessionStorage,bankDetailsService,$ionicPopup,$ionicLoading,$window,proofRedirectFactory,myService,getZBFService,relianceInstantZBF,$location){
     $scope.accountTypeOptions = [
     { name: 'Savings', value: 'SB_New' },
     { name: 'Current', value: 'CA_new' }
@@ -717,7 +754,54 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 				  $sessionStorage.SessionStatus=data.jsonStr.activeStatus;
 				  console.log($sessionStorage.SessionStatus+ "   bank submit $sessionStorage.SessionStatus");
 				  console.log($sessionStorage.docStatus+ "   bank submit $sessionStorage.docStatus");
-				  $state.go('questions');
+				  
+				  if($sessionStorage.SessionStatus=="T")
+				  {
+					   var zbf=getZBFService.get();
+					    zbf.$promise.then(function(data)
+						{
+						if(data.responseCode=="Cali_SUC_1030")
+			{
+							var rg = (data.jsonStr.rgResponse);
+							var relzbf= cordova.InAppBrowser.open(rg,'_blank','location=no');
+							relzbf.addEventListener('loadstop', function(event) 
+							{
+								if( event.url.match('https://investeasy.reliancemutual.com/online/SimplySavePartner/Confirmation?Msg=Success&Folio') )
+								{
+									//add the js file which will call the html in return
+									relzbf.execScript({file:"inject.js"});
+							var parser=document.createElement('a');
+							parser.href=window.location;
+							console.log(parser.search);
+							//sending data to the backend
+							var folio={};
+							folio.portfolioCode=$sessionStorage.SessionPortfolio;
+							folio.schemeCode=$sessionStorage.rtaCode;
+							folio.folioNumber=r;
+							folio=JSON.stringify(folio);
+							relianceInstantZBF.save(folio,function(data)
+							{
+								if(data.responseCode == "Cali_SUC_1030")
+								{
+									$state.go('activeStatus');
+								}
+							}) 
+								$timeout(function () {
+								relzbf.close();
+								},10000);
+								;} 
+							});
+						$timeout(function () 
+						{
+							$state.go('activeStatus');
+						},1000);
+		  }
+				  })
+				  }
+				  else if($sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus==null || $sessionStorage.SessionStatus=="null" || $sessionStorage.SessionStatus==undefined ){$state.go('inactiveClient');}
+				  else{$state.go('verifySuccess');}
+				  
+				
                  }
 
                  else {

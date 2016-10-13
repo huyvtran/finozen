@@ -5,12 +5,30 @@
 	<div class="h1 title"><p class="head_title"><span id="title" translate="BUTTON_LANG_WITH"></span></p></div>
 	<a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
 </div>
-    <ion-content overflow-scroll="true" padding="true" class="has-header" ng-controller="AuthWithdrawlCtrl">
+    <ion-content overflow-scroll="true" padding="true" class="has-header" ng-controller="AuthWithdrawlCtrl" ng-click="RelianceBank()">
 <div class="screen_invest">
-		<div class="row bar bar-subheader invest_subheader">
-		  <p class="title" ng-controller="withdrawCtrl"><span translate="TEXT_CURRENT_BALANCE"></span> <span style="color:#18bb9c">{{ balance() |currency:"&#x20B9; "}}</span></p>
+		<div class="row bar bar-subheader invest_subheader" style="height:85px">
+		  <p class="title" style="text-align:left;" ng-controller="withdrawCtrl"><span translate="TEXT_CURRENT_BALANCE"></span> <span style="color:#18bb9c">{{ balance() |currency:"&#x20B9; "}}</span></p>
+	<div class="invest_info text-center ">
+            <ion-process-spinner style="width:100%; text-align: center;" processing="processing" spinner="bubbles" css-class="spinner-balanced">
+				
+  <div class="item item-button-right text-left instaRefresh">
+    Instant Redemption amount: {{insta}}
+    <button class="button button-clear" ng-click="RelianceInstaAmount()">
+      <i class="icon ion-refresh"></i>
+    </button>
+  </div>
+				
+				
+            </ion-process-spinner>
+	</div>
 		</div>
-		<div class="row invest_info">
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<div class="row">
 		<p translate="TEXT_WIHTDRAW_BALANCE"></p>
 		</div>
 		<form name="withdrawForm" novalidate="" >
@@ -43,11 +61,6 @@
 	<button ion-track-tap="withdraw confirm" class="button button-full button-positive" type="submit" ng-click="Withdrawl(withdrawForm)" translate="BUTTON_LANG_WITH">
 
 	</button>
-	<div class="text-center">
-            <ion-process-spinner style="width:100%; text-align: center;" processing="processing" spinner="bubbles" css-class="spinner-balanced">
-				<button class="button button-full button-clear" ng-click="RelianceInstaAmounandBank()">click </button>
-            </ion-process-spinner>
-	</div>
 	 
 	<p class="scheduled_text" translate="TEXT_WITHDRAW_SCHEDULE_TEXT"></p>
 	<div class="row deposit_table" >

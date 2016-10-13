@@ -228,6 +228,7 @@ width: 30%;}
 .signup_icons{margin-right:10px;}
 .button, .button:hover{color:white; &.activated{background:#18bb9c; opacity:0.8 !important;}}
 }
+.ionic_datepicker_modal .footer{padding:0;}
 .summary{
 	.total_value{
 	font-family: 'bebas_neueregular';
@@ -266,10 +267,20 @@ img{margin:0;width:100vw;}
     top: 10px;
     background: #ebebeb;
 	.title{font-size:14px;}
-	}
-	
+	}	
 	.invest_info{
-		padding-top:60px; margin:auto 10px; 
+		margin-top: 30px;
+		width: 100%;
+		.instaRefresh {
+			border: none;
+			padding: 13px 5px;
+			background: transparent;
+			font-size: 14px;
+			text-transform: uppercase;
+			.button{
+				background:transparent;
+			}
+		}
 		&.list{
 			padding-top:0px; 
 			input{max-width: 98%;}
@@ -504,7 +515,16 @@ img{height: 400px;}
 		right: 9px;
 		margin-top: -1px;
 	}
-}
+	.dobInput button{
+		width: 43%;
+		right: 0;
+		position: absolute;
+		top: 0;
+		background: transparent;
+		border: 1px solid #18bb9c;
+		bottom: 0;
+	}
+} 
 .aboutus{
 	.aboutus_bar{p{padding:5px; margin:0;}}
 	.aboutus_block{

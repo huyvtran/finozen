@@ -29,17 +29,40 @@ angular.module('app.services', [])
   .factory('getReportService', ['$resource','$sessionStorage',function($resource,$sessionStorage){
     return $resource('https://finotrust.com/WealthWeb/ws/clientRepos/getOrders?pfolioCode='+$sessionStorage.SessionPortfolio+'&noOfOrders=30');
   }])
+  
+  /*Reliance ZBF page service*/
+   .factory('getZBFService', ['$resource','$sessionStorage',function($resource,$sessionStorage){
+	   console.log($sessionStorage.portfolioCode+"portfolioCode");
+    return $resource('http://rupeex.com:8080/WealthWeb/ws/clientOrders/zbf?portfolioCode='+$sessionStorage.SessionPortfolio+'&rtaCode='+$sessionStorage.rtaCode);
+  }])
+  
+  /*Reliance folio number sending it to backend */
+   .factory('relianceInstantZBF',['$resource','$sessionStorage',function($resource,$sessionStorage){
+       var relianceZBF = $resource('http://rupeex.com:8080//ealthweb/ws/clientorders/createfolio',{},{
+          save:{
+              method:'POST',
+              headers:{
+                  'Content-Type' :'application/json'
+              }
+          }
+      });
+
+      return relianceZBF;
+  }])
 
 /*For reliance api instant redemption and getting the bank details*/
-  .factory('relianceInstantAmount',['$resource','$sessionStorage',function($resource,$sessionStorage){
-    //arn code needs to be added as per the we get from the back-end
-    //return('https://220.226.201.234/rmfuat/mowblyserver/wsapi/rmf/prod/wsapi/RedInvbankDetails_V1?acno=499155246676&scheme=LP&plan=IG&arncode=ARN-107100&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=0fe4fcca-63c2-453d-b4f0-06adb516923c');
-    return $resource('https://online.reliancemf.com/rmf/mowblyserver/wsapi/rmf/prod/wsapi/RedemptionSchemeDetails?acno='+$sessionStorage.folioNums+'&scheme=LP&plan=IG&arncode=ARN-107100&branch=FP99&proxybranch=&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=c3d2f2f3-7d23-4f48-9fe6-82db5449a562') ;
-}])
-  .factory('relianceUserBank',['$resource','$sessionStorage',function($resource,$sessionStorage){
-    //arn code needs to be added as per the we get from the back-end
-    return $resource('https://online.reliancemf.com/rmf/mowblyserver/wsapi/rmf/prod/wsapi/RedInvbankDetails_V1?arncode=ARN-107100&acno='+$sessionStorage.folioNums+'&scheme=LP&plan=IG&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=c3d2f2f3-7d23-4f48-9fe6-82db5449a562');
-      }])
+  .factory('relianceInstantAmountAPI',['$resource','$sessionStorage',function($resource,$sessionStorage){
+       var relianceIntsaAmount = $resource('http://rupeex.com:8080/WealthWeb/ws/pymt/wrapperWS',{},{
+          save:{
+              method:'POST',
+              headers:{
+                  'Content-Type' :'application/json'
+              }
+          }
+      });
+
+      return relianceIntsaAmount;
+  }])
 
 
 .factory('proofRedirectFactory', function() {
@@ -168,7 +191,7 @@ return totalIndex;
 
       /*Questions factory*/
   .factory('questionsService',['$resource',function($resource){
-    var bankUpload = $resource('https://finotrust.com/WealthWeb/ws/kycs/addlKyc',{},{
+    var bankUpload = $resource('http://rupeex.com:8080/WealthWeb/ws/kycs/addlKyc',{},{ //in final build change it to finotrust.com
       save:{
         method:'POST',
         headers:{
@@ -197,12 +220,13 @@ return totalIndex;
 
 /*send MF orders*/
 .factory('mfOrderUrlService', ['$resource',function($resource){
-	var mfOrderRequest= $resource('https://finotrust.com/WealthWeb/ws/clientOrders/clientOrderMfBuy',{},{
+	var mfOrderRequest= $resource('http://rupeex.com:8080/WealthWeb/ws/clientOrders/clientOrderMfBuy',{},{
 		save:{
 			method:'POST',
 		},
 	});
 	return mfOrderRequest;
+	//https://finotrust.com/WealthWeb/ws/clientOrders/clientOrderMfBuy
 }])
 
 /*send MF sell order*/

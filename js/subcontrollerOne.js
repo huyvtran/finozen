@@ -87,7 +87,7 @@ $scope.terms = function()
         $scope.groups = [];
         $scope.groups["0"] = {name: "What is FinoZen?",items: ["FinoZen is a mobile app where you can watch your money grow, literally! It enables you to invest and withdraw in just a click while your money grows at an expected rate of 7.0 – 8.5% p.a."] };
         $scope.groups["1"] = {name: "How does FinoZen work?" , items: ["FinoZen channels your money to the selected liquid/ultra-short term debt mutual fund which gives the best return at lowest risk. You will have full visibility and control of your money at all times. You can choose to Add or withdraw money anytime, anywhere with no penalties applicable."] };
-        $scope.groups["2"] = {name: "Who is FinoZen meant for?" , items: ["FinoZen is meant for anyone who has excess money parked in their bank account. If you wish to make your money work for you and earn you interest to the tune of 7.0-8.5% p.a. in just a click, then FinoZen is meant for you.  You should be an Indian National, NRI or an Indian Company investing in person capacity. "] };
+        $scope.groups["2"] = {name: "Who is FinoZen meant for?" , items: ["FinoZen is meant for anyone who has excess money parked in their bank account. If you wish to make your money work for you and earn you interest to the tune of 7.0-8.5% p.a. in just a click, then FinoZen is meant for you.  You should be an Indian National, NRI or an Indian Company investing in personal capacity. "] };
         $scope.groups["4"] = {name: "Why should I use Finozen over other options like savings accounts, fixed deposits?" , items: ["If your money is in Savings account, you get low returns at best quarterly.  Fixed Deposits and other saving instruments will have higher returns but have a lock in period. With FinoZen, your returns are usually 7.0-8.5%, returns get credited in your account everyday, and you can add or withdraw any time!"] };
         $scope.groups["3"] = {name: "How does FinoZen make money?",items: ["FinoZen earns 0.05% - 0.25% per annum for investments made through its app i.e. if you invest Rs. 10,000 through FinoZen and keep it for a year, FinoZen gets anywhere between Rs. 5 to Rs. 25. This commission is paid to FinoZen by the Mutual Fund company."] };
 
@@ -142,7 +142,7 @@ $scope.terms = function()
         $scope.groups["2"] = {name: "How often can I invest/Add money or withdraw?",items: ["You can invest/add money or withdraw as often as you want. There are no restrictions on the frequency of your transactions. Also, there are no penalties or charges applicable when you withdraw your money."] };
         $scope.groups["3"] = {name: "How soon will my investments reflect on FinoZen?",items: ["All Investments will be processed on next working day and will reflect in your FinoZen account at 11:30 am on next day of processing.","Working days are Monday to Friday except Bank Holidays.", "For ex: An investment done on Sunday, will be processed on Monday and will reflect in your FinoZen account on 11:30 am Tuesday."] };
         $scope.groups["4"] = {name: "Where does my money go once I withdraw?",items: ["Your money will be deposited back to the bank account you registered with us at the time of your account opening."] };
-        $scope.groups["5"] = {name: "How soon can I access my withdrawn money?",items: ["If you bank is IMPS enabled, withdrawal will be processed and money will be deposited in your account in less than 30 mins. If your Bank is not IMPS enabled then following is the withdrawal schedule: (continue to show the current table)"] };
+        $scope.groups["5"] = {name: "How soon can I access my withdrawn money?",items: ["If you bank is IMPS enabled, withdrawal will be processed and money will be deposited in your account in less than 30 mins. If your Bank is not IMPS enabled then following is the withdrawal schedule: "] }; //add a table
         $scope.groups["6"] = {name: "How much can I invest at a time? Is there a minimum or a maximum?",items: ["You can invest any amount from a minimum of INR 500."] };
         $scope.groups["7"] = {name: "How long do I need to stay invested? Is there a lock-in period?",items: ["There is no minimum period or lock-in. You have the option to withdraw your money anytime. "] };
         $scope.groups["8"] = {name: "Can I invest through cash/cheque?",items: ["No. You can invest only through app or FinoZen website through Netbanking or Debit Card.  "] };
@@ -410,14 +410,8 @@ $scope.xirrRate= function(){
             mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums},function(data){
                 if(data.responseCode=="Cali_SUC_1030"){
 					$ionicLoading.hide();
-                  //clevertap charging notification
-                  clevertap.event.push("Charged", {
-                    "Amount": finalComputedVal, //amount entered
-                    "Fund Name": $sessionStorage.rtaCode, //reliance code
-                    "Charged ID":data.id ,  // important to avoid duplicate transactions due to network failure
-
-                  });
-                    var ref = cordova.InAppBrowser.open('https://finotrust.com/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_blank', 'location=no');
+					if(data.jsonStr=='null'){
+						  var ref = cordova.InAppBrowser.open('https://finotrust.com/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_blank', 'location=no');
 					ref.addEventListener('loadstop', function(event) { if( event.url.match('pymt/bdesk') ){
 						$timeout(function () {
 							ref.close();
@@ -426,6 +420,31 @@ $scope.xirrRate= function(){
 					$timeout(function () {
 							$state.go('tabsController.recentTransactions');
 						},1000);
+						
+					}
+					else{
+						console.log(data.jsonStr.rgResponse);
+						console.log(data.jsonStr.ihno);
+						var rel= cordova.InAppBrowser.open('https://investeasy.reliancemutual.com/online/CampaingLink/InvestorCampaign?IHNO='+data.jsonStr.ihno,'_blank','location=no');
+						rel.addEventListener('loadstop', function(event) { if( event.url.match('https://investeasy.reliancemutual.com/online/Payments/PaymentConfirmation_DIT.aspx') ){
+						$timeout(function () {
+							rel.close();
+						},10000);
+					;} });
+					$timeout(function () {
+							$state.go('tabsController.recentTransactions');
+						},1000);
+						
+						
+					}
+                  //clevertap charging notification
+                  clevertap.event.push("Charged", {
+                    "Amount": finalComputedVal, //amount entered
+                    "Fund Name": $sessionStorage.rtaCode, //reliance code
+                    "Charged ID":data.id ,  // important to avoid duplicate transactions due to network failure
+
+                  });
+                    
 
                 }
 				else{

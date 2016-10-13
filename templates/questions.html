@@ -52,12 +52,12 @@
       </div>
 	<select ng-model='clientPEP.type' required ng-options='option.value as option.name for option in clientPEPOptions'></select>
    </label>
-   <label class = "item item-input item-select item-light">
-      <div class = "input-label">
+   <label class = "item item-input dobInput item-light">
+      <div class = "label">
          4) Date of Birth*
 		 <!--<span style="color: #18bb9c; font-size: 12px;" class="button-icon ion-information-circled"  ng-controller="PEPpopOverController" ng-click="popover.show($event)"> </span>-->
       </div>
-	<input type="number" ng-model='clientDOB' required />
+	<button ng-click="openDatePicker()" ng-model='clientDOB' >{{selectedDate | date:'dd MMM yyyy'}}</button>
    </label>
 
 </div>
@@ -77,7 +77,7 @@
 <p style="padding: 2px 10px 5px; text-align:left;font-size: 12px;"><sup>By clicking on submit I agree that I am an Indian PAN card holder and a resident individual.</sup>.</p>
 </div>
     </ion-content>
-<ion-footer-bar padding="false" style="padding:0;">
+<ion-footer-bar padding="false" class="footerQuestion" style="padding:0;">
 	<div class="button-bar " style="padding:0;">
 		<button class="button button-positive" ng-click="question()" ng-disabled="true"  style="margin:1px;line-height: 44px;">SKIP</button>
 		<button class="button button-positive" ng-click="questionUpload()" style="margin:1px;line-height: 44px;">SUBMIT</button>

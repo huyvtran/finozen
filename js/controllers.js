@@ -142,7 +142,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 
     /*For Sign In*/
 
-.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,$ionicLoading,$localStorage,$translate,$ionicPopup,$timeout) {
+.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,$ionicLoading,$localStorage,$translate,$ionicPopup,$timeout,$ionicPlatform) {
 /*
 	$scope.clientLanguageOptions = [
 			{ name: 'বাঙালি', value: '1' },
@@ -242,31 +242,61 @@ console.log($scope.loginDetails);
         $sessionStorage.SessionIdstorage = data.msg;
         $sessionStorage.SessionPortfolio =data.jsonStr[0].pfolioCode;
         $sessionStorage.SessionStatus =data.jsonStr[0].activeStatus;
-        $sessionStorage.SessionClientName =data.jsonStr[0].clientName;
-        $sessionStorage.SessionClientCode =data.jsonStr[0].clientCode;
-        $sessionStorage.SessionMobNo =data.jsonStr[0].mobileNo;
-        $sessionStorage.SessionFolioNums =(data.jsonStr[0].folioNums).length;
-        $sessionStorage.clientActive = data.jsonStr[0].clientActive;
-        $sessionStorage.nachStatus=data.jsonStr[0].nachStatus;
-        console.log($sessionStorage.SessionFolioNums);
-        $sessionStorage.folioNums = data.jsonStr[0].folioNums[0];
-        $sessionStorage.clientType= data.jsonStr[0].clientType;
-		$sessionStorage.docStatus=data.jsonStr[0].docStatus;
-		console.log($sessionStorage.docStatus + "docStatus");
+		
+		//for suspended client
+		if($sessionStorage.SessionStatus=='S'){
+			$ionicLoading.hide();
+			var myPopup = $ionicPopup.show({
+                content: 'Your account has been suspended',
+                buttons: [
+                    { text: 'Call',
+                        onTap:function(e){
+                            window.location.href="tel:07899825545";
+                        }
 
-        //clever tap login.(if exsisting user update the user's values)
-         clevertap.onUserLogin.push({
-          "Android_app": {
-            "Name": $sessionStorage.SessionClientName,            // String
-            "ClientStatus": $sessionStorage.clientActive,        // string(char)
-            "Phone":$sessionStorage.SessionMobNo,               // Phone
-            "DocStatus":$sessionStorage.docStatus,             //string
-            "ActiveStatus":$sessionStorage.SessionStatus,     //string
-            "ClientType":$sessionStorage.clientType,         // string(char)
-          }
-        });
-        $state.go('tabsController.summaryPage');
-        $ionicLoading.hide();
+                    },
+
+                    {
+                        text: '<b>Close</b>',
+                        type: 'button-positive',
+                        onTap: function(e) {
+                            
+                            
+								 ionic.Platform.exitApp();
+                        }
+                    },
+                ]
+            });
+
+		}
+		else{
+			$sessionStorage.SessionClientName =data.jsonStr[0].clientName;
+			$sessionStorage.SessionClientCode =data.jsonStr[0].clientCode;
+			$sessionStorage.SessionMobNo =data.jsonStr[0].mobileNo;
+			$sessionStorage.SessionFolioNums =(data.jsonStr[0].folioNums).length;
+			$sessionStorage.clientActive = data.jsonStr[0].clientActive;
+			$sessionStorage.nachStatus=data.jsonStr[0].nachStatus;
+			console.log($sessionStorage.SessionFolioNums);
+			$sessionStorage.folioNums = data.jsonStr[0].folioNums[0];
+			$sessionStorage.clientType= data.jsonStr[0].clientType;
+			$sessionStorage.docStatus=data.jsonStr[0].docStatus;
+			console.log($sessionStorage.docStatus + "docStatus");
+
+			//clever tap login.(if exsisting user update the user's values)
+			/* clevertap.onUserLogin.push({
+			  "Android_app": {
+				"Name": $sessionStorage.SessionClientName,            // String
+				"ClientStatus": $sessionStorage.clientActive,        // string(char)
+				"Phone":$sessionStorage.SessionMobNo,               // Phone
+				"DocStatus":$sessionStorage.docStatus,             //string
+				"ActiveStatus":$sessionStorage.SessionStatus,     //string
+				"ClientType":$sessionStorage.clientType,         // string(char)
+			  }
+			});*/
+			$state.go('tabsController.summaryPage');
+			$ionicLoading.hide();
+		}
+
         }
         else if(data.responseCode=="Cali_ERR_9002") {
         $ionicLoading.hide();
@@ -304,7 +334,7 @@ console.log($scope.loginDetails);
 
 
   /*add money page check*/
-.controller('transactionAccessCtrl', function($scope,$sessionStorage,$state){
+.controller('transactionAccessCtrl', function($scope,$sessionStorage,$state,relianceInstantAmountAPI,$ionicLoading){
 	$scope.investCheck=function(){
 	if($sessionStorage.SessionStatus=="N" || $sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus== 'null' ||$sessionStorage.SessionStatus==undefined ){
 		$state.go("inactiveClient");
@@ -320,11 +350,36 @@ console.log($scope.loginDetails);
 
 	}
 	$scope.withdrawCheck=function(){
+		$ionicLoading.show();
 	if($sessionStorage.SessionStatus=="N" || $sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus== 'null' || $sessionStorage.SessionStatus==undefined ){
+		$ionicLoading.hide();
 		$state.go("verifySuccess");
 	}
 	else{
-			$state.go("withdraw");
+			//for reliance instant amount	
+			var bankcall={};
+				bankcall.gateWayType ="RG",
+                bankcall.gateWayPayLoad= "https://online.reliancemf.com/rmf/mowblyserver/wsapi/rmf/prod/wsapi/RedemptionSchemeDetails?acno="+$sessionStorage.folioNums+"&scheme=LP&plan=IG&arncode=ARN-107100&branch=FP99&proxybranch=&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=c3d2f2f3-7d23-4f48-9fe6-82db5449a562"
+				bankcall=JSON.stringify(bankcall);
+				console.log(bankcall+"bank call");
+				var bankedit;
+				relianceInstantAmountAPI.save(bankcall,function(data){
+				
+				console.log(data);
+
+				if(data.responseCode == "Cali_SUC_1030") {
+					console.log(data.jsonStr.rgResponse[0]);
+				//console.log(data.jsonStr.rgResponse.BankAccNo);
+				console.log((JSON.parse(data.jsonStr.rgResponse)).Insta_Amount);
+				$sessionStorage.instaAmount=(JSON.parse(data.jsonStr.rgResponse)).Insta_Amount;
+				$scope.insta=$sessionStorage.instaAmount;
+				$ionicLoading.hide();
+				$state.go("withdraw");
+              }
+		  })	
+		  
+		  
+		  
 	}
 
 	}
@@ -368,7 +423,7 @@ console.log($scope.loginDetails);
     })
 
 
-    .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,$ionicLoading,getReportService,$timeout,relianceUserBank,relianceInstantAmount) {
+    .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,$ionicLoading,getReportService,$timeout,relianceInstantAmountAPI) {
 var timeNow = new Date().getUTCHours();
 /*$ionicLoading.show({
             template:
@@ -406,6 +461,29 @@ $sessionStorage.xirr=data.jsonStr.xirr;
     }
     }
   })
+  
+  //reliance bank details
+  var RelianceBank=function(){
+				var bankcall={};
+				bankcall.gateWayType ="RG",
+                bankcall.gateWayPayLoad= "https://online.reliancemf.com/rmf/mowblyserver/wsapi/rmf/prod/wsapi/RedInvbankDetails_V1?arncode=ARN-107100&acno="+$sessionStorage.folioNums+"+&scheme=LP&plan=IG&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=c3d2f2f3-7d23-4f48-9fe6-82db5449a562"
+				bankcall=JSON.stringify(bankcall);
+				console.log(bankcall+"bank call");
+				var bankedit;
+				relianceInstantAmountAPI.save(bankcall,function(data){
+				
+				console.log(data);
+
+				if(data.responseCode == "Cali_SUC_1030") {
+					console.log(data.jsonStr.rgResponse);
+				//console.log(data.jsonStr.rgResponse.BankAccNo);
+				console.log((JSON.parse(data.jsonStr.rgResponse))[0].BankAccNo);
+				$sessionStorage.bankName=(JSON.parse(data.jsonStr.rgResponse))[0].BankAccNo;
+				$sessionStorage.bankAccNo=(JSON.parse(data.jsonStr.rgResponse))[0].BankName;
+               
+              }
+		  })
+	  }
 
 
   var navDate = getNAVService.get();
@@ -534,24 +612,9 @@ $scope.$broadcast("scroll.refreshComplete");
      })
 
 
-    .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$http,$sessionStorage,$ionicPopup,$ionicLoading,relianceUserBank,relianceInstantAmount,$timeout,$http) {
-			
-       var IntstantRedemtion = relianceInstantAmount.get();
-        IntstantRedemtion.$promise.then(function(data){
-          console.log(data.BankName + "dataa");
-		  $sessionStorage.instaAmt=data.Insta_Amount;
-        })
-		
-          var bankdetails=relianceUserBank.query();
-        bankdetails.$promise.then(function(data){
-			$sessionStorage.bankName= data[0].BankName;
-			$sessionStorage.bankAccNo= data[0].BankAccNo;
-          console.log(data + "bsnk  dataa ");
-          console.log(JSON.stringify(data) + "bsnk  dataa string");
-          console.log(data[0].BankAccNo + "bsnk  dataa ");
-        })
-		
-      
+    .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$http,$sessionStorage,$ionicPopup,$ionicLoading,relianceInstantAmountAPI,$timeout,$http,getZBFService,$location,relianceInstantZBF) {
+	
+$scope.insta=$sessionStorage.instaAmount;
 
 	   $scope.Withdrawl = function(form) {
 console.log($scope.amount);
@@ -585,8 +648,8 @@ console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
 			}
 			else{
 				 var confirmPopup =$ionicPopup.confirm({
-					title: "Confirm",
-					content: "Withdraw INR "+ $scope.amount +" ?"
+					content: "Account No."+$sessionStorage.bankName+"Bank Name"+$sessionStorage.bankAccNo,
+					title: "Withdraw INR "+ $scope.amount +" ?"
 				});
 				confirmPopup.then(function(result) {
 					if(result) {
@@ -689,29 +752,54 @@ $scope.withdraw_error="Please try again";
         $scope.amountClear= function() {
             $scope.amount='';
         }
-
-      //reliance Api call
-      $scope.RelianceInstaAmounandBank=function(){
-        console.log("it is entering");
-		$scope.processing = true;
-		$timeout(function () {
-       var IntstantRedemtion = relianceInstantAmount.get();
-        IntstantRedemtion.$promise.then(function(data){
-          console.log(data.BankName + "dataa");
-		  $sessionStorage.instaAmt=data.Insta_Amount;
-        })
 		
-          var bankdetails=relianceUserBank.query();
-        bankdetails.$promise.then(function(data){
-			$sessionStorage.bankName= data[0].BankName;
-			$sessionStorage.bankAccNo= data[0].BankAccNo;
-          console.log(data + "bsnk  dataa ");
-          console.log(JSON.stringify(data) + "bsnk  dataa string");
-          console.log(data[0].BankAccNo + "bsnk  dataa ");
-        })
-		 $scope.processing = false;
-		}, 5000);
-      }
+		
+		//reliance bank api call
+		
+			  $scope.RelianceBank=function(){
+				var bankcall={};
+				bankcall.gateWayType ="RG",
+                bankcall.gateWayPayLoad= "https://online.reliancemf.com/rmf/mowblyserver/wsapi/rmf/prod/wsapi/RedInvbankDetails_V1?arncode=ARN-107100&acno="+$sessionStorage.folioNums+"+&scheme=LP&plan=IG&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=c3d2f2f3-7d23-4f48-9fe6-82db5449a562"
+				bankcall=JSON.stringify(bankcall);
+				console.log(bankcall+"bank call");
+				var bankedit;
+				relianceInstantAmountAPI.save(bankcall,function(data){
+				
+				console.log(data);
 
+				if(data.responseCode == "Cali_SUC_1030") {
+					console.log(data.jsonStr.rgResponse);
+				//console.log(data.jsonStr.rgResponse.BankAccNo);
+				console.log((JSON.parse(data.jsonStr.rgResponse))[0].BankAccNo);
+				$sessionStorage.bankName=(JSON.parse(data.jsonStr.rgResponse))[0].BankAccNo;
+				$sessionStorage.bankAccNo=(JSON.parse(data.jsonStr.rgResponse))[0].BankName;
+               
+              }
+		  })
+	  }
+	  //reliance InstaAmount Api call
+	  $scope.RelianceInstaAmount=function(){
+				$scope.processing=true;
+				var bankcall={};
+				bankcall.gateWayType ="RG",
+                bankcall.gateWayPayLoad= "https://online.reliancemf.com/rmf/mowblyserver/wsapi/rmf/prod/wsapi/RedemptionSchemeDetails?acno="+$sessionStorage.folioNums+"&scheme=LP&plan=IG&arncode=ARN-107100&branch=FP99&proxybranch=&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=c3d2f2f3-7d23-4f48-9fe6-82db5449a562"
+				bankcall=JSON.stringify(bankcall);
+				console.log(bankcall+"bank call");
+				var bankedit;
+				relianceInstantAmountAPI.save(bankcall,function(data){
+				
+				console.log(data);
+
+				if(data.responseCode == "Cali_SUC_1030") {
+					$scope.processing=false;
+					console.log(data.jsonStr.rgResponse[0]);
+				//console.log(data.jsonStr.rgResponse.BankAccNo);
+				console.log((JSON.parse(data.jsonStr.rgResponse)).Insta_Amount);
+				$sessionStorage.instaAmount=(JSON.parse(data.jsonStr.rgResponse)).Insta_Amount;
+				$scope.insta=$sessionStorage.instaAmount;
+              }
+		  })
+	  }
+	 
 
     })
