@@ -264,21 +264,29 @@ img{margin:0;width:100vw;}
 .screen_invest{
 .button{background:#18bb9c;border:#18bb9c;color:white; &:hover{opacity:0.9; background:#18bb9c;} }
 	.invest_subheader {
-    top: 10px;
-    background: #ebebeb;
+		top: 10px;
+		.subText {
+			min-width: 178px;
+			display: inline-block;
+		}
+    background: #e5ecf4;
 	.title{font-size:14px;}
 	}	
 	.invest_info{
-		margin-top: 30px;
+		margin-top: 18px;
 		width: 100%;
 		.instaRefresh {
 			border: none;
-			padding: 13px 5px;
+			padding: 20px 5px;
 			background: transparent;
 			font-size: 14px;
 			text-transform: uppercase;
 			.button{
 				background:transparent;
+				.icon::before{
+					font-size: 20px;
+					padding-top: 5px;
+				}
 			}
 		}
 		&.list{
@@ -752,7 +760,7 @@ fader {
 .calculator{
 	width: 100%;
 	.returnsBlock{
-		background:#F3F3FE;
+		background:transparent;
 		.returnsBlockText{color:#A6A6A6;width: 100%; margin-bottom: 0px; .expectedReturn{font-size:38px;color: #999;}}
 		
 	}
@@ -782,3 +790,24 @@ fader {
 	&:active, &:hover, &:visited, &:focus{color:red}
 }
 .pane .slidingTabs ul li{font-size: 13px !important;}
+.withdraw_screen{
+	.withdraw_all{
+		padding-left:0;
+		input{
+			margin: 4px;
+			margin-left: 0;
+		}
+	}
+}
+.referalStatus {
+    border: 1px solid #18bb9c;
+    border-radius: 50%;
+    padding: 0px 12px;
+    background: #18bb9c;
+    color: white;
+	&.S{
+		background: whitesmoke;
+		border: 1px solid whitesmoke;
+		color: black;
+	}
+}

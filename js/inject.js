@@ -1,4 +1,3 @@
-
 function create(htmlStr) {
     var frag = document.createDocumentFragment(),
         temp = document.createElement('p');

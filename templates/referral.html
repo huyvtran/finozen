@@ -1,0 +1,43 @@
+<ion-view cache-view="false" title="Recent Transactions">
+<div class="bar bar-header fino_head">
+<button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-click="goOneStepbacktoAddress()"></button>
+  <div class="h1 title"><p class="head_title"><span id="title">REFERRAL STATUS</span></p></div>
+  <a class="button button-clear button-positive  ion-android-call" ng-href="tel:07899825545"></a>
+</div>
+<span ng-controller="showhistoryController"></span>
+<ion-content  has-bouncing="true"  scrollbar-y="false" class="has-header" ng-controller="referralCtrl as listControl">
+<div class="list recent_transactions" ng-hide="inviteShow" >
+  <a class="item" ng-repeat="lists in products | orderBy:'txn'" ng-class="{'lastItem': $last}"  ng-href="tel:{{lists.mobile}}">
+	<div class="row">
+		<div class="col-80">
+			<span class="item-note right">Name&nbsp&nbsp: {{ lists.name}}</br></span><span class=" item-note left">Mobile : <span class=" ion-android-call"> {{lists.mobile}}</span></span>
+		</div>
+		<div class="col-20 text-center">
+			<span class="referalStatus {{lists.txn}}">{{ lists.txn}}</span><br/><span style="font-size:11px;" >{{lists.txn=='S' ? 'Signed Up' : 'Invested'}}</span>
+		</div>
+
+	</div>
+	
+  
+  
+	
+
+  </a>
+</div>
+  <div class="" ng-show="inviteShow">
+	<div class="rows text-center">
+		<img src="img/1.png" alt="">
+		<h3 class="slide3">{{ 'TEXT_INVITE_HEADER2' | translate}}</h3>
+		<p translate="TEXT_INVITE_MESSAGE1"><sup>*</sup></p><br/>
+		<sup><sup>*</sup>{{'TEXT_INVITE_MESSAGE2' | translate}}<br/></sup>
+		<!--<button onclick="window.plugins.socialsharing.shareViaSMS({'message':'My cool message', 'subject':'The subject', 'image':'https://www.google.nl/images/srpr/logo4w.png'}, '0612345678,0687654321', function(msg) {console.log('ok: ' + msg)}, function(msg) {alert('error: ' + msg)})">share via SMS</button>-->
+	</div>
+  </div>
+</ion-content>
+	<ion-footer-bar padding="false" style="padding:0;" ng-controller="socialShareController" ng-show="inviteShow">
+		<div class="button-bar " style="padding:0;" >
+			<button ion-track-tap="invite" class="button button-positive" ng-click="shareViaContacts()" style="margin:1px;line-height: 44px;">Contacts</button>
+			<button ion-track-tap="invite" class="button button-positive" ng-click="shareViaTwitter()" style="margin:1px;line-height: 44px;">{{'TEXT_INVITE_BUTTON' | translate}}</button>
+		</div>
+	</ion-footer-bar>
+</ion-view>

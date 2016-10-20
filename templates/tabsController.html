@@ -1,31 +1,31 @@
 
 <ion-side-menus enable-menu-with-back-views="false">
-  <ion-side-menu-content  drag-content="false" class="tab_controller">
-<div class="bar bar-header fino_head" ng-controller="popupController as popup">
-  <a class="button button-clear button-positive ion-navicon-round" menu-toggle="left" ></a>
-	<div class="h1 title"><p class="head_title"><span id="title fino">FinoZen</span></p></div>
-  <a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
-</div>
-<ion-content scroll="false">
-    <ion-slide-box slide-tabs-scrollable="false"  show-pager="false" ion-slide-tabs >
-		<ion-slide ion-slide-tab-label="{{'tabTitle1' | translate}}" >
-			<summary-page></summary-page>
-		</ion-slide>
-		<ion-slide ion-slide-tab-label="{{'tabTitle2' | translate}}">
-			<growth-rate></growth-rate>
-		</ion-slide>
-		<ion-slide ion-slide-tab-label="{{'tabTitle3' | translate}}">
-			<recent-transact></recent-transact>
-		</ion-slide>
-		
-    </ion-slide-box>
- </ion-content>
-<div class="bar bar-footer row invest_button_footer" ng-hide="keyboardOpen" style="width: 100%; background:#E5ECF4 ;" ng-controller="transactionAccessCtrl">
-  <div ion-track-tap="withdraw" class="col invest_button"><span  ng-click="withdrawCheck()"   class="button button-clear button-positive  ion-ios-minus-empty invest_btn red" ></span><br /><span class="invest_bottom_button red" translate="BUTTON_LANG_WITH"></span></div>
-  <div ion-track-tap="invest" class="col invest_button"><span ng-click="investCheck()" class="button button-clear button-positive  ion-ios-plus-empty invest_btn green" ></span><br /><span class="invest_bottom_button green" translate="TEXT_LANG_HEADER"></span></div>
-</div>
+	<ion-side-menu-content  drag-content="false" class="tab_controller">
+		<div class="bar bar-header fino_head" ng-controller="popupController as popup">
+		  <a class="button button-clear button-positive ion-navicon-round" menu-toggle="left" ></a>
+			<div class="h1 title"><p class="head_title"><span id="title fino">FinoZen</span></p></div>
+		  <a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
+		</div>
+		<ion-content scroll="false">
+			<ion-slide-box slide-tabs-scrollable="false"  show-pager="false" ion-slide-tabs >
+				<ion-slide ion-slide-tab-label="{{'tabTitle1' | translate}}" >
+					<summary-page></summary-page>
+				</ion-slide>
+				<ion-slide ion-slide-tab-label="{{'tabTitle2' | translate}}">
+					<growth-rate></growth-rate>
+				</ion-slide>
+				<ion-slide ion-slide-tab-label="{{'tabTitle3' | translate}}">
+					<recent-transact></recent-transact>
+				</ion-slide>
+				
+			</ion-slide-box>
+		 </ion-content>
+		<div class="bar bar-footer row invest_button_footer" ng-hide="keyboardOpen" style="width: 100%; background:#E5ECF4 ;" ng-controller="transactionAccessCtrl">
+			<div ion-track-tap="withdraw" class="col invest_button"><span  ng-click="withdrawCheck()"   class="button button-clear button-positive  ion-ios-minus-empty invest_btn red" ></span><br /><span class="invest_bottom_button red" translate="BUTTON_LANG_WITH"></span></div>
+			<div ion-track-tap="invest" class="col invest_button"><span ng-click="investCheck()" class="button button-clear button-positive  ion-ios-plus-empty invest_btn green" ></span><br /><span class="invest_bottom_button green" translate="TEXT_LANG_HEADER"></span></div>
+		</div>
 
-  </ion-side-menu-content>
+	</ion-side-menu-content>
 
 
     <ion-side-menu side="left" class="screen_sidemenu" >
@@ -43,6 +43,7 @@
     <ion-content>
             <ion-list class="menulist">
                  <ion-item nav-clear menu-close  class="sideMenuTab"  href="#/invite" ><i class="icon ion-ios-people-outline"></i>{{'TEXT_LANG_MENU1'|translate}}</ion-item>
+                 <ion-item nav-clear menu-close  class="sideMenuTab"  href="#/referral" ><i class="icon ion-ios-people-outline"></i>REFERRAL STATUS</ion-item>
                  <ion-item nav-clear menu-close  class="sideMenuTab"  href="#/faq" ><i class="icon ion-ios-help-outline"></i>{{'TEXT_LANG_MENU2'|translate}}</ion-item>
                  <ion-item nav-clear menu-close  href="#/contact" class="sideMenuTab"  menu-close=""><i class="icon ion-ios-email-outline"></i>{{'TEXT_LANG_MENU3'|translate}}</ion-item>
                  <ion-item nav-clear menu-close  href="#/aboutUs"  class="sideMenuTab"  menu-close=""><i class="icon ion-ios-person-outline"></i>{{'TEXT_LANG_MENU4'|translate}}</ion-item>

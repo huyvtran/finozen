@@ -372,7 +372,7 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
       inputDate: new Date(),      //Optional
       mondayFirst: true,          //Optional
 	  titleLabel: 'Select a Date',
-	  setLabel: 'Happy Birthday',
+	  setLabel: 'Set',
       disableWeekdays: [],       //Optional
       closeOnSelect: false,       //Optional
       templateType: 'modal'       //Optional
@@ -402,17 +402,22 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 
         questionsService.save(questUpload,function(data){
 				$ionicLoading.hide();
-				if($sessionStorage.SessionStatus=="T"){$state.go('activeClientStatus');}
+				// routing to bank
+				/*if($sessionStorage.SessionStatus=="T"){$state.go('activeClientStatus');}
 				else if($sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus==null || $sessionStorage.SessionStatus==undefined ){$state.go('inactiveClient');}
-				else{$state.go('verifySuccess');}
-                   
+				else{$state.go('verifySuccess');}*/
+                $state.go('bank');
 			//}
 			},function(error){
 				$ionicLoading.hide();			//comment this line if api is working
+				
+				// routing to bank
+				
 				//$state.go('signature');			//comment this line if api is working
-				if($sessionStorage.SessionStatus=="T"){$state.go('activeClientStatus');}
+				/*if($sessionStorage.SessionStatus=="T"){$state.go('activeClientStatus');}
 				else if($sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus==null || $sessionStorage.SessionStatus==undefined ){$state.go('inactiveClient');}
-				else{$state.go('verifySuccess');}
+				else{$state.go('verifySuccess');}*/
+				$state.go('bank');
                    
 				/*var refresh=$ionicPopup.alert({
                   title: 'Please try again',
@@ -478,7 +483,7 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 		//else{$scope.cimageFront="img/DL.jpg";}
 		$scope.addressFrontImg=function(){
 		//console.log($sessionStorage.addressChoice);
-		$scope.addressImage=$scope.cimageFront;
+		//$scope.addressImage=$scope.cimageFront;
 		document.addEventListener("deviceready", function () {
 					var options = {
 					  quality: 90,
@@ -592,7 +597,7 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 				else if($sessionStorage.addressChoice == 'GA'){$scope.cimageFront="img/sample.png";}
 
 		$scope.addressBackImg=function(){
-		$scope.cimage2=$scope.cimageBack;
+		//$scope.cimage2=$scope.cimageBack;
 		//$scope.addressFront();
 		  document.addEventListener("deviceready", function () {
 			var options = {
@@ -754,53 +759,10 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 				  $sessionStorage.SessionStatus=data.jsonStr.activeStatus;
 				  console.log($sessionStorage.SessionStatus+ "   bank submit $sessionStorage.SessionStatus");
 				  console.log($sessionStorage.docStatus+ "   bank submit $sessionStorage.docStatus");
-				  
-				  if($sessionStorage.SessionStatus=="T")
-				  {
-					   var zbf=getZBFService.get();
-					    zbf.$promise.then(function(data)
-						{
-						if(data.responseCode=="Cali_SUC_1030")
-			{
-							var rg = (data.jsonStr.rgResponse);
-							var relzbf= cordova.InAppBrowser.open(rg,'_blank','location=no');
-							relzbf.addEventListener('loadstop', function(event) 
-							{
-								if( event.url.match('https://investeasy.reliancemutual.com/online/SimplySavePartner/Confirmation?Msg=Success&Folio') )
-								{
-									//add the js file which will call the html in return
-									relzbf.execScript({file:"inject.js"});
-							var parser=document.createElement('a');
-							parser.href=window.location;
-							console.log(parser.search);
-							//sending data to the backend
-							var folio={};
-							folio.portfolioCode=$sessionStorage.SessionPortfolio;
-							folio.schemeCode=$sessionStorage.rtaCode;
-							folio.folioNumber=r;
-							folio=JSON.stringify(folio);
-							relianceInstantZBF.save(folio,function(data)
-							{
-								if(data.responseCode == "Cali_SUC_1030")
-								{
-									$state.go('activeStatus');
-								}
-							}) 
-								$timeout(function () {
-								relzbf.close();
-								},10000);
-								;} 
-							});
-						$timeout(function () 
-						{
-							$state.go('activeStatus');
-						},1000);
-		  }
-				  })
-				  }
+								console.log($sessionStorage.SessionStatus + "    $sessionStorage.SessionStatus");
+			if($sessionStorage.SessionStatus=="T"){$state.go('activeClientStatus');}
 				  else if($sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus==null || $sessionStorage.SessionStatus=="null" || $sessionStorage.SessionStatus==undefined ){$state.go('inactiveClient');}
 				  else{$state.go('verifySuccess');}
-				  
 				
                  }
 
@@ -835,28 +797,53 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
                    });
                  }
 				 else if(error.data.responseCode == "Cali_ERR_2035"){
-           $ionicLoading.hide();
-           var bankdetails_error= $ionicPopup.alert({
-             title: 'Account Number Duplicate',
-             template: 'Please try again'
-           });
+				   $ionicLoading.hide();
+				   var bankdetails_error= $ionicPopup.alert({
+					 title: 'Account Number Duplicate',
+					 template: 'Please try again'
+				   });
 
-           bankdetails_error.then(function(res) {
-             $window.location.reload(true)
+				   bankdetails_error.then(function(res) {
+					 $window.location.reload(true)
 
-           });
-         }
-         else{
-				$ionicLoading.hide();
-                 var referesh= $ionicPopup.alert({
-                   title: 'Please try again',
-                   template: 'Unable to submit request'
-                 });
-                 referesh.then(function(res) {
-                   //$state.go("questions"); //selfie sign page
-				   $window.location.reload(true)
-                 });
+				   });
 				 }
+
+				 else if(error.data.responseCode == "Cali_ERR_2064"){
+				   $ionicLoading.hide();
+				   var bankdetails_error= $ionicPopup.alert({
+					 title: 'PAN Number Invalid',
+					 template: 'Please try again'
+				   });
+
+				   bankdetails_error.then(function(res) {
+					 $window.location.reload(true)
+
+				   });
+				 }
+				 else if(error.data.responseCode == "Cali_ERR_2065"){
+				   $ionicLoading.hide();
+				   var bankdetails_error= $ionicPopup.alert({
+					 title: 'PAN Number Duplicate',
+					 template: 'Please try again'
+				   });
+
+				   bankdetails_error.then(function(res) {
+					 $window.location.reload(true)
+
+				   });
+				 }
+				else{
+					$ionicLoading.hide();
+					var referesh= $ionicPopup.alert({
+					title: 'Please try again',
+					template: 'Unable to submit request'
+					});
+					referesh.then(function(res) {
+					//$state.go("questions"); //selfie sign page
+					$window.location.reload(true)
+					});
+				}
 
                });
 	}

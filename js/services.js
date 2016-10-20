@@ -5,12 +5,12 @@ angular.module('app.services', [])
 }])
 
 .factory('accessUrlService', ['$resource',function($resource){
-	return $resource('https://finotrust.com/WealthWeb/ws/login/restLogin');
+	return $resource('http://rupeex.com:8080/WealthWeb/ws/login/restLogin');
 }])
 
 /*For Sign up*/
 .factory('SignUpUrlService', ['$resource',function($resource){
-	return $resource('https://finotrust.com/WealthWeb/ws/clientFcps/clientFcp');
+	return $resource('http://rupeex.com:8080/WealthWeb/ws/clientFcps/clientFcp');
 }])
 
 .factory('getPerformanceService', ['$resource','$filter','$sessionStorage',function($resource,$filter,$sessionStorage){
@@ -21,19 +21,19 @@ angular.module('app.services', [])
 
 /*For fetching the NAV webservices*/
   .factory('getNAVService', ['$resource','$sessionStorage',function($resource,$sessionStorage){
-    return $resource('https://finotrust.com/WealthWeb/ws/clientRepos/getInvReco?pfolioCode='+$sessionStorage.SessionPortfolio);
+    return $resource('http://rupeex.com:8080/WealthWeb/ws/clientRepos/getInvReco?pfolioCode='+$sessionStorage.SessionPortfolio);
   }])
 
 
   /*For fetching the transaction webservices*/
   .factory('getReportService', ['$resource','$sessionStorage',function($resource,$sessionStorage){
-    return $resource('https://finotrust.com/WealthWeb/ws/clientRepos/getOrders?pfolioCode='+$sessionStorage.SessionPortfolio+'&noOfOrders=30');
+    return $resource('http://rupeex.com:8080/WealthWeb/ws/clientRepos/getOrders?pfolioCode='+$sessionStorage.SessionPortfolio+'&noOfOrders=30');
   }])
   
   /*Reliance ZBF page service*/
    .factory('getZBFService', ['$resource','$sessionStorage',function($resource,$sessionStorage){
 	   console.log($sessionStorage.portfolioCode+"portfolioCode");
-    return $resource('http://rupeex.com:8080/WealthWeb/ws/clientOrders/zbf?portfolioCode='+$sessionStorage.SessionPortfolio+'&rtaCode='+$sessionStorage.rtaCode);
+    return $resource('http://rupeex.com:8080/WealthWeb/ws/clientOrders/zbf?portfolioCode=CRN26946E20018&rtaCode=RMFLPIG');
   }])
   
   /*Reliance folio number sending it to backend */
@@ -49,7 +49,15 @@ angular.module('app.services', [])
 
       return relianceZBF;
   }])
+  
+  // Referral Factory
+  
+  
+ .factory('getReferalStat', ['$resource','$sessionStorage',function($resource,$sessionStorage){
+	console.log($sessionStorage.SessionMobNo);
+	return $resource('http://rupeex.com:8080/WealthWeb/ws/login/getMyReferrals?mobile='+$sessionStorage.SessionMobNo);
 
+}])     
 /*For reliance api instant redemption and getting the bank details*/
   .factory('relianceInstantAmountAPI',['$resource','$sessionStorage',function($resource,$sessionStorage){
        var relianceIntsaAmount = $resource('http://rupeex.com:8080/WealthWeb/ws/pymt/wrapperWS',{},{
@@ -149,7 +157,7 @@ return totalIndex;
 //console.log();
 	var jsid=$sessionStorage.SessionIdstorage;
 	console.log(jsid + "  jsid");
-	 var change = $resource('https://finotrust.com/WealthWeb/ws/secure/fcpSecure/changePassword',{},{
+	 var change = $resource('http://rupeex.com:8080/WealthWeb/ws/secure/fcpSecure/changePassword',{},{
         save:{
             method:'POST',
             headers:{
@@ -163,7 +171,7 @@ return totalIndex;
 
 	/*PAN image factory*/
 	.factory('panImageService',['$resource','$sessionStorage',function($resource){
-		var panupload = $resource('https://finotrust.com/WealthWeb/ws/kycs/kyphImg',{},{
+		var panupload = $resource('http://rupeex.com:8080/WealthWeb/ws/kycs/kyphImg',{},{
 			save:{
 				method:'POST',
 				method:'POST',
@@ -178,7 +186,7 @@ return totalIndex;
 
 /*Bank Details*/
     .factory('bankDetailsService',['$resource',function($resource){
-      var bankUpload = $resource('https://finotrust.com/WealthWeb/ws/kycs/bankDetails',{},{
+      var bankUpload = $resource('http://rupeex.com:8080/WealthWeb/ws/kycs/bankDetails',{},{
         save:{
           method:'POST',
           headers:{
@@ -226,12 +234,12 @@ return totalIndex;
 		},
 	});
 	return mfOrderRequest;
-	//https://finotrust.com/WealthWeb/ws/clientOrders/clientOrderMfBuy
+	//http://rupeex.com:8080/WealthWeb/ws/clientOrders/clientOrderMfBuy
 }])
 
 /*send MF sell order*/
 .factory('mfSellUrlService', ['$resource',function($resource){
-	var mfSellRequest= $resource('https://finotrust.com/WealthWeb/ws/clientOrders/clientOrderMfSell',{},{
+	var mfSellRequest= $resource('http://rupeex.com:8080/WealthWeb/ws/clientOrders/clientOrderMfSell',{},{
 		save:{
 			method:'POST',
 		},
@@ -258,7 +266,7 @@ return totalIndex;
 
 }])
 
-//https://finotrust.com
+//http://rupeex.com:8080
 
 
 

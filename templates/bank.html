@@ -42,11 +42,18 @@
 			</div>
 		</div>
 	</div>
+	<div class="error-container" ng-if="panEror" ng-messages="bankDetailsTest.panNo.$error">
+		<div  class="error" >
+			<p>
+				{{panEror}}
+			</p>
+		</div>
+	</div>
 	
 <!--
 		<p style="padding: 5px 0; text-align:left;"><input type="checkbox">  Please  deposited only to this account.</p>
 	-->	
-		<p style="padding: 10px 0; text-align:left;font-size: 10px;"><sup>*</sup>By clicking on SUBMIT you agree that these are your personal bank account details. Please note that all transactions, including withdrawals are permitted only through your personal registered bank account.</p>
+		<p style="padding: 10px 0; text-align:left;font-size: 10px;"><sup>*</sup>By clicking on SUBMIT you agree that these are your personal bank account details, PAN holder and Bank account holder are same. Please note that all withdrawals will be credited to registered bank account only.</p>
 <!--
 <ion-footer-bar padding="false" style="padding:0;" >
 	<div class="button-bar " style="padding:0;" >
@@ -57,7 +64,7 @@
 		
 
 		-->
-<ion-footer-bar padding="false" style="padding:0;"  ng-hide="keyboardOpen" >
+<ion-footer-bar padding="false" style="padding:0;"  ng-hide="keyboardOpen"  >
 	<div class="button-bar " style="padding:0;">
 		<a class="button button-positive" ng-href={{bankSkipurl}}  ng-click="bankSkip()" style="margin:1px;line-height: 44px;">SKIP</a>
 		<!--<button type="submit" class="button button-positive" ng-click="bankTest()" style="margin:1px;line-height: 44px;" >SUBMIT</button>-->

@@ -62,11 +62,16 @@
 		<span class="check_agree item-checkbox item_checkbox">By clicking Login, I agree to <span class="inappLinks" ng-click="terms()"> T & C</span> and <span  class="inappLinks" ng-click="policy()">Privacy Policy.</span> For queries please contact us at support@finozen.com</span>
 	</div>
 </form>
-<!--  		
+		
+
+ <!--
+		<button  ng-controller="referralCtrl" class="button button-positive" ng-click="openC()" style="margin:1px;line-height: 44px;">Contacts</button>
+ 	
 
 
-		<button  ng-controller="socialShareController" class="button button-positive" ng-click="closeViaContacts()" style="margin:1px;line-height: 44px;">Contacts</button>
-		<button onclick="window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null , null , function() {console.log('share ok')}, function(errormsg){alert(errormsg)})">msg via WhatsAp</button>
+
+
+	<button onclick="window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null , null , function() {console.log('share ok')}, function(errormsg){alert(errormsg)})">msg via WhatsAp</button>
 		<button onclick="window.plugins.socialsharing.shareViaWhatsAppToReceiver(9949899497, 'Message via WhatsApp', null , null , function() {console.log('share ok')})">msg via WhatsApp</button>
 		<button onclick="cordova.InAppBrowser.open('https://google.com', '_self', 'location=yes')">inApp</button>
 

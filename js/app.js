@@ -52,16 +52,15 @@ angular.module('app', ['ionic','ionic.service.core','app.controllers', 'ionicPro
       TEXT_LANG_INVEST_TERMS_1:'By clicking ADD MONEY you agree to have read',
       TEXT_LANG_INVEST_TERMS_2:'before making the investment',
       TranscationID:'Transaction ID',
-      TEXT_CURRENT_BALANCE:'CURRENT BALANCE :',
+      TEXT_CURRENT_BALANCE:'CURRENT BALANCE ',
       TEXT_WIHTDRAW_BALANCE:'How much would you like to withdraw ?',
-      TEXT_WITHDRAW_COMPLETEBALANCE:'withdraw my complete balance',
-      TEXT_WITHDRAW_SCHEDULE_TEXT:'Schedule for deposit to your registered bank account',
+      TEXT_WITHDRAW_COMPLETEBALANCE:'Withdraw my complete balance',
       noTxnMsg1:'There are no transactions to display,',
       noTxnMsg12:'START INVESTING NOW',
       TEXT_INVITE_HEADER:'INVITE FRIENDS',
       TEXT_INVITE_HEADER2:'Invite Your Friends',
       TEXT_INVITE_MESSAGE1:'Invite now and get INR 100 for every referral, your friend will also get INR 100',
-      TEXT_INVITE_MESSAGE2:'Post 1st investment by your referral, both you and your friend will be eligible for INR 100 referral incentive. Incentive will be deposited directly in your respective bank accounts (within 3 days).Please contact us for any queries.',
+      TEXT_INVITE_MESSAGE2:'Post 1st investment by your referral, both you and your friend will be eligible for INR 100 referral incentive. Incentive will be deposited directly in your respective bank accounts (within 3 working days after investment reflects in FinoZen account). You need to have an active FinoZen account with non-zero balance to be eligible for referral incentive',
       TEXT_INVITE_BUTTON:'Start Inviting',
       TEXT_LANG_MENU1:'Invite & Earn',
       TEXT_LANG_MENU2:'FAQ',
@@ -69,15 +68,14 @@ angular.module('app', ['ionic','ionic.service.core','app.controllers', 'ionicPro
       TEXT_LANG_MENU4:'About us',
       TEXT_LANG_MENU5:'Activate account',
       TEXT_LANG_MENU6:'Sign Out',
-      TEXT_POPOVER:'Estimated annual returns for your investments till date, and should not be construed as projected returns or actual performance.',
-	withdrawlTimeBefore:'before 2pm',
-	withdrawlTimeAfter:'after 2pm',
+	withdrawlTimeBefore:'before 2 pm',
+	withdrawlTimeAfter:'after 2 pm',
 	dayAfter:'Next day',
 	dayAfterNext:'Day after next',
 	andText:'and',
 	Withdrawal:'Withdrawal',
 	deposit:'Deposit',
-	withdrawBottomLine:'Working days Mon-Fri. If the day of deposit is a Bank Holiday, money will be deposited the next working day.',
+	withdrawBottomLine:'Working days Mon-Fri. If the day of credit is a Bank Holiday, money will be credited the next working day.',
 	rememberMe:'Remember Me',
 	fieldEmpty:'You did not enter a field',
 	passwordInvalid:'Entered PIN didn\'t match',
@@ -112,13 +110,12 @@ angular.module('app', ['ionic','ionic.service.core','app.controllers', 'ionicPro
 
 .run(function($ionicPlatform, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaKeyboard,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout,$localStorage) {
   $ionicPlatform.ready(function() {
-/*
   $rootScope.$watch(function() {
   return $cordovaKeyboard.isVisible();
 }, function(value) {
 	console.log(value);
 $rootScope.keyboardOpen = value;
-});*/
+});
       Idle.watch();
 //$localStorage.language=0;
                 if(!navigator.onLine) {
@@ -143,7 +140,7 @@ console.log(navigator.onLine + "  connection state");
 		$state.go('tabsController.summaryPage');
 
       }
-     else if ($ionicHistory.currentStateName() == 'verifySuccess'){
+     else if ($ionicHistory.currentStateName() == 'verifySuccess' || $ionicHistory.currentStateName() == 'questions' || $ionicHistory.currentStateName() == 'bank'){
 		event.preventDefault();
       }
 
@@ -171,7 +168,7 @@ console.log(navigator.onLine + "  connection state");
       }
     }, 100);
 
-
+/*
 //clevertap integration
     CleverTap.registerPush(); //registering for push notifications
     document.addEventListener('deviceready', this.onDeviceReady, false);
@@ -194,7 +191,7 @@ console.log(navigator.onLine + "  connection state");
 // Last Active Session
     var lastVisit = clevertap.user.getLastVisit();
 
-
+*/
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }

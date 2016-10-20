@@ -23,7 +23,7 @@ angular.module('app.subcontrollerOne', [])
 		"\"We will only do with your money what we would do with our own\"",
 		"\"Do not save what is left after spending but spend what is left after saving\"",
 		"\"You will either tell your money what to do or the lack of it will always manage you\"",
-		"\"never depend on a single income. Make investments to create a second source\"",
+		"\"Never depend on a single income. Make investments to create a second source\"",
 		"\"Do not save what is left after spending but spend what is left after saving \""
 		];
 		$scope.textt =$scope.headsUpData[Math.floor(Math.random() * 9)];
@@ -65,15 +65,26 @@ angular.module('app.subcontrollerOne', [])
 $scope.policy = function()
 {
 	//window.open('http://finozen.com/policy.html','_self');
-	cordova.InAppBrowser.open('http://finozen.com/policy.html','_blank', 'location=no');
+	var rel=cordova.InAppBrowser.open('https://finotrust.com/policy.html','_blank', 'location=no');
+  rel.addEventListener('loadstart', function(event) {
+					navigator.notification.activityStart("Please Wait", "Its loading.....");
+				});
+				rel.addEventListener('loadstop', function() {
+				navigator.notification.activityStop();
+				});
   //$ionicHistory.goBack(-1);
 }
 $scope.terms = function()
 {
 	//window.open('http://finozen.com/t&c.html','_self');
-	cordova.InAppBrowser.open('http://finozen.com/t&c.html','_blank', 'location=no');
+	var tc=cordova.InAppBrowser.open('https://finotrust.com/terms.html','_blank', 'location=no');
   //$ionicHistory.goBack(-1);
-
+	tc.addEventListener('loadstart', function(event) {
+					navigator.notification.activityStart("Please Wait", "Its loading.....");
+				});
+				tc.addEventListener('loadstop', function() {
+				navigator.notification.activityStop();
+				});
 }
 
     })
@@ -142,7 +153,7 @@ $scope.terms = function()
         $scope.groups["2"] = {name: "How often can I invest/Add money or withdraw?",items: ["You can invest/add money or withdraw as often as you want. There are no restrictions on the frequency of your transactions. Also, there are no penalties or charges applicable when you withdraw your money."] };
         $scope.groups["3"] = {name: "How soon will my investments reflect on FinoZen?",items: ["All Investments will be processed on next working day and will reflect in your FinoZen account at 11:30 am on next day of processing.","Working days are Monday to Friday except Bank Holidays.", "For ex: An investment done on Sunday, will be processed on Monday and will reflect in your FinoZen account on 11:30 am Tuesday."] };
         $scope.groups["4"] = {name: "Where does my money go once I withdraw?",items: ["Your money will be deposited back to the bank account you registered with us at the time of your account opening."] };
-        $scope.groups["5"] = {name: "How soon can I access my withdrawn money?",items: ["If you bank is IMPS enabled, withdrawal will be processed and money will be deposited in your account in less than 30 mins. If your Bank is not IMPS enabled then following is the withdrawal schedule: "] }; //add a table
+        $scope.groups["5"] = {name: "How soon can I access my withdrawn money?",items: ["If you opt for Instant Withdrawal, you can withdraw your investments in less than 30 mins. For normal withdrawal, schedule of deposit is mentioned on Withdraw page"] }; //add a table
         $scope.groups["6"] = {name: "How much can I invest at a time? Is there a minimum or a maximum?",items: ["You can invest any amount from a minimum of INR 500."] };
         $scope.groups["7"] = {name: "How long do I need to stay invested? Is there a lock-in period?",items: ["There is no minimum period or lock-in. You have the option to withdraw your money anytime. "] };
         $scope.groups["8"] = {name: "Can I invest through cash/cheque?",items: ["No. You can invest only through app or FinoZen website through Netbanking or Debit Card.  "] };
@@ -207,10 +218,10 @@ $scope.terms = function()
 			console.log(returnsAmount , investAmount);
 			
   	if($sessionStorage.clientType=="GO"){
-		$scope.averageRate=7.0;
+		$scope.averageRate=7.5;
 	}
 	  else if($sessionStorage.clientType=="PL") {
-	  $scope.averageRate=8.0;
+	  $scope.averageRate=8.3;
     }
 			var constant=$scope.averageRate/(365*100);
 			if(investAmount==undefined){count++}
@@ -243,13 +254,14 @@ $scope.faq = function(){$state.go('faq')}
 $scope.policy = function()
 {
 	//window.open('http://finozen.com/policy.html','_self');
-	var ref = cordova.InAppBrowser.open('http://finozen.com/policy.html','_blank');
+	var ref = cordova.InAppBrowser.open('https://finotrust.com/policy.html','_blank');
+	
   //$ionicHistory.goBack(-1);
 }
 $scope.terms = function()
 {
 	//window.open('http://finozen.com/t&c.html','_self');
-	var ref = cordova.InAppBrowser.open('http://finozen.com/t&c.html','_blank');
+	var ref = cordova.InAppBrowser.open('https://finotrust.com/terms.html','_blank');
   //$ionicHistory.goBack(-1);
 
 }
@@ -314,18 +326,20 @@ $scope.xirrRate= function(){
     })
 
  // NAV Calculator controller
-.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup,$ionicLoading,$ionicPlatform,$timeout) {
+.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup,$ionicLoading,$ionicPlatform,$timeout,relianceInstantAmountAPI) {
 
   var finalComputedVal;
   	if($sessionStorage.clientType=="GO"){
 		console.log($sessionStorage.clientType+ "  gold")
-		$scope.schemePlan="RELIANCE LIQUID FUND-CASH PLAN-GROWTH";
-		$scope.averageRate=7.0;
+		$scope.schemePlan="RELIANCE LIQUID FUND - TREASURY PLAN - IP - Growth";
+		$scope.averageRate=7.5;
+		$scope.minInv=500;
 	}
 	  else if($sessionStorage.clientType=="PL") {
-	  console.log($sessionStorage.clientType+ "  platinum")
-      $scope.schemePlan="RELIANCE LIQUID FUND - TREASURY PLAN - IP - Growth";
-	  $scope.averageRate=8.0;
+		console.log($sessionStorage.clientType+ "  platinum")
+		$scope.schemePlan="Reliance Money Manager Fund – Growth Plan"; //money managaer needs to come here
+		$scope.averageRate=8.3;
+		$scope.minInv=500;
     }
 	var dayNow = new Date().getDay();
 	console.log(dayNow);
@@ -381,7 +395,7 @@ $scope.xirrRate= function(){
 				else if($sessionStorage.nachStatus !='A'){
 				        $ionicLoading.show({templateUrl:"templates/loading.html"});
 						  console.log('its entering the nach mandate');
-						  if($sessionStorage.SessionStatus=="P" ){
+						  if($sessionStorage.SessionStatus=="P" ||  $sessionStorage.SessionStatus=="U"){
 							  if($scope.initial<=1000){$scope.sendMfOrder();}
 							  else{
 								  $ionicLoading.hide();
@@ -410,26 +424,39 @@ $scope.xirrRate= function(){
             mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums},function(data){
                 if(data.responseCode=="Cali_SUC_1030"){
 					$ionicLoading.hide();
-					if(data.jsonStr=='null'){
-						  var ref = cordova.InAppBrowser.open('https://finotrust.com/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_blank', 'location=no');
-					ref.addEventListener('loadstop', function(event) { if( event.url.match('pymt/bdesk') ){
-						$timeout(function () {
-							ref.close();
-						},10000);
-					;} });
+					if(data.jsonStr==null){
+						  var ref = cordova.InAppBrowser.open('http://rupeex.com:8080/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_blank', 'location=no');
+						  ref.addEventListener('loadstart', function(event) {
+					navigator.notification.activityStart("Please Wait", "Redirecting to a secure payment gateway");
+				});
+						    ref.addEventListener('loadstop', function() {
+								navigator.notification.activityStop();
+							  });
+							ref.addEventListener('loadstop', function(event) { if( event.url.match('pymt/bdesk') ){
+								$timeout(function () {
+									ref.close();
+								},20000);
+							;} });
 					$timeout(function () {
 							$state.go('tabsController.recentTransactions');
 						},1000);
 						
 					}
 					else{
-						console.log(data.jsonStr.rgResponse);
 						console.log(data.jsonStr.ihno);
 						var rel= cordova.InAppBrowser.open('https://investeasy.reliancemutual.com/online/CampaingLink/InvestorCampaign?IHNO='+data.jsonStr.ihno,'_blank','location=no');
+							  rel.addEventListener('loadstart', function(event) {
+					navigator.notification.activityStart("Please Wait", "Redirecting to a secure payment gateway");
+				});
+						rel.addEventListener('loadstop', function() {
+							navigator.notification.activityStop();
+						  });
 						rel.addEventListener('loadstop', function(event) { if( event.url.match('https://investeasy.reliancemutual.com/online/Payments/PaymentConfirmation_DIT.aspx') ){
-						$timeout(function () {
-							rel.close();
-						},10000);
+							rel.executeScript({ file: "https://finotrust.com/inject/counter.js" });
+							rel.insertCSS({file:"https://finotrust.com/inject/inject.css"});
+							$timeout(function () {
+								rel.close();
+							},20000);
 					;} });
 					$timeout(function () {
 							$state.go('tabsController.recentTransactions');
@@ -559,7 +586,7 @@ $scope.xirrRate= function(){
     })
 
 .controller('schemeText', function($scope,$sessionStorage) {
-	if($sessionStorage.clientType=='GO'){
+	/*{
 		$scope.schemeName="Reliance Liquid Fund Cash Plan - Growth";
 		$scope.schemeBody="Reliance Liquid Fund ensure that your investments are very low risk, no-lock in on withdrawl and generate stable returns. This fund primarily invests in money market instruments of public sector banks like Axis Bank, Kotak Mahindra Bank and undertakings such as Steel Authority of India, Idea Cellular, Tata Capital making it ultra-safe (almost as safe as your savings bank deposits) to invest your money. ";
 		$scope.returnsOneM="7.2%";
@@ -571,33 +598,37 @@ $scope.xirrRate= function(){
 		$scope.TaxBenifits=" Unlike FD, there is no TDS for investments in this fund. Also, for investments more than 3 years, tax payout becomes negligible as there is indexation benefits. However for investments less than 3 years, you will have to declare the returns from this investment at the time of tax filing and pay tax as per your salary bracket.";
 		$scope.schemeLink="http://www.moneycontrol.com/mutual-funds/nav/reliance-liquid-fund-cash-plan/MRC014";
 		$scope.schemeLinkText=" to read more about Reliance Liquid Fund Cash Plan – Growth on moneycontrol.";
-	}
-	else{
+	}*/
+	if($sessionStorage.clientType=='GO'){
 		$scope.schemeName="Reliance Liquid Fund Treasury Plan (IP) – G";
 		$scope.schemeBody="Reliance Liquid Fund ensure that your investments are very low risk, no-lock in on withdrawl and generate stable returns. This fund primarily invests in money market instruments of public sector banks and undertakings such as HUDCO, L&T and Tata Steel  making it ultra-safe (almost as safe as your savings bank deposits) to invest your money.";
-		$scope.returnsOneM="9.48%";
-		$scope.returnsThreeM="8.2%";
-		$scope.returnsOneY="8.2%";
-		$scope.returnsThreeY="8.84%";
-		$scope.returnsFiveY="9.06%";
-		$scope.currentAUM=" Rs. 14,469 Crores";
+		$scope.returnsOneM="7.1%";
+		$scope.returnsThreeM="7.1%";
+		$scope.returnsSixM="7.46%";
+		$scope.returnsNineM="7.65%";
+		$scope.returnsOneY="7.84%";
+		$scope.returnsThreeY="8.56%";
+		$scope.currentAUM=" INR 20,722 Crores";
 		$scope.TaxBenifits=" Unlike FD, there is no TDS for investments in this fund. Also, for investments more than 3 years, tax payout becomes negligible as there is indexation benefits. However for investments less than 3 years, you will have to declare the returns from this investment at the time of tax filing and pay tax as per your salary bracket.";
-		$scope.schemeLink="http://www.moneycontrol.com/mutual-funds/nav/reliance-liquid-fund-treasury-plan-ip/MRC046";
+		$scope.schemeLink="https://www.valueresearchonline.com/funds/newsnapshot.asp?schemecode=519";
 		$scope.schemeLinkText=" to read more about Reliance Liquid Fund Treasury Plan (IP) – G on moneycontrol.";
+		$scope.starText="Sep 2016";
 	}
-	/*else{
+	else{
 		$scope.schemeName="Reliance Money Manager Fund – Growth Plan";
 		$scope.schemeBody="Reliance Money Manager Fund ensures that your investments are at low risk, no lock-in on withdrawal and generate stable returns. This fund primarily invests in money market instruments and NCDs of public sector banks and AAA rated companies like Axis Bank, ICICI Bank, HDFC Ltd. etc. making it a safe option to park your surplus bank balance.";
 		$scope.returnsOneM="7.80%";
 		$scope.returnsThreeM="9.04%";
-		$scope.returnsOneY="9.26%";
-		$scope.returnsThreeY="8.77%";
-		$scope.returnsFiveY="8.63%";
-		$scope.currentAUM=" Rs. 14,469 Crores";
-		$scope.TaxBenifits=" Unlike FD, there is no TDS for investments in this fund. Also, for investments more than 3 years, tax payout becomes negligible as there is indexation benefits. However for investments less than 3 years, you will have to declare the returns from this investment at the time of tax filing and pay tax as per your salary bracket.";
-		$scope.schemeLink="http://www.moneycontrol.com/mutual-funds/nav/reliance-liquid-fund-treasury-plan-ip/MRC046";
-		$scope.schemeLinkText=" to read more about Reliance Liquid Fund Treasury Plan (IP) – G on moneycontrol.";
-	}*/
+		$scope.returnsSixM="9.26%";
+		$scope.returnsNineM="8.77%";
+		$scope.returnsOneY="8.63%";
+		$scope.returnsThreeY="8.88%";
+		$scope.currentAUM=" INR 17,024 Crores";
+		$scope.TaxBenifits=" Unlike FD, there is no TDS for investments in this fund. Also, for investments more than 3 years, tax payout becomes negligible as there is indexation benefit. However, for investments less than 3 years, you will have to declare the interest accrued from this investment at the time of tax filing and pay tax as per your salary bracket.";
+		$scope.schemeLink="https://www.valueresearchonline.com/funds/newsnapshot.asp?schemecode=4547";
+		$scope.schemeLinkText=" to read more about Reliance Money Manager Fund – Growth Plan";
+		$scope.starText="Sep 2016";
+	}
 })
 
 .controller('verifySuccessCtrl', function($scope,$sessionStorage,$state,myService,proofRedirectFactory,$timeout,$window) {
@@ -673,7 +704,7 @@ console.log($sessionStorage.SessionStatus+"   $sessionStorage.SessionStatus veri
 			else if ($sessionStorage.SessionStatus=='T'){
 				$scope.disbledSkip=false;
 				$scope.statusImage="img/steplast.jpg";
-				$scope.para1="We have received and verified your details, your FinoZen account is now active.";
+				$scope.para1="We have received and verified your details and as you are already KYC registered, your FinoZen account is now active.";
 				$scope.para2="You can start investing now. Happy Investing!";
 				$scope.startInvesting="Start Investing";
 				$scope.notNow="Activate Now";

@@ -80,6 +80,11 @@ $ionicAppProvider.identify ({
       url: '/inviteContacts',
       templateUrl: 'templates/inviteContacts.html',
       controller: 'contactsCtrl'
+    })     
+    .state('referral', {
+      url: '/referral',
+      templateUrl: 'templates/referral.html',
+      controller: 'referralCtrl'
     })
 
     .state('status', {

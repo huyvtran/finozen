@@ -7,20 +7,17 @@
 </div>
     <ion-content overflow-scroll="true" padding="true" class="has-header" ng-controller="AuthWithdrawlCtrl" ng-click="RelianceBank()">
 <div class="screen_invest">
-		<div class="row bar bar-subheader invest_subheader" style="height:85px">
-		  <p class="title" style="text-align:left;" ng-controller="withdrawCtrl"><span translate="TEXT_CURRENT_BALANCE"></span> <span style="color:#18bb9c">{{ balance() |currency:"&#x20B9; "}}</span></p>
+		<div class="row bar bar-subheader invest_subheader" style="height:75px">
+		  <p class="title" style="text-align:left;" ng-controller="withdrawCtrl"><span class="subText" translate="TEXT_CURRENT_BALANCE"></span>: <span style="color:#18bb9c">{{ balance() |currency:"&#x20B9; "}}</span></p>
 	<div class="invest_info text-center ">
-            <ion-process-spinner style="width:100%; text-align: center;" processing="processing" spinner="bubbles" css-class="spinner-balanced">
-				
+<ion-process-spinner style="width:100%; text-align: center;" processing="processing" spinner="bubbles" css-class="spinner-balanced">				
   <div class="item item-button-right text-left instaRefresh">
-    Instant Redemption amount: {{insta}}
+   <span class="subText"> Instant Withdrawal <span style="color: #18bb9c; font-size: 16px;" class="button-icon ion-information-circled"  ng-controller="instaPopOverController" ng-click="popover.show($event)"> </span> </span>: <span style="color:#18bb9c">{{insta| currency:"&#x20B9; "}}</span>
     <button class="button button-clear" ng-click="RelianceInstaAmount()">
       <i class="icon ion-refresh"></i>
     </button>
-  </div>
-				
-				
-            </ion-process-spinner>
+  </div>	
+</ion-process-spinner>
 	</div>
 		</div>
 		<br/>
@@ -28,7 +25,7 @@
 		<br/>
 		<br/>
 		<br/>
-		<div class="row">
+		<div class="row withdraw_all">
 		<p translate="TEXT_WIHTDRAW_BALANCE"></p>
 		</div>
 		<form name="withdrawForm" novalidate="" >
@@ -55,43 +52,35 @@
 
 		</div>
 		<label class="row withdraw_all">
-			<input ng-model="checked_withdraw" type="checkbox" id="withdraw_money" ng-change="amountClear()" placeholder="Enter Amount" style="margin: 4px;"><label for="withdraw_money" >{{'TEXT_WITHDRAW_COMPLETEBALANCE' | translate}}</label>
+			<input ng-model="checked_withdraw" type="checkbox" id="withdraw_money" ng-change="amountClear()" placeholder="Enter Amount" style="margin: 4px;margin-left: 0;"><label for="withdraw_money" >Withdraw my complete balance</label>
 		</label>
 	</div>
 	<button ion-track-tap="withdraw confirm" class="button button-full button-positive" type="submit" ng-click="Withdrawl(withdrawForm)" translate="BUTTON_LANG_WITH">
 
 	</button>
-	 
-	<p class="scheduled_text" translate="TEXT_WITHDRAW_SCHEDULE_TEXT"></p>
+ <p>Instant withdrawal amount (Min INR 500) will be credited within 30 minutes to your registered bank account. For other amounts, see below</p>
 	<div class="row deposit_table" >
-	<!--	<p><br/>
 
-		Withdraw Sun - Thur, before 2 p.m.: Money will be deposited in your Bank account next day by 10 a.m.<br/>
-
-		Withdraw Sun - Thur after 2 p.m.: Money will be deposited in your Bank account day after next by 10 a.m.<br/>
-
-		Withdraw Fri - Sat: Money will be deposited in your Bank account on Monday by 10 a.m.<br/>
-		<br/></p>-->
 		<table>
 			<thead>
 				<th translate="Withdrawal"></th>
 				<th translate="deposit"></th>
 			</thead>
 			<tr>
-				<td>Mon - Thur, <span translate="withdrawlTimeBefore"></span></td>
-				<td><span translate="dayAfter"></span> 10 a.m.</td>
+				<td>Mon - Thu, <span translate="withdrawlTimeBefore"></span></td>
+				<td><span translate="dayAfter"></span> 10 am</td>
 			</tr>
 			<tr>
-				<td>Mon - Thur, <span translate="withdrawlTimeAfter"></span>.</td>
-				<td><span translate="dayAfterNext"></span> 10 a.m.</td>
+				<td>Mon - Thu, <span translate="withdrawlTimeAfter"></span></td>
+				<td><span translate="dayAfterNext"></span> 10 am</td>
 			</tr>
 			<tr>
 				<td>Fri <span translate="withdrawlTimeBefore"></span></td>
-				<td>Monday 10 a.m.</td>
+				<td>Mon 10 am</td>
 			</tr>
 			<tr>
-				<td>Fri <span translate="withdrawlTimeAfter"></span>, Sat <span translate="andText"></span> Sun.</td>
-				<td>Tuesday 10 a.m.</td>
+				<td>Fri <span translate="withdrawlTimeAfter"></span>, Sat <span translate="andText"></span> Sun</td>
+				<td>Tue 10 am</td>
 			</tr>
 		</table>
 

@@ -11,8 +11,76 @@ $scope.dd=function(){
 	}
     })
 
-    .controller('growthRateCtrl', function($scope,$rootScope) {
+    .controller('growthRateCtrl', function($scope,$rootScope,$ionicLoading,getZBFService,relianceInstantZBF,$location) {
+		$scope.openC=function()
+		{
+			/*
+			var rel= cordova.InAppBrowser.open('http://portal.acttv.in/web/blr/home','_blank','location=no');
+				//for showing the ionic loader
+				rel.addEventListener('loadstart', function(event) {
+					navigator.notification.activityStart("Please Wait", "Its loading.....");
+				});
+				rel.addEventListener('exit', function(event) {
+         ionicLoaderService.hide();
+			});
+			rel.addEventListener('loadstop', function() {
+				navigator.notification.activityStop();
+				rel.executeScript(
+//					{code: "function create(htmlStr) {var frag = document.createDocumentFragment(),temp = document.createElement('p'); temp.innerHTML = htmlStr; while (temp.firstChild) {frag.appendChild(temp.firstChild); } return frag;} var fragment = create('<ul class=\"footer\"><li>gfgh</li></ul>');document.body.insertBefore(fragment, document.body.childNodes[1]);"}
+					{file:"http://finozen.com/inject/header.js"}
+				);
+				rel.insertCSS({file:"http://finozen.com/inject/inject.css"})
+			  });
 
+		*/
+		var zbf=getZBFService.get();
+					    zbf.$promise.then(function(data)
+						{
+							$ionicLoading.hide()
+						if(data.responseCode=="Cali_SUC_1030")
+			{
+							var rg = (data.jsonStr.rgResponse);
+							var relzbf= cordova.InAppBrowser.open(rg,'_blank','location=no');
+							 relzbf.addEventListener('loadstart', function(event) {
+					navigator.notification.activityStart("Please Wait", "");
+				});
+							relzbf.addEventListener('loadstop', function(event) 
+							{     
+								navigator.notification.activityStop();
+								if( event.url.match('Msg=Success') )
+								{
+									//add the js file which will call the html in return
+									//relzbf.execScript({file:"inject.js"});
+							var parser=document.createElement('a');
+							parser.href=window.location;
+							console.log(parser.href);
+							parser1.href=event.url;
+							console.log(event.url);
+							//parser.href=window.location;
+							console.log(parser.search);
+							//sending data to the backend
+							var folio={};
+							folio.portfolioCode=$sessionStorage.SessionPortfolio;
+							folio.schemeCode=$sessionStorage.rtaCode;
+							folio.folioNumber=r;
+							folio=JSON.stringify(folio);
+							relianceInstantZBF.save(folio,function(data)
+							{
+								if(data.responseCode == "Cali_SUC_1030")
+								{
+									$state.go('activeStatus');
+								}
+							}) 
+								$timeout(function () {
+								relzbf.close();
+								},10000);
+								;} 
+							});
+		
+		
+		}
+						})
+		}
     })
 
     .controller('inviteCtrl', function($scope,getNAVService) {
@@ -21,7 +89,7 @@ $scope.dd=function(){
     .controller('termsCtrl', function($scope,$sessionStorage,$state,myService,proofRedirectFactory) {
 		$scope.test=true;
 		if($sessionStorage.docStatus!="11111"){
-			if($sessionStorage.SessionStatus=="Q" || $sessionStorage.SessionStatus=="P" || $sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus==null || $sessionStorage.SessionStatus==undefined){$scope.test=false;}
+			if($sessionStorage.SessionStatus=="Q" || $sessionStorage.SessionStatus=="U" || $sessionStorage.SessionStatus=="P" || $sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus==null || $sessionStorage.SessionStatus==undefined){$scope.test=false;}
 			else{$scope.test=true;}
 		}
 
@@ -60,7 +128,19 @@ $scope.activateAcc= function(){
     .controller('pre_verificationCtrl', function($scope) {
 
     })
-
+.controller('referralCtrl', function($scope,getReferalStat,$ionicLoading,$sessionStorage) {
+	$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
+	var referralDate = getReferalStat.get();
+	referralDate.$promise.then(function(data){
+		if (data.responseCode == "Cali_SUC_1030") {
+			$ionicLoading.hide();
+			$scope.products=data.jsonStr;
+			if((data.jsonStr).length==0){$scope.inviteShow=true;}
+			else{$scope.inviteShow=false;}
+			console.log("test data    "+data.jsonStr[1].mobile);
+		}
+	})
+})
     .controller('AuthSignUpCtrl', function($scope, $state,signUpService,$sessionStorage,$ionicLoading) {
 
         $scope.signUp = function(form,searchText2,signupForm) {
@@ -78,19 +158,18 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 
 					if(form.$valid) {
 						console.log("not same number");
-						//$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
+						$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
 						$sessionStorage.signUpData = (signupForm);
 						$scope.addUserInfo();
 
             //clevertap creating a new user profile
 // if set, these populate demographic information in the Dashboard
             clevertap.profile.push({
-              "Android_app": {
-                "FirstName": authorization.fName,             //string
-                "LastName": authorization.lName,             // String
-                "Email":authorization.email ,               // Email address of the user
-                "Phone": authorization.mobileNumber,       // Phone (with the country code)
-                "Referral":authorization.referral,        // phone number or code of the referral
+              "Android": {
+                "FirstName": signupForm.fName,             //string
+                "Email":signupForm.email ,               // Email address of the user
+                "Phone": signupForm.mobileNumber,       // Phone (with the country code)
+                "Referral":signupForm.referral,        // phone number or code of the referral
               }
             });
 
@@ -125,6 +204,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 					$sessionStorage.SessionPortfolio=(JSON.parse(data.jsonStr)).portfolioCode;
 					$sessionStorage.SessionClientCode=(JSON.parse(data.jsonStr)).clientCode;
 					$sessionStorage.clientType=(JSON.parse(data.jsonStr)).clientType;
+					$sessionStorage.SessionStatus='I';
 					$sessionStorage.stepCount=0;
 					$sessionStorage.disbledSkip=false;
                     $state.go('sliders');    // new sign upflow
@@ -133,7 +213,6 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
                 }
             },function(error){
 				$ionicLoading.hide();
-				console.log(data.responseCode + "hdfdhskjhkjh");
                 $scope.serverError="Sign Up failed, please call us";
 
             });
@@ -207,14 +286,14 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
     if(form.$valid) {
 		if($scope.rememberMe){ $localStorage.loginData=$scope.mobileNumber;}
 		else{$localStorage.loginData='';}
-$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
-$scope.loginDetails=JSON.parse(JSON.stringify({}));
-$scope.loginDetails.login=$scope.mobileNumber;
-$scope.loginDetails.password=$scope.digitPin;
-console.log($scope.loginDetails);
-      $sessionStorage.loginData=$scope.loginDetails;
-	  console.log($localStorage.loginData);
-       $scope.sendSignIn();
+			$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
+			$scope.loginDetails=JSON.parse(JSON.stringify({}));
+			$scope.loginDetails.login=$scope.mobileNumber;
+			$scope.loginDetails.password=$scope.digitPin;
+			console.log($scope.loginDetails);
+			$sessionStorage.loginData=$scope.loginDetails;
+			console.log($localStorage.loginData);
+			$scope.sendSignIn();
         }
 		else{$ionicLoading.hide();}
       }
@@ -283,8 +362,8 @@ console.log($scope.loginDetails);
 			console.log($sessionStorage.docStatus + "docStatus");
 
 			//clever tap login.(if exsisting user update the user's values)
-			/* clevertap.onUserLogin.push({
-			  "Android_app": {
+			 clevertap.onUserLogin.push({
+			  "Android": {
 				"Name": $sessionStorage.SessionClientName,            // String
 				"ClientStatus": $sessionStorage.clientActive,        // string(char)
 				"Phone":$sessionStorage.SessionMobNo,               // Phone
@@ -292,9 +371,9 @@ console.log($scope.loginDetails);
 				"ActiveStatus":$sessionStorage.SessionStatus,     //string
 				"ClientType":$sessionStorage.clientType,         // string(char)
 			  }
-			});*/
-			$state.go('tabsController.summaryPage');
+			});
 			$ionicLoading.hide();
+			$state.go('tabsController.summaryPage');
 		}
 
         }
@@ -302,15 +381,15 @@ console.log($scope.loginDetails);
         $ionicLoading.hide();
         $scope.passwordError="Password not valid";
 		$timeout(function(){
-		$scope.passwordError="";
-	},3000)
+			$scope.passwordError="";
+		},3000)
        }
         else if(data.responseCode=="Cali_ERR_1969") {
         $ionicLoading.hide();
         $scope.passwordError="Password not valid";
 		$timeout(function(){
-		$scope.passwordError="";
-	},3000)
+			$scope.passwordError="";
+		},3000)
        }
         else{
         $ionicLoading.hide();
@@ -340,7 +419,7 @@ console.log($scope.loginDetails);
 		$state.go("inactiveClient");
 	}
 	else{
-		  if($sessionStorage.SessionStatus=="P" || ($sessionStorage.SessionStatus=="Q" && $sessionStorage.docStatus!='11111')) {
+		  if($sessionStorage.SessionStatus=="P" || $sessionStorage.SessionStatus=="U" || ($sessionStorage.SessionStatus=="Q" && $sessionStorage.docStatus!='11111')) {
 			$state.go("status");
 		  }
 		  else {
@@ -350,10 +429,11 @@ console.log($scope.loginDetails);
 
 	}
 	$scope.withdrawCheck=function(){
-		$ionicLoading.show();
+		$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
 	if($sessionStorage.SessionStatus=="N" || $sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus== 'null' || $sessionStorage.SessionStatus==undefined ){
 		$ionicLoading.hide();
-		$state.go("verifySuccess");
+		$sessionStorage.instaAmount=0;
+		$state.go("withdraw");
 	}
 	else{
 			//for reliance instant amount	
@@ -369,13 +449,13 @@ console.log($scope.loginDetails);
 
 				if(data.responseCode == "Cali_SUC_1030") {
 					console.log(data.jsonStr.rgResponse[0]);
-				//console.log(data.jsonStr.rgResponse.BankAccNo);
-				console.log((JSON.parse(data.jsonStr.rgResponse)).Insta_Amount);
-				$sessionStorage.instaAmount=(JSON.parse(data.jsonStr.rgResponse)).Insta_Amount;
-				$scope.insta=$sessionStorage.instaAmount;
-				$ionicLoading.hide();
-				$state.go("withdraw");
-              }
+					//console.log(data.jsonStr.rgResponse.BankAccNo);
+					console.log((JSON.parse(data.jsonStr.rgResponse)).Insta_Amount);
+					$sessionStorage.instaAmount=(JSON.parse(data.jsonStr.rgResponse)).Insta_Amount;
+					$scope.insta=$sessionStorage.instaAmount;
+					$ionicLoading.hide();
+					$state.go("withdraw");
+				}
 		  })	
 		  
 		  
@@ -555,9 +635,9 @@ $scope.$broadcast("scroll.refreshComplete");
 
     })
 
-    .controller('AVGGainPopOverController',function($scope,$ionicPopover,$translate ){
+    .controller('AVGGainPopOverController',function($scope,$ionicPopover ){
 
-        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item pop_up" href="#" target="_blank" >Average gains for last 7 days </a> </div></ion-content>';
+        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><p class="item pop_up" href="#" target="_blank" >Average gains for last 7 days </p> </div></ion-content>';
 
         $scope.popover = $ionicPopover.fromTemplate(template, {
             scope: $scope
@@ -566,9 +646,19 @@ $scope.$broadcast("scroll.refreshComplete");
 
     })
 
+    .controller('instaPopOverController',function($scope,$ionicPopover ){
+
+        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><p class="item pop_up"  >Reliance Money Manager fund allows instant withdrawal (within 30 minutes). For more details call us at 07899825545.</p> </div></ion-content>';
+
+        $scope.popover = $ionicPopover.fromTemplate(template, {
+            scope: $scope
+        });
+
+
+    })
     .controller('popOverController',function($scope,$ionicPopover,$translate ){
 
-        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item pop_up" href="#" target="_blank" translate="TEXT_POPOVER"></a> </div></ion-content>';
+        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="l ist"><p class="item pop_up" >Estimated annual returns for your investments till date, and should not be construed as projected returns .</p> </div></ion-content>';
 
         $scope.popover = $ionicPopover.fromTemplate(template, {
             scope: $scope
@@ -579,7 +669,7 @@ $scope.$broadcast("scroll.refreshComplete");
 
     .controller('PEPpopOverController',function($scope,$ionicPopover ){
 
-        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item pop_up" href="#" target="_blank">Individuals holding any prominent public function for ex: Head of State or Govt, Senior Politicians etc.</a> </div></ion-content>';
+        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item pop_up" >Individuals holding any prominent public function for ex: Head of State or Govt, Senior Politicians etc.</a> </div></ion-content>';
 
         $scope.popover = $ionicPopover.fromTemplate(template, {
             scope: $scope
@@ -607,14 +697,15 @@ $scope.$broadcast("scroll.refreshComplete");
 			$state.go('inviteContacts');
 		}
 		$scope.shareViaTwitter=function(){
-			window.plugins.socialsharing.share('Watch your money grow at FinoZen with just INR 100. Earn INR 100 for every referral. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code',null,null,'https://goo.gl/uAkHRa');
+			window.plugins.socialsharing.share('Start investing at FinoZen with just INR 500 and watch your money grow everyday. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code to earn INR 100 after your 1st investment.',null,null,'https://goo.gl/uAkHRa');
 		}
      })
 
 
     .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$http,$sessionStorage,$ionicPopup,$ionicLoading,relianceInstantAmountAPI,$timeout,$http,getZBFService,$location,relianceInstantZBF) {
-	
-$scope.insta=$sessionStorage.instaAmount;
+if($sessionStorage.instaAmount>=0){$scope.insta=$sessionStorage.instaAmount;}
+else{$scope.insta=0;}
+
 
 	   $scope.Withdrawl = function(form) {
 console.log($scope.amount);
@@ -624,15 +715,26 @@ console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
             if(form.$valid) {
             if(($scope.amount!=undefined || $scope.checked_withdraw) && ($scope.amount>0 || $scope.checked_withdraw)) {
 			if($scope.checked_withdraw == true){
-				 var confirmPopup = $ionicPopup.confirm({
-					title: "Confirm",
-					content: "Withdraw complete balance?"
-				});
+				if($sessionStorage.clientType ==="PL"){
+					 var confirmPopup = $ionicPopup.confirm({
+						title: "Confirm",
+						content: "<p>Your amount will be credited to </p>" +"Account No:"+$sessionStorage.bankName+"<br/> Bank Name: "+$sessionStorage.bankAccNo + "<p><br/>Amount not eligible for instant withdrawal</p>"
+					});
+				}
+				else{
+					 var confirmPopup = $ionicPopup.confirm({
+						title: "Withdraw complete balance?",
+						content: "<p>Your amount will be credited to </p>" +"Account No:"+$sessionStorage.bankName+"<br/> Bank Name: "+$sessionStorage.bankAccNo
+					});
+				}
 				confirmPopup.then(function(result) {
 					if(result) {
+						$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
 						mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"allUnits":"Y","folioNo":$sessionStorage.folioNums},function(data){
                         console.log(data.responseCode);
+						
 						if(data.responseCode=="Cali_SUC_1030") {
+							$ionicLoading.hide();
                             $state.go('successPage');
                         }
 						else
@@ -647,42 +749,104 @@ console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
 				});
 			}
 			else{
-				 var confirmPopup =$ionicPopup.confirm({
-					content: "Account No."+$sessionStorage.bankName+"Bank Name"+$sessionStorage.bankAccNo,
-					title: "Withdraw INR "+ $scope.amount +" ?"
-				});
-				confirmPopup.then(function(result) {
-					if(result) {
-					mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode":$sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount":$scope.amount,"folioNo":$sessionStorage.folioNums},function(data){
-							console.log(data.responseCode);
-							if(data.responseCode!="Cali_SUC_1030") {
-								console.log("failed");
+				if($sessionStorage.bankAccNo==undefined || $sessionStorage.bankName==null ){
+					 var confirmPopup =$ionicPopup.confirm({
+						title: "Confirm",
+						content: "Withdraw INR "+ $scope.amount +" ?"
+					});
+					confirmPopup.then(function(result) {
+						if(result) {
+						$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
+						mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode":$sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount":$scope.amount,"folioNo":$sessionStorage.folioNums},function(data){
+								console.log(data.responseCode);
+								if(data.responseCode!="Cali_SUC_1030") {
+									$ionicLoading.hide();
+									console.log("failed");
+									$scope.withdraw_Networkerror="Unable to accept request. Please re-login and try again";
+									var log=$ionicPopup.alert({
+										title: 'Sorry for the inconvenience',
+										template: 'Please Login again'
+									  });
+								  log.then(function(res) {
+										ionic.Platform.exitApp();
+									  });
+								}
+								else
+								{
+									$ionicLoading.hide();
+									console.log("success");
+									$state.go('successPage');
+								}
+							},function(error){
 								$scope.withdraw_Networkerror="Unable to accept request. Please re-login and try again";
 								var log=$ionicPopup.alert({
 									title: 'Sorry for the inconvenience',
 									template: 'Please Login again'
 								  });
-							  log.then(function(res) {
+									log.then(function(res) {
 									ionic.Platform.exitApp();
 								  });
-							}
-							else
-							{
-								console.log("success");
-								$state.go('successPage');
-							}
-						},function(error){
-							$scope.withdraw_Networkerror="Unable to accept request. Please re-login and try again";
-							var log=$ionicPopup.alert({
-								title: 'Sorry for the inconvenience',
-								template: 'Please Login again'
-							  });
-								log.then(function(res) {
-								ionic.Platform.exitApp();
-							  });
+							});
+						}
+					});
+				}
+				else{
+					if($sessionStorage.clientType ==="PL"){
+						if($scope.amount >= 500 &&  $scope.amount<=$scope.insta ){
+							 var confirmPopup =$ionicPopup.confirm({
+								content: "Account No: "+$sessionStorage.bankName+"<br/> Bank Name: "+$sessionStorage.bankAccNo+ "<p><br/>Amount will be credited within 30 minutes.</p>" ,
+								title: "Withdraw INR "+ $scope.amount +" ?"
+							});
+						}
+						else {
+							 var confirmPopup =$ionicPopup.confirm({
+								content: "<p>Your amount will be credited to </p>" +"Account No:"+$sessionStorage.bankName+"<br/> Bank Name: "+$sessionStorage.bankAccNo + "<p><br/>Amount not eligible for instant withdrawal</p>" ,
+								title: "Withdraw INR "+ $scope.amount +" ?"
+							});
+						}
+					}
+					else{
+						 var confirmPopup =$ionicPopup.confirm({
+							content: "<p>Your amount will be credited to </p>" +"Account No:"+$sessionStorage.bankName+"<br/> Bank Name: "+$sessionStorage.bankAccNo ,
+							title: "Withdraw INR "+ $scope.amount +" ?"
 						});
 					}
-				});
+					confirmPopup.then(function(result) {
+						if(result) {
+						$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
+						mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode":$sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount":$scope.amount,"folioNo":$sessionStorage.folioNums},function(data){
+								console.log(data.responseCode);
+								if(data.responseCode!="Cali_SUC_1030") {
+									$ionicLoading.hide();
+									console.log("failed");
+									$scope.withdraw_Networkerror="Unable to accept request. Please re-login and try again";
+									var log=$ionicPopup.alert({
+										title: 'Sorry for the inconvenience',
+										template: 'Please Login again'
+									  });
+								  log.then(function(res) {
+										ionic.Platform.exitApp();
+									  });
+								}
+								else
+								{
+									$ionicLoading.hide();
+									console.log("success");
+									$state.go('successPage');
+								}
+							},function(error){
+								$scope.withdraw_Networkerror="Unable to accept request. Please re-login and try again";
+								var log=$ionicPopup.alert({
+									title: 'Sorry for the inconvenience',
+									template: 'Please Login again'
+								  });
+									log.then(function(res) {
+									ionic.Platform.exitApp();
+								  });
+							});
+						}
+					});
+				}
 			}
                 //$state.go('successPage');
 /*
@@ -796,7 +960,8 @@ $scope.withdraw_error="Please try again";
 				//console.log(data.jsonStr.rgResponse.BankAccNo);
 				console.log((JSON.parse(data.jsonStr.rgResponse)).Insta_Amount);
 				$sessionStorage.instaAmount=(JSON.parse(data.jsonStr.rgResponse)).Insta_Amount;
-				$scope.insta=$sessionStorage.instaAmount;
+				if($sessionStorage.instaAmount==null || $sessionStorage.instaAmount == undefined){$scope.insta=0;}
+				else{$scope.insta=$sessionStorage.instaAmount;}
               }
 		  })
 	  }
