@@ -44,8 +44,8 @@ $scope.dd=function(){
 							 relzbf.addEventListener('loadstart', function(event) {
 					navigator.notification.activityStart("Please Wait", "");
 				});
-							relzbf.addEventListener('loadstop', function(event) 
-							{     
+							relzbf.addEventListener('loadstop', function(event)
+							{
 								navigator.notification.activityStop();
 								if( event.url.match('Msg=Success') )
 								{
@@ -70,14 +70,14 @@ $scope.dd=function(){
 								{
 									$state.go('activeStatus');
 								}
-							}) 
+							})
 								$timeout(function () {
 								relzbf.close();
 								},10000);
-								;} 
+								;}
 							});
-		
-		
+
+
 		}
 						})
 		}
@@ -321,7 +321,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
         $sessionStorage.SessionIdstorage = data.msg;
         $sessionStorage.SessionPortfolio =data.jsonStr[0].pfolioCode;
         $sessionStorage.SessionStatus =data.jsonStr[0].activeStatus;
-		
+
 		//for suspended client
 		if($sessionStorage.SessionStatus=='S'){
 			$ionicLoading.hide();
@@ -339,8 +339,8 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
                         text: '<b>Close</b>',
                         type: 'button-positive',
                         onTap: function(e) {
-                            
-                            
+
+
 								 ionic.Platform.exitApp();
                         }
                     },
@@ -362,7 +362,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 			console.log($sessionStorage.docStatus + "docStatus");
 
 			//clever tap login.(if exsisting user update the user's values)
-			 clevertap.onUserLogin.push({
+			 clevertap.onUserLogin({
 			  "Android": {
 				"Name": $sessionStorage.SessionClientName,            // String
 				"ClientStatus": $sessionStorage.clientActive,        // string(char)
@@ -436,7 +436,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 		$state.go("withdraw");
 	}
 	else{
-			//for reliance instant amount	
+			//for reliance instant amount
 			var bankcall={};
 				bankcall.gateWayType ="RG",
                 bankcall.gateWayPayLoad= "https://online.reliancemf.com/rmf/mowblyserver/wsapi/rmf/prod/wsapi/RedemptionSchemeDetails?acno="+$sessionStorage.folioNums+"&scheme=LP&plan=IG&arncode=ARN-107100&branch=FP99&proxybranch=&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=c3d2f2f3-7d23-4f48-9fe6-82db5449a562"
@@ -444,7 +444,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 				console.log(bankcall+"bank call");
 				var bankedit;
 				relianceInstantAmountAPI.save(bankcall,function(data){
-				
+
 				console.log(data);
 
 				if(data.responseCode == "Cali_SUC_1030") {
@@ -456,10 +456,10 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 					$ionicLoading.hide();
 					$state.go("withdraw");
 				}
-		  })	
-		  
-		  
-		  
+		  })
+
+
+
 	}
 
 	}
@@ -511,7 +511,7 @@ var timeNow = new Date().getUTCHours();
             noBackdrop: true
         });*/
 	$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
-	
+
 var reportDate = getPerformanceService.get();
 reportDate.$promise.then(function(data){
  if (data.responseCode == "Cali_SUC_1030") {
@@ -541,7 +541,7 @@ $sessionStorage.xirr=data.jsonStr.xirr;
     }
     }
   })
-  
+
   //reliance bank details
   var RelianceBank=function(){
 				var bankcall={};
@@ -551,7 +551,7 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 				console.log(bankcall+"bank call");
 				var bankedit;
 				relianceInstantAmountAPI.save(bankcall,function(data){
-				
+
 				console.log(data);
 
 				if(data.responseCode == "Cali_SUC_1030") {
@@ -560,7 +560,7 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 				console.log((JSON.parse(data.jsonStr.rgResponse))[0].BankAccNo);
 				$sessionStorage.bankName=(JSON.parse(data.jsonStr.rgResponse))[0].BankAccNo;
 				$sessionStorage.bankAccNo=(JSON.parse(data.jsonStr.rgResponse))[0].BankName;
-               
+
               }
 		  })
 	  }
@@ -732,7 +732,7 @@ console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
 						$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
 						mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"allUnits":"Y","folioNo":$sessionStorage.folioNums},function(data){
                         console.log(data.responseCode);
-						
+
 						if(data.responseCode=="Cali_SUC_1030") {
 							$ionicLoading.hide();
                             $state.go('successPage');
@@ -916,10 +916,10 @@ $scope.withdraw_error="Please try again";
         $scope.amountClear= function() {
             $scope.amount='';
         }
-		
-		
+
+
 		//reliance bank api call
-		
+
 			  $scope.RelianceBank=function(){
 				var bankcall={};
 				bankcall.gateWayType ="RG",
@@ -928,7 +928,7 @@ $scope.withdraw_error="Please try again";
 				console.log(bankcall+"bank call");
 				var bankedit;
 				relianceInstantAmountAPI.save(bankcall,function(data){
-				
+
 				console.log(data);
 
 				if(data.responseCode == "Cali_SUC_1030") {
@@ -937,7 +937,7 @@ $scope.withdraw_error="Please try again";
 				console.log((JSON.parse(data.jsonStr.rgResponse))[0].BankAccNo);
 				$sessionStorage.bankName=(JSON.parse(data.jsonStr.rgResponse))[0].BankAccNo;
 				$sessionStorage.bankAccNo=(JSON.parse(data.jsonStr.rgResponse))[0].BankName;
-               
+
               }
 		  })
 	  }
@@ -951,7 +951,7 @@ $scope.withdraw_error="Please try again";
 				console.log(bankcall+"bank call");
 				var bankedit;
 				relianceInstantAmountAPI.save(bankcall,function(data){
-				
+
 				console.log(data);
 
 				if(data.responseCode == "Cali_SUC_1030") {
@@ -965,6 +965,6 @@ $scope.withdraw_error="Please try again";
               }
 		  })
 	  }
-	 
+
 
     })
