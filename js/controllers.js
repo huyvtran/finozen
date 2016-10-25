@@ -362,7 +362,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 			console.log($sessionStorage.docStatus + "docStatus");
 
 			//clever tap login.(if exsisting user update the user's values)
-			 clevertap.onUserLogin.push({
+			 CleverTap.onUserLogin({
 			  "Android": {
 				"Name": $sessionStorage.SessionClientName,            // String
 				"ClientStatus": $sessionStorage.clientActive,        // string(char)
