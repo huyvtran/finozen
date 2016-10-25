@@ -29,13 +29,13 @@ angular.module('app.services', [])
   .factory('getReportService', ['$resource','$sessionStorage',function($resource,$sessionStorage){
     return $resource('https://finotrust.com/WealthWeb/ws/clientRepos/getOrders?pfolioCode='+$sessionStorage.SessionPortfolio+'&noOfOrders=30');
   }])
-  
+
   /*Reliance ZBF page service*/
    .factory('getZBFService', ['$resource','$sessionStorage',function($resource,$sessionStorage){
 	   console.log($sessionStorage.portfolioCode+"portfolioCode");
     return $resource('https://finotrust.com/WealthWeb/ws/clientOrders/zbf?portfolioCode=CRN26946E20018&rtaCode=RMFLPIG');
   }])
-  
+
   /*Reliance folio number sending it to backend */
    .factory('relianceInstantZBF',['$resource','$sessionStorage',function($resource,$sessionStorage){
        var relianceZBF = $resource('https://finotrust.com//ealthweb/ws/clientorders/createfolio',{},{
@@ -49,15 +49,15 @@ angular.module('app.services', [])
 
       return relianceZBF;
   }])
-  
+
   // Referral Factory
-  
-  
+
+
  .factory('getReferalStat', ['$resource','$sessionStorage',function($resource,$sessionStorage){
 	console.log($sessionStorage.SessionMobNo);
-	return $resource('https://finotrust.com/WealthWeb/ws/login/getMyReferrals?mobile='+$sessionStorage.SessionMobNo);
+	return $resource('hhttps://finotrust.com/WealthWeb/ws/login/getMyReferrals?mobile='+$sessionStorage.SessionMobNo);
 
-}])     
+}])
 /*For reliance api instant redemption and getting the bank details*/
   .factory('relianceInstantAmountAPI',['$resource','$sessionStorage',function($resource,$sessionStorage){
        var relianceIntsaAmount = $resource('https://finotrust.com/WealthWeb/ws/pymt/wrapperWS',{},{
@@ -239,7 +239,7 @@ return totalIndex;
 
 /*send MF sell order*/
 .factory('mfSellUrlService', ['$resource',function($resource){
-	var mfSellRequest= $resource('https://finotrust.com/WealthWeb/ws/clientOrders/clientOrderMfSell',{},{
+	var mfSellRequest= $resource('https://finotrust.com0/WealthWeb/ws/clientOrders/clientOrderMfSell',{},{
 		save:{
 			method:'POST',
 		},
