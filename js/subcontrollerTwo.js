@@ -307,7 +307,7 @@ angular.module('app.subcontrollerTwo', [])
     })
 
       /*for question's*/
-    .controller('questionsCTRL',function($scope,myService,proofRedirectFactory,questionsService,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window,ionicDatePicker,$filter){
+    .controller('questionsCTRL',function($scope,myService,proofRedirectFactory,questionsService,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window,ionicDatePicker,$filter,$http){
 $scope.diasbleSkip=$sessionStorage.disbledSkip;
 	   $scope.clientIncomeOptions = [
     { name: 'Below 1 Lakh', value: '31' },
@@ -335,12 +335,66 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
     $scope.clientOccupation = {type : $scope.clientOccupationOptions[3].value};
 
 	   $scope.clientPEPOptions = [
-    { name: 'Not Applicable', value: 'N' },
-    { name: 'Politically Exposed Person', value: 'Y' },
-    { name: 'Related to Politically Exposed Person', value: 'R' }
-    ];
+		{ name: 'Not Applicable', value: 'N' },
+		{ name: 'Politically Exposed Person', value: 'Y' },
+		{ name: 'Related to Politically Exposed Person', value: 'R' }
+		];
 
-    $scope.clientPEP = {type : $scope.clientPEPOptions[0].value};
+		$scope.clientPEP = {type : $scope.clientPEPOptions[0].value};
+		$scope.clientPOB="India";
+		
+		
+		
+		
+		
+		
+		
+
+	   $scope.addressTypeOptions = [
+		{ name: 'Residential', value: '2' },
+		{ name: 'Bussiness', value: '3' },
+		{ name: 'Registered Office', value: '4' },
+		{ name: 'Residential or Bussiness', value: '1' }
+		];
+		$scope.clientAddressType = {type : $scope.addressTypeOptions[0].value};
+
+
+	   $scope.SOWOptions = [
+		{ name: 'Salary', value: '01' },
+		{ name: 'Business Income', value: '02' },
+		{ name: 'Gift', value: '03' },
+		{ name: 'Ancestral Property', value: '04' },
+		{ name: 'Rental Income', value: '05' },
+		{ name: 'Prize Money', value: '06' },
+		{ name: 'Royalty', value: '07' },
+		{ name: 'Others', value: '08' }
+		];
+
+		$scope.clientSOW = {type : $scope.SOWOptions[0].value};
+
+
+	   $scope.marriageStatusOptions = [
+		{ name: 'Married', value: 'M' },
+		{ name: 'Unmarried', value: 'U' }
+		];
+
+		$scope.marriageStatus = {type : $scope.marriageStatusOptions[1].value};
+
+
+	   $scope.nationalityOptions = [
+		{ name: 'Indian', value: 'I' },
+		{ name: 'Others', value: 'O' }
+		];
+
+		$scope.clientNationality = {type : $scope.nationalityOptions[0].value};
+
+
+
+$http.get('data/country.json').then(function(res){
+  $scope.countryOptions = res.data;  
+	$scope.clientCountry = {type : $scope.countryOptions[105].value};  
+	$scope.taxRes = {type : $scope.countryOptions[105].value};
+});
 
 
 		$scope.question=function(){
@@ -388,11 +442,20 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 		$ionicLoading.show({templateUrl:"templates/loading.html"});
 		var questUpload=JSON.parse(JSON.stringify({}));
 		questUpload.kyphCode = $sessionStorage.SessionClientCode;
-		//questUpload.kyphCode="CRN23911";
 		questUpload.income=$scope.clientIncome.type; // income level from 31-36
 		questUpload.occup=$scope.clientOccupation.type; // for the occupation
 		questUpload.pep=$scope.clientPEP.type; //for the pep status either Y or N
+		
+		
+		questUpload.birthPlace=$scope.clientPOB; //for the pep status either Y or N
+		questUpload.birthCountry=$scope.clientCountry.type; //for the pep status either Y or N
+		questUpload.addressType=$scope.clientAddressType.type; //for the pep status either Y or N
+		questUpload.taxResiCountry=$scope.taxRes.type; //for the pep status either Y or N
+		questUpload.wealthSource=$scope.clientSOW.type; //for the pep status either Y or N
+		questUpload.maritalStatus=$scope.marriageStatus.type; //for the pep status either Y or N
+		questUpload.nationality=$scope.clientNationality.type; //for the pep status either Y or N
 		questUpload.resStatus="Individual"; // for the resdential status hardcoding it to individual
+		
 		questUpload.dob=$sessionStorage.dob // for the client's date of birth
 		questUpload = JSON.stringify(questUpload);
 		console.log($scope.clientIncome.type + " clientIncome");
@@ -954,8 +1017,15 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
     })
 */
   /*forgot pin controller*/
-    .controller('forgotPinCtrl', function($scope,$sessionStorage,$http,$state,$ionicPopup) {
-        $scope.resetPin=function(change) {
+    .controller('forgotPinCtrl', function($scope,$sessionStorage,$http,$state,$ionicPopup,$timeout,$ionicLoading) {
+        $scope.resetPin=function(change,confirmNewPin) {
+			console.log(change.newPassword);
+			console.log(confirmNewPin);
+			console.log(change.newPassword==confirmNewPin);
+		}
+        $scope.resetPin2=function(change,confirmNewPin) {
+		  if(change.newPassword==confirmNewPin){
+			  $ionicLoading.show({templateUrl:"templates/loading.html"});
           $scope.forget5 = JSON.parse(forgotPin2(change));
           $scope.forget5.mobileNumber = JSON.stringify($sessionStorage.forgotPinPhone);
           var forgotpinPass = JSON.stringify($scope.forget5);
@@ -963,7 +1033,7 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
           $http.post('https://finotrust.com/WealthWeb/ws/clientFcps/setNewPassword', forgotpinPass).success(function(data){
             console.log(data+'response');
             if(data.responseCode=="Cali_SUC_1030"){
-
+			  $ionicLoading.hide();
               var popup= $ionicPopup.alert({
                 title: 'PIN Change status',
                 template: 'PIN Changed Successfully'
@@ -974,6 +1044,7 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
               });
             }
 			else {
+				$ionicLoading.hide();
 				$ionicPopup.alert({
                 title: 'PIN Change status',
                 template: 'PIN Change UnSuccessful'
@@ -993,7 +1064,12 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
               });
             }
           });
-
+		  }
+		  else{
+		$timeout(function () {
+         $scope.pinMatch="Entered password didn't match"
+        }, 3000);
+		  }
         }
         var  forgotPin2 = function(change2){
             return JSON.stringify(change2)
@@ -1142,7 +1218,7 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 		  $scope.selectedIndex=function(valu){
 			console.log($scope.contacts[valu].phoneNumbers[0].value + " contact value selected");
 
-			window.plugins.socialsharing.shareViaSMS({'message':'Watch your money grow at FinoZen with just INR 100. Earn INR 100 for every referral. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code', 'subject':'The subject', 'image':'https://www.google.nl/images/srpr/logo4w.png'}, $scope.contacts[valu].phoneNumbers[0].value, $scope.contacts[valu].phoneNumbers[0].value, function(msg) {console.log('ok: ' + msg)}, function(msg) {console.log('error: ' + msg)})
+			window.plugins.socialsharing.shareViaSMS({'message':'Start investing at FinoZen with just INR 500 and watch your money grow everyday. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code to earn INR 100 after your 1st investment.', 'subject':'The subject', 'image':'https://www.google.nl/images/srpr/logo4w.png'}, $scope.contacts[valu].phoneNumbers[0].value, $scope.contacts[valu].phoneNumbers[0].value, function(msg) {console.log('ok: ' + msg)}, function(msg) {console.log('error: ' + msg)})
 		  }
 
 		  $scope.pickContact=function(pickUp){

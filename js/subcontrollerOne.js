@@ -244,9 +244,11 @@ $scope.terms = function()
 	})
 	.controller('withdrawCtrl', function($scope,$sessionStorage,$ionicLoading,getReportService,$ionicHistory,ionicToast,$ionicPlatform,$state,$interval,$rootScope,$timeout) {
 	if($sessionStorage.clientType=="GO"){
+		$sessionStorage.RelScheme="LF";
 		$scope.schemeNamep = "GOLD";
 	}
 	else if($sessionStorage.clientType=="PL") {
+		$sessionStorage.RelScheme="LP";
 		$scope.schemeNamep = "PLATINUM";
   }
 
@@ -326,7 +328,7 @@ $scope.xirrRate= function(){
     })
 
  // NAV Calculator controller
-.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup,$ionicLoading,$ionicPlatform,$timeout,relianceInstantAmountAPI) {
+.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup,$ionicLoading,$ionicPlatform,$timeout,relianceInstantAmountAPI,$location) {
 
   var finalComputedVal;
   	if($sessionStorage.clientType=="GO"){
@@ -425,7 +427,7 @@ $scope.xirrRate= function(){
                 if(data.responseCode=="Cali_SUC_1030"){
 					$ionicLoading.hide();
 					if(data.jsonStr==null){
-						  var ref = cordova.InAppBrowser.open('https://finotrust.com/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_blank', 'location=no');
+						  var ref = cordova.InAppBrowser.open('http://52.66.96.81/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_blank', 'location=no');
 						  ref.addEventListener('loadstart', function(event) {
 					navigator.notification.activityStart("Please Wait", "Redirecting to a secure payment gateway");
 				});
@@ -445,12 +447,15 @@ $scope.xirrRate= function(){
 					else{
 						console.log(data.jsonStr.ihno);
 						var rel= cordova.InAppBrowser.open('https://investeasy.reliancemutual.com/online/CampaingLink/InvestorCampaign?IHNO='+data.jsonStr.ihno,'_blank','location=no');
-							  rel.addEventListener('loadstart', function(event) {
-					navigator.notification.activityStart("Please Wait", "Redirecting to a secure payment gateway");
-				});
-						rel.addEventListener('loadstop', function() {
+							rel.addEventListener('loadstart', function(event) {
+								navigator.notification.activityStart("Please Wait", "Redirecting to a secure payment gateway");
+							});
+						rel.addEventListener('loadstop', function(event) { 
 							navigator.notification.activityStop();
 						  });
+							rel.addEventListener('loadstop', function(event) { if( event.url.match('online/RMFShort/FetchInvData') ){
+								console.log(event.url);
+							;} });
 						rel.addEventListener('loadstop', function(event) { if( event.url.match('https://investeasy.reliancemutual.com/online/Payments/PaymentConfirmation_DIT.aspx') ){
 							rel.executeScript({ file: "https://finotrust.com/inject/counter.js" });
 							rel.insertCSS({file:"https://finotrust.com/inject/inject.css"});

@@ -35,7 +35,7 @@
 			</div>
 		</div>
 		<label class="item item-input" ng-class="{ 'has-errors' : authorizationForm.password.$invalid && authorizationForm.$submitted, 'no-errors' : authorizationForm.password.$valid  && authorizationForm.$submitted}">
-			<input type="password" name="password" ng-pattern="/^[0-9]{1,4}$/" ng-model="digitPin" maxlength="4" ng-minlength="4" ng-maxlength="4" required placeholder="{{'passwordLength' | translate}}" >
+			<input type="password" name="password"  ng-model="digitPin" ng-minlength="4" required placeholder="Enter your password" >
 		</label>
 		<p class="text-right forgot_pin" ng-click="forgotPin(authorizationForm.mobile)"translate="BUTTON_LANG_FORGOT"></p>
 		<div class="error-container last-error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">
@@ -44,7 +44,7 @@
 					{{'fieldEmpty' | translate}}
 				</div>
 				<div ng-message="minlength, maxlength">
-					{{'passwordLength' | translate}}
+					Password should have atleast 4 characters
 				</div>
 				<div ng-message="pattern">{{'digitsOnly' | translate}}</div>
 			</div>

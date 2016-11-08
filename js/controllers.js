@@ -98,7 +98,7 @@ $scope.activateAcc= function(){
 	$scope.test=false;
 	if($sessionStorage.docStatus=="11111"){}
 	else{
-	if($sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus=="N" ||  $sessionStorage.SessionStatus==null){$state.go('bank');}
+	if($sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus=="N" ||  $sessionStorage.SessionStatus==null){$state.go('questions');}
 	else{
 	console.log($sessionStorage.docStatus);
 	$sessionStorage.stepCount=-1;
@@ -137,14 +137,14 @@ $scope.activateAcc= function(){
 			$scope.products=data.jsonStr;
 			if((data.jsonStr).length==0){$scope.inviteShow=true;}
 			else{$scope.inviteShow=false;}
-			console.log("test data    "+data.jsonStr[1].mobile);
+			//console.log("test data    "+data.jsonStr[1].mobile);
 		}
 	})
 })
     .controller('AuthSignUpCtrl', function($scope, $state,signUpService,$sessionStorage,$ionicLoading) {
 
         $scope.signUp = function(form,searchText2,signupForm) {
-$sessionStorage.SessionClientName=signupForm.fName+' '+signupForm.lName;
+$sessionStorage.SessionClientName=signupForm.fName;
 $sessionStorage.SessionMobNo=signupForm.mobileNumber;
             if(angular.equals(signupForm.pin,searchText2))
             {
@@ -164,15 +164,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 
             //clevertap creating a new user profile
 // if set, these populate demographic information in the Dashboard
-            clevertap.profile.push({
-              "Android": {
-                "FirstName": signupForm.fName,             //string
-                "Email":signupForm.email ,               // Email address of the user
-                "Phone": signupForm.mobileNumber,       // Phone (with the country code)
-                "Referral":signupForm.referral,        // phone number or code of the referral
-              }
-            });
-
+         
           }
 				}
             }
@@ -200,6 +192,18 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 					}
 				}
                 else {
+					/*
+					 //clevertap creating a new user profile
+					// if set, these populate demographic information in the Dashboard
+				  CleverTap.profile.push({
+                    "SignUp_Android": {
+                      "FirstName": signupForm.fName,             //string
+                      "Email": signupForm.email,               // Email address of the user
+                      "Phone": signupForm.mobileNumber,       // Phone (with the country code)
+                      "Referral": signupForm.referral,       //referral number
+								}
+										)}; */
+					
 					//saving the signUp data with similar name convention as per sign in controller
 					$sessionStorage.SessionPortfolio=(JSON.parse(data.jsonStr)).portfolioCode;
 					$sessionStorage.SessionClientCode=(JSON.parse(data.jsonStr)).clientCode;
@@ -330,7 +334,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
                 buttons: [
                     { text: 'Call',
                         onTap:function(e){
-                            window.location.href="tel:07899825545";
+                            window.location.href="tel:09206073021";
                         }
 
                     },
@@ -362,7 +366,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 			console.log($sessionStorage.docStatus + "docStatus");
 
 			//clever tap login.(if exsisting user update the user's values)
-			 clevertap.onUserLogin({
+			/* CleverTap.onUserLogin({
 			  "Android": {
 				"Name": $sessionStorage.SessionClientName,            // String
 				"ClientStatus": $sessionStorage.clientActive,        // string(char)
@@ -371,7 +375,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 				"ActiveStatus":$sessionStorage.SessionStatus,     //string
 				"ClientType":$sessionStorage.clientType,         // string(char)
 			  }
-			});
+			});*/
 			$ionicLoading.hide();
 			$state.go('tabsController.summaryPage');
 		}
@@ -439,7 +443,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 			//for reliance instant amount
 			var bankcall={};
 				bankcall.gateWayType ="RG",
-                bankcall.gateWayPayLoad= "https://online.reliancemf.com/rmf/mowblyserver/wsapi/rmf/prod/wsapi/RedemptionSchemeDetails?acno="+$sessionStorage.folioNums+"&scheme=LP&plan=IG&arncode=ARN-107100&branch=FP99&proxybranch=&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=c3d2f2f3-7d23-4f48-9fe6-82db5449a562"
+                bankcall.gateWayPayLoad= "https://online.reliancemf.com/rmf/mowblyserver/wsapi/rmf/prod/wsapi/RedemptionSchemeDetails?acno="+$sessionStorage.folioNums+"&scheme="+$sessionStorage.RelScheme+"&plan=IG&arncode=ARN-107100&branch=FP99&proxybranch=&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=c3d2f2f3-7d23-4f48-9fe6-82db5449a562"
 				bankcall=JSON.stringify(bankcall);
 				console.log(bankcall+"bank call");
 				var bankedit;
@@ -480,7 +484,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
                 buttons: [
                     { text: 'Call',
                         onTap:function(e){
-                            window.location.href="tel:07899825545";
+                            window.location.href="tel:09206073021";
                         }
 
                     },
@@ -546,7 +550,7 @@ $sessionStorage.xirr=data.jsonStr.xirr;
   var RelianceBank=function(){
 				var bankcall={};
 				bankcall.gateWayType ="RG",
-                bankcall.gateWayPayLoad= "https://online.reliancemf.com/rmf/mowblyserver/wsapi/rmf/prod/wsapi/RedInvbankDetails_V1?arncode=ARN-107100&acno="+$sessionStorage.folioNums+"+&scheme=LP&plan=IG&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=c3d2f2f3-7d23-4f48-9fe6-82db5449a562"
+                bankcall.gateWayPayLoad= "https://online.reliancemf.com/rmf/mowblyserver/wsapi/rmf/prod/wsapi/RedInvbankDetails_V1?arncode=ARN-107100&acno="+$sessionStorage.folioNums+"+&scheme="+$sessionStorage.RelScheme+"&plan=IG&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=c3d2f2f3-7d23-4f48-9fe6-82db5449a562"
 				bankcall=JSON.stringify(bankcall);
 				console.log(bankcall+"bank call");
 				var bankedit;
@@ -648,7 +652,7 @@ $scope.$broadcast("scroll.refreshComplete");
 
     .controller('instaPopOverController',function($scope,$ionicPopover ){
 
-        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><p class="item pop_up"  >Reliance Money Manager fund allows instant withdrawal (within 30 minutes). For more details call us at 07899825545.</p> </div></ion-content>';
+        var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><p class="item pop_up"  >Reliance Money Manager fund allows instant withdrawal (within 30 minutes). For more details call us at 09206073021.</p> </div></ion-content>';
 
         $scope.popover = $ionicPopover.fromTemplate(template, {
             scope: $scope
@@ -715,38 +719,47 @@ console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
             if(form.$valid) {
             if(($scope.amount!=undefined || $scope.checked_withdraw) && ($scope.amount>0 || $scope.checked_withdraw)) {
 			if($scope.checked_withdraw == true){
-				if($sessionStorage.clientType ==="PL"){
-					 var confirmPopup = $ionicPopup.confirm({
-						title: "Confirm",
-						content: "<p>Your amount will be credited to </p>" +"Account No:"+$sessionStorage.bankName+"<br/> Bank Name: "+$sessionStorage.bankAccNo + "<p><br/>Amount not eligible for instant withdrawal</p>"
-					});
+				if($sessionStorage.bankAccNo==undefined || $sessionStorage.bankName==null ){
+				 var confirmPopup =$ionicPopup.confirm({
+					title: "Confirm",
+					content: "Withdraw complete balance ?"
+				});
 				}
 				else{
-					 var confirmPopup = $ionicPopup.confirm({
-						title: "Withdraw complete balance?",
-						content: "<p>Your amount will be credited to </p>" +"Account No:"+$sessionStorage.bankName+"<br/> Bank Name: "+$sessionStorage.bankAccNo
+					if($sessionStorage.clientType ==="PL"){
+						 var confirmPopup = $ionicPopup.confirm({
+							title: "Confirm",
+							content: "<p>Your amount will be credited to </p>" +"Account No:"+$sessionStorage.bankName+"<br/> Bank Name: "+$sessionStorage.bankAccNo + "<p><br/>Amount not eligible for instant withdrawal</p>"
+						});
+					}
+					else{
+						 var confirmPopup = $ionicPopup.confirm({
+							title: "Withdraw complete balance?",
+							content: "<p>Your amount will be credited to </p>" +"Account No:"+$sessionStorage.bankName+"<br/> Bank Name: "+$sessionStorage.bankAccNo
+						});
+					}
+					confirmPopup.then(function(result) {
+						if(result) {
+							$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
+							mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"allUnits":"Y","folioNo":$sessionStorage.folioNums},function(data){
+							console.log(data.responseCode);
+
+							if(data.responseCode=="Cali_SUC_1030") {
+								$ionicLoading.hide();
+								$state.go('successPage');
+							}
+							else
+							{
+								$ionicLoading.hide();
+								$scope.withdraw_Networkerror="Please try again";
+							}
+						},function(error){
+							$ionicLoading.hide(); 
+							$scope.withdraw_Networkerror="Please try again";
+						});
+						}
 					});
 				}
-				confirmPopup.then(function(result) {
-					if(result) {
-						$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
-						mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"allUnits":"Y","folioNo":$sessionStorage.folioNums},function(data){
-                        console.log(data.responseCode);
-
-						if(data.responseCode=="Cali_SUC_1030") {
-							$ionicLoading.hide();
-                            $state.go('successPage');
-                        }
-						else
-						{
-							$scope.withdraw_Networkerror="Please try again";
-						}
-                    },function(error){
-
-						$scope.withdraw_Networkerror="Please try again";
-                    });
-					}
-				});
 			}
 			else{
 				if($sessionStorage.bankAccNo==undefined || $sessionStorage.bankName==null ){
@@ -778,6 +791,7 @@ console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
 									$state.go('successPage');
 								}
 							},function(error){
+								$ionicLoading.hide();
 								$scope.withdraw_Networkerror="Unable to accept request. Please re-login and try again";
 								var log=$ionicPopup.alert({
 									title: 'Sorry for the inconvenience',
@@ -923,7 +937,7 @@ $scope.withdraw_error="Please try again";
 			  $scope.RelianceBank=function(){
 				var bankcall={};
 				bankcall.gateWayType ="RG",
-                bankcall.gateWayPayLoad= "https://online.reliancemf.com/rmf/mowblyserver/wsapi/rmf/prod/wsapi/RedInvbankDetails_V1?arncode=ARN-107100&acno="+$sessionStorage.folioNums+"+&scheme=LP&plan=IG&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=c3d2f2f3-7d23-4f48-9fe6-82db5449a562"
+                bankcall.gateWayPayLoad="https://online.reliancemf.com/rmf/mowblyserver/wsapi/rmf/prod/wsapi/RedInvbankDetails_V1?arncode=ARN-107100&acno="+$sessionStorage.folioNums+"+&scheme="+$sessionStorage.RelScheme+"&plan=IG&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=c3d2f2f3-7d23-4f48-9fe6-82db5449a562"  //(LF, IG) (LP,IG)
 				bankcall=JSON.stringify(bankcall);
 				console.log(bankcall+"bank call");
 				var bankedit;
@@ -944,9 +958,10 @@ $scope.withdraw_error="Please try again";
 	  //reliance InstaAmount Api call
 	  $scope.RelianceInstaAmount=function(){
 				$scope.processing=true;
+				console.log($sessionStorage.RelScheme);
 				var bankcall={};
 				bankcall.gateWayType ="RG",
-                bankcall.gateWayPayLoad= "https://online.reliancemf.com/rmf/mowblyserver/wsapi/rmf/prod/wsapi/RedemptionSchemeDetails?acno="+$sessionStorage.folioNums+"&scheme=LP&plan=IG&arncode=ARN-107100&branch=FP99&proxybranch=&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=c3d2f2f3-7d23-4f48-9fe6-82db5449a562"
+                bankcall.gateWayPayLoad= "https://online.reliancemf.com/rmf/mowblyserver/wsapi/rmf/prod/wsapi/RedemptionSchemeDetails?acno="+$sessionStorage.folioNums+"&scheme="+$sessionStorage.RelScheme+"&plan=IG&arncode=ARN-107100&branch=FP99&proxybranch=&deviceid=PARTNERAPI&appVersion=1.0.1&appName=FINOTRUST&apikey=c3d2f2f3-7d23-4f48-9fe6-82db5449a562"
 				bankcall=JSON.stringify(bankcall);
 				console.log(bankcall+"bank call");
 				var bankedit;

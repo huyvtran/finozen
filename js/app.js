@@ -39,8 +39,8 @@ angular.module('app', ['ionic','ionic.service.core','app.controllers', 'ionicPro
 	firstName:'First Name',
 	lastName:'Last Name',
 	mobileNo:'Mobile Number',
-	setPIN:'Set 4 digit PIN as password',
-	confirmPin:'Confirm 4 digit PIN',
+	setPIN:'Set your password',
+	confirmPin:'Confirm your PIN',
 	referralCode:'Referral code(Optional)',
 	activationText:'You will now need to activate your account. Please keep the following documents ready.',
 	notNow:'NOT NOW',
@@ -79,7 +79,7 @@ angular.module('app', ['ionic','ionic.service.core','app.controllers', 'ionicPro
 	rememberMe:'Remember Me',
 	fieldEmpty:'You did not enter a field',
 	passwordInvalid:'Entered PIN didn\'t match',
-	passwordLength:'Enter 4 digit PIN',
+	passwordLength:'Password should have atleast 4 characters',
 	mobileInvalid:'Enter valid mobile number',
 	mobileLength:'Mobile number must be 10 digits.',
 	credentialsInvalid:'Entered Credentials did not validate',
@@ -110,6 +110,7 @@ angular.module('app', ['ionic','ionic.service.core','app.controllers', 'ionicPro
 
 .run(function($ionicPlatform, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaKeyboard,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout,$localStorage) {
   $ionicPlatform.ready(function() {
+
   $rootScope.$watch(function() {
   return $cordovaKeyboard.isVisible();
 }, function(value) {
@@ -117,6 +118,7 @@ angular.module('app', ['ionic','ionic.service.core','app.controllers', 'ionicPro
 $rootScope.keyboardOpen = value;
 });
       Idle.watch();
+
 //$localStorage.language=0;
                 if(!navigator.onLine) {
 console.log(navigator.onLine + "  connection state");
@@ -168,7 +170,8 @@ console.log(navigator.onLine + "  connection state");
       }
     }, 100);
 
-/*
+
+
 //clevertap integration
     CleverTap.registerPush(); //registering for push notifications
     document.addEventListener('deviceready', this.onDeviceReady, false);
@@ -177,7 +180,7 @@ console.log(navigator.onLine + "  connection state");
     document.addEventListener('onCleverTapInAppNotificationDismissed', this.onCleverTapInAppNotificationDismissed, false); // optional, to be receive a callback with custom in-app notification click data
     document.addEventListener('onDeepLink', this.onDeepLink, false); // optional, register to receive deep links.
     document.addEventListener('onPushNotification', this.onPushNotification, false); // optional, register to receive push notification payloads.
-	 CleverTap.setDebugLevel(1277182231);
+	 //CleverTap.setDebugLevel(1277182231);
     var customerType = clevertap.profile.getAttribute("Customer type");
     // Returns the time elapsed in seconds
     var timeElapsed = clevertap.session.getTimeElapsed();
@@ -191,7 +194,9 @@ console.log(navigator.onLine + "  connection state");
 // Last Active Session
     var lastVisit = clevertap.user.getLastVisit();
 
-*/
+
+
+
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }

@@ -518,19 +518,35 @@ img{height: 400px;}
 .questionsSelect{
 	.item-light{padding-left: 10px;}
 	.input-label{font-size:14px;}
-	.item-select select{max-width: 41%; padding:0 30px 0 10px;direction: ltr; outline:none;}
+	.item-select select{
+		max-width: 41%; padding:0 30px 0 10px;direction: ltr; outline:none;    width: 500px;
+		option{width:500px;}
+	}
 	.item-select::after{
 		right: 9px;
 		margin-top: -1px;
 	}
-	.dobInput button{
-		width: 43%;
-		right: 0;
-		position: absolute;
-		top: 0;
-		background: transparent;
-		border: 1px solid #18bb9c;
-		bottom: 0;
+	.dobInput{
+		button{
+			width: 43%;
+			right: 0;
+			position: absolute;
+			top: 0;
+			background: transparent;
+			border: 1px solid #18bb9c;
+			bottom: 0;
+			text-align: left;
+			padding: 6px 22px;	
+		}
+		input{
+			width: 43%;
+			border: 1px solid #18bb9c; 
+			padding: 6px 22px;
+			height: 45px;
+			position: absolute;
+			top: 0;
+			right: 0;
+		}
 	}
 } 
 .aboutus{
@@ -787,7 +803,7 @@ fader {
 }
 .inappLinks{
 	text-decoration:underline;
-	&:active, &:hover, &:visited, &:focus{color:red}
+	&:active, &:hover, &:visited, &:focus{color:#18bb9c}
 }
 .pane .slidingTabs ul li{font-size: 13px !important;}
 .withdraw_screen{
