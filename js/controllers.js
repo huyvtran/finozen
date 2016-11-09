@@ -417,7 +417,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 
 
   /*add money page check*/
-.controller('transactionAccessCtrl', function($scope,$sessionStorage,$state,relianceInstantAmountAPI,$ionicLoading){
+.controller('transactionAccessCtrl', function($scope,$sessionStorage,$state,relianceInstantAmountAPI,$ionicLoading,$ionicPopup){
 	$scope.investCheck=function(){
 	if($sessionStorage.SessionStatus=="N" || $sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus== 'null' ||$sessionStorage.SessionStatus==undefined ){
 		$state.go("inactiveClient");
@@ -460,7 +460,17 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 					$ionicLoading.hide();
 					$state.go("withdraw");
 				}
-		  })
+		  },function(error){
+				$ionicLoading.hide();
+                 var referesh= $ionicPopup.alert({
+                   title: 'Please try again',
+                   template: 'Unable to submit request'
+                 });
+                 referesh.then(function(res) {
+                   //$state.go("questions"); //selfie sign page
+				   $window.location.reload(true)
+                 });
+            })
 
 
 
@@ -718,47 +728,53 @@ console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
             var date=dateService.getDate();
             if(form.$valid) {
             if(($scope.amount!=undefined || $scope.checked_withdraw) && ($scope.amount>0 || $scope.checked_withdraw)) {
-			if($scope.checked_withdraw == true){
-				if($sessionStorage.bankAccNo==undefined || $sessionStorage.bankName==null ){
-				 var confirmPopup =$ionicPopup.confirm({
-					title: "Confirm",
-					content: "Withdraw complete balance ?"
-				});
-				}
-				else{
-					if($sessionStorage.clientType ==="PL"){
-						 var confirmPopup = $ionicPopup.confirm({
-							title: "Confirm",
-							content: "<p>Your amount will be credited to </p>" +"Account No:"+$sessionStorage.bankName+"<br/> Bank Name: "+$sessionStorage.bankAccNo + "<p><br/>Amount not eligible for instant withdrawal</p>"
-						});
+			if($scope.checked_withdraw == true ){
+				if($sessionStorage.mktValue>0 ){
+					if($sessionStorage.bankAccNo==undefined || $sessionStorage.bankName==null ){
+					 var confirmPopup =$ionicPopup.confirm({
+						title: "Confirm",
+						content: "Withdraw complete balance ?"
+					});
 					}
 					else{
-						 var confirmPopup = $ionicPopup.confirm({
-							title: "Withdraw complete balance?",
-							content: "<p>Your amount will be credited to </p>" +"Account No:"+$sessionStorage.bankName+"<br/> Bank Name: "+$sessionStorage.bankAccNo
+						if($sessionStorage.clientType ==="PL"){
+							 var confirmPopup = $ionicPopup.confirm({
+								title: "Confirm",
+								content: "<p>Your amount will be credited to </p>" +"Account No:"+$sessionStorage.bankName+"<br/> Bank Name: "+$sessionStorage.bankAccNo + "<p><br/>Amount not eligible for instant withdrawal</p>"
+							});
+						}
+						else{
+							 var confirmPopup = $ionicPopup.confirm({
+								title: "Withdraw complete balance?",
+								content: "<p>Your amount will be credited to </p>" +"Account No:"+$sessionStorage.bankName+"<br/> Bank Name: "+$sessionStorage.bankAccNo
+							});
+						}
+						confirmPopup.then(function(result) {
+							if(result) {
+								$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
+								mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"allUnits":"Y","folioNo":$sessionStorage.folioNums},function(data){
+								console.log(data.responseCode);
+
+								if(data.responseCode=="Cali_SUC_1030") {
+									$ionicLoading.hide();
+									$state.go('successPage');
+								}
+								else
+								{
+									$ionicLoading.hide();
+									$scope.withdraw_Networkerror="Please try again";
+								}
+							},function(error){
+								$ionicLoading.hide(); 
+								$scope.withdraw_Networkerror="Please try again";
+							});
+							}
 						});
 					}
-					confirmPopup.then(function(result) {
-						if(result) {
-							$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
-							mfSellUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"allUnits":"Y","folioNo":$sessionStorage.folioNums},function(data){
-							console.log(data.responseCode);
-
-							if(data.responseCode=="Cali_SUC_1030") {
-								$ionicLoading.hide();
-								$state.go('successPage');
-							}
-							else
-							{
-								$ionicLoading.hide();
-								$scope.withdraw_Networkerror="Please try again";
-							}
-						},function(error){
-							$ionicLoading.hide(); 
-							$scope.withdraw_Networkerror="Please try again";
-						});
-						}
-					});
+				}
+				else{
+					$ionicLoading.hide(); 
+					$scope.withdraw_Networkerror="Amount should be greater than 100";
 				}
 			}
 			else{

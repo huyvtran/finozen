@@ -15,8 +15,8 @@ angular.module('app.subcontrollerTwo', [])
 
 
                     var popup= $ionicPopup.alert({
-                        title: 'PIN Change status',
-                        template: 'PIN Changed Successfully'
+                        title: 'Password Change status',
+                        template: 'Password Changed Successfully'
                     });
 
                     popup.then(function(res) {
@@ -26,8 +26,8 @@ angular.module('app.subcontrollerTwo', [])
                 else {
                     console.log("Error");
                     $ionicPopup.alert({
-                        title: 'PIN Change status',
-                        template: 'PIN Change Unsuccessful'
+                        title: 'Password Change status',
+                        template: 'Password Change Unsuccessful'
                     });
 					popup.then(function(res) {
                         $state.go("account");
@@ -1016,7 +1016,7 @@ $http.get('data/country.json').then(function(res){
 		}
     })
 */
-  /*forgot pin controller*/
+  /*forgot Password controller*/
     .controller('forgotPinCtrl', function($scope,$sessionStorage,$http,$state,$ionicPopup,$timeout,$ionicLoading) {
         $scope.resetPin=function(change,confirmNewPin) {
 			console.log(change.newPassword);
@@ -1035,8 +1035,8 @@ $http.get('data/country.json').then(function(res){
             if(data.responseCode=="Cali_SUC_1030"){
 			  $ionicLoading.hide();
               var popup= $ionicPopup.alert({
-                title: 'PIN Change status',
-                template: 'PIN Changed Successfully'
+                title: 'Password Change status',
+                template: 'Password Changed Successfully'
               });
 
               popup.then(function(res) {
@@ -1046,8 +1046,8 @@ $http.get('data/country.json').then(function(res){
 			else {
 				$ionicLoading.hide();
 				$ionicPopup.alert({
-                title: 'PIN Change status',
-                template: 'PIN Change UnSuccessful'
+                title: 'Password Change status',
+                template: 'Password Change UnSuccessful'
 				});
 				popup.then(function(res) {
                 $state.go("login");
@@ -1059,8 +1059,8 @@ $http.get('data/country.json').then(function(res){
             {
               console.log("Error");
               $ionicPopup.alert({
-                title: 'PIN Change status',
-                template: 'PIN Changed UnSuccessfully'
+                title: 'Password Change status',
+                template: 'Password Changed UnSuccessfully'
               });
             }
           });

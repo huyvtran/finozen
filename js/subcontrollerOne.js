@@ -427,7 +427,7 @@ $scope.xirrRate= function(){
                 if(data.responseCode=="Cali_SUC_1030"){
 					$ionicLoading.hide();
 					if(data.jsonStr==null){
-						  var ref = cordova.InAppBrowser.open('http://52.66.96.81/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_blank', 'location=no');
+						  var ref = cordova.InAppBrowser.open('https://finotrust.com/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_blank', 'location=no');
 						  ref.addEventListener('loadstart', function(event) {
 					navigator.notification.activityStart("Please Wait", "Redirecting to a secure payment gateway");
 				});
