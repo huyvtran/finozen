@@ -12,8 +12,8 @@
 	<div class="invest_info text-center ">
 <ion-process-spinner style="width:100%; text-align: center;" processing="processing" spinner="bubbles" css-class="spinner-balanced">				
   <div class="item item-button-right text-left instaRefresh">
-   <span class="subText"> Instant Withdrawal <span style="color: #18bb9c; font-size: 16px;" class="button-icon ion-information-circled"  ng-controller="instaPopOverController" ng-click="popover.show($event)"> </span> </span>: <span style="color:#18bb9c">{{insta| currency:"&#x20B9; "}}</span>
-    <button class="button button-clear" ng-click="RelianceInstaAmount()">
+   <span class="subText"> Instant Withdrawal <span style="color: #18bb9c; font-size: 16px;" class="button-icon ion-information-circled"  ng-controller="instaPopOverController" ng-click="popover.show($event)"> </span> </span>: <span ng-hide="instaError" style="color:#18bb9c">{{insta| currency:"&#x20B9; "}}</span><span ng-show="instaError">{{instaError}} </span>
+    <button class="button button-clear" ng-hide="instaError" ng-click="RelianceInstaAmount()">
       <i class="icon ion-refresh"></i>
     </button>
   </div>	
@@ -58,7 +58,7 @@
 	<button ion-track-tap="withdraw confirm" class="button button-full button-positive" type="submit" ng-click="Withdrawl(withdrawForm)" translate="BUTTON_LANG_WITH">
 
 	</button>
- <p>Instant withdrawal amount (Min INR 500) will be credited within 30 minutes to your registered bank account. For other amounts, see below</p>
+ <p>Instant withdrawal amount (Min Rs 500) will be credited within 30 minutes to your registered bank account. For other amounts, see below</p>
 	<div class="row deposit_table" >
 
 		<table>

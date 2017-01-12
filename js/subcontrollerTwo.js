@@ -1,7 +1,7 @@
 angular.module('app.subcontrollerTwo', [])
 
 
-    .controller('changeCtrl', function(changePinService,$scope,$sessionStorage,$ionicPopup,$state){
+    .controller('changeCtrl', function(changePinService,$scope,$sessionStorage,$ionicPopup,$state,$ionicLoading){
 
         $scope.resetPin=function(changePinForm){
 
@@ -10,9 +10,10 @@ angular.module('app.subcontrollerTwo', [])
             console.log(changePinForm + " form data");
 //changePinService.changePin(changePinForm);
             changePinService.save(changePinForm,function(data){
+				$ionicLoading.show({templateUrl:"templates/loading.html"});
                 console.log(data);
                 if(data.responseCode == "Cali_SUC_1030") {
-
+$ionicLoading.hide();
 
                     var popup= $ionicPopup.alert({
                         title: 'Password Change status',
@@ -24,6 +25,7 @@ angular.module('app.subcontrollerTwo', [])
                     });
                 }
                 else {
+					$ionicLoading.hide();
                     console.log("Error");
                     $ionicPopup.alert({
                         title: 'Password Change status',
@@ -34,6 +36,7 @@ angular.module('app.subcontrollerTwo', [])
                     });
                 }
             },function(error){
+				$ionicLoading.hide();
                 console.log("eror");
 
             });
@@ -278,19 +281,20 @@ angular.module('app.subcontrollerTwo', [])
                 }
                 else {
 					$ionicLoading.hide();
-					var nextSteps=myService.myFunction($sessionStorage.docStatus);
-					var nextStepsUrl=proofRedirectFactory.name;
-					$sessionStorage.stepCount=$sessionStorage.stepCount+1;
-					var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
-					//if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
-					//else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
-					console.log(nextSteps[$sessionStorage.stepCount]  + " next state" );
-					if(nextSteps[$sessionStorage.stepCount]==2 && nextSteps[$sessionStorage.stepCount+1]==3){$sessionStorage.stepCount=$sessionStorage.stepCount+1; $state.go('imageSelection');}
-					else if(nextSteps[$sessionStorage.stepCount]==2 || nextSteps[$sessionStorage.stepCount]==3){$state.go('imageSelection');}
-					else{
-						if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
-						else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
-					}
+					$state.go('ipv');			
+			/*var nextSteps=myService.myFunction($sessionStorage.docStatus);
+			var nextStepsUrl=proofRedirectFactory.name;
+			$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+			var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+			//if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
+			//else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+			console.log(nextSteps[$sessionStorage.stepCount]  + " next state" );
+			if(nextSteps[$sessionStorage.stepCount]==2 && nextSteps[$sessionStorage.stepCount+1]==3){$sessionStorage.stepCount=$sessionStorage.stepCount+1; $state.go('imageSelection');}
+			else if(nextSteps[$sessionStorage.stepCount]==2 || nextSteps[$sessionStorage.stepCount]==3){$state.go('imageSelection');}
+			else{
+				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
+				else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+			}*/
                 }
             },function(error){
               $ionicLoading.hide();
@@ -405,6 +409,9 @@ $http.get('data/country.json').then(function(res){
 		
 		//for datepicker
 		$scope.selectedDate = new Date();
+		dateof = $filter('date')($scope.selectedDate,'dd/MM/yyyy');
+		console.log(dateof);
+		$sessionStorage.dob=dateof;
     var ipObj1 = {
       callback: function (val) {  //Mandatory
         console.log('Return value from the datepicker modal is : ' + val, new Date(val));
@@ -435,8 +442,6 @@ $http.get('data/country.json').then(function(res){
     $scope.openDatePicker = function(){
       ionicDatePicker.openDatePicker(ipObj1);
     };
-
-
 		
       $scope.questionUpload = function(){
 		$ionicLoading.show({templateUrl:"templates/loading.html"});
@@ -445,8 +450,6 @@ $http.get('data/country.json').then(function(res){
 		questUpload.income=$scope.clientIncome.type; // income level from 31-36
 		questUpload.occup=$scope.clientOccupation.type; // for the occupation
 		questUpload.pep=$scope.clientPEP.type; //for the pep status either Y or N
-		
-		
 		questUpload.birthPlace=$scope.clientPOB; //for the pep status either Y or N
 		questUpload.birthCountry=$scope.clientCountry.type; //for the pep status either Y or N
 		questUpload.addressType=$scope.clientAddressType.type; //for the pep status either Y or N
@@ -455,7 +458,6 @@ $http.get('data/country.json').then(function(res){
 		questUpload.maritalStatus=$scope.marriageStatus.type; //for the pep status either Y or N
 		questUpload.nationality=$scope.clientNationality.type; //for the pep status either Y or N
 		questUpload.resStatus="Individual"; // for the resdential status hardcoding it to individual
-		
 		questUpload.dob=$sessionStorage.dob // for the client's date of birth
 		questUpload = JSON.stringify(questUpload);
 		console.log($scope.clientIncome.type + " clientIncome");
@@ -1131,7 +1133,7 @@ $http.get('data/country.json').then(function(res){
   $cordovaGoogleAnalytics.trackView('withdraw');
   $cordovaGoogleAnalytics.trackView('inviteCtrl');
   $cordovaGoogleAnalytics.addTransactionItem(
-    'mfBuyOder', 'Fluffy Pink Bunnies', '0001', 'Reliance mutual fund', '100', '1', 'INR'
+    'mfBuyOder', 'Fluffy Pink Bunnies', '0001', 'Reliance mutual fund', '100', '1', 'Rs'
   );
   //$cordovaGoogleAnalytics.trackEvent('swipe', 'Video Load Time', 'Gone With the Wind', 100);*/
 })
@@ -1218,7 +1220,7 @@ $http.get('data/country.json').then(function(res){
 		  $scope.selectedIndex=function(valu){
 			console.log($scope.contacts[valu].phoneNumbers[0].value + " contact value selected");
 
-			window.plugins.socialsharing.shareViaSMS({'message':'Start investing at FinoZen with just INR 500 and watch your money grow everyday. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code to earn INR 100 after your 1st investment.', 'subject':'The subject', 'image':'https://www.google.nl/images/srpr/logo4w.png'}, $scope.contacts[valu].phoneNumbers[0].value, $scope.contacts[valu].phoneNumbers[0].value, function(msg) {console.log('ok: ' + msg)}, function(msg) {console.log('error: ' + msg)})
+			window.plugins.socialsharing.shareViaSMS({'message':'Start investing at FinoZen with just Rs 500 and watch your money grow everyday. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code to earn Rs 100 after your 1st investment.', 'subject':'The subject', 'image':'https://www.google.nl/images/srpr/logo4w.png'}, $scope.contacts[valu].phoneNumbers[0].value, $scope.contacts[valu].phoneNumbers[0].value, function(msg) {console.log('ok: ' + msg)}, function(msg) {console.log('error: ' + msg)})
 		  }
 
 		  $scope.pickContact=function(pickUp){

@@ -79,7 +79,7 @@ $scope.dd=function(){
 
 
 		}
-						})
+		})
 		}
     })
 
@@ -122,30 +122,171 @@ $scope.activateAcc= function(){
 }
     })
 
-    .controller('recentTransactionsCtrl', function($scope) {
+    .controller('TransactionsReportCtrl', function($scope,TransRepoService,$sessionStorage,ionicDatePicker,$filter,$ionicPopup,$state,$ionicLoading) {
+		///for datepicker
+    var ipObj2 = {
+      callback: function (val) {  //Mandatory
+        console.log('Return value from the datepicker modal is : ' + val, new Date(val));
+		$scope.selectedDate1 = new Date(val);
+		var dateof= val;
+		dateof = $filter('date')(val,'yyyy-MM-dd');
+		$scope.startDate=dateof;
+      },
+      disabledDates: [            //Optional
+        new Date(),
+        new Date("08-16-2016"),
+        new Date(1439676000000)
+      ],
+      from: new Date(1940, 1, 1), //Optional
+      to: new Date(), 			  //Optional
+      inputDate: new Date(),      //Optional
+      mondayFirst: true,          //Optional
+	  titleLabel: 'Select a Date',
+	  setLabel: 'Set',
+      disableWeekdays: [],       //Optional
+      closeOnSelect: false,       //Optional
+      templateType: 'modal'       //Optional
+    };
 
+    $scope.openReportStart = function(){
+      ionicDatePicker.openDatePicker(ipObj2);
+    };
+
+	$scope.selectedDate1 = new Date();
+	$scope.selectedDate = new Date();
+	$scope.startDate = $filter('date')($scope.selectedDate,'yyyy-MM-dd');
+	$scope.EndDate = $filter('date')($scope.selectedDate,'yyyy-MM-dd');
+$scope.openReportEnd = function(){
+		dateofEnd = $filter('date')($scope.selectedDate,'yyyy-MM-dd');
+	var ipObj3 = {
+      callback: function (valu) {  //Mandatory
+        console.log('Return value from the datepicker modal is : ' + valu, new Date(valu));
+		$scope.selectedDate = new Date(valu);
+		var dateofEnd= valu;
+		dateofEnd = $filter('date')(valu,'yyyy-MM-dd');
+		$scope.EndDate=dateofEnd;
+      },
+      disabledDates: [            //Optional
+        new Date(),
+        new Date(1439676000000)
+      ],
+      from: new Date($scope.startDate), //Optional
+      to: new Date(), 			  //Optional
+      inputDate: new Date(),      //Optional
+      mondayFirst: true,          //Optional
+	  titleLabel: 'Select a Date',
+	  setLabel: 'To',
+      disableWeekdays: [],       //Optional
+      closeOnSelect: false,       //Optional
+      templateType: 'modal'       //Optional
+    };
+      ionicDatePicker.openDatePicker(ipObj3);
+	  console.log($sessionStorage.EndDate+"    final date");
+};
+
+$scope.TranasctionUpload=function(){
+	$ionicLoading.show({templateUrl:"templates/loading.html"});
+	var TransUpload=JSON.parse(JSON.stringify({}));
+	TransUpload.portfolioCode=$sessionStorage.SessionPortfolio;
+	TransUpload.repo_code="Txn_Stmt";
+	TransUpload.param1=$scope.startDate;
+	TransUpload.param2=$scope.EndDate;
+	TransUpload = JSON.stringify(TransUpload);
+	console.log(TransUpload);
+	TransRepoService.save(TransUpload,function(data){
+		console.log($filter('date')(new Date(),'yyyy-MM-dd'));
+		$ionicLoading.hide();
+			clevertap.event.push("Report Request", {
+                    "Name": $sessionStorage.SessionClientName, //Name of the client
+                    "Phone Number": $sessionStorage.mobileNumber, //Mobile Number
+                    "from date":$scope.startDate , //Starting request date
+					"end date":$scope.EndDate,    //end date request date
+					"Date of request":$filter('date')(new Date(),'yyyy-MM-dd'),                //date of request made
+                  });
+			var refer=  $ionicPopup.alert({
+                            title: 'Thank You',
+                            template: 'You will receive your transactions report on your registered email address within the next 5 minutes.'
+                        });
+                      refer.then(function(res){
+                        $state.go("tabsController.summaryPage");
+                      })
+	},function(error){
+				$ionicLoading.hide();
+
+            });
+	
+}
+
+    })
+    .controller('ipvCtrl', function($scope,$window,$ionicLoading,$state,myService,proofRedirectFactory,$timeout,$sessionStorage) {
+  $scope.showSubmit=false;
+  $scope.AutoRecord=function(){
+	 window.plugins.videocaptureplus.captureVideo(
+      captureSuccess, // your success callback
+      {
+        limit: 1, // the nr of videos to record, default 1 (on iOS always 1)
+        duration: 3, // max duration in seconds, default 0, which is 'forever'
+        highquality: true, // set to true to override the default low quality setting
+        frontcamera: true, // set to true to override the default backfacing camera setting. iOS: works fine, Android: YMMV (#18)
+        // you'll want to sniff the useragent/device and pass the best overlay based on that.. assuming iphone here
+        portraitOverlay: 'www/img/finotree.png', // put the png in your www folder
+        landscapeOverlay: 'www/img/finotree.png', // not passing an overlay means no image is shown for the landscape orientation
+        overlayText: 'Please rotate to landscape for the best result' // iOS only
+      }
+	 
+  );
+  }
+  function captureSuccess(mediafiles){
+		  
+		  $scope.showSubmit=true;
+	  }
+	$scope.videoSumbit=function(){
+		$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
+		$timeout(function () {
+			$ionicLoading.hide();
+			var nextSteps=myService.myFunction($sessionStorage.docStatus);
+			var nextStepsUrl=proofRedirectFactory.name;
+			$sessionStorage.stepCount=$sessionStorage.stepCount+1;
+			var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
+			//if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
+			//else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+			console.log(nextSteps[$sessionStorage.stepCount]  + " next state" );
+			if(nextSteps[$sessionStorage.stepCount]==2 && nextSteps[$sessionStorage.stepCount+1]==3){$sessionStorage.stepCount=$sessionStorage.stepCount+1; $state.go('imageSelection');}
+			else if(nextSteps[$sessionStorage.stepCount]==2 || nextSteps[$sessionStorage.stepCount]==3){$state.go('imageSelection');}
+			else{
+				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
+				else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
+			}
+          
+        }, 2000);
+	}
     })
     .controller('pre_verificationCtrl', function($scope) {
 
     })
-.controller('referralCtrl', function($scope,getReferalStat,$ionicLoading,$sessionStorage) {
+.controller('referralCtrl', function($scope,getReferalStat,$ionicLoading,$sessionStorage,$state) {
 	$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
 	var referralDate = getReferalStat.get();
 	referralDate.$promise.then(function(data){
 		if (data.responseCode == "Cali_SUC_1030") {
 			$ionicLoading.hide();
 			$scope.products=data.jsonStr;
+			$scope.productsLen=(data.jsonStr).length;
 			if((data.jsonStr).length==0){$scope.inviteShow=true;}
 			else{$scope.inviteShow=false;}
 			//console.log("test data    "+data.jsonStr[1].mobile);
 		}
+	$scope.referral= function(){
+			if($scope.productsLen==0){$scope.inviteShow=true;$state.go('invite');}
+			else{$scope.inviteShow=false; $state.go('referral');}
+	}
 	})
 })
     .controller('AuthSignUpCtrl', function($scope, $state,signUpService,$sessionStorage,$ionicLoading) {
 
         $scope.signUp = function(form,searchText2,signupForm) {
-$sessionStorage.SessionClientName=signupForm.fName;
-$sessionStorage.SessionMobNo=signupForm.mobileNumber;
+			$sessionStorage.SessionClientName=signupForm.fName;
+			$sessionStorage.SessionMobNo=signupForm.mobileNumber;
             if(angular.equals(signupForm.pin,searchText2))
             {
                 if( signupForm.mobileNumber==signupForm.referral) {
@@ -192,18 +333,17 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 					}
 				}
                 else {
-					/*
+					
 					 //clevertap creating a new user profile
 					// if set, these populate demographic information in the Dashboard
-				  CleverTap.profile.push({
-                    "SignUp_Android": {
-                      "FirstName": signupForm.fName,             //string
-                      "Email": signupForm.email,               // Email address of the user
-                      "Phone": signupForm.mobileNumber,       // Phone (with the country code)
-                      "Referral": signupForm.referral,       //referral number
-								}
-										)}; */
 					
+				  clevertap.profile.push("SignUp", {
+                    "FirstName": signupForm.fName,             //string
+                    "Email": signupForm.email,               // Email address of the user
+                    "Phone": signupForm.mobileNumber,       // Phone (with the country code)
+                    "Referral": signupForm.referral,      //referral number
+
+                  });		 
 					//saving the signUp data with similar name convention as per sign in controller
 					$sessionStorage.SessionPortfolio=(JSON.parse(data.jsonStr)).portfolioCode;
 					$sessionStorage.SessionClientCode=(JSON.parse(data.jsonStr)).clientCode;
@@ -225,7 +365,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 
     /*For Sign In*/
 
-.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,$ionicLoading,$localStorage,$translate,$ionicPopup,$timeout,$ionicPlatform) {
+.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,$ionicLoading,$localStorage,$translate,$ionicPopup,$timeout,$ionicPlatform,$window) {
 /*
 	$scope.clientLanguageOptions = [
 			{ name: 'বাঙালি', value: '1' },
@@ -366,16 +506,16 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 			console.log($sessionStorage.docStatus + "docStatus");
 
 			//clever tap login.(if exsisting user update the user's values)
-			/* CleverTap.onUserLogin({
-			  "Android": {
-				"Name": $sessionStorage.SessionClientName,            // String
+			 
+			 clevertap.onUserLogin.push("Login", {
+                "Name": $sessionStorage.SessionClientName,            // String
 				"ClientStatus": $sessionStorage.clientActive,        // string(char)
 				"Phone":$sessionStorage.SessionMobNo,               // Phone
 				"DocStatus":$sessionStorage.docStatus,             //string
 				"ActiveStatus":$sessionStorage.SessionStatus,     //string
 				"ClientType":$sessionStorage.clientType,         // string(char)
-			  }
-			});*/
+                  });
+			
 			$ionicLoading.hide();
 			$state.go('tabsController.summaryPage');
 		}
@@ -412,12 +552,12 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
     });
 
   }
-  $ionicLoading.hide();
+  $ionicLoading.hide();  
     })
 
 
   /*add money page check*/
-.controller('transactionAccessCtrl', function($scope,$sessionStorage,$state,relianceInstantAmountAPI,$ionicLoading,$ionicPopup){
+.controller('transactionAccessCtrl', function($scope,$sessionStorage,$state,relianceInstantAmountAPI,$ionicLoading,$ionicPopup,$timeout){
 	$scope.investCheck=function(){
 	if($sessionStorage.SessionStatus=="N" || $sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus== 'null' ||$sessionStorage.SessionStatus==undefined ){
 		$state.go("inactiveClient");
@@ -447,6 +587,7 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 				bankcall=JSON.stringify(bankcall);
 				console.log(bankcall+"bank call");
 				var bankedit;
+				
 				relianceInstantAmountAPI.save(bankcall,function(data){
 
 				console.log(data);
@@ -460,16 +601,13 @@ $sessionStorage.SessionMobNo=signupForm.mobileNumber;
 					$ionicLoading.hide();
 					$state.go("withdraw");
 				}
+				else{
+					$ionicLoading.hide();
+				}
 		  },function(error){
 				$ionicLoading.hide();
-                 var referesh= $ionicPopup.alert({
-                   title: 'Please try again',
-                   template: 'Unable to submit request'
-                 });
-                 referesh.then(function(res) {
-                   //$state.go("questions"); //selfie sign page
-				   $window.location.reload(true)
-                 });
+				$sessionStorage.instaAmountError="Unable to retrive amount";
+				$state.go("withdraw");
             })
 
 
@@ -576,7 +714,11 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 				$sessionStorage.bankAccNo=(JSON.parse(data.jsonStr.rgResponse))[0].BankName;
 
               }
-		  })
+		  },function(error){
+				$ionicLoading.hide();
+				$sessionStorage.instaAmountError="Unable to retrieve amount";
+				//$state.go("withdraw");
+            })
 	  }
 
 
@@ -681,6 +823,37 @@ $scope.$broadcast("scroll.refreshComplete");
 
     })
 
+    .controller('popOverTxnSuccess',function($scope,$ionicPopover,$translate ){
+
+        var template =  '<ion-popover-view class="fit test"><ion-content scroll="false"><div class="l ist"><p class="item pop_up" >Your transaction is Approved.</p> </div></ion-content>';
+
+        $scope.popover = $ionicPopover.fromTemplate(template, {
+            scope: $scope
+        });
+
+
+    })
+    .controller('popOverTxnInProgress',function($scope,$ionicPopover,$translate ){
+
+        var template =  '<ion-popover-view class="fit test"><ion-content scroll="false"><div class="l ist"><p class="item pop_up" >Your transaction is safe and is in progress.</p> </div></ion-content>';
+
+        $scope.popover = $ionicPopover.fromTemplate(template, {
+            scope: $scope
+        });
+
+
+    })
+    .controller('popOverTxnFailed',function($scope,$ionicPopover,$translate ){
+
+        var template =  '<ion-popover-view class="fit test"><ion-content scroll="false"><div class="l ist"><p class="item pop_up" >Your transaction is Declined.</p> </div></ion-content>';
+
+        $scope.popover = $ionicPopover.fromTemplate(template, {
+            scope: $scope
+        });
+
+
+    })
+
     .controller('PEPpopOverController',function($scope,$ionicPopover ){
 
         var template =  '<ion-popover-view class="fit"><ion-content scroll="false"><div class="list"><a class="item pop_up" >Individuals holding any prominent public function for ex: Head of State or Govt, Senior Politicians etc.</a> </div></ion-content>';
@@ -711,7 +884,7 @@ $scope.$broadcast("scroll.refreshComplete");
 			$state.go('inviteContacts');
 		}
 		$scope.shareViaTwitter=function(){
-			window.plugins.socialsharing.share('Start investing at FinoZen with just INR 500 and watch your money grow everyday. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code to earn INR 100 after your 1st investment.',null,null,'https://goo.gl/uAkHRa');
+			window.plugins.socialsharing.share('Start investing at FinoZen with just Rs 500 and watch your money grow everyday. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code to earn Rs 100 after your 1st investment.',null,null,'https://goo.gl/uAkHRa');
 		}
      })
 
@@ -719,7 +892,9 @@ $scope.$broadcast("scroll.refreshComplete");
     .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$http,$sessionStorage,$ionicPopup,$ionicLoading,relianceInstantAmountAPI,$timeout,$http,getZBFService,$location,relianceInstantZBF) {
 if($sessionStorage.instaAmount>=0){$scope.insta=$sessionStorage.instaAmount;}
 else{$scope.insta=0;}
-
+if($sessionStorage.instaAmountError){
+	$scope.instaError=$sessionStorage.instaAmountError;
+}
 
 	   $scope.Withdrawl = function(form) {
 console.log($scope.amount);
@@ -774,14 +949,14 @@ console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
 				}
 				else{
 					$ionicLoading.hide(); 
-					$scope.withdraw_Networkerror="Amount should be greater than 100";
+					$scope.withdraw_Networkerror="Amount should be greater than 0";
 				}
 			}
 			else{
 				if($sessionStorage.bankAccNo==undefined || $sessionStorage.bankName==null ){
 					 var confirmPopup =$ionicPopup.confirm({
 						title: "Confirm",
-						content: "Withdraw INR "+ $scope.amount +" ?"
+						content: "Withdraw Rs "+ $scope.amount +" ?"
 					});
 					confirmPopup.then(function(result) {
 						if(result) {
@@ -801,7 +976,14 @@ console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
 									  });
 								}
 								else
-								{
+								{	
+							clevertap.event.push("withdraw", {
+                    "Amount": $scope.amount, //amount entered
+                    "Fund Name": $sessionStorage.rtaCode, //reliance code
+                    "folioNo":$sessionStorage.folioNums , //folio number for that client
+					"date":date,
+					"Invested Amount":$sessionStorage.netInv,
+                  });
 									$ionicLoading.hide();
 									console.log("success");
 									$state.go('successPage');
@@ -825,20 +1007,20 @@ console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
 						if($scope.amount >= 500 &&  $scope.amount<=$scope.insta ){
 							 var confirmPopup =$ionicPopup.confirm({
 								content: "Account No: "+$sessionStorage.bankName+"<br/> Bank Name: "+$sessionStorage.bankAccNo+ "<p><br/>Amount will be credited within 30 minutes.</p>" ,
-								title: "Withdraw INR "+ $scope.amount +" ?"
+								title: "Withdraw Rs "+ $scope.amount +" ?"
 							});
 						}
 						else {
 							 var confirmPopup =$ionicPopup.confirm({
 								content: "<p>Your amount will be credited to </p>" +"Account No:"+$sessionStorage.bankName+"<br/> Bank Name: "+$sessionStorage.bankAccNo + "<p><br/>Amount not eligible for instant withdrawal</p>" ,
-								title: "Withdraw INR "+ $scope.amount +" ?"
+								title: "Withdraw Rs "+ $scope.amount +" ?"
 							});
 						}
 					}
 					else{
 						 var confirmPopup =$ionicPopup.confirm({
 							content: "<p>Your amount will be credited to </p>" +"Account No:"+$sessionStorage.bankName+"<br/> Bank Name: "+$sessionStorage.bankAccNo ,
-							title: "Withdraw INR "+ $scope.amount +" ?"
+							title: "Withdraw Rs "+ $scope.amount +" ?"
 						});
 					}
 					confirmPopup.then(function(result) {
@@ -960,20 +1142,24 @@ $scope.withdraw_error="Please try again";
 				relianceInstantAmountAPI.save(bankcall,function(data){
 
 				console.log(data);
-
+				$sessionStorage.instaAmountError=false;
 				if(data.responseCode == "Cali_SUC_1030") {
-					console.log(data.jsonStr.rgResponse);
-				//console.log(data.jsonStr.rgResponse.BankAccNo);
 				console.log((JSON.parse(data.jsonStr.rgResponse))[0].BankAccNo);
 				$sessionStorage.bankName=(JSON.parse(data.jsonStr.rgResponse))[0].BankAccNo;
 				$sessionStorage.bankAccNo=(JSON.parse(data.jsonStr.rgResponse))[0].BankName;
 
               }
-		  })
+		  },function(error){
+				$ionicLoading.hide();
+				$sessionStorage.instaAmountError=true;
+				$sessionStorage.instaAmountError="Unable to retrieve amount";
+				//$state.go("withdraw");
+            })
 	  }
 	  //reliance InstaAmount Api call
 	  $scope.RelianceInstaAmount=function(){
 				$scope.processing=true;
+				$sessionStorage.instaAmountError=false;
 				console.log($sessionStorage.RelScheme);
 				var bankcall={};
 				bankcall.gateWayType ="RG",
@@ -994,8 +1180,236 @@ $scope.withdraw_error="Please try again";
 				if($sessionStorage.instaAmount==null || $sessionStorage.instaAmount == undefined){$scope.insta=0;}
 				else{$scope.insta=$sessionStorage.instaAmount;}
               }
-		  })
+			  else{
+				  $sessionStorage.instaAmountError=true;
+				  $scope.processing=false;
+			  }
+		  },function(error){
+				$ionicLoading.hide();
+				$scope.processing=false;
+				$sessionStorage.instaAmountError=true;
+				//$state.go("withdraw");
+            })
 	  }
 
 
     })
+
+ // NAV Calculator controller
+.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup,$ionicLoading,$ionicPlatform,$timeout,relianceInstantAmountAPI,$location,$http) {
+
+  var finalComputedVal;
+  	if($sessionStorage.clientType=="GO"){
+		console.log($sessionStorage.clientType+ "  gold")
+		$scope.schemePlan="RELIANCE LIQUID FUND - TREASURY PLAN - IP - Growth";
+		$scope.averageRate=7.5;
+		$scope.minInv=500;
+	}
+	  else if($sessionStorage.clientType=="PL") {
+		console.log($sessionStorage.clientType+ "  platinum")
+		$scope.schemePlan="Reliance Money Manager Fund – Growth Plan"; //money managaer needs to come here
+		$scope.averageRate=8.3;
+		$scope.minInv=500;
+    }
+	var dayNow = new Date().getDay();
+	console.log(dayNow);
+	if(dayNow >=1 && dayNow <5){$scope.nav=$sessionStorage.nav*(1+ 0.0002);}
+	else if(dayNow ==5) {$scope.nav=$sessionStorage.nav*(Math.pow((1+ 0.0002),3));}
+	else if(dayNow ==6) {$scope.nav=$sessionStorage.nav*(Math.pow((1+ 0.0002),2));}
+	else if(dayNow ==0) {$scope.nav=$sessionStorage.nav;}
+
+	console.log($scope.nav);
+	// till here
+
+    $scope.final=function(initial,nav,suggest){
+		console.log($scope.nav + "nav");
+    var theory=initial/nav ;
+    var rounded= Math.round(theory * 1000)/1000;
+    //loss=theory-rounded;
+    var diff=rounded*nav-initial;
+    if(initial>0){
+    if(diff>0){
+    finalComputedVal=initial;
+    return suggest;
+    }
+    else{
+    return $scope.test(initial,nav,suggest);
+    }
+    }
+    else{return 0;}
+	}
+    $scope.test=function(initial,nav,suggest){
+    suggest++;
+    initial=initial+1;
+            return $scope.final(initial,nav,suggest);
+        }
+
+	  $scope.Invest = function(form) {
+            if(form.$valid && $scope.initial>=100) {
+				if($sessionStorage.allTransactions > 0 && $sessionStorage.SessionFolioNums==0){
+					$ionicPopup.alert({
+					title: 'Transaction In-Progress',
+					template: 'Your first transaction is in progress. For next transaction, we request you to wait till the first investment reflects in your FinoZen account.'
+				  });
+				  }
+				  // comment this part for nachStatus
+				  /*
+				  $ionicLoading.show({templateUrl:"templates/loading.html"});
+          console.log('its entering the nach mandate');
+          $scope.sendMfOrder()
+				  */
+				  // till here
+
+				  //Nach status redirection
+
+				else if($sessionStorage.nachStatus !='A'){
+				        $ionicLoading.show({templateUrl:"templates/loading.html"});
+						  console.log('its entering the nach mandate');
+						  if($sessionStorage.SessionStatus=="P" ||  $sessionStorage.SessionStatus=="U"){
+							  if($scope.initial<=1000){$scope.sendMfOrder();}
+							  else{
+								  $ionicLoading.hide();
+								  var log=$ionicPopup.alert({
+										title: 'Acctivate account',
+										template: 'You are not allowed to Invest more than Rs.1000 untill you submit all documents'
+									  });
+								    log.then(function(res) {
+										state.go("invest");
+									});
+							  }
+							}
+							else{
+							  $scope.sendMfOrder();
+							}
+						}
+						else{
+						  $ionicLoading.show({templateUrl:"templates/loading.html"});
+						  $scope.nach();
+						}
+            }
+        }
+
+        $scope.sendMfOrder=function() {
+            var date=dateService.getDate();
+            mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums},function(data){
+                if(data.responseCode=="Cali_SUC_1030"){
+					$ionicLoading.hide();
+					if(data.jsonStr==null){
+						  var ref = cordova.InAppBrowser.open('https://finotrust.com/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_blank', 'location=no');
+						  ref.addEventListener('loadstart', function(event) {
+					navigator.notification.activityStart("Please Wait", "Redirecting to a secure payment gateway");
+				});
+						    ref.addEventListener('loadstop', function() {
+								navigator.notification.activityStop();
+							  });
+							ref.addEventListener('loadstop', function(event) { if( event.url.match('pymt/bdesk') ){
+								$timeout(function () {
+									ref.close();
+								},20000);
+							;} });
+					$timeout(function () {
+							$state.go('tabsController.recentTransactions');
+						},1000);
+						
+					}
+					else{
+						console.log(data.jsonStr.ihno);
+						var rel= cordova.InAppBrowser.open('https://investeasy.reliancemutual.com/online/CampaingLink/InvestorCampaign?IHNO='+data.jsonStr.ihno,'_blank','location=no');
+							rel.addEventListener('loadstart', function(event) {
+								navigator.notification.activityStart("Please Wait", "Redirecting to a secure payment gateway");
+							});
+						rel.addEventListener('loadstop', function(event) { 
+							navigator.notification.activityStop();
+						  });
+							rel.addEventListener('loadstop', function(event) { if( event.url.match('online/RMFShort/FetchInvData') ){
+								console.log(event.url);
+								var n= event.url;
+								$http({
+									method: 'GET',
+									url: 'https://finotrust.com/WealthWeb/ws/clientOrders/updateIHNO?orderRefNo='+data.id+'&ihno='+n
+										}).then(function successCallback(response) {
+											
+								}, function errorCallback(response) {
+									 clevertap.event.push("Failed Transaction", {
+                    "Amount": finalComputedVal, //amount entered
+                    "Fund Name": $sessionStorage.rtaCode, //reliance code
+                    "Charged ID":data.id ,  // important to avoid duplicate transactions due to network failure
+					"date":date,            //purchase date 
+					"client Phone Number":$sessionStorage.mobileNumber, // client identification
+                  });
+								
+								});		
+							;} });
+						rel.addEventListener('loadstop', function(event) { if( event.url.match('https://investeasy.reliancemutual.com/online/Payments/PaymentConfirmation') ){
+							rel.executeScript({ file: "https://finotrust.com/inject/counter.js" });
+							rel.insertCSS({file:"https://finotrust.com/inject/inject.css"});
+							$timeout(function () {
+								rel.close();
+							},20000);
+					;} });
+					$timeout(function () {
+							$state.go('tabsController.recentTransactions');
+						},1000);
+						
+						
+					}
+                  //clevertap charging notification
+                  clevertap.event.push("Charged", {
+                    "Amount": finalComputedVal, //amount entered
+                    "Fund Name": $sessionStorage.rtaCode, //reliance code
+                    "Charged ID":data.id ,  // important to avoid duplicate transactions due to network failure
+                  });
+                    
+
+                }
+				else{
+				$ionicLoading.hide();
+				var log=$ionicPopup.alert({
+					title: 'Sorry for the inconvenience',
+					template: 'Please Login again'
+				  });
+              log.then(function(res) {
+					ionic.Platform.exitApp();
+				  });
+				}
+            },function(error){
+				$ionicLoading.hide();
+				var log=$ionicPopup.alert({
+					title: 'Sorry for the inconvenience',
+					template: 'Please Login again'
+				  });
+              log.then(function(res) {
+					ionic.Platform.exitApp();
+				  });
+				$scope.mess="Enter a value";
+            });
+        };
+
+  //nach status
+  $scope.nach=function() {
+    var date=dateService.getDate();
+    mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums,"paymentMode" : "a"},function(data){
+      if(data.responseCode=="Cali_SUC_1030"){
+        $ionicLoading.hide();
+       
+       $state.go('invest_success');
+      }
+      else{
+        $ionicLoading.hide();
+      }
+
+    },function(error){
+      $ionicLoading.hide();
+      var log=$ionicPopup.alert({
+        title: 'Sorry for the inconvenience',
+        template: 'Please Login again'
+      });
+      log.then(function(res) {
+        ionic.Platform.exitApp();
+      });
+      $scope.mess="Enter a value";
+    });
+  };
+var mid=$sessionStorage.orderId;//dynamic id
+})
+

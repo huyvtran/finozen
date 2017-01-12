@@ -146,6 +146,11 @@ $ionicAppProvider.identify ({
           controller: ''     
     })  
     
+             .state('ipv', {
+      url: '/ipv',         
+          templateUrl: 'templates/ipv.html',
+          controller: ''     
+    })    
              .state('aboutUs', {
       url: '/aboutUs',         
           templateUrl: 'templates/aboutUs.html',
@@ -213,6 +218,10 @@ $ionicAppProvider.identify ({
         templateUrl: 'templates/panVerify.html',
         controller: ''     
     }) 
+        .state('reportgen', {
+		url: '/reportgen',         
+        templateUrl: 'templates/reportgen.html'     
+    })    
         .state('panImage', {
 		url: '/panImage',         
         templateUrl: 'templates/panImage.html',

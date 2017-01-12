@@ -33,7 +33,6 @@ angular.module('app.subcontrollerOne', [])
             }, 5000);
 		}
 	$scope.plzWait2();
-
 	})
 //FAQ controllers START
     .controller('FundsMethodCtrl', function($scope) {
@@ -154,7 +153,7 @@ $scope.terms = function()
         $scope.groups["3"] = {name: "How soon will my investments reflect on FinoZen?",items: ["All Investments will be processed on next working day and will reflect in your FinoZen account at 11:30 am on next day of processing.","Working days are Monday to Friday except Bank Holidays.", "For ex: An investment done on Sunday, will be processed on Monday and will reflect in your FinoZen account on 11:30 am Tuesday."] };
         $scope.groups["4"] = {name: "Where does my money go once I withdraw?",items: ["Your money will be deposited back to the bank account you registered with us at the time of your account opening."] };
         $scope.groups["5"] = {name: "How soon can I access my withdrawn money?",items: ["If you opt for Instant Withdrawal, you can withdraw your investments in less than 30 mins. For normal withdrawal, schedule of deposit is mentioned on Withdraw page"] }; //add a table
-        $scope.groups["6"] = {name: "How much can I invest at a time? Is there a minimum or a maximum?",items: ["You can invest any amount from a minimum of INR 500."] };
+        $scope.groups["6"] = {name: "How much can I invest at a time? Is there a minimum or a maximum?",items: ["You can invest any amount from a minimum of Rs 500."] };
         $scope.groups["7"] = {name: "How long do I need to stay invested? Is there a lock-in period?",items: ["There is no minimum period or lock-in. You have the option to withdraw your money anytime. "] };
         $scope.groups["8"] = {name: "Can I invest through cash/cheque?",items: ["No. You can invest only through app or FinoZen website through Netbanking or Debit Card.  "] };
 
@@ -180,6 +179,30 @@ $scope.terms = function()
         $scope.groups = [];
         $scope.groups["0"] = {name: "Where is your office?",items: ["Our office is located at:","25, 18th Cross,","9th Main, Behind McDonald,","HSR Layout,Sector 7, ","Bengaluru, 560102 Karnataka","Our business hours are Monday to Friday 10 am to 8 pm."] };
         $scope.groups["1"] = {name: "How can I reach you in case of any questions?",items: ["You can call us Monday to Friday 10am to 8 pm by using the dialer icon on the top right corner on any page of the app. ","You can also reach us via email at support@finozen.com. We will respond to your queries within 1 business days. ","You can also send us your feedback by going to the “Contact Us” section on the left menu panel of the app."] };
+
+
+        /*
+         * if given group is the selected group, deselect it
+         * else, select the given group
+         */
+        $scope.toggleGroup = function(group) {
+            if ($scope.isGroupShown(group)) {
+                $scope.shownGroup = null;
+            } else {
+                $scope.shownGroup = group;
+
+            }
+        };
+        $scope.isGroupShown = function(group) {
+            return $scope.shownGroup === group;
+        };
+
+    })
+    .controller('BankCtrl', function($scope) {
+        $scope.groups = [];
+        $scope.groups["0"] = {name: "Why are we asking for PAN?",items: ["As the investment will be made under your name, PAN is mandatory requirement from SEBI"] };
+        $scope.groups["1"] = {name: "Why are we asking for Bank Account Details?",items: ["When you withdraw money from FinoZen, money will be deposited only to your registered bank account. Hence, please provide correct details."] };
+        $scope.groups["2"] = {name: "Are my personal details safe?",items: ["Your details are 128 bit encrypted (bank grade security) and hence are completely safe and secure."] };
 
 
         /*
@@ -326,203 +349,9 @@ $scope.xirrRate= function(){
 			
 		},5000);
     })
-
- // NAV Calculator controller
-.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup,$ionicLoading,$ionicPlatform,$timeout,relianceInstantAmountAPI,$location) {
-
-  var finalComputedVal;
-  	if($sessionStorage.clientType=="GO"){
-		console.log($sessionStorage.clientType+ "  gold")
-		$scope.schemePlan="RELIANCE LIQUID FUND - TREASURY PLAN - IP - Growth";
-		$scope.averageRate=7.5;
-		$scope.minInv=500;
-	}
-	  else if($sessionStorage.clientType=="PL") {
-		console.log($sessionStorage.clientType+ "  platinum")
-		$scope.schemePlan="Reliance Money Manager Fund – Growth Plan"; //money managaer needs to come here
-		$scope.averageRate=8.3;
-		$scope.minInv=500;
-    }
-	var dayNow = new Date().getDay();
-	console.log(dayNow);
-	if(dayNow >=1 && dayNow <5){$scope.nav=$sessionStorage.nav*(1+ 0.0002);}
-	else if(dayNow ==5) {$scope.nav=$sessionStorage.nav*(Math.pow((1+ 0.0002),3));}
-	else if(dayNow ==6) {$scope.nav=$sessionStorage.nav*(Math.pow((1+ 0.0002),2));}
-	else if(dayNow ==0) {$scope.nav=$sessionStorage.nav;}
-
-	console.log($scope.nav);
-	// till here
-
-    $scope.final=function(initial,nav,suggest){
-		console.log($scope.nav + "nav");
-    var theory=initial/nav ;
-    var rounded= Math.round(theory * 1000)/1000;
-    //loss=theory-rounded;
-    var diff=rounded*nav-initial;
-    if(initial>0){
-    if(diff>0){
-    finalComputedVal=initial;
-    return suggest;
-    }
-    else{
-    return $scope.test(initial,nav,suggest);
-    }
-    }
-    else{return 0;}
-	}
-    $scope.test=function(initial,nav,suggest){
-    suggest++;
-    initial=initial+1;
-            return $scope.final(initial,nav,suggest);
-        }
-
-	  $scope.Invest = function(form) {
-            if(form.$valid && $scope.initial>=100) {
-				if($sessionStorage.allTransactions > 0 && $sessionStorage.SessionFolioNums==0){
-					$ionicPopup.alert({
-					title: 'Transaction In-Progress',
-					template: 'Your first transaction is in progress. For next transaction, we request you to wait till the first investment reflects in your FinoZen account.'
-				  });
-				  }
-				  // comment this part for nachStatus
-				  /*
-				  $ionicLoading.show({templateUrl:"templates/loading.html"});
-          console.log('its entering the nach mandate');
-          $scope.sendMfOrder()
-				  */
-				  // till here
-
-				  //Nach status redirection
-
-				else if($sessionStorage.nachStatus !='A'){
-				        $ionicLoading.show({templateUrl:"templates/loading.html"});
-						  console.log('its entering the nach mandate');
-						  if($sessionStorage.SessionStatus=="P" ||  $sessionStorage.SessionStatus=="U"){
-							  if($scope.initial<=1000){$scope.sendMfOrder();}
-							  else{
-								  $ionicLoading.hide();
-								  var log=$ionicPopup.alert({
-										title: 'Acctivate account',
-										template: 'You are not allowed to Invest more than Rs.1000 untill you submit all documents'
-									  });
-								    log.then(function(res) {
-										state.go("invest");
-									});
-							  }
-							}
-							else{
-							  $scope.sendMfOrder();
-							}
-						}
-						else{
-						  $ionicLoading.show({templateUrl:"templates/loading.html"});
-						  $scope.nach();
-						}
-            }
-        }
-
-        $scope.sendMfOrder=function() {
-            var date=dateService.getDate();
-            mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums},function(data){
-                if(data.responseCode=="Cali_SUC_1030"){
-					$ionicLoading.hide();
-					if(data.jsonStr==null){
-						  var ref = cordova.InAppBrowser.open('https://finotrust.com/WealthWeb/ws/pymt/pymtView?mfOrderId='+data.id,'_blank', 'location=no');
-						  ref.addEventListener('loadstart', function(event) {
-					navigator.notification.activityStart("Please Wait", "Redirecting to a secure payment gateway");
-				});
-						    ref.addEventListener('loadstop', function() {
-								navigator.notification.activityStop();
-							  });
-							ref.addEventListener('loadstop', function(event) { if( event.url.match('pymt/bdesk') ){
-								$timeout(function () {
-									ref.close();
-								},20000);
-							;} });
-					$timeout(function () {
-							$state.go('tabsController.recentTransactions');
-						},1000);
-						
-					}
-					else{
-						console.log(data.jsonStr.ihno);
-						var rel= cordova.InAppBrowser.open('https://investeasy.reliancemutual.com/online/CampaingLink/InvestorCampaign?IHNO='+data.jsonStr.ihno,'_blank','location=no');
-							rel.addEventListener('loadstart', function(event) {
-								navigator.notification.activityStart("Please Wait", "Redirecting to a secure payment gateway");
-							});
-						rel.addEventListener('loadstop', function(event) { 
-							navigator.notification.activityStop();
-						  });
-							rel.addEventListener('loadstop', function(event) { if( event.url.match('online/RMFShort/FetchInvData') ){
-								console.log(event.url);
-							;} });
-						rel.addEventListener('loadstop', function(event) { if( event.url.match('https://investeasy.reliancemutual.com/online/Payments/PaymentConfirmation_DIT.aspx') ){
-							rel.executeScript({ file: "https://finotrust.com/inject/counter.js" });
-							rel.insertCSS({file:"https://finotrust.com/inject/inject.css"});
-							$timeout(function () {
-								rel.close();
-							},20000);
-					;} });
-					$timeout(function () {
-							$state.go('tabsController.recentTransactions');
-						},1000);
-						
-						
-					}
-                  //clevertap charging notification
-                  clevertap.event.push("Charged", {
-                    "Amount": finalComputedVal, //amount entered
-                    "Fund Name": $sessionStorage.rtaCode, //reliance code
-                    "Charged ID":data.id ,  // important to avoid duplicate transactions due to network failure
-
-                  });
-                    
-
-                }
-				else{
-					$ionicLoading.hide();
-				}
-            },function(error){
-				$ionicLoading.hide();
-				var log=$ionicPopup.alert({
-					title: 'Sorry for the inconvenience',
-					template: 'Please Login again'
-				  });
-              log.then(function(res) {
-					ionic.Platform.exitApp();
-				  });
-				$scope.mess="Enter a value";
-            });
-        };
-
-  //nach status
-  $scope.nach=function() {
-    var date=dateService.getDate();
-    mfOrderUrlService.save({"portfolioCode": $sessionStorage.SessionPortfolio,"amcCode": $sessionStorage.amcCode,"rtaCode":$sessionStorage.rtaCode,"orderTxnDate": date,"amount": finalComputedVal,"folioNo":$sessionStorage.folioNums,"paymentMode" : "a"},function(data){
-      if(data.responseCode=="Cali_SUC_1030"){
-        $ionicLoading.hide();
-
-       $state.go('invest_success');
-      }
-      else{
-        $ionicLoading.hide();
-      }
-
-    },function(error){
-      $ionicLoading.hide();
-      var log=$ionicPopup.alert({
-        title: 'Sorry for the inconvenience',
-        template: 'Please Login again'
-      });
-      log.then(function(res) {
-        ionic.Platform.exitApp();
-      });
-      $scope.mess="Enter a value";
-    });
-  };
-        var mid=$sessionStorage.orderId;//dynamic id
-    })
-.controller('statusPageCtrl', function($scope ,$sessionStorage,$state,proofRedirectFactory,myService){
+	
+	
+	.controller('statusPageCtrl', function($scope ,$sessionStorage,$state,proofRedirectFactory,myService,$ionicLoading){
 
 
 
@@ -580,7 +409,7 @@ $scope.xirrRate= function(){
 
 })
 
-    .controller('panVerifyCtrl', function($scope,$state) {
+    .controller('panVerifyCtrl', function($scope,$state,$ionicLoading) {
 		$scope.kycdone=function(){$state.go('panImage');}
 		$scope.kycnotdone=function(){$state.go('aadhar');}
 		$scope.otpdone=function(){$state.go('confirm');}
@@ -590,7 +419,7 @@ $scope.xirrRate= function(){
 		$scope.withdrawSuccess = function() {console.log("here"); $state.go('tabsController.summaryPage');}
     })
 
-.controller('schemeText', function($scope,$sessionStorage) {
+.controller('schemeText', function($scope,$sessionStorage,$ionicLoading) {
 	/*{
 		$scope.schemeName="Reliance Liquid Fund Cash Plan - Growth";
 		$scope.schemeBody="Reliance Liquid Fund ensure that your investments are very low risk, no-lock in on withdrawl and generate stable returns. This fund primarily invests in money market instruments of public sector banks like Axis Bank, Kotak Mahindra Bank and undertakings such as Steel Authority of India, Idea Cellular, Tata Capital making it ultra-safe (almost as safe as your savings bank deposits) to invest your money. ";
@@ -613,7 +442,7 @@ $scope.xirrRate= function(){
 		$scope.returnsNineM="7.65%";
 		$scope.returnsOneY="7.84%";
 		$scope.returnsThreeY="8.56%";
-		$scope.currentAUM=" INR 20,722 Crores";
+		$scope.currentAUM=" Rs 20,722 Crores";
 		$scope.TaxBenifits=" Unlike FD, there is no TDS for investments in this fund. Also, for investments more than 3 years, tax payout becomes negligible as there is indexation benefits. However for investments less than 3 years, you will have to declare the returns from this investment at the time of tax filing and pay tax as per your salary bracket.";
 		$scope.schemeLink="https://www.valueresearchonline.com/funds/newsnapshot.asp?schemecode=519";
 		$scope.schemeLinkText=" to read more about Reliance Liquid Fund Treasury Plan (IP) – G on moneycontrol.";
@@ -628,7 +457,7 @@ $scope.xirrRate= function(){
 		$scope.returnsNineM="8.77%";
 		$scope.returnsOneY="8.63%";
 		$scope.returnsThreeY="8.88%";
-		$scope.currentAUM=" INR 17,024 Crores";
+		$scope.currentAUM=" Rs 17,024 Crores";
 		$scope.TaxBenifits=" Unlike FD, there is no TDS for investments in this fund. Also, for investments more than 3 years, tax payout becomes negligible as there is indexation benefit. However, for investments less than 3 years, you will have to declare the interest accrued from this investment at the time of tax filing and pay tax as per your salary bracket.";
 		$scope.schemeLink="https://www.valueresearchonline.com/funds/newsnapshot.asp?schemecode=4547";
 		$scope.schemeLinkText=" to read more about Reliance Money Manager Fund – Growth Plan";
@@ -636,7 +465,7 @@ $scope.xirrRate= function(){
 	}
 })
 
-.controller('verifySuccessCtrl', function($scope,$sessionStorage,$state,myService,proofRedirectFactory,$timeout,$window) {
+.controller('verifySuccessCtrl', function($scope,$sessionStorage,$state,myService,proofRedirectFactory,$timeout,$window,$ionicLoading) {
 console.log($sessionStorage.SessionStatus+"   $sessionStorage.SessionStatus verifySuccessCtrl");
 	$timeout(function(){
 		//$window.location.reload(true)
@@ -749,8 +578,16 @@ console.log($sessionStorage.SessionStatus+"   $sessionStorage.SessionStatus veri
 $scope.initial();
 
 })
-
-.controller('menuOverlay', function($scope, $window, $ionicSideMenuDelegate) {
+.controller('MySlideCtrl', function($scope, $ionicSlideBoxDelegate,$sessionStorage) {
+	$scope.clientMobile= $sessionStorage.SessionMobNo;
+   $scope.nextSlide = function() {
+      $ionicSlideBoxDelegate.next();
+   }
+   $scope.prvSlide = function() {
+      $ionicSlideBoxDelegate.previous();
+   }
+})
+.controller('menuOverlay', function($scope, $window, $ionicSideMenuDelegate,$ionicLoading) {
 
   $scope.width = function () {
     return $window.innerWidth;

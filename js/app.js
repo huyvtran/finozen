@@ -7,12 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 var confirmation = 0;
 angular.module('app', ['ionic','ionic.service.core','app.controllers', 'ionicProcessSpinner' , 'app.subcontrollerOne','pascalprecht.translate','app.subcontrollerTwo' , 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages','ngStorage','ngIdle','ngCordova', 'ionic-toast','ionic-datepicker'])
-/*.constant('$ionicLoadingConfig', {
-  template: '<ion-spinner icon="android"></ion-spinner>',
-  showBackdrop: true,
-})
 
-*/
 .config(function ($translateProvider) {
 
 
@@ -57,12 +52,12 @@ angular.module('app', ['ionic','ionic.service.core','app.controllers', 'ionicPro
       TEXT_WITHDRAW_COMPLETEBALANCE:'Withdraw my complete balance',
       noTxnMsg1:'There are no transactions to display,',
       noTxnMsg12:'START INVESTING NOW',
-      TEXT_INVITE_HEADER:'INVITE FRIENDS',
-      TEXT_INVITE_HEADER2:'Invite Your Friends',
-      TEXT_INVITE_MESSAGE1:'Invite now and get INR 100 for every referral, your friend will also get INR 100',
-      TEXT_INVITE_MESSAGE2:'Post 1st investment by your referral, both you and your friend will be eligible for INR 100 referral incentive. Incentive will be deposited directly in your respective bank accounts (within 3 working days after investment reflects in FinoZen account). You need to have an active FinoZen account with non-zero balance to be eligible for referral incentive',
+      TEXT_INVITE_HEADER:'EDUCATE YOUR FRIENDS',
+      TEXT_INVITE_HEADER2:'Educate Your Friends',
+      TEXT_INVITE_MESSAGE1:'Earn Money In The Process',
+      TEXT_INVITE_MESSAGE2:'Educate your peers and make money in the process. Use your mobile number as the referral code and invite as many friends as you wish to make use of FinoZen. You can earn upto Rs. 50,000 per month by educating your friends on FinoZen.',
       TEXT_INVITE_BUTTON:'Start Inviting',
-      TEXT_LANG_MENU1:'Invite & Earn',
+      TEXT_LANG_MENU1:'Educate & Earn',
       TEXT_LANG_MENU2:'FAQ',
       TEXT_LANG_MENU3:'contact us',
       TEXT_LANG_MENU4:'About us',
@@ -101,13 +96,6 @@ angular.module('app', ['ionic','ionic.service.core','app.controllers', 'ionicPro
   $translateProvider.preferredLanguage('2');
 })
 
-.config(function(IdleProvider, KeepaliveProvider) {
-    // configure Idle settings
-    IdleProvider.idle(5); // in seconds
-    IdleProvider.timeout(5); // in seconds
-    KeepaliveProvider.interval(2); // in seconds
-})
-
 .run(function($ionicPlatform, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaKeyboard,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout,$localStorage) {
   $ionicPlatform.ready(function() {
 
@@ -116,10 +104,11 @@ angular.module('app', ['ionic','ionic.service.core','app.controllers', 'ionicPro
 }, function(value) {
 	console.log(value);
 $rootScope.keyboardOpen = value;
-});
-      Idle.watch();
+}); 
 
 //$localStorage.language=0;
+
+
                 if(!navigator.onLine) {
 console.log(navigator.onLine + "  connection state");
                   // all details are for
@@ -140,7 +129,6 @@ console.log(navigator.onLine + "  connection state");
      if ($ionicHistory.currentStateName() == 'invest'){
 		 console.log("inv");
 		$state.go('tabsController.summaryPage');
-
       }
      else if ($ionicHistory.currentStateName() == 'verifySuccess' || $ionicHistory.currentStateName() == 'questions' || $ionicHistory.currentStateName() == 'bank'){
 		event.preventDefault();
@@ -170,8 +158,8 @@ console.log(navigator.onLine + "  connection state");
       }
     }, 100);
 
-
-
+   
+	
 //clevertap integration
     CleverTap.registerPush(); //registering for push notifications
     document.addEventListener('deviceready', this.onDeviceReady, false);
@@ -180,20 +168,6 @@ console.log(navigator.onLine + "  connection state");
     document.addEventListener('onCleverTapInAppNotificationDismissed', this.onCleverTapInAppNotificationDismissed, false); // optional, to be receive a callback with custom in-app notification click data
     document.addEventListener('onDeepLink', this.onDeepLink, false); // optional, register to receive deep links.
     document.addEventListener('onPushNotification', this.onPushNotification, false); // optional, register to receive push notification payloads.
-	 //CleverTap.setDebugLevel(1277182231);
-    var customerType = clevertap.profile.getAttribute("Customer type");
-    // Returns the time elapsed in seconds
-    var timeElapsed = clevertap.session.getTimeElapsed();
-
-// Total Visit Count
-    var totalVisits = clevertap.user.getTotalVisits();
-
-// Page Count
-    var pageCount = clevertap.session.getPageCount();
-
-// Last Active Session
-    var lastVisit = clevertap.user.getLastVisit();
-
 
 
 

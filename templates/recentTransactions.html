@@ -6,11 +6,14 @@
 
 <div class="list recent_transactions" >
   <div class="item text-center padding item-note">Pull down to refresh...</div>
-  <div class="item item-avatar item-icon-right in in done done" ng-repeat="lists in products | orderBy:'-orderId'" ng-class="{'lastItem': $last}">
+  <div class="item item-avatar item-icon-right in in done done" ng-repeat="lists in products | orderBy:'-txnDate'" ng-class="{'lastItem': $last}">
 	<p class="success {{lists.txnTypeStr}}"><span>&#x20B9;</span> {{lists.amount|currency :"":2}}</p>
 	<span class="item-note right">{{'TranscationID' | translate}}: {{ lists.orderId}}</span><br/>
 	<span class="item-note left">{{lists.txnDate}} </span>
-	<i class="icon ion-ios-checkmark-outline payment"></i>
+
+	<i ng-show="lists.orderMatchFlag == 'C' || lists.orderMatchFlag == 'Y' ||  lists.orderMatchFlag == 'Y' ||  lists.orderMatchFlag == null  " class="icon ion-ios-checkmark-outline payment"  ng-controller="popOverTxnSuccess" ng-click="popover.show($event)"></i>
+	<i ng-show="lists.orderMatchFlag == 'U' || lists.orderMatchFlag == 'S' " class="icon ion-ios-help-outline payment paymentProgress"  ng-controller="popOverTxnInProgress" ng-click="popover.show($event)"></i>
+	<i ng-show="lists.orderMatchFlag == 'X' || lists.orderMatchFlag == 'D' " class="icon ion-ios-close-outline payment"  style="color:#e01916"  ng-controller="popOverTxnFailed" ng-click="popover.show($event)"></i>
   </div>
   <div class="noTxn" ng-show="noTxnIcon"><p>{{'noTxnMsg1'| translate}}<br/>{{'noTxnMsg12' | translate}} <img ng-src="{{noTxnIcon}}"></p>
   </div>

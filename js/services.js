@@ -27,7 +27,7 @@ angular.module('app.services', [])
 
   /*For fetching the transaction webservices*/
   .factory('getReportService', ['$resource','$sessionStorage',function($resource,$sessionStorage){
-    return $resource('https://finotrust.com/WealthWeb/ws/clientRepos/getOrders?pfolioCode='+$sessionStorage.SessionPortfolio+'&noOfOrders=30');
+    return $resource('https://finotrust.com/WealthWeb/ws/clientRepos/getOrders?pfolioCode='+$sessionStorage.SessionPortfolio+'&noOfOrders=3000');
   }])
 
   /*Reliance ZBF page service*/
@@ -38,7 +38,7 @@ angular.module('app.services', [])
 
   /*Reliance folio number sending it to backend */
    .factory('relianceInstantZBF',['$resource','$sessionStorage',function($resource,$sessionStorage){
-       var relianceZBF = $resource('https://finotrust.com//ealthweb/ws/clientorders/createfolio',{},{
+       var relianceZBF = $resource('https://finotrust.com/Wealthweb/ws/clientorders/createfolio',{},{
           save:{
               method:'POST',
               headers:{
@@ -136,7 +136,7 @@ return totalIndex;
 }
  };
  })
-/*Get data*/
+/*Get login data*/
 .factory('loginInfoService', ['accessUrlService','$q',function(accessUrlService,$q){
 	return  {
 	getJsonId: function(loginData) {
@@ -154,7 +154,6 @@ return totalIndex;
 
 
 .factory('changePinService', ['$resource','$sessionStorage', function($resource,$sessionStorage){
-//console.log();
 	var jsid=$sessionStorage.SessionIdstorage;
 	console.log(jsid + "  jsid");
 	 var change = $resource('https://finotrust.com/WealthWeb/ws/secure/fcpSecure/changePassword',{},{
@@ -174,7 +173,6 @@ return totalIndex;
 		var panupload = $resource('https://finotrust.com/WealthWeb/ws/kycs/kyphImg',{},{
 			save:{
 				method:'POST',
-				method:'POST',
 					headers:{
 					'Content-Type' :'application/json'
 				}
@@ -183,6 +181,21 @@ return totalIndex;
 		return panupload;
 
 }])
+
+/*For Transaction Report*/
+	.factory('TransRepoService',['$resource','$sessionStorage',function($resource){
+		var Transupload = $resource('https://finotrust.com/WealthWeb/ws/caliRep/StmtReq',{},{
+			save:{
+				method:'POST',
+					headers:{
+					'Content-Type' :'application/json'
+				}
+			}
+		});
+		return Transupload;
+
+}])
+
 
 /*Bank Details*/
     .factory('bankDetailsService',['$resource',function($resource){
@@ -234,7 +247,7 @@ return totalIndex;
 		},
 	});
 	return mfOrderRequest;
-	//https://finotrust.com/WealthWeb/ws/clientOrders/clientOrderMfBuy
+	//192.168.0.122:8080/WealthWeb/ws/clientOrders/clientOrderMfBuy
 }])
 
 /*send MF sell order*/
@@ -266,7 +279,6 @@ return totalIndex;
 
 }])
 
-//https://finotrust.com
 
 
 

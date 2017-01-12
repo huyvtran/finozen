@@ -1,9 +1,9 @@
 img{margin:2em auto 0;display: block;}
 .has-header2{margin-top:6%;}
-.item p.Buy{color:#02a315}
+.item p.Buy, .item p.Switch-Buy{color:#02a315}
 .icon{color:#009688}
-.item p.Sell{color:#e01916}
-.payment{color:#009688 !important}
+.item p.Sell, .item p.Switch-Sell{color:#e01916}
+.payment{color:#009688}
 .button{
 text-transform:uppercase;
 max-height: 42px !important;
@@ -42,8 +42,27 @@ border-color:#18bb9c;
 	.slide2{color:#00a5c3}
 	.slide3{color:#49c593}
 	.slide4{color:#5d9cec}
-	img{margin: 20vh auto 80px;}
-.box{}
+	img{margin: 15vh auto 50px; max-height: 150px;}
+.box{
+	.relianceGrowth {
+		width: 90%;
+		margin: auto;
+		border-bottom: 1px solid #ccc;
+		border-top: 1px solid #ccc;
+		tr{
+			font-size: 12px;
+			&.firstRow {
+				font-weight: 600;
+			}
+		}
+		th{font-weight: 600;border: 1px solid #ddd;}
+		td{
+			padding: 5px;
+			border: 1px solid #ddd;
+			&:first-child{text-align:left}
+		}
+	}
+}
 
 }
 .item-note{float:none;}
@@ -179,7 +198,7 @@ width: 30%;}
   .secure_lock{padding-right: 10px; color: white !important;}
   .forgot_pin{
 		padding: 10px 10px 5px 0;
-		width: 130px;
+		width: 145px;
 		display: inline-block;
 		float: right;
 		color:#18bb9c; 
@@ -188,7 +207,7 @@ width: 30%;}
 	.rememberme{
 	margin-top: 20px;
 	width: 150px;
-	#remember_me_label{line-height:1.82857; width:100px} }
+	#remember_me_label{line-height:1.82857; width:115px} }
 }  
 .signin_background, .sign_up{
 .item-input{
@@ -321,6 +340,28 @@ ion-slide{background:white;transition-duration: 300ms;}
 .slider-slide.disable-user-behavior {
     height: 100vh;
 }
+
+.outerList{
+	list-style: none;
+	width: 85%;
+	margin: auto;
+	text-align: left;
+	list-style-type: disc;
+	padding: 15px;
+	.mobnum{
+		font-size: 18px;
+		color: #18bb9c;
+		padding: 8px;
+		font-weight: 600;
+	}
+	.innerList{
+		list-style: none;
+		width: 85%;
+		margin: auto;
+		text-align: left;
+		list-style-type: disc;
+	}
+}
 .button {
     width: 40%;
     margin: auto;
@@ -352,6 +393,39 @@ img{margin: 10vh auto 30px;}
 .list{
 	margin-top: 10px;
 	a{padding-left: 25px;}
+	}
+}
+.bankDetails{
+	.scroll{height:100%;}
+	.InnerDiv{
+		height: 93%;
+		overflow-y: scroll;
+		overflow-x: hidden;
+		.Bank_questions{
+			.question{
+				padding: 0 4px;
+				p{
+					display: inline-block;
+					padding-left: 6px;
+					margin: 0;
+					font-size: 12px;
+					color: #18bb9c;
+				}
+				.icon{
+					position: absolute;
+					left: 10px;
+					font-size:11px;
+				}
+			}
+			.answer{
+				padding: 0 4px;
+				p{
+					padding-left: 14px;
+					margin: 0;
+					font-size:10px;
+				}
+			}
+		}
 	}
 }
 .change_password{
@@ -390,7 +464,7 @@ img{margin: 10vh auto 30px;}
 box-shadow:1px 1px 10px 1px #ccc;
 &.invest_btn{
 font-size: 66px;
-margin: 9px auto;
+margin: 3% auto 1px;
 max-height: 100px !important;
 display: block;
 width: 70px;
@@ -436,7 +510,7 @@ padding-left: 3px;
 .noTxn{
 display:table;
 margin:auto;
-height:65vh;
+height:50vh;
 text-align: center;
 	& p{
 	display:table-cell;
@@ -592,7 +666,8 @@ img{height: 400px;}
 		font-weight: 300;
 		padding: 0 15px 10px;
 	}
-	margin: 10px;
+	&.paymentProgress{color:#666}
+	margin: 0 10px;
 	.success_block {
 		padding: 10px;
 		background: #e8e8e8 none repeat scroll 0 0;
@@ -826,4 +901,8 @@ fader {
 		border: 1px solid whitesmoke;
 		color: black;
 	}
+}
+.test.fit{
+	padding: 0;
+	margin: -20px !important
 }

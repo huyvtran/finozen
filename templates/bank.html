@@ -4,8 +4,9 @@
   <div class="h1 title"><p class="head_title"><span id="title">ACCOUNT ACTIVATION</span></p></div>
   <a class="button button-clear button-positive  ion-android-call" ng-href="tel:09206073021"></a>
 </div>
-	<ion-content overflow-scroll="true" padding="true" class="has-header" ng-controller="bankDetailsCTRL">
-		<p style="padding: 20px 0 3px;">Please enter your valid PAN No. and bank details to activate your FinoZen account instantaneously.</p>
+	<ion-content padding="true" class="has-header bankDetails" ng-controller="bankDetailsCTRL">
+<div class="InnerDiv">
+	<p style="padding: 20px 0 3px;">Please enter your valid PAN No. and bank details to activate your FinoZen account instantaneously.</p>
 <form name="bankDetailsTest" novalidate="" >
 		<label class="item item-input" >
 			<input type="text" name="panNo" placeholder="Enter Your PAN Number"  uppercase-only ng-model="panNo" minlength="10"  maxlength="10"  required />
@@ -64,6 +65,24 @@
 		
 
 		-->
+<div ng-controller="BankCtrl" class="">
+	<div ng-repeat="group in groups" class="faq_question_content Bank_questions">
+	  <div class="item-stable col question"
+				ng-click="toggleGroup(group)"
+				ng-class="{active: isGroupShown(group)}">
+		  
+		&nbsp;
+		<p>{{group.name}}</p>
+		<i class="icon icon-right" ng-class="isGroupShown(group) ? 'ion-minus-circled' : 'ion-plus-circled'"></i>
+	  </div>
+	  <div class="item-accordion col answer"
+				ng-repeat="item in group.items"
+				ng-show="isGroupShown(group)">
+		<p>{{item}}</p>
+	  </div>
+	</div>
+</div>
+</div>
 <ion-footer-bar padding="false" style="padding:0;"  ng-hide="keyboardOpen"  >
 	<div class="button-bar " style="padding:0;">
 		<a class="button button-positive" ng-href={{bankSkipurl}}  ng-click="bankSkip()" style="margin:1px;line-height: 44px;">SKIP</a>

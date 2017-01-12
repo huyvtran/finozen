@@ -1,0 +1,19 @@
+<ion-view title="CONFIRM" ng-controller="ipvCtrl">
+<div class="bar bar-header fino_head">
+<button class="button button-clear ion-android-arrow-back " ng-controller="goOneStep" ng-disabled="true" ng-click="goOneStepbacktoAddress()"></button>
+  <div class="h1 title"><p class="head_title"><span id="title">VIDEO VERIFICATION</span></p></div>
+  <a class="button button-clear button-positive  ion-android-call" ng-href="tel:09206073021"></a>
+</div>
+	<ion-content overflow-scroll="true" padding="true" class="has-header" >
+<div class="padding">
+<br/>
+<p>Record a 5 seconds video of yours holding your original PAN </p>
+</div>
+    </ion-content>
+<ion-footer-bar padding="false" class="footerQuestion" style="padding:0;">
+	<div class="button-bar " style="padding:0;">
+		<button ng-show="!showSubmit" class="button button-positive" ng-click="AutoRecord()" style="margin:1px;line-height: 44px;">Start</button>
+		<button ng-show="showSubmit" class="button button-positive" ng-click="videoSumbit()" style="margin:1px;line-height: 44px;">Submit</button>
+	</div>
+</ion-footer-bar>
+</ion-view>

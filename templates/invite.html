@@ -5,13 +5,43 @@
 	<a class="button button-clear button-positive  ion-android-call" ng-click="showPopup()"></a>
 </div>
     <ion-content overflow-scroll="true" padding="true" class="has-header">
-      <div class="rows">
-			<img src="img/1.png" alt="">
-			<h3 class="slide3  text-center">{{ 'TEXT_INVITE_HEADER2' | translate}}</h3>
-			<p class="text-center" translate="TEXT_INVITE_MESSAGE1"><sup>*</sup></p><br/>
-			<sup  class="text-left"><sup>*</sup>{{'TEXT_INVITE_MESSAGE2' | translate}}<br/></sup>
-			<!--<button onclick="window.plugins.socialsharing.shareViaSMS({'message':'My cool message', 'subject':'The subject', 'image':'https://www.google.nl/images/srpr/logo4w.png'}, '0612345678,0687654321', function(msg) {console.log('ok: ' + msg)}, function(msg) {alert('error: ' + msg)})">share via SMS</button>-->
-		</div>
+<ion-slide-box  class="text-center slides">
+
+		<ion-slide>
+			<div class="rows">
+				<img src="img/1.png" alt="">
+				<h3 class="slide3  text-center">{{ 'TEXT_INVITE_HEADER2' | translate}}</h3>
+				<h4 class="text-center" translate="TEXT_INVITE_MESSAGE1"></h4><br/>
+				<sup  class="text-left"><sup>*</sup>{{'TEXT_INVITE_MESSAGE2' | translate}}<br/></sup>
+				<!--<button onclick="window.plugins.socialsharing.shareViaSMS({'message':'My cool message', 'subject':'The subject', 'image':'https://www.google.nl/images/srpr/logo4w.png'}, '0612345678,0687654321', function(msg) {console.log('ok: ' + msg)}, function(msg) {alert('error: ' + msg)})">share via SMS</button>-->
+			</div>
+			<div ng-controller="MySlideCtrl">
+				<span ng-click="nextSlide()" style="position: absolute;top: 43%;bottom: 50%;right: 4px;" class="button-icon icon ion-chevron-right"></span>
+				<span ng-click="prvSlide()" style="position: absolute;top: 43%;bottom: 50%;left: 4px;opacity: 0.2;" class="button-icon icon ion-chevron-left"></span>
+			</div>
+		</ion-slide>
+		<ion-slide>
+			<div ng-controller="MySlideCtrl">
+				<ul class="outerList">
+					<li>Your referral code is: <span class="mobnum">{{clientMobile}}</span></li>
+					<li>
+						Instructions:
+						<ul  class="innerList">
+							<li>Your mobile number[{{clientMobile}}] is your referral code</li>
+							<li>Educate your friends about FinoZen and ask them to use your mobile number as the referral code when they create their FinoZen account.</li>
+							<li>After your friend activates his/her account and make his/her 1st investment both of you will earn Rs. 100 which will be deposited directly in your registered bank account </li>
+							<li>You can earn upto Rs. 50,000 per month by educating your friends on FinoZen!</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div ng-controller="MySlideCtrl">
+				<span ng-click="nextSlide()" style="position: absolute;top: 43%;bottom: 50%;right: 4px;opacity: 0.2;" class="button-icon icon ion-chevron-right"></span>
+				<span ng-click="prvSlide()" style="position: absolute;top: 43%;bottom: 50%;left: 4px;" class="button-icon icon ion-chevron-left"></span>
+			</div>
+		</ion-slide>
+</ion-slide-box>
+
 <ion-footer-bar padding="false" style="padding:0;" ng-controller="socialShareController">
 	<div class="button-bar " style="padding:0;" >
 		<button ion-track-tap="invite" class="button button-positive" ng-click="shareViaContacts()" style="margin:1px;line-height: 44px;">Contacts</button>

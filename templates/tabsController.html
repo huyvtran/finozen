@@ -43,13 +43,14 @@
     <ion-content>
             <ion-list class="menulist">
                  <ion-item nav-clear menu-close  class="sideMenuTab"  href="#/invite" ><i class="icon ion-ios-people-outline"></i>{{'TEXT_LANG_MENU1'|translate}}</ion-item>
-                 <ion-item nav-clear menu-close  class="sideMenuTab"  href="#/referral" ><i class="icon ion-ios-people-outline"></i>REFERRAL STATUS</ion-item>
+                 <ion-item nav-clear menu-close  ng-controller="referralCtrl" class="sideMenuTab" ng-click="referral()"  ><i class="icon ion-ios-people-outline"></i>REFERRAL STATUS</ion-item>
                  <ion-item nav-clear menu-close  class="sideMenuTab"  href="#/faq" ><i class="icon ion-ios-help-outline"></i>{{'TEXT_LANG_MENU2'|translate}}</ion-item>
+                 <ion-item nav-clear menu-close  class="sideMenuTab"  href="#/reportgen" ><i class="icon ion-clipboard"></i>Reports</ion-item>
                  <ion-item nav-clear menu-close  href="#/contact" class="sideMenuTab"  menu-close=""><i class="icon ion-ios-email-outline"></i>{{'TEXT_LANG_MENU3'|translate}}</ion-item>
                  <ion-item nav-clear menu-close  href="#/aboutUs"  class="sideMenuTab"  menu-close=""><i class="icon ion-ios-person-outline"></i>{{'TEXT_LANG_MENU4'|translate}}</ion-item>
                 <!-- <ion-item nav-clear menu-close  href="#" ng-controller="languageCtrl" ng-click="changeLan()" menu-close=""><i class="icon ion-ios-email-outline"></i>Language {{'TEXT_LANG_MENU2'|translate}}</ion-item>-->
                  <ion-item nav-clear menu-close ng-controller="termsCtrl" class="sideMenuTab" ng-hide="test" ng-click="activateAcc()" menu-close=""><i class="icon ion-android-checkmark-circle"></i>{{'TEXT_LANG_MENU5'|translate}}</ion-item>
-                 <ion-item nav-clear menu-close  ng-controller="signoutCtrl"  class="sideMenuTab"  href="#page7" menu-close="" ng-click="signOut()"><i class="icon ion-power"></i>{{'TEXT_LANG_MENU6'|translate}}</ion-item>
+                 <ion-item nav-clear menu-close  ng-controller="signoutCtrl"  class="sideMenuTab" menu-close="" ng-click="signOut()"><i class="icon ion-power"></i>{{'TEXT_LANG_MENU6'|translate}}</ion-item>
             </ion-list>
     </ion-content>
   </ion-side-menu>
