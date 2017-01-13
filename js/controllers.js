@@ -282,7 +282,7 @@ $scope.TranasctionUpload=function(){
 	}
 	})
 })
-    .controller('AuthSignUpCtrl', function($scope, $state,signUpService,$sessionStorage,$ionicLoading) {
+    .controller('AuthSignUpCtrl', function($scope, $state,signUpService,$sessionStorage,$ionicLoading,dateService) {
 
         $scope.signUp = function(form,searchText2,signupForm) {
 			$sessionStorage.SessionClientName=signupForm.fName;
@@ -317,7 +317,7 @@ $scope.TranasctionUpload=function(){
         $scope.addUserInfo=function(){
             signUpService.sendSignUp($sessionStorage.signUpData).then(function(data){
 				//$sessionStorage.
-
+				var date=dateService.getDate();
                 if(data.responseCode!="Cali_SUC_1030"){
 					$ionicLoading.hide();
 
@@ -343,7 +343,8 @@ $scope.TranasctionUpload=function(){
                     "Phone": signupForm.mobileNumber,       // Phone (with the country code)
                     "Referral": signupForm.referral,      //referral number
 
-                  });		 
+                  });	
+					
 					//saving the signUp data with similar name convention as per sign in controller
 					$sessionStorage.SessionPortfolio=(JSON.parse(data.jsonStr)).portfolioCode;
 					$sessionStorage.SessionClientCode=(JSON.parse(data.jsonStr)).clientCode;
@@ -354,6 +355,16 @@ $scope.TranasctionUpload=function(){
                     $state.go('sliders');    // new sign upflow
 					//$state.go('reference');
 					$ionicLoading.hide();
+					
+					clevertap.event.push("SIGNUP", {
+                    "Name": signupForm.fName,            // String
+					"Email": signupForm.email,        // string(char)
+					"Phone": signupForm.mobileNumber,       // Phone 
+					"Referral": signupForm.referral,      //referral number
+					"portfolioCode":$sessionStorage.SessionPortfolio,     //string
+					"ClientType":$sessionStorage.clientType,
+					"date":date,
+                  });
                 }
             },function(error){
 				$ionicLoading.hide();
@@ -365,7 +376,7 @@ $scope.TranasctionUpload=function(){
 
     /*For Sign In*/
 
-.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,$ionicLoading,$localStorage,$translate,$ionicPopup,$timeout,$ionicPlatform,$window) {
+.controller('AuthSigninCtrl', function($scope,$state,$sessionStorage,$http,loginInfoService,$ionicLoading,$localStorage,$translate,$ionicPopup,$timeout,$ionicPlatform,$window,$filter) {
 /*
 	$scope.clientLanguageOptions = [
 			{ name: 'বাঙালি', value: '1' },
@@ -506,7 +517,7 @@ $scope.TranasctionUpload=function(){
 			console.log($sessionStorage.docStatus + "docStatus");
 
 			//clever tap login.(if exsisting user update the user's values)
-			 
+			var date= $filter('date')(date,'MM/dd/yyyy');
 			 clevertap.onUserLogin.push("Login", {
                 "Name": $sessionStorage.SessionClientName,            // String
 				"ClientStatus": $sessionStorage.clientActive,        // string(char)
@@ -515,7 +526,16 @@ $scope.TranasctionUpload=function(){
 				"ActiveStatus":$sessionStorage.SessionStatus,     //string
 				"ClientType":$sessionStorage.clientType,         // string(char)
                   });
-			
+				  
+				  clevertap.event.push("LOGIN", {
+                    "Name": $sessionStorage.SessionClientName,            // String
+					"ClientStatus": $sessionStorage.clientActive,        // string(char)
+					"Phone":$sessionStorage.SessionMobNo,               // Phone
+					"DocStatus":$sessionStorage.docStatus,             //string
+					"ActiveStatus":$sessionStorage.SessionStatus,     //string
+					"ClientType":$sessionStorage.clientType,
+					"date":date,
+                  });		
 			$ionicLoading.hide();
 			$state.go('tabsController.summaryPage');
 		}
@@ -825,7 +845,7 @@ $scope.$broadcast("scroll.refreshComplete");
 
     .controller('popOverTxnSuccess',function($scope,$ionicPopover,$translate ){
 
-        var template =  '<ion-popover-view class="fit test"><ion-content scroll="false"><div class="l ist"><p class="item pop_up" >Your transaction is Approved.</p> </div></ion-content>';
+        var template =  '<ion-popover-view class="fit test"><ion-content scroll="false"><div class="l ist"><p class="item pop_up" >Your transaction is approved.</p> </div></ion-content>';
 
         $scope.popover = $ionicPopover.fromTemplate(template, {
             scope: $scope
@@ -845,7 +865,7 @@ $scope.$broadcast("scroll.refreshComplete");
     })
     .controller('popOverTxnFailed',function($scope,$ionicPopover,$translate ){
 
-        var template =  '<ion-popover-view class="fit test"><ion-content scroll="false"><div class="l ist"><p class="item pop_up" >Your transaction is Declined.</p> </div></ion-content>';
+        var template =  '<ion-popover-view class="fit test"><ion-content scroll="false"><div class="l ist"><p class="item pop_up" >Your transaction has been declined.</p> </div></ion-content>';
 
         $scope.popover = $ionicPopover.fromTemplate(template, {
             scope: $scope
@@ -895,6 +915,7 @@ else{$scope.insta=0;}
 if($sessionStorage.instaAmountError){
 	$scope.instaError=$sessionStorage.instaAmountError;
 }
+
 
 	   $scope.Withdrawl = function(form) {
 console.log($scope.amount);
@@ -1331,12 +1352,12 @@ $scope.withdraw_error="Please try again";
 											
 								}, function errorCallback(response) {
 									 clevertap.event.push("Failed Transaction", {
-                    "Amount": finalComputedVal, //amount entered
-                    "Fund Name": $sessionStorage.rtaCode, //reliance code
-                    "Charged ID":data.id ,  // important to avoid duplicate transactions due to network failure
-					"date":date,            //purchase date 
-					"client Phone Number":$sessionStorage.mobileNumber, // client identification
-                  });
+										"Amount": finalComputedVal, //amount entered
+										"Fund Name": $sessionStorage.rtaCode, //reliance code
+										"Charged ID":data.id ,  // important to avoid duplicate transactions due to network failure
+										"date":date,            //purchase date 
+										"client Phone Number":$sessionStorage.mobileNumber, // client identification
+									  });
 								
 								});		
 							;} });

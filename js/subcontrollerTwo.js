@@ -281,8 +281,8 @@ $ionicLoading.hide();
                 }
                 else {
 					$ionicLoading.hide();
-					$state.go('ipv');			
-			/*var nextSteps=myService.myFunction($sessionStorage.docStatus);
+				//	$state.go('ipv');			
+			var nextSteps=myService.myFunction($sessionStorage.docStatus);
 			var nextStepsUrl=proofRedirectFactory.name;
 			$sessionStorage.stepCount=$sessionStorage.stepCount+1;
 			var totalSteps=myService.myFunction($sessionStorage.docStatus).length;
@@ -294,7 +294,7 @@ $ionicLoading.hide();
 			else{
 				if(totalSteps==$sessionStorage.stepCount){confirmation=1; console.log("iam going");  $state.go('feedback');}
 				else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
-			}*/
+			}
                 }
             },function(error){
               $ionicLoading.hide();
