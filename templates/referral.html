@@ -5,8 +5,8 @@
   <a class="button button-clear button-positive  ion-android-call" ng-href="tel:09206073021"></a>
 </div>
 <span ng-controller="showhistoryController"></span>
-<ion-content  has-bouncing="true"  scrollbar-y="false" class="has-header" ng-controller="referralCtrl as listControl">
-<div class="list recent_transactions" ng-hide="inviteShow" >
+<ion-content  has-bouncing="true"  scrollbar-y="false" class="has-header" ng-controller="referralStatus as listControl">
+<div class="list recent_transactions" >
   <a class="item" ng-repeat="lists in products | orderBy:'txn'" ng-class="{'lastItem': $last}"  ng-href="tel:{{lists.mobile}}">
 	<div class="row">
 		<div class="col-80">
@@ -24,16 +24,6 @@
 
   </a>
 </div>
-  <div class="padding" ng-show="inviteShow">
-	
-      <div class="rows">
-			<img src="img/1.png" alt="">
-			<h3 class="slide3  text-center">{{ 'TEXT_INVITE_HEADER2' | translate}}</h3>
-			<p class="text-center" translate="TEXT_INVITE_MESSAGE1"><sup>*</sup></p><br/>
-			<sup  class="text-left"><sup>*</sup>{{'TEXT_INVITE_MESSAGE2' | translate}}<br/></sup>
-			<!--<button onclick="window.plugins.socialsharing.shareViaSMS({'message':'My cool message', 'subject':'The subject', 'image':'https://www.google.nl/images/srpr/logo4w.png'}, '0612345678,0687654321', function(msg) {console.log('ok: ' + msg)}, function(msg) {alert('error: ' + msg)})">share via SMS</button>-->
-		</div>
-  </div>
 </ion-content>
 	<ion-footer-bar padding="false" style="padding:0;" ng-controller="socialShareController" ng-show="inviteShow">
 		<div class="button-bar " style="padding:0;" >

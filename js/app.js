@@ -1,10 +1,5 @@
 // Ionic Starter App
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
 var confirmation = 0;
 angular.module('app', ['ionic','ionic.service.core','app.controllers', 'ionicProcessSpinner' , 'app.subcontrollerOne','pascalprecht.translate','app.subcontrollerTwo' , 'app.routes', 'app.services', 'app.directives','ngResource', 'ngMessages','ngStorage','ngIdle','ngCordova', 'ionic-toast','ionic-datepicker'])
 
@@ -98,14 +93,14 @@ angular.module('app', ['ionic','ionic.service.core','app.controllers', 'ionicPro
 
 .run(function($ionicPlatform, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaKeyboard,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout,$localStorage) {
   $ionicPlatform.ready(function() {
-
+/*
   $rootScope.$watch(function() {
   return $cordovaKeyboard.isVisible();
 }, function(value) {
 	console.log(value);
 $rootScope.keyboardOpen = value;
 }); 
-
+*/
 //$localStorage.language=0;
 
 
@@ -130,7 +125,7 @@ console.log(navigator.onLine + "  connection state");
 		 console.log("inv");
 		$state.go('tabsController.summaryPage');
       }
-     else if ($ionicHistory.currentStateName() == 'verifySuccess' || $ionicHistory.currentStateName() == 'questions' || $ionicHistory.currentStateName() == 'bank'){
+     else if ($ionicHistory.currentStateName() == 'verifySuccess' || $ionicHistory.currentStateName() == 'questions' || $ionicHistory.currentStateName() == 'bank' || $ionicHistory.currentStateName() == 'sliders'){
 		event.preventDefault();
       }
 

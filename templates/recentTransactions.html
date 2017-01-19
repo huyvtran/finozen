@@ -4,7 +4,7 @@
 
   <ion-refresher  on-refresh="doRefresh()">    </ion-refresher>
 
-<div class="list recent_transactions" >
+<div class="list recent_transactions">
   <div class="item text-center padding item-note">Pull down to refresh...</div>
   <div class="item item-avatar item-icon-right in in done done" ng-repeat="lists in products | orderBy:'-txnDate'" ng-class="{'lastItem': $last}">
 	<p class="success {{lists.txnTypeStr}}"><span>&#x20B9;</span> {{lists.amount|currency :"":2}}</p>

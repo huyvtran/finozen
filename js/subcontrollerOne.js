@@ -73,8 +73,7 @@ $scope.policy = function()
 				});
   //$ionicHistory.goBack(-1);
 }
-$scope.terms = function()
-{
+$scope.terms = function(){
 	//window.open('http://finozen.com/t&c.html','_self');
 	var tc=cordova.InAppBrowser.open('https://finotrust.com/terms.html','_blank', 'location=no');
   //$ionicHistory.goBack(-1);
@@ -265,7 +264,7 @@ $scope.terms = function()
 		}
 
 	})
-	.controller('withdrawCtrl', function($scope,$sessionStorage,$ionicLoading,getReportService,$ionicHistory,ionicToast,$ionicPlatform,$state,$interval,$rootScope,$timeout) {
+	.controller('withdrawCtrl', function($scope,$sessionStorage,$ionicLoading,$ionicHistory,ionicToast,$ionicPlatform,$state,$interval,$rootScope,$timeout) {
 	if($sessionStorage.clientType=="GO"){
 		$sessionStorage.RelScheme="LF";
 		$scope.schemeNamep = "GOLD";
@@ -335,12 +334,12 @@ $scope.xirrRate= function(){
       template: 'Loading...'
     });
 
-         var Report = getReportService.get();
+     /*    var Report = getReportService.get();
          Report.$promise.then(function(data){
          if(data.responseCode=="Cali_SUC_1030"){
          $scope.products=data.jsonStr;
          }
-         })
+         })*/
         $ionicLoading.hide();
 		$interval(function () {
 			$timeout(function(){
@@ -506,7 +505,7 @@ console.log($sessionStorage.SessionStatus+"   $sessionStorage.SessionStatus veri
 		if(confirmation==1){$state.go("tour");}
 		else{
 			if ($sessionStorage.SessionStatus=='I' || $sessionStorage.SessionStatus=='N' || $sessionStorage.SessionStatus==null ){
-				$state.go("bank");
+				$state.go("questions");
 			}
 			else if ($sessionStorage.SessionStatus=='T'){
 				$state.go("tour");

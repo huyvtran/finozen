@@ -95,7 +95,7 @@ $ionicLoading.hide();
 			  }, false);
 			}
 			$scope.PanImage = function() {
-        $ionicLoading.show({templateUrl:"templates/loading.html",duration: 5000});
+        $ionicLoading.show({templateUrl:"templates/loadingImage.html",duration: 5000});
 				$scope.uploadPan=JSON.parse(JSON.stringify({}));
                 $scope.uploadPan.kyphCode = $sessionStorage.SessionClientCode;
 				console.log($sessionStorage.SessionClientCode+ 'clientCode');
@@ -171,7 +171,7 @@ $ionicLoading.hide();
 			//$state.go(nextStepsUrl[5]);
 		}
 		$scope.signUpload = function() {
-      $ionicLoading.show({templateUrl:"templates/loading.html"});
+      $ionicLoading.show({templateUrl:"templates/loadingImage.html"});
 			var uploadsign=JSON.parse(JSON.stringify({}));
             uploadsign.kyphCode = $sessionStorage.SessionClientCode;
             //uploadsign.kyphCode = "CRN23919";;
@@ -257,7 +257,7 @@ $ionicLoading.hide();
 		}
 
 		$scope.selfieUpload = function() {
-      $ionicLoading.show({templateUrl:"templates/loading.html"});
+      $ionicLoading.show({templateUrl:"templates/loadingImage.html"});
 			var uploadselfie=JSON.parse(JSON.stringify({}));
             uploadselfie.kyphCode = $sessionStorage.SessionClientCode;
             //uploadselfie.kyphCode = "CRN24178";
@@ -577,7 +577,7 @@ $http.get('data/country.json').then(function(res){
 		}
 
 		$scope.addressFrontSubmit = function() {
-			$ionicLoading.show({templateUrl:"templates/loading.html"});
+			$ionicLoading.show({templateUrl:"templates/loadingImage.html"});
 			var uploadaddress=JSON.parse(JSON.stringify({}));
             uploadaddress.kyphCode = $sessionStorage.SessionClientCode;
             //uploadaddress.kyphCode = "CRN23919";;
@@ -690,7 +690,7 @@ $http.get('data/country.json').then(function(res){
 		}
 
         $scope.addressBackSubmit = function() {
-			$ionicLoading.show({templateUrl:"templates/loading.html"});
+			$ionicLoading.show({templateUrl:"templates/loadingImage.html"});
 			var uploabackdaddress=JSON.parse(JSON.stringify({}));
             uploabackdaddress.kyphCode = $sessionStorage.SessionClientCode;
             //uploabackdaddress.kyphCode = "CRN23919";;

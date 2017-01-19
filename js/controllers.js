@@ -83,7 +83,7 @@ $scope.dd=function(){
 		}
     })
 
-    .controller('inviteCtrl', function($scope,getNAVService) {
+    .controller('inviteCtrl', function($scope) {
 
     })
     .controller('termsCtrl', function($scope,$sessionStorage,$state,myService,proofRedirectFactory) {
@@ -264,8 +264,8 @@ $scope.TranasctionUpload=function(){
     .controller('pre_verificationCtrl', function($scope) {
 
     })
-.controller('referralCtrl', function($scope,getReferalStat,$ionicLoading,$sessionStorage,$state) {
-	$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
+.controller('referralStatus', function($scope,getReferalStat,$ionicLoading,$sessionStorage,$state,$timeout) {
+	$ionicLoading.show({templateUrl:"templates/loading.html"});
 	var referralDate = getReferalStat.get();
 	referralDate.$promise.then(function(data){
 		if (data.responseCode == "Cali_SUC_1030") {
@@ -276,11 +276,31 @@ $scope.TranasctionUpload=function(){
 			else{$scope.inviteShow=false;}
 			//console.log("test data    "+data.jsonStr[1].mobile);
 		}
-	$scope.referral= function(){
-			if($scope.productsLen==0){$scope.inviteShow=true;$state.go('invite');}
-			else{$scope.inviteShow=false; $state.go('referral');}
-	}
 	})
+})
+.controller('referralCtrl', function($scope,getReferalStat,$ionicLoading,$sessionStorage,$state,$timeout) {
+	$scope.referral= function(){
+	$ionicLoading.show({templateUrl:"templates/loading.html"});
+	var referralDate = getReferalStat.get();
+	referralDate.$promise.then(function(data){
+		if (data.responseCode == "Cali_SUC_1030") {
+			$ionicLoading.hide();
+			$scope.products=data.jsonStr;
+			$scope.productsLen=(data.jsonStr).length;
+			if($scope.productsLen == 0){
+				$ionicLoading.hide();
+				$scope.inviteShow=true;$state.go('invite');
+				}
+			else{
+				$scope.inviteShow=false; 
+				$ionicLoading.hide();
+				$state.go('referral');
+			}
+
+			//console.log("test data    "+data.jsonStr[1].mobile);
+		}
+	})
+	}
 })
     .controller('AuthSignUpCtrl', function($scope, $state,signUpService,$sessionStorage,$ionicLoading,dateService) {
 
@@ -299,7 +319,7 @@ $scope.TranasctionUpload=function(){
 
 					if(form.$valid) {
 						console.log("not same number");
-						$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
+						$ionicLoading.show({templateUrl:"templates/loading.html"});
 						$sessionStorage.signUpData = (signupForm);
 						$scope.addUserInfo();
 
@@ -336,14 +356,13 @@ $scope.TranasctionUpload=function(){
 					
 					 //clevertap creating a new user profile
 					// if set, these populate demographic information in the Dashboard
-					
+				/*	
 				  clevertap.profile.push("SignUp", {
                     "FirstName": signupForm.fName,             //string
                     "Email": signupForm.email,               // Email address of the user
                     "Phone": signupForm.mobileNumber,       // Phone (with the country code)
                     "Referral": signupForm.referral,      //referral number
-
-                  });	
+                  });	*/
 					
 					//saving the signUp data with similar name convention as per sign in controller
 					$sessionStorage.SessionPortfolio=(JSON.parse(data.jsonStr)).portfolioCode;
@@ -354,17 +373,7 @@ $scope.TranasctionUpload=function(){
 					$sessionStorage.disbledSkip=false;
                     $state.go('sliders');    // new sign upflow
 					//$state.go('reference');
-					$ionicLoading.hide();
-					
-					clevertap.event.push("SIGNUP", {
-                    "Name": signupForm.fName,            // String
-					"Email": signupForm.email,        // string(char)
-					"Phone": signupForm.mobileNumber,       // Phone 
-					"Referral": signupForm.referral,      //referral number
-					"portfolioCode":$sessionStorage.SessionPortfolio,     //string
-					"ClientType":$sessionStorage.clientType,
-					"date":date,
-                  });
+						$ionicLoading.hide();
                 }
             },function(error){
 				$ionicLoading.hide();
@@ -518,14 +527,14 @@ $scope.TranasctionUpload=function(){
 
 			//clever tap login.(if exsisting user update the user's values)
 			var date= $filter('date')(date,'MM/dd/yyyy');
-			 clevertap.onUserLogin.push("Login", {
+			 /*clevertap.onUserLogin.push("Login", {
                 "Name": $sessionStorage.SessionClientName,            // String
 				"ClientStatus": $sessionStorage.clientActive,        // string(char)
 				"Phone":$sessionStorage.SessionMobNo,               // Phone
 				"DocStatus":$sessionStorage.docStatus,             //string
 				"ActiveStatus":$sessionStorage.SessionStatus,     //string
 				"ClientType":$sessionStorage.clientType,         // string(char)
-                  });
+                  });*/
 				  
 				  clevertap.event.push("LOGIN", {
                     "Name": $sessionStorage.SessionClientName,            // String
@@ -534,7 +543,6 @@ $scope.TranasctionUpload=function(){
 					"DocStatus":$sessionStorage.docStatus,             //string
 					"ActiveStatus":$sessionStorage.SessionStatus,     //string
 					"ClientType":$sessionStorage.clientType,
-					"date":date,
                   });		
 			$ionicLoading.hide();
 			$state.go('tabsController.summaryPage');
@@ -675,7 +683,7 @@ $scope.TranasctionUpload=function(){
     })
 
 
-    .controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,$ionicLoading,getReportService,$timeout,relianceInstantAmountAPI) {
+.controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,$ionicLoading,getReportService,$timeout,relianceInstantAmountAPI) {
 var timeNow = new Date().getUTCHours();
 /*$ionicLoading.show({
             template:
@@ -1217,7 +1225,7 @@ $scope.withdraw_error="Please try again";
     })
 
  // NAV Calculator controller
-.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup,$ionicLoading,$ionicPlatform,$timeout,relianceInstantAmountAPI,$location,$http) {
+.controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup,$ionicLoading,$ionicPlatform,$timeout,relianceInstantAmountAPI,$location,$http,getReportService) {
 
   var finalComputedVal;
   	if($sessionStorage.clientType=="GO"){
@@ -1267,6 +1275,15 @@ $scope.withdraw_error="Please try again";
 
 	  $scope.Invest = function(form) {
             if(form.$valid && $scope.initial>=100) {
+		
+   var Report = getReportService.get();
+   Report.$promise.then(function (data) {
+       if (data.responseCode == "Cali_SUC_1030") {
+		   $sessionStorage.allTransactions=(data.jsonStr).length;
+       }
+	   else{console.log("error line 1286");}
+   })
+		
 				if($sessionStorage.allTransactions > 0 && $sessionStorage.SessionFolioNums==0){
 					$ionicPopup.alert({
 					title: 'Transaction In-Progress',
