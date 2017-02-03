@@ -30,12 +30,12 @@ angular.module('app.services', [])
     return $resource('https://finotrust.com/WealthWeb/ws/clientRepos/getOrders?pfolioCode='+$sessionStorage.SessionPortfolio+'&noOfOrders=3000');
   }])
 
-  /*Reliance ZBF page service*/
+  /*Reliance ZBF page service
    .factory('getZBFService', ['$resource','$sessionStorage',function($resource,$sessionStorage){
 	   console.log($sessionStorage.portfolioCode+"portfolioCode");
     return $resource('https://finotrust.com/WealthWeb/ws/clientOrders/zbf?portfolioCode=CRN26946E20018&rtaCode=RMFLPIG');
   }])
-
+*/
   /*Reliance folio number sending it to backend */
    .factory('relianceInstantZBF',['$resource','$sessionStorage',function($resource,$sessionStorage){
        var relianceZBF = $resource('https://finotrust.com/Wealthweb/ws/clientorders/createfolio',{},{

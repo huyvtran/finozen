@@ -95,6 +95,10 @@ $scope.dd=function(){
 
 
 $scope.activateAcc= function(){
+cordova.plugins.diagnostic.requestCameraAuthorization(function(status){
+}, function(error){
+    console.error(error);
+});
 	$scope.test=false;
 	if($sessionStorage.docStatus=="11111"){}
 	else{
@@ -544,7 +548,7 @@ $scope.TranasctionUpload=function(){
 					"ActiveStatus":$sessionStorage.SessionStatus,     //string
 					"ClientType":$sessionStorage.clientType,
                   });		
-			$ionicLoading.hide();
+			//$ionicLoading.hide();
 			$state.go('tabsController.summaryPage');
 		}
 
@@ -580,7 +584,10 @@ $scope.TranasctionUpload=function(){
     });
 
   }
-  $ionicLoading.hide();  
+	$timeout(function(){
+		  $ionicLoading.hide(); 
+	},3000)
+ 
     })
 
 
@@ -602,7 +609,7 @@ $scope.TranasctionUpload=function(){
 	}
 	$scope.withdrawCheck=function(){
 		$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
-	if($sessionStorage.SessionStatus=="N" || $sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus== 'null' || $sessionStorage.SessionStatus==undefined ){
+	if($sessionStorage.SessionStatus=="N" || $sessionStorage.SessionStatus=="P" || $sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus== 'null' || $sessionStorage.SessionStatus==undefined ){
 		$ionicLoading.hide();
 		$sessionStorage.instaAmount=0;
 		$state.go("withdraw");
@@ -683,13 +690,9 @@ $scope.TranasctionUpload=function(){
     })
 
 
-.controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,$ionicLoading,getReportService,$timeout,relianceInstantAmountAPI) {
+.controller('transListController',function($scope,$sessionStorage,getPerformanceService,getNAVService,$ionicLoading,getReportService,$timeout,relianceInstantAmountAPI,TransRepoService,ionicDatePicker) {
 var timeNow = new Date().getUTCHours();
-/*$ionicLoading.show({
-            template:
-'<div class="loading visible active" style="margin-left: -53px; margin-top: 76px"><span><img style="max-height:50px" src="img/loading.gif"></img><br/>Custom Loading...</span></div>',
-            noBackdrop: true
-        });*/
+
 	$ionicLoading.show({templateUrl:"templates/loadingNormal.html"});
 
 var reportDate = getPerformanceService.get();
@@ -782,7 +785,9 @@ $sessionStorage.xirr=data.jsonStr.xirr;
       }
 
     }
-    $ionicLoading.hide();
+	$timeout(function(){
+		  $ionicLoading.hide(); 
+	},3000)
     }
   },function(error){
     console.log("error");
@@ -917,7 +922,7 @@ $scope.$broadcast("scroll.refreshComplete");
      })
 
 
-    .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$http,$sessionStorage,$ionicPopup,$ionicLoading,relianceInstantAmountAPI,$timeout,$http,getZBFService,$location,relianceInstantZBF) {
+    .controller('AuthWithdrawlCtrl', function($scope, $state,mfSellUrlService,dateService,$http,$sessionStorage,$ionicPopup,$ionicLoading,relianceInstantAmountAPI,$timeout,$http,$location) {
 if($sessionStorage.instaAmount>=0){$scope.insta=$sessionStorage.instaAmount;}
 else{$scope.insta=0;}
 if($sessionStorage.instaAmountError){

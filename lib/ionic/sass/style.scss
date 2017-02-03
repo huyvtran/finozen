@@ -389,6 +389,32 @@ margin: 1px;
 .invite{
 img{margin: 10vh auto 30px;}
 }
+.Bank_questions{
+	.question{
+		padding: 0 4px;
+		p{
+			display: inline-block;
+			padding-left: 6px;
+			margin: 0;
+			font-size: 12px;
+			color: #18bb9c;
+		}
+		.icon{
+			position: absolute;
+			left: 10px;
+			font-size:11px;
+		}
+	}
+	.answer{
+		padding: 0 4px;
+		p{
+			padding-left: 14px;
+			margin: 0;
+			font-size:10px;
+		}
+	}
+}
+
 .FAQ{
 .list{
 	margin-top: 10px;
@@ -401,31 +427,6 @@ img{margin: 10vh auto 30px;}
 		height: 93%;
 		overflow-y: scroll;
 		overflow-x: hidden;
-		.Bank_questions{
-			.question{
-				padding: 0 4px;
-				p{
-					display: inline-block;
-					padding-left: 6px;
-					margin: 0;
-					font-size: 12px;
-					color: #18bb9c;
-				}
-				.icon{
-					position: absolute;
-					left: 10px;
-					font-size:11px;
-				}
-			}
-			.answer{
-				padding: 0 4px;
-				p{
-					padding-left: 14px;
-					margin: 0;
-					font-size:10px;
-				}
-			}
-		}
 	}
 }
 .change_password{
@@ -607,16 +608,16 @@ img{height: 400px;}
 			position: absolute;
 			top: 0;
 			background: transparent;
-			border: 1px solid #18bb9c;
+			border: 1px solid #ccc;
 			bottom: 0;
 			text-align: left;
 			padding: 6px 22px;	
 		}
 		input{
 			width: 43%;
-			border: 1px solid #18bb9c; 
+			border: 1px solid #ccc; 
 			padding: 6px 22px;
-			height: 45px;
+			height: 44.2px;
 			position: absolute;
 			top: 0;
 			right: 0;

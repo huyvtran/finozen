@@ -4,29 +4,30 @@
   <div class="h1 title"><p class="head_title"><span id="title">PERSONAL DETAILS</span></p></div>
   <a class="button button-clear button-positive  ion-android-call" ng-href="tel:09206073021"></a>
 </div>
-<ion-content overflow-scroll="true" padding="false" class="has-header" >
-<form name="fatcaForm" novalidate="" ng-submit="questionUpload(fatcaForm)"><br/>
-<div style="overflow: scroll;height: 81vh;">
-	<div class = "list questionsSelect">	
-		<div class="error-container" ng-show="fatcaForm.clientMother.$error && fatcaForm.$submitted" ng-messages="fatcaForm.clientMother.$error">
-			<div  class="error" >
-
-				<div ng-message="required">{{'fieldEmpty' | translate}}</div>
+	<ion-content overflow-scroll="true" padding="false" class="has-header" >
+<div class="">
+<br/>
+	<div class="error-container " ng-if="motherNameError">
+		<div  class="error" >
+			<div>
+				{{motherNameError}}
 			</div>
 		</div>
-		<label class="item item-input dobInput item-light" ng-class="{ 'has-errors' : fatcaForm.clientMother.$touched && fatcaForm.clientMother.$invalid, 'no-errors' :  fatcaForm.clientMother.$touched && fatcaForm.clientMother.$valid}">
-			<div class = "input-label">
-				 1) Mother's name
-			  </div>
-			<input type="text" name="clientMother" ng-model="clientMotherNumber"   required placeholder="" >
-		</label>
-		<label class = "item item-input dobInput item-light">
-		  <div class = "input-label">
-			 2) Date of Birth
-			 <!--<span style="color: #18bb9c; font-size: 12px;" class="button-icon ion-information-circled"  ng-controller="PEPpopOverController" ng-click="popover.show($event)"> </span>-->
-		  </div>
-		<button ng-click="openDatePicker()" ng-model='clientDOB' >{{selectedDate | date:'dd MMM yyyy'}}</button>
-		</label>
+	</div>
+<div class = "list questionsSelect">
+   <label class = "item item-input dobInput item-light">
+      <div class = "input-label">
+         1) Mother's name
+      </div>
+	<input type="text" ng-model='clientMother' />
+   </label>
+   <label class = "item item-input dobInput item-light">
+      <div class = "input-label">
+         2) Date of Birth
+		 <!--<span style="color: #18bb9c; font-size: 12px;" class="button-icon ion-information-circled"  ng-controller="PEPpopOverController" ng-click="popover.show($event)"> </span>-->
+      </div>
+	<button ng-click="openDatePicker()" ng-model='clientDOB' >{{selectedDate | date:'dd MMM yyyy'}}</button>
+   </label>
    <label class = "item item-input dobInput item-light">
       <div class = "input-label">
          3) Place of Birth
@@ -97,32 +98,32 @@
       </div>
 	<select ng-model='clientNationality.type' required ng-options='option.value as option.name for option in nationalityOptions'></select>
    </label>
-</div>
 
+   
+   
+   
+
+</div>
+<!--
+<div class="row questions">
+<span class="col-40">Residential status</span>
+	<select class="col-50">
+		<option>Resident Individual</option>
+		<option>Non – Resident Individual</option>
+		<option>Foreign Portfolio Investor – Category III</option>
+		<option>Foreign National</option>
+		<option>Qualified Foreign Investor</option>
+	</select>
+</div>-->
+<!--<div class="footer" ng-controller="panVerifyCtrl">-->
 <p style="padding: 22px 10px 0px; text-align:left;font-size: 12px;"><sup>*Politically exposed person is an indivdual who is or has been entrusted with a prominent public function e.g. Heads of State or of Governments,Senior Politicans etc.</sup></p>
 <p style="padding: 2px 10px 5px; text-align:left;font-size: 12px;"><sup>By clicking on submit I agree that I am an Indian PAN card holder and a resident individual.</sup></p>
-
 </div>
+    </ion-content>
 <ion-footer-bar padding="false" class="footerQuestion" style="padding:0;">
 	<div class="button-bar " style="padding:0;">
 		<button class="button button-positive" ng-click="question()" ng-disabled="true"  style="margin:1px;line-height: 44px;">SKIP</button>
-		<button class="button button-positive" type="submit" style="margin:1px;line-height: 44px;">SUBMIT</button>
+		<button class="button button-positive" ng-click="questionUpload(clientMother)" style="margin:1px;line-height: 44px;">SUBMIT</button>
 	</div>
 </ion-footer-bar>
-</form>
-<!--
-
-
-
-	<button onclick="window.plugins.socialsharing.shareViaWhatsApp('Message via WhatsApp', null , null , function() {console.log('share ok')}, function(errormsg){alert(errormsg)})">msg via WhatsAp</button>
-		<button onclick="window.plugins.socialsharing.shareViaWhatsAppToReceiver(9949899497, 'Message via WhatsApp', null , null , function() {console.log('share ok')})">msg via WhatsApp</button>
-		<button onclick="cordova.InAppBrowser.open('https://google.com', '_self', 'location=yes')">inApp</button>
-
-<div ng-controller="openBrowser">
-      <button class = "button" ng-click = "openBrowser()">OPEN BROWSER</button>
-
- <button class = "button" ng-click = "closeBrowser()">Close BROWSER</button>
-    </div>
-<button ng-controller="signupCtrl" ng-click="terms()">click</button>-->
-   </ion-content>
 </ion-view>

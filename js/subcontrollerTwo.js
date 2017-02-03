@@ -47,6 +47,38 @@ $ionicLoading.hide();
 
         /*for sending the pan Image*/
         .controller('panImageCTRL',function(panImageService,$cordovaCamera,$scope,$sessionStorage,$state,$ionicPopup,$ionicLoading,$window,myService,proofRedirectFactory){
+cordova.plugins.diagnostic.requestCameraAuthorization(function(status){
+	console.log("Authorization request for camera use was " + (status == cordova.plugins.diagnostic.permissionStatus.GRANTED ? "granted" : "denied"));
+	/*console.log(status);
+   if(status == cordova.plugins.diagnostic.permissionStatus.DENIED){
+            // An elaborate, custom popup
+            var myPopup = $ionicPopup.show({
+				title: 'Camera access denied',
+                content: 'Please go to your system settings and allow camera access to finozen or call us to know why',
+                buttons: [
+                    {
+                        text: 'Not Now',
+                        onTap: function(e) {
+                            //don't allow the user to close unless he enters wifi password
+                            window.location.href="#/page14/page15";
+                        }
+                    },
+                    { 
+						text: '<b>Call</b>',
+                        type: 'button-positive',
+                        onTap:function(e){
+                            window.location.href="tel:09206073021";
+                        }
+
+                    },
+
+                ]
+            });
+
+   }*/
+}, function(error){
+    console.error(error);
+});
 			$scope.diasbleSkip=$sessionStorage.disbledSkip;
 //			$scope.addressRetake=function(){ window.location.reload(true);}
             $scope.selfieGo=function(){
@@ -346,14 +378,6 @@ $scope.diasbleSkip=$sessionStorage.disbledSkip;
 
 		$scope.clientPEP = {type : $scope.clientPEPOptions[0].value};
 		$scope.clientPOB="India";
-		
-		
-		
-		
-		
-		
-		
-
 	   $scope.addressTypeOptions = [
 		{ name: 'Residential', value: '2' },
 		{ name: 'Bussiness', value: '3' },
@@ -443,57 +467,61 @@ $http.get('data/country.json').then(function(res){
       ionicDatePicker.openDatePicker(ipObj1);
     };
 		
-      $scope.questionUpload = function(){
-		$ionicLoading.show({templateUrl:"templates/loading.html"});
-		var questUpload=JSON.parse(JSON.stringify({}));
-		questUpload.kyphCode = $sessionStorage.SessionClientCode;
-		questUpload.income=$scope.clientIncome.type; // income level from 31-36
-		questUpload.occup=$scope.clientOccupation.type; // for the occupation
-		questUpload.pep=$scope.clientPEP.type; //for the pep status either Y or N
-		questUpload.birthPlace=$scope.clientPOB; //for the pep status either Y or N
-		questUpload.birthCountry=$scope.clientCountry.type; //for the pep status either Y or N
-		questUpload.addressType=$scope.clientAddressType.type; //for the pep status either Y or N
-		questUpload.taxResiCountry=$scope.taxRes.type; //for the pep status either Y or N
-		questUpload.wealthSource=$scope.clientSOW.type; //for the pep status either Y or N
-		questUpload.maritalStatus=$scope.marriageStatus.type; //for the pep status either Y or N
-		questUpload.nationality=$scope.clientNationality.type; //for the pep status either Y or N
-		questUpload.resStatus="Individual"; // for the resdential status hardcoding it to individual
-		questUpload.dob=$sessionStorage.dob // for the client's date of birth
-		questUpload = JSON.stringify(questUpload);
-		console.log($scope.clientIncome.type + " clientIncome");
-		console.log($scope.clientPEP.type + " clientPEP");
-		console.log($scope.clientOccupation.type + " clientOccupation");
-		console.log(questUpload + " questUpload");
+      $scope.questionUpload = function(form){
+			console.log(form.clientMother.$modelValue, $scope.clientMother);
+			if(form.$valid) {
+				$ionicLoading.show({templateUrl:"templates/loading.html"});
+				var questUpload=JSON.parse(JSON.stringify({}));
+				questUpload.kyphCode = $sessionStorage.SessionClientCode;
+				questUpload.income=$scope.clientIncome.type; // income level from 31-36
+				questUpload.occup=$scope.clientOccupation.type; // for the occupation
+				questUpload.pep=$scope.clientPEP.type; //for the pep status either Y or N
+				questUpload.birthPlace=$scope.clientPOB; //for the pep status either Y or N
+				questUpload.birthCountry=$scope.clientCountry.type; //for the pep status either Y or N
+				questUpload.addressType=$scope.clientAddressType.type; //for the pep status either Y or N
+				questUpload.taxResiCountry=$scope.taxRes.type; //for the pep status either Y or N
+				questUpload.wealthSource=$scope.clientSOW.type; //for the pep status either Y or N
+				questUpload.maritalStatus=$scope.marriageStatus.type; //for the pep status either Y or N
+				questUpload.nationality=$scope.clientNationality.type; //for the pep status either Y or N
+				questUpload.resStatus="Individual"; // for the resdential status hardcoding it to individual
+				questUpload.dob=$sessionStorage.dob // for the client's date of birth
+				questUpload.motherMaidenName=form.clientMother.$modelValue //for the client's mother name
+				questUpload = JSON.stringify(questUpload);
+				console.log($scope.clientIncome.type + " clientIncome");
+				console.log($scope.clientPEP.type + " clientPEP");
+				console.log($scope.clientOccupation.type + " clientOccupation");
+				console.log(questUpload + " questUpload");
 
-        questionsService.save(questUpload,function(data){
-				$ionicLoading.hide();
-				// routing to bank
-				/*if($sessionStorage.SessionStatus=="T"){$state.go('activeClientStatus');}
-				else if($sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus==null || $sessionStorage.SessionStatus==undefined ){$state.go('inactiveClient');}
-				else{$state.go('verifySuccess');}*/
-                $state.go('bank');
-			//}
-			},function(error){
-				$ionicLoading.hide();			//comment this line if api is working
-				
-				// routing to bank
-				
-				//$state.go('signature');			//comment this line if api is working
-				/*if($sessionStorage.SessionStatus=="T"){$state.go('activeClientStatus');}
-				else if($sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus==null || $sessionStorage.SessionStatus==undefined ){$state.go('inactiveClient');}
-				else{$state.go('verifySuccess');}*/
-				$state.go('bank');
-                   
-				/*var refresh=$ionicPopup.alert({
-                  title: 'Please try again',
-                   template: 'Unable to submit request'
-                });
-              refresh.then(function(res) {
-                  $window.location.reload(true)
+				questionsService.save(questUpload,function(data){
+					$ionicLoading.hide();
+					// routing to bank
+					/*if($sessionStorage.SessionStatus=="T"){$state.go('activeClientStatus');}
+					else if($sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus==null || $sessionStorage.SessionStatus==undefined ){$state.go('inactiveClient');}
+					else{$state.go('verifySuccess');}*/
+					$state.go('bank');
+				//}
+				},function(error){
+					$ionicLoading.hide();			//comment this line if api is working
+					
+					// routing to bank
+					
+					//$state.go('signature');			//comment this line if api is working
+					/*if($sessionStorage.SessionStatus=="T"){$state.go('activeClientStatus');}
+					else if($sessionStorage.SessionStatus=="I" || $sessionStorage.SessionStatus==null || $sessionStorage.SessionStatus==undefined ){$state.go('inactiveClient');}
+					else{$state.go('verifySuccess');}*/
+					$state.go('bank');
+					   
+					/*var refresh=$ionicPopup.alert({
+					  title: 'Please try again',
+					   template: 'Unable to submit request'
+					});
+				  refresh.then(function(res) {
+					  $window.location.reload(true)
 
-			});*/
-          });
-        }
+				});*/
+			  });
+			}
+		}
       }
     )
 
@@ -788,7 +816,7 @@ $http.get('data/country.json').then(function(res){
 
 /*for uploading the bank details*/
 
-  .controller('bankDetailsCTRL',function($scope,$state,$sessionStorage,bankDetailsService,$ionicPopup,$ionicLoading,$window,proofRedirectFactory,myService,getZBFService,relianceInstantZBF,$location){
+  .controller('bankDetailsCTRL',function($scope,$state,$sessionStorage,bankDetailsService,$ionicPopup,$ionicLoading,$window,proofRedirectFactory,myService,relianceInstantZBF,$location){
     $scope.accountTypeOptions = [
     { name: 'Savings', value: 'SB_New' },
     { name: 'Current', value: 'CA_new' }

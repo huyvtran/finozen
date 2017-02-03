@@ -13,7 +13,25 @@
 				<p class="padding" style="padding: 0px 10px; margin: 0px;" ><b>1. Pan Card<br/>2. Address proof (Aadhar/ Driving Licence/ Voter ID/ Passport/ Ration Card)</b></p>
 			</div>
 		</div>
-    </ion-content>
+		<hr/>
+<div ng-controller="BankCtrl" class="padding">
+	<div ng-repeat="group in successPage" class="faq_question_content Bank_questions">
+	  <div class="item-stable col question"
+				ng-click="toggleGroup(group)"
+				ng-class="{active: isGroupShown(group)}">
+		  
+		&nbsp;
+		<p>{{group.name}}</p>
+		<i class="icon icon-right" ng-class="isGroupShown(group) ? 'ion-minus-circled' : 'ion-plus-circled'"></i>
+	  </div>
+	  <div class="item-accordion col answer"
+				ng-repeat="item in group.items"
+				ng-show="isGroupShown(group)">
+		<p>{{item}}</p>
+	  </div>
+	</div>
+</div> 
+ </ion-content>
 
 <ion-footer-bar padding="false">
 	<div class="button-bar " style="padding:0;">

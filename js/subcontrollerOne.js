@@ -199,9 +199,14 @@ $scope.terms = function(){
     })
     .controller('BankCtrl', function($scope) {
         $scope.groups = [];
+        $scope.successPage = [];
         $scope.groups["0"] = {name: "Why are we asking for PAN?",items: ["As the investment will be made under your name, PAN is mandatory requirement from SEBI"] };
         $scope.groups["1"] = {name: "Why are we asking for Bank Account Details?",items: ["When you withdraw money from FinoZen, money will be deposited only to your registered bank account. Hence, please provide correct details."] };
         $scope.groups["2"] = {name: "Are my personal details safe?",items: ["Your details are 128 bit encrypted (bank grade security) and hence are completely safe and secure."] };
+        
+		
+		$scope.successPage["0"] = {name: "Why are these documents required?",items: ["It is a mandatory requirement from SEBI, that a person needs to be KYC registered before he/she can invest his money in mutual funds. Your documents will be required to register your KYC. "] };
+		$scope.successPage["1"] = {name: "Are my personal details safe?",items: ["Your details are 128 bit encrypted (bank grade security) and hence are completely safe and secure."] };
 
 
         /*
@@ -330,9 +335,6 @@ $scope.xirrRate= function(){
 		}
 	}
 	console.log('entered');
-	$ionicLoading.show({
-      template: 'Loading...'
-    });
 
      /*    var Report = getReportService.get();
          Report.$promise.then(function(data){
@@ -340,7 +342,7 @@ $scope.xirrRate= function(){
          $scope.products=data.jsonStr;
          }
          })*/
-        $ionicLoading.hide();
+        //$ionicLoading.hide();
 		$interval(function () {
 			$timeout(function(){
 				$rootScope.$broadcast('flip',{});
