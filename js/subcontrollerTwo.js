@@ -11,7 +11,7 @@ angular.module('app.subcontrollerTwo', [])
 //changePinService.changePin(changePinForm);
             changePinService.save(changePinForm,function(data){
 				$ionicLoading.show({templateUrl:"templates/loading.html"});
-                console.log(data);
+                console.log(data);$ionicLoading.hide();
                 if(data.responseCode == "Cali_SUC_1030") {
 $ionicLoading.hide();
 
@@ -99,10 +99,38 @@ cordova.plugins.diagnostic.requestCameraAuthorization(function(status){
 						}
 				//$state.go('selfie');
 			}
-			$scope.takeit1=function(){
-			//$scope.cimage1="img/Pancard.jpg";
-			  document.addEventListener("deviceready", function () {
-				var options = {
+			$scope.takeit1=function(imgSrc){
+			$scope.imgType=imgSrc;
+			var reload=["Re-upload Image", "Re-take Image"];
+			$scope.reload=reload[imgSrc];
+			$scope.retake=function(){
+				if(imgSrc==0){return 1;}
+				else{return 0;}
+			}
+			$scope.otherSrc=function(){
+				if(imgSrc==0){
+					var a="Take Image"
+					return a;
+				}
+				else{
+					var b="Upload Image";
+					return b;
+				}
+			}
+			  document.addEventListener("deviceready", function(){
+				var options = [{
+				  quality: 80,
+				  destinationType: Camera.DestinationType.DATA_URL,
+				  sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+				  allowEdit: false,
+				  encodingType: Camera.EncodingType.JPEG,
+				  cameraDirection:1,
+					targetWidth: 700,
+				    targetHeight: 500,
+				  popoverOptions: CameraPopoverOptions,
+				  saveToPhotoAlbum: false,
+				  correctOrientation:false
+				},{
 				  quality: 90,
 				  destinationType: Camera.DestinationType.DATA_URL,
 				  sourceType: Camera.PictureSourceType.CAMERA,
@@ -114,9 +142,9 @@ cordova.plugins.diagnostic.requestCameraAuthorization(function(status){
 				  popoverOptions: CameraPopoverOptions,
 				  saveToPhotoAlbum: false,
 				  correctOrientation:false
-				};
+				}];
 
-				$cordovaCamera.getPicture(options).then(function(imageData) {
+				$cordovaCamera.getPicture(options[imgSrc]).then(function(imageData) {
 				  $scope.panData = imageData;
 				  $scope.pan = "data:image/jpeg;base64," + imageData;
 				  $scope.cimage1 = "data:image/jpeg;base64," + imageData;
@@ -261,24 +289,52 @@ cordova.plugins.diagnostic.requestCameraAuthorization(function(status){
 				else{$state.go(nextStepsUrl[nextSteps[$sessionStorage.stepCount]]);}
 			}
 		}
-		$scope.selfieImage=function(){
-		//$scope.selfie="img/no_leaves.png";
+		$scope.selfieImage=function(imgSrc){
+			$scope.imgType=imgSrc;
+			var reload=["Re-upload Image", "Re-take Image"];
+			$scope.reload=reload[imgSrc];
+			$scope.retake=function(){
+				if(imgSrc==0){return 1;}
+				else{return 0;}
+			}
+			$scope.otherSrc=function(){
+				if(imgSrc==0){
+					var a="Take Image"
+					return a;
+				}
+				else{
+					var b="Upload Image";
+					return b;
+				}
+			}
 		  document.addEventListener("deviceready", function () {
-			$scope.options = {
-			  quality: 70,
-			  destinationType: Camera.DestinationType.DATA_URL,
-			  sourceType: Camera.PictureSourceType.CAMERA,
-			  allowEdit: true,
-			  encodingType: Camera.EncodingType.JPEG,
-			  targetWidth: 300,
-			  cameraDirection:1,
-			  targetHeight: 500,
-			  popoverOptions: CameraPopoverOptions,
-			  saveToPhotoAlbum: false,
-			  correctOrientation:true
-			};
+			var options = [{
+				  quality: 70,
+				  destinationType: Camera.DestinationType.DATA_URL,
+				  sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+				  allowEdit: false,
+				  encodingType: Camera.EncodingType.JPEG,
+				  cameraDirection:1,
+					targetWidth: 300,
+				    targetHeight: 500,
+				  popoverOptions: CameraPopoverOptions,
+				  saveToPhotoAlbum: false,
+				  correctOrientation:false
+				},{
+				  quality: 70,
+				  destinationType: Camera.DestinationType.DATA_URL,
+				  sourceType: Camera.PictureSourceType.CAMERA,
+				  allowEdit: false,
+				  encodingType: Camera.EncodingType.JPEG,
+				  cameraDirection:1,
+					targetWidth: 700,
+				    targetHeight: 500,
+				  popoverOptions: CameraPopoverOptions,
+				  saveToPhotoAlbum: false,
+				  correctOrientation:false
+				}];
 
-			$cordovaCamera.getPicture($scope.options).then(function(imageData) {
+				$cordovaCamera.getPicture(options[imgSrc]).then(function(imageData) {
 			  //$scope.selfieData = imageData;
 			  $scope.selfie = "data:image/jpeg;base64," + imageData;
 			}, function(err) {
@@ -574,27 +630,52 @@ $http.get('data/country.json').then(function(res){
 				else if($sessionStorage.addressChoice == 'GA'){$scope.cimageFront="img/sample.png";}
 
 		//else{$scope.cimageFront="img/DL.jpg";}
-		$scope.addressFrontImg=function(){
-		//console.log($sessionStorage.addressChoice);
-		//$scope.addressImage=$scope.cimageFront;
+		$scope.addressFrontImg=function(imgSrc){
+			$scope.imgType=imgSrc;
+			var reload=["Re-upload Image", "Re-take Image"];
+			$scope.reload=reload[imgSrc];
+			$scope.retake=function(){
+				if(imgSrc==0){return 1;}
+				else{return 0;}
+			}
+			$scope.otherSrc=function(){
+				if(imgSrc==0){
+					var a="Take Image"
+					return a;
+				}
+				else{
+					var b="Upload Image";
+					return b;
+				}
+			}
 		document.addEventListener("deviceready", function () {
-					var options = {
-					  quality: 90,
-					  destinationType: Camera.DestinationType.DATA_URL,
-					  sourceType: Camera.PictureSourceType.CAMERA,
-					  allowEdit: false,
-					  encodingType: Camera.EncodingType.JPEG,
-					  targetWidth: 700,
-					  targetHeight: 500,
-					  popoverOptions: CameraPopoverOptions,
-					  saveToPhotoAlbum: false,
-					  correctOrientation:true
-					};
-			console.log(options);
+				var options = [{
+				  quality: 80,
+				  destinationType: Camera.DestinationType.DATA_URL,
+				  sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+				  allowEdit: false,
+				  encodingType: Camera.EncodingType.JPEG,
+				  cameraDirection:1,
+					targetWidth: 700,
+				    targetHeight: 500,
+				  popoverOptions: CameraPopoverOptions,
+				  saveToPhotoAlbum: false,
+				  correctOrientation:false
+				},{
+				  quality: 90,
+				  destinationType: Camera.DestinationType.DATA_URL,
+				  sourceType: Camera.PictureSourceType.CAMERA,
+				  allowEdit: false,
+				  encodingType: Camera.EncodingType.JPEG,
+				  cameraDirection:1,
+					targetWidth: 700,
+				    targetHeight: 500,
+				  popoverOptions: CameraPopoverOptions,
+				  saveToPhotoAlbum: false,
+				  correctOrientation:false
+				}];
 
-
-
-			$cordovaCamera.getPicture(options).then(function(imageData) {
+				$cordovaCamera.getPicture(options[imgSrc]).then(function(imageData) {
 			  //$scope.addressImageData = imageData;
 			  $scope.addressImage = "data:image/jpeg;base64," + imageData;
 			}, function(err) {
@@ -689,24 +770,52 @@ $http.get('data/country.json').then(function(res){
 				else if($sessionStorage.addressChoice == 'RC'){ $scope.cimageBack="img/ration2.jpg";}
 				else if($sessionStorage.addressChoice == 'GA'){$scope.cimageFront="img/sample.png";}
 
-		$scope.addressBackImg=function(){
-		//$scope.cimage2=$scope.cimageBack;
-		//$scope.addressFront();
+		$scope.addressBackImg=function(imgSrc){
+			$scope.imgType=imgSrc;
+			var reload=["Re-upload Image", "Re-take Image"];
+			$scope.reload=reload[imgSrc];
+			$scope.retake=function(){
+				if(imgSrc==0){return 1;}
+				else{return 0;}
+			}
+			$scope.otherSrc=function(){
+				if(imgSrc==0){
+					var a="Take Image"
+					return a;
+				}
+				else{
+					var b="Upload Image";
+					return b;
+				}
+			}
 		  document.addEventListener("deviceready", function () {
-			var options = {
-			  quality: 90,
-			  destinationType: Camera.DestinationType.DATA_URL,
-			  sourceType: Camera.PictureSourceType.CAMERA,
-			  allowEdit: false,
-			  targetWidth: 700,
-			  targetHeight: 500,
-			  encodingType: Camera.EncodingType.JPEG,
-			  popoverOptions: CameraPopoverOptions,
-			  saveToPhotoAlbum: false,
-			  correctOrientation:true
-			};
+				var options = [{
+				  quality: 80,
+				  destinationType: Camera.DestinationType.DATA_URL,
+				  sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+				  allowEdit: false,
+				  encodingType: Camera.EncodingType.JPEG,
+				  cameraDirection:1,
+					targetWidth: 700,
+				    targetHeight: 500,
+				  popoverOptions: CameraPopoverOptions,
+				  saveToPhotoAlbum: false,
+				  correctOrientation:false
+				},{
+				  quality: 90,
+				  destinationType: Camera.DestinationType.DATA_URL,
+				  sourceType: Camera.PictureSourceType.CAMERA,
+				  allowEdit: false,
+				  encodingType: Camera.EncodingType.JPEG,
+				  cameraDirection:1,
+					targetWidth: 700,
+				    targetHeight: 500,
+				  popoverOptions: CameraPopoverOptions,
+				  saveToPhotoAlbum: false,
+				  correctOrientation:false
+				}];
 
-			$cordovaCamera.getPicture(options).then(function(imageData) {
+			$cordovaCamera.getPicture(options[imgSrc]).then(function(imageData) {
 			  //$scope.addressBackData = imageData;
 			  $scope.cimage2 = "data:image/jpeg;base64," + imageData;
 			  $sessionStorage.panimage=imageData;

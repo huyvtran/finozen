@@ -13,8 +13,10 @@
 			<img ng-show="cimage2 === undefined" ng-src="{{cimageBack}} "/>
 		</div>
 		<div class="text-center">
-			<button class="button button-positive" ng-click="addressBackImg()" ng-show="cimage2 === undefined">Back view</button>
-			<button class="button button-positive" ng-click="addressBackImg()" ng-show="cimage2 !== undefined">Re-Take Image</button>
+			<button class="button button-positive" ng-click="addressBackImg(0)" ng-show="cimage2 === undefined">Upload Image</button>
+			<button class="button button-positive" ng-click="addressBackImg(1)" ng-show="cimage2 === undefined">Take Image</button>
+			<button class="button button-positive" ng-click="addressBackImg(retake())" ng-show="cimage2 !== undefined">{{otherSrc()}}</button>
+			<button class="button button-positive" ng-click="addressBackImg(imgType)" ng-show="cimage2 !== undefined">{{reload}}</button>
 		</div>
 		</div>
 		</div>

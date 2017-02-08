@@ -1218,16 +1218,14 @@ $scope.withdraw_error="Please try again";
 				  $sessionStorage.instaAmountError=true;
 				  $scope.processing=false;
 			  }
-		  },function(error){
-				$ionicLoading.hide();
-				$scope.processing=false;
-				$sessionStorage.instaAmountError=true;
-				//$state.go("withdraw");
-            })
-	  }
-
-
-    })
+		},function(error){
+			$ionicLoading.hide();
+			$scope.processing=false;
+			$sessionStorage.instaAmountError=true;
+			//$state.go("withdraw");
+        })
+	}
+})
 
  // NAV Calculator controller
 .controller('sampleCtrl', function ($scope,$state,mfOrderUrlService,$sessionStorage,dateService,$ionicPopup,$ionicLoading,$ionicPlatform,$timeout,relianceInstantAmountAPI,$location,$http,getReportService) {
@@ -1388,7 +1386,7 @@ $scope.withdraw_error="Please try again";
 							rel.insertCSS({file:"https://finotrust.com/inject/inject.css"});
 							$timeout(function () {
 								rel.close();
-							},20000);
+							},4000);
 					;} });
 					$timeout(function () {
 							$state.go('tabsController.recentTransactions');

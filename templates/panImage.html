@@ -15,8 +15,10 @@
 			</div>
 			<p ng-show="cimage1 === undefined">Please ensure that uploaded image is similar to sample. This will ensure clarity of images required for KYC</p>
 		<div class="text-center">
-		<button class="button button-positive" ng-click="takeit1()" ng-show="cimage1 === undefined">Take Image</button>
-		<button class="button button-positive" ng-click="takeit1()" ng-show="cimage1 !== undefined">Re-Take Image</button>
+		<button class="button button-positive" ng-click="takeit1(0)" ng-show="cimage1 === undefined">Upload Image</button>
+		<button class="button button-positive" ng-click="takeit1(1)" ng-show="cimage1 === undefined">Take Image</button>
+		<button class="button button-positive" ng-click="takeit1(retake())" ng-show="cimage1 !== undefined">{{otherSrc()}}</button>
+		<button class="button button-positive" ng-click="takeit1(imgType)" ng-show="cimage1 !== undefined">{{reload}}</button>
 		</div>
 		</div>
 <ion-footer-bar padding="false" style="padding:0;">

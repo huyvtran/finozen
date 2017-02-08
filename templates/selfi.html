@@ -13,8 +13,10 @@
 			</div>
 			
 			<div class="text-center">
-			<button class="button button-positive" ng-click="selfieImage()" ng-show="selfie === undefined">Take Image</button>
-			<button class="button button-positive" ng-click="selfieImage()" ng-show="selfie !== undefined">Re-Take Image</button>
+			<button class="button button-positive" ng-click="selfieImage(0)" ng-show="selfie === undefined">Upload Image</button>
+			<button class="button button-positive" ng-click="selfieImage(1)" ng-show="selfie === undefined">Take Image</button>
+			<button class="button button-positive" ng-click="selfieImage(retake())" ng-show="selfie !== undefined">{{otherSrc()}}</button>
+			<button class="button button-positive" ng-click="selfieImage(imgType)" ng-show="selfie !== undefined">{{reload}}</button>
 			</div>
 		</div>
 		<p ng-show="selfie === undefined" style="padding: 26px 0; text-align:left;font-size: 10px;"><sup>*</sup>This image will be used for your identity verification and to ensure that you are creating an account for yourself.</p>
