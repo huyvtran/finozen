@@ -148,7 +148,6 @@ cordova.plugins.diagnostic.requestCameraAuthorization(function(status){
 				  $scope.panData = imageData;
 				  $scope.pan = "data:image/jpeg;base64," + imageData;
 				  $scope.cimage1 = "data:image/jpeg;base64," + imageData;
-				  $sessionStorage.panimage=imageData;
 				}, function(err) {
 				  $state.go('panImage');
 				});
@@ -230,6 +229,50 @@ cordova.plugins.diagnostic.requestCameraAuthorization(function(status){
 			$state.go('feedback');
 			//$state.go(nextStepsUrl[5]);
 		}
+		//for uploading a signature
+		$scope.takeit1=function(imgSrc){
+			$scope.imgType=imgSrc;
+			var reload=["Re-upload Image", "Re-take Image"];
+			$scope.reload=reload[imgSrc];
+			$scope.retake=function(){
+				if(imgSrc==0){return 1;}
+				else{return 0;}
+			}
+			$scope.otherSrc=function(){
+				if(imgSrc==0){
+					var a="Take Image"
+					return a;
+				}
+				else{
+					var b="Upload Image";
+					return b;
+				}
+			}
+			  document.addEventListener("deviceready", function(){
+				var options = [{
+				  quality: 80,
+				  destinationType: Camera.DestinationType.DATA_URL,
+				  sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+				  allowEdit: false,
+				  encodingType: Camera.EncodingType.JPEG,
+				  cameraDirection:1,
+					targetWidth: 700,
+				    targetHeight: 500,
+				  popoverOptions: CameraPopoverOptions,
+				  saveToPhotoAlbum: false,
+				  correctOrientation:false
+				}];
+
+				$cordovaCamera.getPicture(options[imgSrc]).then(function(imageData) {
+				  $scope.panData = imageData;
+				  $scope.signature = "data:image/jpeg;base64," + imageData;
+				  $scope.cimage1 = "data:image/jpeg;base64," + imageData;
+				}, function(err) {
+                  $window.location.reload(true)
+				});
+			  }, false);
+			}
+		
 		$scope.signUpload = function() {
       $ionicLoading.show({templateUrl:"templates/loadingImage.html"});
 			var uploadsign=JSON.parse(JSON.stringify({}));
@@ -488,7 +531,7 @@ $http.get('data/country.json').then(function(res){
 		}
 		
 		//for datepicker
-		$scope.selectedDate = new Date();
+		$scope.selectedDate = new Date(1987,04,24);
 		dateof = $filter('date')($scope.selectedDate,'dd/MM/yyyy');
 		console.log(dateof);
 		$sessionStorage.dob=dateof;
@@ -510,7 +553,7 @@ $http.get('data/country.json').then(function(res){
       ],
       from: new Date(1940, 1, 1), //Optional
       to: new Date(), 			  //Optional
-      inputDate: new Date(),      //Optional
+      inputDate: new Date(1987,04,24),      //Optional
       mondayFirst: true,          //Optional
 	  titleLabel: 'Select a Date',
 	  setLabel: 'Set',
@@ -1048,7 +1091,7 @@ $http.get('data/country.json').then(function(res){
 				}
 
                });
-	}
+	}else{console.log("form invalid")}
              }
 		$scope.bankSkip=function(){
 			console.log($sessionStorage.SessionStatus + "    $sessionStorage.SessionStatus");
@@ -1357,7 +1400,7 @@ $http.get('data/country.json').then(function(res){
 		  $scope.selectedIndex=function(valu){
 			console.log($scope.contacts[valu].phoneNumbers[0].value + " contact value selected");
 
-			window.plugins.socialsharing.shareViaSMS({'message':'Start investing at FinoZen with just Rs 500 and watch your money grow everyday. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code to earn Rs 100 after your 1st investment.', 'subject':'The subject', 'image':'https://www.google.nl/images/srpr/logo4w.png'}, $scope.contacts[valu].phoneNumbers[0].value, $scope.contacts[valu].phoneNumbers[0].value, function(msg) {console.log('ok: ' + msg)}, function(msg) {console.log('error: ' + msg)})
+			window.plugins.socialsharing.shareViaSMS({'message':'Start investing at FinoZen with just Rs 500 and watch your money grow everyday. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code to earn Rs 50 after your 1st investment.', 'subject':'The subject', 'image':'https://www.google.nl/images/srpr/logo4w.png'}, $scope.contacts[valu].phoneNumbers[0].value, $scope.contacts[valu].phoneNumbers[0].value, function(msg) {console.log('ok: ' + msg)}, function(msg) {console.log('error: ' + msg)})
 		  }
 
 		  $scope.pickContact=function(pickUp){

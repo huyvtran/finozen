@@ -324,8 +324,11 @@ $scope.TranasctionUpload=function(){
 					if(form.$valid) {
 						console.log("not same number");
 						$ionicLoading.show({templateUrl:"templates/loading.html"});
-						$sessionStorage.signUpData = (signupForm);
-						$scope.addUserInfo();
+						signupForm.address1="finozen";
+						signupForm.instType="Fz";
+						//$sessionStorage.signUpData = (signupForm);
+						
+						$scope.addUserInfo(signupForm);
 
             //clevertap creating a new user profile
 // if set, these populate demographic information in the Dashboard
@@ -338,8 +341,8 @@ $scope.TranasctionUpload=function(){
             }
         }
 
-        $scope.addUserInfo=function(){
-            signUpService.sendSignUp($sessionStorage.signUpData).then(function(data){
+        $scope.addUserInfo=function(signupForm){
+            signUpService.sendSignUp(signupForm).then(function(data){
 				//$sessionStorage.
 				var date=dateService.getDate();
                 if(data.responseCode!="Cali_SUC_1030"){
@@ -458,6 +461,7 @@ $scope.TranasctionUpload=function(){
 			$scope.loginDetails=JSON.parse(JSON.stringify({}));
 			$scope.loginDetails.login=$scope.mobileNumber;
 			$scope.loginDetails.password=$scope.digitPin;
+			$scope.loginDetails.instType="Fz";
 			console.log($scope.loginDetails);
 			$sessionStorage.loginData=$scope.loginDetails;
 			console.log($localStorage.loginData);
@@ -528,6 +532,8 @@ $scope.TranasctionUpload=function(){
 			$sessionStorage.clientType= data.jsonStr[0].clientType;
 			$sessionStorage.docStatus=data.jsonStr[0].docStatus;
 			console.log($sessionStorage.docStatus + "docStatus");
+			$sessionStorage.emailId=data.jsonStr[0].emailId;
+			console.log($sessionStorage.emailId + "emailid");
 
 			//clever tap login.(if exsisting user update the user's values)
 			var date= $filter('date')(date,'MM/dd/yyyy');
@@ -760,7 +766,7 @@ $sessionStorage.xirr=data.jsonStr.xirr;
       if(data.jsonStr[i].recco=="Accumulate"){
 		  console.log($sessionStorage.clientType+ "   client type");
 		  if($sessionStorage.clientType ==="PL"){
-			if(JSON.stringify(data.jsonStr[i].schemeName)[1]=="P"){
+			if(data.jsonStr[i].schemeName=="Reliance Money Manager Fund(G)"){
 				console.log(JSON.stringify(data.jsonStr[i].schemeName)[1] +"   i am platinum");
 				$sessionStorage.schemeName=data.jsonStr[i].schemeName;
 				$sessionStorage.nav=data.jsonStr[i].nav;
@@ -770,7 +776,7 @@ $sessionStorage.xirr=data.jsonStr.xirr;
 			}
 		  }
 		  else if($sessionStorage.clientType  ==='GO'){
-			  if(JSON.stringify(data.jsonStr[i].schemeName)[1]=="G"){
+			  if(data.jsonStr[i].schemeName=="Reliance Liquid-Treasury Plan(G)"){
 				console.log("i am gold");
 				$sessionStorage.schemeName=data.jsonStr[i].schemeName;
 				$sessionStorage.nav=data.jsonStr[i].nav;
@@ -917,7 +923,7 @@ $scope.$broadcast("scroll.refreshComplete");
 			$state.go('inviteContacts');
 		}
 		$scope.shareViaTwitter=function(){
-			window.plugins.socialsharing.share('Start investing at FinoZen with just Rs 500 and watch your money grow everyday. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code to earn Rs 100 after your 1st investment.',null,null,'https://goo.gl/uAkHRa');
+			window.plugins.socialsharing.share('Start investing at FinoZen with just Rs 500 and watch your money grow everyday. Use my phone number '+ $sessionStorage.SessionMobNo+' as referral code to earn Rs 50 after your 1st investment.',null,null,'https://goo.gl/uAkHRa');
 		}
      })
 
@@ -987,7 +993,7 @@ console.log(($scope.amount!=undefined || $scope.checked_withdraw) );
 				}
 			}
 			else{
-				if($sessionStorage.bankAccNo==undefined || $sessionStorage.bankName==null ){
+				if($sessionStorage.bankAccNo==undefined || $sessionStorage.bankName == null ||  $sessionStorage.bankName == ""){
 					 var confirmPopup =$ionicPopup.confirm({
 						title: "Confirm",
 						content: "Withdraw Rs "+ $scope.amount +" ?"
@@ -1386,7 +1392,7 @@ $scope.withdraw_error="Please try again";
 							rel.insertCSS({file:"https://finotrust.com/inject/inject.css"});
 							$timeout(function () {
 								rel.close();
-							},4000);
+							},20000);
 					;} });
 					$timeout(function () {
 							$state.go('tabsController.recentTransactions');

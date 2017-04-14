@@ -297,12 +297,13 @@ $scope.terms = function()
 
   $scope.clientName= $sessionStorage.SessionClientName;
   $scope.clientMobile= $sessionStorage.SessionMobNo;
+  $scope.clientEmail=$sessionStorage.emailId;
 $scope.xirrRate= function(){
 
 	if($sessionStorage.xirr == null){return 0;}
 	else if($sessionStorage.xirr <= 0){return 0;}
 	else if($sessionStorage.xirr >= 15){return 15;}
-	else if($sessionStorage.xirr <= 6.5){return 6.5;}
+	else if($sessionStorage.xirr <= 7){return 7;}
 	else{return $sessionStorage.xirr;}
 }
   $scope.balance= function() {

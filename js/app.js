@@ -94,12 +94,13 @@ angular.module('app', ['ionic','ionic.service.core','app.controllers', 'ionicPro
 .run(function($ionicPlatform, $rootScope, $ionicLoading,Idle, $ionicHistory,$cordovaKeyboard,$cordovaSocialSharing,$state,$ionicPopup,$sessionStorage,ionicToast,$timeout,$localStorage) {
   $ionicPlatform.ready(function() {
 
+  /*
   $rootScope.$watch(function() {
   return $cordovaKeyboard.isVisible();
 }, function(value) {
 	console.log(value);
 $rootScope.keyboardOpen = value;
-}); 
+}); */
 
 //$localStorage.language=0;
 
